@@ -19,7 +19,6 @@ def updateCurrentVehicle():
 import math
 import traceback
 
-from adisp import async, process
 from CurrentVehicle import g_currentVehicle
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache

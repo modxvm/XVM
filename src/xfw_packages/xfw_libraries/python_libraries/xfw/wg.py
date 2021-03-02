@@ -7,7 +7,6 @@ import importlib
 
 import game
 import BigWorld
-import ResMgr
 
 from gui.battle_control import avatar_getter
 from gui.shared.utils import getPlayerDatabaseID

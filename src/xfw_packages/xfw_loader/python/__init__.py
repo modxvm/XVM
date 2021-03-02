@@ -22,11 +22,9 @@ import glob
 import json
 import importlib
 import logging
-import os
 import platform
 import re
 import sys
-import shutil
 import traceback
 
 #BigWorld

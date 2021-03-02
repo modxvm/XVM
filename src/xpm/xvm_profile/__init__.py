@@ -5,13 +5,11 @@
 
 import traceback
 
-from gui.Scaleform.locale.PROFILE import PROFILE
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.meta.ProfileMeta import ProfileMeta
 from gui.Scaleform.daapi.view.meta.ProfileWindowMeta import ProfileWindowMeta
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 from gui.Scaleform.daapi.view.lobby.profile.ProfileUtils import DetailedStatisticsUtils
-from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from helpers import dependency
 from skeletons.gui.lobby_context import ILobbyContext
 

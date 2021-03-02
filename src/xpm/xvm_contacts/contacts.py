@@ -22,10 +22,9 @@ def setXvmContactData(uid, value):
 
 from random import randint
 import traceback
+import simplejson
 
 from gui import SystemMessages
-
-import simplejson
 
 from xfw import *
 from xvm_main.python.consts import *

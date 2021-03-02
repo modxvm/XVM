@@ -1,3 +1,5 @@
+""" XVM (c) https://modxvm.com 2013-2021 """
+
 import traceback
 
 from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton

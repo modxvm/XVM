@@ -10,18 +10,14 @@ import traceback
 
 import BigWorld
 import game
+from hashlib import sha1
 from gui.shared import g_eventBus
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.shared import EVENT_BUS_SCOPE
 
 from xfw import *
-from xfw.constants import PATH
 from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
-
-import xvm_main.python.config as config
 from xvm_main.python.logger import *
-
-from hashlib import sha1
 
 
 #####################################################################

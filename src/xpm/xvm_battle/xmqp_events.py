@@ -1,9 +1,7 @@
 """ XVM (c) https://modxvm.com 2013-2021 """
 
 import traceback
-import simplejson
 
-from gui.shared import g_eventBus, events
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
 

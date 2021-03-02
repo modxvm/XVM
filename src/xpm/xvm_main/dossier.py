@@ -16,9 +16,7 @@ def requestDossier(args):
 #############################
 # Private
 
-from pprint import pprint
 import traceback
-from adisp import process
 
 import BigWorld
 from helpers.i18n import makeString
@@ -33,7 +31,6 @@ from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import 
 from items.components.c11n_constants import SeasonType
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
-from skeletons.gui.game_control import IRankedBattlesController
 from skeletons.gui.lobby_context import ILobbyContext
 
 from xfw import *

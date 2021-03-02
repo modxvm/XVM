@@ -36,10 +36,8 @@ def getClanIcon(vehicleID):
 
 import os
 import pprint
-import datetime
 import traceback
 import time
-from random import randint
 import threading
 import uuid
 import imghdr

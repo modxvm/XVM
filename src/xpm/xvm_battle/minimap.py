@@ -13,11 +13,9 @@ import game
 from constants import VISIBILITY
 from account_helpers.settings_core.SettingsCore import SettingsCore
 from account_helpers.settings_core import settings_constants
-from Avatar import PlayerAvatar
 from AvatarInputHandler.control_modes import PostMortemControlMode
-from items.vehicles import VEHICLE_CLASS_TAGS
 from gui.battle_control import avatar_getter
-from gui.shared import g_eventBus, events
+from gui.shared import g_eventBus
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME, ADDITIONAL_FEATURES
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin, PersonalEntriesPlugin

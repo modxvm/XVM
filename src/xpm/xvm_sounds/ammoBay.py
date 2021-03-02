@@ -3,6 +3,8 @@
 #####################################################################
 # imports
 
+import traceback
+
 import SoundGroups
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
@@ -11,7 +13,7 @@ from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from xfw import *
 import xvm_main.python.config as config
 from xvm_main.python.logger import *
-import traceback
+
 
 #####################################################################
 # constants

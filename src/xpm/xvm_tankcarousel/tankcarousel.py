@@ -4,14 +4,11 @@
 # imports
 
 from functools import partial
-from operator import attrgetter
 import traceback
-import weakref
 
 import BigWorld
 import game
 from constants import QUEUE_TYPE
-from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as ACHIEVEMENT_BLOCK
 from gui import GUI_NATIONS_ORDER_INDEX
 from gui.shared import g_eventBus
 from gui.shared.gui_items.Vehicle import VEHICLE_TYPES_ORDER_INDICES

@@ -4,10 +4,9 @@
 # imports
 
 import traceback
-import sys
 from math import degrees, pi
 
-from constants import SHELL_TYPES
+from constants import SHELL_TYPES, ITEM_DEFS_PATH
 import game
 import gui.shared.tooltips.vehicle as tooltips_vehicle
 from gun_rotation_shared import calcPitchLimitsFromDesc
@@ -35,7 +34,6 @@ import ResMgr
 import nations
 import BigWorld
 from items import _xml
-from constants import ITEM_DEFS_PATH
 
 from xfw import *
 

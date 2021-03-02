@@ -27,7 +27,6 @@ from xfw_actionscript.python import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-import xvm_main.python.utils as utils
 
 from consts import *
 
