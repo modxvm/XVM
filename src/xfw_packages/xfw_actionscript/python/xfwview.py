@@ -16,13 +16,10 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-from __future__ import absolute_import
-
 import os
 import glob
 import logging
 import traceback
-import itertools
 import weakref
 
 from constants import ARENA_GUI_TYPE
@@ -30,7 +27,7 @@ from gui import DialogsInterface, SystemMessages
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, EVENT_BUS_SCOPE
-from gui.shared.events import HasCtxEvent, ComponentEvent
+from gui.shared.events import HasCtxEvent
 from gui.Scaleform.daapi.view import dialogs
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View

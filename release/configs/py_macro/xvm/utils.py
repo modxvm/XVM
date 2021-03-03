@@ -1,4 +1,3 @@
-import struct
 import xvm_main.python.config as config
 
 def brighten_color(color, percent):

@@ -1,6 +1,5 @@
 import ResMgr
 import nations
-from items import _xml
 from helpers import dependency
 from helpers.i18n import makeString
 from constants import ITEM_DEFS_PATH
@@ -9,7 +8,6 @@ from gui.shared.tooltips.shell import CommonStatsBlockConstructor
 from gui.shared.tooltips import formatters
 from gui.shared.formatters import text_styles
 from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_data_provider import CarouselDataProvider
-from gui.Scaleform.daapi.view.lobby.ModuleInfoWindow import ModuleInfoWindow
 
 from xvm_main.python.logger import *
 from xfw import *

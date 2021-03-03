@@ -6,7 +6,6 @@
 from Avatar import PlayerAvatar
 
 from xfw import *
-
 from xvm_main.python.logger import *
 
 import fps

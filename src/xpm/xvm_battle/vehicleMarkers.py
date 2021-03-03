@@ -4,7 +4,6 @@
 # imports
 
 import traceback
-import weakref
 import time
 
 import BigWorld
@@ -27,7 +26,6 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 import xvm_main.python.python_macro as python_macro
 import xvm_main.python.stats as stats
-import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 
 from consts import *

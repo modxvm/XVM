@@ -8,7 +8,6 @@ from CurrentVehicle import g_currentVehicle
 from messenger import MessengerEntry
 from gui import SystemMessages
 from gui.app_loader.settings import APP_NAME_SPACE
-from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from helpers import dependency

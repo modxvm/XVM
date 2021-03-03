@@ -2,7 +2,6 @@ from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar
 from constants import VEHICLE_SIEGE_STATE, VEHICLE_HIT_FLAGS as VHF
-from vehicle_extras import ShowShooting, ShowShootingMultiGun
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
 from gui.battle_control.arena_info.arena_vos import VehicleArenaInfoVO

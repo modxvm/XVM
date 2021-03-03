@@ -14,7 +14,6 @@ from PlayerEvents import g_playerEvents
 from gui.shared import g_eventBus, events
 
 from xfw import *
-import xvm_main.python.config as config
 from xvm_main.python.logger import *
 import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
@@ -92,8 +91,8 @@ def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestro
                 arenaInfoStr = self._BattleReplay__replayCtrl.getArenaInfoStr()
                 if arenaInfoStr:
                     arenaInfo = simplejson.loads(arenaInfoStr)
-                    arenaInfo.update({"xvm":utils.pretty_floats(_xvm_record_data)})
-                    self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo, separators=(',',':')))
+                    arenaInfo.update({"xvm": utils.pretty_floats(_xvm_record_data)})
+                    self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo, separators=(',', ':')))
                 _xvm_record_data = None
     except Exception as ex:
         err(traceback.format_exc())

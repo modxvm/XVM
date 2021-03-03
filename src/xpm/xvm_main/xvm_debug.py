@@ -7,7 +7,6 @@ from xfw import *
 
 from gui.shared import events, g_eventBus
 from gui.shared import event_dispatcher as shared_events
-from gui.shared.event_bus import EVENT_BUS_SCOPE
 
 def onHangarInit():
     # debug
@@ -111,6 +110,7 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
 
 #from gui.shared import events
 #from gui.shared.event_bus import EventBus, EVENT_BUS_SCOPE
+#
 #@overrideMethod(EventBus, 'handleEvent')
 #def _EventBus_handleEvent(base, self, event, scope=EVENT_BUS_SCOPE.DEFAULT):
 #    if isinstance(event, events.LoadViewEvent):

@@ -17,8 +17,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
-import weakref
-
 import BigWorld
 import game
 
@@ -27,16 +25,14 @@ from gui.shared import events, g_eventBus
 from gui.shared.events import HasCtxEvent
 from gui.Scaleform.framework.application import AppEntry
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
-
 from helpers import dependency
-
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
 
 from xfw.constants import *
 from xfw.events import *
 from xfw.logger import *
 import xfw_vfs as vfs
-from xfw import isInBootcamp, IS_DEVELOPMENT
+from xfw import isInBootcamp
 
 from .swfloadedinfo import swf_loaded_info
 

@@ -19,8 +19,6 @@ import game
 from gui import shop
 from gui.impl import backport
 from gui.shared import g_eventBus, tooltips
-from gui.shared.gui_items import GUI_ITEM_TYPE
-from gui.shared.money import Currency
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree

@@ -27,7 +27,7 @@ from xvm_main.python.stats import _stat
 from xvm_main.python.xvm import l10n
 
 import parser_addon
-from xvm.damageLog import HIT_EFFECT_CODES, keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
+from xvm.damageLog import keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
 
 BATTLE_TYPE = {ARENA_GUI_TYPE.UNKNOWN: "unknown",
                ARENA_GUI_TYPE.RANDOM: "regular",

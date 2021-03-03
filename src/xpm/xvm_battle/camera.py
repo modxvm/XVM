@@ -27,7 +27,6 @@ from xfw_actionscript.python import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-import xvm_main.python.utils as utils
 
 from consts import *
 
@@ -204,8 +203,10 @@ def create(base, self, model, list, args):
 def clampToLimits(base, self, turretYaw, gunPitch):
     res = base(self, turretYaw, gunPitch)
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
-        mode = config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey"
-        if mode and BigWorld.isKeyDown(KEY_RIGHTMOUSE) and self._SniperAimingSystem__yawLimits is not None:
+        hotkey = config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey"
+        if hotkey and not BigWorld.isKeyDown(KEY_RIGHTMOUSE):
+            return res
+        elif self._SniperAimingSystem__yawLimits is not None:
             return (turretYaw, res[1])
     return res
 

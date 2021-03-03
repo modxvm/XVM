@@ -1,12 +1,9 @@
 """ XVM (c) https://modxvm.com 2013-2021 """
 
 import os
-import sys
-import re
 import traceback
 import threading
 import math
-from pprint import pprint
 from bisect import bisect_left
 
 import BigWorld
