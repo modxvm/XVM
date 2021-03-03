@@ -97,7 +97,7 @@
       {
         "enabled": true,
         "x": 17, "y": 28,
-        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_tdb|#CFCFCF}}'>{{v.tdb%d}}</font></b>",
+        "format": "<b><font face='$FieldFont' size='12' color='{{v.c_xtdb|#CFCFCF}}'>{{v.tdb%d}}</font></b>",
         "shadow": ${ "def.textFieldShadow" }
       },
       // Sign of mastery.
