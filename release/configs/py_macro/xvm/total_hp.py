@@ -1,25 +1,35 @@
-# Addons: "avgDamage" and "mainGun"
+# Addons: "totalHp", "avgDamage" and "mainGun"
 # night_dragon_on <https://kr.cm/f/p/14897/>
 # ktulho <https://kr.cm/f/p/17624/>
 
 import BigWorld
+from Vehicle import Vehicle
 from Avatar import PlayerAvatar
 from constants import VEHICLE_HIT_FLAGS
 from CurrentVehicle import g_currentVehicle
+from gui.Scaleform.daapi.view.battle.shared.frag_correlation_bar import FragCorrelationBar
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
 from skeletons.gui.game_control import IBootcampController
 from skeletons.gui.shared import IItemsCache
 
-import xvm_battle.python.fragCorrelationPanel as panel
 from xfw import *
 from xfw_actionscript.python import *
+import xvm_battle.python.battle as battle
+from xvm_main.python import config
 
+#####################################################################
+# globals
 
-max_hp_ally = 0
-max_hp_enemy = 0
 playerAvgDamage = None
+teams_totalhp = [0, 0]
+teams_maxhp = [0, 0]
+hp_colors = {}
+total_hp_color = None
+total_hp_sign = None
 
+#####################################################################
+# handlers
 
 class PlayerDamages(object):
 
@@ -27,10 +37,7 @@ class PlayerDamages(object):
         self.teamHits = True
 
     def reset(self):
-        global max_hp_ally, max_hp_enemy
         self.teamHits = True
-        max_hp_ally = 0
-        max_hp_enemy = 0
 
     def showShotResults(self, playerAvatar, results):
         arenaVehicles = playerAvatar.arena.vehicles
@@ -45,15 +52,54 @@ class PlayerDamages(object):
 
 data = PlayerDamages()
 
+def update_conf_hp():
+    try:
+        hp_colors.update({'bad': 'FF0000', 'neutral': 'FFFFFF', 'good': '00FF00'})
+        hp_colors.update(config.get('colors/totalHP', {}))
+        for type, color in hp_colors.iteritems():
+            color = color[-6:]
+            hp_colors[type] = {'red': int(color[0:2], 16), 'green' : int(color[2:4], 16), 'blue': int(color[4:6], 16)}
+    except Exception, ex:
+        err(traceback.format_exc())
 
-@registerEvent(panel, 'update_hp')
-def update_hp(vehicleID, hp):
-    global max_hp_ally, max_hp_enemy
-    if panel.teams_totalhp[0] > max_hp_ally:
-        max_hp_ally = panel.teams_totalhp[0]
-    elif panel.teams_totalhp[1] > max_hp_enemy:
-        max_hp_enemy = panel.teams_totalhp[1]
-    as_event('ON_UPDATE_HP')
+def color_gradient(color1, color2, ratio):
+    try:
+        ratio_comp = 1.0 - ratio
+        return '%0.2X%0.2X%0.2X' % (
+                color1['red'] * ratio + color2['red'] * ratio_comp,
+                color1['green'] * ratio + color2['green'] * ratio_comp,
+                color1['blue'] * ratio + color2['blue'] * ratio_comp,
+                )
+    except Exception, ex:
+        err(traceback.format_exc())
+        return 'FFFFFF'
+
+def update_hp():
+    try:
+        global total_hp_color, total_hp_sign
+        if teams_totalhp[0] < teams_totalhp[1]:
+            ratio = max(min(2.0 * teams_totalhp[0] / teams_totalhp[1] - 0.9, 1), 0)
+            total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['bad'], ratio)
+            total_hp_sign = '<'
+        elif teams_totalhp[0] > teams_totalhp[1]:
+            ratio = max(min(2.0 * teams_totalhp[1] / teams_totalhp[0] - 0.9, 1), 0)
+            total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['good'], ratio)
+            total_hp_sign = '>'
+        else:
+            total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
+            total_hp_sign = '='
+        as_event('ON_UPDATE_HP')
+    except Exception, ex:
+        err(traceback.format_exc())
+
+
+@registerEvent(FragCorrelationBar, 'updateTeamHealth')
+def updateTeamHealth(self, alliesHP, enemiesHP, totalAlliesHP, totalEnemiesHP):
+    if battle.isBattleTypeSupported:
+        global teams_totalhp, teams_maxhp
+        teams_totalhp = [alliesHP, enemiesHP]
+        teams_maxhp = [float(totalAlliesHP), float(totalEnemiesHP)]
+        update_hp()
 
 
 @registerEvent(Hangar, '_Hangar__updateParams')
@@ -69,41 +115,49 @@ def Hangar__updateParams(self):
 
 @registerEvent(PlayerAvatar, 'showShotResults')
 def showShotResults(self, results):
-    data.showShotResults(self, results)
+    if battle.isBattleTypeSupported:
+        data.showShotResults(self, results)
 
+
+@registerEvent(Vehicle, 'onEnterWorld')
+def onEnterWorld(self, prereqs):
+    update_conf_hp()
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
+    global teams_totalhp, teams_maxhp
     data.reset()
+    teams_totalhp = [0, 0]
+    teams_maxhp = [0, 0]
 
 
 def ally(norm=None):
-    if (norm is None) or (max_hp_ally == 0):
-        return panel.teams_totalhp[0]
+    if (norm is None) or (teams_maxhp[0] == 0):
+        return teams_totalhp[0]
     else:
-        return int(panel.teams_totalhp[0] * norm / max_hp_ally)
+        return int(teams_totalhp[0] * norm / teams_maxhp[0])
 
 
 def enemy(norm=None):
-    if (norm is None) or (max_hp_enemy == 0):
-        return panel.teams_totalhp[1]
+    if (norm is None) or (teams_maxhp[1] == 0):
+        return teams_totalhp[1]
     else:
-        return int(panel.teams_totalhp[1] * norm / max_hp_enemy)
+        return int(teams_totalhp[1] * norm / teams_maxhp[1])
 
 
 def color():
-    return panel.total_hp_color
+    return total_hp_color
 
 
 def sign():
-    if panel.total_hp_sign == '<':
+    if total_hp_sign == '<':
         return '&lt;'
-    elif panel.total_hp_sign == '>':
+    elif total_hp_sign == '>':
         return '&gt;'
-    elif panel.total_hp_sign is None:
+    elif total_hp_sign is None:
         return ''
     else:
-        return panel.total_hp_sign
+        return total_hp_sign
 
 
 def text():
@@ -125,10 +179,10 @@ def avgDamage(dmg_total):
 
 def mainGun(dmg_total):
     battletype = BigWorld.player().arena.guiType
-    if (battletype != 1) or (max_hp_enemy == 0):
+    if (battletype != 1) or (teams_maxhp[1] == 0):
         return
     else:
-        threshold = max_hp_enemy * 0.2 if max_hp_enemy > 5000 else 1000
+        threshold = teams_maxhp[1] * 0.2 if teams_maxhp[1] > 5000 else 1000
         high_caliber = int(threshold - dmg_total)
         if data.teamHits:
             if high_caliber <= 0:
@@ -138,5 +192,5 @@ def mainGun(dmg_total):
                 high_caliber = '<font color="#00EAFF">+%s</font>' % (abs(high_caliber))
             else:
                 high_caliber = '<font color="#00EAFF">%s</font>' % (high_caliber)
-    if max_hp_enemy >= 1000:
+    if teams_maxhp[1] >= 1000:
         return high_caliber

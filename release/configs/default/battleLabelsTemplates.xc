@@ -62,7 +62,7 @@
       "enabled": false,
       "updateEvent": "PY(ON_UPDATE_HP)",
       "x": 0,
-      "y": 30,
+      "y": 45,
       "screenHAlign": "center",
       "align": "center",
       "shadow": { "distance": 1, "angle": 90, "alpha": 80, "blur": 5, "strength": 1.5 },
