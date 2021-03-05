@@ -9,6 +9,9 @@
   * Добавлена опция в секциях "playersPanel"/"short", "medium", "medium2", "large":
 
     * `"removeSpottedIndicator"` — убрать отображение иконки статуса засвета противника
+    * `"spottedIndicatorAlpha"` — прозрачность иконки статуса засвета противника
+    * `"spottedIndicatorOffsetX"` — смещение координаты X для иконки статуса засвета противника
+    * `"spottedIndicatorOffsetY"` — смещение координаты Y для иконки статуса засвета противника
 
   #### Камера
 

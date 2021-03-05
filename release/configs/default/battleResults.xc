@@ -21,7 +21,7 @@
     "showExtendedInfo": true,
     // true - show totals for your battle efficiency in first page.
     // true - показывать итог по вашей боевой эффективности на первой странице.
-    "showTotals": true,
+    "showTotals": false,
     // true - display standard interface for the "FrontLine" mode.
     // true - отображать стандартный интерфейс для режима "Линия фронта".
     "showStandardFrontLineInterface": true,

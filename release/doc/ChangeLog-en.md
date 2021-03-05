@@ -9,6 +9,9 @@
   * Added option in the sections "playersPanel"/"short", "medium", "medium2", "large":
 
     * `"removeSpottedIndicator"` — disable enemy spotted status icons
+    * `"spottedIndicatorAlpha"` — transparency of the enemy spotted status icons
+    * `"spottedIndicatorOffsetX"` — offset of X value for enemy spotted status icons
+    * `"spottedIndicatorOffsetY"` — offset of Y value for enemy spotted status icons
 
   #### Camera
 
