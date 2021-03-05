@@ -32,8 +32,11 @@ package com.xvm.types.cfg
         public var rankBadgeWidth:*;
         public var rankBadgeOffsetXLeft:*;
         public var rankBadgeOffsetXRight:*;
-        public var removeSquadIcon:*;
         public var removeSpottedIndicator:*;
+        public var removeSquadIcon:*;
+        public var spottedIndicatorAlpha:*;
+        public var spottedIndicatorOffsetX:*;
+        public var spottedIndicatorOffsetY:*;
         public var squadIconAlpha:*;
         public var standardFields:Array;
         public var vehicleFormatLeft:String;

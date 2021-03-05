@@ -113,6 +113,8 @@ package com.xvm.battle.shared.playersPanel
         private var DEFAULT_VEHICLE_WIDTH:int;
         private var DEFAULT_BADGEICON_WIDTH:int;
         private var DEFAULT_PLAYERNAMECUT_WIDTH:int;
+        private var DEFAULT_SPOTTED_INDICATOR_X:int;
+        private var DEFAULT_SPOTTED_INDICATOR_Y:int;
 
         private var bcfg:CBattle;
         private var pcfg:CPlayersPanel;
@@ -193,6 +195,8 @@ package com.xvm.battle.shared.playersPanel
             // ui.badge.width equal to zero :(
             DEFAULT_BADGEICON_WIDTH = ui.badge.width;
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
+            DEFAULT_SPOTTED_INDICATOR_X = ui.spottedIndicator.x;
+            DEFAULT_SPOTTED_INDICATOR_Y = ui.spottedIndicator.y;
 
             _setup();
         }
@@ -484,6 +488,8 @@ package com.xvm.battle.shared.playersPanel
                     ui.vehicleTF.width = DEFAULT_VEHICLE_WIDTH;
                     ui.badge.width = DEFAULT_BADGEICON_WIDTH;
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
+                    ui.spottedIndicator.x = DEFAULT_SPOTTED_INDICATOR_X;
+                    ui.spottedIndicator.y = DEFAULT_SPOTTED_INDICATOR_Y;
                 }
 
                 setup();
@@ -632,7 +638,16 @@ package com.xvm.battle.shared.playersPanel
 
         private function _updateSpottedIndicator():void
         {
-            ui.spottedIndicator.alpha = mcfg.removeSpottedIndicator ? 0 : 1;
+            if (mcfg.removeSpottedIndicator)
+            {
+                ui.spottedIndicator.alpha = 0;
+            }
+            else
+            {
+                ui.spottedIndicator.alpha = Macros.FormatNumber(mcfg.spottedIndicatorAlpha, currentPlayerState, 100) / 100.0;
+                ui.spottedIndicator.x = Macros.FormatNumber(mcfg.spottedIndicatorOffsetX, currentPlayerState, 0) + DEFAULT_SPOTTED_INDICATOR_X;
+                ui.spottedIndicator.y = Macros.FormatNumber(mcfg.spottedIndicatorOffsetY, currentPlayerState, 0) + DEFAULT_SPOTTED_INDICATOR_Y;
+            }
         }
 
         // update positions
