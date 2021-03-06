@@ -13,12 +13,6 @@
     * `"spottedIndicatorOffsetX"` — offset of X value for enemy spotted status icons
     * `"spottedIndicatorOffsetY"` — offset of Y value for enemy spotted status icons
 
-  #### Camera
-
-  * Removed option:
-
-    * `"camera"/"sniper"/"startZoom"`
-
 ______________________________
 
 ### XVM 8.7.6

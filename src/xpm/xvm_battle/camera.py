@@ -27,6 +27,7 @@ from xfw_actionscript.python import *
 
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+import xvm_main.python.utils as utils
 
 from consts import *
 
@@ -135,9 +136,17 @@ def _SniperCamera_updateSettingsFromServer(self):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zooms'):
         self._cfg['increasedZoom'] = True
 
-@registerEvent(SniperCamera, 'enable')
-def _SniperCamera_enable(self, targetPos, saveZoom):
+@overrideMethod(SniperCamera, 'enable')
+def _SniperCamera_enable(base, self, targetPos, saveZoom):
     #debug('_SniperCamera_enable')
+    if config.get('battle/camera/enabled'):
+        zoom = config.get('battle/camera/sniper/startZoom')
+        if zoom is None:
+            zoom = self._cfg['zoom']
+        else:
+            SniperCamera._SNIPER_ZOOM_LEVEL = -1
+        self._cfg['zoom'] = utils.takeClosest(self._cfg['zooms'], zoom)
+    base(self, targetPos, saveZoom)
     _sendSniperCameraFlash(True, self._SniperCamera__zoom)
 
 @registerEvent(SniperCamera, 'disable')
