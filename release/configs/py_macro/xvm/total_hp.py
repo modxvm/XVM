@@ -2,6 +2,8 @@
 # night_dragon_on <https://kr.cm/f/p/14897/>
 # ktulho <https://kr.cm/f/p/17624/>
 
+import traceback
+
 import BigWorld
 from Vehicle import Vehicle
 from Avatar import PlayerAvatar
