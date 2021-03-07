@@ -69,7 +69,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     item.substrateHolder = _createExtraFieldsHolder(renderer, 0);
                     item.bottomHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.content));
-                    item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.clanLock));
+                    item.normalHolder = _createExtraFieldsHolder(renderer.content, renderer.content.getChildIndex(renderer.content.imgIcon) + 1);
                     item.topHolder = _createExtraFieldsHolder(renderer, renderer.getChildIndex(renderer.focusIndicator) + 1);
                     item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, false, CTextFormat.GetDefaultConfigForLobby());
                 }
