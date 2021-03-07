@@ -181,7 +181,7 @@ package com.xvm.battle.shared.playersPanel
             Xfw.addCommandListener(XvmCommands.AS_ON_CLAN_ICON_LOADED, _onClanIconLoaded);
 
             _substrateHolder = ui.addChildAt(new Sprite(), 0) as Sprite;
-            _bottomHolder = ui.addChildAt(new Sprite(), 1) as Sprite;
+            _bottomHolder = ui.addChildAt(new Sprite(), ui.getChildIndex(ui.selfBg) + 1) as Sprite;
             _normalHolder = this;
             _topHolder = ui.addChild(new Sprite()) as Sprite;
 
