@@ -19,7 +19,7 @@ package com.xvm.battle.ranked.playersPanel
         {
             super();
             proxy = new RankedPlayersPanelListItemProxy(this, true);
-            addChildAt(proxy, getChildIndex(vehicleTF) - 1);
+            addChildAt(proxy, getChildIndex(vehicleIcon) + 1);
         }
 
         override protected function onDispose():void
