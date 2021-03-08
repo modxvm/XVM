@@ -38,21 +38,16 @@ def _reload_config(e=None):
     if not wwise_module:
         logging.error("[XVM/Sounds] [bankmanager/reload_config] XFW.WWISE is failed to load")
 
-    wwise = getattr(wwise_module, 'g_wwise')
-    wwise.battle_config.clear()
-    wwise.hangar_config.clear()
-
     banks_battle = config.get('sounds/soundBanks/battle')
     if banks_battle:
         for bank in banks_battle:
-            wwise.bank_add(bank.strip(), True, False, True)
+            wwise_module.wwise_bank_add(bank.strip(), True, False)
 
     banks_hangar = config.get('sounds/soundBanks/hangar')
     if banks_hangar:
         for bank in banks_hangar:
-            wwise.bank_add(bank.strip(), False, True, True)
+            wwise_module.wwise_bank_add(bank.strip(), False, True)
 
-    wwise.reload_banks()
 
 if loader.is_mod_loaded('com.modxvm.xfw.wwise'):
     if config.get('sounds/enabled'):

@@ -32,8 +32,7 @@ if loader.is_mod_loaded('com.modxvm.xfw.wwise'):
             if not wwise_module:
                 logging.error("[XVM/Sounds] [remote_communication] XFW.WWISE is failed to load")
 
-            wwise = getattr(wwise_module, 'g_wwise')
-            wwise.comm_init()
+            wwise_module.wwise_communication_init()
             logging.info("[XVM/Sounds] [remote_communication] communication with WWISE Authoring Tools is enabled")
 
         except Exception:
