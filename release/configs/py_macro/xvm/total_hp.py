@@ -26,7 +26,7 @@ from xvm_main.python import config
 playerAvgDamage = None
 teams_totalhp = [0, 0]
 teams_maxhp = [0, 0]
-hp_colors = {}
+hp_colors = {'bad': 'FF0000', 'neutral': 'FFFFFF', 'good': '00FF00'}
 total_hp_color = None
 total_hp_sign = None
 
@@ -56,8 +56,7 @@ data = PlayerDamages()
 
 def update_conf_hp():
     try:
-        hp_colors.update({'bad': 'FF0000', 'neutral': 'FFFFFF', 'good': '00FF00'})
-        hp_colors.update(config.get('colors/totalHP', {}))
+        hp_colors.update(config.get('colors/totalHP', hp_colors))
         for type, color in hp_colors.iteritems():
             color = color[-6:]
             hp_colors[type] = {'red': int(color[0:2], 16), 'green' : int(color[2:4], 16), 'blue': int(color[4:6], 16)}
@@ -82,14 +81,14 @@ def update_hp():
         if teams_totalhp[0] < teams_totalhp[1]:
             ratio = max(min(2.0 * teams_totalhp[0] / teams_totalhp[1] - 0.9, 1), 0)
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['bad'], ratio)
-            total_hp_sign = '<'
+            total_hp_sign = '&lt;'
         elif teams_totalhp[0] > teams_totalhp[1]:
             ratio = max(min(2.0 * teams_totalhp[1] / teams_totalhp[0] - 0.9, 1), 0)
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['good'], ratio)
-            total_hp_sign = '>'
+            total_hp_sign = '&gt;'
         else:
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
-            total_hp_sign = '='
+            total_hp_sign = '&equals;'
         as_event('ON_UPDATE_HP')
     except Exception, ex:
         err(traceback.format_exc())
@@ -123,7 +122,9 @@ def showShotResults(self, results):
 
 @registerEvent(Vehicle, 'onEnterWorld')
 def onEnterWorld(self, prereqs):
-    update_conf_hp()
+    if self.isPlayerVehicle:
+        update_conf_hp()
+
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
 def destroyGUI(self):
@@ -152,14 +153,7 @@ def color():
 
 
 def sign():
-    if total_hp_sign == '<':
-        return '&lt;'
-    elif total_hp_sign == '>':
-        return '&gt;'
-    elif total_hp_sign is None:
-        return ''
-    else:
-        return total_hp_sign
+    return total_hp_sign
 
 
 def text():
