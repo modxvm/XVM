@@ -1,32 +1,32 @@
 ﻿{
     "RU": {
-        "ver": "8.7.6",
-        "wot": "1.11.1.3",
-        "message": " • World of Tanks 1.11.1.3\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "8.7.7",
+        "wot": "1.12.0.0",
+        "message": " • World of Tanks 1.12.0.0\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.7.6",
-        "wot": "1.11.1.3",
-        "message": " • World of Tanks 1.11.1.3\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.7.7",
+        "wot": "1.12.0.0",
+        "message": " • World of Tanks 1.12.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "NA": {
-        "ver": "8.7.6",
-        "wot": "1.11.1.3",
-        "message": " • World of Tanks 1.11.1.3\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.7.7",
+        "wot": "1.12.0.0",
+        "message": " • World of Tanks 1.12.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "8.7.6",
-        "wot": "1.11.1.3",
-        "message": " • World of Tanks 1.11.1.3\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.7.7",
+        "wot": "1.12.0.0",
+        "message": " • World of Tanks 1.12.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CN": {
-        "ver": "8.7.6",
-        "wot": "1.11.1.3",
-        "message": " • World of Tanks 1.11.1.3\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.7.7",
+        "wot": "1.12.0.0",
+        "message": " • World of Tanks 1.12.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT": {
-        "ver": "8.7.6",
-        "wot": "1.11.1.3",
-        "message": " • World of Tanks 1.11.1.3\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.7.7",
+        "wot": "1.12.0.0",
+        "message": " • World of Tanks 1.12.0.0\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     }
 }
