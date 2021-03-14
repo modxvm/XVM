@@ -405,7 +405,7 @@
       "storage": true,                       // Storage        / Склад
       "store": true,                         // Store          / Магазин
       "missions": true,                      // Missions       / Задачи
-      "PersonalMissionOperationsPage": true, // Campaigns      / Кампании      
+      "PersonalMissionOperationsPage": true, // Campaigns      / Кампании
       "profile": true,                       // Service Record / Достижения
       "barracks": true,                      // Barracks       / Казарма
       "StrongholdView": true                 // Clan           / Клан
