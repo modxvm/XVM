@@ -74,7 +74,7 @@ package com.xvm.lobby.ui.contacts
             }
             catch (ex:Error)
             {
-				Logger.add("com.xvm.lobby.ui.contacts.UI_ContactsTreeItemRenderer::draw()")
+                Logger.add("com.xvm.lobby.ui.contacts.UI_ContactsTreeItemRenderer::draw()")
                 Logger.err(ex);
             }
         }
