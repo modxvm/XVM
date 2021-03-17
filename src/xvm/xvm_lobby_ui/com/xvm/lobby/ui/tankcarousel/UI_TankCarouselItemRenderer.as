@@ -40,13 +40,9 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     bgMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBackgroundAlpha, 100) / 100.0;
                 }
-                if (content)
+                if (border)
                 {
-                    var border:MovieClip = getChildAt(getChildIndex(content) + 1) as MovieClip;
-                    if (border)
-                    {
-                        border.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBorderAlpha, 100) / 100.0;
-                    }
+                    border.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBorderAlpha, 100) / 100.0;
                 }
             }
             catch (ex:Error)

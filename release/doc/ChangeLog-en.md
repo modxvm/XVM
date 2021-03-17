@@ -1,4 +1,14 @@
-﻿### XVM 8.7.7
+﻿### XVM 8.7.8
+
+  #### Carousel
+
+  * Added options in the `"carousel"/"normal"/"fields"` and `"carousel"/"small"/"fields"` sections:
+
+    * `"progressionPoints"` — Battle Pass progression points
+
+______________________________
+
+### XVM 8.7.7
 
   #### General
 
