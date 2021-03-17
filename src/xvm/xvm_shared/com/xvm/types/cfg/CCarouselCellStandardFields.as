@@ -25,6 +25,7 @@ package com.xvm.types.cfg
         public var tankName:CCarouselCellStandardField;
         public var tankType:CCarouselCellStandardField;
         public var xp:CCarouselCellStandardField;
+        public var progressionPoints:CCarouselCellStandardField;
 
         public function clone():*
         {
