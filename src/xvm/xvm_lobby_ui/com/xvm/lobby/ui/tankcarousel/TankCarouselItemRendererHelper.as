@@ -36,7 +36,6 @@ package com.xvm.lobby.ui.tankcarousel
         private var DEFAULT_SCALE_X:Number;
         private var DEFAULT_SCALE_Y:Number;
 
-
         public function TankCarouselItemRendererHelper(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int):void
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
@@ -507,7 +506,6 @@ package com.xvm.lobby.ui.tankcarousel
                 }
             }
         }
-
 
         private var orig_txtInfo_x:Number = NaN;
         private var orig_txtInfo_y:Number = NaN;

@@ -2,9 +2,9 @@
 
   #### Карусель техники
 
-  * Добавлены опции в секциях `"carousel"/"normal"/"fields"` и `"carousel"/"small"/"fields"`:
+  * Добавлена опция в секциях `"carousel"/"normal"/"fields"` и `"carousel"/"small"/"fields"`:
 
-    * `"progressionPoints"` — очки прогрессии боевого пропуска.
+    * `"progressionPoints"` — очки прогрессии боевого пропуска
 
 ______________________________
 

@@ -2,9 +2,9 @@
 
   #### Carousel
 
-  * Added options in the `"carousel"/"normal"/"fields"` and `"carousel"/"small"/"fields"` sections:
+  * Added option in the `"carousel"/"normal"/"fields"` and `"carousel"/"small"/"fields"` sections:
 
-    * `"progressionPoints"` — Battle Pass progression points
+    * `"progressionPoints"` — battle Pass progression points
 
 ______________________________
 
