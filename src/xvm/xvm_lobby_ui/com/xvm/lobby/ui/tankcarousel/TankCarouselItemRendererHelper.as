@@ -173,7 +173,7 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        public function handleRollOver():void
+        public function handleMouseOver():void
         {
             _setupStandardFieldInfo();
             if (item.vehicleCarouselVO)
@@ -183,7 +183,7 @@ package com.xvm.lobby.ui.tankcarousel
             //updateDataXvm();
         }
 
-        public function handleRollOut():void
+        public function handleMouseOut():void
         {
             _setupStandardFieldInfo();
             if (item.vehicleCarouselVO)
@@ -385,6 +385,7 @@ package com.xvm.lobby.ui.tankcarousel
                 }
             }
         }
+
         private function _setupStandardFieldTankName():void
         {
             var cfg_tankName:CCarouselCellStandardField = cfg.fields.tankName;

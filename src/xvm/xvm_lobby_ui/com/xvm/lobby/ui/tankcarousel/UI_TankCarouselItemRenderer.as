@@ -54,16 +54,16 @@ package com.xvm.lobby.ui.tankcarousel
         override protected function configUI():void
         {
             super.configUI();
-            addEventListener(MouseEvent.ROLL_OVER, onSlotMouseRollOverHandler, false, 0, true);
-            addEventListener(MouseEvent.ROLL_OUT, onSlotMouseRollOutHandler, false, 0, true);
+            addEventListener(MouseEvent.MOUSE_OVER, onSlotMouseOverHandler, false, 0, true);
+            addEventListener(MouseEvent.MOUSE_OUT, onSlotMouseOutHandler, false, 0 , true);
         }
 
         override protected function onDispose():void
         {
             try
             {
-                removeEventListener(MouseEvent.ROLL_OVER, onSlotMouseRollOverHandler);
-                removeEventListener(MouseEvent.ROLL_OUT, onSlotMouseRollOutHandler);
+                removeEventListener(MouseEvent.MOUSE_OVER, onSlotMouseOverHandler);
+                removeEventListener(MouseEvent.MOUSE_OUT, onSlotMouseOutHandler);
                 _helper.dispose();
                 _helper = null;
             }
@@ -188,14 +188,14 @@ package com.xvm.lobby.ui.tankcarousel
 
         // PRIVATE
 
-        private function onSlotMouseRollOverHandler(param1:MouseEvent) : void
+        private function onSlotMouseOverHandler(param1:MouseEvent) : void
         {
-            _helper.handleRollOver();
+            _helper.handleMouseOver();
         }
 
-        private function onSlotMouseRollOutHandler(param1:MouseEvent) : void
+        private function onSlotMouseOutHandler(param1:MouseEvent) : void
         {
-            _helper.handleRollOut();
+            _helper.handleMouseOut();
         }
     }
 }
