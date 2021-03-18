@@ -24,6 +24,7 @@ package com.xvm.lobby.ui.tankcarousel
     {
         private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
+        private static const PROGRESSION_POINTS:String = "progressionPoints";
 
         private var cfg:CCarouselCell;
         private var item:ITankCarouselItemRenderer;
@@ -131,6 +132,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     _setupStandardFieldInfo();
                     _setupStandardFieldTankName();
+                    _setupStandardFieldProgressionPoints();
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
                     {
                         if (item.extraFields)
@@ -481,10 +483,37 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardTextField(renderer.content.statsTF, cfg.fields.stats, 0);
         }
 
+        private var orig_progressionPoints_x:Number = NaN;
+        private var orig_progressionPoints_y:Number = NaN;
+
+        private function _setupStandardFieldProgressionPoints():void
+        {
+            if (item.vehicleCarouselVO && item.vehicleCarouselVO.hasProgression)
+            {
+                var progressionPoints:InteractiveObject = renderer.getChildByName(PROGRESSION_POINTS) as InteractiveObject;
+                if (progressionPoints)
+                {
+                    if (isNaN(orig_progressionPoints_x))
+                    {
+                        orig_progressionPoints_x = progressionPoints.x;
+                        orig_progressionPoints_y = progressionPoints.y
+                    }
+                    _setupStandardFieldAlpha(progressionPoints, cfg.fields.progressionPoints);
+                    var scale:Number = isNaN(cfg.fields.progressionPoints.scale) ? 1 : cfg.fields.progressionPoints.scale;
+                    progressionPoints.scaleX = DEFAULT_SCALE_X * scale;
+                    progressionPoints.scaleY = DEFAULT_SCALE_Y * scale;
+                    progressionPoints.x = (orig_progressionPoints_x * progressionPoints.scaleX) + cfg.fields.progressionPoints.dx;
+                    progressionPoints.y = (orig_progressionPoints_y * progressionPoints.scaleY) + cfg.fields.progressionPoints.dy;
+                }
+            }
+        }
+
+
         private var orig_txtInfo_x:Number = NaN;
         private var orig_txtInfo_y:Number = NaN;
         private var orig_infoImg_x:Number = NaN;
         private var orig_infoImg_y:Number = NaN;
+
         private function _setupStandardFieldInfo():void
         {
             var cfgInfo:CCarouselCellStandardField = null;
