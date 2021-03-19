@@ -250,6 +250,8 @@ class _Dossier(object):
             return dossier.getCompanyStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.RANKED:
             return dossier.getRankedStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.EPIC_RANDOM:
+            return dossier.getEpicRandomStats()
         raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
 
 

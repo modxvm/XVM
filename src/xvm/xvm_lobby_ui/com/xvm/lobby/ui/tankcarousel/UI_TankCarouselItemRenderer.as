@@ -55,7 +55,7 @@ package com.xvm.lobby.ui.tankcarousel
         {
             super.configUI();
             addEventListener(MouseEvent.MOUSE_OVER, onSlotMouseOverHandler, false, 0, true);
-            addEventListener(MouseEvent.MOUSE_OUT, onSlotMouseOutHandler, false, 0 , true);
+            addEventListener(MouseEvent.MOUSE_OUT, onSlotMouseOutHandler, false, 0, true);
         }
 
         override protected function onDispose():void
