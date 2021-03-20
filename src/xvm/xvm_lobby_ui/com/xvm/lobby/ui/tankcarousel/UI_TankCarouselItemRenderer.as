@@ -103,6 +103,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 super.selected = value;
                 _helper.updateDataXvm();
+                selectedMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotSelectedBorderAlpha, 100) / 100.0;
             }
         }
 

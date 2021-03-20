@@ -6,6 +6,8 @@
 
     * `"progressionPoints"` — очки прогрессии боевого пропуска
 
+  * Добавлена опция `"slotSelectedBorderAlpha"` в секцию `"carousel"`
+
 ______________________________
 
 ### XVM 8.7.7
