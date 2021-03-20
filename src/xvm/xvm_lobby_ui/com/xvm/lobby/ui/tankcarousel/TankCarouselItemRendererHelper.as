@@ -25,6 +25,8 @@ package com.xvm.lobby.ui.tankcarousel
         private static const COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT:String = 'xvm_carousel.get_used_slots_count';
         private static const COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT:String = 'xvm_carousel.get_total_slots_count';
         private static const PROGRESSION_POINTS:String = "progressionPoints";
+        private static const INFO_IMG_OFFSET_H:int = 32;
+        private static const INFO_IMG_OFFSET_V:int = 3;
 
         private var cfg:CCarouselCell;
         private var item:ITankCarouselItemRenderer;
@@ -516,6 +518,7 @@ package com.xvm.lobby.ui.tankcarousel
         private function _setupStandardFieldInfo():void
         {
             var cfgInfo:CCarouselCellStandardField = null;
+            var cfgInfoImg:CCarouselCellStandardField = cfg.fields.infoImg;
             if (item.vehicleCarouselVO)
             {
                 if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
@@ -535,47 +538,29 @@ package com.xvm.lobby.ui.tankcarousel
             var field:TextField = renderer.content.txtInfo;
             var tf:TextFormat = field.getTextFormat();
             var img:Image = renderer.content.infoImg as Image;
-            if (isNaN(orig_txtInfo_x))
-            {
-                orig_txtInfo_x = field.x;
-                orig_txtInfo_y = field.y;
-                orig_infoImg_x = img.x;
-                orig_infoImg_y = img.y;
-            }
-
-            //var orig_txtInfo_x:Number = field.x;
-            //var orig_txtInfo_y:Number = field.y;
-            //var orig_infoImg_x:Number = img.x;
-            //var orig_infoImg_y:Number = img.y;
+            var isImgVisible:Boolean = cfgInfoImg.enabled && img.visible;
+            var infoImgOffset:int = isImgVisible ? INFO_IMG_OFFSET_H : 0;
+            var fieldDefaultY:int = renderer.content.height - field.height >> 1;
+            var fieldDefaultX:int = renderer.content.width - field.width + infoImgOffset >> 1;
+            var scale:Number = isNaN(cfg.scale) ? 1 : cfgInfo.scale;
 
             _setupStandardFieldAlpha(field, cfgInfo);
-            _setupStandardFieldScale(field, cfgInfo);
+            field.scaleX = DEFAULT_SCALE_X * scale;
+            field.scaleY = DEFAULT_SCALE_Y * scale;
             field.antiAliasType = AntiAliasType.ADVANCED;
-            if (cfg.fields.infoImg.enabled && img.visible)
-            {
-                field.x = orig_txtInfo_x + cfgInfo.dx;
-                tf.align = TEXT_ALIGN.LEFT;
-            }
-            else
-            {
-                field.x = cfgInfo.dx;
-                tf.align = TEXT_ALIGN.CENTER;
-            }
+            field.y = fieldDefaultY + cfgInfo.dy;
+            field.x = fieldDefaultX + cfgInfo.dx;
+
+            tf.align = isImgVisible ? TEXT_ALIGN.LEFT : TEXT_ALIGN.CENTER;
             field.setTextFormat(tf);
-            field.y = orig_txtInfo_y + cfgInfo.dy;
-            field.width = DEFAULT_WIDTH / cfgInfo.scale;
-            field.height = DEFAULT_HEIGHT / cfgInfo.scale;
             _setupTextFormat(field, cfgInfo.textFormat);
             _setupShadow(field, cfgInfo.shadow);
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
 
-            if (img)
-            {
-                _setupStandardFieldAlpha(img, cfg.fields.infoImg);
-                _setupStandardFieldScale(img, cfg.fields.infoImg);
-                img.x = orig_infoImg_x + cfg.fields.infoImg.dx;
-                img.y = orig_infoImg_y + cfg.fields.infoImg.dy;
-            }
+            _setupStandardFieldAlpha(img, cfgInfoImg);
+            _setupStandardFieldScale(img, cfgInfoImg);
+            img.x = fieldDefaultX - infoImgOffset + cfgInfoImg.dx;
+            img.y = fieldDefaultY - INFO_IMG_OFFSET_V + cfgInfoImg.dy;
 
             if (!cfg.fields.crystalsBorder.enabled && item.vehicleCarouselVO.isEarnCrystals)
             {
