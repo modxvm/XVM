@@ -6,6 +6,8 @@
 
     * `"progressionPoints"` — battle Pass progression points
 
+  * Added the `"slotSelectedBorderAlpha "` option to the `"carousel"` section
+
 ______________________________
 
 ### XVM 8.7.7

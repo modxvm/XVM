@@ -540,14 +540,16 @@ package com.xvm.lobby.ui.tankcarousel
             var img:Image = renderer.content.infoImg as Image;
             var isImgVisible:Boolean = cfgInfoImg.enabled && img.visible;
             var infoImgOffset:int = isImgVisible ? INFO_IMG_OFFSET_H : 0;
-            var fieldDefaultY:int = renderer.content.height - field.height >> 1;
-            var fieldDefaultX:int = renderer.content.width - field.width + infoImgOffset >> 1;
             var scale:Number = isNaN(cfg.scale) ? 1 : cfgInfo.scale;
 
             _setupStandardFieldAlpha(field, cfgInfo);
             field.scaleX = DEFAULT_SCALE_X * scale;
             field.scaleY = DEFAULT_SCALE_Y * scale;
             field.antiAliasType = AntiAliasType.ADVANCED;
+
+            var fieldDefaultY:int = renderer.content.height - field.height >> 1;
+            var fieldDefaultX:int = renderer.content.width - field.width + infoImgOffset >> 1;
+
             field.y = fieldDefaultY + cfgInfo.dy;
             field.x = fieldDefaultX + cfgInfo.dx;
 
