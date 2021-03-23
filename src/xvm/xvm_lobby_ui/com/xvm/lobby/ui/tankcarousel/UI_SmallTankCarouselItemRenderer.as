@@ -33,11 +33,14 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 //preventAutosizing = false;
                 _helper = new TankCarouselItemRendererHelper(this, Config.config.hangar.carousel.small, DEFAULT_RENDERER_WIDTH, DEFAULT_RENDERER_HEIGHT);
+                if (bgMc)
+                {
+                    bgMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBackgroundAlpha, 100) / 100.0;
+                }
                 if (border)
                 {
                     border.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBorderAlpha, 100) / 100.0;
                 }
-
             }
             catch (ex:Error)
             {
@@ -87,7 +90,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 super.selected = value;
                 _helper.updateDataXvm();
-                selectedMc.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotSelectedBorderAlpha, 100) / 100.0;
+                selectedMc.alpha = value ? Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotSelectedBorderAlpha, 100) / 100.0 : 0;
             }
         }
 
