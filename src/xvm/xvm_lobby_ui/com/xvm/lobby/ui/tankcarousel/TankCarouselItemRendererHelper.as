@@ -27,29 +27,33 @@ package com.xvm.lobby.ui.tankcarousel
         private static const PROGRESSION_POINTS:String = "progressionPoints";
         private static const INFO_IMG_OFFSET_H:int = 32;
         private static const INFO_IMG_OFFSET_V:int = 3;
+        private static const W_OFFSET:int = 7;
 
         private var cfg:CCarouselCell;
         private var item:ITankCarouselItemRenderer;
         private var renderer:TankCarouselItemRenderer;
+        private var isSmallCarousel:Boolean;
         private var DEFAULT_WIDTH:int;
         private var DEFAULT_HEIGHT:int;
         private var orig_TankName_x:Number;
         private var orig_TankName_y:Number;
         private var DEFAULT_SCALE_X:Number;
         private var DEFAULT_SCALE_Y:Number;
+        private var infoImgSrc:String;
 
-        public function TankCarouselItemRendererHelper(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int):void
+        public function TankCarouselItemRendererHelper(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int, isSmallCarousel:Boolean):void
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
-            _init(item, cfg, defaultWidth, defaultHeight);
+            _init(item, cfg, defaultWidth, defaultHeight, isSmallCarousel);
         }
 
-        private function _init(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int):void
+        private function _init(item:ITankCarouselItemRenderer, cfg:CCarouselCell, defaultWidth:int, defaultHeight:int, isSmallCarousel:Boolean):void
         {
             this.cfg = cfg;
             this.item = item;
             this.DEFAULT_WIDTH = defaultWidth;
             this.DEFAULT_HEIGHT = defaultHeight;
+            this.isSmallCarousel = isSmallCarousel;
 
             renderer = item as TankCarouselItemRenderer;
             //XfwUtils.logChilds(renderer);
@@ -182,7 +186,6 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 _addSlotsCount();
             }
-            //updateDataXvm();
         }
 
         public function handleMouseOut():void
@@ -192,7 +195,6 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 _addSlotsCount();
             }
-            //updateDataXvm()
         }
 
         // PRIVATE
@@ -510,11 +512,6 @@ package com.xvm.lobby.ui.tankcarousel
             }
         }
 
-        private var orig_txtInfo_x:Number = NaN;
-        private var orig_txtInfo_y:Number = NaN;
-        private var orig_infoImg_x:Number = NaN;
-        private var orig_infoImg_y:Number = NaN;
-
         private function _setupStandardFieldInfo():void
         {
             var cfgInfo:CCarouselCellStandardField = null;
@@ -541,15 +538,31 @@ package com.xvm.lobby.ui.tankcarousel
             var isImgVisible:Boolean = cfgInfoImg.enabled && img.visible;
             var infoImgOffset:int = isImgVisible ? INFO_IMG_OFFSET_H : 0;
             var scale:Number = isNaN(cfg.scale) ? 1 : cfgInfo.scale;
+            var cellWidth:Number = renderer.content.width;
+            var cellHeight:Number = renderer.content.height;
+            var fieldDefaultX:int;
+            var fieldDefaultY:int;
 
             _setupStandardFieldAlpha(field, cfgInfo);
             field.scaleX = DEFAULT_SCALE_X * scale;
             field.scaleY = DEFAULT_SCALE_Y * scale;
             field.antiAliasType = AntiAliasType.ADVANCED;
 
-            var fieldDefaultY:int = renderer.content.height - field.height >> 1;
-            var fieldDefaultX:int = renderer.content.width - field.width + infoImgOffset >> 1;
-
+            if (isSmallCarousel)
+            {
+                field.width = cellWidth - infoImgOffset;
+                if(field.height > cellHeight)
+                {
+                    field.height = cellHeight;
+                }
+                fieldDefaultX = img.visible ? infoImgOffset : (cellWidth - field.width >> 1);
+            }
+            else
+            {
+                field.width = cellWidth - W_OFFSET - infoImgOffset;
+                fieldDefaultX = cellWidth - field.width + infoImgOffset >> 1;
+            }
+            fieldDefaultY = (cellHeight - field.height) >> 1;
             field.y = fieldDefaultY + cfgInfo.dy;
             field.x = fieldDefaultX + cfgInfo.dx;
 
@@ -560,9 +573,11 @@ package com.xvm.lobby.ui.tankcarousel
             //field.border = true; field.borderColor = 0xFFFF00; // DEBUG
 
             _setupStandardFieldAlpha(img, cfgInfoImg);
-            _setupStandardFieldScale(img, cfgInfoImg);
-            img.x = fieldDefaultX - infoImgOffset + cfgInfoImg.dx;
-            img.y = fieldDefaultY - INFO_IMG_OFFSET_V + cfgInfoImg.dy;
+            scale = isNaN(cfgInfoImg.scale) ? 1 : cfgInfoImg.scale;
+            img.scaleX = DEFAULT_SCALE_X * scale;
+            img.scaleY = DEFAULT_SCALE_Y * scale;
+            img.x = fieldDefaultX - infoImgOffset + cfgInfoImg.dx + (isSmallCarousel ? 2 : 0);
+            img.y = fieldDefaultY - INFO_IMG_OFFSET_V + cfgInfoImg.dy - (isSmallCarousel ? 4 : 0);
 
             if (!cfg.fields.crystalsBorder.enabled && item.vehicleCarouselVO.isEarnCrystals)
             {
