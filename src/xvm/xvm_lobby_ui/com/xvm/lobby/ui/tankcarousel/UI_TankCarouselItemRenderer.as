@@ -89,10 +89,10 @@ package com.xvm.lobby.ui.tankcarousel
                     extraFields.visible = false;
                 }
             }
-            else
-            {
-                _helper.fixData(value);
-            }
+            //else
+            //{
+                //_helper.fixData(value);
+            //}
             content.clanLock.validateNow();
             super.data = value;
         }
