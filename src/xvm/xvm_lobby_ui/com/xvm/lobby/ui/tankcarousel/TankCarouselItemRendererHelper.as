@@ -120,14 +120,14 @@ package com.xvm.lobby.ui.tankcarousel
 
         // extra fields
 
-        public function fixData(value:Object):void
-        {
-            if (cfg.fields.infoImg.enabled == false)
-            {
-                value.infoImgSrc = "";
-            }
-        }
-
+        //public function fixData(value:Object):void
+        //{
+            //if (cfg.fields.infoImg.enabled == false)
+            //{
+                //value.infoImgSrc = "";
+            //}
+        //}
+//
         public function updateDataXvm():void
         {
             try
@@ -537,13 +537,14 @@ package com.xvm.lobby.ui.tankcarousel
             var img:Image = renderer.content.infoImg as Image;
             var isImgVisible:Boolean = cfgInfoImg.enabled && img.visible;
             var infoImgOffset:int = isImgVisible ? INFO_IMG_OFFSET_H : 0;
-            var scale:Number = isNaN(cfg.scale) ? 1 : cfgInfo.scale;
             var cellWidth:Number = renderer.content.width;
             var cellHeight:Number = renderer.content.height;
             var fieldDefaultX:int;
             var fieldDefaultY:int;
+            var scale:Number;
 
             _setupStandardFieldAlpha(field, cfgInfo);
+            scale = isNaN(cfgInfo.scale) ? 1 : cfgInfo.scale;
             field.scaleX = DEFAULT_SCALE_X * scale;
             field.scaleY = DEFAULT_SCALE_Y * scale;
             field.antiAliasType = AntiAliasType.ADVANCED;
