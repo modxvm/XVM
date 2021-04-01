@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 27.02.2021
+    // Last update: 01.04.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -60,6 +60,7 @@
     "china-Ch41_WZ_111_QL":                  {"name": null, "short": null},
     "china-Ch42_WalkerBulldog_M41D":         {"name": null, "short": null},
     "china-Ch43_WZ_122_2":                   {"name": null, "short": null},
+    "china-Ch44_114_SP2":                    {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
     "czech-Cz02_TVP_T50":                    {"name": null, "short": null},
     "czech-Cz03_LT_vz35":                    {"name": null, "short": null},
@@ -705,6 +706,7 @@
     "ussr-R125_T_45":                        {"name": null, "short": null},
     "ussr-R126_Object_730_5":                {"name": null, "short": null},
     "ussr-R127_T44_100_K":                   {"name": null, "short": null},
+    "ussr-R127_T44_100_M":                   {"name": null, "short": null},
     "ussr-R127_T44_100_P":                   {"name": null, "short": null},
     "ussr-R127_T44_100_U":                   {"name": null, "short": null},
     "ussr-R128_KV4_Kreslavskiy":             {"name": null, "short": null},

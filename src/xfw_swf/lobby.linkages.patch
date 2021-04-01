@@ -1,7 +1,7 @@
 diff -Naur lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm lobby.orig-0/net/wg/data/constants/Linkages.class.asasm
 --- lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2020-07-27 15:01:56.966647400 +0300
 +++ lobby.orig-0/net/wg/data/constants/Linkages.class.asasm	2020-07-27 15:14:55.684797700 +0300
-@@ -2181,7 +2181,7 @@
+@@ -2185,7 +2185,7 @@
   trait const QName(PackageNamespace(""), "CHART_STATISTICS_VIEW") slotid 200 type QName(PackageNamespace(""), "String") value Utf8("ChartsStatisticsView_UI") end
   trait const QName(PackageNamespace(""), "STATISTICS_DASH_LINE_TEXT_ITEM_RENDERER") slotid 201 type QName(PackageNamespace(""), "String") value Utf8("StatisticsDashLineTextItemIRenderer_UI") end
   trait const QName(PackageNamespace(""), "TECHNIQUE_STATISTICS_PERCENT_SIGN") slotid 202 type QName(PackageNamespace(""), "String") value Utf8("TechniqueStatisticsPercentSign_UI") end
