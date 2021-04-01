@@ -36,7 +36,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStat
        coerce              QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats.tableItem"), "StatsTableItem")
        setlocal3
  
-@@ -384,7 +384,7 @@
+@@ -492,7 +492,7 @@
      end ; body
     end ; method
    end ; trait

@@ -96,6 +96,7 @@ def onXfwCommand(cmd, *args):
             handlersInvalidate('onGoldChange(0)', TechnicalMaintenance_handler)
             handlersInvalidate('onGoldChange(0)', RecruitWindow_handler)
             handlersInvalidate("_PersonalCase__onClientChanged({'stats': 'gold'})", PersonalCase_handlers)
+            handlersInvalidate("onBuyConfirmed(False)", MainView_handler)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable

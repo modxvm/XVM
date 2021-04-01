@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 27.02.2021
+    # Last update: 01.04.2021
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -83,6 +83,7 @@ _data = {
     "china:Ch41_WZ_111_QL":                  '111·lq',
     "china:Ch42_WalkerBulldog_M41D":         'M41D',
     "china:Ch43_WZ_122_2":                   'wz122·2',
+    "china-Ch44_114_SP2":                    '114·SP2',
     "czech:Cz01_Skoda_T40":                  'skT40',
     "czech:Cz02_TVP_T50":                    'skT50',
     "czech:Cz03_LT_vz35":                    'vz.35',
@@ -728,6 +729,7 @@ _data = {
     "ussr:R125_T_45":                        't45',
     "ussr:R126_Object_730_5":                'obj268v5',
     "ussr:R127_T44_100_K":                   't44·100K',
+    "ussr:R127_T44_100_M":                   't44·100M',
     "ussr:R127_T44_100_P":                   't44·100P',
     "ussr:R127_T44_100_U":                   't44·100U',
     "ussr:R128_KV4_Kreslavskiy":             'Kv·4·Kresl',

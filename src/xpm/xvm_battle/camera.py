@@ -7,20 +7,16 @@ import traceback
 import math
 import Math
 
-import BigWorld
 from Avatar import PlayerAvatar
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
 from helpers import dependency
 from skeletons.gui.battle_session import IBattleSessionProvider
-from gui.battle_control import avatar_getter
 from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
 from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
 from AvatarInputHandler.control_modes import SniperControlMode
 from helpers.EffectsList import _FlashBangEffectDesc
-from AvatarInputHandler.AimingSystems.SniperAimingSystem import SniperAimingSystem
-from Keys import KEY_RIGHTMOUSE
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -207,23 +203,6 @@ def create(base, self, model, list, args):
     if config.get('battle/camera/enabled') and config.get('battle/camera/noFlashBang'):
         return
     base(self, model, list, args)
-
-@overrideMethod(SniperAimingSystem, '_SniperAimingSystem__clampToLimits')
-def clampToLimits(base, self, turretYaw, gunPitch):
-    res = base(self, turretYaw, gunPitch)
-    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled'):
-        hotkey = config.get('battle/camera/sniper/noCameraLimit/mode') == "hotkey"
-        if hotkey and not BigWorld.isKeyDown(KEY_RIGHTMOUSE):
-            return res
-        elif self._SniperAimingSystem__yawLimits is not None:
-            return (turretYaw, res[1])
-    return res
-
-@overrideMethod(SniperControlMode, 'getPreferredAutorotationMode')
-def getPreferredAutorotationMode(base, self):
-    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noCameraLimit/enabled') and config.get('battle/camera/sniper/noCameraLimit/mode') == "full":
-        return avatar_getter.getVehicleTypeDescriptor().chassis.rotationIsAroundCenter
-    return base(self)
 
 
 # PRIVATE

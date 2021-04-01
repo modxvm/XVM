@@ -1,5 +1,9 @@
 ﻿### XVM 8.7.8
 
+  #### Общее
+
+  * Совместимость с World of Tanks 1.12.0.0
+
   #### Карусель техники
 
   * Добавлена опция в секциях `"carousel"/"normal"/"fields"` и `"carousel"/"small"/"fields"`:
@@ -7,6 +11,10 @@
     * `"progressionPoints"` — очки прогрессии боевого пропуска
 
   * Добавлена опция `"slotSelectedBorderAlpha"` в секцию `"carousel"`
+
+  #### Камера
+
+  * Удалена секция "camera"/"noCameraLimit"
 
 ______________________________
 
