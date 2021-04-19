@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 01.04.2021
+    // Last update: 20.04.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -305,6 +305,7 @@
     "germany-G80_Pz_IV_AusfD":               {"name": null, "short": null},
     "germany-G80_Pz_IV_AusfD_bootcamp":      {"name": null, "short": null},
     "germany-G81_Pz_IV_AusfH":               {"name": null, "short": null},
+    "germany-G81_Pz_IV_AusfH_GuP":           {"name": null, "short": null},
     "germany-G82_Pz_II_AusfG":               {"name": null, "short": null},
     "germany-G83_Pz_IV_AusfA":               {"name": null, "short": null},
     "germany-G85_Auf_Panther":               {"name": null, "short": null},

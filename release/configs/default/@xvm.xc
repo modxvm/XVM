@@ -70,7 +70,7 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "01.04.2021"
+    "date": "20.04.2021"
   },
 
   // Parameters for login screen.

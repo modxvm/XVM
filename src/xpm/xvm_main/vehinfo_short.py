@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 01.04.2021
+    # Last update: 20.04.2021
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -328,6 +328,7 @@ _data = {
     "germany:G80_Pz_IV_AusfD":               'Pz4d',
     "germany:G80_Pz_IV_AusfD_bootcamp":      'Pz4d',
     "germany:G81_Pz_IV_AusfH":               'Pz4h',
+    "germany:G81_Pz_IV_AusfH_GuP":           'Pz4h·ank',
     "germany:G82_Pz_II_AusfG":               'Pz2g',
     "germany:G83_Pz_IV_AusfA":               'Pz4a',
     "germany:G85_Auf_Panther":               'AufPan',
