@@ -10,3 +10,4 @@ browse=Browse
 wotNotFound=World of Tanks not found in directory.
 backupXVM=Backup /res_mods/configs folder.
 websiteXVM=Activate online services on XVM website
+component_XVM=XVM
