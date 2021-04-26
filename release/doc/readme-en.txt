@@ -156,7 +156,7 @@
     XVM server monitors the list of top clans and downloads it at client launch. If a player in top clan is encounter in a battle, that clan's icon is downloaded from the XVM server.
     The list is updated 8 times a day.
     There is an option to use custom clan/player icons.
-    Config parameter battle/clanIconsFolder sets path to clan icons root folder.
+    Config parameter "battle"/"clanIconsFolder" sets path to clan icons root folder.
     The icons are loaded automatically from a subfolder corresponding to game's region
     (RU, EU, NA, etc.) or player's account ID.
   To add your clan or player icon, just copy an icon file to:

@@ -94,7 +94,7 @@ Legend:
 │                   │   │   │   │   │   │   │   │   "knockout"   - применяет эффект выбивки (true), который фактически делает заливку объекта прозрачной и выявляет цвет фона документа. Значение по умолчанию — false (без выбивки).
 │                   │   │   │   │   │   │   │   │   "quality"    - заданное число применений фильтра. Значение по умолчанию — 1 (однократное применение фильтра). Можно использовать дополнительные числовые значения до 15 для получения разнообразных эффектов, более высокие значения выполняются ДОЛЬШЕ.
 │                   │   │   │   │   │   │   │   │
-│                   │   │   │   │   │   │   │   │ https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/filters/DropShadowFilter.html
+│                   │   │   │   │   │   │   │   │ https://help.adobe.com/ru_RU/FlashPlatform/reference/actionscript/3/flash/filters/DropShadowFilter.html
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "textFormat"      │ X │ X │ X │ X │ X │ X │ X │ применяет глобальный стиль HTML в "format"; обратите внимание, что определенные атрибуты шрифта в "format" переопределяют "textFormat"
 │                   │   │   │   │   │   │   │   │ стандартный стиль поля, значение по умолчанию:
@@ -114,7 +114,7 @@ Legend:
 │                   │   │   │   │   │   │   │   │   "marginLeft"  - отступ слева, аналогично (<textformat lefMargin='XX'>...</textformat>) (по-умолчанию: 0)
 │                   │   │   │   │   │   │   │   │   "marginRight" - отступ справа, аналогично (<textformat rightMargin='XX'>...</textformat>) (по-умолчанию: 0)
 │                   │   │   │   │   │   │   │   │
-│                   │   │   │   │   │   │   │   │ https://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
+│                   │   │   │   │   │   │   │   │ https://help.adobe.com/ru_RU/FlashPlatform/reference/actionscript/3/flash/text/TextFormat.html
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
 │ "format"          │ X │ X │ X │ X │ X │ X │ X │ отображаемые данные в текстовых полях (доступно использование HTML и макросов) (по-умолчанию: "")
 ├───────────────────┼───┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────
