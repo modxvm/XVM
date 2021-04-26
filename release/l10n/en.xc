@@ -230,7 +230,7 @@
     "PremiumTooltipHeader": "Premium vehicles",
     "PremiumTooltipBody": "Show only premium vehicles.",
     "Special": "Reward",
-    "SpecialTooltipHeader": "Reward vehicles.",
+    "SpecialTooltipHeader": "Reward vehicles",
     "SpecialTooltipBody": "Show only reward vehicles.",
     "Normal": "Normal",
     "NormalTooltipHeader": "Normal Vehicles",
@@ -281,7 +281,7 @@
     "Config file xvm.xc was not found, using the built-in config": "Config file xvm.xc was not found, using the built-in config",
     "Error loading XVM config": "Error loading XVM config",
 
-    //Bootcamp workaround
+    // Bootcamp workaround
     "bootcamp_workaround_title": "Warning",
     "bootcamp_workaround_message": "Currently XVM is not compatible with the \"boot camp\" game mode.\n\nTo enter the \"boot camp\" mode, you must restart the World of Tanks client in safe mode, which does not load modifications.\n\nDo you want to restart World of Tanks without mods right now?"
   }

@@ -27,7 +27,7 @@
     "fire": "пожар",
     "ramming": "таран",
     "world_collision": "падение",
-    "death_zone": "death zone",
+    "death_zone": "мёртвая зона",
     "pillbox": "Огневая точка {0}",
 
     "Hits": "Пробитий",
@@ -281,7 +281,7 @@
     "Config file xvm.xc was not found, using the built-in config": "Файл конфигурации xvm.xc не найден, используем встроенную конфигурацию",
     "Error loading XVM config": "Ошибка загрузки конфига XVM",
 
-    //Bootcamp workaround
+    // Bootcamp workaround
     "bootcamp_workaround_title": "Предупреждение",
     "bootcamp_workaround_message": "В настоящий момент модификация XVM не совместима с режимом «учебный полигон».\n\nДля входа в режим «учебный полигон» необходимо перезапустить клиент World of Tanks в безопасном режиме, при использовании которого не происходит загрузка модификаций.\n\nВы хотите перезапустить игру без модификаций прямо сейчас?"
   }
