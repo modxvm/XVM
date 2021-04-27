@@ -2,7 +2,7 @@
 
   #### General
 
-  * Compatibility with World of Tanks 1.12.1.0
+  * Compatibility with World of Tanks 1.12.1.1
 
   #### Carousel
 

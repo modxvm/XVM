@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 20.04.2021
+    # Last update: 27.04.2021
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -79,6 +79,7 @@ _data = {
     "china:Ch39_WZ120_1G_FT_FL":             '120·1ft·fl',
     "china:Ch40_WZ120G_FT":                  '120G·ft',
     "china:Ch41_WZ_111_5A":                  '111·5a',
+    "china:Ch41_WZ_111_5A_WB":               '111·5a·wb',
     "china:Ch41_WZ_111_5A_bob":              '111·5a·bb',
     "china:Ch41_WZ_111_QL":                  '111·lq',
     "china:Ch42_WalkerBulldog_M41D":         'M41D',
@@ -670,7 +671,8 @@ _data = {
     "usa:A81_T95_E2":                        'T95e2',
     "usa:A83_T110E4":                        '110e4',
     "usa:A85_T110E3":                        '110e3',
-    "usa:A86_T23E3":                         'T23e3',
+    "usa:A85_T110E3_WB":                     '110e3',
+    "usa:A86_T23E3":                         'T23e3·wb',
     "usa:A87_M44":                           'M44',
     "usa:A88_M53_55":                        'M53·55',
     "usa:A89_T54E1":                         '54E1',
@@ -864,6 +866,7 @@ _data = {
     "ussr:R96_Object_430":                   'obj430',
     "ussr:R96_Object_430B":                  'obj430b',
     "ussr:R97_Object_140":                   'obj140',
+    "ussr:R97_Object_140_WB":                'obj140·wb',
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'
