@@ -10,6 +10,8 @@ package com.xvm.types.cfg
     {
         public var battle_royale_solo:String;
         public var battle_royale_squad:String;
+        public var battle_royale_training_solo:String;
+        public var battle_royale_training_squad:String;
         public var bob:String;
         public var bootcamp:String;
         public var clan:String;
@@ -37,6 +39,7 @@ package com.xvm.types.cfg
         public var training:String;
         public var tutorial:String;
         public var unknown:String;
+        public var weekend_brawl:String;
 
         public function clone():*
         {

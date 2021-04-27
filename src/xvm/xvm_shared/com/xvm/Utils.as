@@ -130,6 +130,9 @@ package com.xvm
                 case 31: return 'tournament_event';
                 case 32: return 'bob';
                 case 33: return 'event_random';
+                case 34: return 'battle_royale_training_solo';
+                case 35: return 'battle_royale_training_squad';
+                case 36: return 'weekend_brawl';
                 default: return 'unknown';
             }
         }
