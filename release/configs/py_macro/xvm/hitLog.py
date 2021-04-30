@@ -186,7 +186,7 @@ class DataHitLog(object):
         self.intCD = None
         self.splashHit = False
         self.criticalHit = False
-        self.compName = 'unknown'
+        self.compName = None
         self.battletypeKey = 'unknown'
         self.data = {
             'damage': 0,
@@ -359,9 +359,10 @@ class DataHitLog(object):
             maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
             compName = decodedPoints[0].componentName
             self.compName = compName if compName[0] != 'W' else 'wheel'
+            self.criticalHit = (maxHitEffectCode == 5)
         else:
-            self.compName = 'unknown'
-        self.criticalHit = (maxHitEffectCode == 5)
+            self.compName = None
+            self.criticalHit = False
 
     def onEnterWorld(self, vehicle):
         self.macros.setChooseRating()
