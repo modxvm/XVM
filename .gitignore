@@ -16,6 +16,7 @@ syntax: glob
 _build/
 _devel/
 _logs/
+temp/
 
 #Actionscript disasm
 *.abc

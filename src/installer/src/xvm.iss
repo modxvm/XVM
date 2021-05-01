@@ -1,6 +1,6 @@
 #include "..\temp\defines\xvm_defines.iss"
 #include "..\temp\l10n_result\lang.iss"
-#include "dll\findwot\src_innosetup\findwot.iss"
+#include "xvmextensions.iss"
 
 [Setup]
 AppCopyright    = "2021 (c) XVM Team"
@@ -14,6 +14,7 @@ AppVersion      = {#VersionXVM}
 
 WizardImageFile      = images\big_image.bmp
 WizardSmallImageFile = images\small_image.bmp
+WizardStyle          = modern
 SetupIconFile        = images\setup_ico.ico
 
 Compression=lzma2/ultra64
@@ -52,9 +53,6 @@ Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_ba
 Source: "..\..\..\~output\deploy\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs
 Source: "..\..\..\~output\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs
 Source: "..\..\..\~output\deploy\readme*.*"; DestDir: "{app}"
-
-;installer libs
-Source: "dll\findwot\bin\findwot.dll"; Flags: dontcopy;
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
@@ -140,12 +138,22 @@ begin
       WOT_GetClientVersionW(Buffer, 1024, Index);
       Str := Copy(Buffer, 0, Pos(#0, Buffer));
 
-      case WOT_GetClientBranch(Index) of
-         1: Insert(' Release: ', Str, Pos(#0, Str));
-         2: Insert(' Common Test: ', Str, Pos(#0, Str));
-         3: Insert(' Super Test: ', Str, Pos(#0, Str));
-         4: Insert(' Sandbox: ', Str, Pos(#0, Str));
+      Insert(' [', Str, Pos(#0, Str));
+
+      case WOT_GetClientWgcFlavour(Index) of
+         1: Insert('WG/', Str, Pos(#0, Str));
+         2: Insert('360/', Str, Pos(#0, Str));
+         3: Insert('Steam/', Str, Pos(#0, Str));
       end;
+
+      case WOT_GetClientBranch(Index) of
+         1: Insert('Release', Str, Pos(#0, Str));
+         2: Insert('CT', Str, Pos(#0, Str));
+         3: Insert('ST', Str, Pos(#0, Str));
+         4: Insert('SB', Str, Pos(#0, Str));
+      end;
+
+      Insert('] - ', Str, Pos(#0, Str));
 
       WOT_GetClientPathW(Buffer, 1024, Index);
       Insert(Buffer, Str, Pos(#0, Str));
@@ -207,7 +215,7 @@ begin
   WotList.SetBounds(
     WizardForm.DirEdit.Left,
     WizardForm.DirEdit.Top,
-    WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width - WizardForm.DirEdit.Left,
+    WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width,
     WizardForm.DirEdit.Height
   );
 
