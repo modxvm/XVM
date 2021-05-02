@@ -47,7 +47,7 @@ fi
 
 # $XVMBUILD_L10N_URL
 if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
-    export XVMBUILD_L10N_URL="http://translate.modxvm.com/download/xvm-client/xvm-client-l10n_json.zip"
+    export XVMBUILD_L10N_URL="http://translate.modxvm.com/downloads/xvm-client/xvm-client-l10n_json.zip"
 fi
 
 ##########################
