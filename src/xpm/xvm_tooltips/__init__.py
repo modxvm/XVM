@@ -107,6 +107,10 @@ def _ToolTip_onHideTooltip(base, self, tooltipId):
     self.xvm_hide()
     base(self, tooltipId)
 
+@registerEvent(ToolTip, 'hide', True)
+def _ToolTip_onHideTooltip(self):
+    self.xvm_hide()
+
 # adds delay for tooltip appearance
 def _createTooltip(self, func):
     try:
