@@ -135,11 +135,11 @@ package com.xvm.lobby.ui.tankcarousel
                 var isExtraFieldsVisible:Boolean = false;
                 if (item.vehicleCarouselVO)
                 {
-                    _setupStandardFieldInfo();
                     _setupStandardFieldTankName();
                     _setupStandardFieldProgressionPoints();
                     if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
                     {
+                        _setupStandardFieldInfo();
                         if (item.extraFields)
                         {
                             if (item.vehicleCarouselVO.icon)
@@ -166,6 +166,7 @@ package com.xvm.lobby.ui.tankcarousel
                     else
                     {
                         _addSlotsCount();
+                        _setupStandardFieldInfo();
                     }
                 }
                 if (item.extraFields)
@@ -190,11 +191,11 @@ package com.xvm.lobby.ui.tankcarousel
 
         public function handleMouseOut():void
         {
-            _setupStandardFieldInfo();
             if (item.vehicleCarouselVO)
             {
                 _addSlotsCount();
             }
+            _setupStandardFieldInfo();
         }
 
         // PRIVATE
@@ -211,7 +212,8 @@ package com.xvm.lobby.ui.tankcarousel
                         "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
                         Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
                     // Centering in height
-                    renderer.content.txtInfo.y -= 8;
+                    //renderer.content.txtInfo.y -= 8;
+                    renderer.content.txtInfo.height = renderer.content.txtInfo.textHeight + 5;
                 }
             }
             if (item.vehicleCarouselVO.buyTank)
@@ -222,6 +224,7 @@ package com.xvm.lobby.ui.tankcarousel
                         "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
                         "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
                         Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
+                    renderer.content.txtInfo.height = renderer.content.txtInfo.textHeight + 5;
                 }
             }
         }
