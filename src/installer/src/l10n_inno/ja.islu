@@ -1,4 +1,4 @@
-﻿; *** Inno Setup version 5.5.3+ Japanese messages ***
+﻿; *** Inno Setup version 6.1.0+ Japanese messages ***
 ;
 ; Maintained by Koichi Shirasuka (shirasuka@eugrid.co.jp)
 ;
@@ -27,7 +27,7 @@ ErrorTitle=エラー
 ; *** SetupLdr messages
 SetupLdrStartupMessage=%1 をインストールします。続行しますか？
 LdrCannotCreateTemp=一時ファイルを作成できません。セットアップを中止します。
-LdrCannotExecTemp=一時フォルダのファイルを実行できません。セットアップを中止します。
+LdrCannotExecTemp=一時フォルダーのファイルを実行できません。セットアップを中止します。
 
 ; *** Startup error messages
 LastErrorMessage=%1.%n%nエラー %2: %3
@@ -41,13 +41,22 @@ WindowsServicePackRequired=このプログラムの実行には %1 Service Pack 
 NotOnThisPlatform=このプログラムは %1 では動作しません。
 OnlyOnThisPlatform=このプログラムの実行には %1 が必要です。
 OnlyOnTheseArchitectures=このプログラムは%n%n%1プロセッサー向けの Windows にしかインストールできません。
-MissingWOW64APIs=ご使用中の 64-bit 版 Windows にはこのプログラムをインストールし、動作させる為に必要な機能が含まれていません。この問題を修正する為にはサービスパック %1 をインストールしてください。
 WinVersionTooLowError=このプログラムの実行には %1 %2 以降が必要です。
 WinVersionTooHighError=このプログラムは %1 %2 以降では動作しません。
 AdminPrivilegesRequired=このプログラムをインストールするためには管理者としてログインする必要があります。
 PowerUserPrivilegesRequired=このプログラムをインストールするためには管理者またはパワーユーザーとしてログインする必要があります。
 SetupAppRunningError=セットアップは実行中の %1 を検出しました。%n%n開いているアプリケーションをすべて閉じてから「OK」をクリックしてください。「キャンセル」をクリックすると、セットアップを終了します。
 UninstallAppRunningError=アンインストールは実行中の %1 を検出しました。%n%n開いているアプリケーションをすべて閉じてから「OK」をクリックしてください。「キャンセル」をクリックすると、セットアップを終了します。
+
+; *** Startup questions
+PrivilegesRequiredOverrideTitle=インストールモードの選択
+PrivilegesRequiredOverrideInstruction=インストールモードを選択してください
+PrivilegesRequiredOverrideText1=%1 はすべてのユーザー (管理者権限が必要です) または現在のユーザー用にインストールできます。
+PrivilegesRequiredOverrideText2=%1 は現在のユーザーまたはすべてのユーザー用 (管理者権限が必要です) にインストールできます。
+PrivilegesRequiredOverrideAllUsers=すべてのユーザー用にインストール(&A)
+PrivilegesRequiredOverrideAllUsersRecommended=すべてのユーザー用にインストール(&A) (推奨)
+PrivilegesRequiredOverrideCurrentUser=現在のユーザー用にインストール(&M)
+PrivilegesRequiredOverrideCurrentUserRecommended=現在のユーザー用にインストール(&M) (推奨)
 
 ; *** Misc. errors
 ErrorCreatingDir=ディレクトリ %1 を作成中にエラーが発生しました。
@@ -79,7 +88,7 @@ ButtonNewFolder=新しいフォルダー(&M)
 
 ; *** "Select Language" dialog messages
 SelectLanguageTitle=セットアップに使用する言語の選択
-SelectLanguageLabel=インストール中に利用する言語を選んでください:
+SelectLanguageLabel=インストール中に利用する言語を選んでください。
 
 ; *** Common wizard text
 ClickNext=続行するには「次へ」、セットアップを終了するには「キャンセル」をクリックしてください。
@@ -127,6 +136,7 @@ WizardSelectDir=インストール先の指定
 SelectDirDesc=[name] のインストール先を指定してください。
 SelectDirLabel3=[name] をインストールするフォルダを指定して、「次へ」をクリックしてください。
 SelectDirBrowseLabel=続けるには「次へ」をクリックしてください。別のフォルダーを選択するには「参照」をクリックしてください。
+DiskSpaceGBLabel=このプログラムは最低 [gb] GB のディスク空き領域を必要とします。
 DiskSpaceMBLabel=このプログラムは最低 [mb] MB のディスク空き領域を必要とします。
 CannotInstallToNetworkDrive=ネットワークドライブにインストールすることはできません。
 CannotInstallToUNCPath=UNC パスにインストールすることはできません。
@@ -154,6 +164,7 @@ NoUninstallWarningTitle=既存のコンポーネント
 NoUninstallWarning=セットアップは以下のコンポーネントが既にインストールされていることを検出しました。%n%n%1%n%nこれらのコンポーネントの選択を解除してもアンインストールはされません。%n%nこのまま続行しますか？
 ComponentSize1=%1 KB
 ComponentSize2=%1 MB
+ComponentsDiskSpaceGBLabel=現在の選択は最低 [gb] GB のディスク空き領域を必要とします。
 ComponentsDiskSpaceMBLabel=現在の選択は最低 [mb] MB のディスク空き領域を必要とします。
 
 ; *** "Select Additional Tasks" wizard page
@@ -162,15 +173,15 @@ SelectTasksDesc=実行する追加タスクを選択してください。
 SelectTasksLabel2=[name] インストール時に実行する追加タスクを選択して、「次へ」をクリックしてください。
 
 ; *** "Select Start Menu Folder" wizard page
-WizardSelectProgramGroup=プログラムグループの指定
-SelectStartMenuFolderDesc=プログラムアイコンを作成する場所を指定してください。
-SelectStartMenuFolderLabel3=セットアップはスタートメニューにプログラムのショートカットを作成します。
-SelectStartMenuFolderBrowseLabel=続けるには「次へ」をクリックしてください。違うディレクトリを選択するには「参照」をクリックしてください。
-MustEnterGroupName=グループ名を指定してください。
+WizardSelectProgramGroup=スタートメニューフォルダーの指定
+SelectStartMenuFolderDesc=プログラムのショートカットを作成する場所を指定してください。
+SelectStartMenuFolderLabel3=セットアップは次のスタートメニューフォルダーにプログラムのショートカットを作成します。
+SelectStartMenuFolderBrowseLabel=続けるには「次へ」をクリックしてください。違うフォルダーを選択するには「参照」をクリックしてください。
+MustEnterGroupName=フォルダー名を指定してください。
 GroupNameTooLong=フォルダー名またはパスが長過ぎます。
-InvalidGroupName=グループ名が無効です。
-BadGroupName=以下の文字を含むグループ名は指定できません。:%n%n%1
-NoProgramGroupCheck2=プログラムグループを作成しない(&D)
+InvalidGroupName=フォルダー名が無効です。
+BadGroupName=次の文字を含むフォルダー名は指定できません:%n%n%1
+NoProgramGroupCheck2=スタートメニューフォルダーを作成しない(&D)
 
 ; *** "Ready to Install" wizard page
 WizardReady=インストール準備完了
@@ -181,8 +192,20 @@ ReadyMemoUserInfo=ユーザー情報:
 ReadyMemoDir=インストール先:
 ReadyMemoType=セットアップの種類:
 ReadyMemoComponents=選択コンポーネント:
-ReadyMemoGroup=プログラムグループ:
+ReadyMemoGroup=スタートメニューフォルダー:
 ReadyMemoTasks=追加タスク一覧:
+
+; *** TDownloadWizardPage wizard page and DownloadTemporaryFile
+DownloadingLabel=追加のファイルをダウンロードしています...
+ButtonStopDownload=ダウンロードを中止(&S)
+StopDownload=ダウンロードを中止してもよろしいですか？
+ErrorDownloadAborted=ダウンロードを中止しました
+ErrorDownloadFailed=ダウンロードに失敗しました: %1 %2
+ErrorDownloadSizeFailed=サイズの取得に失敗しました: %1 %2
+ErrorFileHash1=ファイルのハッシュに失敗しました: %1
+ErrorFileHash2=無効なファイルハッシュ: 予期された値 %1, 実際の値 %2
+ErrorProgress=無効な進行状況: %1 / %2
+ErrorFileSize=無効なファイルサイズ: 予期された値 %1, 実際の値 %2
 
 ; *** "Preparing to Install" wizard page
 WizardPreparing=インストール準備中
@@ -194,6 +217,7 @@ ApplicationsFound2=以下のアプリケーションがセットアップに必�
 CloseApplications=自動的にアプリケーションを終了する(&A)
 DontCloseApplications=アプリケーションを終了しない(&D)
 ErrorCloseApplications=セットアップはすべてのアプリケーションを自動的に終了することができませんでした。セットアップを続行する前に、更新の必要なファイルを使用しているすべてのアプリケーションを終了することを推奨します。
+PrepareToInstallNeedsRestart=セットアップはコンピューターを再起動する必要があります。コンピューターを再起動した後、セットアップを再度実行して [name] のインストールを完了してください。%n%nすぐに再起動しますか？?
 
 ; *** "Installing" wizard page
 WizardInstalling=インストール状況
@@ -202,7 +226,7 @@ InstallingLabel=ご使用のコンピューターに [name] をインストー�
 ; *** "Setup Completed" wizard page
 FinishedHeadingLabel=[name] セットアップウィザードの完了
 FinishedLabelNoIcons=ご使用のコンピューターに [name] がセットアップされました。
-FinishedLabel=ご使用のコンピューターに [name] がセットアップされました。アプリケーションを実行するにはインストールされたアイコンを選択してください。
+FinishedLabel=ご使用のコンピューターに [name] がセットアップされました。アプリケーションを実行するにはインストールされたショートカットを選択してください。
 ClickFinish=セットアップを終了するには「完了」をクリックしてください。
 FinishedRestartLabel=[name] のインストールを完了するためには、コンピューターを再起動する必要があります。すぐに再起動しますか？
 FinishedRestartMessage=[name] のインストールを完了するためには、コンピューターを再起動する必要があります。%n%nすぐに再起動しますか？
@@ -223,7 +247,10 @@ SelectDirectoryLabel=次のディスクのある場所を指定してくださ�
 
 ; *** Installation phase messages
 SetupAborted=セットアップは完了していません。%n%n問題を解決してから、もう一度セットアップを実行してください。
-EntryAbortRetryIgnore=もう一度やりなおすには「再試行」、エラーを無視して続行するには「無視」、インストールを中止するには「中止」をクリックしてください。
+AbortRetryIgnoreSelectAction=アクションを選択してください
+AbortRetryIgnoreRetry=再試行(&T)
+AbortRetryIgnoreIgnore=エラーを無視して続行(&I)
+AbortRetryIgnoreCancel=インストールをキャンセル
 
 ; *** Installation status messages
 StatusClosingApplications=アプリケーションを終了しています...
@@ -254,36 +281,54 @@ ErrorRegWriteKey=レジストリキー書き込みエラー:%n%1\%2
 ErrorIniEntry=INIファイルエントリ作成エラー: ファイル %1
 
 ; *** File copying errors
-FileAbortRetryIgnore=もう一度やりなおすには「再試行」、このファイルをスキップして続行するには「無視」（推奨されません）、インストールを中止するには「中止」をクリックしてください。
-FileAbortRetryIgnore2=もう一度やりなおすには「再試行」、このファイルをスキップして続行するには「無視」（推奨されません）、インストールを中止するには「中止」をクリックしてください。
+FileAbortRetryIgnoreSkipNotRecommended=このファイルをスキップ(&S) (推奨されません)
+FileAbortRetryIgnoreIgnoreNotRecommended=エラーを無視して続行(&I) (推奨されません)
 SourceIsCorrupted=コピー元のファイルが壊れています。
 SourceDoesntExist=コピー元のファイル %1 が見つかりません。
-ExistingFileReadOnly=既存のファイルは読み取り専用です。%n%n読み取り専用属性を解除してもう一度やりなおすには「再試行」、このファイルをスキップして続行するには「無視」、インストールを中止するには「中止」をクリックしてください。
-ErrorReadingExistingDest=既存のファイルを読み込み中にエラーが発生しました。:
-FileExists=ファイルは既に存在します。%n%n上書きしますか？
-ExistingFileNewer=インストールしようとしているファイルよりも新しいファイルが存在します。既存のファイルを残すことをお奨めします。%n%n既存のファイルを残しますか。
-ErrorChangingAttr=既存ファイルの属性を変更中にエラーが発生しました。:
-ErrorCreatingTemp=コピー先のフォルダにファイルを作成中にエラーが発生しました。:
-ErrorReadingSource=コピー元のファイルを読み込み中にエラーが発生しました。:
-ErrorCopying=ファイルをコピー中にエラーが発生しました。:
-ErrorReplacingExistingFile=既存ファイルを置き換え中にエラーが発生しました。:
-ErrorRestartReplace=置き換え再開中にエラーが発生しました。:
-ErrorRenamingTemp=コピー先フォルダのファイル名を変更中にエラーが発生しました。:
-ErrorRegisterServer=DLL/OCXの登録に失敗しました。: %1
-ErrorRegSvr32Failed=RegSvr32はエラーコード %1 により失敗しました。
-ErrorRegisterTypeLib=タイプライブラリへの登録に失敗しました。: %1
+ExistingFileReadOnly2=既存のファイルは読み取り専用のため置き換えできません。
+ExistingFileReadOnlyRetry=読み取り専用属性を解除してもう一度やりなおす(&R)
+ExistingFileReadOnlyKeepExisting=既存のファイルを残す(&K)
+ErrorReadingExistingDest=既存のファイルを読み込み中にエラーが発生しました:
+FileExistsSelectAction=アクションを選択してください
+FileExists2=ファイルは既に存在します。
+FileExistsOverwriteExisting=既存のファイルを上書きする(&O)
+FileExistsKeepExisting=既存のファイルを維持する(&K)
+FileExistsOverwriteOrKeepAll=以降の競合に同じ処理を行う(&D)
+ExistingFileNewerSelectAction=アクションを選択してください
+ExistingFileNewer2=セットアップがインストールしようとしているものよりも新しいファイルがあります。
+ExistingFileNewerOverwriteExisting=既存のファイルを上書きする(&O)
+ExistingFileNewerKeepExisting=既存のファイルを維持する(&K) (推奨)
+ExistingFileNewerOverwriteOrKeepAll=以降の競合に同じ処理を行う(&D)
+ErrorChangingAttr=既存ファイルの属性を変更中にエラーが発生しました:
+ErrorCreatingTemp=コピー先のフォルダーにファイルを作成中にエラーが発生しました:
+ErrorReadingSource=コピー元のファイルを読み込み中にエラーが発生しました:
+ErrorCopying=ファイルをコピー中にエラーが発生しました:
+ErrorReplacingExistingFile=既存のファイルを置き換え中にエラーが発生しました:
+ErrorRestartReplace=再起動による置き換えの実行に失敗しました:
+ErrorRenamingTemp=コピー先フォルダーのファイル名を変更中にエラーが発生しました:
+ErrorRegisterServer=DLL/OCXの登録に失敗しました: %1
+ErrorRegSvr32Failed=RegSvr32は終了コード %1 により失敗しました
+ErrorRegisterTypeLib=タイプライブラリへの登録に失敗しました: %1
+
+; *** Uninstall display name markings
+UninstallDisplayNameMark=%1 (%2)
+UninstallDisplayNameMarks=%1 (%2, %3)
+UninstallDisplayNameMark32Bit=32 ビット
+UninstallDisplayNameMark64Bit=64 ビット
+UninstallDisplayNameMarkAllUsers=すべてのユーザー
+UninstallDisplayNameMarkCurrentUser=現在のユーザー
 
 ; *** Post-installation errors
 ErrorOpeningReadme=README ファイルのオープンに失敗しました。
 ErrorRestartingComputer=コンピューターの再起動に失敗しました。手動で再起動してください。
 
 ; *** Uninstaller messages
-UninstallNotFound=ファイル %1 が見つかりません。アンインストールを実行できません。
-UninstallOpenError=ファイル %1 を開けることができません。アンインストールを実行できません。
-UninstallUnsupportedVer=アンインストールログファイル %1 は、このバージョンのアンインストールプログラムが認識できない形式です。アンインストールを実行できません。
-UninstallUnknownEntry=アンインストールログに不明のエントリ %1 が見つかりました。
+UninstallNotFound=ファイル "%1" が見つかりません。アンインストールを実行できません。
+UninstallOpenError=ファイル "%1" を開くことができません。アンインストールを実行できません。
+UninstallUnsupportedVer=アンインストールログファイル "%1" は、このバージョンのアンインストールプログラムが認識できない形式です。アンインストールを実行できません。
+UninstallUnknownEntry=アンインストールログに不明のエントリ (%1) が見つかりました。
 ConfirmUninstall=%1 とその関連コンポーネントをすべて削除します。よろしいですか？
-UninstallOnlyOnWin64=このプログラムは64-bit版Windows上でのみアンインストールすることができます。
+UninstallOnlyOnWin64=このプログラムは64 ビット版Windows上でのみアンインストールすることができます。
 OnlyAdminCanUninstall=アンインストールするためには管理者権限が必要です。
 UninstallStatusLabel=ご使用のコンピューターから %1 を削除しています。しばらくお待ちください。
 UninstalledAll=%1 はご使用のコンピューターから正常に削除されました。

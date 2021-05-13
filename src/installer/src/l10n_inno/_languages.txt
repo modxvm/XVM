@@ -1,0 +1,37 @@
+┌───────┬───────────────────────┬──────────┬────────────────────
+│ be    │ Belarusian            │          │ 5.5.3+
+│ bg    │ Bulgarian             │ Official │ 6.1.0+
+│ cs    │ Czech                 │ Official │ 6.1.0+
+│ da    │ Danish                │ Official │ 6.1.0+
+│ de    │ German (Standard)     │ Official │ 6.1.0+
+│ el    │ Greek                 │          │ 6.1.0+
+│ en    │ English               │ Official │ 6.1.0+
+│ es    │ Spanish               │ Official │ 6.1.0+
+│ et    │ Estonian              │          │ 5.5.3+
+│ fi    │ Finnish               │ Official │ 6.1.0+
+│ fr    │ French (Standard)     │ Official │ 6.1.0+
+│ hr    │ Croatian              │          │ 6.1.0+
+│ hu    │ Hungarian             │          │ 6.1.0+
+│ id    │ Indonesian            │          │ 6.1.0+
+│ it    │ Italian               │ Official │ 6.1.0+
+│ ja    │ Japanese              │ Official │ 6.1.0+
+│ ka    │ Georgian              │          │ 6.1.0+
+│ ko    │ Korean                │          │ 6.0.3+
+│ lt    │ Lithuanian            │          │ 6.1.0+
+│ lv    │ Latvian               │          │ 5.5.0+
+│ ms    │ Malay (Malaysian)     │          │ 5.1.0+
+│ nl    │ Dutch (Netherlands)   │ Official │ 6.1.0+
+│ no    │ Norwegian (Bokmal)    │ Official │ 6.1.0+
+│ pl    │ Polish                │ Official │ 6.1.0+
+│ pt    │ Portuguese (Portugal) │ Official │ 6.1.0+
+│ pt_BR │ Portuguese (Brazil)   │ Official │ 6.1.0+
+│ ro    │ Romanian              │          │ 5.5.3+
+│ ru    │ Russian               │ Official │ 6.1.0+
+│ sk    │ Slovak                │ Official │ 6.1.0+
+│ sr    │ Serbian (Latin)       │          │ 6.1.0+
+│ sv    │ Swedish               │          │ 6.1.0+
+│ th    │ Thai                  │          │ 5.5.3+
+│ tr    │ Turkish               │ Official │ 6.1.0+
+│ uk    │ Ukrainian             │ Official │ 6.1.0+
+│ vi    │ Vietnamese            │          │ 6.0.0+
+└───────┴───────────────────────┴──────────┴────────────────────

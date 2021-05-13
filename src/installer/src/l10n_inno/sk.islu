@@ -1,6 +1,6 @@
 ﻿; ******************************************************
 ; ***                                                ***
-; *** Inno Setup version 5.5.3+ Slovak messages      ***
+; *** Inno Setup version 6.1.0+ Slovak messages      ***
 ; ***                                                ***
 ; *** Original Author:                               ***
 ; ***                                                ***
@@ -13,7 +13,7 @@
 ; ***   Tomas Falb (tomasf AT pobox.sk)              ***
 ; ***   Slappy (slappy AT pobox.sk)                  ***
 ; ***                                                ***
-; *** Update: 04.02.2013                             ***
+; *** Update: 22.08.2020                             ***
 ; ***                                                ***
 ; ******************************************************
 ;
@@ -38,7 +38,7 @@ LdrCannotExecTemp=Nie je možné spustiť súbor v dočasnom adresári. Sprievod
 LastErrorMessage=%1.%n%nChyba %2: %3
 SetupFileMissing=Inštalačný adresár neobsahuje súbor %1. Opravte, prosím, túto chybu alebo si zaobstarajte novú kópiu tohto produktu.
 SetupFileCorrupt=Súbory sprievodcu inštaláciou sú poškodené. Zaobstarajte si, prosím, novú kópiu tohto produktu.
-SetupFileCorruptOrWrongVer=Súbory sprievodcu inštaláciou sú poškodené alebo sa nezhodujú s touto verziou sprievodcu instaláciou. Opravte, prosím, túto chybu alebo si zaobstarajte novú kópiu tohto produktu.
+SetupFileCorruptOrWrongVer=Súbory sprievodcu inštaláciou sú poškodené alebo sa nezhodujú s touto verziou sprievodcu inštaláciou. Opravte, prosím, túto chybu alebo si zaobstarajte novú kópiu tohto produktu.
 InvalidParameter=Nesprávny parameter na príkazovom riadku:%n%n%1
 SetupAlreadyRunning=Inštalácia už beží.
 WindowsVersionNotSupported=Tento program nepodporuje vašu verziu Windows.
@@ -46,13 +46,24 @@ WindowsServicePackRequired=Tento program vyžaduje %1 Service Pack %2 alebo nov�
 NotOnThisPlatform=Tento produkt sa nedá spustiť v %1.
 OnlyOnThisPlatform=Tento produkt musí byť spustený v %1.
 OnlyOnTheseArchitectures=Tento produkt je možné nainštalovať iba vo verziách MS Windows s podporou architektúry procesorov:%n%n%1
-MissingWOW64APIs=Aktuálna verzia MS Windows neobsahuje funkcie, ktoré vyžaduje sprievodca inštaláciou pre 64-bitovú inštaláciu. Opravte, prosím, túto chybu nainštalovaním aktualizácie Service Pack %1.
+
 WinVersionTooLowError=Tento produkt vyžaduje %1 verzie %2 alebo vyššej.
 WinVersionTooHighError=Tento produkt sa nedá nainštalovať vo %1 verzie %2 alebo vyššej.
 AdminPrivilegesRequired=Na inštaláciu tohto produktu musíte byť prihlásený s právami administrátora.
 PowerUserPrivilegesRequired=Na inštaláciu tohto produktu musíte byť prihlásený s právami administrátora alebo člena skupiny Power Users.
 SetupAppRunningError=Sprievodca inštaláciou zistil, že produkt %1 je teraz spustený.%n%nUkončite, prosím, všetky spustené inštancie tohto produktu a pokračujte kliknutím na tlačidlo OK alebo ukončite inštaláciu tlačidlom Zrušiť.
 UninstallAppRunningError=Sprievodca odinštaláciou zistil, že produkt %1 je teraz spustený.%n%nUkončite, prosím, všetky spustené inštancie tohto produktu a pokračujte kliknutím na tlačidlo OK alebo ukončite inštaláciu tlačidlom Zrušiť.
+
+; *** Startup questions
+PrivilegesRequiredOverrideTitle=Vyberte inštalačný mód inštalátora
+PrivilegesRequiredOverrideInstruction=Vyberte inštalačný mód
+PrivilegesRequiredOverrideText1=%1 sa môže nainštalovať pre Všetkých užívateľov (vyžaduje administrátorské práva), alebo len pre Vás.
+PrivilegesRequiredOverrideText2=%1 sa môže nainštalovať len pre Vás, alebo pre Všetkých užívateľov (vyžaduje administrátorské práva).
+PrivilegesRequiredOverrideAllUsers=Inštalovať pre &Všetkých užívateľov
+PrivilegesRequiredOverrideAllUsersRecommended=Inštalovať pre &Všetkých užívateľov (odporúčané)
+PrivilegesRequiredOverrideCurrentUser=Inštalovať len pre &mňa
+PrivilegesRequiredOverrideCurrentUserRecommended=Inštalovať len pre &mňa (odporúčané)
+
 ErrorCreatingDir=Sprievodca inštaláciou nemohol vytvoriť adresár "%1"
 ErrorTooManyFilesInDir=Nedá sa vytvoriť súbor v adresári "%1", pretože tento adresár už obsahuje príliš veľa súborov
 ExitSetupTitle=Ukončiť sprievodcu inštaláciou
@@ -76,7 +87,7 @@ ButtonBrowse=&Prechádzať...
 ButtonWizardBrowse=&Prechádzať...
 ButtonNewFolder=&Vytvoriť nový adresár
 SelectLanguageTitle=Výber jazyka sprievodcu inštaláciou
-SelectLanguageLabel=Zvoľte jazyk, ktorý sa má použiť pri inštalácii:
+SelectLanguageLabel=Zvoľte jazyk, ktorý sa má použiť pri inštalácii.
 ClickNext=Pokračujte kliknutím na tlačidlo Ďalej alebo ukončite sprievodcu inštaláciou tlačidlom Zrušiť.
 BeveledLabel=
 BrowseDialogTitle=Nájsť adresár
@@ -88,7 +99,7 @@ WizardPassword=Heslo
 PasswordLabel1=Táto inštalácia je chránená heslom.
 PasswordLabel3=Zadajte, prosím, heslo a pokračujte kliknutím na tlačidlo Ďalej. Pri zadávání hesla rozlišujte malé a veľké písmená.
 PasswordEditLabel=&Heslo:
-IncorrectPassword=Zadané heslo nie je správne. Zkúste to, prosím, ešte raz.
+IncorrectPassword=Zadané heslo nie je správne. Skúste to, prosím, ešte raz.
 WizardLicense=Licenčná zmluva
 LicenseLabel=Skôr, ako budete pokračovať, prečítajte si, prosím, tieto dôležité informácie.
 LicenseLabel3=Prečítajte si, prosím, túto Licenčnú zmluvu. Aby mohla inštalácia pokračovať, musíte súhlasiť s podmienkami tejto zmluvy.
@@ -110,10 +121,11 @@ WizardSelectDir=Vyberte cieľový adresár
 SelectDirDesc=Kam má byť produkt [name] nainštalovaný?
 SelectDirLabel3=Sprievodca nainštaluje produkt [name] do nasledujúceho adresára.
 SelectDirBrowseLabel=Pokračujte kliknutím na tlačidlo Ďalej. Ak chcete vybrať iný adresár, kliknite na tlačidlo Prechádzať.
+DiskSpaceGBLabel=Inštalácia vyžaduje najmenej [gb] GB miesta na disku.
 DiskSpaceMBLabel=Inštalácia vyžaduje najmenej [mb] MB miesta na disku.
 CannotInstallToNetworkDrive=Inštalátor nemôže inštalovať na sieťovú jednotku.
 CannotInstallToUNCPath=Inštalátor nemôže inštalovať na UNC cestu.
-InvalidPath=Musíte zadat úplnú cestu vrátane písmena jednotky; napríklad:%n%nC:\Aplikácia%n%nalebo cestu UNC v tvare:%n%n\\server\zdieľaný adresár
+InvalidPath=Musíte zadat úplnú cestu vrátane písmena jednotky; napríklad:%n%nC:\Aplikácia%n%nalebo cestu UNC v tvare:%n%n\\Server\Zdieľaný adresár
 InvalidDrive=Vami vybraná jednotka alebo cesta UNC neexistuje alebo nie je dostupná. Vyberte, prosím, iné umiestnenie.
 DiskSpaceWarningTitle=Nedostatok miesta na disku
 DiskSpaceWarning=Sprievodca inštaláciou vyžaduje najmenej %1 KB voľného miesta na inštaláciu produktu, ale na vybranej jednotke je dostupných len %2 KB.%n%nPrajete si napriek tomu pokračovať?
@@ -134,6 +146,7 @@ NoUninstallWarningTitle=Komponenty existujú
 NoUninstallWarning=Sprievodca inštaláciou zistil, že nasledujúce komponenty sú už na Vašom počítači nainštalované:%n%n%1%n%nAk ich teraz nezahrniete do výberu, nebudú neskôr odinštalované.%n%nPrajete si napriek tomu pokračovať?
 ComponentSize1=%1 KB
 ComponentSize2=%1 MB
+ComponentsDiskSpaceGBLabel=Vybrané komponenty vyžadujú najmenej [gb] GB miesta na disku.
 ComponentsDiskSpaceMBLabel=Vybrané komponenty vyžadujú najmenej [mb] MB miesta na disku.
 WizardSelectTasks=Vyberte ďalšie úlohy
 SelectTasksDesc=Ktoré ďalšie úlohy majú byť vykonané?
@@ -157,6 +170,17 @@ ReadyMemoType=Typ inštalácie:
 ReadyMemoComponents=Vybrané komponenty:
 ReadyMemoGroup=Skupina v ponuke Štart:
 ReadyMemoTasks=Ďalšie úlohy:
+DownloadingLabel=Sťahovanie dodatočných súborov...
+ButtonStopDownload=&Zastaviť sťahovanie
+StopDownload=Ste si istý, že chcete zastaviť sťahovanie?
+ErrorDownloadAborted=Sťahovanie prerušené
+ErrorDownloadFailed=Sťahovanie zlyhalo: %1 %2
+ErrorDownloadSizeFailed=Zlyhalo získanie veľkosti: %1 %2
+ErrorFileHash1=Kontrolná suma súbora zlyhala: %1
+ErrorFileHash2=Nesprávna kontrolná suma: očakávalo sa %1, zistilo sa %2
+ErrorProgress=Nesprávny priebeh: %1 z %2
+ErrorFileSize=Nesprávna veľkosť súbora: očakávalo sa %1, zistilo sa %2
+
 WizardPreparing=Príprava inštalácie
 PreparingDesc=Sprievodca inštaláciou pripravuje inštaláciu produktu [name] na Váš počítač.
 PreviousInstallNotCompleted=Inštalácia/odinštalácia predošlého produktu nebola úplne dokončená. Dokončenie tohto procesu vyžaduje reštart počítača.%n%nPo reštartovaní počítača spustite znovu sprievodcu inštaláciou, aby bolo možné dokončiť inštaláciu produktu [name].
@@ -166,6 +190,7 @@ ApplicationsFound2=Nasledujúce aplikácie pracujú so súbormi, ktoré musí in
 CloseApplications=&Automaticky ukončiť aplikácie
 DontCloseApplications=&Neukončovať aplikácie
 ErrorCloseApplications=Sprievodca nemohol automaticky zatvoriť všetky aplikácie. Odporúčame Vám, aby ste ručne uzavreli všetky aplikácie, ktoré používajú súbory, ktoré má Sprievodca aktualizovať.
+PrepareToInstallNeedsRestart=Sprievodca potrebuje reštartovať Váš počítač. Po reštartovaní spusťte tohto Sprievodcu opäť, aby sa inštalácia [name] dokončila.%n%nChcete reštartovať teraz?
 WizardInstalling=Inštalujem
 InstallingLabel=Počkajte prosím, kým sprievodca inštaláciou nedokončí inštaláciu produktu [name] na Váš počítač.
 FinishedHeadingLabel=Dokončuje sa inštalácia produktu [name]
@@ -180,12 +205,16 @@ NoRadio=&Nie, počítač reštartujem neskôr
 RunEntryExec=Spustiť %1
 RunEntryShellExec=Zobraziť %1
 ChangeDiskTitle=Sprievodca inštaláciou vyžaduje ďalší disk
-SelectDiskLabel2=Vložte, prosím, disk %1 a kliknite na tlačidlo OK.%n%nAk sa súbory na tomto disku nachádzajú v inom adresári, ako v tom, ktorý je zobrazený nižšie, zadejte správnu cestu alebo kliknite na tlačidlo Prechádzať.
+SelectDiskLabel2=Vložte, prosím, disk %1 a kliknite na tlačidlo OK.%n%nAk sa súbory na tomto disku nachádzajú v inom adresári, ako v tom, ktorý je zobrazený nižšie, zadajte správnu cestu alebo kliknite na tlačidlo Prechádzať.
 PathLabel=&Cesta:
 FileNotInDir2=Súbor "%1" sa nedá nájsť v "%2". Vložte, prosím, správny disk alebo zvoľte iný adresár.
-SelectDirectoryLabel=Špecifikujte,prosím, umiestnenie ďalšieho disku.
+SelectDirectoryLabel=Špecifikujte, prosím, umiestnenie ďalšieho disku.
 SetupAborted=Inštalácia nebola úplne dokončená.%n%nOpravte, prosím, chybu a spustite sprievodcu inštaláciou znova.
-EntryAbortRetryIgnore=Akciu zopakujete kliknutím na tlačidlo Opakovať. Akciu vynecháte kliknutím na tlačidlo Preskočiť. Inštaláciu prerušíte kliknutím na tlačidlo Prerušiť.
+AbortRetryIgnoreSelectAction=Vyberte akciu
+AbortRetryIgnoreRetry=&Skúsiť znova
+AbortRetryIgnoreIgnore=&Ignorovať chybu a pokračovať
+AbortRetryIgnoreCancel=Zrušiť inštaláciu
+
 StatusClosingApplications=Ukončovanie aplikácií...
 StatusCreateDirs=Vytvárajú sa adresáre...
 StatusExtractFiles=Rozbaľujú sa súbory...
@@ -206,14 +235,26 @@ ErrorRegOpenKey=Došlo k chybe pri otváraní kľúča systémového registra:%n
 ErrorRegCreateKey=Došlo k chybe pri vytváraní kľúča systémového registra:%n%1\%2
 ErrorRegWriteKey=Došlo k chybe pri zápise do kľúča systémového registra:%n%1\%2
 ErrorIniEntry=Došlo k chybe pri vytváraní záznamu v konfiguračnom súbore "%1".
-FileAbortRetryIgnore=Akciu zopakujete kliknutím na tlačidlo Opakovať. Tento súbor preskočíte kliknutím na tlačidlo Preskočiť (neodporúča sa). Inštaláciu prerušíte tlačidlom Prerušiť.
-FileAbortRetryIgnore2=Akciu zopakujete kliknutím na tlačidlo Opakovať. Pokračujete kliknutím na tlačidlo Preskočiť (neodporúča sa). Inštaláciu prerušíte tlačidlom Prerušiť.
+FileAbortRetryIgnoreSkipNotRecommended=&Preskočiť tento súbor (neodporúčané)
+FileAbortRetryIgnoreIgnoreNotRecommended=&Ignorovať chybu a pokračovať (neodporúčané)
 SourceIsCorrupted=Zdrojový súbor je poškodený
 SourceDoesntExist=Zdrojový súbor "%1" neexistuje
-ExistingFileReadOnly=Existujúci súbor je určený len na čítanie.%n%nAtribút "Iba na čítanie" odstránite a akciu zopakujete kliknutím na tlačidlo Opakovať. Súbor preskočíte kliknutím na tlačidlo Preskočiť. Inštaláciu prerušíte kliknutím na tlačidlo Prerušiť.
+
+ExistingFileReadOnly2=Existujúci súbor nie je možné prepísať, pretože je označený atribútom len na čítanie.
+ExistingFileReadOnlyRetry=&Odstrániť atribút len na čítanie a skúsiť znova
+ExistingFileReadOnlyKeepExisting=&Ponechať existujúci súbor
+
 ErrorReadingExistingDest=Došlo k chybe pri pokuse o čítanie existujúceho súboru:
-FileExists=Súbor už existuje.%n%nMá ho sprievodca inštalácie prepísať?
-ExistingFileNewer=Existujúci súbor je novší ako ten, ktorý sa sprievodca inštaláciou pokúša nainštalovať. Odporúča sa ponechať existujúci súbor.%n%nPrajete si ponechat existujúci súbor?
+FileExistsSelectAction=Vyberte akciu
+FileExists2=Súbor už existuje.
+FileExistsOverwriteExisting=&Prepísať existujúci súbor
+FileExistsKeepExisting=Ponechať &existujúci súbor
+FileExistsOverwriteOrKeepAll=&Vykonať pre všetky ďalšie konflikty
+ExistingFileNewerSelectAction=Vyberte akciu
+ExistingFileNewer2=Existujúci súbor je novší ako súbor, ktorý sa Sprievodca inštaláciou pokúša nainštalovať.
+ExistingFileNewerOverwriteExisting=&Prepísať existujúci súbor
+ExistingFileNewerKeepExisting=Ponechať &existujúci súbor (odporúčané)
+ExistingFileNewerOverwriteOrKeepAll=&Vykonať pre všetky ďalšie konflikty
 ErrorChangingAttr=Došlo k chybe pri pokuse o modifikáciu atribútov existujúceho súboru:
 ErrorCreatingTemp=Došlo k chybe pri pokuse o vytvorenie súboru v cieľovom adresári:
 ErrorReadingSource=Došlo k chybe pri pokuse o čítanie zdrojového súboru:
@@ -239,13 +280,21 @@ UninstalledMost=%1 bol odinštalovaný z Vášho počítača.%n%nNiektoré jeho 
 UninstalledAndNeedsRestart=Na dokončenie odinštalácie produktu %1 je potrebné reštartovať Váš počítač.%n%nPrajete si teraz reštartovať Váš počítač?
 UninstallDataCorrupted=Súbor "%1" je poškodený. Produkt sa nedá odinštalovať
 ConfirmDeleteSharedFileTitle=Odinštalovať zdieľaný súbor?
-ConfirmDeleteSharedFile2=Systém indikuje, že následujúci zdieľaný súbor nie je používaný žiadnymi inými aplikáciami. Má sprievodca odinštalácie tento zdieľaný súbor odstrániť?%n%nAk niektoré aplikácie tento súbor používajú, nemusia po jeho odinštalovaní pracovať správne. Ak si nie ste istý, zvoľte Nie. Ponechanie tohoto súboru vo Vašom systéme nespôsobí žiadnu škodu.
+ConfirmDeleteSharedFile2=Systém indikuje, že nasledujúci zdieľaný súbor nie je používaný žiadnymi inými aplikáciami. Má sprievodca odinštalácie tento zdieľaný súbor odstrániť?%n%nAk niektoré aplikácie tento súbor používajú, nemusia po jeho odinštalovaní pracovať správne. Ak si nie ste istý, zvoľte Nie. Ponechanie tohoto súboru vo Vašom systéme nespôsobí žiadnu škodu.
 SharedFileNameLabel=Názov súboru:
 SharedFileLocationLabel=Umiestnenie:
 WizardUninstalling=Stav odinštalovania
 StatusUninstalling=Odinštalujem %1...
 ShutdownBlockReasonInstallingApp=Inštalovanie %1.
 ShutdownBlockReasonUninstallingApp=Odinštalovanie %1.
+
+; *** Uninstall display name markings
+UninstallDisplayNameMark=%1 (%2)
+UninstallDisplayNameMarks=%1 (%2, %3)
+UninstallDisplayNameMark32Bit=32-bit
+UninstallDisplayNameMark64Bit=64-bit
+UninstallDisplayNameMarkAllUsers=Všetci užívatelia
+UninstallDisplayNameMarkCurrentUser=Aktuálny užívateľ
 
 
 [CustomMessages]
