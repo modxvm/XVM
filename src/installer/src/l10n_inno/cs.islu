@@ -1,6 +1,6 @@
 ﻿; *******************************************************
 ; ***                                                 ***
-; *** Inno Setup version 5.5.3+ Czech messages        ***
+; *** Inno Setup version 6.1.0+ Czech messages        ***
 ; ***                                                 ***
 ; *** Original Author:                                ***
 ; ***                                                 ***
@@ -12,14 +12,6 @@
 ; ***   Vitezslav Svejdar (vitezslav.svejdar@cuni.cz) ***
 ; ***                                                 ***
 ; *******************************************************
-;
-; Copyright (C) 1997-2012 Jordan Russell. All rights reserved.
-; Translations (C) 2002-2012 Original Author and Contributors. All rights reserved.
-;
-; The contents of this file are subject to the Inno Setup License (the "License").
-; You may obtain a copy of the License at http://www.jrsoftware.org/files/is/license.txt
-;
-; $jrsoftware: issrc/Files/Languages/Czech.isl,v 1.18 2007/02/27 18:22:41 jr Exp $
 
 [LangOptions]
 LanguageName=<010C>e<0161>tina
@@ -43,6 +35,7 @@ ErrorTitle=Chyba
 SetupLdrStartupMessage=Vítá Vás průvodce instalací produktu %1. Chcete pokračovat?
 LdrCannotCreateTemp=Nelze vytvořit dočasný soubor. Průvodce instalací bude ukončen
 LdrCannotExecTemp=Nelze spustit soubor v dočasné složce. Průvodce instalací bude ukončen
+HelpTextNote=
 
 ; *** Startup error messages
 LastErrorMessage=%1.%n%nChyba %2: %3
@@ -56,13 +49,22 @@ WindowsServicePackRequired=Tento produkt vyžaduje %1 Service Pack %2 nebo vyš�
 NotOnThisPlatform=Tento produkt nelze spustit ve %1.
 OnlyOnThisPlatform=Tento produkt musí být spuštěn ve %1.
 OnlyOnTheseArchitectures=Tento produkt lze nainstalovat pouze ve verzích MS Windows s podporou architektury procesorů:%n%n%1
-MissingWOW64APIs=Aktuální verze MS Windows postrádá funkce, které vyžaduje průvodce instalací pro 64-bitovou instalaci. Opravte prosím tuto chybu nainstalováním aktualizace Service Pack %1.
 WinVersionTooLowError=Tento produkt vyžaduje %1 verzi %2 nebo vyšší.
 WinVersionTooHighError=Tento produkt nelze nainstalovat ve %1 verzi %2 nebo vyšší.
 AdminPrivilegesRequired=K instalaci tohoto produktu musíte být přihlášeni s právy administrátora.
 PowerUserPrivilegesRequired=K instalaci tohoto produktu musíte být přihlášeni s právy administrátora nebo člena skupiny Power Users.
 SetupAppRunningError=Průvodce instalací zjistil, že produkt %1 je nyní spuštěn.%n%nZavřete prosím všechny instance tohoto produktu a pak pokračujte klepnutím na tlačítko OK, nebo ukončete instalaci tlačítkem Storno.
 UninstallAppRunningError=Průvodce odinstalací zjistil, že produkt %1 je nyní spuštěn.%n%nZavřete prosím všechny instance tohoto produktu a pak pokračujte klepnutím na tlačítko OK, nebo ukončete odinstalaci tlačítkem Storno.
+
+; *** Startup questions
+PrivilegesRequiredOverrideTitle=Výběr režimu průvodce instalací
+PrivilegesRequiredOverrideInstruction=Zvolte režim instalace
+PrivilegesRequiredOverrideText1=Produkt %1 lze nainstalovat pro všechny uživatele (musíte být přihlášeni s právy administrátora), nebo pouze pro Vás.
+PrivilegesRequiredOverrideText2=Produkt %1 lze nainstalovat pouze pro Vás, nebo pro všechny uživatele (musíte být přihlášeni s právy administrátora).
+PrivilegesRequiredOverrideAllUsers=Nainstalovat pro &všechny uživatele
+PrivilegesRequiredOverrideAllUsersRecommended=Nainstalovat pro &všechny uživatele (doporučuje se)
+PrivilegesRequiredOverrideCurrentUser=Nainstalovat pouze pro &mě
+PrivilegesRequiredOverrideCurrentUserRecommended=Nainstalovat pouze pro &mě (doporučuje se)
 
 ; *** Misc. errors
 ErrorCreatingDir=Průvodci instalací se nepodařilo vytvořit složku "%1"
@@ -94,7 +96,7 @@ ButtonNewFolder=&Vytvořit novou složku
 
 ; *** "Select Language" dialog messages
 SelectLanguageTitle=Výběr jazyka průvodce instalací
-SelectLanguageLabel=Zvolte jazyk, který se má použít během instalace:
+SelectLanguageLabel=Zvolte jazyk, který se má použít během instalace.
 
 ; *** Common wizard text
 ClickNext=Pokračujte klepnutím na tlačítko Další, nebo ukončete průvodce instalací tlačítkem Storno.
@@ -142,6 +144,7 @@ WizardSelectDir=Zvolte cílové umístění
 SelectDirDesc=Kam má být produkt [name] nainstalován?
 SelectDirLabel3=Průvodce nainstaluje produkt [name] do následující složky.
 SelectDirBrowseLabel=Pokračujte klepnutím na tlačítko Další. Chcete-li zvolit jinou složku, klepněte na tlačítko Procházet.
+DiskSpaceGBLabel=Instalace vyžaduje nejméně [gb] MB volného místa na disku.
 DiskSpaceMBLabel=Instalace vyžaduje nejméně [mb] MB volného místa na disku.
 CannotInstallToNetworkDrive=Průvodce instalací nemůže instalovat do síťové jednotky.
 CannotInstallToUNCPath=Průvodce instalací nemůže instalovat do cesty UNC.
@@ -169,6 +172,7 @@ NoUninstallWarningTitle=Součásti existují
 NoUninstallWarning=Průvodce instalací zjistil, že následující součásti jsou již na Vašem počítači nainstalovány:%n%n%1%n%nNezahrnete-li tyto součásti do výběru, nebudou nyní odinstalovány.%n%nChcete přesto pokračovat?
 ComponentSize1=%1 KB
 ComponentSize2=%1 MB
+ComponentsDiskSpaceGBLabel=Vybrané součásti vyžadují nejméně [gb] MB místa na disku.
 ComponentsDiskSpaceMBLabel=Vybrané součásti vyžadují nejméně [mb] MB místa na disku.
 
 ; *** "Select Additional Tasks" wizard page
@@ -199,6 +203,18 @@ ReadyMemoComponents=Vybrané součásti:
 ReadyMemoGroup=Složka v nabídce Start:
 ReadyMemoTasks=Další úlohy:
 
+; *** TDownloadWizardPage wizard page and DownloadTemporaryFile
+DownloadingLabel=Stahují se další soubory...
+ButtonStopDownload=&Zastavit stahování
+StopDownload=Určitě chcete stahování zastavit?
+ErrorDownloadAborted=Stahování přerušeno
+ErrorDownloadFailed=Stahování selhalo: %1 %2
+ErrorDownloadSizeFailed=Nepodařilo se zjistit velikost: %1 %2
+ErrorFileHash1=Nepodařilo se určit kontrolní součet souboru: %1
+ErrorFileHash2=Neplatný kontrolní součet souboru: očekáváno %1, nalezeno %2
+ErrorProgress=Neplatný průběh: %1 of %2
+ErrorFileSize=Neplatná velikost souboru: očekáváno %1, nalezeno %2
+
 ; *** "Preparing to Install" wizard page
 WizardPreparing=Příprava k instalaci
 PreparingDesc=Průvodce instalací připravuje instalaci produktu [name] na Váš počítač.
@@ -209,6 +225,7 @@ ApplicationsFound2=Následující aplikace přistupují k souborům, které je t
 CloseApplications=&Zavřít aplikace automaticky
 DontCloseApplications=&Nezavírat aplikace
 ErrorCloseApplications=Průvodci instalací se nepodařilo automaticky zavřít všechny aplikace. Dříve než budete pokračovat, doporučuje se zavřít veškeré aplikace přistupující k souborům, které je třeba během instalace aktualizovat.
+PrepareToInstallNeedsRestart=Průvodce instalací musí restartovat Váš počítač. Po restartování Vašeho počítače spusťte průvodce instalací znovu, aby bylo možné dokončit instalaci produktu [name].%n%nChcete jej restartovat nyní?
 
 ; *** "Installing" wizard page
 WizardInstalling=Instalování
@@ -219,8 +236,8 @@ FinishedHeadingLabel=Dokončuje se instalace produktu [name]
 FinishedLabelNoIcons=Průvodce instalací dokončil instalaci produktu [name] na Váš počítač.
 FinishedLabel=Průvodce instalací dokončil instalaci produktu [name] na Váš počítač. Produkt lze spustit pomocí nainstalovaných zástupců.
 ClickFinish=Ukončete průvodce instalací klepnutím na tlačítko Dokončit.
-FinishedRestartLabel=K dokončení instalace produktu [name] je nezbytné, aby průvodce instalací restartoval Váš počítač. Chcete jej nyní restartovat?
-FinishedRestartMessage=K dokončení instalace produktu [name] je nezbytné, aby průvodce instalací restartoval Váš počítač.%n%nChcete jej nyní restartovat?
+FinishedRestartLabel=K dokončení instalace produktu [name] je nezbytné, aby průvodce instalací restartoval Váš počítač. Chcete jej restartovat nyní?
+FinishedRestartMessage=K dokončení instalace produktu [name] je nezbytné, aby průvodce instalací restartoval Váš počítač.%n%nChcete jej restartovat nyní?
 ShowReadmeCheck=Ano, chci zobrazit dokument "ČTIMNE"
 YesRadio=&Ano, chci nyní restartovat počítač
 NoRadio=&Ne, počítač restartuji později
@@ -238,7 +255,10 @@ SelectDirectoryLabel=Specifikujte prosím umístění dalšího disku.
 
 ; *** Installation phase messages
 SetupAborted=Instalace nebyla zcela dokončena.%n%nOpravte prosím chybu a spusťte průvodce instalací znovu.
-EntryAbortRetryIgnore=Akci zopakujete klepnutím na tlačítko Opakovat. Tento krok vynecháte klepnutím na tlačítko Přeskočit. Instalaci stornujete klepnutím na tlačítko Přerušit.
+AbortRetryIgnoreSelectAction=Zvolte akci
+AbortRetryIgnoreRetry=&Zopakovat akci
+AbortRetryIgnoreIgnore=&Ignorovat chybu a pokračovat
+AbortRetryIgnoreCancel=Zrušit instalaci
 
 ; *** Installation status messages
 StatusClosingApplications=Zavírají se aplikace...
@@ -269,14 +289,24 @@ ErrorRegWriteKey=Došlo k chybě při zápisu do klíče systémového registru:
 ErrorIniEntry=Došlo k chybě při vytváření záznamu v inicializačním souboru "%1".
 
 ; *** File copying errors
-FileAbortRetryIgnore=Akci zopakujete klepnutím na tlačítko Opakovat. Tento soubor přeskočíte klepnutím na tlačítko Přeskočit (nedoporučuje se). Instalaci stornujete klepnutím na tlačítko Přerušit.
-FileAbortRetryIgnore2=Akci zopakujete klepnutím na tlačítko Opakovat. Pokračujete klepnutím na tlačítko Přeskočit (nedoporučuje se). Instalaci stornujete klepnutím na tlačítko Přerušit.
+FileAbortRetryIgnoreSkipNotRecommended=&Přeskočit tento soubor (nedoporučuje se)
+FileAbortRetryIgnoreIgnoreNotRecommended=&Ignorovat chybu a pokračovat (nedoporučuje se)
 SourceIsCorrupted=Zdrojový soubor je poškozen
 SourceDoesntExist=Zdrojový soubor "%1" neexistuje
-ExistingFileReadOnly=Existující soubor je určen pouze pro čtení.%n%nAtribut "pouze pro čtení" odstraníte a akci zopakujete klepnutím na tlačítko Opakovat. Tento soubor přeskočíte klepnutím na tlačítko Přeskočit. Instalaci stornujete klepnutím na tlačítko Přerušit.
+ExistingFileReadOnly2=Nelze nahradit existující soubor, protože je určen pouze pro čtení.
+ExistingFileReadOnlyRetry=&Odstranit atribut "pouze pro čtení" a zopakovat akci
+ExistingFileReadOnlyKeepExisting=&Ponechat existující soubor
 ErrorReadingExistingDest=Došlo k chybě při pokusu o čtení existujícího souboru:
-FileExists=Soubor již existuje.%n%nMá být průvodcem instalace přepsán?
-ExistingFileNewer=Existující soubor je novější než ten, který se průvodce instalací pokouší nainstalovat. Doporučuje se ponechat existující soubor.%n%nChcete jej ponechat?
+FileExistsSelectAction=Zvolte akci
+FileExists2=Soubor již existuje.
+FileExistsOverwriteExisting=&Nahradit existující soubor
+FileExistsKeepExisting=&Ponechat existující soubor
+FileExistsOverwriteOrKeepAll=&Zachovat se stejně u dalších konfliktů
+ExistingFileNewerSelectAction=Zvolte akci
+ExistingFileNewer2=Existující soubor je novější než ten, který se průvodce instalací pokouší instalovat.
+ExistingFileNewerOverwriteExisting=&Nahradit existující soubor
+ExistingFileNewerKeepExisting=&Ponechat existující soubor (doporučuje se)
+ExistingFileNewerOverwriteOrKeepAll=&Zachovat se stejně u dalších konfliktů
 ErrorChangingAttr=Došlo k chybě při pokusu o změnu atributů existujícího souboru:
 ErrorCreatingTemp=Došlo k chybě při pokusu o vytvoření souboru v cílové složce:
 ErrorReadingSource=Došlo k chybě při pokusu o čtení zdrojového souboru:
@@ -288,6 +318,16 @@ ErrorRegisterServer=Nelze zaregistrovat DLL/OCX: %1
 ErrorRegSvr32Failed=Volání RegSvr32 selhalo s návratovým kódem %1
 ErrorRegisterTypeLib=Nelze zaregistrovat typovou knihovnu: %1
 
+; *** Uninstall display name markings
+; used for example as 'My Program (32-bit)'
+UninstallDisplayNameMark=%1 (%2)
+; used for example as 'My Program (32-bit, All users)'
+UninstallDisplayNameMarks=%1 (%2, %3)
+UninstallDisplayNameMark32Bit=32bitový
+UninstallDisplayNameMark64Bit=64bitový
+UninstallDisplayNameMarkAllUsers=Všichni uživatelé
+UninstallDisplayNameMarkCurrentUser=Aktuální uživatel
+
 ; *** Post-installation errors
 ErrorOpeningReadme=Došlo k chybě při pokusu o otevření dokumentu "ČTIMNE".
 ErrorRestartingComputer=Průvodci instalací se nepodařilo restartovat Váš počítač. Restartujte jej prosím ručně.
@@ -297,13 +337,13 @@ UninstallNotFound=Soubor "%1" neexistuje. Produkt nelze odinstalovat.
 UninstallOpenError=Soubor "%1" nelze otevřít. Produkt nelze odinstalovat.
 UninstallUnsupportedVer=Formát souboru se záznamy k odinstalaci produktu "%1" nebyl touto verzí průvodce odinstalací rozpoznán. Produkt nelze odinstalovat
 UninstallUnknownEntry=V souboru obsahujícím informace k odinstalaci produktu byla zjištěna neznámá položka (%1)
-ConfirmUninstall=Jste si opravdu jisti, že chcete produkt %1 a všechny jeho součásti odinstalovat?
+ConfirmUninstall=Určitě chcete produkt %1 a všechny jeho součásti odinstalovat?
 UninstallOnlyOnWin64=Tento produkt lze odinstalovat pouze v 64-bitových verzích MS Windows.
 OnlyAdminCanUninstall=K odinstalaci tohoto produktu musíte být přihlášeni s právy administrátora.
 UninstallStatusLabel=Čekejte prosím, dokud produkt %1 nebude odinstalován z Vašeho počítače.
 UninstalledAll=Produkt %1 byl z Vašeho počítače úspěšně odinstalován.
 UninstalledMost=Produkt %1 byl odinstalován.%n%nNěkteré jeho součásti se odinstalovat nepodařilo. Můžete je však odstranit ručně.
-UninstalledAndNeedsRestart=K dokončení odinstalace produktu %1 je nezbytné, aby průvodce odinstalací restartoval Váš počítač.%n%nChcete jej nyní restartovat?
+UninstalledAndNeedsRestart=K dokončení odinstalace produktu %1 je nezbytné, aby průvodce odinstalací restartoval Váš počítač.%n%nChcete jej restartovat nyní?
 UninstallDataCorrupted=Soubor "%1" je poškozen. Produkt nelze odinstalovat
 
 ; *** Uninstallation phase messages
