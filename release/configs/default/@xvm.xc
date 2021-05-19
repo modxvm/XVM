@@ -62,7 +62,7 @@
 
     // Supported version of the game.
     // Поддерживаемая версия игры.
-    "gameVersion": "1.12.1.1",
+    "gameVersion": "1.12.1.2",
 
     // The minimum required version of the XVM mod.
     // Минимально необходимая версия мода XVM.
@@ -70,7 +70,7 @@
 
     // Config last modified.
     // Дата последней модификации конфига.
-    "date": "27.04.2021"
+    "date": "19.05.2021"
   },
 
   // Parameters for login screen.
