@@ -5,7 +5,6 @@
 import traceback
 
 import BigWorld
-from Vehicle import Vehicle
 from Avatar import PlayerAvatar
 from constants import VEHICLE_HIT_FLAGS
 from CurrentVehicle import g_currentVehicle
@@ -120,9 +119,9 @@ def showShotResults(self, results):
         data.showShotResults(self, results)
 
 
-@registerEvent(Vehicle, 'onEnterWorld')
-def onEnterWorld(self, prereqs):
-    if self.isPlayerVehicle:
+@registerEvent(PlayerAvatar, 'onEnterWorld')
+def _PlayerAvatar_onEnterWorld(self, prereqs):
+    if battle.isBattleTypeSupported:
         update_conf_hp()
 
 
