@@ -306,7 +306,8 @@ class Data(object):
                      'shells_stunning': False,
                      'critDevice': 'no-critical',
                      'hitTime': 0,
-                     'attackerVehicleName': ''
+                     'attackerVehicleName': '',
+                     'numCrits': 0
                      }
 
     def updateData(self):
@@ -445,6 +446,7 @@ class Data(object):
         self.data['hitEffect'] = 'unknown'
         self.data['splashHit'] = 'no-splash'
         self.data['attackReasonID'] = 0
+        self.data['numCrits'] = 0
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
         if not vehicle.isStarted:
@@ -497,6 +499,7 @@ class Data(object):
         extra = player.vehicleTypeDescriptor.extras[extraIndex]
         if damageCode in ('DEVICE_CRITICAL_AT_RAMMING', 'DEVICE_DESTROYED_AT_RAMMING'):
             self.data['criticalHit'] = True
+            self.data['numCrits'] += 1
             if extra.name in DEVICES_TANKMAN:
                 self.data['critDevice'] = DEVICES_TANKMAN[extra.name] if damageCode == 'DEVICE_CRITICAL_AT_RAMMING' else DEVICES_TANKMAN[extra.name + '_destr']
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
@@ -506,6 +509,7 @@ class Data(object):
                     self.updateData()
         elif damageCode in ('DEVICE_CRITICAL_AT_WORLD_COLLISION', 'DEVICE_DESTROYED_AT_WORLD_COLLISION', 'TANKMAN_HIT_AT_WORLD_COLLISION'):
             self.data['criticalHit'] = True
+            self.data['numCrits'] += 1
             if extra.name in DEVICES_TANKMAN:
                 self.data['critDevice'] = DEVICES_TANKMAN[extra.name + '_destr'] if damageCode == 'DEVICE_DESTROYED_AT_WORLD_COLLISION' else DEVICES_TANKMAN[extra.name]
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
@@ -523,6 +527,7 @@ class Data(object):
             if extra.name in DEVICES_TANKMAN:
                 self.data['critDevice'] = DEVICES_TANKMAN[extra.name + '_destr'] if damageCode in damageInfoDestructions else DEVICES_TANKMAN[extra.name]
             self.data['criticalHit'] = True
+            self.data['numCrits'] += 1
 
     def onHealthChanged(self, vehicle, newHealth, oldHealth, attackerID, attackReasonID):
         self.data['blownup'] = (newHealth <= -5)
@@ -662,7 +667,8 @@ class _Base(object):
                       'my-blownup': 'blownup' if value['blownup'] else None,
                       'type-shell-key': value['shellKind'],
                       'stun-duration': value.get('stun-duration', None),
-                      'vehiclename': value.get('attackerVehicleName', '')
+                      'vehiclename': value.get('attackerVehicleName', ''),
+                      'n-crits': value.get('numCrits', 0)
                       }
 
         macros.update({'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],

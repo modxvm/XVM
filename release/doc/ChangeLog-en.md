@@ -4,6 +4,11 @@
 
   * Compatibility with World of Tanks 1.12.1.2
 
+  #### Python macros
+
+  * Added macro to **damageLog**:
+
+    * `{{n-crits}}` - number of crits received per hit, 0 - if not received
 ______________________________
 
 ### XVM 8.7.8
