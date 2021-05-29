@@ -49,6 +49,7 @@
     {{type-shell-key}} - shell kind table key value / название ключа таблицы типа снаряда.
     {{hitTime}}        - time of the received (blocked) damage in "mm:ss" format / время полученного (заблокированного) урона в формате "мм:сс".
     {{vehiclename}}    - vehicle system name (usa-A34_M24_Chaffee) / название техники в системе (usa-A34_M24_Chaffee).
+    {{n-crits}}        - number of crits received per hit, 0 - if not received / количество критов полученных за одно попадание, 0 - если не получено.
 */
 
 {
