@@ -284,6 +284,7 @@ class Data(object):
                      'dmgRatio': 0,
                      'oldHealth': 0,
                      'maxHealth': 0,
+                     'hp': 0,
                      'costShell': 'unknown',
                      'shellKind': 'not_shell',
                      'teamDmg': 'unknown',
@@ -519,9 +520,12 @@ class Data(object):
                     self.updateData()
         elif damageCode == 'DEATH_FROM_DROWNING':
             self.data.update(dataUpdate)
+            vehicle = BigWorld.entities.get(player.playerVehicleID)
+            crewRoles = vehicle.typeDescriptor.type.crewRoles
             self.data['attackReasonID'] = 5
             self.data['isAlive'] = False
-            self.data['criticalHit'] = False
+            self.data['criticalHit'] = True
+            self.data['numCrits'] += len(crewRoles)
             self.updateData()
         elif (damageCode in damageInfoCriticals) or (damageCode in damageInfoDestructions) or (damageCode in damageInfoTANKMAN):
             if extra.name in DEVICES_TANKMAN:
@@ -531,9 +535,9 @@ class Data(object):
 
     def onHealthChanged(self, vehicle, newHealth, oldHealth, attackerID, attackReasonID):
         self.data['blownup'] = (newHealth <= -5)
-        newHealth = max(0, newHealth)
-        self.data['damage'] = self.data['oldHealth'] - newHealth
-        self.data['oldHealth'] = newHealth
+        self.data['hp'] = max(0, newHealth)
+        self.data['damage'] = self.data['oldHealth'] - self.data['hp']
+        self.data['oldHealth'] = self.data['hp']
         if self.data['damage'] < 0:
             return
         if self.data['attackReasonID'] == 0:
@@ -667,8 +671,7 @@ class _Base(object):
                       'my-blownup': 'blownup' if value['blownup'] else None,
                       'type-shell-key': value['shellKind'],
                       'stun-duration': value.get('stun-duration', None),
-                      'vehiclename': value.get('attackerVehicleName', ''),
-                      'n-crits': value.get('numCrits', 0)
+                      'vehiclename': value.get('attackerVehicleName', '')
                       }
 
         macros.update({'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],
@@ -691,7 +694,9 @@ class _Base(object):
                        'dmg': value['damage'],
                        'dmg-ratio': value['dmgRatio'],
                        'fire-duration': value.get('fireDuration', None),
-                       'hitTime': value['hitTime']
+                       'hitTime': value['hitTime'],
+                       'n-crits': value.get('numCrits', 0),
+                       'hp': value.get('hp', 0)
                        })
 
     def getShadow(self):

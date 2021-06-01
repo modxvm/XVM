@@ -6,9 +6,11 @@
 
   #### Python macros
 
-  * Added macro to **damageLog**:
+  * Added macros to **damageLog**:
 
     * `{{n-crits}}` - number of crits received per hit, 0 - if not received
+    * `{{hp}}` - current health points
+
 ______________________________
 
 ### XVM 8.7.8
