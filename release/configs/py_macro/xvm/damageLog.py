@@ -783,6 +783,7 @@ class DamageLog(_Base):
             self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
                                                             'damage': self.dataLog['damage'],
                                                             'criticalHit': self.dataLog['criticalHit'],
+                                                            'numCrits': self.dataLog['numCrits'],
                                                             'numberLine': 0,
                                                             'startAction': BigWorld.time() if attackReasonID == 1 else None,
                                                             'hitTime': self.dataLog['hitTime']
@@ -801,11 +802,13 @@ class DamageLog(_Base):
     def updateGroupedValues(self, parametersDmg):
         parametersDmg['time'] = BigWorld.serverTime()
         parametersDmg['damage'] += self.dataLog['damage']
+        parametersDmg['numCrits'] += self.dataLog['numCrits']
         parametersDmg['criticalHit'] = (parametersDmg['criticalHit'] or self.dataLog['criticalHit'])
         if parametersDmg['damage'] > 0:
             self.dataLog['hitEffect'] = 'armor_pierced'
         self.dataLog['criticalHit'] = parametersDmg['criticalHit']
         self.dataLog['damage'] = parametersDmg['damage']
+        self.dataLog['numCrits'] = parametersDmg['numCrits']
         self.dataLog['dmgRatio'] = self.dataLog['damage'] * 100 // self.dataLog['maxHealth']
         self.dataLog['number'] = len(self.listLog) - parametersDmg['numberLine']
         if (self.dataLog['attackReasonID'] == 1) and (parametersDmg['startAction'] is not None):
@@ -893,9 +896,10 @@ class LastHit(_Base):
             self.y = parser(_config.get(self.S_Y))
         self.shadow = self.getShadow()
 
-    def initGroupedValues(self, dmg, hitTime, attackReasonID):
+    def initGroupedValues(self, dmg, numCrits, hitTime, attackReasonID):
         return {'time': BigWorld.serverTime(),
                 'damage': dmg,
+                'numCrits': numCrits,
                 'startAction': BigWorld.time() if attackReasonID == 1 else None,
                 'hitTime': hitTime}
 
@@ -909,16 +913,18 @@ class LastHit(_Base):
                 if ('time' in key) and ('damage' in key) and ((BigWorld.serverTime() - key['time']) < 1):
                     key['time'] = BigWorld.serverTime()
                     key['damage'] += dataLog['damage']
+                    key['numCrits'] += dataLog['numCrits']
                     dataLog['damage'] = key['damage']
+                    dataLog['numCrits'] = key['numCrits']
                     dataLog['dmgRatio'] = key['damage'] * 100 // dataLog['maxHealth']
                     dataLog['fireDuration'] = BigWorld.time() - key['startAction'] if (attackReasonID == 1) and (key['startAction'] is not None) else None
                     dataLog['hitTime'] = key['hitTime']
             else:
-                self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['hitTime'], attackReasonID)
+                self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['numCrits'], dataLog['hitTime'], attackReasonID)
                 dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
         else:
             self.dictVehicle[attackerID] = {}
-            self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['hitTime'], attackReasonID)
+            self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['numCrits'], dataLog['hitTime'], attackReasonID)
             dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
         return dataLog
 
