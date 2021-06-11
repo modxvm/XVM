@@ -48,7 +48,7 @@ BATTLE_TYPE = {ARENA_GUI_TYPE.UNKNOWN: "unknown",
                ARENA_GUI_TYPE.EPIC_BATTLE: "epic_battle",
                ARENA_GUI_TYPE.EPIC_TRAINING: "epic_battle",
                ARENA_GUI_TYPE.BATTLE_ROYALE: "battle_royale",
-               ARENA_GUI_TYPE.WEEKEND_BRAWL: "weekend_brawl"}
+               ARENA_GUI_TYPE.MAPBOX: "mapbox"}
 
 HIT_LOG = 'hitLog/'
 FORMAT_HISTORY = 'formatHistory'
@@ -348,7 +348,7 @@ class DataHitLog(object):
             self.data['shortUserString'] = l10n(PILLBOX).format(self.entityNumber)
         self.updateData()
 
-    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
+    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
         maxComponentIdx = TankPartIndexes.ALL[-1]
         wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
         if wheelsConfig:
@@ -870,9 +870,9 @@ def DestructibleEntity_onHealthChanged(self, newHealth, attackerID, attackReason
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
-def _Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
+def _Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
     if battle.isBattleTypeSupported and (g_dataHitLog.playerVehicleID == attackerID) and self.isAlive() and _config.get(HIT_LOG_ENABLED, True):
-        g_dataHitLog.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
+        g_dataHitLog.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')

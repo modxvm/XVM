@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 27.04.2021
+    // Last update: 11.06.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -56,7 +56,6 @@
     "china-Ch39_WZ120_1G_FT_FL":             {"name": null, "short": null},
     "china-Ch40_WZ120G_FT":                  {"name": null, "short": null},
     "china-Ch41_WZ_111_5A":                  {"name": null, "short": null},
-    "china-Ch41_WZ_111_5A_WB":               {"name": null, "short": null},
     "china-Ch41_WZ_111_5A_bob":              {"name": null, "short": null},
     "china-Ch41_WZ_111_QL":                  {"name": null, "short": null},
     "china-Ch42_WalkerBulldog_M41D":         {"name": null, "short": null},
@@ -74,6 +73,7 @@
     "czech-Cz10_LT_vz38":                    {"name": null, "short": null},
     "czech-Cz11_V_8_H":                      {"name": null, "short": null},
     "czech-Cz13_T_27":                       {"name": null, "short": null},
+    "czech-Cz14_Skoda_T-56":                 {"name": null, "short": null},
     "czech-Cz15_Skoda_T-45_Prem":            {"name": null, "short": null},
     "france-F01_RenaultFT":                  {"name": null, "short": null},
     "france-F01_RenaultFT_bot":              {"name": null, "short": null},
@@ -101,6 +101,7 @@
     "france-F114_Projet_4_1":                {"name": null, "short": null},
     "france-F115_Lorraine_50t":              {"name": null, "short": null},
     "france-F116_Bat_Chatillon_Bourrasque":  {"name": null, "short": null},
+    "france-F117_Alt_Proto_AMX_30":          {"name": null, "short": null},
     "france-F11_Renault_G1R":                {"name": null, "short": null},
     "france-F12_Hotchkiss_H35":              {"name": null, "short": null},
     "france-F13_AMX38":                      {"name": null, "short": null},
@@ -648,7 +649,6 @@
     "usa-A81_T95_E2":                        {"name": null, "short": null},
     "usa-A83_T110E4":                        {"name": null, "short": null},
     "usa-A85_T110E3":                        {"name": null, "short": null},
-    "usa-A85_T110E3_WB":                     {"name": null, "short": null},
     "usa-A86_T23E3":                         {"name": null, "short": null},
     "usa-A87_M44":                           {"name": null, "short": null},
     "usa-A88_M53_55":                        {"name": null, "short": null},
@@ -843,7 +843,6 @@
     "ussr-R96_Object_430":                   {"name": null, "short": null},
     "ussr-R96_Object_430B":                  {"name": null, "short": null},
     "ussr-R97_Object_140":                   {"name": null, "short": null},
-    "ussr-R97_Object_140_WB":                {"name": null, "short": null},
     "ussr-R98_T44_85":                       {"name": null, "short": null},
     "ussr-R98_T44_85M":                      {"name": null, "short": null},
     "ussr-R99_T44_122":                      {"name": null, "short": null}

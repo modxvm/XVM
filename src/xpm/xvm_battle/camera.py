@@ -8,7 +8,8 @@ import math
 import Math
 
 from Avatar import PlayerAvatar
-from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera, MinMax
+from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera
+from AvatarInputHandler.DynamicCameras.arcade_camera_helper import MinMax, ZoomStateSwitcher
 from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
 from helpers import dependency
@@ -61,10 +62,11 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 # BATTLE
 
 @overrideMethod(ArcadeCamera, 'create')
-def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postmortemMode = False):
+def _ArcadeCamera_create(base, self, onChangeControlMode = None, postmortemMode = False):
     #debug('_ArcadeCamera_create: {}'.format(postmortemMode))
     if config.get('battle/camera/enabled'):
-        mode = 'arcade' if not postmortemMode else 'postmortem'
+        # 'postmortemMode' is not work
+        mode = 'arcade' if not self._ArcadeCamera__postmortemMode else 'postmortem'
         c = config.get('battle/camera/%s' % mode)
         cfg = self._cfg
         bcfg = self._baseCfg
@@ -79,6 +81,7 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
             defMin = 2
             defMax = 25
             cfg['distRange'] = MinMax(float(value[0]), float(value[1])) if value[0] != value[1] else MinMax(defMin, defMax)
+            self._ArcadeCamera__distRange = cfg['distRange']
 
         value = c['startDist']
         if value is not None:
@@ -89,7 +92,7 @@ def _ArcadeCamera_create(base, self, pivotPos, onChangeControlMode = None, postm
             bcfg['scrollSensitivity'] = float(value)
             cfg['scrollSensitivity'] = float(value) * ucfg['scrollSensitivity']
 
-    base(self, pivotPos, onChangeControlMode, postmortemMode)
+    base(self, onChangeControlMode, postmortemMode)
 
 @registerEvent(ArcadeCamera, 'enable')
 def _ArcadeCamera_enable(self, *args, **kwargs):
@@ -99,6 +102,12 @@ def _ArcadeCamera_enable(self, *args, **kwargs):
             camDist = self._cfg.get('startDist', None)
             if camDist:
                 self.setCameraDistance(camDist)
+
+@overrideMethod(ZoomStateSwitcher, '_ZoomStateSwitcher__isEnabledBySettings')
+def isEnabledBySettings(base, self, index):
+    if config.get('battle/camera/enabled'):
+        return False
+    base(self, index)
 
 @overrideMethod(SniperCamera, 'create')
 def _SniperCamera_create(base, self, onChangeControlMode = None):

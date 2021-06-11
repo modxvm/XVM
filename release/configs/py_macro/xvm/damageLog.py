@@ -449,7 +449,7 @@ class Data(object):
         self.data['attackReasonID'] = 0
         self.data['numCrits'] = 0
 
-    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor):
+    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
         if not vehicle.isStarted:
             return
         maxComponentIdx = TankPartIndexes.ALL[-1]
@@ -1072,13 +1072,13 @@ def Vehicle_onEnterWorld(self, prereqs):
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
-def Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
+def Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
     global isImpact
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event(EVENTS_NAMES.ON_IMPACT)
     if self.isPlayerVehicle and data.data['isAlive'] and isShowDamageLog:
-        data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor)
+        data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')

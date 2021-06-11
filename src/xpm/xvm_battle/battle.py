@@ -32,7 +32,8 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehicles
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.postmortem_panel import PostmortemPanel
 from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisticsDataController
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import CommanderCameraHintPlugin, TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin, RoleHelpPlugin
+from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
 
 from xfw import *
 from xfw_actionscript.python import *
@@ -52,7 +53,7 @@ NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.EVENT_BATTLES,
                            constants.ARENA_GUI_TYPE.BOOTCAMP,
                            constants.ARENA_GUI_TYPE.BATTLE_ROYALE,
-                           constants.ARENA_GUI_TYPE.WEEKEND_BRAWL]
+                           constants.ARENA_GUI_TYPE.MAPBOX]
 
 #####################################################################
 # initialization/finalization
@@ -149,9 +150,9 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 #    pass
 
 # on any player marker appear
-@registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
-def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
-    # debug("> _PlayerAvatar_vehicle_onEnterWorld: hp=%i" % vehicle.health)
+@registerEvent(PlayerAvatar, 'vehicle_onAppearanceReady')
+def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
+    # debug("> _PlayerAvatar_vehicle_onAppearanceReady: hp=%i" % vehicle.health)
     g_battle.updatePlayerState(vehicle.id, INV.ALL)
 
 # on any player marker lost
@@ -212,6 +213,13 @@ def _switchToPostmortem(base, self):
 def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce):
     base(self, data, True)
 
+# disable battle hints
+@overrideMethod(CommanderCameraHintPlugin, '_CommanderCameraHintPlugin__displayHint')
+def displayHint(base, self, hint):
+    if not config.get('battle/showBattleHint'):
+        return
+    base(self, hint)
+
 @overrideMethod(TrajectoryViewHintPlugin, '_TrajectoryViewHintPlugin__addHint')
 def addHint(base, self):
     if not config.get('battle/showBattleHint'):
@@ -230,11 +238,17 @@ def canDisplayQuestHint(base, self):
         return False
     base(self)
 
-@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayHelpHint')
-def canDisplayHelpHint(base, self, typeDescriptor):
+@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayVehicleHelpHint')
+def canDisplayVehicleHelpHint(base, self, typeDescriptor):
     if not config.get('battle/showBattleHint'):
         return False
     base(self, typeDescriptor)
+
+@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplaySPGHelpHint')
+def canDisplaySPGHelpHint(base, self):
+    if not config.get('battle/showBattleHint'):
+        return False
+    base(self)
 
 @overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
 def canDisplayBattleCommunicationHint(base, self):
@@ -248,6 +262,13 @@ def areOtherIndicatorsShown(base, self):
         return True
     base(self)
 
+@overrideMethod(RoleHelpPlugin, '_RoleHelpPlugin__handleBattleLoading')
+def handleBattleLoading(base, self, event):
+    if not config.get('battle/showBattleHint'):
+        return
+    base(self)
+
+# disable DogTag's
 @overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')
 def onDogTagKillerInPlaySound(base, self):
     if not config.get('battle/showPostmortemDogTag', True) or not config.get('battle/showPostmortemTips', True):
@@ -260,6 +281,11 @@ def onKillerDogTagSet(base, self, dogTagInfo):
         return
     base(self, dogTagInfo)
 
+@overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')
+def as_setPanelHPBarVisibilityStateS(base, self, value):
+    if config.get('playersPanel/enabled') and not config.get('playersPanel/showHealthPoints'):
+        return
+    base(self, value)
 
 #####################################################################
 # Battle

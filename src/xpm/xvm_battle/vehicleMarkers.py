@@ -70,8 +70,8 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
     base(self)
 
 # on any player marker appear
-@registerEvent(PlayerAvatar, 'vehicle_onEnterWorld')
-def _PlayerAvatar_vehicle_onEnterWorld(self, vehicle):
+@registerEvent(PlayerAvatar, 'vehicle_onAppearanceReady')
+def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
     g_markers.updatePlayerState(vehicle.id, INV.ALL)
 
 @registerEvent(Vehicle, 'set_isCrewActive')

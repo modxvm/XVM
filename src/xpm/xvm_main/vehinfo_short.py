@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 27.04.2021
+    # Last update: 11.06.2021
     "china:Ch01_Type59":                     'Typ59',
     "china:Ch01_Type59_Gold":                'Typ59g',
     "china:Ch02_Type62":                     'Typ62',
@@ -79,7 +79,6 @@ _data = {
     "china:Ch39_WZ120_1G_FT_FL":             '120·1ft·fl',
     "china:Ch40_WZ120G_FT":                  '120G·ft',
     "china:Ch41_WZ_111_5A":                  '111·5a',
-    "china:Ch41_WZ_111_5A_WB":               '111·5a·wb',
     "china:Ch41_WZ_111_5A_bob":              '111·5a·bb',
     "china:Ch41_WZ_111_QL":                  '111·lq',
     "china:Ch42_WalkerBulldog_M41D":         'M41D',
@@ -97,6 +96,7 @@ _data = {
     "czech:Cz10_LT_vz38":                    'vz.38',
     "czech:Cz11_V_8_H":                      'vz.39',
     "czech:Cz13_T_27":                       'skT27',
+    "czech:Cz14_Skoda_T-56":                 'skT56',
     "czech:Cz15_Skoda_T-45_Prem":            'skT45',
     "france:F01_RenaultFT":                  'FT',
     "france:F01_RenaultFT_bot":              'FT',
@@ -124,6 +124,7 @@ _data = {
     "france:F114_Projet_4_1":                'Char.Fut.4',
     "france:F115_Lorraine_50t":              'Lr50t',
     "france:F116_Bat_Chatillon_Bourrasque":  'Bourr.',
+    "france:F117_Alt_Proto_AMX_30":          'a.p·amx30',
     "france:F11_Renault_G1R":                'G1R',
     "france:F12_Hotchkiss_H35":              'h35',
     "france:F13_AMX38":                      'amx38',
@@ -671,8 +672,7 @@ _data = {
     "usa:A81_T95_E2":                        'T95e2',
     "usa:A83_T110E4":                        '110e4',
     "usa:A85_T110E3":                        '110e3',
-    "usa:A85_T110E3_WB":                     '110e3',
-    "usa:A86_T23E3":                         'T23e3·wb',
+    "usa:A86_T23E3":                         'T23e3',
     "usa:A87_M44":                           'M44',
     "usa:A88_M53_55":                        'M53·55',
     "usa:A89_T54E1":                         '54E1',
@@ -866,7 +866,6 @@ _data = {
     "ussr:R96_Object_430":                   'obj430',
     "ussr:R96_Object_430B":                  'obj430b',
     "ussr:R97_Object_140":                   'obj140',
-    "ussr:R97_Object_140_WB":                'obj140·wb',
     "ussr:R98_T44_85":                       't44·85',
     "ussr:R98_T44_85M":                      't44·85m',
     "ussr:R99_T44_122":                      't44·122'

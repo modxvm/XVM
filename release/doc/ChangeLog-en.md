@@ -1,4 +1,24 @@
-﻿### XVM 8.7.9
+﻿### XVM 8.8.0
+
+  #### General
+
+  * Compatibility with World of Tanks 1.13.0.0
+
+  #### Players panel
+
+  * Added option:
+
+    * `"playersPanel"/"removeHealthPoints"` — remove the number of hit points (HP) vehicle
+
+  #### Minimap
+
+  * Added option:
+
+    * `"minimapAlt"/"healthPointsEnabled"` — use standard the number of hit points (HP) vehicle
+
+______________________________
+
+### XVM 8.7.9
 
   #### General
 

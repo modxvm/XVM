@@ -45,9 +45,9 @@
     // Strategic mode (arty).
     // Стратегический режим (арта).
     "strategic": {
-      // Camera distance range: [min, max], default - [40, 100].
-      // Отдаление камеры: [мин, макс], по умолчанию - [40, 100].
-      "distRange": [40, 100],
+      // Camera distance range: [min, max], default - [40, 120].
+      // Отдаление камеры: [мин, макс], по умолчанию - [40, 120].
+      "distRange": [40, 120],
       // false - disable the shot recoil effect (for the enabled dynamic camera option).
       // false - выключить эффект отдачи от выстрела (для включенной опции динамической камеры).
       "shotRecoilEffect": true

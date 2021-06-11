@@ -154,7 +154,10 @@
       "battle_royale_training_squad": "",
       // «Brawl» mode.
       // Режим «Схватка».
-      "weekend_brawl": ""
+      "weekend_brawl": "",
+      // «Recon Mission» mode.
+      // Режим «Разведка боем».
+      "mapbox": ""
     },
     // Text for {{topclan}} macro.
     // Текст для макроса {{topclan}}.
