@@ -29,10 +29,10 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/PlayersPanelBase.clas
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2020-07-27 15:01:42.166282100 +0300
 +++ battle.orig-0/net/wg/gui/battle/components/stats/playersPanel/list/BasePlayersPanelListItem.class.asasm	2020-07-27 15:10:54.675241800 +0300
-@@ -51,6 +51,25 @@
-   trait slot QName(PackageNamespace(""), "chatCommandState") type QName(PackageNamespace("net.wg.gui.battle.components.stats.playersPanel"), "ChatCommandItemComponent") value Null() end
+@@ -55,6 +55,25 @@
    trait slot QName(PackageNamespace(""), "spottedIndicator") type QName(PackageNamespace("net.wg.gui.battle.components.stats.playersPanel"), "SpottedIndicator") value Null() end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "maxPlayerNameWidth") type QName(PackageNamespace(""), "uint") value Integer(0) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_holderItemID") type QName(PackageNamespace(""), "int") value Integer(-1) end
 +  trait getter QName(PackageNamespace(""), "xfw_state")
 +   method
 +    returns QName(PackageNamespace(""), "int")
@@ -52,9 +52,9 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/li
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(ProtectedNamespace("net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_state") type QName(PackageNamespace(""), "int") value Integer(-1) end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_holderItemID") type QName(PackageNamespace(""), "int") value Integer(-1) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_state") type QName(PackageNamespace(""), "int") value Integer(-1) end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_vehicleName") type QName(PackageNamespace(""), "String") value Null() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_frags") type QName(PackageNamespace(""), "int") value Integer(0) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2020-07-27 15:01:43.723594200 +0300
 +++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2020-07-27 15:09:50.265411700 +0300
