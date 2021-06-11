@@ -53,6 +53,7 @@ def onConfigLoaded(self, e=None):
     g_minimap.opt_linesEnabled = config.get('minimap/linesEnabled', True)
     g_minimap.opt_circlesEnabled = config.get('minimap/circlesEnabled', True)
     g_minimap.opt_minimapDeadSwitch = config.get('battle/minimapDeadSwitch', True)
+    g_minimap.opt_healthPointsEnabled = config.get('minimap/healthPointsEnabled', True)
 
 g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
@@ -177,6 +178,8 @@ _LINES_SETTINGS = (
     settings_constants.GAME.SHOW_SECTOR_ON_MAP)
 _LABELS_SETTINGS = (
     settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP)
+_HP_SETTINGS = (
+    settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP)
 _DEFAULTS = {
     settings_constants.GAME.SHOW_VECTOR_ON_MAP: False,
     settings_constants.GAME.SHOW_SECTOR_ON_MAP: True,
@@ -185,6 +188,7 @@ _DEFAULTS = {
     settings_constants.GAME.MINIMAP_VIEW_RANGE: True,
     settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP: False,
     settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE: False,
+    settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP: True,
 }
 
 _in_PersonalEntriesPlugin_setSettings = False
@@ -206,6 +210,9 @@ def _SettingsCore_getSetting(base, self, name):
         if _in_ArenaVehiclesPlugin_setSettings:
             if name in _LABELS_SETTINGS:
                 if g_minimap.opt_labelsEnabled:
+                    value = _DEFAULTS[name]
+            elif name in _HP_SETTINGS:
+                if g_minimap.opt_healthPointsEnabled:
                     value = _DEFAULTS[name]
         #debug('getSetting: {} = {}'.format(name, value))
     return value
@@ -262,6 +269,9 @@ def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
         if g_minimap.opt_labelsEnabled:
             if settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP] = _DEFAULTS[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP]
+        if g_minimap.opt_healthPointsEnabled:
+            if settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP in diff:
+                diff[settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP] = _DEFAULTS[settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP]
     base(self, diff)
 
 
@@ -298,6 +308,7 @@ class _Minimap(object):
     opt_linesEnabled = True
     opt_circlesEnabled = True
     opt_minimapDeadSwitch = True
+    opt_healthPointsEnabled = True
     viewPointID = 0
     minimapComponent = None
     entrySymbols = {}

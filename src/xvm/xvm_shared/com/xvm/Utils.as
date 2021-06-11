@@ -133,6 +133,7 @@ package com.xvm
                 case 34: return 'battle_royale_training_solo';
                 case 35: return 'battle_royale_training_squad';
                 case 36: return 'weekend_brawl';
+                case 37: return 'mapbox';
                 default: return 'unknown';
             }
         }

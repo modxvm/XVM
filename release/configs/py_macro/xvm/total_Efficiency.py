@@ -172,7 +172,7 @@ def Vehicle_showShooting(self, burstCount, gunIndex, isPredictedShot=False):
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
-def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor):
+def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
     global numberShotsReceived, numberHitsReceived
     if battle.isBattleTypeSupported and self.isPlayerVehicle and self.isAlive:
         numberShotsReceived += 1

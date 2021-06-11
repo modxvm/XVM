@@ -108,6 +108,7 @@ package com.xvm
         public static const BATTLE_ROYALE_TRN_SOLO:Number = 34;
         public static const BATTLE_ROYALE_TRN_SQUAD:Number = 35;
         public static const WEEKEND_BRAWL:Number = 36;
+        public static const MAPBOX:Number = 37;
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";

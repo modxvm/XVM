@@ -89,6 +89,7 @@ class _Fps():
 
 
 _g_fps = None
+
 def _init():
     global _g_fps
     _g_fps = _Fps()

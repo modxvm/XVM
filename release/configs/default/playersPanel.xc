@@ -95,6 +95,9 @@
     // true - remove the Players Panel mode switcher (buttons for changing size).
     // true - убрать переключатель режимов ушей мышкой.
     "removePanelsModeSwitcher": false,
+    // true - remove the number of hit points (HP) vehicle.
+    // true - убрать количество очков прочности (HP) техники.
+    "removeHealthPoints": false,
     // Start panels mode. Possible values: "none", "short", "medium", "medium2", "large".
     // Начальный режим ушей. Возможные значения: "none", "short", "medium", "medium2", "large".
     "startMode": "large",

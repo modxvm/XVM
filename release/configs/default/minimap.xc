@@ -68,6 +68,9 @@
     // false - use standard lines.
     // false - использовать стандартные линии.
     "linesEnabled": true,
+    // false - use standard the number of hit points (HP) vehicle.
+    // false - использовать стандартное количество очков прочности (HP) техники.
+    "healthPointsEnabled": false,
     // Minimap labels.
     // Надписи на миникарте.
     "labels": ${"minimapLabels.xc":"labels"},
