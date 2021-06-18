@@ -5,10 +5,13 @@
 package com.xvm.battle.classic.fullStats
 {
     import com.xfw.XfwUtils;
-    import net.wg.gui.battle.random.views.stats.components.fullStats.*;
-    import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.*;
-    import net.wg.gui.battle.views.stats.fullStats.*;
-    import net.wg.infrastructure.base.meta.impl.*;
+
+    import net.wg.gui.battle.random.views.stats.components.fullStats.FullStatsTable;
+    import net.wg.gui.battle.random.views.stats.components.fullStats.FullStatsTableCtrl;
+    import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.DynamicSquadCtrl;
+    import net.wg.gui.battle.random.views.stats.components.fullStats.tableItem.StatsTableItem;
+    import net.wg.gui.battle.views.stats.fullStats.StatsTableItemBase;
+    import net.wg.infrastructure.base.meta.impl.StatsBaseMeta;
 
     public class FullStatsTableCtrlXvm extends FullStatsTableCtrl
     {
@@ -26,8 +29,7 @@ package com.xvm.battle.classic.fullStats
         public function createSquadItem(col:int, row:int):DynamicSquadCtrl
         {
             var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
-            var index:int = col * StatsTableItemBase.NUM_ITEM_ROWS + row;
-
+            var index:int = col * numRows + row;
             return new DynamicSquadCtrlXvm(
                 col == 0,
                 table.squadStatusCollection[index],

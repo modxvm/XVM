@@ -84,7 +84,7 @@ package com.xvm.battle.ranked.fullStats
 
             super(table, col, row);
 
-            var index:int = col * NUM_ITEM_ROWS + row;
+            var index:int = col * numRows + row;
             _isLeftPanel = col == 0;
             _playerNameTF = table.playerNameCollection[index];
             _vehicleNameTF = table.vehicleNameCollection[index];
