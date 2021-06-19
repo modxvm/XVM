@@ -169,10 +169,6 @@
   // Замена названий танков.
   "vehicleNames": ${"vehicleNames.xc":"vehicleNames"},
 
-  // Export data.
-  // Выгрузка данных.
-  "export": ${"export.xc":"export"},
-
   // Parameters for tooltips.
   // Параметры всплывающих подсказок.
   "tooltips": ${"tooltips.xc":"tooltips"},
