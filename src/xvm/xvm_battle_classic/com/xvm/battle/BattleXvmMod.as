@@ -29,7 +29,7 @@ package com.xvm.battle
             "classicBattlePage": [
                 RandomBattleLoadingXvmView,
                 FullStatsXvmView,
-                PlayersPanelXvmView,
+                //TODO: 1.13, PlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
