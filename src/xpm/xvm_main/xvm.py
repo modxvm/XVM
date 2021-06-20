@@ -1,4 +1,20 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+This file is part of the XVM project.
+
+Copyright (c) 2013-2021 XVM Team.
+
+XVM is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, version 3.
+
+XVM is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+"""
 
 import traceback
 import simplejson
@@ -85,6 +101,8 @@ class Xvm(object):
     appLoader = dependency.descriptor(IAppLoader)
 
     def __init__(self):
+        trace('xvm_main.python.xvm::XVM::__init__()')
+
         self.xvmServicesInitialized = False
         self.xvmLobbyMessageShown = False
         self.xvmServerMessageLastInfo = None
@@ -93,7 +111,7 @@ class Xvm(object):
     # CONFIG
 
     def onConfigLoaded(self, e=None):
-        trace('onConfigLoaded')
+        trace('xvm_main.python.xvm::XVM::onConfigLoaded()')
 
         python_macro.initialize()
         disabled_servers.initialize()
@@ -103,7 +121,8 @@ class Xvm(object):
             wgutils.reloadHangar()
 
     def respondConfig(self):
-        trace('respondConfig')
+        trace('xvm_main.python.xvm::XVM::respondConfig()')
+
         as_xfw_cmd(XVM_COMMAND.AS_SET_CONFIG,
                    config.config_data,
                    config.lang_data,

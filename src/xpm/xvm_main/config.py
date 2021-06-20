@@ -72,6 +72,7 @@ def load(e):
     global config_data
     global lang_data
 
+    trace('xvm_main.python.config::load()')
     try:
         # TODO: config selection
         filename = e.ctx.get('filename', XVM.CONFIG_FILE)
@@ -119,6 +120,7 @@ def load(e):
         err(traceback.format_exc())
 
 
+    trace('xvm_main.python.config::load() --> end')
     g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
 
 
