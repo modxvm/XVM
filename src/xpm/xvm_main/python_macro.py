@@ -120,6 +120,8 @@ def execute(code, file_name, context):
 
 
 def initialize():
+    trace('xvm_main.python.python_macro::initialize()')
+
     global _container
     _container = {}
     files = glob.iglob(os.path.join(XVM.PY_MACRO_DIR, "*.py"))

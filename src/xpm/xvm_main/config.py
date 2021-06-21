@@ -67,7 +67,7 @@ def get(path, default=None):
         err(traceback.format_exc())
     return default
 
-def load(e):
+def load(e, from_init_stage = False):
     global config_autoreload
     global config_data
     global lang_data
@@ -121,7 +121,7 @@ def load(e):
 
 
     trace('xvm_main.python.config::load() --> end')
-    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED))
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED, {'fromInitStage': from_init_stage}))
 
 
 # PRIVATE

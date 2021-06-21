@@ -100,6 +100,8 @@ class Xvm(object):
 
     appLoader = dependency.descriptor(IAppLoader)
 
+    # INIT
+
     def __init__(self):
         trace('xvm_main.python.xvm::XVM::__init__()')
 
@@ -108,13 +110,18 @@ class Xvm(object):
         self.xvmServerMessageLastInfo = None
         self.currentAccountDBID = None
 
+    def initialize(self):
+        trace('xvm_main.python.xvm::XVM::initialize()')
+
+        python_macro.initialize()
+        disabled_servers.initialize()
+
     # CONFIG
 
     def onConfigLoaded(self, e=None):
         trace('xvm_main.python.xvm::XVM::onConfigLoaded()')
 
-        python_macro.initialize()
-        disabled_servers.initialize()
+        self.initialize()
 
         if not e or not e.ctx.get('fromInitStage', False):
             self.respondConfig()
