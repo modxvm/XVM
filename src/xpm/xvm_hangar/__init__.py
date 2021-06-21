@@ -77,6 +77,8 @@ def fini():
 # handlers
 
 # replace original 'NOT_FULL_AMMO_MULTIPLIER'
+'''
+TODO: 1.13
 @overrideMethod(Vehicle, 'isAmmoFull')
 def Vehicle_isAmmoFull(base, self):
     try:
@@ -90,6 +92,7 @@ def Vehicle_isAmmoFull(base, self):
     except Exception as ex:
         err(traceback.format_exc())
         return base(self)
+'''
 
 # barracks: add nation flag and skills for tanksman
 @overrideMethod(barrack, '_packActiveTankman')
