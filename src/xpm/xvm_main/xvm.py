@@ -115,13 +115,15 @@ class Xvm(object):
 
         python_macro.initialize()
         disabled_servers.initialize()
+        vehinfo.initialize()
 
     # CONFIG
 
     def onConfigLoaded(self, e=None):
         trace('xvm_main.python.xvm::XVM::onConfigLoaded()')
 
-        self.initialize()
+        python_macro.initialize()
+        disabled_servers.initialize()
 
         if not e or not e.ctx.get('fromInitStage', False):
             self.respondConfig()

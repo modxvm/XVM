@@ -153,76 +153,6 @@ _UNKNOWN_VEHICLE_DATA = {
     'topTurretCD': 0
 }
 
-def _init():
-    res = [_UNKNOWN_VEHICLE_DATA]
-    try:
-        for nation in nations.NAMES:
-            nationID = nations.INDICES[nation]
-            for (id, descr) in vehicles.g_list.getList(nationID).iteritems():
-                if descr.name.endswith('training'):
-                    continue
-
-                item = vehicles.g_cache.vehicle(nationID, id)
-                #log('%i    %i  %s  %s' % (descr.level, descr.compactDescr, descr.name, descr.shortUserString))
-
-                data = dict()
-                data['vehCD'] = descr.compactDescr
-                data['key'] = descr.name
-                data['nation'] = nation
-                data['level'] = descr.level
-                data['vclass'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr.tags)[0]
-                data['localizedName'] = descr.shortUserString
-                data['localizedShortName'] = descr.shortUserString
-                data['localizedFullName'] = descr.userString
-                data['premium'] = 'premium' in descr.tags and 'special' not in descr.tags
-                data['special'] = 'special' in descr.tags
-
-                stockTurret = item.turrets[0][0]
-                topTurret = item.turrets[0][-1]
-                topGun = topTurret.guns[-1]
-
-                #if len(item.hulls) != 1:
-                #    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr.name)
-                data['hpStock'] = item.hulls[0].maxHealth + stockTurret.maxHealth
-                data['hpTop'] = item.hulls[0].maxHealth + topTurret.maxHealth
-                data['turret'] = _getTurretType(item, nation)
-                data['topTurretCD'] = topTurret.compactDescr
-                (data['visRadius'], data['firingRadius'], data['artyRadius']) = \
-                    _getRanges(topTurret, topGun, nation, data['vclass'])
-
-                (data['tierLo'], data['tierHi']) = vehinfo_tiers.getTiers(data['level'], data['vclass'], data['key'])
-
-                data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
-
-                data['isReserved'] = False
-
-                #log(data)
-
-                res.append(data)
-
-            ResMgr.purge(_VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml', True)
-
-        vehinfo_short.checkNames(res)
-
-        global _vehicleInfoData
-        _vehicleInfoData = {x['vehCD']:x for x in res}
-
-        # load cached values
-        _load_xvmscale_data_callback(None, userprefs.get('cache/xvmscales.json.gz'))
-        _load_wn8_data_callback(None, userprefs.get('cache/wn8exp.json.gz'))
-        _load_xte_data_callback(None, userprefs.get('cache/xte.json.gz'))
-        _load_xtdb_data_callback(None, userprefs.get('cache/xtdb.json.gz'))
-
-        # request latest values
-        filecache.get_url(_XVMSCALE_DATA_URL, _load_xvmscale_data_callback)
-        filecache.get_url(_WN8_DATA_URL, _load_wn8_data_callback)
-        filecache.get_url(_XTE_DATA_URL, _load_xte_data_callback)
-        filecache.get_url(_XTDB_DATA_URL, _load_xtdb_data_callback)
-
-    except Exception, ex:
-        err(traceback.format_exc())
-
-BigWorld.callback(0, _init)
 
 def _getRanges(turret, gun, nation, vclass):
     visionRadius = firingRadius = artyRadius = 0
@@ -342,5 +272,81 @@ def _load_xtdb_data_callback(url, bytes):
                 userprefs.set('cache/xtdb.json.gz', bytes)
             global _xtdb_data
             _xtdb_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+    except Exception, ex:
+        err(traceback.format_exc())
+
+
+#
+# Init
+# 
+
+def initialize():
+    trace('xvm_main.python.vehinfo::init()')
+
+    res = [_UNKNOWN_VEHICLE_DATA]
+    try:
+        for nation in nations.NAMES:
+            nationID = nations.INDICES[nation]
+            for (id, descr) in vehicles.g_list.getList(nationID).iteritems():
+                if descr.name.endswith('training'):
+                    continue
+
+                item = vehicles.g_cache.vehicle(nationID, id)
+                #log('%i    %i  %s  %s' % (descr.level, descr.compactDescr, descr.name, descr.shortUserString))
+
+                data = dict()
+                data['vehCD'] = descr.compactDescr
+                data['key'] = descr.name
+                data['nation'] = nation
+                data['level'] = descr.level
+                data['vclass'] = tuple(vehicles.VEHICLE_CLASS_TAGS & descr.tags)[0]
+                data['localizedName'] = descr.shortUserString
+                data['localizedShortName'] = descr.shortUserString
+                data['localizedFullName'] = descr.userString
+                data['premium'] = 'premium' in descr.tags and 'special' not in descr.tags
+                data['special'] = 'special' in descr.tags
+
+                stockTurret = item.turrets[0][0]
+                topTurret = item.turrets[0][-1]
+                topGun = topTurret.guns[-1]
+
+                #if len(item.hulls) != 1:
+                #    log('WARNING: TODO: len(hulls) != 1 for vehicle ' + descr.name)
+                data['hpStock'] = item.hulls[0].maxHealth + stockTurret.maxHealth
+                data['hpTop'] = item.hulls[0].maxHealth + topTurret.maxHealth
+                data['turret'] = _getTurretType(item, nation)
+                data['topTurretCD'] = topTurret.compactDescr
+                (data['visRadius'], data['firingRadius'], data['artyRadius']) = \
+                    _getRanges(topTurret, topGun, nation, data['vclass'])
+
+                (data['tierLo'], data['tierHi']) = vehinfo_tiers.getTiers(data['level'], data['vclass'], data['key'])
+
+                data['shortName'] = vehinfo_short.getShortName(data['key'], data['level'], data['vclass'])
+
+                data['isReserved'] = False
+
+                #log(data)
+
+                res.append(data)
+
+            ResMgr.purge(_VEHICLE_TYPE_XML_PATH + nation + '/components/guns.xml', True)
+
+        vehinfo_short.checkNames(res)
+
+        global _vehicleInfoData
+        _vehicleInfoData = {x['vehCD']:x for x in res}
+
+        # load cached values
+        _load_xvmscale_data_callback(None, userprefs.get('cache/xvmscales.json.gz'))
+        _load_wn8_data_callback(None, userprefs.get('cache/wn8exp.json.gz'))
+        _load_xte_data_callback(None, userprefs.get('cache/xte.json.gz'))
+        _load_xtdb_data_callback(None, userprefs.get('cache/xtdb.json.gz'))
+
+        # request latest values
+        filecache.get_url(_XVMSCALE_DATA_URL, _load_xvmscale_data_callback)
+        filecache.get_url(_WN8_DATA_URL, _load_wn8_data_callback)
+        filecache.get_url(_XTE_DATA_URL, _load_xte_data_callback)
+        filecache.get_url(_XTDB_DATA_URL, _load_xtdb_data_callback)
+
     except Exception, ex:
         err(traceback.format_exc())
