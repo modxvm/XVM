@@ -364,7 +364,7 @@ class DataHitLog(object):
             self.compName = None
             self.criticalHit = False
 
-    def onEnterWorld(self, vehicle):
+    def onAppearanceReady(self, vehicle):
         self.macros.setChooseRating()
         self.player = BigWorld.player()
         self.playerVehicleID = self.player.playerVehicleID
@@ -888,13 +888,13 @@ def __onArenaVehicleKilled(self, targetID, attackerID, equipmentID, reason):
         g_hitLogs.removePlayerFromLogs(targetID)
 
 
-@registerEvent(Vehicle, 'onEnterWorld')
-def _Vehicle_onEnterWorld(self, prereqs):
+@registerEvent(Vehicle, '_Vehicle__onAppearanceReady')
+def _Vehicle__onAppearanceReady(self, appearance):
     if _config.get(HIT_LOG_ENABLED, True) and battle.isBattleTypeSupported:
         if self.id in g_dataHitLog.vehDead:
             g_dataHitLog.vehDead.remove(self.id)
         if self.isPlayerVehicle:
-            g_dataHitLog.onEnterWorld(self)
+            g_dataHitLog.onAppearanceReady(self)
             g_hitLogs.setPosition(g_dataHitLog.battletypeKey)
 
 
