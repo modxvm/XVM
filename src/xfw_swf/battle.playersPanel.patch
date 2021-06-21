@@ -46,7 +46,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/components/stats/playersPanel/li
 +      pushscope
 +
 +      getlocal0
-+      getproperty         QName(ProtectedNamespace("net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem"), "_state")
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.components.stats.playersPanel.list:BasePlayersPanelListItem#0"), "_state")
 +      returnvalue
 +     end ; code
 +    end ; body

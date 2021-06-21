@@ -16,7 +16,6 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-
 #
 # Imports
 #
@@ -36,7 +35,6 @@ from consts import XVM_EVENT
 from logger import trace
 import handlers
 from xvm import g_xvm
-
 
 #
 # Init/deinit

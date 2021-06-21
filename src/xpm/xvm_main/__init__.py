@@ -25,7 +25,6 @@ from glob import glob
 import os
 import platform
 
-
 #
 # XFW Mod initialization
 #
@@ -70,7 +69,6 @@ def xfw_module_init():
 
     import config
     from consts import XVM, XVM_EVENT
-    
     from init import subscribe, start
 
     log_version()

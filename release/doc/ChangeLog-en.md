@@ -3,6 +3,9 @@
   #### General
 
   * Compatibility with World of Tanks 1.13.0.0
+  * Removed section:
+
+    * `"export*"` in **@xvm.xc** file (deleted **export.xc** file)
 
   #### Players panel
 
