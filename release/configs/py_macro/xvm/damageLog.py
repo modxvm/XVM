@@ -1049,8 +1049,8 @@ def updateVehicleHealth(self, vehicleID, health, deathReasonID, isCrewActive, is
         data.data['isDamage'] = (max(0, health) != data.data['oldHealth'])
 
 
-@registerEvent(Vehicle, 'onEnterWorld')
-def Vehicle_onEnterWorld(self, prereqs):
+@registerEvent(Vehicle, '_Vehicle__onAppearanceReady')
+def _Vehicle__onAppearanceReady(self, appearance):
     if self.isPlayerVehicle:
         global isShowDamageLog
         isShowDamageLog = _config.get(DAMAGE_LOG_ENABLED) and battle.isBattleTypeSupported

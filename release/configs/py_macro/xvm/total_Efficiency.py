@@ -297,8 +297,8 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
         updateLabels.update()
 
 
-@registerEvent(Vehicle, 'onEnterWorld')
-def onEnterWorld(self, prereqs):
+@registerEvent(Vehicle, '_Vehicle__onAppearanceReady')
+def _Vehicle__onAppearanceReady(self, appearance):
     global _player, isPlayerInSquad, isStuns, enemiesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP, alliesDamage
     if not battle.isBattleTypeSupported:
         return
