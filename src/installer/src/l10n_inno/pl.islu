@@ -56,7 +56,7 @@ PowerUserPrivilegesRequired=Aby przeprowadzić instalację tej aplikacji, konto 
 SetupAppRunningError=Instalator wykrył, iż aplikacja %1 jest aktualnie uruchomiona.%n%nPrzed wciśnięciem przycisku OK zamknij wszystkie procesy aplikacji. Kliknij przycisk Anuluj, aby przerwać instalację.
 UninstallAppRunningError=Dezinstalator wykrył, iż aplikacja %1 jest aktualnie uruchomiona.%n%nPrzed wciśnięciem przycisku OK zamknij wszystkie procesy aplikacji. Kliknij przycisk Anuluj, aby przerwać dezinstalację.
 
-; *** Startup questions	 ---
+; *** Startup questions ---
 PrivilegesRequiredOverrideTitle=Wybierz typ instalacji aplikacji
 PrivilegesRequiredOverrideInstruction=Wybierz typ instalacji
 PrivilegesRequiredOverrideText1=Aplikacja %1 może zostać zainstalowana dla wszystkich użytkowników (wymagane są uprawnienia administratora) lub tylko dla bieżącego użytkownika.

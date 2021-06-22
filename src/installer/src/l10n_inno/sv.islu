@@ -16,7 +16,7 @@
 
 
 [LangOptions]
-LanguageName=Svenska	
+LanguageName=Svenska
 LanguageID=$041D
 LanguageCodePage=1252
 ; If the language you are translating to requires special font faces or

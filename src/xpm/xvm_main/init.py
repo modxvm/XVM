@@ -43,7 +43,6 @@ from xvm import g_xvm
 
 from __version__ import __branch__, __revision__, __node__
 
-    
 #
 # Info
 #

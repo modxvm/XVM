@@ -278,7 +278,7 @@ def _load_xtdb_data_callback(url, bytes):
 
 #
 # Init
-# 
+#
 
 def initialize():
     trace('xvm_main.python.vehinfo::init()')
