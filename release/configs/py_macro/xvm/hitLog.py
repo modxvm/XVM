@@ -328,10 +328,10 @@ class DataHitLog(object):
         self.data['isAlive'] = vehicle.isAlive()
         if attackReasonID < 8:
             self.data['attackReasonID'] = attackReasonID
-        elif attackReasonID in [9, 10, 13, 24]:
-            self.data['attackReasonID'] = 24
-        elif attackReasonID in [11, 14, 25]:
-            self.data['attackReasonID'] = 25
+        elif attackReasonID in [9, 10, 13, 34]:
+            self.data['attackReasonID'] = 34
+        elif attackReasonID in [11, 14, 36]:
+            self.data['attackReasonID'] = 36
         self.data['blownup'] = newHealth <= -5
         newHealth = max(0, newHealth)
         self.data['damage'] = (self.vehHealth[vehicle.id]['health'] - newHealth) if vehicle.id in self.vehHealth else (- newHealth)
