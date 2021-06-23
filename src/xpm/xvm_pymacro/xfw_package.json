@@ -1,0 +1,20 @@
+{
+    "id": "com.modxvm.xvm.pymacro",
+    "name": "XVM",
+    "description": "XVM",
+
+    "version": "XVM_VERSION",
+    "dependencies": [
+        "com.modxvm.xfw.libraries", 
+        "com.modxvm.xvm", 
+        "com.modxvm.xvm.battle"],
+    "dependencies_optional": [],
+
+    "url": "https://modxvm.com/",
+    "url_update": "https://modxvm.com/",
+
+    "wot_version_min": "WOT_VERSION",
+    "wot_version_exactmatch": false,
+
+    "features": ["python"]
+}

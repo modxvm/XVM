@@ -30,6 +30,7 @@ from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
 
 from xfw import *
+import xfw_loader.python as xfw_loader
 from xfw_actionscript.python import *
 
 from consts import *
@@ -43,7 +44,7 @@ import userprefs
 import disabled_servers
 import dossier
 import minimap_circles
-import python_macro
+import pymacro
 import reserve
 import topclans
 import wgutils
@@ -56,6 +57,22 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_USER,
 )
 
+#
+# python macro
+#
+__python_macro = None
+__python_macro_checked = False
+
+def __process_python_macro(arg):
+    if not __python_macro_checked and __python_macro is None:
+            __python_macro = xfw_loader.get_mod_module('com.modxvm.xvm.python_macro')
+            __python_macro_checked = True
+
+    if __python_macro is None:
+        return None
+
+    return __python_macro.process_macro(arg)
+    
 # performs translations and fixes image path
 def l10n(text):
 
@@ -113,7 +130,6 @@ class Xvm(object):
     def initialize(self):
         trace('xvm_main.python.xvm::XVM::initialize()')
 
-        python_macro.initialize()
         disabled_servers.initialize()
         vehinfo.initialize()
 
@@ -122,7 +138,6 @@ class Xvm(object):
     def onConfigLoaded(self, e=None):
         trace('xvm_main.python.xvm::XVM::onConfigLoaded()')
 
-        python_macro.initialize()
         disabled_servers.initialize()
 
         if not e or not e.ctx.get('fromInitStage', False):
@@ -310,7 +325,7 @@ class Xvm(object):
                 return (None, True)
 
             if cmd == XVM_COMMAND.PYTHON_MACRO:
-                return (python_macro.process_python_macro(args[0]), True)
+                return (pymacro.process_python_macro(args[0]), True)
 
             if cmd == XVM_COMMAND.GET_PLAYER_ID:
                 return (getCurrentAccountDBID(), True)

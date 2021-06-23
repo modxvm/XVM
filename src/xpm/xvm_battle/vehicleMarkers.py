@@ -24,7 +24,7 @@ from xfw import *
 from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
-import xvm_main.python.python_macro as python_macro
+import xvm_main.python.pymacro as pymacro
 import xvm_main.python.stats as stats
 import xvm_main.python.vehinfo as vehinfo
 
@@ -237,7 +237,7 @@ class VehicleMarkers(object):
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.respondGlobalBattleData()
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
-                self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, python_macro.process_python_macro(args[0]))
+                self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, pymacro.process_python_macro(args[0]))
             elif cmd == XVM_COMMAND.GET_CLAN_ICON:
                 self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, stats.getClanIcon(int(args[0])))
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
