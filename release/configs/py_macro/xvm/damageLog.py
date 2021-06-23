@@ -13,7 +13,7 @@ from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPan
 from gui.Scaleform.daapi.view.meta.DamagePanelMeta import DamagePanelMeta
 from gui.shared.utils.TimeInterval import TimeInterval
 from helpers import dependency
-from items import _xml
+from items import _xml#, vehicles
 from skeletons.gui.battle_session import IBattleSessionProvider
 from skeletons.gui.game_control import IBootcampController
 from vehicle_systems.tankStructure import TankPartIndexes
@@ -59,15 +59,16 @@ ATTACK_REASONS = {
     18: 'berserker_eq',
     19: 'spawned_bot_ram',
     20: 'smoke',
-    31: 'art_attack',
-    32: 'air_strike'
+    34: 'art_attack',
+    36: 'air_strike'
 }
 
 SHOT_EFFECTS_INDEXES = {
-    31: 31,
-    32: 32,
-    33: 31,
-    34: 32
+    34: 34,
+    35: 34,
+    36: 36,
+    37: 34,
+    38: 36
 }
 
 VEHICLE_CLASSES_SHORT = {
@@ -465,10 +466,19 @@ class Data(object):
             self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         else:
             self.data['compName'] = 'unknown'
-
-        # self.data['criticalHit'] = (maxHitEffectCode == 5)
         if damageFactor == 0:
             self.data['isAlive'] = bool(vehicle.isCrewActive)
+
+        # output to log index of artillery and airstrike
+
+        # for index, effect in enumerate(vehicles.g_cache.shotEffects):
+        #     if 'artilleryID' in effect:
+        #         log('%s =  artilleryID = %s' % (index, effect['artilleryID']))
+        #     elif 'airstrikeID' in effect:
+        #         log('%s =  airstrikeID = %s' % (index, effect['airstrikeID']))
+        #     else:
+        #         log('%s' % (index))
+
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
     def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
@@ -544,9 +554,9 @@ class Data(object):
             if (attackReasonID < 8) or (attackReasonID == 12):
                 self.data['attackReasonID'] = attackReasonID
             elif attackReasonID in [9, 10, 13]:
-                self.data['attackReasonID'] = 31
+                self.data['attackReasonID'] = 34
             elif attackReasonID in [11, 14]:
-                self.data['attackReasonID'] = 32
+                self.data['attackReasonID'] = 36
 
         self.data['isDamage'] = (self.data['damage'] > 0)
         self.data['isAlive'] = vehicle.isAlive()
