@@ -71,6 +71,10 @@ def log_version():
 # Init/deinit
 #
 
+def config_load_event():
+    # config was already loaded, but we need to ping other modules which are dependent on XVM config and loads AFTER the xvm_main
+    g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CONFIG_LOADED, {'fromInitStage': True}))
+
 def config_load():
     trace('xvm_main.python.init::config_load()')
     config.load(events.HasCtxEvent(XVM_EVENT.RELOAD_CONFIG, {'filename': XVM.CONFIG_FILE}), True)
@@ -98,6 +102,8 @@ def init():
     config_load()
 
     g_xvm.initialize()
+
+    BigWorld.callback(0, config_load_event)
 
 
 @registerEvent(game, 'fini')
