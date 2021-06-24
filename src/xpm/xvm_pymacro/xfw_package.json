@@ -5,8 +5,8 @@
 
     "version": "XVM_VERSION",
     "dependencies": [
-        "com.modxvm.xfw.libraries", 
-        "com.modxvm.xvm", 
+        "com.modxvm.xfw.libraries",
+        "com.modxvm.xvm",
         "com.modxvm.xvm.battle"],
     "dependencies_optional": [],
 

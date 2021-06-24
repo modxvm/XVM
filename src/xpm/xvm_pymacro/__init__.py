@@ -38,13 +38,11 @@ from xvm_main.python.logger import debug, err, log, trace
 import parser
 
 
-
 #
 # Globals
 #
 
 _container = {}
-
 
 
 #
@@ -65,7 +63,6 @@ class XvmNamespace(object):
             _container[function_name] = (func, deterministic)
             return func
         return decorator
-
 
 
 #
@@ -150,7 +147,6 @@ def __finalize():
     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, __reload)
 
 
-
 #
 # Public
 #
@@ -162,7 +158,6 @@ def process(arg):
     except Exception as ex:
         err(traceback.format_exc() + "arg='{}'".format(arg))
         return (None, True)
-
 
 
 #
