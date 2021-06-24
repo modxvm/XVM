@@ -72,7 +72,7 @@ def __process_python_macro(arg):
         return None
 
     return __python_macro.process_macro(arg)
-    
+
 # performs translations and fixes image path
 def l10n(text):
 

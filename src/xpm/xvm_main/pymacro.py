@@ -23,7 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import xfw_loader.python as xfw_loader
 
 
-
 #
 # Globals
 #
@@ -32,10 +31,9 @@ __python_macro = None
 __python_macro_checked = False
 
 
-
 #
 # Public
-# 
+#
 
 def process_python_macro(arg):
     global __python_macro

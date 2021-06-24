@@ -29,7 +29,6 @@ class IllegalStatementException(Exception):
         self.messages = messages
 
 
-
 #
 # Illegal Checker
 #
@@ -67,8 +66,6 @@ class IllegalChecker(ast.NodeVisitor):
             return
         if node.func.id in self.illegal_functions:
             self.errors += 'Illegal function call "{}"'.format(node.func.id),
-
-
 
 
 #
