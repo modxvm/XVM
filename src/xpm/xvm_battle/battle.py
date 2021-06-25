@@ -283,7 +283,7 @@ def onKillerDogTagSet(base, self, dogTagInfo):
 
 @overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')
 def as_setPanelHPBarVisibilityStateS(base, self, value):
-    if config.get('playersPanel/enabled') and not config.get('playersPanel/showHealthPoints'):
+    if config.get('playersPanel/enabled') and config.get('playersPanel/removeHealthPoints'):
         return
     base(self, value)
 
