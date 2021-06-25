@@ -107,7 +107,8 @@ def _ArcadeCamera_enable(self, *args, **kwargs):
 def isEnabledBySettings(base, self, index):
     if config.get('battle/camera/enabled'):
         return False
-    base(self, index)
+    else:
+        return base(self, index)
 
 @overrideMethod(SniperCamera, 'create')
 def _SniperCamera_create(base, self, onChangeControlMode = None):
