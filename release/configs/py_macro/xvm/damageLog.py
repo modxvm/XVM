@@ -1078,6 +1078,7 @@ def _Vehicle__onAppearanceReady(self, appearance):
             on_fire = 0
             data.data['oldHealth'] = self.health
             data.data['maxHealth'] = self.health
+            data.data['hp'] = self.health
             data.data['isAlive'] = self.isAlive()
 
 
