@@ -266,7 +266,7 @@ def areOtherIndicatorsShown(base, self):
 def handleBattleLoading(base, self, event):
     if not config.get('battle/showBattleHint'):
         return
-    base(self)
+    base(self, event)
 
 # disable DogTag's
 @overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')
