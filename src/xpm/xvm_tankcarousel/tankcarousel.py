@@ -102,12 +102,12 @@ def _Hangar_as_setCarouselS(base, self, linkage, alias):
         return base(self, linkage, alias)
 
     #do not modify tankcarousel in events
-    isEvent = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.EVENT_BATTLES)
+    isEvent = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.EVENT_BATTLES) if self.prbDispatcher is not None else False
     if isEvent:
         return base(self, linkage, alias)
 
     #do not modify tankcarousel in battle royale
-    isRoyale = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.BATTLE_ROYALE)
+    isRoyale = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.BATTLE_ROYALE) if self.prbDispatcher is not None else False
     if isRoyale:
         return base(self, linkage, alias)
 
