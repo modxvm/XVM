@@ -9,6 +9,7 @@ package com.xvm.lobby.widgets
     import com.xvm.lobby.vo.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
+    import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.interfaces.*;
 
@@ -42,6 +43,8 @@ package com.xvm.lobby.widgets
             //Logger.add("[widgets] init lobby");
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
+
+            Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL);
 
             cfg = Config.config.hangar.widgets;
 
