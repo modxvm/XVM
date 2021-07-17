@@ -80,14 +80,14 @@ def update_hp():
         if teams_totalhp[0] < teams_totalhp[1]:
             ratio = max(min(2.0 * teams_totalhp[0] / teams_totalhp[1] - 0.9, 1), 0)
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['bad'], ratio)
-            total_hp_sign = '&lt;'
+            total_hp_sign = '&#60;'
         elif teams_totalhp[0] > teams_totalhp[1]:
             ratio = max(min(2.0 * teams_totalhp[1] / teams_totalhp[0] - 0.9, 1), 0)
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['good'], ratio)
-            total_hp_sign = '&gt;'
+            total_hp_sign = '&#62;'
         else:
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
-            total_hp_sign = '&equals;'
+            total_hp_sign = '&#61;'
         as_event('ON_UPDATE_HP')
     except Exception, ex:
         err(traceback.format_exc())
