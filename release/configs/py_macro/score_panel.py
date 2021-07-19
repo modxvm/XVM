@@ -27,8 +27,8 @@ def enemy_alive():
 @xvm.export('sp.signScore', deterministic=False)
 def sign_score():
     if panel.ally_frags > panel.enemy_frags:
-        return '&gt;'
+        return '&#62;'
     elif panel.ally_frags < panel.enemy_frags:
-        return '&lt;'
+        return '&#60;'
     else:
         return '&#61;'
