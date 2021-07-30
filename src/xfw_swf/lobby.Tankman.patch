@@ -1,7 +1,7 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm lobby.orig-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm
 --- lobby.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2019-05-29 13:25:05.781737300 +0300
 +++ lobby.orig-0/net/wg/gui/components/tooltips/ToolTipTankmen.class.asasm	2019-05-29 13:38:42.267713800 +0300
-@@ -431,20 +431,24 @@
+@@ -427,20 +431,24 @@
  
        getlocal0
        getproperty         QName(PackageNamespace(""), "vehicleIco")
@@ -33,7 +33,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class
        getlocal            5
        getlex              QName(PackageNamespace(""), "MENU")
        getlocal0
-@@ -526,17 +526,17 @@
+@@ -522,17 +522,17 @@
        getproperty         QName(PackageNamespace(""), "tankInfoTF")
        getlocal0
        getproperty         QName(PackageNamespace(""), "vehicleIco")
@@ -59,7 +59,7 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/components/tooltips/ToolTipTankmen.class
  
        getlocal0
        getproperty         QName(PackageNamespace(""), "vehicleIco")
-@@ -1342,30 +1342,18 @@
+@@ -1338,30 +1338,18 @@
  
  L15:
        getlocal0
