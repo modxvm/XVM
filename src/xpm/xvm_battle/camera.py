@@ -203,10 +203,10 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
     base(self, onChangeControlMode)
 
 @overrideMethod(SniperControlMode, '_SniperControlMode__setupBinoculars')
-def setupBinoculars(base, self, isCoatedOptics):
+def setupBinoculars(base, self, optDevices):
     if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/noBinoculars'):
         return
-    base(self, isCoatedOptics)
+    base(self, optDevices)
 
 @overrideMethod(_FlashBangEffectDesc, 'create')
 def create(base, self, model, list, args):

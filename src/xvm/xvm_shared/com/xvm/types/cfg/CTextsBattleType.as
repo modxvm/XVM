@@ -27,6 +27,7 @@ package com.xvm.types.cfg
         public var fallout_multiteam:String;
         public var fort_battle_2:String;
         public var global_map:String;
+        public var maps_training:String;
         public var mapbox:String;
         public var ranked:String;
         public var rated_sandbox:String;
