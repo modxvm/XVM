@@ -32,7 +32,7 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehicles
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.postmortem_panel import PostmortemPanel
 from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisticsDataController
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import CommanderCameraHintPlugin, TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin, RoleHelpPlugin
+from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import CommanderCameraHintPlugin, TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin, RoleHelpPlugin, MapsTrainingHelpHintPlugin
 from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
 
 from xfw import *
@@ -52,7 +52,8 @@ import xmqp_events
 NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.EVENT_BATTLES,
                            constants.ARENA_GUI_TYPE.BOOTCAMP,
-                           constants.ARENA_GUI_TYPE.BATTLE_ROYALE]
+                           constants.ARENA_GUI_TYPE.BATTLE_ROYALE,
+                           constants.ARENA_GUI_TYPE.MAPS_TRAINING]
 
 #####################################################################
 # initialization/finalization
@@ -266,6 +267,18 @@ def handleBattleLoading(base, self, event):
     if not config.get('battle/showBattleHint'):
         return
     base(self, event)
+
+@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
+def canDisplayBattleCommunicationHint(base, self):
+    if not config.get('battle/showBattleHint'):
+        return False
+    base(self)
+
+@overrideMethod(MapsTrainingHelpHintPlugin, '_canDisplayCustomHelpHint')
+def _canDisplayCustomHelpHint(base, self):
+    if not config.get('battle/showBattleHint'):
+        return False
+    base(self)
 
 # disable DogTag's
 @overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')

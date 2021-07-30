@@ -48,7 +48,8 @@ BATTLE_TYPE = {ARENA_GUI_TYPE.UNKNOWN: "unknown",
                ARENA_GUI_TYPE.EPIC_BATTLE: "epic_battle",
                ARENA_GUI_TYPE.EPIC_TRAINING: "epic_battle",
                ARENA_GUI_TYPE.BATTLE_ROYALE: "battle_royale",
-               ARENA_GUI_TYPE.MAPBOX: "mapbox"}
+               ARENA_GUI_TYPE.MAPBOX: "mapbox",
+               ARENA_GUI_TYPE.MAPS_TRAINING: "maps_training"}
 
 HIT_LOG = 'hitLog/'
 FORMAT_HISTORY = 'formatHistory'
