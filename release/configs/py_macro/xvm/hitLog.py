@@ -920,7 +920,7 @@ def _Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReaso
 
 
 @registerEvent(Vehicle, 'set_isCrewActive')
-def set_isCrewActive(self, prev):
+def set_isCrewActive(self, _=None):
     g_dataHitLog.updateVehInfo(self)
 
 

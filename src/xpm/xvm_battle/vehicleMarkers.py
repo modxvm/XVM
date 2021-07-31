@@ -75,7 +75,7 @@ def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
     g_markers.updatePlayerState(vehicle.id, INV.ALL)
 
 @registerEvent(Vehicle, 'set_isCrewActive')
-def set_isCrewActive(self, prev):
+def set_isCrewActive(self, _=None):
     g_markers.updatePlayerState(self.id, INV.CREW_ACTIVE)
 
 #####################################################################
