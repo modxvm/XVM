@@ -55,6 +55,7 @@ package com.xvm.battle.shared.minimap.entries.personal
             {
                 Xfw.addCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
                 Xfw.addCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
+                Xfw.addCommandListener(XvmCommands.AS_CHANGING_SHELL, onChangingShell);
                 Xvm.addEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
                 Xvm.addEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
 
@@ -164,6 +165,7 @@ package com.xvm.battle.shared.minimap.entries.personal
 
             Xfw.removeCommandListener(XvmCommands.AS_MOVING_STATE_CHANGED, onMovingStateChanged);
             Xfw.removeCommandListener(XvmCommands.AS_STEREOSCOPE_TOGGLED, onStereoscopeToggled);
+            Xfw.removeCommandListener(XvmCommands.AS_CHANGING_SHELL, onChangingShell);
             Xvm.removeEventListener(PlayerStateEvent.CURRENT_VEHICLE_DESTROYED, updateCirclesVisibility);
             Xvm.removeEventListener(PlayerStateEvent.ON_MINIMAP_ALT_MODE_CHANGED, updateCirclesVisibility);
 
@@ -224,6 +226,12 @@ package com.xvm.battle.shared.minimap.entries.personal
             {
                 Logger.err(ex);
             }
+        }
+
+        private function onChangingShell(shellCD:int):void
+        {
+            _circles.updateArtilleryRange(shellCD);
+            _circlesAlt.updateArtilleryRange(shellCD);
         }
     }
 }

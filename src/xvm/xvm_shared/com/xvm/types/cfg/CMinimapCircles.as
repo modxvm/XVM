@@ -8,7 +8,7 @@ package com.xvm.types.cfg
 
     public dynamic class CMinimapCircles implements ICloneable
     {
-        public var artillery:CMinimapCirclesRange;
+        public var artillery:CMinimapCircle;
         public var shell:CMinimapCirclesRange;
         public var special:Array;
         public var view:Array;
