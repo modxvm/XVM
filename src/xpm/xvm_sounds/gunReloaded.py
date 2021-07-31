@@ -24,7 +24,7 @@ class XVM_SOUND_EVENT(object):
 # handlers
 
 @registerEvent(AmmoPlugin, '_AmmoPlugin__onGunReloadTimeSet')
-def onGunReloadTimeSet(self, _, state):
+def onGunReloadTimeSet(self, _, state, skipAutoLoader):
     try:
         if config.get('sounds/enabled'):
             isAutoReload = self._AmmoPlugin__guiSettings.hasAutoReload

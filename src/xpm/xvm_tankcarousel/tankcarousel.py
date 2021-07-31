@@ -218,7 +218,7 @@ def _VehicleContextMenuHandler_generateOptions(base, self, ctx = None):
         err(traceback.format_exc())
     return result
 
-@overrideMethod(HangarCarouselDataProvider, '_HangarCarouselDataProvider__getSupplyIndices')
+@overrideMethod(HangarCarouselDataProvider, '_getSupplyIndices')
 def _HangarCarouselDataProvider_getSupplyIndices(base, self):
     supplyIndices = base(self)
     if config.get('hangar/carousel/hideBuySlot'):
