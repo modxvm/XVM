@@ -26,6 +26,7 @@ package com.xvm
         public static const AS_ON_CLAN_ICON_LOADED:String = "xvm.as.on_clan_icon_loaded";
         public static const AS_MOVING_STATE_CHANGED:String = "xvm.as.as_moving_state_changed";
         public static const AS_STEREOSCOPE_TOGGLED:String = "xvm.as.as_stereoscope_toggled";
+        public static const AS_CHANGING_SHELL:String = "xvm.as.as_changing_shell";
 
         // XFW
 

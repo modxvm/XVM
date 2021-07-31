@@ -11,7 +11,6 @@ package com.xvm.battle.vo
         public var view_coated_optics:Boolean;
         public var base_loaders_skill:Number;
         public var base_radio_distance:Number;
-        public var artillery_range:Number;
         public var view_ventilation:Boolean;
         public var view_stereoscope:Boolean;
         public var view_radioman_inventor:Number;
@@ -30,9 +29,23 @@ package com.xvm.battle.vo
         public var shell_range:Number;
         public var view_brothers_in_arms:Boolean;
 
+        public var artillery_ranges:Array;
+        public var artillery_shellsCD:Array;
+
         public function VOMinimapCirclesData(data:Object = null)
         {
             super(data);
         }
+
+        public function artilleryRange(shellsCD: int):Number
+        {
+            if (!artillery_shellsCD || !artillery_ranges)
+            {
+                return 0;
+            }
+            return artillery_ranges[artillery_shellsCD.indexOf(shellsCD)];
+
+        }
+
     }
 }

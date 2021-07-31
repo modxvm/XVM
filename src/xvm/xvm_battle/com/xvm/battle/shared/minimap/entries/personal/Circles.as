@@ -18,7 +18,7 @@ package com.xvm.battle.shared.minimap.entries.personal
 
         private var _staticCircles:Vector.<MinimapCircleData>;
         private var _dynamicCircles:Vector.<MinimapCircleData>;
-        private var _artilleryCircle:Shape = null;
+        private var _artilleryCircle:MinimapCircleData = null;
         private var _shellRangeCircle:Shape = null;
 
         public function Circles(cfg:CMinimapCircles)
@@ -53,17 +53,14 @@ package com.xvm.battle.shared.minimap.entries.personal
 
             _dynamicCircles = _defineDynamicCircles(cfg);
 
-            _artilleryCircle = null;
             if (cfg.artillery.enabled)
             {
-                radius = BattleGlobalData.minimapCirclesData.artillery_range;
-                //Logger.add("arty: " + radius);
-                if (radius > 0)
+                if (isNaN(cfg.artillery.distance))
                 {
-                    _artilleryCircle = _drawCircle(radius, cfg.artillery.thickness, cfg.artillery.color, cfg.artillery.alpha);
-                    addChild(_artilleryCircle);
+                   _artilleryCircle = new MinimapCircleData(cfg.artillery);
                 }
             }
+
 
             if (cfg.shell.enabled)
             {
@@ -172,6 +169,32 @@ package com.xvm.battle.shared.minimap.entries.personal
                     data.shape = _drawCircle(radius, data.cfg.thickness, data.cfg.color, data.cfg.alpha);
                     data.shape.visible = visible;
                     addChild(data.shape);
+                }
+            }
+        }
+
+        public function updateArtilleryRange(shellCD:int):void
+        {
+            if (_artilleryCircle.cfg.enabled)
+            {
+                var radius:int = BattleGlobalData.minimapCirclesData.artilleryRange(shellCD);
+                if (radius > 0)
+                {
+                    var shape:Shape = _artilleryCircle.shape;
+                    if (shape == null || _artilleryCircle.radius != radius)
+                    {
+                        var visible:Boolean = true;
+                        if (shape != null)
+                        {
+                            visible = shape.visible;
+                            removeChild(shape);
+                            shape = null;
+                        }
+                        _artilleryCircle.radius = radius;
+                        _artilleryCircle.shape = _drawCircle(radius, _artilleryCircle.cfg.thickness, _artilleryCircle.cfg.color, _artilleryCircle.cfg.alpha);
+                        _artilleryCircle.shape.visible = visible;
+                        addChild(_artilleryCircle.shape);
+                    }
                 }
             }
         }
