@@ -163,15 +163,17 @@ class _MinimapCircles(object):
         # Shell Range & Artillery Range
         isArty = 'SPG' in descr.type.tags
         shell_range = 0
-        artillery_range = 0
+        artillery_ranges = []
+        artillery_shellsCD = []
         for shell in descr.gun.shots:
             shell_range = max(shell_range, shell.maxDistance)
             if isArty:
                 pitchLimits = abs(descr.gun.pitchLimits['absolute'][0])
                 if pitchLimits >= (math.pi / 4):
-                    artillery_range = max(artillery_range, round(math.pow(shell.speed, 2) / shell.gravity))
+                    artillery_ranges.append(round(math.pow(shell.speed, 2) / shell.gravity))
                 else:
-                    artillery_range = max(artillery_range, round(math.sin(2 * pitchLimits) * math.pow(shell.speed, 2) / shell.gravity))
+                    artillery_ranges.append(round(math.sin(2 * pitchLimits) * math.pow(shell.speed, 2) / shell.gravity))
+                artillery_shellsCD.append(shell.shell.compactDescr)
 
         # do not show for range more then 707m (maximum marker visibility range)
         if shell_range >= 707:
@@ -198,7 +200,8 @@ class _MinimapCircles(object):
             'view_radioman_finder': self.radioman_finder,
             'view_radioman_inventor': self.radioman_inventor,
             'view_camouflage': self.camouflage,
-            'artillery_range': artillery_range,
+            'artillery_ranges': artillery_ranges,
+            'artillery_shellsCD': artillery_shellsCD,
             'shell_range': shell_range,
             'base_gun_reload_time': float("{0:.3f}".format(descr.gun.reloadTime)),
             'base_radio_distance': descr.radio.distance,

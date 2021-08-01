@@ -55,10 +55,7 @@ package com.xvm.battle.shared.minimap.entries.personal
 
             if (cfg.artillery.enabled)
             {
-                if (isNaN(cfg.artillery.distance))
-                {
-                   _artilleryCircle = new MinimapCircleData(cfg.artillery);
-                }
+                _artilleryCircle = new MinimapCircleData(cfg.artillery);
             }
 
 

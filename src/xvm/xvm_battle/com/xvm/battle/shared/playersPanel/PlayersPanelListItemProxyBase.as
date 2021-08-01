@@ -545,7 +545,7 @@ package com.xvm.battle.shared.playersPanel
                 case PLAYERS_PANEL_STATE.HIDDEN:
                 case -1:
                     BattleState.playersPanelWidthLeft = 0;
-                    BattleState.playersPanelWidthLeft = 0;
+                    BattleState.playersPanelWidthRight = 0;
                     ui.visible = false;
                     //ui.x = isLeftPanel ? -WIDTH : WIDTH;
                     break;
@@ -680,6 +680,8 @@ package com.xvm.battle.shared.playersPanel
         {
             var vehicleIconX:int = VEHICLE_ICON_LEFT_X + _getFieldOffsetXLeft(ui.vehicleIcon);
             var vehicleLevelX:int = VEHICLE_LEVEL_LEFT_X + _getFieldOffsetXLeft(ui.vehicleLevel) - ui.vehicleLevel.width / 2;
+            ui.hpBarPlayersPanelListItem.setParentX(-this.x);
+            ui.hpBarPlayersPanelListItem.setVehicleIconX(vehicleIconX);
             if (int(ui.vehicleIcon.x) != vehicleIconX)
             {
                 ui.vehicleIcon.x = vehicleIconX;
@@ -695,17 +697,20 @@ package com.xvm.battle.shared.playersPanel
             var vehicleIconScaleX:Number;
             var vehicleIconX:int;
             var vehicleLevelX:int;
+            ui.hpBarPlayersPanelListItem.setParentX(-this.x);
             if (bcfg.mirroredVehicleIcons)
             {
                 vehicleIconScaleX = 1;
                 vehicleIconX = VEHICLE_ICON_RIGHT_X - _getFieldOffsetXRight(ui.vehicleIcon);
                 vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - _getFieldOffsetXRight(ui.vehicleLevel) - ui.vehicleLevel.width / 2;
+                ui.hpBarPlayersPanelListItem.setVehicleIconX(vehicleIconX);
             }
             else
             {
                 vehicleIconScaleX = -1;
                 vehicleIconX =  VEHICLE_ICON_RIGHT_X - _getFieldOffsetXRight(ui.vehicleIcon) - ICONS_AREA_WIDTH;
                 vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - _getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH - ui.vehicleLevel.width / 2 + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
+                ui.hpBarPlayersPanelListItem.setVehicleIconX(vehicleIconX + ICONS_AREA_WIDTH);
             }
             if (ui.vehicleIcon.scaleX != vehicleIconScaleX)
             {
