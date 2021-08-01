@@ -16,6 +16,7 @@ from skeletons.gui.app_loader import IAppLoader
 from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.app_loader.settings import APP_NAME_SPACE
 from gui.shared import g_eventBus, events
+from gui.shared.gui_items.Vehicle import VEHICLE_CLASS_NAME
 from gui.shared.utils.functions import getBattleSubTypeBaseNumber
 from gui.battle_control import avatar_getter
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
@@ -107,6 +108,9 @@ def _PlayerAvatar_onBecomePlayer(base, self):
         if ctrl:
             ctrl.onOptionalDeviceAdded += g_battle.onOptionalDeviceAdded
             ctrl.onOptionalDeviceUpdated += g_battle.onOptionalDeviceUpdated
+        ctrl = sessionProvider.shared.ammo
+        if ctrl:
+            ctrl.onCurrentShellChanged += g_battle.onCurrentShellChanged
         g_battle.onStartBattle()
     except Exception, ex:
         err(traceback.format_exc())
@@ -131,6 +135,9 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
         if ctrl:
             ctrl.onOptionalDeviceAdded -= g_battle.onOptionalDeviceAdded
             ctrl.onOptionalDeviceUpdated -= g_battle.onOptionalDeviceUpdated
+        ctrl = sessionProvider.shared.ammo
+        if ctrl:
+            ctrl.onCurrentShellChanged -= g_battle.onCurrentShellChanged
         xmqp.stop()
     except Exception, ex:
         err(traceback.format_exc())
@@ -153,6 +160,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 @registerEvent(PlayerAvatar, 'vehicle_onAppearanceReady')
 def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
     # debug("> _PlayerAvatar_vehicle_onAppearanceReady: hp=%i" % vehicle.health)
+    g_battle.isSPG = self.vehicleTypeDescriptor.type.getVehicleClass() == VEHICLE_CLASS_NAME.SPG
     g_battle.updatePlayerState(vehicle.id, INV.ALL)
 
 # on any player marker lost
@@ -309,6 +317,8 @@ class Battle(object):
     targetVehicleID = None
     xvm_battle_swf_initialized = False
     is_moving = False
+    shellCD = 0
+    isSPG = False
 
     appLoader = dependency.descriptor(IAppLoader)
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
@@ -388,6 +398,12 @@ class Battle(object):
         if attackerID == avatar_getter.getPlayerVehicleID():
             inv |= INV.DAMAGE_CAUSED
         self.updatePlayerState(vehicleID, inv, userData)
+
+    def onCurrentShellChanged(self, intCD):
+        if self.shellCD != intCD:
+            self.shellCD = intCD
+            if self.isSPG:
+                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_CHANGING_SHELL, intCD)
 
     def updateSpottedStatus(self, vehicleID, active):
         spotted_status = SPOTTED_STATUS.SPOTTED if active else SPOTTED_STATUS.LOST

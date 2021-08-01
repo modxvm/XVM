@@ -21,6 +21,7 @@ class XVM_BATTLE_COMMAND(object):
     AS_ON_TARGET_CHANGED = "xvm.as.on_target_changed"
     AS_MOVING_STATE_CHANGED = "xvm.as.as_moving_state_changed"
     AS_STEREOSCOPE_TOGGLED = "xvm.as.as_stereoscope_toggled"
+    AS_CHANGING_SHELL = "xvm.as.as_changing_shell"
 
 # Markers only commands
 
