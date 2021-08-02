@@ -4,7 +4,7 @@
  */
 {
   "vehicleNames": {
-    // Last update: 30.07.2021
+    // Last update: 02.08.2021
     "china-Ch01_Type59":                     {"name": null, "short": null},
     "china-Ch01_Type59_Gold":                {"name": null, "short": null},
     "china-Ch02_Type62":                     {"name": null, "short": null},
@@ -62,6 +62,7 @@
     "china-Ch42_WalkerBulldog_M41D":         {"name": null, "short": null},
     "china-Ch43_WZ_122_2":                   {"name": null, "short": null},
     "china-Ch44_114_SP2":                    {"name": null, "short": null},
+    "china-Ch46_113_140":                    {"name": null, "short": null},
     "czech-Cz01_Skoda_T40":                  {"name": null, "short": null},
     "czech-Cz02_TVP_T50":                    {"name": null, "short": null},
     "czech-Cz03_LT_vz35":                    {"name": null, "short": null},

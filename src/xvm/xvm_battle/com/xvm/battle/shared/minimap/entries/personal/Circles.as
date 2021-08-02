@@ -58,7 +58,6 @@ package com.xvm.battle.shared.minimap.entries.personal
                 _artilleryCircle = new MinimapCircleData(cfg.artillery);
             }
 
-
             if (cfg.shell.enabled)
             {
                 radius = BattleGlobalData.minimapCirclesData.shell_range;

@@ -87,7 +87,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
    trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views:BaseBattlePage"), "onMiniMapTrySizeChangeHandler")
     method
      refid "net.wg.gui.battle.views:BaseBattlePage/instance/net.wg.gui.battle.views:BaseBattlePage/onMiniMapTrySizeChangeHandler"
-@@ -2112,6 +2112,28 @@
+@@ -2071,6 +2071,28 @@
  
        returnvoid
       end ; code
