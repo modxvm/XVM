@@ -276,7 +276,7 @@ def init(path_to_root):
 
     # "../res_mods/0.9.20.1/""
     global WOT_RESMODS_DIR
-    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + ResMgr.openSection('../paths.xml')['Paths'].values()[0].asString.lstrip('./')
+    WOT_RESMODS_DIR = XFWLOADER_PATH_TO_ROOT + [path.asString for path in ResMgr.openSection('../paths.xml')['Paths'].values() if './res_mods/' in path.asString][0].lstrip('./')
 
     # ver =
     #   * 'v.0.8.7'
