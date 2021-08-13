@@ -276,12 +276,6 @@ def handleBattleLoading(base, self, event):
         return
     base(self, event)
 
-@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
-def canDisplayBattleCommunicationHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return False
-    base(self)
-
 @overrideMethod(MapsTrainingHelpHintPlugin, '_canDisplayCustomHelpHint')
 def _canDisplayCustomHelpHint(base, self):
     if not config.get('battle/showBattleHint'):
