@@ -56,6 +56,7 @@
     "battleDamageLogPanel"          - Панель: Информирование в бою - История событий         / Panel: Battle Notifications - Log
     "battleLoading"                 - Экран загрузки боя                                     / Battle Loading screen
     "battleMessenger"               - Чат                                                    / Chat
+    "battleNotifier"                - Панель с результатами предыдущего боя                  / Panel with the results of the previous battle
     "battleTimer"                   - Таймер боя                                             / Battle timer
     "calloutPanel"                  - Панель подтверждения команды (коммуникация в бою)      / Command confirmation panel (communication in battle)
     "consumablesPanel"              - Панель снарядов и расходников                          / Ammo bar
@@ -71,6 +72,7 @@
     "hintPanel":                    - Панель с подсказками в бою                             / Panel tips in battle
     "minimap"                       - Миникарта                                              / Minimap
     "playersPanel"                  - Панели игроков/уши                                     / Players panels
+    "prebattleAmmunitionPanel"      - Панель снарядов и расходников (выбор комплектаций)     / Ammo bar (choice of configurations)
     "prebattleTimer"                - Таймер до начала боя                                   / Timer before a battle start
     "questProgressTopAnimContainer" - Панель: Информирование в бою - Прогресс ЛБЗ            / Panel: Battle Notifications - Progress for Personal Missions
     "questProgressTopView"          - Панель: Информирование в бою - Прогресс ЛБЗ (анимация) / Panel: Battle Notifications - Progress for Personal Missions (animation)
