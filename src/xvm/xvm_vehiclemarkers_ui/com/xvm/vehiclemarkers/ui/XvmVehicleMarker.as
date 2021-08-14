@@ -120,15 +120,24 @@ package com.xvm.vehiclemarkers.ui
             {
                 var damageTypeSplitted:Array = damageType.split(",");
                 damageType = damageTypeSplitted[0];
-                playerState.update({
-                    damageInfo: new VODamageInfo({
-                        damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
-                        damageType: damageType,
-                        damageFlag: damageFlag,
-                        attackerID: Number(damageTypeSplitted[1])
-                    }),
-                    curHealth: newHealth
-                });
+                var attackerID : Number = Number(damageTypeSplitted[1]);
+                if (!playerState.isAlive && damageFlag == Defines.FROM_UNKNOWN && attackerID == 0)
+                {
+                    playerState.damageInfo = null;
+                    playerState.update({curHealth : newHealth});
+                }
+                else
+                {
+                    playerState.update({
+                        damageInfo: new VODamageInfo({
+                            damageDelta: playerState.getCurHealthValue() - Math.max(newHealth, 0),
+                            damageType: damageType,
+                            damageFlag: damageFlag,
+                            attackerID: attackerID
+                        }),
+                        curHealth: newHealth
+                    });
+                }
                 // BattleState may not be updated yet, but {{my-frags}} macro should display correct value in the damage message
                 if (newHealth <= 0)
                 {
