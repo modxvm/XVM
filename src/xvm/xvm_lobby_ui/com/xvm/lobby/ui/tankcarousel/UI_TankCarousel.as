@@ -33,7 +33,7 @@ package com.xvm.lobby.ui.tankcarousel
         private var cfg:CCarousel;
         private var _enabled:Boolean = false;
         private var _rowCount:int = 1;
-		private var _frontline:Boolean = true; //TODO: handle it correctly
+		private var _frontline:Boolean = false; //TODO: handle it correctly
 
         public function UI_TankCarousel()
         {

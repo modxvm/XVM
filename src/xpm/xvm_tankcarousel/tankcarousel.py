@@ -88,6 +88,19 @@ def onXfwCommand(cmd, *args):
     return (None, False)
 
 
+######################################################################
+# TODO 1.14: add support epicBattleTankCarousel
+
+from gui.Scaleform.daapi.view.meta.HangarMeta import HangarMeta
+from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
+
+@overrideMethod(HangarMeta, 'as_setCarouselS')
+def as_setCarouselS(base, self, linkage, alias):
+    if alias == HANGAR_ALIASES.EPICBATTLE_TANK_CAROUSEL:
+        alias = HANGAR_ALIASES.TANK_CAROUSEL
+    return base(self, linkage, alias)
+
+
 #####################################################################
 # handlers
 
