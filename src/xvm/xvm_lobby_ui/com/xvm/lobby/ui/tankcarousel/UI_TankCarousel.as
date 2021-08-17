@@ -4,24 +4,36 @@
  */
 package com.xvm.lobby.ui.tankcarousel
 {
-    import com.xfw.*;
-    import com.xvm.*;
-    import com.xvm.types.dossier.*;
-    import com.xvm.types.cfg.*;
-    import flash.geom.*;
-    import net.wg.data.constants.generated.*;
-    import net.wg.gui.lobby.hangar.tcarousel.helper.*;
-    import net.wg.infrastructure.events.*;
-    import scaleform.clik.constants.*;
-    import org.idmedia.as3commons.util.*;
+	import flash.geom.Rectangle;
+	
+	import scaleform.clik.constants.InvalidationType;
+		
+	import org.idmedia.as3commons.util.StringUtils;	
+		
+	import net.wg.data.constants.generated.PROFILE_DROPDOWN_KEYS;
+	import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
+    import net.wg.infrastructure.events.LifeCycleEvent;
+
+	import com.xfw.Logger;
+	
+	import com.xvm.Config;
+	import com.xvm.Dossier;
+	import com.xvm.Macros;
+	
+    import com.xvm.types.dossier.AccountDossier;
+	import com.xvm.types.cfg.CCarousel;
+	
+   
 
     public class UI_TankCarousel extends TankCarouselUI
     {
         private static const THRESHOLD:int = 650;
+		private static const FRONTLINE_ROW_LIMIT:int = 2;
 
         private var cfg:CCarousel;
         private var _enabled:Boolean = false;
         private var _rowCount:int = 1;
+		private var _frontline:Boolean = true; //TODO: handle it correctly
 
         public function UI_TankCarousel()
         {
@@ -67,12 +79,15 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (cfg.rows > 0)
                     {
-                        rows = cfg.rows;
+						rows = cfg.rows;
+						if (_frontline){
+							rows = Math.min(rows, FRONTLINE_ROW_LIMIT);
+						}
                     }
                 }
             }
             _rowCount = rows;
-            super.as_rowCount(rows);
+            super.as_rowCount(_rowCount);
         }
 
         override protected function getNewHelper():ITankCarouselHelper
@@ -134,7 +149,8 @@ package com.xvm.lobby.ui.tankcarousel
         {
             return (background.alpha < 1) ? null : super.getRectangles();
         }
-
+		
+		
         // PRIVATE
 
         private function init():void
