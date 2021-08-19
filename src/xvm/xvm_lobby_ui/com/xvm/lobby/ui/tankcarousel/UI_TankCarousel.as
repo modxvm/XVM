@@ -7,6 +7,7 @@ package com.xvm.lobby.ui.tankcarousel
     import flash.geom.Rectangle;
     import scaleform.clik.constants.InvalidationType;
     import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.data.constants.generated.HANGAR_ALIASES;
     import net.wg.data.constants.generated.PROFILE_DROPDOWN_KEYS;
     import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
     import net.wg.infrastructure.events.LifeCycleEvent;
@@ -25,7 +26,6 @@ package com.xvm.lobby.ui.tankcarousel
         private var cfg:CCarousel;
         private var _enabled:Boolean = false;
         private var _rowCount:int = 1;
-        private var _frontline:Boolean = false; //TODO: handle it correctly
 
         public function UI_TankCarousel()
         {
@@ -72,7 +72,7 @@ package com.xvm.lobby.ui.tankcarousel
                     if (cfg.rows > 0)
                     {
                         rows = cfg.rows;
-                        if (_frontline){
+                        if (this.getAliasS() == HANGAR_ALIASES.EPICBATTLE_TANK_CAROUSEL){
                             rows = Math.min(rows, FRONTLINE_ROW_LIMIT);
                         }
                     }
