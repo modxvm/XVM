@@ -139,12 +139,12 @@ def __initialize():
 
     sys.path.append(XFWLOADER_PATH_TO_ROOT + "res_mods/configs/xvm/py_macro")
     __reload()
-
-    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, __reload)
-
-
-def __finalize():
-    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, __reload)
+#
+#     g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, __reload)
+#
+#
+# def __finalize():
+#     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, __reload)
 
 
 #
