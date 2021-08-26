@@ -57,21 +57,6 @@ _LOG_COMMANDS = (
     XVM_COMMAND.LOAD_STAT_USER,
 )
 
-#
-# python macro
-#
-__python_macro = None
-__python_macro_checked = False
-
-def __process_python_macro(arg):
-    if not __python_macro_checked and __python_macro is None:
-            __python_macro = xfw_loader.get_mod_module('com.modxvm.xvm.python_macro')
-            __python_macro_checked = True
-
-    if __python_macro is None:
-        return None
-
-    return __python_macro.process_macro(arg)
 
 # performs translations and fixes image path
 def l10n(text):
