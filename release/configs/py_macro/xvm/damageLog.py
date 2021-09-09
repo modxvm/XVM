@@ -548,7 +548,7 @@ class Data(object):
         self.data['hp'] = max(0, newHealth)
         self.data['damage'] = self.data['oldHealth'] - self.data['hp']
         self.data['oldHealth'] = self.data['hp']
-        if self.data['damage'] < 0:
+        if self.data['damage'] < 0 or (attackReasonID == 16 and (newHealth - oldHealth) == 0):
             return
         if self.data['attackReasonID'] == 0:
             if (attackReasonID < 8) or (attackReasonID == 12):
@@ -1077,7 +1077,7 @@ def _Vehicle__onAppearanceReady(self, appearance):
                 damageLogConfig = {section: readyConfig(section) for section in DAMAGE_LOG_SECTIONS.SECTIONS}
             on_fire = 0
             data.data['oldHealth'] = self.health
-            data.data['maxHealth'] = self.health
+            data.data['maxHealth'] = self.maxHealth
             data.data['hp'] = self.health
             data.data['isAlive'] = self.isAlive()
 
