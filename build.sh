@@ -47,7 +47,7 @@ fi
 
 # $XVMBUILD_L10N_URL
 if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
-    export XVMBUILD_L10N_URL="http://translate.modxvm.com/downloads/xvm-client/xvm-client-l10n_json.zip"
+    export XVMBUILD_L10N_URL="https://translate.modxvm.com/downloads/xvm-client/xvm-client-l10n_json.zip"
 fi
 
 ##########################
@@ -174,7 +174,7 @@ function download_translations()
     pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
     mkdir -p temp
     cd temp
-    wget --quiet --output-document=l10n.zip "$XVMBUILD_L10N_URL"
+    wget --output-document=l10n.zip "$XVMBUILD_L10N_URL"
     unzip -o l10n.zip >/dev/null
     rm l10n.zip ru.xc
     rm -f en.xc
@@ -189,7 +189,6 @@ calc_hash_for_xvm_integrity()
 {
     echo ""
     echo "Calculating hashes for xvm_integrity"
-
 
     pushd ~output/deploy > /dev/null
 
@@ -252,6 +251,7 @@ detect_python
 detect_unzip
 detect_wget
 detect_ffdec
+detect_pandoc
 
 #build components
 args="$*"

@@ -3,6 +3,11 @@
 # XVM Team (c) https://modxvm.com 2014-2021
 # XVM nightly build system functions library
 
+# Text formatting
+
+DEFAULT='\033[0m'       # Reset formatting
+BOLD_RED='\033[1;91m'   # Bold Red
+
 #Actionscript constants
 AS_VERSION_PLAYERGLOBAL="10.2"
 AS_VERSION_PLAYER="10.2"
@@ -41,7 +46,7 @@ detect_arch(){
     elif [ "$(uname -m)" == "x86_64" ]; then
         export arch=amd64
     else
-        echo "!!! Only i686 and amd64 architectures are supported"
+        echo -e "${BOLD_RED} Only i686 and amd64 architectures are supported${DEFAULT}"
         exit 1
     fi
 }
@@ -56,7 +61,7 @@ detect_os(){
          [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
         export OS=Windows
     else
-        echo "!!! Only Linux and Windows are supported"
+        echo -e "${BOLD_RED} Only Linux and Windows are supported${DEFAULT}"
         exit 1
     fi
 }
@@ -67,7 +72,7 @@ detect_git(){
     if hash git 2>/dev/null; then
         return 0
     else
-        echo "!!! Git is not found"
+        echo -e "${BOLD_RED}!!! Git is not found${DEFAULT}"
         return 1
     fi
 }
@@ -76,7 +81,7 @@ detect_mercurial(){
     if hash hg 2>/dev/null; then
         return 0
     else
-        echo "!!! Mercurial is not found"
+        echo -e "${BOLD_RED}!!! Mercurial is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -111,7 +116,7 @@ git_get_repostats(){
 #Build software detection
 detect_coreutils(){
     if ! (hash sha1sum 2>/dev/null); then
-        echo "!!! coreutils is not found"
+        echo -e "${BOLD_RED}!!! coreutils is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -130,14 +135,14 @@ detect_ffdec(){
     fi
 
     if [ ! -f "$XVMBUILD_FFDEC_FILEPATH" ]; then
-        echo "!!! FFdec is not found"
+        echo -e "${BOLD_RED}!!! FFdec is not found${DEFAULT}"
         exit 1
     fi
 }
 
 detect_tar(){
     if ! (hash tar 2>/dev/null); then
-        echo "!!! tar is not found"
+        echo -e "${BOLD_RED}!!! tar is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -207,7 +212,7 @@ detect_actionscript_sdk(){
         export ASSDK_TYPE="royale"
 
         if [ ! -d "$ASSDK_HOME" ]; then
-            echo "!!! Apache Royale/Flex error on download"
+            echo -e "${BOLD_RED}!!! Apache Royale/Flex error on download${DEFAULT}"
             exit 1
         fi
     fi
@@ -224,13 +229,13 @@ detect_actionscript_sdk(){
 
     #check if mxmlc exists
     if [ ! -f "$XVMBUILD_MXMLC_FILEPATH" ]; then
-        echo "!!! Apache Royale/Flex mxmlc file is not found"
+        echo -e "${BOLD_RED}!!! Apache Royale/Flex mxmlc file is not found${DEFAULT}"
         exit 1
     fi
 
     #check if compc exists
     if [ ! -f "$XVMBUILD_COMPC_FILEPATH" ]; then
-        echo "!!! Apache Royale/Flex compc file is not found"
+        echo -e "${BOLD_RED}!!! Apache Royale/Flex compc file is not found${DEFAULT}"
         exit 1
     fi
 
@@ -247,7 +252,7 @@ detect_actionscript_sdk(){
                 exit 1
             fi
             mkdir -p "$PLAYERGLOBAL_HOME/$playerglobalver/"
-            wget --quiet "https://github.com/nexussays/playerglobal/raw/master/$playerglobalver/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc"
+            wget "https://github.com/nexussays/playerglobal/raw/master/$playerglobalver/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc"
         fi
     done
 
@@ -257,7 +262,7 @@ detect_actionscript_sdk(){
 
 detect_java(){
     if ! (hash java 2>/dev/null); then
-        echo "!!! java is not found"
+        echo -e "${BOLD_RED}!!! java is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -271,7 +276,7 @@ detect_mono(){
             if hash mono 2>/dev/null; then
                 export XVMBUILD_MONO_FILENAME=mono
             else
-                echo "!!! Mono is not found"
+                echo -e "${BOLD_RED}!!! Mono is not found${DEFAULT}"
                 exit 1
             fi
         fi
@@ -279,7 +284,7 @@ detect_mono(){
         if hash "$XVMBUILD_MONO_FILENAME" 2>/dev/null; then
             return 0
         else
-            echo "!!! Mono is not found"
+            echo -e "${BOLD_RED}!!! Mono is not found${DEFAULT}"
             exit 1
         fi
     fi
@@ -287,14 +292,14 @@ detect_mono(){
 
 detect_mtasc(){
     if ! (hash mtasc 2>/dev/null); then
-        echo "!!! MTASC is not found"
+        echo -e "${BOLD_RED}!!! MTASC is not found${DEFAULT}"
         exit 1
     fi
 }
 
 detect_patch(){
     if ! (hash patch 2>/dev/null); then
-        echo "!!! Patch is not found"
+        echo -e "${BOLD_RED}!!! Patch is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -330,21 +335,21 @@ detect_python(){
 
     #check results
     if [[ "$XVMBUILD_PYTHON_FILEPATH" == "" ]]; then
-        echo "!!! Python 2.7 is not found"
+        echo -e "${BOLD_RED}!!! Python 2.7 is not found${DEFAULT}"
         exit 1
     fi
 
     #Check python version
     pythonver=$("$XVMBUILD_PYTHON_FILEPATH" --version 2>&1)
     if [[ ${pythonver:7:3} != "2.7" ]]; then
-        echo "!!! Python 2.7 is not found. Current version is: ${pythonver:7:3}"
+        echo -e "${BOLD_RED} Python 2.7 is not found. Current version is: ${pythonver:7:3}${DEFAULT}"
         exit 1
     fi
 }
 
 detect_wget(){
     if ! (hash wget 2>/dev/null); then
-        echo "!!! wget is not found"
+        echo -e "${BOLD_RED}!!! wget is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -356,7 +361,7 @@ detect_wine(){
             export XVMBUILD_WINE_FILENAME="wine"
             return 0
         else
-            echo "!!! Wine is not found"
+            echo -e "${BOLD_RED}!!! Wine is not found${DEFAULT}"
             exit 1
         fi
     else
@@ -366,14 +371,21 @@ detect_wine(){
 
 detect_unzip(){
     if ! (hash unzip 2>/dev/null); then
-        echo "!!! unzip is not found"
+        echo -e "${BOLD_RED}!!! unzip is not found${DEFAULT}"
         exit 1
     fi
 }
 
 detect_zip(){
     if ! (hash zip 2>/dev/null); then
-        echo "!!! zip is not found"
+        echo -e "${BOLD_RED}!!! zip is not found${DEFAULT}"
+        exit 1
+    fi
+}
+
+detect_pandoc(){
+    if ! (hash pandoc 2>/dev/null); then
+        echo -e "${BOLD_RED}!!! pandoc is not found${DEFAULT}"
         exit 1
     fi
 }
@@ -402,7 +414,7 @@ clean_repodir(){
 sign_file(){
     if [ "$OS" == "Linux" ]; then
         if ! (hash osslsigncode 2>/dev/null); then
-            echo "!!! osslsigncode is not found"
+            echo -e "${BOLD_RED}!!! osslsigncode is not found${DEFAULT}"
             exit 1
         fi
         echo "Signing $1"

@@ -15,7 +15,7 @@ source "$XVMBUILD_ROOT_PATH"/build/xvm-build.conf
 
 # $XVMBUILD_L10N_URL
 if [[ "$XVMINST_L10N_URL" == "" ]]; then
-    export XVMINST_L10N_URL="http://translate.modxvm.com/downloads/xvm-installer/xvm-installer-l10n_isl.zip"
+    export XVMINST_L10N_URL="https://translate.modxvm.com/downloads/xvm-installer/xvm-installer-l10n_isl.zip"
 fi
 
 ##########################
@@ -40,12 +40,14 @@ clean_directories()
 
 prepare_changelog()
 {
-    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-en.md" "$XVMINST_ROOT_PATH/temp/changelogs/"
-    cp "$XVMBUILD_ROOT_PATH/release/doc/ChangeLog-ru.md" "$XVMINST_ROOT_PATH/temp/changelogs/"
-
-    sed -i '1s/^\xef\xbb\xbf//' "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md"
-    iconv --from-code=utf-8 --to-code=cp1251 "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md" > "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md.new"
-    mv "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md.new" "$XVMINST_ROOT_PATH/temp/changelogs/ChangeLog-ru.md"
+    pushd "$XVMBUILD_ROOT_PATH/release/doc/" > /dev/null
+ 
+    for file in ChangeLog-*.md; do
+        pandoc "$file" -s -f gfm -o "$XVMINST_ROOT_PATH/temp/changelogs/${file%.md}.rtf";
+        sed -i 's/\\bullet \\tx360\\tab/ \\bullet /g' "$XVMINST_ROOT_PATH/temp/changelogs/${file%.md}.rtf"
+    done
+ 
+    popd > /dev/null
 }
 
 prepare_defines()
@@ -80,7 +82,7 @@ prepare_languages()
 
     echo "[Languages]" >> lang.iss
 
-    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.md\"" >> lang.iss
+    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.rtf\"" >> lang.iss
 
     for file in *.islu; do
         lang="${file%.*}"
@@ -94,7 +96,7 @@ prepare_languages()
             fi
 
             if [ -f "$XVMINST_ROOT_PATH/src/l10n_inno/$lang.islu" ]; then
-                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.md\"" >> lang.iss
+                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.rtf\"" >> lang.iss
             fi
         fi
     done
@@ -125,6 +127,7 @@ build_deploy(){
 
 main(){
     detect_os
+    detect_pandoc
     detect_wine
     detect_wget
     detect_git
