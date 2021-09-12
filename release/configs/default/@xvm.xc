@@ -58,7 +58,7 @@
 
     // Address to config updates.
     // Адрес, где выкладываются обновления конфига.
-    "url": "https://modxvm.com/",
+    "url": "https://modxvm.com/"
 
   },
 
