@@ -2,7 +2,10 @@
 
   #### Макросы на Python
 
-  * Добавлен макрос `{{py:xvm.toAvgDmg(norm)}}`
+  * В **totalEfficiency** добавлены макросы:
+
+    * `{{py:xvm.toAvgDmg(norm)}}`
+    * `{{py:xvm.toMainGun(norm)}}`
 
 ______________________________
 

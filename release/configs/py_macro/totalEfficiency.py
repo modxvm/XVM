@@ -218,3 +218,11 @@ def xvm_toAvgDmg(norm=None):
     result = max(0, avgDamage - te.totalDamage)
     return int(result if (norm is None) or (avgDamage == 0) else result * norm / avgDamage)
 
+
+@xvm.export('xvm.toMainGun', deterministic=False)
+def xvm_toMainGun(norm=None):
+    if not te.isRandom or te.enemyVehiclesSumMaxHP < 1000:
+        return None
+    mainGun = max(1000, te.enemyVehiclesSumMaxHP * 0.2)
+    result = max(0, mainGun - te.totalDamage)
+    return int(result if norm is None else result * norm / mainGun)
