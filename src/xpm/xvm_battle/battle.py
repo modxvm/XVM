@@ -391,6 +391,8 @@ class Battle(object):
         userData = None
         if attackerID == avatar_getter.getPlayerVehicleID():
             inv |= INV.DAMAGE_CAUSED
+        if attackerID <= 0 and constants.ATTACK_REASONS[attackReasonID] == constants.ATTACK_REASON.NONE:
+            inv |= INV.MAX_HEALTH
         self.updatePlayerState(vehicleID, inv, userData)
 
     def onCurrentShellChanged(self, intCD):
