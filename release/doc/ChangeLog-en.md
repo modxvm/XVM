@@ -2,7 +2,10 @@
 
   #### Python macros
 
-  * Added `{{py:xvm.toAvgDmg(norm)}}` macro
+  * Added macros to **totalEfficiency**:
+
+    * `{{py:xvm.toAvgDmg(norm)}}`
+    * `{{py:xvm.toMainGun(norm)}}`
 
 ______________________________
 
