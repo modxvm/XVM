@@ -1,4 +1,5 @@
-﻿import xvm_main.python.config as config
+﻿from math import ceil
+import xvm_main.python.config as config
 import xvm_main.python.vehinfo as vehinfo
 from xvm_main.python.logger import *
 
@@ -216,7 +217,7 @@ def xvm_toAvgDmg(norm=None):
     if not te.isRandom or avgDamage is None:
         return None
     result = max(0, avgDamage - te.totalDamage)
-    return int(result if (norm is None) or (avgDamage == 0) else result * norm / avgDamage)
+    return int(ceil(result if (norm is None) or (avgDamage == 0) else result * norm / avgDamage))
 
 
 @xvm.export('xvm.toMainGun', deterministic=False)
@@ -225,4 +226,4 @@ def xvm_toMainGun(norm=None):
         return None
     mainGun = max(1000, te.enemyVehiclesSumMaxHP * 0.2)
     result = max(0, mainGun - te.totalDamage)
-    return int(result if norm is None else result * norm / mainGun)
+    return int(ceil(result if norm is None else result * norm / mainGun))
