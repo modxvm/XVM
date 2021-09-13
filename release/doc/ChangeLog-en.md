@@ -1,4 +1,12 @@
-﻿### XVM 8.8.2
+﻿### XVM 8.8.3
+
+  #### Python macros
+
+  * Added `{{py:xvm.toAvgDmg(norm)}}` macro
+
+______________________________
+
+### XVM 8.8.2
 
   #### General
 

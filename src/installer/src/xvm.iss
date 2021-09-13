@@ -159,7 +159,7 @@ begin
       Insert(Buffer, Str, Pos(#0, Str));
 
       WotList.Items.Add(Str);
-     end;
+    end;
   end;
 
   WotList.Items.Add(ExpandConstant('{cm:browse}'));
@@ -179,12 +179,12 @@ begin
   Index := WOT_AddClientW(ClientPath);
   if Index >= 0 then
   begin
-     WotList_Update();
-     WotList.ItemIndex := Index;
+    WotList_Update();
+    WotList.ItemIndex := Index;
   end else
   begin
-     MsgBox(ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
-     WotList.ItemIndex := -1;
+    MsgBox(ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
+    WotList.ItemIndex := -1;
   end;
 end;
 
@@ -196,8 +196,8 @@ begin
     WotList_AddClient(WizardForm.DirEdit.Text);
   end;
 
-   WOT_GetClientPathW(Buffer, 1024, WotList.ItemIndex);
-   WizardForm.DirEdit.Text := Buffer;
+  WOT_GetClientPathW(Buffer, 1024, WotList.ItemIndex);
+  WizardForm.DirEdit.Text := Buffer;
 end;
 
 procedure InitializeWizard();
@@ -241,8 +241,8 @@ begin
 
   if (CurPage = wpSelectDir) then
   begin
-   if not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then
-   begin
+    if not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then
+    begin
       MsgBox(ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
       Result := False;
       Exit;

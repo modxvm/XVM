@@ -1,21 +1,23 @@
+from Avatar import PlayerAvatar
 from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
-from Avatar import PlayerAvatar
 from constants import VEHICLE_SIEGE_STATE, VEHICLE_HIT_FLAGS as VHF
-from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
+from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
+from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
+from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
+from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
 from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
 from gui.battle_control.arena_info.arena_vos import VehicleArenaInfoVO
-from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
-from gui.Scaleform.daapi.view.battle.shared.ribbons_panel import BattleRibbonsPanel
-from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
-from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
+from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 
 from xfw import *
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
+
 import xvm_battle.python.battle as battle
 
 from xvm.damageLog import ATTACK_REASONS
+
 
 ON_TOTAL_EFFICIENCY = 'ON_TOTAL_EFFICIENCY'
 
@@ -56,6 +58,7 @@ burst = 1
 allyVehicles = []
 damageKind = None
 arenaDP = None
+isRandom = False
 
 
 ribbonTypes = {
@@ -299,12 +302,13 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
 
 @registerEvent(Vehicle, '_Vehicle__onAppearanceReady')
 def _Vehicle__onAppearanceReady(self, appearance):
-    global _player, isPlayerInSquad, isStuns, enemiesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP, alliesDamage
+    global _player, isPlayerInSquad, isStuns, enemiesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP, alliesDamage, isRandom
     if not battle.isBattleTypeSupported:
         return
     if _player is None:
         _player = player()
         arenaDP = _player.guiSessionProvider.getArenaDP()
+        isRandom = _player.arena.guiType == 1
     if self.publicInfo['team'] != _player.team:
         enemiesHealth[self.id] = self.health if self.health is not None else 0
         if self.id in enemyVehiclesMaxHP and enemyVehiclesMaxHP[self.id] < self.health:

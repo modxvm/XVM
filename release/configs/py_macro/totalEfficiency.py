@@ -1,6 +1,9 @@
-﻿import xvm.total_Efficiency as te
+﻿import xvm_main.python.config as config
 import xvm_main.python.vehinfo as vehinfo
-import xvm_main.python.config as config
+from xvm_main.python.logger import *
+
+import xvm.total_Efficiency as te
+import xvm.total_hp as total_hp
 
 
 @xvm.export('xvm.totalDamageColor', deterministic=False)
@@ -205,3 +208,13 @@ def xvm_dmgAlly():
 @xvm.export('xvm.dmgKindColor', deterministic=False)
 def xvm_dmgKindColor():
     return '#' + config.get('colors/dmg_kind').get(te.damageKind, '')[2:]
+
+
+@xvm.export('xvm.toAvgDmg', deterministic=False)
+def xvm_toAvgDmg(norm=None):
+    avgDamage = total_hp.playerAvgDamage
+    if not te.isRandom or avgDamage is None:
+        return None
+    result = max(0, avgDamage - te.totalDamage)
+    return int(result if (norm is None) or (avgDamage == 0) else result * norm / avgDamage)
+
