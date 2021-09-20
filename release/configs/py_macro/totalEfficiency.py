@@ -214,16 +214,16 @@ def xvm_dmgKindColor():
 @xvm.export('xvm.toAvgDmg', deterministic=False)
 def xvm_toAvgDmg(norm=None):
     avgDamage = total_hp.playerAvgDamage
-    if not te.isRandom or avgDamage is None:
+    if not te.isRandom or avgDamage is None or te.totalDamage is None:
         return None
     result = max(0, avgDamage - te.totalDamage)
-    return int(ceil(result if (norm is None) or (avgDamage == 0) else result * norm / avgDamage))
+    return result if (norm is None) or (avgDamage == 0) else ceil(min(norm, result * norm / avgDamage))
 
 
 @xvm.export('xvm.toMainGun', deterministic=False)
 def xvm_toMainGun(norm=None):
-    if not te.isRandom or te.enemyVehiclesSumMaxHP < 1000:
+    if not te.isRandom or te.enemyVehiclesSumMaxHP < 1000 or te.totalDamage is None:
         return None
     mainGun = max(1000, te.enemyVehiclesSumMaxHP * 0.2)
     result = max(0, mainGun - te.totalDamage)
-    return int(ceil(result if norm is None else result * norm / mainGun))
+    return result if norm is None else ceil(min(norm, result * norm / mainGun))
