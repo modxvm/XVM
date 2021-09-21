@@ -22,6 +22,7 @@ from gui.battle_control import avatar_getter
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
+from gui.battle_control.controllers.battle_field_ctrl import BattleFieldCtrl
 from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
@@ -175,6 +176,17 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
     # update only for player vehicle, others handled on vehicle feedback event
     if self.isPlayerVehicle:
         g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
+
+
+@registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setEnemyMaxHealth')
+def _BattleFieldCtrl__setEnemyMaxHealth(self, vehicleID, currentMaxHealth, newMaxHealth):
+    g_battle.updatePlayerState(vehicleID, INV.MAX_HEALTH, newMaxHealth)
+
+
+@registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setAllyMaxHealth')
+def _BattleFieldCtrl__setAllyMaxHealth(self, vehicleID, currentMaxHealth, newMaxHealth):
+    g_battle.updatePlayerState(vehicleID, INV.MAX_HEALTH, newMaxHealth)
+
 
 # on vehicle info updated
 @registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
@@ -391,8 +403,6 @@ class Battle(object):
         userData = None
         if attackerID == avatar_getter.getPlayerVehicleID():
             inv |= INV.DAMAGE_CAUSED
-        if attackerID <= 0 and constants.ATTACK_REASONS[attackReasonID] == constants.ATTACK_REASON.NONE:
-            inv |= INV.MAX_HEALTH
         self.updatePlayerState(vehicleID, inv, userData)
 
     def onCurrentShellChanged(self, intCD):
@@ -427,11 +437,14 @@ class Battle(object):
                         data['curHealth'] = entity.health
 
                 if targets & INV.MAX_HEALTH:
-                    vInfoVO = arenaDP.getVehicleInfo(vehicleID)
-                    if vInfoVO:
-                        data['maxHealth'] = vInfoVO.vehicleType.maxHealth
-                    elif entity and hasattr(entity, 'maxHealth'):
-                        data['maxHealth'] = entity.maxHealth
+                    if userData is not None:
+                        data['maxHealth'] = userData
+                    else:
+                        vInfoVO = arenaDP.getVehicleInfo(vehicleID)
+                        if vInfoVO:
+                            data['maxHealth'] = vInfoVO.vehicleType.maxHealth
+                        elif entity and hasattr(entity, 'maxHealth'):
+                            data['maxHealth'] = entity.maxHealth
 
                 if targets & INV.MARKS_ON_GUN:
                     if entity and hasattr(entity, 'publicInfo'):
