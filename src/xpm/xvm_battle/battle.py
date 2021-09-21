@@ -180,13 +180,11 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
 
 @registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setEnemyMaxHealth')
 def _BattleFieldCtrl__setEnemyMaxHealth(self, vehicleID, currentMaxHealth, newMaxHealth):
-    log('_BattleFieldCtrl__setEnemyMaxHealth')
     g_battle.updatePlayerState(vehicleID, INV.MAX_HEALTH, newMaxHealth)
 
 
 @registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setAllyMaxHealth')
 def _BattleFieldCtrl__setAllyMaxHealth(self, vehicleID, currentMaxHealth, newMaxHealth):
-    log('_BattleFieldCtrl__setAllyMaxHealth')
     g_battle.updatePlayerState(vehicleID, INV.MAX_HEALTH, newMaxHealth)
 
 
