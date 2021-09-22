@@ -100,7 +100,7 @@ deploy:
     - job: pack
       artifacts: true
   rules:
-    - if: '$CI_PIPELINE_SOURCE != "push"'
+    - if: '$CI_PIPELINE_SOURCE != "push" && $CI_PIPELINE_SOURCE != "web" && $CI_PIPELINE_SOURCE != "api"'
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-deploy\]/
       when: never

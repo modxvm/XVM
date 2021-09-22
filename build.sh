@@ -35,6 +35,16 @@ source ./build/xvm-build.conf
 ####      CONFIG      ####
 ##########################
 
+#$XVMBUILD_DEVELOPMENT
+if [[ "$XVMBUILD_DEVELOPMENT" =~ ^(True|False)$ ]];
+then
+    echo '$XVMBUILD_DEVELOPMENT = '"$XVMBUILD_DEVELOPMENT"
+else
+    echo '$XVMBUILD_DEVELOPMENT ($IS_DEV_BUILD) must be exactly "True" or "False" (capitalized for Python)'
+    echo 'See /build/xvm-build.conf for more info'
+    exit 1
+fi
+
 # $XFW_BUILD_CLEAR
 if [ "$XFW_BUILD_CLEAR" == "" ]; then
   export XFW_BUILD_CLEAR=1

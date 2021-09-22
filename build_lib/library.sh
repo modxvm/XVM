@@ -390,7 +390,6 @@ detect_pandoc(){
     fi
 }
 
-#used in: /build.sh
 #used in: /build/ci/ci_deploy.sh
 clean_repodir(){
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
