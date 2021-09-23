@@ -39,9 +39,9 @@ detect_patch
 #EXTRACT_ONLY=1
 
 files=(
-#  'battle'
+  'battle'
   'battleVehicleMarkersApp'
-#  'lobby'
+  'lobby'
 )
 
 if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
