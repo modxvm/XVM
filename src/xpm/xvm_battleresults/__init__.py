@@ -14,7 +14,7 @@ from gui.Scaleform.genConsts.BATTLE_RESULTS_PREMIUM_STATES import BATTLE_RESULTS
 from gui.battle_results import composer
 from gui.battle_results.components import base
 from gui.battle_results.components.personal import DynamicPremiumState
-from gui.battle_results.br_constants import BattleResultsRecord
+from gui.battle_results.settings import BATTLE_RESULTS_RECORD
 from gui.shared.crits_mask_parser import critsParserGenerator
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -194,7 +194,7 @@ def appendTotalData(total, data):
     total['ricochetsCount'] += data['ricochetsCount']
     total['nonPenetrationsCount'] += data['nonPenetrationsCount']
 
-_XVM_DATA_STATS_BLOCK = XvmDataBlock(base.DictMeta(), 'xvm_data', BattleResultsRecord.PERSONAL)
+_XVM_DATA_STATS_BLOCK = XvmDataBlock(base.DictMeta(), 'xvm_data', BATTLE_RESULTS_RECORD.PERSONAL)
 
 @overrideMethod(composer.StatsComposer, '__init__')
 def _StatsComposer__init__(base, self, *args):
