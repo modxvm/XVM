@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2019-08-22 22:42:04.291076800 +0300
-+++ battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2019-08-22 22:44:51.854731800 +0300
-@@ -1450,6 +1450,28 @@
+--- battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2021-09-23 08:03:32.553431400 +0300
++++ battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2021-09-23 08:04:05.965168500 +0300
+@@ -1453,6 +1453,28 @@
      end ; body
     end ; method
    end ; trait
@@ -63,8 +63,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
     method
      refid "net.wg.gui.battle.random.views:BattlePage/instance/net.wg.gui.battle.random.views:BattlePage/onTeamBasesPanelUIChangeHandler"
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm	2019-08-22 22:42:05.744221500 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm	2019-08-22 22:44:51.873735000 +0300
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm	2021-09-23 08:03:32.995832300 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm	2021-09-23 08:04:05.977333500 +0300
 @@ -921,6 +921,26 @@
      end ; body
     end ; method
@@ -92,7 +92,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/Team
    trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "updatePositions")
     method
      refid "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/instance/net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/updatePositions"
-@@ -1221,7 +1221,48 @@
+@@ -1241,7 +1261,48 @@
     end ; code
    end ; body
   end ; method
@@ -143,9 +143,9 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/Team
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "DEF_MAX_BARS_COUNT") slotid 3 type QName(PackageNamespace(""), "uint") value Integer(0) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "ALPHA_FADE_SPEED") slotid 4 type QName(PackageNamespace(""), "Number") value Integer(500) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm	2019-08-22 22:42:05.208250000 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm	2019-08-22 22:44:51.882199500 +0300
-@@ -175,7 +175,7 @@
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm	2021-09-23 08:03:33.246059800 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm	2021-09-23 08:04:05.987342700 +0300
+@@ -196,7 +196,7 @@
        getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ALPHA_FADE_SPEED")
        getlocal0
        pushstring          "y"
@@ -154,7 +154,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/Team
        pushstring          "alpha"
        pushbyte            0
        newobject           2
-@@ -928,9 +928,9 @@
+@@ -969,9 +969,9 @@
      pushshort           500
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ALPHA_FADE_SPEED")
  
@@ -166,7 +166,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/Team
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_DELAY")
      pushshort           4500
-@@ -1011,7 +1011,7 @@
+@@ -1052,7 +1052,7 @@
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "POINTS_2_BAR_RATIO") slotid 3 type QName(PackageNamespace(""), "Number") value Double(0.01) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ANIMATE_STEP_TIME") slotid 4 type QName(PackageNamespace(""), "Number") value Integer(40) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ALPHA_FADE_SPEED") slotid 5 type QName(PackageNamespace(""), "Number") value Integer(500) end

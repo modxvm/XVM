@@ -39,9 +39,9 @@ detect_patch
 #EXTRACT_ONLY=1
 
 files=(
-  'battle'
+#  'battle'
   'battleVehicleMarkersApp'
-  'lobby'
+#  'lobby'
 )
 
 if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
@@ -84,14 +84,17 @@ for (( i=0; i<${#files[@]}; i++ )); do
 
     rabcasm $name.orig-0/$name.orig-0.main.asasm
     abcreplace $name.orig.swf 0 $name.orig-0/$name.orig-0.main.abc
-    rm $name.orig-0.abc
-    rm -rf $name.orig-0
 
     mkdir -p "$XVMBUILD_ROOT_PATH"/"$XVMBUILD_XFW_WG_OUTPUTPATH"
 
     #TODO: disabled, because of the strange behavior on WoT 1.1
     #mv $name.orig.swf "$XVMBUILD_ROOT_PATH"/"$XVMBUILD_XFW_WG_OUTPUTPATH"/xfw_$name.swf
     mv $name.orig.swf "$XVMBUILD_ROOT_PATH"/"$XVMBUILD_XFW_WG_OUTPUTPATH"/$name.swf
+
+    [ "$DONT_DELETE" = "1" ] && continue
+    rm $name.orig-0.abc
+    rm -rf $name.orig-0
+
 done
 
 echo ""
