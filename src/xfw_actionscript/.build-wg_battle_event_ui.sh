@@ -24,24 +24,16 @@ XVMBUILD_ROOT_PATH="$currentdir/../../"
 
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
-mkdir -p "$XVMBUILD_ROOT_PATH/~output/xfw/swf/"
+detect_os
+detect_actionscript_sdk
 
-projects="
-    wg_lobby_ui
-    wg_battle_classic_ui
-    wg_battle_event_ui
-    wg_battle_epicbattle_ui
-    wg_battle_epicrandom_ui
-    wg_battle_ranked_ui
-    wg_battle_royale_ui
-    wg_vm_ui
-    xfw_shared
-    xfw
-"
-
-for project in ${projects}; do
-    echo "building ${project}"
-    . .build-${project}.sh
-done
-
-echo ""
+class="\$AppLinks"
+build_as3_swc \
+    -source-path wg/battle_ui/event \
+    -source-path wg/battle_ui/ui/* \
+    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/common_i18n_library-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_base-1.0-SNAPSHOT.swc \
+    -external-library-path+=../wg_swc/gui_battle-1.0-SNAPSHOT.swc \
+    -output ../../~output/xfw/swc/wg_battle_event_ui.swc \
+    -include-classes $class
