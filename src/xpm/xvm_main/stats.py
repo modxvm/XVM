@@ -694,12 +694,18 @@ class _Player(object):
         self.accountDBID = vData['accountDBID']
         self.name = vData['name']
         self.clan = vData['clanAbbrev']
+
         self.badgeId = None
         self.badgeStage = None
         badges = vData.get('badges', None)
         if badges:
-            self.badgeId = str(badges[0])
-            self.badgeStage = str(badges[1][0])
+            try:
+                self.badgeId = str(badges[0])
+                self.badgeStage = str(badges[1][0])
+            except IndexError:
+                self.badgeId = None
+                self.badgeStage = None
+
         self.clanInfo = topclans.getClanInfo(self.clan)
         self.vehCD = None
         if 'typeCompDescr' in vData:
