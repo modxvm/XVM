@@ -323,6 +323,7 @@ class _Minimap(object):
                self.initialized and \
                (self.guiType != constants.ARENA_GUI_TYPE.EPIC_BATTLE) and \
                (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
+               (self.guiType != constants.ARENA_GUI_TYPE.EVENT_BATTLES) and \
                (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL)
 
     def init(self, minimapComponent):
