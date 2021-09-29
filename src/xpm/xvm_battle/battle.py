@@ -161,8 +161,11 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 @registerEvent(PlayerAvatar, 'vehicle_onAppearanceReady')
 def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
     # debug("> _PlayerAvatar_vehicle_onAppearanceReady: hp=%i" % vehicle.health)
-    g_battle.isSPG = self.vehicleTypeDescriptor.type.getVehicleClass() == VEHICLE_CLASS_NAME.SPG
+    if vehicle.id == self.playerVehicleID:
+        g_battle.isSPG = self.vehicleTypeDescriptor.type.getVehicleClass() == VEHICLE_CLASS_NAME.SPG
+        g_battle.shellCD = 0
     g_battle.updatePlayerState(vehicle.id, INV.ALL)
+
 
 # on any player marker lost
 #@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
