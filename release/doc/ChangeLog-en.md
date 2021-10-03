@@ -1,6 +1,10 @@
 ﻿### XVM 8.8.4-dev
 
-  * Current development version
+  #### General
+
+  * Compatibility with World of Tanks 1.14.0.5 nanopatch 1
+
+______________________________
 
 ### XVM 8.8.3
 
