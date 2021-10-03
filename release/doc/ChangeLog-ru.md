@@ -1,6 +1,6 @@
 ﻿### XVM 8.8.4-dev
 
-  * Current development version
+  * Текущая версия в разработке
 
 ### XVM 8.8.3
 
