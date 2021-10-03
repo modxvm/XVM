@@ -1,5 +1,9 @@
 ﻿### XVM 8.8.3
 
+  #### General
+
+  * Compatibility with World of Tanks 1.14.0.5
+
   #### Python macros
 
   * Added macros to **totalEfficiency**:
