@@ -3,6 +3,9 @@
   #### General
 
   * Compatibility with World of Tanks 1.14.0.5 nanopatch 1
+  * XFW.Native 2.4.0
+     * fixed compatibility with Windows 11
+     * new SSL-stack (OpenSSL 1.1, TLS 1.2) for 32-bit WoT
 
 ______________________________
 
