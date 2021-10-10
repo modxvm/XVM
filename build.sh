@@ -261,7 +261,6 @@ detect_python
 detect_unzip
 detect_wget
 detect_ffdec
-detect_pandoc
 
 #build components
 args="$*"
