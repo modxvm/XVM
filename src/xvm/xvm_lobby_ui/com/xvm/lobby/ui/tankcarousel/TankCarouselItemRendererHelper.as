@@ -466,8 +466,9 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function _setupStandardFieldCrystalsBorder():void
         {
-            _setupStandardFieldAlpha(renderer.crystalsBorder, cfg.fields.crystalsBorder);
-            _setupStandardFieldAlpha(renderer.content.crystalsGlow, cfg.fields.crystalsBorder);
+			//TODO: 1.14.1
+            //_setupStandardFieldAlpha(renderer.crystalsBorder, cfg.fields.crystalsBorder);
+            //_setupStandardFieldAlpha(renderer.content.crystalsGlow, cfg.fields.crystalsBorder);
             _setupStandardFieldAlpha(renderer.content.crystalsGlowBlend, cfg.fields.crystalsBorder);
         }
 
