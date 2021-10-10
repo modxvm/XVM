@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2020-07-27 15:01:41.486586900 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2020-07-27 15:07:59.486058900 +0300
-@@ -1991,7 +1991,7 @@
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-11 00:44:10.195712000 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-11 00:56:44.021040300 +0300
+@@ -1929,7 +1951,7 @@
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
@@ -10,7 +10,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH")
-@@ -2029,7 +2029,7 @@
+@@ -1967,7 +1989,7 @@
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_X_POSITION") slotid 1 type QName(PackageNamespace(""), "int") value Integer(229) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING") slotid 2 type QName(PackageNamespace(""), "int") value Integer(3) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET") slotid 3 type QName(PackageNamespace(""), "int") value Integer(60) end
@@ -20,9 +20,9 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MESSANGER_SWAP_AREA_TOP_OFFSET") slotid 6 type QName(PackageNamespace(""), "Number") value Integer(-27) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "QUEST_PROGRESS_TOP_SHIFT") slotid 7 type QName(PackageNamespace(""), "int") value Integer(45) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/Minimap.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2021-09-23 08:03:32.825678600 +0300
-+++ battle.orig-0/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2021-09-23 08:04:05.746075200 +0300
-@@ -188,6 +188,25 @@
+--- battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2021-10-11 00:44:10.894805200 +0300
++++ battle.orig-0/net/wg/gui/battle/views/minimap/Minimap.class.asasm	2021-10-11 00:56:43.770813100 +0300
+@@ -221,6 +221,25 @@
    trait slot QName(PackageNamespace(""), "entriesContainer") type QName(PackageNamespace("net.wg.gui.battle.views.minimap.containers"), "MinimapEntriesContainer") value Null() end
    trait slot QName(PackageNamespace(""), "background") type QName(PackageNamespace("net.wg.gui.components.controls"), "UILoaderAlt") value Null() end
    trait slot QName(PackageNamespace(""), "minimapHint") type QName(PackageNamespace("net.wg.gui.battle.views.minimap"), "MinimapHint") value Null() end
