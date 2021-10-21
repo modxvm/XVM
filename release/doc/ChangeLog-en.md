@@ -4,6 +4,23 @@
 
   * Compatibility with World of Tanks 1.14.1.0
 
+  #### Сarousel
+
+  * fix `crystalsBorder` option in carousel
+
+  #### totalEfficiency
+
+  * fix macros `{{py:xvm.toMainGun}}` and `{{py:xvm.toAvgDmg}}`
+
+  #### hitLog
+
+  * fix macro `{{alive}}`
+
+  #### XFW.Native 2.4.4
+
+  * revert SSL stack
+  * remove additional modules
+
 ______________________________
 
 ### XVM 8.8.4
@@ -11,9 +28,10 @@ ______________________________
   #### General
 
   * Compatibility with World of Tanks 1.14.0.5 nanopatch 1
-  * XFW.Native 2.4.0
-     * fixed compatibility with Windows 11
-     * new SSL-stack (OpenSSL 1.1, TLS 1.2) for 32-bit WoT
+
+  #### XFW.Native 2.4.0
+  * fixed compatibility with Windows 11
+  * new SSL-stack (OpenSSL 1.1, TLS 1.2) for 32-bit WoT
 
 ______________________________
 
