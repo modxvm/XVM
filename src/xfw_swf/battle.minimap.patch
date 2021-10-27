@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-11 00:44:10.195712000 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-11 00:56:44.021040300 +0300
-@@ -1929,7 +1951,7 @@
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-26 22:50:44.621206000 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-26 22:56:32.867462300 +0300
+@@ -2129,7 +2151,7 @@
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
@@ -10,7 +10,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
  
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH")
-@@ -1967,7 +1989,7 @@
+@@ -2167,7 +2189,7 @@
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_X_POSITION") slotid 1 type QName(PackageNamespace(""), "int") value Integer(229) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING") slotid 2 type QName(PackageNamespace(""), "int") value Integer(3) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET") slotid 3 type QName(PackageNamespace(""), "int") value Integer(60) end

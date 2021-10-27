@@ -31,9 +31,9 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.
     method
      refid "net.wg.gui.battle.epicRandom.views:EpicRandomPage/instance/net.wg.gui.battle.epicRandom.views:EpicRandomPage/onTeamBasesPanelUIChangeHandler"
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-11 00:44:10.195712000 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-11 00:56:44.021040300 +0300
-@@ -1505,6 +1505,28 @@
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-26 22:50:44.621206000 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-10-26 22:56:32.867462300 +0300
+@@ -1702,6 +1702,28 @@
      end ; body
     end ; method
    end ; trait
