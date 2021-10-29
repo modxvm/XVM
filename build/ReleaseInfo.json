@@ -1,32 +1,32 @@
 {
     "RU": {
-        "ver": "8.9.1",
-        "wot": "1.14.1.1",
-        "message": "• Совместимость с World of Tanks 1.14.1.1\n• Множество исправлений и улучшений\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
+        "ver": "8.9.2",
+        "wot": "1.14.1.2",
+        "message": "• Совместимость с World of Tanks 1.14.1.2\n\nСкачать на <a href='#XVM_SITE#'>официальном сайте XVM</a>"
     },
     "EU": {
-        "ver": "8.9.1",
-        "wot": "1.14.1.1",
-        "message": "• Compatibility with World of Tanks 1.14.1.1\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.2",
+        "wot": "1.14.1.2",
+        "message": "• Compatibility with World of Tanks 1.14.1.2\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "NA": {
-        "ver": "8.9.1",
-        "wot": "1.14.1.1",
-        "message": "• Compatibility with World of Tanks 1.14.1.1\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.2",
+        "wot": "1.14.1.2",
+        "message": "• Compatibility with World of Tanks 1.14.1.2\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "8.9.1",
-        "wot": "1.14.1.1",
-        "message": "• Compatibility with World of Tanks 1.14.1.1\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.2",
+        "wot": "1.14.1.2",
+        "message": "• Compatibility with World of Tanks 1.14.1.2\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CN": {
-        "ver": "8.9.1",
-        "wot": "1.14.1.1",
-        "message": "• Compatibility with World of Tanks 1.14.1.1\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.2",
+        "wot": "1.14.1.2",
+        "message": "• Compatibility with World of Tanks 1.14.1.2\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT": {
-        "ver": "8.9.1",
-        "wot": "1.14.1.1",
-        "message": "• Compatibility with World of Tanks 1.14.1.1\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.2",
+        "wot": "1.14.1.2",
+        "message": "• Compatibility with World of Tanks 1.14.1.2\n• Many fixes and improvements\nDownload on the <a href='#XVM_SITE#'>official XVM site</a>"
     }
 }
