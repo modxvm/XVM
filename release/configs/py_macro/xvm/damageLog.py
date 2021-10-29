@@ -59,16 +59,23 @@ ATTACK_REASONS = {
     18: 'berserker_eq',
     19: 'spawned_bot_ram',
     20: 'smoke',
-    34: 'art_attack',
-    36: 'air_strike'
+    41: 'art_attack',
+    43: 'air_strike'
+    # 34: 'art_attack',
+    # 36: 'air_strike'
 }
 
 SHOT_EFFECTS_INDEXES = {
-    34: 34,
-    35: 34,
-    36: 36,
-    37: 34,
-    38: 36
+    41: 41,
+    42: 41,
+    43: 43,
+    44: 41,
+    45: 43
+    # 34: 34,
+    # 35: 34,
+    # 36: 36,
+    # 37: 34,
+    # 38: 36
 }
 
 VEHICLE_CLASSES_SHORT = {
