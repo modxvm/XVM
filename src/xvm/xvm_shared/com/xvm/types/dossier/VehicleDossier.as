@@ -31,5 +31,6 @@ package com.xvm.types.dossier
         public var camouflageWinter:String = Values.EMPTY_STR;
         public var camouflageDesert:String = Values.EMPTY_STR;
         public var camouflageCount:int;
+        public var levelPostProgress:Number;
     }
 }
