@@ -2,6 +2,10 @@
 
   * Current development version
 
+  ### Hangar
+
+  * added `{{v.levelPostProgress}}` macro
+
 ### XVM 8.9.2
 
   * Compatibility with World of Tanks 1.14.1.2

@@ -131,6 +131,7 @@ package com.xvm.types.dossier
                     damageRating = level < 5 ? NaN : vdossier.damageRating;
                     c_damageRating = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, NaN, "#");
                     crystalEarned = isNaN(vdossier.crystalEarned) ? NaN : vdossier.crystalEarned;
+                    levelPostProgress = isNaN(vdossier.levelPostProgress) || vdossier.levelPostProgress < 0 ? NaN : vdossier.levelPostProgress;
                 }
             }
         }
@@ -209,5 +210,6 @@ package com.xvm.types.dossier
         // extra
         public var elite:String;
         public var selected:String;
+        public var levelPostProgress:Number;
     }
 }

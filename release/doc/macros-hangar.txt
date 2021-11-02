@@ -91,6 +91,7 @@ Legend:
 │ {{v.gunDispersion}}        │ . │ . │ base dispersion at 100 m for current gun
 │ {{v.gunAimingTime}}        │ . │ . │ base aiming time for current gun
 │ {{v.selected}}             │ X │   │ value 'sel' for selected, empty - for others
+│ {{v.levelPostProgress}}    │ X │ X │ field modification level. For vehicles that do not support FM, it returns empty.
 │ {{mystat.player_id}}       │   │ X │ ID of current player
 │ {{mystat.name}}            │   │ X │ nick of current player
 │ {{mystat.flag}}            │   │ X │ flag selected in the personal cabinet on the https://modxvm.com/ site
