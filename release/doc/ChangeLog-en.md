@@ -2,7 +2,7 @@
 
   * Current development version
 
-  ### Hangar
+  #### Hangar
 
   * added `{{v.levelPostProgress}}` macro
 
