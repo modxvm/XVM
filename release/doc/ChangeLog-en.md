@@ -1,6 +1,6 @@
 ﻿### XVM 8.9.3-dev
 
-  * Current development version
+  * Compatibility with World of Tanks 1.14.1.3
 
   #### Hangar
 
