@@ -18,6 +18,8 @@ import BigWorld
 import game
 from gui import shop
 from gui.impl import backport
+from gui.impl.dialogs.sub_views.top_right.money_balance import MoneyBalance
+from gui.impl.lobby.dialogs.full_screen_dialog_view import FullScreenDialogView
 from gui.shared import g_eventBus, tooltips
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
@@ -29,6 +31,7 @@ from gui.Scaleform.daapi.view.lobby.exchange.ExchangeFreeToTankmanXpWindow impor
 from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView
 from gui.Scaleform.genConsts.CURRENCIES_CONSTANTS import CURRENCIES_CONSTANTS
 from gui.shared.formatters import text_styles
+from gui.shared.money import Currency
 from gui.shared.tooltips.common import HeaderMoneyAndXpTooltipData
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -182,6 +185,20 @@ def _getValue(base, self):
     elif self._btnType == CURRENCIES_CONSTANTS.FREE_XP:
         valueStr = text_styles.expText(backport.getIntegralFormat(max(self.itemsCache.items.stats.actualFreeXP, 0)))
     return valueStr
+
+@overrideMethod(MoneyBalance, '_MoneyBalance__setStats')
+def MoneyBalance__setStats(base, self, model):
+    base(self, model)
+    model.setCredits(int(self._stats.actualMoney.getSignValue(Currency.CREDITS)))
+    model.setGold(int(self._stats.actualMoney.getSignValue(Currency.GOLD)))
+    model.setCrystals(int(self._stats.actualMoney.getSignValue(Currency.CRYSTAL)))
+
+@overrideMethod(FullScreenDialogView, '_FullScreenDialogView__setStats')
+def FullScreenDialogView__setStats(base, self, model):
+    base(self, model)
+    model.setCredits(int(self._stats.actualMoney.getSignValue(Currency.CREDITS)))
+    model.setGolds(int(self._stats.actualMoney.getSignValue(Currency.GOLD)))
+    model.setCrystals(int(self._stats.actualMoney.getSignValue(Currency.CRYSTAL)))
 
 ##############################################################
 # handlers of windows that use gold/freeXP/crystal
