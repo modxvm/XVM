@@ -341,7 +341,8 @@
         "death_zone": "DZ",                   // death zone / смертельная зона.
         "gas_attack": "GA",                   // gas attack / газовая атака.
         "art_attack": "{{hit-effects}}",      // art attack / артиллерийская поддержка.
-        "air_strike": "{{hit-effects}}"       // air strike / поддержка авиации.
+        "air_strike": "{{hit-effects}}",      // air strike / поддержка авиации.
+        "minefield": "{{hit-effects}}"        // minefield / минное поле.
       },
       // Last damage format.
       // Формат последнего урона.

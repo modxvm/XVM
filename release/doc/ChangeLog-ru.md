@@ -6,6 +6,10 @@
 
   *  в секции "dmg-kind" и "c:dmg-kind" добавлен параметр "minefield"
 
+  #### hitLog
+
+  *  в секции "dmg-kind", "c:dmg-kind" и "dmg-kind-player" добавлен параметр "minefield"
+
 ### XVM 8.9.3
 
   * Совместимость с World of Tanks 1.14.1.3

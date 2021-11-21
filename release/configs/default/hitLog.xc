@@ -95,7 +95,8 @@
         "death_zone":      "DZ",                                                     // death zone / смертельная зона.
         "gas_attack":      "GA",                                                     // gas attack / газовая атака.
         "art_attack":      "<font face='xvm'>&#x110;</font>",                        // art attack / артиллерийская поддержка.
-        "air_strike":      "<font face='xvm'>&#x111;</font>"                         // air strike / поддержка авиации.
+        "air_strike":      "<font face='xvm'>&#x111;</font>",                        // air strike / поддержка авиации.
+        "minefield":       "<font face='xvm'>&#x117;</font>"                         // minefield / минное поле.
       },
       // Color by damage kind (macro {{c:dmg-kind}}).
       // Цвет по типу нанесенного урона (макрос {{c:dmg-kind}}).
@@ -109,7 +110,8 @@
         "death_zone": "#CCCCCC",      // death zone / смертельная зона.
         "gas_attack": "#CCCCCC",      // gas attack / газовая атака.
         "art_attack": "#CCCCCC",      // art attack / артиллерийская поддержка.
-        "air_strike": "#CCCCCC"       // air strike / поддержка авиации.
+        "air_strike": "#CCCCCC",      // air strike / поддержка авиации.
+        "minefield": "#CCCCCC"        // minefield / минное поле.
       },
       // Type of damage (macro {{dmg-kind-player}}).
       // Тип нанесенного урона (макрос {{dmg-kind-player}}).
@@ -123,7 +125,8 @@
         "death_zone":      "DZ",                                                     // death zone / смертельная зона.
         "gas_attack":      "GA",                                                     // gas attack / газовая атака.
         "art_attack":      "<font face='xvm'>&#x110;</font>",                        // art attack / артиллерийская поддержка.
-        "air_strike":      "<font face='xvm'>&#x111;</font>"                         // air strike / поддержка авиации.
+        "air_strike":      "<font face='xvm'>&#x111;</font>",                        // air strike / поддержка авиации.
+        "minefield":       "<font face='xvm'>&#x117;</font>"                         // minefield / минное поле.
       },
       // Shell kind (macro {{type-shell}}).
       // Тип снаряда (макрос {{type-shell}}).
