@@ -47,30 +47,26 @@ ATTACK_REASONS = {
     6: 'gas_attack',
     7: 'overturn',
     8: 'manual',
-    9: 'artillery_protection',
-    10: 'artillery_sector',
-    11: 'bombers',
+    9: 'art_attack',
+    10: 'art_attack',
+    11: 'air_strike',
     12: 'recovery',
-    13: 'artillery_eq',
-    14: 'bomber_eq',
-    15: 'minefield_eq',
+    13: 'art_attack',
+    14: 'air_strike',
+    15: 'minefield',
     16: 'none',
     17: 'spawned_bot_explosion',
     18: 'berserker_eq',
     19: 'spawned_bot_ram',
-    20: 'smoke',
-    41: 'art_attack',
-    43: 'air_strike'
-    # 34: 'art_attack',
-    # 36: 'air_strike'
+    20: 'smoke'
 }
 
 SHOT_EFFECTS_INDEXES = {
-    41: 41,
-    42: 41,
-    43: 43,
-    44: 41,
-    45: 43
+    41: 9,
+    42: 9,
+    43: 11,
+    44: 9,
+    45: 11
     # 34: 34,
     # 35: 34,
     # 36: 36,
@@ -427,7 +423,8 @@ class Data(object):
         self.data['stun-duration'] = None
         self.data['attackerID'] = attackerID
         # self.data['attackReasonID'] = effectsIndex if effectsIndex in [24, 25] else 0
-        self.data['attackReasonID'] = SHOT_EFFECTS_INDEXES.get(effectsIndex, 0)
+        if damageFactor == 0:
+            self.data['attackReasonID'] = SHOT_EFFECTS_INDEXES.get(effectsIndex, 0)
         self.data['reloadGun'] = self.timeReload(attackerID)
         self.typeShell(effectsIndex)
         self.data['damage'] = 0
@@ -558,12 +555,7 @@ class Data(object):
         if self.data['damage'] < 0 or (attackReasonID == 16 and (newHealth - oldHealth) == 0):
             return
         if self.data['attackReasonID'] == 0:
-            if (attackReasonID < 8) or (attackReasonID == 12):
-                self.data['attackReasonID'] = attackReasonID
-            elif attackReasonID in [9, 10, 13]:
-                self.data['attackReasonID'] = 34
-            elif attackReasonID in [11, 14]:
-                self.data['attackReasonID'] = 36
+            self.data['attackReasonID'] = attackReasonID
 
         self.data['isDamage'] = (self.data['damage'] > 0)
         self.data['isAlive'] = vehicle.isAlive()

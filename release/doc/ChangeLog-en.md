@@ -2,6 +2,14 @@
 
   * Current development version
 
+  #### damageLog
+
+  * added "minefield" parameter to "dmg-kind" and "c:dmg-kind" sections.
+
+  #### hitLog
+
+  * added "minefield" parameter to "dmg-kind", "c:dmg-kind" and "dmg-kind-player" sections.
+
 ### XVM 8.9.3
 
   * Compatibility with World of Tanks 1.14.1.3
