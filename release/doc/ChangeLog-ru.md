@@ -1,14 +1,15 @@
-﻿### XVM 8.9.4-dev
+﻿### XVM 8.9.4
 
-  * Текущая версия в разработке
+  * Совместимость с World of Tanks 1.14.1.4
+  * Исправления ошибок
 
   #### damageLog
 
-  *  в секции "dmg-kind" и "c:dmg-kind" добавлен параметр "minefield"
+  * В секции "dmg-kind" и "c:dmg-kind" добавлен параметр "minefield"
 
   #### hitLog
 
-  *  в секции "dmg-kind", "c:dmg-kind" и "dmg-kind-player" добавлен параметр "minefield"
+  * В секции "dmg-kind", "c:dmg-kind" и "dmg-kind-player" добавлен параметр "minefield"
 
 ### XVM 8.9.3
 
