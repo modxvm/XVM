@@ -1,0 +1,31 @@
+--- battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2021-12-03 00:25:06.003092900 +0300
++++ battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2021-12-03 00:25:47.839444000 +0300
+@@ -1466,6 +1466,28 @@
+     end ; body
+    end ; method
+   end ; trait
++  trait method QName(PackageNamespace(""), "xfw_onTeamBasesPanelUIChangeHandler")
++   method
++    param QName(PackageNamespace("flash.events"), "Event")
++    returns QName(PackageNamespace(""), "void")
++    body
++     maxstack 1
++     localcount 2
++     initscopedepth 15
++     maxscopedepth 16
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getlocal1
++      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.epicRandom.views:EpicRandomPage"), "onTeamBasesPanelUIChangeHandler"), 1
++
++      returnvoid
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.epicRandom.views:EpicRandomPage"), "onTeamBasesPanelUIChangeHandler")
+    method
+     refid "net.wg.gui.battle.epicRandom.views:EpicRandomPage/instance/net.wg.gui.battle.epicRandom.views:EpicRandomPage/onTeamBasesPanelUIChangeHandler"
