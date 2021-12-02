@@ -99,7 +99,8 @@
         "death_zone": "DZ",                                                                                // death zone / смертельная зона.
         "gas_attack": "GA",                                                                                // gas attack / газовая атака.
         "art_attack": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x110;</font>", // art attack / артиллерийская поддержка.
-        "air_strike": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x111;</font>"  // air strike / поддержка авиации.
+        "air_strike": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x111;</font>", // air strike / поддержка авиации.
+        "minefield": "{{hit-effects}}{{critical-hit}}{{splash-hit}}<tab><font face='xvm'>&#x117;</font>"   // minefield / минное поле.
       },
       // Color by kind of the received damage (macro {{c:dmg-kind}}).
       // Цвет по типу полученного урона (макрос {{c:dmg-kind}}).
@@ -114,7 +115,8 @@
         "death_zone": "#CCCCCC",           // death zone / смертельная зона.
         "gas_attack": "#CCCCCC",           // gas attack / газовая атака.
         "art_attack": "{{c:hit-effects}}", // art attack / артиллерийская поддержка.
-        "air_strike": "{{c:hit-effects}}"  // air strike / поддержка авиации.
+        "air_strike": "{{c:hit-effects}}", // air strike / поддержка авиации.
+        "minefield": "{{c:hit-effects}}"   // minefield / минное поле.
       },
       // Damage with shell splinters (HE/HESH). (macro {{splash-hit}}).
       // Урон осколками снаряда (ОФ/ХФ). (макрос {{splash-hit}}).
@@ -339,7 +341,8 @@
         "death_zone": "DZ",                   // death zone / смертельная зона.
         "gas_attack": "GA",                   // gas attack / газовая атака.
         "art_attack": "{{hit-effects}}",      // art attack / артиллерийская поддержка.
-        "air_strike": "{{hit-effects}}"       // air strike / поддержка авиации.
+        "air_strike": "{{hit-effects}}",      // air strike / поддержка авиации.
+        "minefield": "{{hit-effects}}"        // minefield / минное поле.
       },
       // Last damage format.
       // Формат последнего урона.
