@@ -333,6 +333,16 @@ def initialize():
 
         vehinfo_short.checkNames(res)
 
+        # # data for vehicleNames.xc
+        # vehName = ['"{}":'.format(data['key'].replace(':', '-')) for data in res]
+        # for name in sorted(vehName):
+        #     log('    ' + '{:<43}'.format(name) + '{"name": null, "short": null},')
+
+        # # data for vehinfo_short.py
+        # vehName = {'"{}":'.format(data['key']): data['localizedShortName'] for data in res}
+        # for name in sorted(vehName.keys()):
+        #     log('    ' + '{:<43}'.format(name) + "'{}',".format(vehName[name]))
+
         global _vehicleInfoData
         _vehicleInfoData = {x['vehCD']:x for x in res}
 
