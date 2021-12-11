@@ -1,32 +1,32 @@
 {
     "RU": {
-        "ver": "8.9.4",
-        "wot": "1.14.1.4",
-        "message": "• Совместимость с World of Tanks 1.14.1.4\n• Новый параметр для логов урона в бою\n• Исправления ошибок\n\nСкачать с <a href='#XVM_SITE#'>официального сайта XVM</a>"
+        "ver": "8.9.5",
+        "wot": "1.15.0.0",
+        "message": "• Совместимость с World of Tanks 1.15.0.0\n• Новый параметр для логов урона в бою\n• Исправления ошибок\n\nСкачать с <a href='#XVM_SITE#'>официального сайта XVM</a>"
     },
     "EU": {
-        "ver": "8.9.4",
-        "wot": "1.14.1.4",
-        "message": "• Compatibility with World of Tanks 1.14.1.4\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.5",
+        "wot": "1.15.0.0",
+        "message": "• Compatibility with World of Tanks 1.15.0.0\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "NA": {
-        "ver": "8.9.4",
-        "wot": "1.14.1.4",
-        "message": "• Compatibility with World of Tanks 1.14.1.4\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.5",
+        "wot": "1.15.0.0",
+        "message": "• Compatibility with World of Tanks 1.15.0.0\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "ASIA": {
-        "ver": "8.9.4",
-        "wot": "1.14.1.4",
-        "message": "• Compatibility with World of Tanks 1.14.1.4\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.5",
+        "wot": "1.15.0.0",
+        "message": "• Compatibility with World of Tanks 1.15.0.0\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CN": {
-        "ver": "8.9.4",
-        "wot": "1.14.1.4",
-        "message": "• Compatibility with World of Tanks 1.14.1.4\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.5",
+        "wot": "1.15.0.0",
+        "message": "• Compatibility with World of Tanks 1.15.0.0\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
     },
     "CT": {
-        "ver": "8.9.4",
-        "wot": "1.14.1.4",
-        "message": "• Compatibility with World of Tanks 1.14.1.4\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
+        "ver": "8.9.5",
+        "wot": "1.15.0.0",
+        "message": "• Compatibility with World of Tanks 1.15.0.0\n• New parameter for hit/damage logs\n\nDownload from the <a href='#XVM_SITE#'>official XVM site</a>"
     }
 }
