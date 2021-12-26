@@ -30,7 +30,7 @@ package com.xvm
         public static function getVehicleDossier(vehCD:int, accountDBID:int = 0):VehicleDossier
         {
             //Logger.add("getVehicleDossier: vehCD=" + vehCD + ", accountDBID=" + accountDBID);
-            return getDossier(accountDBID, vehCD);
+            return vehCD != 0 ? getDossier(accountDBID, vehCD) : null;
         }
 
         public static function setVehicleDossier(vdossier:VehicleDossier):void
