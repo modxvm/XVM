@@ -78,7 +78,8 @@ def onXfwCommand(cmd, *args):
     try:
         if cmd == XVM_CAROUSEL_COMMAND.GET_USED_SLOTS_COUNT:
             itemsCache = dependency.instance(IItemsCache)
-            return (len(itemsCache.items.getVehicles(REQ_CRITERIA.INVENTORY)), True)
+            vehiclesCriteria = REQ_CRITERIA.INVENTORY | ~REQ_CRITERIA.VEHICLE.BATTLE_ROYALE
+            return (len(itemsCache.items.getVehicles(vehiclesCriteria)), True)
         if cmd == XVM_CAROUSEL_COMMAND.GET_TOTAL_SLOTS_COUNT:
             itemsCache = dependency.instance(IItemsCache)
             return (itemsCache.items.stats.vehicleSlots, True)
