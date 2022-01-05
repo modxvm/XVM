@@ -213,9 +213,9 @@ def xvm_dmgKindColor():
 
 @xvm.export('xvm.toAvgDmg', deterministic=False)
 def xvm_toAvgDmg(norm=None):
-    avgDamage = float(total_hp.playerAvgDamage)
-    if not te.isRandom or avgDamage is None or te.totalDamage is None:
+    if not te.isRandom or total_hp.playerAvgDamage is None or te.totalDamage is None:
         return None
+    avgDamage = float(total_hp.playerAvgDamage)
     result = max(0, avgDamage - te.totalDamage)
     return result if (norm is None) or (avgDamage == 0) else ceil(min(norm, result * norm / avgDamage))
 
