@@ -77,12 +77,11 @@ def fini():
 def onXfwCommand(cmd, *args):
     try:
         if cmd == XVM_CAROUSEL_COMMAND.GET_USED_SLOTS_COUNT:
-            itemsCache = dependency.instance(IItemsCache)
-            vehiclesCriteria = REQ_CRITERIA.INVENTORY | ~REQ_CRITERIA.VEHICLE.BATTLE_ROYALE
-            return (len(itemsCache.items.getVehicles(vehiclesCriteria)), True)
+            return (get_used_slots_count(), True)
         if cmd == XVM_CAROUSEL_COMMAND.GET_TOTAL_SLOTS_COUNT:
             itemsCache = dependency.instance(IItemsCache)
-            return (itemsCache.items.stats.vehicleSlots, True)
+            freeSlots = itemsCache.items.inventory.getFreeSlots(itemsCache.items.stats.vehicleSlots)
+            return (freeSlots + get_used_slots_count(), True)
     except Exception, ex:
         err(traceback.format_exc())
         return (None, True)
@@ -247,6 +246,11 @@ def _TankCarousel__init__(self):
 
 #####################################################################
 # internal
+
+def get_used_slots_count():
+    itemsCache = dependency.instance(IItemsCache)
+    vehiclesCriteria = REQ_CRITERIA.INVENTORY | ~REQ_CRITERIA.VEHICLE.BATTLE_ROYALE
+    return len(itemsCache.items.getVehicles(vehiclesCriteria))
 
 def update_config(*args, **kwargs):
     try:
