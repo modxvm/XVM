@@ -2,6 +2,12 @@
 
   * Current in-dev version
 
+  #### Python macros
+
+  * Added macros to **totalEfficiency**:
+
+    * `{{py:xvm.avgDmg}}`
+
 ### XVM 8.9.6
 
   * Compatibility with World of Tanks 1.15.0.1
