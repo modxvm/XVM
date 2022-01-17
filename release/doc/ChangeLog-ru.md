@@ -2,6 +2,12 @@
 
   * Совместимость с World of Tanks 1.15.0.1
 
+  #### Макросы на Python
+
+  * В **totalEfficiency** добавлены макросы:
+
+    * `{{py:xvm.avgDmg}}`
+
 ### XVM 8.9.5
 
   * Совместимость с World of Tanks 1.15.0.0

@@ -5,6 +5,7 @@ from xvm_main.python.logger import *
 
 import xvm.total_Efficiency as te
 import xvm.total_hp as total_hp
+from xvm.total_Efficiency import isRandom
 
 
 @xvm.export('xvm.totalDamageColor', deterministic=False)
@@ -213,16 +214,21 @@ def xvm_dmgKindColor():
 
 @xvm.export('xvm.toAvgDmg', deterministic=False)
 def xvm_toAvgDmg(norm=None):
-    if not te.isRandom or total_hp.playerAvgDamage is None or te.totalDamage is None:
+    if not isRandom() or total_hp.playerAvgDamage is None or te.totalDamage is None:
         return None
     avgDamage = float(total_hp.playerAvgDamage)
     result = max(0, avgDamage - te.totalDamage)
     return result if (norm is None) or (avgDamage == 0) else ceil(min(norm, result * norm / avgDamage))
 
 
+@xvm.export('xvm.avgDmg', deterministic=False)
+def xvm_avgDmg():
+    return None if not isRandom() or total_hp.playerAvgDamage is None else float(total_hp.playerAvgDamage)
+
+
 @xvm.export('xvm.toMainGun', deterministic=False)
 def xvm_toMainGun(norm=None):
-    if not te.isRandom or te.enemyVehiclesSumMaxHP < 1000 or te.totalDamage is None:
+    if not isRandom() or te.enemyVehiclesSumMaxHP < 1000 or te.totalDamage is None:
         return None
     mainGun = max(1000.0, te.enemyVehiclesSumMaxHP * 0.2)
     result = max(0, mainGun - te.totalDamage)
