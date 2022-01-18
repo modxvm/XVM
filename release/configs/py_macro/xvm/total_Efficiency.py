@@ -1,7 +1,7 @@
 from Avatar import PlayerAvatar
 from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
-from constants import VEHICLE_SIEGE_STATE, VEHICLE_HIT_FLAGS as VHF
+from constants import ARENA_GUI_TYPE, VEHICLE_SIEGE_STATE, VEHICLE_HIT_FLAGS as VHF
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.battle.shared.ribbons_aggregator import RibbonsAggregator
@@ -58,7 +58,6 @@ burst = 1
 allyVehicles = []
 damageKind = None
 arenaDP = None
-isRandom = False
 
 
 ribbonTypes = {
@@ -104,6 +103,10 @@ class UpdateLabels(object):
 
 
 updateLabels = UpdateLabels(ON_TOTAL_EFFICIENCY)
+
+
+def isRandom():
+    return _player.arena.guiType == ARENA_GUI_TYPE.RANDOM if _player is not None else False
 
 
 @registerEvent(VehicleArenaInfoVO, 'updatePlayerStatus')
@@ -302,13 +305,11 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
 
 @registerEvent(Vehicle, '_Vehicle__onAppearanceReady')
 def _Vehicle__onAppearanceReady(self, appearance):
-    global _player, isPlayerInSquad, isStuns, enemiesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP, alliesDamage, isRandom
+    global _player, isPlayerInSquad, isStuns, enemiesHealth, allyVehicles, enemyVehiclesMaxHP, enemyVehiclesSumMaxHP, arenaDP, alliesDamage
     if not battle.isBattleTypeSupported:
         return
     if _player is None:
         _player = player()
-        arenaDP = _player.guiSessionProvider.getArenaDP()
-        isRandom = _player.arena.guiType == 1
     if self.publicInfo['team'] != _player.team:
         enemiesHealth[self.id] = self.health if self.health is not None else 0
         if self.id in enemyVehiclesMaxHP and enemyVehiclesMaxHP[self.id] < self.health:
@@ -320,6 +321,7 @@ def _Vehicle__onAppearanceReady(self, appearance):
             alliesDamage[self.id] = 0
     if self.isPlayerVehicle:
         global maxHealth, vehCD, burst
+        arenaDP = _player.guiSessionProvider.getArenaDP()
         isPlayerInSquad = arenaDP.isSquadMan(_player.playerVehicleID)
         vehCD = self.typeDescriptor.type.compactDescr
         burst = self.typeDescriptor.gun.burst[0]
