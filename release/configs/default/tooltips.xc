@@ -204,6 +204,7 @@
   "piercingPower",                        - Пробитие базовым снарядом (от и до) \ Penetration of basic shell (from - to)
   "piercingPowerAvg",                     - Пробитие базовым снарядом (среднее) \ Penetration of basic shell (avg)
   "piercingPowerAvgSummary",              - Сводка пробития всеми снарядами \ Summary of penetration of all shells
+  "damage"                                - Урон базовым снярядом (от и до)\ Damage of basic shell (from - to)
   "avgDamage",                            - Средний урон базовым снарядом \ Average damage of basic shell
   "stunMaxDuration",                      - Максимальное время оглушения (c) \ Maximum stun duration (s)
   "stunMinDuration",                      - Минимальное время оглушения (c) \ Minimum stun duration (s)
@@ -237,7 +238,9 @@
   "rateOfFire",                           - Скорострельность оружия \ Rate of Fire
   "battleTiers",                          - Уровни боев танка \ Battle tiers of vehicle
   "maxHealth",                            - ХП танка \ HP of vehicle
+  "chassisRepairTime",                    - Время ремонта ходовой \ Chassis repair time
   "invisibilityStillFactor"               - Незаметность неподвижной машины (%) \ Concealment of Stationary Vehicle (%)
   "invisibilityMovingFactor"              - Незаметность машины в движении (%) \ Concealment of Moving Vehicle (%)
+  "invisibilityFactorAtShot"              - Незаметность машины после выстрела \ Invisibility of vehicle after the shot
   "TEXT:customtext",                      - Показывать произвольный текст (с поддержкой HTML и макросом {{l10n:text}}) \ Show custom text (with HTML support and macro {{l10n:text}})
 */
