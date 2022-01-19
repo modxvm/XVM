@@ -311,6 +311,8 @@ def CommonStatsBlockConstructor_construct(base, self):
                     continue
                 if paramName == 'rateOfFire':
                     paramName = 'reloadTime'
+                if paramName == 'piercingPowerAvg':
+                    paramName = 'avgPiercingPower'
                 elif paramName == 'traverseLimits':
                     paramName = 'gunYawLimits' if 'gunYawLimits' in vehicleCommonParams else 'turretYawLimits'
                 elif paramName == 'radioRange':
@@ -358,9 +360,9 @@ def CommonStatsBlockConstructor_construct(base, self):
                     shellSpeedSummary_str = '/'.join(shellSpeedSummary_arr)
                     tooltip_add_param(self, result, tooltip_with_units(l10n('shellSpeed'), l10n('(m/sec)')), shellSpeedSummary_str)
                 #piercingPowerAvg
-                elif paramName == 'piercingPowerAvg':
-                    piercingPowerAvg = formatNumber(veh_descr.shot.piercingPower[0])
-                    tooltip_add_param(self, result, replace_p(i18n.makeString(MENU.TANK_PARAMS_AVGPIERCINGPOWER)), piercingPowerAvg)
+                # elif paramName == 'piercingPowerAvg':
+                #     piercingPowerAvg = formatNumber(veh_descr.shot.piercingPower[0])
+                #     tooltip_add_param(self, result, replace_p(i18n.makeString(MENU.TANK_PARAMS_AVGPIERCINGPOWER)), piercingPowerAvg)
                 #piercingPowerAvgSummary
                 elif paramName == 'piercingPowerAvgSummary':
                     piercingPowerAvgSummary_arr = []
