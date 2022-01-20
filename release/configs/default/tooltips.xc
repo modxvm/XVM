@@ -241,6 +241,5 @@
   "chassisRepairTime",                    - Время ремонта ходовой \ Chassis repair time
   "invisibilityStillFactor"               - Незаметность неподвижной машины (%) \ Concealment of Stationary Vehicle (%)
   "invisibilityMovingFactor"              - Незаметность машины в движении (%) \ Concealment of Moving Vehicle (%)
-  "invisibilityFactorAtShot"              - Незаметность машины после выстрела \ Invisibility of vehicle after the shot
   "TEXT:customtext",                      - Показывать произвольный текст (с поддержкой HTML и макросом {{l10n:text}}) \ Show custom text (with HTML support and macro {{l10n:text}})
 */
