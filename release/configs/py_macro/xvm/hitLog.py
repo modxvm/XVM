@@ -170,7 +170,6 @@ class DataHitLog(object):
         self.shells = {}
         self.macros = Macros()
         self.reset()
-        self.ammo = None
 
     def reset(self):
         self.shellType = None
@@ -303,9 +302,6 @@ class DataHitLog(object):
         self.data['battletype-key'] = self.battletypeKey
         self.updateLabels()
 
-    def loaded(self):
-        self.intCD = self.ammo.getCurrentShellCD()
-
     def setParametersShot(self):
         if self.intCD is not None:
             _shells = self.shells[self.intCD]
@@ -331,7 +327,7 @@ class DataHitLog(object):
         self.data['blownup'] = newHealth <= -5
         newHealth = max(0, newHealth)
         self.data['damage'] = (self.vehHealth[vehicle.id]['health'] - newHealth) if vehicle.id in self.vehHealth else (- newHealth)
-        if self.data['attackReasonID'] != 0:
+        if attackReasonID != 0:
             self.criticalHit = False
             self.splashHit = False
             self.compName = None
@@ -360,16 +356,17 @@ class DataHitLog(object):
             self.compName = None
             self.criticalHit = False
 
-    def onAppearanceReady(self, vehicle):
-        self.macros.setChooseRating()
-        self.player = BigWorld.player()
-        self.playerVehicleID = self.player.playerVehicleID
-        self.ammo = self.guiSessionProvider.shared.ammo
-        shots = vehicle.typeDescriptor.gun.shots
-        nation = nations.NAMES[vehicle.typeDescriptor.type.id[0]]
+    def getListGoldShells(self, nation_id):
+        nation = nations.NAMES[nation_id]
         xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
         xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
         goldShells = [_xml.readInt(xmlCtx, s, 'id', 0, 65535) for xmlCtx, s in xmlCtx_s if s.readBool('improved', False)]
+        ResMgr.purge(xmlPath, True)
+        return goldShells
+
+    def setShellParameters(self, typeDescriptor):
+        shots = typeDescriptor.gun.shots
+        goldShells = self.getListGoldShells(typeDescriptor.type.id[0])
         for shot in shots:
             shell = shot.shell
             intCD = shell.compactDescr
@@ -377,9 +374,13 @@ class DataHitLog(object):
             self.shells[intCD]['shellKind'] = shell.kind.lower()
             self.shells[intCD]['shellDamage'] = shell.damage[0]
             self.shells[intCD]['costShell'] = 'gold-shell' if shell.id[1] in goldShells else 'silver-shell'
-        ResMgr.purge(xmlPath, True)
-        arena = avatar_getter.getArena()
-        self.battletypeKey = BATTLE_TYPE.get(arena.guiType, ARENA_GUI_TYPE.UNKNOWN)
+
+    def onAppearanceReady(self, vehicle):
+        self.macros.setChooseRating()
+        self.player = BigWorld.player()
+        self.playerVehicleID = self.player.playerVehicleID
+        self.setShellParameters(vehicle.typeDescriptor)
+        self.battletypeKey = BATTLE_TYPE.get(self.player.arena.guiType, ARENA_GUI_TYPE.UNKNOWN)
 
     def updateVehInfo(self, vehicle):
         if vehicle.id not in self.vehHealth:
@@ -846,7 +847,7 @@ g_hitLogs = HitLogs()
 @registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')
 def PlayerAvatar__processVehicleAmmo(self, vehicleID, compactDescr, quantity, quantityInClip, _, __):
     if battle.isBattleTypeSupported and _config.get(HIT_LOG_ENABLED, True):
-        g_dataHitLog.loaded()
+        g_dataHitLog.intCD = compactDescr
 
 
 @registerEvent(DestructibleEntity, 'onEnterWorld')
