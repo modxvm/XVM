@@ -13,15 +13,21 @@ import xvm_main.python.vehinfo as vehinfo
 def getGlobalBattleData():
     vehicleID = avatar_getter.getPlayerVehicleID()
     arena = avatar_getter.getArena()
-    arenaVehicle = arena.vehicles.get(vehicleID)
-    vehCD = getVehCD(vehicleID)
-    clan = arenaVehicle['clanAbbrev']
+    arenaVehicle = arena.vehicles.get(vehicleID, None)
+    if arenaVehicle is not None:
+        vehCD = arenaVehicle['vehicleType'].type.compactDescr
+        clan = arenaVehicle['clanAbbrev']
+        playerName = arenaVehicle['name']
+    else:
+        vehCD = 0
+        clan = None
+        playerName = None
     vInfoVO = utils.getVehicleInfo(vehicleID)
     if not clan:
         clan = None
     return (
         vehicleID,                                  # playerVehicleID
-        arenaVehicle['name'],                       # playerName
+        playerName,                                 # playerName
         vInfoVO.player.fakeName,                    # playerFakeName
         clan,                                       # playerClan
         vehCD,                                      # playerVehCD
