@@ -79,7 +79,6 @@ package com.xvm.battle
         {
             Xfw.addCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
             Xfw.cmd(BattleCommands.REQUEST_BATTLE_GLOBAL_DATA);
-            Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
 
             _curent_xtdb = 0;
             _initialized = true;
@@ -114,6 +113,10 @@ package com.xvm.battle
             battleLevel:Number, battleType:Number, arenaGuiType:Number, mapSize:Number,
             minimapCirclesData:Object, xtdb_data:Array):void
         {
+            if (playerVehCD != 0)
+            {
+                Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
+            }
             //Logger.addObject(arguments);
             _playerVehicleID = playerVehicleID;
             _playerName = playerName;
