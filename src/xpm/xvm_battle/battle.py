@@ -98,6 +98,7 @@ def _PlayerAvatar_onBecomePlayer(base, self):
             arena.onAvatarReady += g_battle.onAvatarReady
             arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
             arena.onNewVehicleListReceived += xmqp.start
+            arena.onNewVehicleListReceived += g_battle.onNewVehicleListReceived
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
         if ctrl:
@@ -125,6 +126,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
             arena.onAvatarReady -= g_battle.onAvatarReady
             arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
             arena.onNewVehicleListReceived -= xmqp.start
+            arena.onNewVehicleListReceived -= g_battle.onNewVehicleListReceived
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
         if ctrl:
@@ -331,6 +333,9 @@ class Battle(object):
 
     appLoader = dependency.descriptor(IAppLoader)
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
+
+    def onNewVehicleListReceived(self):
+        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
 
     def onAppInitialized(self, event):
         #log('onAppInitialized: ' + str(event.ctx.ns))
