@@ -113,10 +113,6 @@ package com.xvm.battle
             battleLevel:Number, battleType:Number, arenaGuiType:Number, mapSize:Number,
             minimapCirclesData:Object, xtdb_data:Array):void
         {
-            if (playerVehCD != 0)
-            {
-                Xfw.removeCommandListener(BattleCommands.AS_RESPONSE_BATTLE_GLOBAL_DATA, onRespondBattleGlobalData);
-            }
             //Logger.addObject(arguments);
             _playerVehicleID = playerVehicleID;
             _playerName = playerName;
