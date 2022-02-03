@@ -171,6 +171,10 @@ package com.xvm.battle.shared.minimap.entries.personal
 
         public function updateArtilleryRange(shellCD:int):void
         {
+            if (!_artilleryCircle)
+            {
+                return
+            }
             if (_artilleryCircle.cfg.enabled)
             {
                 var radius:int = BattleGlobalData.minimapCirclesData.artilleryRange(shellCD);
