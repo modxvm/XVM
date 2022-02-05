@@ -1,6 +1,7 @@
-﻿﻿### XVM 8.9.7-dev
+﻿﻿### XVM 8.9.7
 
-  * Current in-dev version
+  * Compatibility with World of Tanks 1.15.0.2
+  * Various fixes and improvements
 
   #### Python macros
 
