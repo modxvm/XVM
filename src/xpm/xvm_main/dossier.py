@@ -179,6 +179,7 @@ class _Dossier(object):
         cache_item = self._cache.get(cache_key, None)
         if cache_item is not None and cache_item['totalBattles'] == totalBattles:
             self.__updateCamouflageResult(cache_item, summer_camo, winter_camo, desert_camo)
+            self._cache[cache_key]['levelPostProgress'] = levelPostProgress
             return cache_item
 
         xpVehs = self.itemsCache.items.stats.vehiclesXPs
