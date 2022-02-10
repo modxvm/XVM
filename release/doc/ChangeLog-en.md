@@ -1,6 +1,7 @@
 ﻿﻿### XVM 8.9.8-dev
 
   * Current in-dev version
+  * Compatibility with World of Tanks 1.15.0.3
 
 ### XVM 8.9.7
 
