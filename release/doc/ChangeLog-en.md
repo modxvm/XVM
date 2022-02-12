@@ -1,7 +1,8 @@
-﻿﻿### XVM 8.9.8-dev
+﻿﻿### XVM 8.9.8
 
-  * Current in-dev version
   * Compatibility with World of Tanks 1.15.0.3
+  * Fixed `{{v.levelPostProgress}}` macro
+  * Updated short vehicle names
 
 ### XVM 8.9.7
 
