@@ -1,4 +1,8 @@
-﻿﻿### XVM 8.9.8
+﻿﻿### XVM 8.9.9-dev
+
+  * Current in-dev version
+
+### XVM 8.9.8
 
   * Compatibility with World of Tanks 1.15.0.3
   * Fixed `{{v.levelPostProgress}}` macro
