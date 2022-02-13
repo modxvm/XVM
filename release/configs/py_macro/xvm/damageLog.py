@@ -90,7 +90,8 @@ HIT_EFFECT_CODES = {
     2: 'armor_not_pierced',
     3: 'armor_pierced_no_damage',
     4: 'armor_pierced',
-    5: 'critical_hit'
+    5: 'critical_hit',
+    6: 'armor_pierced_device'
 }
 
 RATINGS = {
@@ -461,7 +462,7 @@ class Data(object):
         wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
         if wheelsConfig:
             maxComponentIdx += wheelsConfig.getWheelsCount()
-        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
+        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx, vehicle.typeDescriptor)
         if decodedPoints:
             maxPriorityHitPoint = decodedPoints[-1]
             maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
