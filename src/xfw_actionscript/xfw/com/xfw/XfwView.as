@@ -9,6 +9,7 @@ package com.xfw
     import flash.display.*;
     import net.wg.app.iml.base.*;
     import net.wg.data.constants.*;
+	import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.base.*;
     import net.wg.infrastructure.interfaces.*;
@@ -36,29 +37,28 @@ package com.xfw
         {
             this.xfw = addChild(new XfwComponent()) as XfwComponent;
             this.registerFlashComponent(this.xfw, "xfw");
-            var mainViewContainer:MainViewContainer = searchMainViewContainer();
-            // Move component to the main view to fix ESC key
-            mainViewContainer.addChildAt(this, 0);
-            mainViewContainer.setFocusedView(mainViewContainer.getTopmostView());
-            //XfwUtils.logChilds(App.instance as DisplayObject);
+            var viewContainer:MainViewContainer = _getContainer(LAYER_NAMES.VIEWS) as MainViewContainer;
+            if (viewContainer != null)
+            {
+                var topmostView:IManagedContent = viewContainer.getTopmostView();
+                if (topmostView)
+                    viewContainer.setFocusedView(topmostView);
+            }
         }
 
-        // PRIVATE
-
-        private function searchMainViewContainer():MainViewContainer
+        // this needs for valid Focus in Login Window 
+        override protected function nextFrameAfterPopulateHandler() : void 
         {
-            var app:AbstractApplication = App.instance as AbstractApplication;
-            var len:int = app.numChildren;
-            var mainViewContainer:MainViewContainer = null;
-            for (var i:int = 0; i < len; ++i)
+            super.nextFrameAfterPopulateHandler();
+            if (parent != App.instance)
             {
-                mainViewContainer = app.getChildAt(i) as MainViewContainer;
-                if (mainViewContainer != null)
-                {
-                    break;
-                }
+                (App.instance as MovieClip).addChild(this);
             }
-            return mainViewContainer;
+        }
+
+        private function _getContainer(containerName:String) : ISimpleManagedContainer
+        {
+            return App.containerMgr.getContainer(LAYER_NAMES.LAYER_ORDER.indexOf(containerName))
         }
     }
 }
