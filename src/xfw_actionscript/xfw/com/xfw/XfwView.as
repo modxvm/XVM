@@ -9,7 +9,7 @@ package com.xfw
     import flash.display.*;
     import net.wg.app.iml.base.*;
     import net.wg.data.constants.*;
-	import net.wg.data.constants.generated.LAYER_NAMES;
+    import net.wg.data.constants.generated.LAYER_NAMES;
     import net.wg.gui.components.containers.*;
     import net.wg.infrastructure.base.*;
     import net.wg.infrastructure.interfaces.*;
@@ -37,6 +37,7 @@ package com.xfw
         {
             this.xfw = addChild(new XfwComponent()) as XfwComponent;
             this.registerFlashComponent(this.xfw, "xfw");
+            addAsChildToApp();
             var viewContainer:MainViewContainer = _getContainer(LAYER_NAMES.VIEWS) as MainViewContainer;
             if (viewContainer != null)
             {
@@ -50,6 +51,11 @@ package com.xfw
         override protected function nextFrameAfterPopulateHandler() : void 
         {
             super.nextFrameAfterPopulateHandler();
+            addAsChildToApp();
+        }
+
+        private function addAsChildToApp() : void 
+        {
             if (parent != App.instance)
             {
                 (App.instance as MovieClip).addChild(this);
