@@ -11,6 +11,8 @@ package com.xvm.battle
 
     public class BattleXvmComponentController implements IBattleComponentDataController, IDisposable
     {
+        private var _disposed:Boolean = false;
+
         public function BattleXvmComponentController()
         {
             //Logger.add("BattleXvmComponentController");
@@ -20,7 +22,14 @@ package com.xvm.battle
         public final function dispose():void
         {
             onDispose();
+            _disposed = true;
         }
+
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
+        }
+
 
         protected function onDispose():void
         {

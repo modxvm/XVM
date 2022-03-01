@@ -20,6 +20,8 @@ package com.xvm.battle.shared.battleloading
         private var clock:TextField;
         private var clockFormat:String;
 
+        private var _disposed: Boolean = false;
+
         public function Clock(form:BaseTipLoadingForm)
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
@@ -75,6 +77,12 @@ package com.xvm.battle.shared.battleloading
         public final function dispose():void
         {
             onDispose();
+            _disposed = true;
+        }
+        
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
         }
 
         protected function onDispose():void

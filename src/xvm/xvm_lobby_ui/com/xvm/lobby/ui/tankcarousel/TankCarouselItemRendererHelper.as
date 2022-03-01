@@ -137,7 +137,7 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     _setupStandardFieldTankName();
                     _setupStandardFieldProgressionPoints();
-                    if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank || item.vehicleCarouselVO.nySlot))
+                    if (!(item.vehicleCarouselVO.buySlot || item.vehicleCarouselVO.buyTank || item.vehicleCarouselVO.restoreTank))
                     {
                         _setupStandardFieldInfo();
                         if (item.extraFields)

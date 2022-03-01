@@ -11,6 +11,8 @@ package com.xvm.wg
 
         private var _lock:Boolean = false;
 
+        private var _disposed:Boolean = false;
+
         public function WeakRef(param1:*, param2:Boolean = false)
         {
             super();
@@ -52,6 +54,12 @@ package com.xvm.wg
                 delete this._dict[_loc1_];
             }
             this._dict = null;
+            this._disposed = false;
+        }
+
+        public function get isDisposed() : Boolean
+        {
+            return this._disposed;
         }
 
         public function get isLock() : Boolean

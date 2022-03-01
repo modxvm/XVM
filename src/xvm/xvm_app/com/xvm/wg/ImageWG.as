@@ -31,6 +31,8 @@ package com.xvm.wg
 
         private var _cacheType:int = 2;
 
+        private var _disposed:Boolean = false;
+
         public function ImageWG()
         {
             super();
@@ -42,6 +44,12 @@ package com.xvm.wg
         public final function dispose() : void
         {
             this.onDispose();
+            _disposed = true;
+        }
+
+        public final function isDisposed() : Boolean
+        {
+            return _disposed;
         }
 
         public function readjustSize() : void

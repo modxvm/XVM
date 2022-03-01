@@ -21,6 +21,8 @@ package com.xvm.battle.shared.minimap.entries.personal
         private var _artilleryCircle:MinimapCircleData = null;
         private var _shellRangeCircle:Shape = null;
 
+        private var _disposed:Boolean = false;
+
         public function Circles(cfg:CMinimapCircles)
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
@@ -78,6 +80,13 @@ package com.xvm.battle.shared.minimap.entries.personal
             {
                 removeChildAt(0);
             }
+
+            _disposed = true;
+        }
+
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
         }
 
         // http://forum.worldoftanks.ru/index.php?/topic/1047590-/

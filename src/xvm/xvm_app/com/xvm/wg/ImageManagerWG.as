@@ -122,7 +122,7 @@ package com.xvm.wg
             this.initCache();
         }
 
-        public final function dispose() : void
+        public override final function dispose() : void
         {
             var _loc1_:ImageData = null;
             if(this._init)

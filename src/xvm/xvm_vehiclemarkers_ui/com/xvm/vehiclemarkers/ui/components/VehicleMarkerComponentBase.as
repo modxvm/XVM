@@ -14,6 +14,8 @@ package com.xvm.vehiclemarkers.ui.components
         protected var marker:XvmVehicleMarker;
         protected var initialized:Boolean;
 
+        private var _disposed:Boolean = false;
+
         public function VehicleMarkerComponentBase(marker:XvmVehicleMarker)
         {
             this.marker = marker;
@@ -31,6 +33,13 @@ package com.xvm.vehiclemarkers.ui.components
             marker.removeEventListener(XvmVehicleMarkerEvent.INIT, instance.init);
             marker.removeEventListener(XvmVehicleMarkerEvent.UPDATE, instance.update);
             marker.removeEventListener(XvmVehicleMarkerEvent.EX_INFO, instance.onExInfo);
+
+            _disposed = true;
+        }
+
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
         }
 
         protected function onDispose():void

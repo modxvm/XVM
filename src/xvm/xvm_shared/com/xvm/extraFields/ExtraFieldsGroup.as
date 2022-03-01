@@ -24,6 +24,8 @@ package com.xvm.extraFields
         private var _x:Number = 0;
         private var _y:Number = 0;
 
+        private var _disposed:Boolean = false;
+
         public function ExtraFieldsGroup(item:IExtraFieldGroupHolder, formats:Array, isRootLayout:Boolean = false,
             defaultTextFormatConfig:CTextFormat = null)
         {
@@ -132,6 +134,13 @@ package com.xvm.extraFields
                 top.dispose();
                 top = null;
             }
+
+            _disposed = true;
+        }
+
+        public function isDisposed () : Boolean
+        {
+            return _disposed;	
         }
 
         public function set visible(value:Boolean):void

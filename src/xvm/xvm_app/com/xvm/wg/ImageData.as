@@ -35,6 +35,8 @@ package com.xvm.wg
 
         private var _cacheType:int = 1;
 
+        private var _disposed:Boolean = false;
+
         function ImageData(param1:String, param2:int)
         {
             super();
@@ -60,6 +62,12 @@ package com.xvm.wg
                 this._loader.close();
                 this._loader = null;
             }
+            this._disposed = true;
+        }
+
+        public function get isDisposed() : Boolean
+        {
+            return this._disposed;
         }
 
         public function isLockData() : Boolean

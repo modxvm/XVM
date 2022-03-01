@@ -37,6 +37,8 @@ package com.xvm.lobby.ui.limits
         private var freeXpLocker:LockerControl = null;
         private var crystalLocker:LockerControl = null;
 
+        private var _disposed:Boolean = false;
+
         public function LimitsUIImpl()
         {
             //Logger.add("LimitsUIImpl");
@@ -97,6 +99,13 @@ package com.xvm.lobby.ui.limits
                 crystalLocker.dispose();
                 crystalLocker = null;
             }
+
+            _disposed = true;
+        }
+
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
         }
 
         // PRIVATE

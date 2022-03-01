@@ -18,7 +18,12 @@ package com.xvm.wg
             super();
         }
 
-        public function get disposed() : Boolean
+        public function dispose(): void
+        {
+            this._disposed = true;
+        }
+
+        public function get isDisposed() : Boolean
         {
             return this._disposed;
         }

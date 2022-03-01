@@ -22,6 +22,8 @@ package com.xvm.battle.shared.elements
         private var cfg:Array;
         private var timers:Array = [];
 
+        private var _disposed: Boolean = false;
+
         public function BattleElements()
         {
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
@@ -32,6 +34,12 @@ package com.xvm.battle.shared.elements
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             stop();
+            _disposed = true;
+        }
+
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
         }
 
         // PRIVATE

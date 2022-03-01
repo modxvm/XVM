@@ -20,6 +20,8 @@ package com.xvm.battle.shared.battleClock
         private var format:String;
         private var timer:Timer = null;
 
+        private var _disposed:Boolean = false;
+
         public function BattleClock()
         {
             mouseEnabled = false;
@@ -37,6 +39,12 @@ package com.xvm.battle.shared.battleClock
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             stop();
+            _disposed = true;
+        }
+
+        public final function isDisposed(): Boolean
+        {
+            return _disposed;
         }
 
         // event handlers

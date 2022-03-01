@@ -37,6 +37,8 @@ package com.xvm.extraFields
         private var _lastOptions:IVOMacrosOptions = null;
 
         private var _initialized:Boolean = false;
+        private var _disposed:Boolean = false;
+
 
         private var _xValue:Number = 0;
         private var _yValue:Number = 0;
@@ -114,6 +116,12 @@ package com.xvm.extraFields
         {
             _cfg = null;
             Xfw.removeCommandListener(XvmCommands.AS_ON_KEY_EVENT, onKeyEvent);
+            _disposed = true;
+        }
+
+        public final function isDisposed () : Boolean
+        {
+            return _disposed;	
         }
 
         public function get cfg():CExtraField
