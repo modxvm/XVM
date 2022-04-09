@@ -197,8 +197,7 @@ package com.xvm.vehiclemarkers.ui
             if (atlasManager.isAtlasInitialized(atlasName))
             {
                 RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-
-                XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
+				updateIconColor();
             }
         }
 

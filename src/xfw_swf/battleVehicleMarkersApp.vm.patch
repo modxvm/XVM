@@ -203,33 +203,6 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
        getlex              QName(PackageNamespace(""), "ICON")
        callproperty        QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
        convert_b
-@@ -3319,6 +3344,26 @@
- 
-       returnvoid
-      end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-+  trait method QName(PackageNamespace(""), "xfw_updateIconColor")
-+   method
-+    returns QName(PackageNamespace(""), "void")
-+    body
-+     maxstack 1
-+     localcount 1
-+     initscopedepth 15
-+     maxscopedepth 16
-+     code
-+      getlocal0
-+      pushscope
-+
-+      getlocal0
-+      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateIconColor"), 0
-+
-+      returnvoid
-+     end ; code
-     end ; body
-    end ; method
-   end ; trait
 diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm
 --- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2021-12-03 00:25:07.919767000 +0300
 +++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2021-12-03 00:25:51.706027700 +0300
