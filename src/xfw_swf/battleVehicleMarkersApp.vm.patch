@@ -162,9 +162,9 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
        callpropvoid        QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback"), 0
  
 diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2021-12-03 00:14:33.049982100 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2021-12-03 00:17:22.567491100 +0300
-@@ -2029,6 +2029,24 @@
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-04-09 20:08:59.979825600 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-04-09 20:11:21.283299600 +0300
+@@ -1915,6 +1915,24 @@
      end ; body
     end ; method
    end ; trait
@@ -186,10 +186,10 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateMarkerSettings")
+   trait method QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateMarkerSettings")
     method
-     refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/updateMarkerSettings"
-@@ -2047,6 +2065,13 @@
+     refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarker:updateMarkerSettings"
+@@ -1933,6 +1951,13 @@
        setlocal            9
  
        getlocal0
@@ -200,10 +200,10 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +
 +XVMACTIVE:
 +      getlocal0
-       getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "ICON")
-       callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
+       getlex              QName(PackageNamespace(""), "ICON")
+       callproperty        QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
        convert_b
-@@ -3358,6 +3383,26 @@
+@@ -3319,6 +3344,26 @@
  
        returnvoid
       end ; code
