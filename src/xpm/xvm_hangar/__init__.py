@@ -11,7 +11,7 @@ import nations
 import gui.Scaleform.daapi.view.lobby.barracks.barracks_data_provider as barrack
 from CurrentVehicle import g_currentVehicle
 from gui.shared import g_eventBus
-from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
+from gui.prb_control.entities.base.actions_validator import BaseVehicleActionsValidator
 from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.locale.MENU import MENU
@@ -171,8 +171,8 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     return base.fget(self, *args, **kwargs) # base is property
 
 # low ammo => vehicle not ready (disable red button)
-@overrideMethod(CurrentVehicleActionsValidator, '_validate')
-def _CurrentVehicleActionsValidator_validate(base, self):
+@overrideMethod(BaseVehicleActionsValidator, '_validate')
+def _BaseVehicleActionsValidator_validate(base, self):
     res = base(self)
     if isInBootcamp():
         return res
