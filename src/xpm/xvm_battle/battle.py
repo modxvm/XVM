@@ -269,12 +269,6 @@ def canDisplayVehicleHelpHint(base, self, typeDescriptor):
         return False
     base(self, typeDescriptor)
 
-@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplaySPGHelpHint')
-def canDisplaySPGHelpHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return False
-    base(self)
-
 @overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
 def canDisplayBattleCommunicationHint(base, self):
     if not config.get('battle/showBattleHint'):
