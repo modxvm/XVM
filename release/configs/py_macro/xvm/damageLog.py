@@ -499,7 +499,7 @@ class Data(object):
         if (not self.data['isDamage']) and (self.data['hitEffect'] in ('armor_pierced_no_damage', 'critical_hit')):
             self.updateData()
 
-    def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
+    def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVeh):
         dataUpdate = {
             'attackerID': entityID,
             'costShell': 'unknown',
@@ -1041,7 +1041,7 @@ def Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReason
 
 
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
-def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
+def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVeh):
     global isImpact
     if self.playerVehicleID == vehicleID:
         if not isImpact:
@@ -1050,7 +1050,7 @@ def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex,
             if isImpact:
                 as_event(EVENTS_NAMES.ON_IMPACT)
         if isShowDamageLog:
-            data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
+            data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVeh)
 
 
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')
