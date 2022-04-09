@@ -119,6 +119,8 @@ notify-krcm:
       when: never
     - if: $CI_COMMIT_MESSAGE =~ /\[no-notify\]/
       when: never
+    - if: $CI_COMMIT_MESSAGE =~ /\[no-krcm\]/
+      when: never
     - when: on_success
 
 notify-telegram:
