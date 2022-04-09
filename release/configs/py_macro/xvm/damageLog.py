@@ -988,9 +988,9 @@ def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeI
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
-def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun):
+def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun, supplyDamage, showSumIcon):
     if not (_config.get(DAMAGE_LOG_DISABLED_SUMMARY_STATS) and isShowDamageLog):
-        return base(self, damage, blocked, assist, stun)
+        return base(self, damage, blocked, assist, stun, supplyDamage, showSumIcon)
 
 
 @overrideMethod(DamageLogPanel, 'as_updateSummaryDamageValueS')
