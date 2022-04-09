@@ -13,7 +13,8 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.vo.*;
     import flash.events.*;
     import net.wg.data.constants.Values;
-    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager; // * - name conflict
+    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersConstants;
+    import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
     import net.wg.gui.battle.views.vehicleMarkers.events.*;
     import net.wg.gui.utils.*;
 
@@ -80,11 +81,7 @@ package com.xvm.vehiclemarkers.ui
         override public function settingsUpdate(param0:int):void
         {
             super.settingsUpdate(param0);
-            var playerState:VOPlayerState = BattleState.get(vehicleID);
-            if (playerState)
-            {
-                setupVehicleIcon(playerState.isAlly);
-            }
+            setupVehicleIcon();
         }
 
         override protected function draw():void
@@ -95,7 +92,7 @@ package com.xvm.vehiclemarkers.ui
                 var playerState:VOPlayerState = BattleState.get(vehicleID);
                 if (playerState)
                 {
-                    setupVehicleIcon(playerState.isAlly);
+                    setupVehicleIcon();
                     dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
                     if (playerState.damageInfo != null)
                     {
@@ -188,6 +185,20 @@ package com.xvm.vehiclemarkers.ui
             if (playerState)
             {
                 dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.SET_SPEAKING, playerState, exInfo));
+            }
+        }
+		
+		override protected function setupVehicleIcon():void
+        {
+			var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
+			
+            var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
+            var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
+            if (atlasManager.isAtlasInitialized(atlasName))
+            {
+                RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
+
+                XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
             }
         }
 
@@ -323,19 +334,6 @@ package com.xvm.vehiclemarkers.ui
                 invalidate(INVALIDATE_DATA);
             }
         }
-
-        private final function setupVehicleIcon(isAlly:Boolean):void
-        {
-            var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
-            var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
-            if (atlasManager.isAtlasInitialized(atlasName))
-            {
-                RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-
-                XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
-            }
-        }
-
 
         private static var _vmPlayerFrags:Number = 0;
 
