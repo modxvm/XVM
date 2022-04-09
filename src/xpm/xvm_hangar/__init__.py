@@ -261,7 +261,7 @@ def updateBatteleCount(base, self):
     base(self)
 
 # hide display widget with daily quests
-@overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')
+@overrideMethod(DailyQuestWidget, '_shouldHide')
 def shouldHide(base, self):
     if not config.get('hangar/showDailyQuestWidget', True):
         return True
