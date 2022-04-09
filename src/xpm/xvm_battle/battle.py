@@ -486,7 +486,7 @@ class Battle(object):
     def invalidateArenaInfo(self):
         #debug('battle: invalidateArenaInfo')
         if self.battle_page:
-            if battle_loading.isBattleLoadingShowed():
+            if battle_loading._isBattleLoadingShowed():
                 if 'battleLoading' in self.battle_page.as_getComponentsVisibilityS():
                     battleLoading = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING)
                     if battleLoading:
