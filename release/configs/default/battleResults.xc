@@ -19,9 +19,6 @@
     // true - display shots precision and damage in first page under credits and XP.
     // true - отображать процент попаданий и урон на первой странице, под кредитами и опытом.
     "showExtendedInfo": true,
-    // true - show totals for your battle efficiency in first page.
-    // true - показывать итог по вашей боевой эффективности на первой странице.
-    "showTotals": false,
     // true - display standard interface for the "FrontLine" mode.
     // true - отображать стандартный интерфейс для режима "Линия фронта".
     "showStandardFrontLineInterface": true,

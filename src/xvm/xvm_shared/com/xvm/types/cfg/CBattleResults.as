@@ -13,7 +13,6 @@ package com.xvm.types.cfg
         public var showExtendedInfo:*;
         public var showNetIncome:*;
         public var showTotalExperience:*;
-        public var showTotals:*;
         public var startPage:*;
         public var bonusState:CBattleResultsBonusState;
 

@@ -61,15 +61,7 @@ package com.xvm.lobby.ui.battleresults
         private var damageAssistedTitle:TextField;
         private var damageAssistedValue:TextField;
         private var damageValue:TextField;
-
-        private var stunTotalField:EfficiencyIconRenderer;
-        private var spottedTotalField:EfficiencyIconRenderer;
-        private var damageAssistedTotalField:EfficiencyIconRenderer;
-        private var armorTotalField:EfficiencyIconRenderer;
-        private var critsTotalField:EfficiencyIconRenderer;
-        private var damageTotalField:EfficiencyIconRenderer;
-        private var killsTotalField:EfficiencyIconRenderer;
-
+		
         private var bonusState:PremiumBonusState;
 
         private var tooltips:Object;
@@ -135,16 +127,6 @@ package com.xvm.lobby.ui.battleresults
                     compareState.validateNow();
                     updateValues();
                 }
-            }
-            if (_fieldsInitialized && Config.config.battleResults.showTotals && isInvalid(HEADER_INVALID))
-            {
-                stunTotalField.visible =
-                    spottedTotalField.visible =
-                    damageAssistedTotalField.visible =
-                    armorTotalField.visible =
-                    critsTotalField.visible =
-                    damageTotalField.visible =
-                    killsTotalField.visible = efficiencyHeader.visible;
             }
         }
 
@@ -273,11 +255,6 @@ package com.xvm.lobby.ui.battleresults
         {
             compactQuests();
 
-            if (Config.config.battleResults.showTotals)
-            {
-                initTotals();
-            }
-
             if (_data.personal.dynamicPremiumState == BATTLE_RESULTS_PREMIUM_STATES.PREMIUM_BONUS)
             {
                 initPremiumBonusFields();
@@ -371,55 +348,6 @@ package com.xvm.lobby.ui.battleresults
             damageValue.addEventListener(MouseEvent.ROLL_OUT, onRollHandler, false, 0, true);
         }
 
-        private function initTotals():void
-        {
-            try
-            {
-                efficiencyHeader.summArmorTF.visible =
-                    efficiencyHeader.summAssistTF.visible =
-                    efficiencyHeader.summCritsTF.visible =
-                    efficiencyHeader.summDamageTF.visible =
-                    efficiencyHeader.summKillTF.visible =
-                    efficiencyHeader.summSpottedTF.visible =
-                    efficiencyHeader.summStunTF.visible = false;
-
-                var x:int = efficiencyHeader.x + 5;
-                var y:int = efficiencyHeader.y - 2;
-
-                // stun
-                stunTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summStunTF.x - 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.STUN })) as EfficiencyIconRenderer;
-
-                // spotted
-                spottedTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summSpottedTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DETECTION })) as EfficiencyIconRenderer;
-
-                // damage assisted (radio/tracks)
-                damageAssistedTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summAssistTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.ASSIST })) as EfficiencyIconRenderer;
-
-                // armor
-                armorTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summArmorTF.x + 1, y: y, kind: BATTLE_EFFICIENCY_TYPES.ARMOR })) as EfficiencyIconRenderer;
-
-                // crits
-                critsTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summCritsTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.CRITS })) as EfficiencyIconRenderer;
-
-                // piercings
-                damageTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summDamageTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DAMAGE })) as EfficiencyIconRenderer;
-
-                // kills
-                killsTotalField = addChild(createTotalItem(
-                    { x: x + efficiencyHeader.summKillTF.x, y: y, kind: BATTLE_EFFICIENCY_TYPES.DESTRUCTION } )) as EfficiencyIconRenderer;
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-
         private static const CREW_EXP_OFFSET_X:int = 30;
         private function initCrewExperience():void
         {
@@ -455,11 +383,6 @@ package com.xvm.lobby.ui.battleresults
                 compareState.premTitleLbl.setTextFormat(textFormat);
             }
 
-            if (Config.config.battleResults.showTotals)
-            {
-                showTotals();
-            }
-
             if (Config.config.battleResults.showExtendedInfo)
             {
                 showExtendedInfo();
@@ -479,69 +402,6 @@ package com.xvm.lobby.ui.battleresults
             {
                 showNetIncome();
             }
-        }
-
-        private function showTotals():void
-        {
-            var tooltipData:IconEfficiencyTooltipData;
-
-            // stun
-            stunTotalField.value = _xdata.stunNum;
-            stunTotalField.enabled = _xdata.stunNum > 0;
-            tooltipData = new IconEfficiencyTooltipData();
-            tooltipData.setBaseValues(
-                [App.utils.locale.integer(_xdata.damageAssistedStun), _xdata.stunNum, App.utils.locale.float(_xdata.stunDuration)],
-                stunNames,
-                3);
-            tooltips[BATTLE_EFFICIENCY_TYPES.STUN] = tooltipData;
-
-            // spotted
-            spottedTotalField.value = _xdata.spotted;
-            spottedTotalField.enabled = _xdata.spotted > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.DETECTION] = new IconEfficiencyTooltipData();
-
-            // kills
-            killsTotalField.value = _xdata.kills;
-            killsTotalField.enabled = _xdata.kills > 0;
-            tooltips[BATTLE_EFFICIENCY_TYPES.DESTRUCTION] = new IconEfficiencyTooltipData();
-
-            // damage
-            damageTotalField.value = _xdata.piercings;
-            damageTotalField.enabled = _xdata.piercings > 0;
-            tooltipData = new IconEfficiencyTooltipData();
-            tooltipData.setBaseValues(
-                [App.utils.locale.integer(_xdata.damageDealt), _xdata.piercings],
-                damageDealtNames,
-                2);
-            tooltips[BATTLE_EFFICIENCY_TYPES.DAMAGE] = tooltipData;
-
-            // armor
-            armorTotalField.value = _xdata.nonPenetrationsCount;
-            armorTotalField.enabled = _xdata.nonPenetrationsCount > 0;
-            tooltipData = new IconEfficiencyTooltipData();
-            tooltipData.setBaseValues(
-                [_xdata.ricochetsCount, _xdata.nonPenetrationsCount, App.utils.locale.integer(_xdata.damageBlockedByArmor)],
-                armorNames,
-                3);
-            tooltips[BATTLE_EFFICIENCY_TYPES.ARMOR] = tooltipData;
-
-            // assist (radio/tracks)
-            damageAssistedTotalField.value = _xdata.damageAssistedCount;
-            damageAssistedTotalField.enabled = _xdata.damageAssistedCount > 0;
-            tooltipData = new IconEfficiencyTooltipData();
-            tooltipData.totalAssistedDamage = _xdata.damageAssisted;
-            tooltipData.setBaseValues(
-                [App.utils.locale.integer(_xdata.damageAssistedRadio), App.utils.locale.integer(_xdata.damageAssistedTrack), App.utils.locale.integer(_xdata.damageAssisted)],
-                damageAssistedNames,
-                3);
-            tooltips[BATTLE_EFFICIENCY_TYPES.ASSIST] = tooltipData;
-
-            // crits
-            critsTotalField.value = _xdata.critsCount;
-            critsTotalField.enabled = _xdata.critsCount > 0;
-            tooltipData = new IconEfficiencyTooltipData();
-            //tooltipData.setCritValues(_xdata.criticalDevices, _xdata.destroyedTankmen, _xdata.destroyedDevices, _xdata.critsCount);
-            tooltips[BATTLE_EFFICIENCY_TYPES.CRITS] = tooltipData;
         }
 
         private function showExtendedInfo():void
