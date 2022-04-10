@@ -172,8 +172,8 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
 
 # low ammo => vehicle not ready (disable red button)
 @overrideMethod(BaseVehicleActionsValidator, '_validate')
-def _BaseVehicleActionsValidator_validate(base, self):
-    res = base(self)
+def _BaseVehicleActionsValidator_validate(base, self, vehicles = None, invalidStates = None):
+    res = base(self, vehicles, invalidStates)
     if isInBootcamp():
         return res
     elif g_currentVehicle.isOnlyForEventBattles():
