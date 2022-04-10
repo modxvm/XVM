@@ -48,7 +48,13 @@ class _Contacts:
         self.contacts_disabled = False
 
 
-    def initialize(self):
+    def initialize(self): 
+        #
+        # TODO: 1.16.0,1.16.1: disable contacts
+        #
+        self.contacts_disabled = True
+        return
+
         try:
             self.is_available = False
 

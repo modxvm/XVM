@@ -46,7 +46,7 @@ package com.xvm.lobby
             "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
             "hangar": [ CrewXvmView, HangarXvmView ],
             "battleResults": [ BattleResultsXvmView ],
-            "ContactsPopover": [ ContactsXvmView ],
+            //"ContactsPopover": [ ContactsXvmView ],
             "profile": [ ProfileXvmView ],
             "profileWindow": [ ProfileXvmView ],
             "techtree": [ TechTreeXvmView ],
