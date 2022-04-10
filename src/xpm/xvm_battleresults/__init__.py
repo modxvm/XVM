@@ -123,7 +123,7 @@ class XvmDataBlock(base.StatsBlock):
             'ricochetsCount': 0,
             'nonPenetrationsCount': 0}
 
-        for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
+        for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result, reusable):
             #log(vData)
             #log from 1.5.0.0: https://koreanrandom.com/forum/topic/49651-
 
@@ -194,7 +194,7 @@ def appendTotalData(total, data):
     total['ricochetsCount'] += data['ricochetsCount']
     total['nonPenetrationsCount'] += data['nonPenetrationsCount']
 
-_XVM_DATA_STATS_BLOCK = XvmDataBlock(base.DictMeta(), 'xvm_data', BATTLE_RESULTS_RECORD.PERSONAL)
+_XVM_DATA_STATS_BLOCK = XvmDataBlock(base.DictMeta(), 'xvm_data')
 
 @overrideMethod(composer.StatsComposer, '__init__')
 def _StatsComposer__init__(base, self, *args):
