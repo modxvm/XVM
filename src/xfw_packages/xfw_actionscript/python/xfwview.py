@@ -167,6 +167,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_royale']
                 elif arenaGuiType == ARENA_GUI_TYPE.EVENT_BATTLES:
                     as_paths += ['as_battle_event']
+                elif arenaGuiType == ARENA_GUI_TYPE.RTS or arenaGuiType == ARENA_GUI_TYPE.RTS_TRAINING or arenaGuiType == ARENA_GUI_TYPE.RTS_BOOTCAMP :
+                    as_paths += ['as_battle_rts']
                 else:
                     as_paths += ['as_battle_classic']
             else:

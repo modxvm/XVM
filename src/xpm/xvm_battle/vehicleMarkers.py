@@ -182,6 +182,9 @@ class VehicleMarkers(object):
                (self.guiType != constants.ARENA_GUI_TYPE.TUTORIAL) and \
                (self.battleType != constants.ARENA_BONUS_TYPE.TUTORIAL) and \
                (self.guiType != constants.ARENA_GUI_TYPE.EVENT_BATTLES) and \
+               (self.guiType != constants.ARENA_GUI_TYPE.RTS) and \
+               (self.guiType != constants.ARENA_GUI_TYPE.RTS_TRAINING) and \
+               (self.guiType != constants.ARENA_GUI_TYPE.RTS_BOOTCAMP) and \
                (self.battleType != constants.ARENA_BONUS_TYPE.EVENT_BATTLES)
 
     @property

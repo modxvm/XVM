@@ -110,6 +110,9 @@ package com.xvm
         public static const WEEKEND_BRAWL:Number = 36;
         public static const MAPBOX:Number = 37;
         public static const MAPS_TRAINING:Number = 38;
+        public static const RTS:Number = 39;
+        public static const RTS_1x1:Number = 40;
+        public static const RTS_BOOTCAMP:Number = 41;
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
@@ -153,6 +156,7 @@ package com.xvm
         public static const APP_TYPE_VEHICLE_MARKERS:int =   0x0020;
         public static const APP_TYPE_BATTLE_ROYALE:int =     0x0040;
         public static const APP_TYPE_BATTLE_EVENT:int =      0x0080;
-        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED | APP_TYPE_BATTLE_ROYALE | APP_TYPE_BATTLE_EVENT;
+        public static const APP_TYPE_BATTLE_RTS:int =        0x0100;
+        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED | APP_TYPE_BATTLE_ROYALE | APP_TYPE_BATTLE_EVENT | APP_TYPE_BATTLE_RTS;
     }
 }

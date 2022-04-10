@@ -135,6 +135,9 @@ package com.xvm
                 case 36: return 'weekend_brawl';
                 case 37: return 'mapbox';
                 case 38: return 'maps_training';
+                case 39: return 'rts';
+                case 40: return 'rts_1x1';
+                case 41: return 'rts_bootcamp';
                 default: return 'unknown';
             }
         }

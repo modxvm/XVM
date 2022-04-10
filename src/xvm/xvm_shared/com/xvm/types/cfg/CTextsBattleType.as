@@ -42,6 +42,9 @@ package com.xvm.types.cfg
         public var tutorial:String;
         public var unknown:String;
         public var weekend_brawl:String;
+        public var rts:String;
+        public var rts_1x1:String;
+        public var rts_bootcamp:String;
 
         public function clone():*
         {
