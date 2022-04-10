@@ -1,17 +1,17 @@
 package com.xvm.wg
 {
-    //import net.wg.infrastructure.base.meta.impl.ImageManagerMeta;
-    import net.wg.infrastructure.managers.IImageManager;
-    import flash.utils.Dictionary;
-    import net.wg.infrastructure.managers.ILoaderManager;
-    import net.wg.data.constants.ImageCacheTypes;
     import flash.events.Event;
     import flash.events.IOErrorEvent;
+	import flash.utils.Dictionary;
+
+    import net.wg.data.constants.ImageCacheTypes;
+	import net.wg.infrastructure.base.meta.impl.ImageManagerMeta;
     import net.wg.infrastructure.events.LoaderEvent;
     import net.wg.infrastructure.interfaces.IImageData;
-    //import org.idmedia.as3commons.util.StringUtils;
+    import net.wg.infrastructure.managers.IImageManager;
+	import net.wg.infrastructure.managers.ILoaderManager;
 
-    public class ImageManagerWG extends ImageManagerMetaWG implements IImageManager
+    public class ImageManagerWG extends ImageManagerMeta implements IImageManager
     {
         // <xvm>
         private static var _imageMgr:IImageManager = null;
@@ -122,7 +122,7 @@ package com.xvm.wg
             this.initCache();
         }
 
-        public override final function dispose() : void
+        override protected function onDispose() : void
         {
             var _loc1_:ImageData = null;
             if(this._init)
@@ -144,6 +144,7 @@ package com.xvm.wg
                 _loc1_.dispose();
             }
             this._cache = null;
+			super.onDispose();
         }
 
         public function getImageData(param1:String, param2:int = 1) : IImageData
