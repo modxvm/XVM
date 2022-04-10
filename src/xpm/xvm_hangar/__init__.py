@@ -265,7 +265,7 @@ def updateBatteleCount(base, self):
 def shouldHide(base, self):
     if not config.get('hangar/showDailyQuestWidget', True):
         return True
-    base(self)
+    return base(self)
 
 # hide display pop-up window when receiving progressive decals
 @overrideMethod(ProgressiveItemsRewardHandler, '_showAward')
