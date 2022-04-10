@@ -45,8 +45,11 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         if linkage == 'EpicStatsUI' and not config.get('battleResults/showStandardFrontLineInterface', True):
             linkage = 'CommonStats'
 
-        if linkage == 'CommonStats':
-            linkage = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+        #
+        # TODO 1.16.1: disable BattleResulsts
+        #
+        # if linkage == 'CommonStats':
+        #    linkage = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
 
         if linkage == 'com.xvm.lobby.ui.battleresults::UI_CommonStats':
             data['tabInfo'][0]['linkage'] = linkage
@@ -56,8 +59,9 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
             data['xvm_data']['arenaUniqueID'] = str(self._BattleResultsWindow__arenaUniqueID)
             data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'], separators=(',',':'))
-
-        del data['xvm_data']
+    
+        if 'xvm_data' in data:
+            del data['xvm_data']
     except Exception as ex:
         err(traceback.format_exc())
     return base(self, data)
