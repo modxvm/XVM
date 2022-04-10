@@ -77,7 +77,7 @@ def ProfileTechnique_receiveVehicleDossier(base, self, vehCD, accountDBID):
     _lastVehCD = None
 
     if config.networkServicesSettings.statAwards:
-        if self._isDAAPIInited():
+        if self._isDAAPIInited() and hasattr(self.flashObject, 'as_responseVehicleDossierXvm'):
             vDossier = dossier.getDossier(self._battlesType, accountDBID, vehCD)
             self.flashObject.as_responseVehicleDossierXvm(vDossier)
 
