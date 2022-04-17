@@ -252,8 +252,7 @@ package com.xvm.battle
 
         private function createWatermark():void
         {
-            _watermark = new MovieClip();
-            var textField:TextField = new TextField();
+             var textField:TextField = new TextField();
             textField.width = 200;
             textField.height = 50;
             textField.mouseEnabled = false;
@@ -262,10 +261,15 @@ package com.xvm.battle
             textField.wordWrap = false;
             textField.defaultTextFormat = new TextFormat("$FieldFont", 12, 0xFFFFFF, null, null, null, null, null, TextFormatAlign.CENTER, null, null, null, -2);
             textField.htmlText = "XVM Nightly Build <b>#" + Config.config.__xvmRevision + "</b>\nget stable version on https://modxvm.com";
+            
+            _watermark = new MovieClip();
             _watermark.addChild(textField);
             _watermark.x = -100;
             _watermark.y = 50;
             _watermark.alpha = 0;
+            _watermark.mouseEnabled = false;
+            _watermark.mouseChildren = false;
+            
             MovieClip(battlePage.prebattleTimer).win.addChildAt(_watermark, 0);
             App.utils.scheduler.scheduleTask(function():void { TweenLite.to(_watermark, 5, {alpha: 0.4}); }, 7000);
         }
