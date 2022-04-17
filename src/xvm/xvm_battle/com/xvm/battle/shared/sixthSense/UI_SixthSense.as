@@ -22,6 +22,8 @@ package com.xvm.battle.shared.sixthSense
         public function UI_SixthSense()
         {
             super();
+            mouseEnabled = false;
+            
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             _loader = new ImageXVM();
             _loader.addEventListener(Event.COMPLETE, onImageSuccessLoadHandler, false, 0, true);
