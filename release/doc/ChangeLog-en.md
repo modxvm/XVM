@@ -1,4 +1,12 @@
-﻿﻿### XVM 9.0.0
+﻿﻿### XVM 9.1.0
+
+  * Compatibility with World of Tanks 1.16.1.0
+
+  #### damageLog, hitLog
+
+  * Added "high_explosive_stun" parameter to "type-shell" and "c:type-shell" sections.
+
+### XVM 9.0.0
 
   * Compatibility with World of Tanks 1.16.0.0
 

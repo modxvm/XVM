@@ -392,7 +392,7 @@ class Data(object):
         for shot in attacker['vehicleType'].gun.shots:
             _shell = shot.shell
             if effectsIndex == _shell.effectsIndex:
-                self.data['shellKind'] = str(_shell.kind).lower()
+                self.data['shellKind'] = str(_shell.kind).lower() if not _shell.hasStun else 'high_explosive_stun'
                 self.data['caliber'] = _shell.caliber
                 self.data['shellDamage'] = _shell.damage[0]
                 _id = _shell.id
