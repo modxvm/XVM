@@ -131,22 +131,24 @@
       // Shell kind (macro {{type-shell}}).
       // Тип снаряда (макрос {{type-shell}}).
       "type-shell": {
-        "armor_piercing":    "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:armor_piercing}}</font>",    // armor piercing / бронебойный.
-        "high_explosive":    "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:high_explosive}}</font>",    // high explosive / осколочно-фугасный.
-        "armor_piercing_cr": "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:armor_piercing_cr}}</font>", // armor piercing composite rigid / бронебойный подкалиберный.
-        "armor_piercing_he": "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:armor_piercing_he}}</font>", // armor piercing high explosive / бронебойно-фугасный.
-        "hollow_charge":     "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:hollow_charge}}</font>",     // high explosive anti-tank / кумулятивный.
-        "not_shell": "НД"                                                                                         // another source of damage / другой источник урона.
+        "armor_piercing":      "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:armor_piercing}}</font>",    // armor piercing / бронебойный.
+        "high_explosive":      "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:high_explosive}}</font>",    // high explosive / осколочно-фугасный.
+        "high_explosive_stun": "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:high_explosive}}</font>",    // stunning high explosive / оглушающий осколочно-фугасный.
+        "armor_piercing_cr":   "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:armor_piercing_cr}}</font>", // armor piercing composite rigid / бронебойный подкалиберный.
+        "armor_piercing_he":   "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:armor_piercing_he}}</font>", // armor piercing high explosive / бронебойно-фугасный.
+        "hollow_charge":       "<font color='{{c:costShell}}' face='$FieldFont'>{{l10n:hollow_charge}}</font>",     // high explosive anti-tank / кумулятивный.
+        "not_shell": "НД"                                                                                           // another source of damage / другой источник урона.
       },
       // Color by shell kind (macro {{c:type-shell}}).
       // Цвет по типу снаряда (макрос {{c:type-shell}}).
       "c:type-shell": {
-        "armor_piercing": "#CCCCCC",    // armor piercing / бронебойный.
-        "high_explosive": "#CCCCCC",    // high explosive / осколочно-фугасный.
-        "armor_piercing_cr": "#CCCCCC", // armor piercing composite rigid / бронебойный подкалиберный.
-        "armor_piercing_he": "#CCCCCC", // armor piercing high explosive / бронебойно-фугасный.
-        "hollow_charge": "#CCCCCC",     // high explosive anti-tank / кумулятивный.
-        "not_shell": "#CCCCCC"          // another source of damage / другой источник урона.
+        "armor_piercing": "#CCCCCC",      // armor piercing / бронебойный.
+        "high_explosive": "#CCCCCC",      // high explosive / осколочно-фугасный.
+        "high_explosive_stun": "#CCCCCC", // stunning high explosive / оглушающий осколочно-фугасный.
+        "armor_piercing_cr": "#CCCCCC",   // armor piercing composite rigid / бронебойный подкалиберный.
+        "armor_piercing_he": "#CCCCCC",   // armor piercing high explosive / бронебойно-фугасный.
+        "hollow_charge": "#CCCCCC",       // high explosive anti-tank / кумулятивный.
+        "not_shell": "#CCCCCC"            // another source of damage / другой источник урона.
       },
       // Vehicle type (macro {{vtype}}).
       // Тип техники (макрос {{vtype}}).
