@@ -403,6 +403,13 @@ package com.xvm.battle
                 return ps && ps.damageInfo && ps.damageInfo.damageType ? ps.damageInfo.damageType : null;
             }
 
+            // {{dmg-color-key}}
+            m_globals["dmg-color-key"] = function(o:IVOMacrosOptions):String
+            {
+                var ps:VOPlayerState = o as VOPlayerState;
+                return ps ? getDamageSystemColorKey(ps) : null;
+            }
+
             // {{c:dmg}}
             m_globals["c:dmg"] = function(o:IVOMacrosOptions):String
             {
@@ -450,36 +457,55 @@ package com.xvm.battle
             return o ? parseInt(Config.config.colors.system[getSystemColorKey(o/*, isBase*/)]) : NaN;
         }
 
+        private static function isDamageDelta(o:VOPlayerState):Boolean
+        {
+            return o ? (o.damageInfo ? (o.damageInfo.damageDelta ? true : false) : false) : false;
+        }
+
         private static function getDamageSystemColor(o:VOPlayerState):Number
         {
-            if (o)
+            if (isDamageDelta(o))
             {
-                if (o.damageInfo)
+                switch (o.damageInfo.damageType)
                 {
-                    if (o.damageInfo.damageDelta)
-                    {
-                        switch (o.damageInfo.damageType)
-                        {
-                            //case "world_collision":
-                            case "death_zone":
-                            //case "drowning":
-                                return getDmgKindValue(o.damageInfo.damageType);
-                            default:
-                                return getDmgSrcColorValue(o);
-                        }
-                    }
+                    //case "world_collision":
+                    case "death_zone":
+                    //case "drowning":
+                        return getDmgKindValue(o.damageInfo.damageType);
+                    default:
+                        return getDmgSrcColorValue(o);
                 }
             }
             return NaN;
         }
 
-        private static function getDmgSrcColorValue(o:VOPlayerState):Number
+        private static function getDamageSystemColorKey(o:VOPlayerState):String
         {
-            if (!o)
-                return NaN;
+            if (isDamageDelta(o))
+            {
+                switch (o.damageInfo.damageType)
+                {
+                    //case "world_collision":
+                    case "death_zone":
+                    //case "drowning":
+                        return o.damageInfo.damageType;
+                    default:
+                        return getDmgSrcColorValueKey(o);
+                }
+            }
+            return null;
+        }
+
+        private static function getDmgSrcColorValueKey(o:VOPlayerState):String
+        {
             var damageSource:String = damageFlagToDamageSource(o.damageInfo.damageFlag);
             var damageDest:String = o.isTeamKiller ? (o.isAlly ? "ally" : "enemy") + "tk" : getEntityName(o);
-            var key:String = damageSource + "_" + damageDest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
+            return damageSource + "_" + damageDest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
+        }
+
+        private static function getDmgSrcColorValue(o:VOPlayerState):Number
+        {
+            var key:String = getDmgSrcColorValueKey(o);
             if (Config.config.colors.damage[key] == null)
                 return NaN;
             var value:int = XfwUtils.toInt(Config.config.colors.damage[key], -1);
