@@ -2,6 +2,10 @@
 
   * Совместимость с World of Tanks 1.16.1.0
 
+  #### Бой
+
+  * Добавлен макрос `{{dmg-color-key}}`
+
   #### damageLog, hitLog
 
   * В секции "type-shell" и "c:type-shell" добавлен параметр "high_explosive_stun"

@@ -80,6 +80,7 @@ Legend:
 │ D │ {{dmg-kind}}       │   │   │   │   │ X │   │ damage kind (attack, fire, ramming, ...)
 │ D │ {{dmg-kind-key}}   │   │   │   │   │ X │   │ damage kind table key value (shot, fire, ramming, ...)
 │ D │ {{c:dmg}}          │   │   │   │   │ X │   │ color depending on damage source
+│ D │ {{dmg-color-key}}  │   │   │   │   │ X │   │ table key name by damage source
 │ D │ {{c:dmg-kind}}     │   │   │   │   │ X │   │ color depending on damage kind
 │S/D│ {{py:f()}}         │ X │ X │ X │ X │ X │ X │ dynamic python function call
 └───┴────────────────────┴───┴───┴───┴───┴───┴───┴─────────────────────────────────────────
