@@ -1,170 +1,7 @@
-diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm battleVehicleMarkersApp.orig-0/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm	2019-09-10 14:49:48.950541200 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm	2019-09-10 15:19:32.275344100 +0300
-@@ -41,6 +41,159 @@
-       getlocal0
-       pushscope
- 
-+      getlocal0
-+      pushstring          "../../../mods/xfw_packages/xvm_battle/as_battle/xvm_vehiclemarkers_ui.swf"
-+      callpropvoid        QName(PackageNamespace(""), "loadXvm"), 1
-+
-+      returnvoid
-+     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-+  trait method QName(PackageNamespace(""), "loadXvm")
-+   method
-+    param QName(PackageNamespace(""), "String")
-+    returns QName(PackageNamespace(""), "void")
-+    body
-+     maxstack 5
-+     localcount 3
-+     initscopedepth 11
-+     maxscopedepth 12
-+     code
-+      getlocal0
-+      pushscope
-+
-+      findpropstrict      QName(PackageNamespace("flash.display"), "Loader")
-+      constructprop       QName(PackageNamespace("flash.display"), "Loader"), 0
-+      coerce              QName(PackageNamespace("flash.display"), "Loader")
-+      setlocal2
-+
-+      findpropstrict      QName(PackageNamespace(""), "addChild")
-+      getlocal2
-+      callpropvoid        QName(PackageNamespace(""), "addChild"), 1
-+
-+      getlocal2
-+      getproperty         QName(PackageNamespace(""), "contentLoaderInfo")
-+      getlex              QName(PackageNamespace("flash.events"), "Event")
-+      getproperty         QName(PackageNamespace(""), "COMPLETE")
-+      getlocal0
-+      getproperty         QName(PackageNamespace(""), "onSWFLoadedXvm")
-+      callpropvoid        QName(PackageNamespace(""), "addEventListener"), 2
-+
-+      getlocal2
-+      getproperty         QName(PackageNamespace(""), "contentLoaderInfo")
-+      getlex              QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+      getproperty         QName(PackageNamespace(""), "IO_ERROR")
-+      getlocal0
-+      getproperty         QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+      callpropvoid        QName(PackageNamespace(""), "addEventListener"), 2
-+
-+      getlocal2
-+      findpropstrict      QName(PackageNamespace("flash.net"), "URLRequest")
-+      getlocal1
-+      constructprop       QName(PackageNamespace("flash.net"), "URLRequest"), 1
-+      findpropstrict      QName(PackageNamespace("flash.system"), "LoaderContext")
-+      pushfalse
-+      getlex              QName(PackageNamespace("flash.system"), "ApplicationDomain")
-+      getproperty         QName(PackageNamespace(""), "currentDomain")
-+      constructprop       QName(PackageNamespace("flash.system"), "LoaderContext"), 2
-+      callpropvoid        QName(PackageNamespace(""), "load"), 2
-+
-+      returnvoid
-+     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-+  trait method QName(PackageNamespace(""), "onSWFLoadedXvm")
-+   method
-+    param QName(PackageNamespace("flash.events"), "Event")
-+    returns QName(PackageNamespace(""), "void")
-+    body
-+     maxstack 4
-+     localcount 3
-+     initscopedepth 11
-+     maxscopedepth 12
-+     code
-+      getlocal0
-+      pushscope
-+
-+      getlocal1
-+      getproperty         QName(PackageNamespace(""), "currentTarget")
-+      getlex              QName(PackageNamespace("flash.display"), "LoaderInfo")
-+      astypelate
-+      coerce              QName(PackageNamespace("flash.display"), "LoaderInfo")
-+      setlocal2
-+
-+      getlocal2
-+      getlex              QName(PackageNamespace("flash.events"), "Event")
-+      getproperty         QName(PackageNamespace(""), "INIT")
-+      getlocal0
-+      getproperty         QName(PackageNamespace(""), "onSWFLoadedXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
-+
-+      getlocal2
-+      getlex              QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+      getproperty         QName(PackageNamespace(""), "IO_ERROR")
-+      getlocal0
-+      getproperty         QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
-+
-+      findpropstrict      QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback")
-+      callpropvoid        QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback"), 0
-+
-+      getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
-+      pushstring          "xvm.cmd"
-+      pushstring          "xfw.log"
-+      pushstring          "[VM] registered"
-+      callpropvoid        QName(PackageNamespace(""), "call"), 3
-+
-+      returnvoid
-+     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-+  trait method QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+   method
-+    param QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+    returns QName(PackageNamespace(""), "void")
-+    body
-+     maxstack 5
-+     localcount 3
-+     initscopedepth 11
-+     maxscopedepth 12
-+     code
-+      getlocal0
-+      pushscope
-+
-+      getlocal1
-+      getproperty         QName(PackageNamespace(""), "currentTarget")
-+      getlex              QName(PackageNamespace("flash.display"), "LoaderInfo")
-+      astypelate
-+      coerce              QName(PackageNamespace("flash.display"), "LoaderInfo")
-+      setlocal2
-+
-+      getlocal2
-+      getlex              QName(PackageNamespace("flash.events"), "Event")
-+      getproperty         QName(PackageNamespace(""), "INIT")
-+      getlocal0
-+      getproperty         QName(PackageNamespace(""), "onSWFLoadedXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
-+
-+      getlocal2
-+      getlex              QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+      getproperty         QName(PackageNamespace(""), "IO_ERROR")
-+      getlocal0
-+      getproperty         QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
-+
-+      getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
-+      pushstring          "xvm.cmd"
-+      pushstring          "xfw.log"
-+      pushstring          "[XVM] Error loading xvm_vehiclemarkers_ui.swf: "
-+      getlocal1
-+      add
-+      callpropvoid        QName(PackageNamespace(""), "call"), 3
-+
-       findpropstrict      QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback")
-       callpropvoid        QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback"), 0
- 
 diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-04-09 20:08:59.979825600 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-04-09 20:11:21.283299600 +0300
-@@ -1915,6 +1915,24 @@
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-05-28 14:20:43.836763500 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-05-28 14:23:28.967011700 +0300
+@@ -2029,6 +2029,24 @@
      end ; body
     end ; method
    end ; trait
@@ -186,10 +23,10 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait method QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateMarkerSettings")
+   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateMarkerSettings")
     method
-     refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarker:updateMarkerSettings"
-@@ -1933,6 +1951,13 @@
+     refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/updateMarkerSettings"
+@@ -2047,6 +2065,13 @@
        setlocal            9
  
        getlocal0
@@ -200,38 +37,33 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +
 +XVMACTIVE:
 +      getlocal0
-       getlex              QName(PackageNamespace(""), "ICON")
-       callproperty        QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
+       getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "ICON")
+       callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
        convert_b
-diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2021-12-03 00:25:07.919767000 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2021-12-03 00:25:51.706027700 +0300
-@@ -843,6 +843,28 @@
+@@ -4076,6 +4101,26 @@
      end ; body
     end ; method
    end ; trait
-+  trait method QName(PackageNamespace(""), "as_xvm_cmd")
++  trait method QName(PackageNamespace(""), "xfw_updateIconColor")
 +   method
-+    flag NEED_REST
++    returns QName(PackageNamespace(""), "void")
 +    body
-+     maxstack 3
-+     localcount 2
-+     initscopedepth 9
-+     maxscopedepth 10
++     maxstack 1
++     localcount 1
++     initscopedepth 15
++     maxscopedepth 16
 +     code
 +      getlocal0
 +      pushscope
 +
-+      getlex              QName(PackageNamespace("com.xfw"), "Xfw")
-+      getproperty         QName(PackageNamespace(""), "as_xfw_cmd")
 +      getlocal0
-+      getlocal1
-+      callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "apply"), 2
-+      returnvalue
++      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateIconColor"), 0
++
++      returnvoid
 +     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
++     end ; body
++    end ; method
++   end ; trait
   end ; instance
   cinit
-   refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager/class/init"
+   refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/class/init"

@@ -99,14 +99,14 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/profile/pages/technique/TechniqueS
     method
      refid "net.wg.gui.lobby.profile.pages.technique:TechniqueStatisticTab/instance/update"
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.class.asasm lobby.orig-0/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.class.asasm
---- lobby.orig-0.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.class.asasm	2017-08-04 10:20:59.708574900 +0300
-+++ lobby.orig-0/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.class.asasm	2017-08-04 10:33:14.131594700 +0300
-@@ -25,6 +25,8 @@
+--- lobby.orig-0.orig/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.class.asasm	2022-05-28 14:01:17.586597600 +0300
++++ lobby.orig-0/net/wg/gui/lobby/profile/pages/technique/data/TechniqueListVehicleVO.class.asasm	2022-05-28 14:00:58.445036200 +0300
+@@ -27,6 +27,8 @@
      end ; code
     end ; body
    end ; method
 +  trait slot QName(PackageNamespace(""), "xvm_xte") type QName(PackageNamespace(""), "int") end
 +  trait slot QName(PackageNamespace(""), "xvm_xte_flag") type QName(PackageNamespace(""), "int") end
-   trait slot QName(PackageNamespace(""), "id") type QName(PackageNamespace(""), "int") end
-   trait slot QName(PackageNamespace(""), "inventoryID") type QName(PackageNamespace(""), "int") end
-   trait slot QName(PackageNamespace(""), "nationID") type QName(PackageNamespace(""), "int") end
+   trait slot QName(PackageNamespace(""), "id") type QName(PackageNamespace(""), "int") value Integer(-1) end
+   trait slot QName(PackageNamespace(""), "inventoryID") type QName(PackageNamespace(""), "int") value Integer(-1) end
+   trait slot QName(PackageNamespace(""), "nationID") type QName(PackageNamespace(""), "int") value Integer(-1) end

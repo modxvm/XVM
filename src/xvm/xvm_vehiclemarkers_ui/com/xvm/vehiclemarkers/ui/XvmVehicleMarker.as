@@ -188,7 +188,7 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 		
-		override protected function setupVehicleIcon():void
+		private final function setupVehicleIcon():void
         {
 			var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
 			
@@ -197,7 +197,7 @@ package com.xvm.vehiclemarkers.ui
             if (atlasManager.isAtlasInitialized(atlasName))
             {
                 RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-				updateIconColor();
+				XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
             }
         }
 

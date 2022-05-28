@@ -1,0 +1,32 @@
+diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2021-12-03 00:25:07.919767000 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2021-12-03 00:25:51.706027700 +0300
+@@ -843,6 +843,28 @@
+     end ; body
+    end ; method
+   end ; trait
++  trait method QName(PackageNamespace(""), "as_xvm_cmd")
++   method
++    flag NEED_REST
++    body
++     maxstack 3
++     localcount 2
++     initscopedepth 9
++     maxscopedepth 10
++     code
++      getlocal0
++      pushscope
++
++      getlex              QName(PackageNamespace("com.xfw"), "Xfw")
++      getproperty         QName(PackageNamespace(""), "as_xfw_cmd")
++      getlocal0
++      getlocal1
++      callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "apply"), 2
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+  end ; instance
+  cinit
+   refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager/class/init"
