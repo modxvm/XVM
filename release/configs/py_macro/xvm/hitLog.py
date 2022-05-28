@@ -884,7 +884,7 @@ def _Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, dam
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__onArenaVehicleKilled')
-def __onArenaVehicleKilled(self, targetID, attackerID, equipmentID, reason):
+def __onArenaVehicleKilled(self, targetID, attackerID, equipmentID, reason, numVehiclesAffected):
     if self.playerVehicleID != attackerID:
         g_hitLogs.removePlayerFromLogs(targetID)
 

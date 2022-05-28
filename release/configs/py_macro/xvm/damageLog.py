@@ -499,7 +499,7 @@ class Data(object):
         if (not self.data['isDamage']) and (self.data['hitEffect'] in ('armor_pierced_no_damage', 'critical_hit')):
             self.updateData()
 
-    def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVeh):
+    def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
         dataUpdate = {
             'attackerID': entityID,
             'costShell': 'unknown',
@@ -988,9 +988,9 @@ def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeI
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
-def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun, supplyDamage, showSumIcon):
+def DamageLogPanel_as_summaryStatsS(base, self, damage, blocked, assist, stun):
     if not (_config.get(DAMAGE_LOG_DISABLED_SUMMARY_STATS) and isShowDamageLog):
-        return base(self, damage, blocked, assist, stun, supplyDamage, showSumIcon)
+        return base(self, damage, blocked, assist, stun)
 
 
 @overrideMethod(DamageLogPanel, 'as_updateSummaryDamageValueS')
@@ -1041,7 +1041,7 @@ def Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReason
 
 
 @registerEvent(PlayerAvatar, 'showVehicleDamageInfo')
-def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVeh):
+def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID):
     global isImpact
     if self.playerVehicleID == vehicleID:
         if not isImpact:
@@ -1050,7 +1050,7 @@ def PlayerAvatar_showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex,
             if isImpact:
                 as_event(EVENTS_NAMES.ON_IMPACT)
         if isShowDamageLog:
-            data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVeh)
+            data.showVehicleDamageInfo(self, vehicleID, damageIndex, extraIndex, entityID, equipmentID)
 
 
 @registerEvent(PlayerAvatar, 'updateVehicleHealth')

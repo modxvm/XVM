@@ -18,7 +18,7 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, events
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
-from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin, getVehicleDamageType
+from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin
 
 from xfw import *
 from xvm_main.python.consts import *
@@ -148,7 +148,7 @@ def _VehicleMarkerPlugin__updateVehicleHealth(base, self, vehicleID, handle, new
             self._invokeMarker(handle,
                                'updateHealth',
                                newHealth,
-                               getVehicleDamageType(aInfo, self._playerVehicleID, self.sessionProvider),
+                               self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
                                '{},{}'.format(constants.ATTACK_REASONS[attackReasonID], str(attackerID)))
             return
     base(self, vehicleID, handle, newHealth, aInfo, attackReasonID)
