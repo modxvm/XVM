@@ -1,7 +1,6 @@
 from Avatar import PlayerAvatar
 from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
-from collections import defaultdict
 from constants import ARENA_GUI_TYPE, VEHICLE_SIEGE_STATE, VEHICLE_HIT_FLAGS as VHF
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
@@ -204,22 +203,20 @@ def isPlayerVehicle():
 def _onTotalEfficiencyUpdated(self, diff):
     global totalDamage, totalAssist, totalBlocked, numberHitsBlocked, old_totalDamage, damage, totalStun
     if battle.isBattleTypeSupported and isPlayerVehicle():
-        vehicleId = self._DamageLogPanel__vehStateCtrl.getControllingVehicleID()
-        vehTotalValues = diff.get(vehicleId, defaultdict(int))
         isUpdate = False
-        if PERSONAL_EFFICIENCY_TYPE.DAMAGE in vehTotalValues:
-            totalDamage = vehTotalValues[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
+        if PERSONAL_EFFICIENCY_TYPE.DAMAGE in diff:
+            totalDamage = diff[PERSONAL_EFFICIENCY_TYPE.DAMAGE]
             damage = totalDamage - old_totalDamage
             old_totalDamage = totalDamage
             isUpdate = True
-        if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in vehTotalValues:
-            totalAssist = vehTotalValues[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
+        if PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE in diff:
+            totalAssist = diff[PERSONAL_EFFICIENCY_TYPE.ASSIST_DAMAGE]
             isUpdate = True
-        if PERSONAL_EFFICIENCY_TYPE.STUN in vehTotalValues:
-            totalStun = vehTotalValues[PERSONAL_EFFICIENCY_TYPE.STUN]
+        if PERSONAL_EFFICIENCY_TYPE.STUN in diff:
+            totalStun = diff[PERSONAL_EFFICIENCY_TYPE.STUN]
             isUpdate = True
-        if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in vehTotalValues:
-            totalBlocked = vehTotalValues[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
+        if PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE in diff:
+            totalBlocked = diff[PERSONAL_EFFICIENCY_TYPE.BLOCKED_DAMAGE]
             numberHitsBlocked = (numberHitsBlocked + 1) if totalBlocked else 0
             isUpdate = True
         if isUpdate:
