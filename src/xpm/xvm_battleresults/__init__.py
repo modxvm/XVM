@@ -127,7 +127,7 @@ class XvmDataBlock(base.StatsBlock):
             'ricochetsCount': 0,
             'nonPenetrationsCount': 0}
 
-        for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result, reusable):
+        for typeCompDescr, vData in reusable.personal.getVehicleCDsIterator(result):
             #log(vData)
             #log from 1.5.0.0: https://koreanrandom.com/forum/topic/49651-
 
