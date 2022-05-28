@@ -45,8 +45,11 @@ def BattleResultsWindow_as_setDataS(base, self, data):
         if linkage == 'EpicStatsUI' and not config.get('battleResults/showStandardFrontLineInterface', True):
             linkage = 'CommonStats'
 
-        if linkage == 'CommonStats':
-            linkage = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
+        #
+        # TODO 1.16.1: disable BattleResulsts
+        #
+        # if linkage == 'CommonStats':
+        #    linkage = 'com.xvm.lobby.ui.battleresults::UI_CommonStats'
 
         if linkage == 'com.xvm.lobby.ui.battleresults::UI_CommonStats':
             data['tabInfo'][0]['linkage'] = linkage
