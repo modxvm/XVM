@@ -258,7 +258,7 @@ shellData = ShellData()
 # add to hangar tooltips display the missing experience to unlock the vehicle
 @overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')
 def StatusBlockConstructor_construct(base, self):
-    block, result = base(self)
+    block = base(self)
     if block and config.get('tooltips/showXpToUnlockVeh'):
         try:
             techTreeNode = self.configuration.node
@@ -271,12 +271,12 @@ def StatusBlockConstructor_construct(base, self):
                     icon = "<img src='{}' vspace='{}'".format(RES_ICONS.MAPS_ICONS_LIBRARY_XPCOSTICON_1.replace('..', 'img://gui'), -3)
                     template = "<font face='$TitleFont' size='14'><font color='#ff2717'>{}</font> {}</font> {}"
                     block[0]['data']['text'] = template.format(i18n.makeString(STORAGE.BLUEPRINTS_CARD_CONVERTREQUIRED), need, icon)
-            return block, result
+            return block
         except Exception as ex:
             err(traceback.format_exc())
-            return block, result
+            return block
     else:
-        return block, result
+        return block
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
 @overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
