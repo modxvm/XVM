@@ -54,6 +54,8 @@ def log_version():
     log("    XVM Revision    : %s" % __revision__)
     log("    XVM Branch      : %s" % __branch__)
     log("    XVM Hash        : %s" % __node__)
+    log("    OS              : %s" % platform.system() + " " + platform.release() + " " + platform.machine())
+    log("    OS (Detailed)   : %s" % platform.platform())
     log("    WoT Version     : %s" % WOT_VERSION_FULL)
     log("    WoT Architecture: %s" % platform.architecture()[0])
     log("    Current Time    : %s %+05d" % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
