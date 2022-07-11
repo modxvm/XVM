@@ -24,7 +24,7 @@
 #include "winapi_EnumFontsFamiliesEx.h"
 #include "ttfInfo.h"
 
-#include <MinHook.h>
+#include <xfw_hooks.h>
 #include <Windows.h>
 
 std::map<std::wstring, std::wstring> fontMap;
@@ -46,16 +46,16 @@ std::string ConvertUTF16ToUTF8(const wchar_t* pszTextUTF16) {
 
 PyObject* Py_InitHooks(PyObject* self, PyObject* args)
 {
-    if (MH_CreateHook(&CreateFontW, &CreateFontW_Detour, reinterpret_cast<void**>(&CreateFontW_trampoline)) != MH_OK)
+    if (!XFW::Hooks::HookCreate(&CreateFontW, &CreateFontW_Detour, reinterpret_cast<void**>(&CreateFontW_trampoline)))
         return NULL;
 
-    if (MH_EnableHook(&CreateFontW) != MH_OK)
+    if (!XFW::Hooks::HookEnable(&CreateFontW))
         return NULL;
 
-    if (MH_CreateHook(&EnumFontFamiliesExW, &EnumFontFamiliesExW_Detour, reinterpret_cast<void**>(&EnumFontFamiliesExW_trampoline)) != MH_OK)
+    if (!XFW::Hooks::HookCreate(&EnumFontFamiliesExW, &EnumFontFamiliesExW_Detour, reinterpret_cast<void**>(&EnumFontFamiliesExW_trampoline)))
         return NULL;
 
-    if (MH_EnableHook(&EnumFontFamiliesExW) != MH_OK)
+    if (!XFW::Hooks::HookEnable(&EnumFontFamiliesExW))
         return NULL;
 
     Py_RETURN_TRUE;
@@ -64,8 +64,8 @@ PyObject* Py_InitHooks(PyObject* self, PyObject* args)
 
 PyObject* Py_DeinitHooks(PyObject* self, PyObject* args)
 {
-    MH_DisableHook(&CreateFontW);
-    MH_DisableHook(&EnumFontFamiliesExW);
+    XFW::Hooks::HookDisable(&CreateFontW);
+    XFW::Hooks::HookDisable(&EnumFontFamiliesExW);
 
     Py_RETURN_TRUE;
 }

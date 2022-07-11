@@ -20,10 +20,10 @@ Push-Location $PSScriptRoot
 Import-Module ../../build_lib/library.psm1 -Force -DisableNameChecking
 
 #version
-$version_str = "8.6.0.0"
+$version_str = "9.3.0.0"
 $version = $version_str -replace "\.",","
 
-$xfwnative_url="https://gitlab.com/xvm/xfw/xfw.native/uploads/8babfbe9fe26db9effee2f11c599f6b5/com.modxvm.xfw.native_2.0.9-devel.zip"
+$xfwnative_url="https://gitlab.com/xvm/xfw/xfw.native/uploads/dc6682e03f71dedc3cb9e42e92fbe06e/com.modxvm.xfw.native_2.7.0-devel.zip"
 
 $projects_32=@(
     "xfw_filewatcher"
@@ -68,7 +68,7 @@ function Build-CmakeProject($Name, $Arch = "32bit")
 
 
 
-    cmake -A $msvcarch -T v141_xp "$root/$Name/native/" -DVER_VERSION="${version}" -DVER_VERSION_STR="${version_str}" -DCMAKE_INSTALL_PREFIX="$root/_binaries/$Name/native_$Arch/" -DCMAKE_PREFIX_PATH="$root/_devel/$msvcarch"
+    cmake -A $msvcarch -T v143 "$root/$Name/native/" -DVER_VERSION="${version}" -DVER_VERSION_STR="${version_str}" -DCMAKE_INSTALL_PREFIX="$root/_binaries/$Name/native_$Arch/" -DCMAKE_PREFIX_PATH="$root/_devel/$msvcarch"
     if ($LastExitCode -ne 0) {
         Write-Error "Configure failed"
         Pop-Location

@@ -14,11 +14,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.20)
 project(xfw_fonts LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 find_package(libpython REQUIRED)
-find_package(minhook REQUIRED)
+find_package(xfw_hooks REQUIRED)
 
 include_directories("src")
 
@@ -40,10 +43,8 @@ target_include_directories(xfw_fonts PRIVATE "${CMAKE_BUILD_DIR}")
 
 target_compile_definitions(xfw_fonts PRIVATE "_CRT_SECURE_NO_WARNINGS")
 
-target_compile_options(xfw_fonts PRIVATE "/d2FH4-")
-
 target_link_libraries(xfw_fonts libpython::python27)
-target_link_libraries(xfw_fonts minhook::minhook)
+target_link_libraries(xfw_fonts xfw_hooks::xfw_hooks)
 set_target_properties(xfw_fonts PROPERTIES SUFFIX ".pyd")
 set_target_properties(xfw_fonts PROPERTIES LINK_FLAGS "/INCREMENTAL:NO")
 
