@@ -18,7 +18,7 @@ from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
 from gui.Scaleform.locale.MENU import MENU
 from gui.shared.items_parameters import formatters as param_formatter
-from gui.shared.items_parameters.formatters import measureUnitsForParameter
+from gui.shared.items_parameters.formatters import measureUnitsForParameter, MEASURE_UNITS
 from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
 from gui.shared.items_parameters.params_helper import idealCrewComparator as idealCrewComparator_helper
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
@@ -461,7 +461,7 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName.startswith('TEXT:'):
                     customtext = paramName[5:]
                     tooltip_add_param(self, result, l10n(customtext), '')
-                elif paramInfo is not None and paramName in paramInfo.name:
+                elif paramInfo is not None and paramName in paramInfo.name and paramName in MEASURE_UNITS:
                     valueStr = str(param_formatter.formatParameter(paramName, paramInfo.value))
                     tooltip_add_param(self, result, getParameterValue(paramName), valueStr)
         if vehicle.isInInventory:
