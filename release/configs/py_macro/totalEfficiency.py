@@ -212,6 +212,11 @@ def xvm_dmgKindColor():
     return '#' + config.get('colors/dmg_kind').get(te.damageKind, '')[2:]
 
 
+@xvm.export('xvm.dmgKindKey', deterministic=False)
+def xvm_dmgKindKey():
+    return te.damageKind
+
+
 @xvm.export('xvm.toAvgDmg', deterministic=False)
 def xvm_toAvgDmg(norm=None):
     if not isRandom() or total_hp.playerAvgDamage is None or te.totalDamage is None:

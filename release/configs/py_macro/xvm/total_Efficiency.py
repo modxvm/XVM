@@ -297,7 +297,7 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
                 dmgAlly = True
             if attackReasonID == 0:
                 numberHitsDealt += 1
-            damageKind = ATTACK_REASONS[min(attackReasonID, 6)]
+            damageKind = ATTACK_REASONS[attackReasonID] if attackReasonID < 8 else 'other'
             isUpdate = True
     if isUpdate:
         updateLabels.update()

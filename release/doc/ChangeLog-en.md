@@ -1,6 +1,8 @@
 ### XVM 9.2.2-dev
 
-  * 
+  * Added macros to **totalEfficiency**:
+
+    * `{{py:xvm.dmgKindKey}}`
 
 ### XVM 9.2.1
 
