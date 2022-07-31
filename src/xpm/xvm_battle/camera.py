@@ -62,7 +62,7 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
 # BATTLE
 
 @overrideMethod(ArcadeCamera, 'create')
-def _ArcadeCamera_create(base, self, onChangeControlMode = None, postmortemMode = False):
+def _ArcadeCamera_create(base, self, onChangeControlMode = None, postmortemMode = False, smartPointCalculator = True):
     #debug('_ArcadeCamera_create: {}'.format(postmortemMode))
     if config.get('battle/camera/enabled'):
         # 'postmortemMode' is not work
@@ -92,7 +92,7 @@ def _ArcadeCamera_create(base, self, onChangeControlMode = None, postmortemMode 
             bcfg['scrollSensitivity'] = float(value)
             cfg['scrollSensitivity'] = float(value) * ucfg['scrollSensitivity']
 
-    base(self, onChangeControlMode, postmortemMode)
+    base(self, onChangeControlMode, postmortemMode, smartPointCalculator)
 
 @registerEvent(ArcadeCamera, 'enable')
 def _ArcadeCamera_enable(self, *args, **kwargs):
