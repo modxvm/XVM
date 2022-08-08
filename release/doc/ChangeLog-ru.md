@@ -1,5 +1,5 @@
-### XVM 9.2.2-dev
-
+### XVM 9.3.0
+  * Совместимость с World of Tanks 1.17.1.0
   * В **totalEfficiency** добавлены макросы:
 
     * `{{py:xvm.dmgKindKey}}`
