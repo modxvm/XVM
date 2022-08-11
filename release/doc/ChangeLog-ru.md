@@ -1,3 +1,8 @@
+### XVM 9.1.1
+
+  * Совместимость с World of Tanks 1.17.1.2
+
+
 ### XVM 9.3.0
   * Совместимость с World of Tanks 1.17.1.0
   * В **totalEfficiency** добавлены макросы:

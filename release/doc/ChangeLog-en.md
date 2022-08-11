@@ -1,4 +1,9 @@
+### XVM 9.3.1
+
+  * Compatibility with World of Tanks 1.17.1.2
+
 ### XVM 9.3.0
+
   * Compatibility with World of Tanks 1.17.1.0
   * Added macros to **totalEfficiency**:
 
