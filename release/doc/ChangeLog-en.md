@@ -1,3 +1,7 @@
+### XVM 9.3.2
+
+  * hangar/tankcarousel: fix carousels with >2 rows
+
 ### XVM 9.3.1
 
   * Compatibility with World of Tanks 1.17.1.2
