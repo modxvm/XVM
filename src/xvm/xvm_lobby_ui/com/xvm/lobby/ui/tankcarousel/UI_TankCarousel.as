@@ -21,7 +21,6 @@ package com.xvm.lobby.ui.tankcarousel
     public class UI_TankCarousel extends TankCarouselUI
     {
         private static const THRESHOLD:int = 650;
-        private static const FRONTLINE_ROW_LIMIT:int = 2;
 
         private var _cfg:CCarousel;
         private var _enabled:Boolean = false;
@@ -67,19 +66,9 @@ package com.xvm.lobby.ui.tankcarousel
         
         override public function as_rowCount(rows:int):void
         {
-            if (_enabled)
+            if (_enabled && !isNaN(_cfg.rows) && _cfg.rows > 0)
             {
-                if (!isNaN(_cfg.rows))
-                {
-                    if (_cfg.rows > 0)
-                    {
-                        rows = _cfg.rows;
-                        Logger.add(this.getAliasS());
-                        if (this.getAliasS() == HANGAR_ALIASES.EPICBATTLE_TANK_CAROUSEL){
-                            rows = Math.min(rows, FRONTLINE_ROW_LIMIT);
-                        }
-                    }
-                }
+                rows = _cfg.rows;
             }
             super.as_rowCount(rows);
         }
