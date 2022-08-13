@@ -1,3 +1,7 @@
+### XVM 9.3.4
+
+  * 
+
 ### XVM 9.3.3
 
   * py_macro/total_hp: fix normalization in macros `{{py:xvm.total_hp.enemy}}` and `{{py:xvm.total_hp.ally}}`
