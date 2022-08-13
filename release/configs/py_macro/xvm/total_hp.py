@@ -135,7 +135,7 @@ def destroyGUI(self):
 
 def ally(norm=None):
     maxhp = int(teams_maxhp[0])
-    if (norm is None) or (maxhp == 0) or (teams_maxhp[0] == 0):
+    if (norm is None) or (maxhp == 0) or (teams_totalhp[0] == 0):
         return teams_totalhp[0]
     else:
         result = teams_totalhp[0] * norm / maxhp
@@ -144,7 +144,7 @@ def ally(norm=None):
 
 def enemy(norm=None):
     maxhp = int(teams_maxhp[1])
-    if (norm is None) or (maxhp == 0) or (teams_maxhp[1] == 0):
+    if (norm is None) or (maxhp == 0) or (teams_totalhp[1] == 0):
         return teams_totalhp[1]
     else:
         result = teams_totalhp[1] * norm / maxhp
