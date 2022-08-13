@@ -6,17 +6,17 @@ import traceback
 
 import BigWorld
 from Avatar import PlayerAvatar
-from constants import VEHICLE_HIT_FLAGS
 from CurrentVehicle import g_currentVehicle
+from constants import VEHICLE_HIT_FLAGS
 from gui.Scaleform.daapi.view.battle.shared.frag_correlation_bar import FragCorrelationBar
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
 from skeletons.gui.game_control import IBootcampController
 from skeletons.gui.shared import IItemsCache
 
+import xvm_battle.python.battle as battle
 from xfw import *
 from xfw_actionscript.python import *
-import xvm_battle.python.battle as battle
 from xvm_main.python import config
 
 #####################################################################
@@ -134,17 +134,11 @@ def destroyGUI(self):
 
 
 def ally(norm=None):
-    if (norm is None) or (teams_maxhp[0] == 0):
-        return teams_totalhp[0]
-    else:
-        return int(teams_totalhp[0] * norm / teams_maxhp[0])
+    return teams_totalhp[0] if (norm is None) or (teams_maxhp[0] == 0) else max(1, teams_totalhp[0] * norm / teams_maxhp[0])
 
 
 def enemy(norm=None):
-    if (norm is None) or (teams_maxhp[1] == 0):
-        return teams_totalhp[1]
-    else:
-        return int(teams_totalhp[1] * norm / teams_maxhp[1])
+    return teams_totalhp[1] if (norm is None) or (teams_maxhp[1] == 0) else max(1, teams_totalhp[1] * norm / teams_maxhp[1])
 
 
 def color():
