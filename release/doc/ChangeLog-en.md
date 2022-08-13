@@ -1,3 +1,7 @@
+### XVM 9.3.3
+
+  * py_macro/total_hp: fix normalization in macros `{{py:xvm.total_hp.enemy}}` and `{{py:xvm.total_hp.ally}}`
+
 ### XVM 9.3.2
 
   * hangar/tankcarousel: fix carousels with >2 rows
