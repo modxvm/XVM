@@ -1,6 +1,6 @@
 ### XVM 9.3.4
 
-  * 
+  * Compatibility with World of Tanks 1.17.1.3
 
 ### XVM 9.3.3
 
