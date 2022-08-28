@@ -39,6 +39,7 @@
     "enemyBaseCaptured": "База{0} захвачена союзниками!",
     "allyBaseCapture": "Захват базы{0} врагами!",
     "allyBaseCaptured": "База{0} захвачена врагами!",
+    "baseCaptureBlocked": "Захват базы заблокирован.",
 
     // Battle interface labels
     "avgDamage": "Средний урон",

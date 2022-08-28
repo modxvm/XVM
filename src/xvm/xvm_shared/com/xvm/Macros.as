@@ -960,6 +960,11 @@ package com.xvm
                     m_prepare_value_cache[key] = res;
                     //Logger.add(key + " => " + res);
                     break;
+                case "cap.points":
+                    if (isNaN(value))
+                        value = 1;
+                    res = Math.round(parseInt(norm) * value / 100).toString();
+                    break;
                 case "hp-ratio":
                     if (isNaN(value))
                         value = 100;

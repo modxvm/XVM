@@ -9,6 +9,7 @@ package com.xvm.types.cfg
     public dynamic class CCaptureBar implements ICloneable
     {
         public var ally:CCaptureBarTeam;
+        public var block:CCaptureBarTeam;
         public var distanceOffset:*;
         public var enabled:*;
         public var enemy:CCaptureBarTeam;

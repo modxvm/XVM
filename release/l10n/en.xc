@@ -39,6 +39,7 @@
     "enemyBaseCaptured": "Base{0} captured by allies!",
     "allyBaseCapture": "Base{0} capture by enemies!",
     "allyBaseCaptured": "Base{0} captured by enemies!",
+    "baseCaptureBlocked": "Base capture blocked.",
 
     // Battle interface labels
     "avgDamage": "Avg damage",

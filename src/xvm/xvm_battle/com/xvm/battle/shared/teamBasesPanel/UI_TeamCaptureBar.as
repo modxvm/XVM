@@ -44,6 +44,7 @@ package com.xvm.battle.shared.teamBasesPanel
         private var cfg:CCaptureBarTeam;
         private var m_captured:Boolean;
         private var m_baseNumText:String = "";
+        private var m_colorType:String = "";
 
         private var m_points:Number;
         private var m_vehiclesCount:String;
@@ -109,6 +110,10 @@ package com.xvm.battle.shared.teamBasesPanel
             try
             {
                 super.updateCaptureData.apply(this, arguments);
+                if (m_captured != this.colorType)
+                {
+                    onConfigLoaded(null);
+                }
                 if (!cfg)
                     return;
                 m_points = points;
@@ -142,7 +147,16 @@ package com.xvm.battle.shared.teamBasesPanel
 
         private function get team():String
         {
-            return colorType == "green" ? "ally" : "enemy";
+            m_colorType = colorType;
+            switch (m_colorType)
+            {
+                case "green":
+                    return "ally";
+                case "grey":
+                    return "block";
+                default:
+                    return "enemy";
+            }
         }
 
         private function onConfigLoaded(e:Event):Object

@@ -2,6 +2,12 @@
 
   * Compatibility with World of Tanks 1.17.1.3
 
+  #### Battle
+
+  * Added normalization support for `{{cap.points}}`.
+
+  * Added a setting for the capture bar to the "captureBar" when blocking the capture of the base.
+
 ### XVM 9.3.3
 
   * py_macro/total_hp: fix normalization in macros `{{py:xvm.total_hp.enemy}}` and `{{py:xvm.total_hp.ally}}`
