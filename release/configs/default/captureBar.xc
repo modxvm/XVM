@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Capture bar.
  * Полоса захвата.
  */
@@ -114,7 +114,7 @@
       "color": null,
       "title": {
         "$ref": { "path":"captureBar.enemy.title" },
-        "format": "<font size='15' color='#FFFFFF'>{{l10n:baseCaptureBlocked}}</font> <font size='14' color='#F0F0F0'>({{cap.points}})</font>",
+        "format": "<font size='15' color='#FFFFFF'>{{l10n:baseCaptureBlocked}}</font> <font size='14' color='#F0F0F0'>({{cap.points}})</font>"
       },
       "players": ${"captureBar.enemy.players"},
       "timer": ${"captureBar.enemy.timer"},
