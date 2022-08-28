@@ -4,16 +4,13 @@
     "description": "XFW Libraries Module",
 
     "version": "XFW_VERSION",
-    "dependencies": [],
-    "dependencies_optional": [
-        "com.modxvm.xfw.native"
-    ],
+    "features": ["python"],
+    "dependencies": ["org.pypi.six"],
+    "dependencies_optional": [],
 
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",
 
     "wot_version_min": "WOT_VERSION",
-    "wot_version_exactmatch": false,
-
-    "features": []
+    "wot_version_exactmatch": false
 }

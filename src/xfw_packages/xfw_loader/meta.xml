@@ -1,6 +1,0 @@
-<root>
-    <id>com.modxvm.xfw.loader</id>
-    <version>XFW_VERSION</version>
-    <name>XVM Framework Loader</name>
-    <description>Set of nice utilities and libraries for modmakers</description>
-</root>

@@ -24,6 +24,7 @@ package com.xvm.lobby.ui.tankcarousel
 
         private var _cfg:CCarousel;
         private var _enabled:Boolean = false;
+        private var _rowCount:int = 2;
 
         
         //
@@ -70,6 +71,7 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 rows = _cfg.rows;
             }
+            this._rowCount = rows;
             super.as_rowCount(rows);
         }
         
@@ -119,7 +121,7 @@ package com.xvm.lobby.ui.tankcarousel
                     if (cellType != "normal")
                     {
                         var normalHelper:TankCarouselHelper = new TankCarouselHelper(_cfg.normal);
-                        var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * this.rowCount - normalHelper.verticalGap;
+                        var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * this._rowCount - normalHelper.verticalGap;
                         if (App.appHeight - h < THRESHOLD)
                         {
                             cellType = "small";

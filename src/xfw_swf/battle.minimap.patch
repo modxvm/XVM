@@ -49,9 +49,9 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/Minimap.class.asas
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:Minimap"), "_currForeground") type QName(PackageNamespace("flash.display"), "Sprite") value Null() end
    trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:Minimap"), "_currentSizeIndex") type QName(PackageNamespace(""), "int") value Integer(0) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2020-07-27 15:01:43.692339200 +0300
-+++ battle.orig-0/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2020-07-27 15:07:59.532931400 +0300
-@@ -89,12 +89,69 @@
+--- battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2022-08-28 23:53:57.320832000 +0300
++++ battle.orig-0/net/wg/gui/battle/views/minimap/MinimapEntryController.class.asasm	2022-08-28 23:57:38.196672200 +0300
+@@ -80,12 +80,68 @@
      end ; code
     end ; body
    end ; method
@@ -66,7 +66,6 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryContro
 +     code
 +      getlocal0
 +      pushscope
-+
 +      getlocal0
 +      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_vehicleEntries")
 +      returnvalue
@@ -74,7 +73,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryContro
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_vehicleEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry")>) value Null() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_vehicleEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry")>) end
 +  trait getter QName(PackageNamespace(""), "xfw_vehicleLabelsEntries")
 +   method
 +    returns TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry")>)
@@ -94,11 +93,11 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryContro
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_vehicleLabelsEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry")>) value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_isDisposed") type QName(PackageNamespace(""), "Boolean") value False() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_asserter") type QName(PackageNamespace("net.wg.utils"), "IAssertable") end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_lastHighlightedEntry") type QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry") value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_isShowVehicleNamesTurnedOn") type QName(PackageNamespace(""), "Boolean") value False() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_vehicleLabelsEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry")>) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_isDisposed") type QName(PackageNamespace(""), "Boolean") value False() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_asserter") type QName(PackageNamespace("net.wg.utils"), "IAssertable") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_lastHighlightedEntry") type QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IVehicleMinimapEntry") value Null() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_isShowVehicleNamesTurnedOn") type QName(PackageNamespace(""), "Boolean") value False() end
 +  trait getter QName(PackageNamespace(""), "xfw_scalableEntries")
 +   method
 +    returns TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "DisplayObject")>)
@@ -118,9 +117,9 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/MinimapEntryContro
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_scalableEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "DisplayObject")>) value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_scalableEntriesWithNonScaleContent") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IMinimapEntryWithNonScaleContent")>) value Null() end
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController#1"), "_nonScalableEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "DisplayObject")>) value Null() end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_scalableEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "DisplayObject")>) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_scalableEntriesWithNonScaleContent") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.minimap.components.entries.interfaces"), "IMinimapEntryWithNonScaleContent")>) end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap:MinimapEntryController"), "_nonScalableEntries") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("flash.display"), "DisplayObject")>) end
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm	2021-12-02 23:09:59.217808200 +0300
 +++ battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/vehicle/VehicleMinimapEntry.class.asasm	2021-12-03 00:12:38.177787900 +0300

@@ -70,15 +70,16 @@ package com.xvm.battle.shared.minimap.entries.personal
             }
         }
 
+        /*!!!TODO!!!
         override public function dispose():void
         {
             if (!_entryDeleted)
             {
                 xvm_delEntry();
             }
-
             super.dispose();
         }
+        */
 
         override public function as_addDrawRange(param1:Number, param2:Number, param3:Number):void
         {

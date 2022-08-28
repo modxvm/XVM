@@ -86,14 +86,16 @@ package com.xvm.battle.shared.minimap.entries.personal
             MinimapEntriesLabelsHelper.init(this);
         }
 
-        override protected function onDispose():void
+        /* !!!TODO!!!
+        override public function dispose():void
         {
             if (!_entryDeleted)
             {
                 xvm_delEntry();
             }
-            super.onDispose();
+            super.dispose();
         }
+        */
 
         override public function setYawLimit(leftYawLimit:Number, rightYawLimit:Number):void
         {
