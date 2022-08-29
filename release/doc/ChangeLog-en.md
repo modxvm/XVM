@@ -111,7 +111,7 @@
 
   * Compatibility with World of Tanks 1.14.1.0
 
-  #### Сarousel
+  #### Carousel
 
   * fix `crystalsBorder` option in carousel
 
