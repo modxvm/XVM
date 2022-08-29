@@ -192,11 +192,13 @@ class VehicleMarkers(object):
         return self.manager._MarkersManager__plugins if self.manager else None
 
     def init(self, manager):
+        return
         self.manager = manager
         self.manager.addExternalCallback('xvm.cmd', self.onVMCommand)
         self.playerVehicleID = self.sessionProvider.getArenaDP().getPlayerVehicleID()
 
     def populate(self):
+        return
         self.populated = True
         self.respondConfig()
         self.process_pending_commands()
@@ -209,8 +211,9 @@ class VehicleMarkers(object):
         self.guiType = None
         self.battleType = None
         self.playerVehicleID = 0
-        self.manager.removeExternalCallback('xvm.cmd')
-        self.manager = None
+        if self.manager is not None:
+            self.manager.removeExternalCallback('xvm.cmd')
+            self.manager = None
 
     #####################################################################
     # event handlers
