@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 16.07.2022
+    # Last update: 01.09.2022
     "china:Ch00_ClingeBot_SH":                           'CB·ch',
     "china:Ch01_Type59":                                 'Typ59',
     "china:Ch01_Type59_Gold":                            'Typ59g',
@@ -107,6 +107,7 @@ _data = {
     "czech:Cz15_Skoda_T-45_Prem":                        'skT45',
     "czech:Cz16_TNH_T_vz51":                             'tnh·vz51',
     "czech:Cz17_Vz_55":                                  'vz55',
+    "czech:Cz17_Vz_55_CN":                               'vz55·CN',
     "czech:Cz18_TNH_105_1000":                           'tnh·105',
     "czech:Cz19_Vz_44_1":                                'vz44·1',
     "czech:Cz20_ShPTK_TVP_100_mm":                       'ShPTK·100',
@@ -397,7 +398,13 @@ _data = {
     "italy:It18_Progetto_C45_mod_71":                    'Prog71',
     "italy:It19_Progetto_C50_mod_66":                    'Prog66',
     "italy:It20_Carro_Combattimento_45t":                'Carro45t',
+    "italy:It23_CC_3":                                   'CC·3',
+    "italy:It24_Controcarro_1_Mk2":                      'Contro',
+    "italy:It26_CC_56":                                  'CC·56',
+    "italy:It27_M43_da_105_25_Bassoto":                  'Bassoto',
+    "italy:It28_Semovente_M41_Da_75_18":                 'Semov',
     "italy:It30_CC_mod_64_Prem":                         'CC64·prem',
+    "italy:It31_CC_67_B":                                'CC·67·B',
     "japan:J01_NC27":                                    'R.Ots',
     "japan:J01_NC27_bot":                                'R.Ots',
     "japan:J02_Te_Ke":                                   'TeKe',
@@ -776,6 +783,7 @@ _data = {
     "ussr:R114_Object_244":                              'obj244',
     "ussr:R115_IS-3_auto":                               'Is·3mz',
     "ussr:R115_IS-3_auto_test":                          'Is·3mz·T',
+    "ussr:R115_IS-3_auto_S":                             'Is·3mz·S',
     "ussr:R116_ISU122C_Berlin":                          'isu122c',
     "ussr:R117_T34_85_Rudy":                             'Rudy',
     "ussr:R118_T28_F30":                                 't28f30',
@@ -851,6 +859,7 @@ _data = {
     "ussr:R188_Object_259A_CN":                          'obj259a',
     "ussr:R192_K_2":                                     'K·2',
     "ussr:R195_T34M_54":                                 't34m-54',
+    "ussr:R197_KV_1S_MZ":                                'Kv·1s·MZ',
     "ussr:R18_SU-152":                                   'Su152',
     "ussr:R18_SU-152_IGR":                               'Su152',
     "ussr:R193_M4A2_T_34":                               'М4·85',
