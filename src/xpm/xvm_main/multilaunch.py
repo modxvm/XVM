@@ -1,7 +1,7 @@
 """
 This file is part of the XVM project.
 
-Copyright (c) 2020-2021 XVM Team.
+Copyright (c) 2020-2022 XVM Team.
 
 XVM is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as
@@ -16,21 +16,44 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
-import traceback
+#
+# Includes
+#
 
-from gui.Scaleform.daapi.view.login.LoginView import LoginView
+# stdlib
+import logging
 
-from xfw import *
+# BigWorld
+from PlayerEvents import g_playerEvents
 
+# XFW.Multilaunch
+import xfw_loader.python as loader
+
+# XVM
 import config
 
-#WGC resets WoT mutex so we should perform mutex kill after wgc_api.dll code execution
-@registerEvent(LoginView, 'onLogin')
-def kill_wotclient_mutex(self, *args):
+
+#
+# Functions
+#
+
+def kill_mutex(*args, **kwargs):
     try:
         if config.get('tweaks/allowMultipleWotInstances', False):
-            import xfw_mutex.python as mutex
-            mutex.allow_multiple_wot()
+            if loader.is_mod_loaded('com.modxvm.xfw.multilaunch'):
+                import xfw_multilaunch.python as native
+                native.kill_mutex()
     except Exception:
-        traceback.print_exc()
+        logging.getLogger('XVM/Main').exception('multilaunch/kill_mutex')
 
+
+
+#
+# Init
+#
+
+def init():
+    g_playerEvents.onAccountShowGUI += kill_mutex
+
+def fini():
+    g_playerEvents.onAccountShowGUI -= kill_mutex

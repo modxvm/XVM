@@ -7,7 +7,7 @@
     "dependencies": ["com.modxvm.xfw.libraries"],
     "dependencies_optional": [
         "com.modxvm.xfw.filewatcher",
-        "com.modxvm.xfw.mutex"
+        "com.modxvm.xfw.multilaunch"
     ],
 
     "url": "https://modxvm.com/",

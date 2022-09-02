@@ -39,6 +39,7 @@ import config
 from consts import XVM, XVM_EVENT
 from logger import log, warn, trace
 import handlers
+import multilaunch
 from xvm import g_xvm
 
 from __version__ import __branch__, __revision__, __node__
@@ -103,6 +104,8 @@ def init():
     subscribe()
     config_load()
 
+    multilaunch.init()
+
     g_xvm.initialize()
 
     BigWorld.callback(0, config_load_event)
@@ -111,6 +114,8 @@ def init():
 @registerEvent(game, 'fini')
 def fini():
     trace('xvm_main.python.init::fini()')
+
+    multilaunch.fini()
 
     try:
         dependency.instance(IAppLoader).onGUISpaceEntered -= g_xvm.onGUISpaceEntered
