@@ -4,7 +4,7 @@
     "description": "XVM Sounds module",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xvm"],
+    "dependencies": ["com.modxvm.xfw.libraries", "com.modxvm.xvm"],
     "dependencies_optional": ["com.modxvm.xfw.wwise"],
 
     "url": "https://modxvm.com/",

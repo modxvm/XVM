@@ -1,23 +1,33 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+Copyright (c) 2016-2021 night_dragon_on <https://kr.cm/f/p/14897/>
+"""
 
-# Authors:
-# night_dragon_on <https://kr.cm/f/p/14897/>
+#
+# Imports
+#
 
-#####################################################################
-# imports
+# stdlib
+import logging
 
+# BigWorld
 import SoundGroups
 from constants import ARENA_PERIOD
 from gui.Scaleform.daapi.view.battle.classic.battle_end_warning_panel import BattleEndWarningPanel
 from gui.battle_control import avatar_getter
-import traceback
 
-from xfw import *
+# XFW
+from xfw.events import registerEvent
+
+# XVM.Main
 import xvm_main.python.config as config
-from xvm_main.python.logger import *
 
-#####################################################################
+
+
+#
 # constants
+#
 
 class XVM_SOUND_EVENT(object):
     BATTLE_END_300 = "xvm_battleEnd_5_min"
@@ -27,10 +37,12 @@ class XVM_SOUND_EVENT(object):
     BATTLE_END_30 = "xvm_battleEnd_30_sec"
     BATTLE_END_5 = "xvm_battleEnd_5_sec"
 
-#####################################################################
-# handlers
 
-@registerEvent(BattleEndWarningPanel, 'setTotalTime')
+
+#
+# Handlers
+#
+
 def BattleEndWarningPanel_setTotalTime(self, totalTime):
     try:
         if config.get('sounds/enabled'):
@@ -49,4 +61,17 @@ def BattleEndWarningPanel_setTotalTime(self, totalTime):
                 elif totalTime == 5:
                     SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.BATTLE_END_5)
     except:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Sounds').exception('battleEnd/BattleEndWarningPanel_setTotalTime')
+
+
+
+#
+# Initialization
+#
+
+def init():
+    registerEvent(BattleEndWarningPanel, 'setTotalTime')(BattleEndWarningPanel_setTotalTime)
+
+
+def fini():
+    pass

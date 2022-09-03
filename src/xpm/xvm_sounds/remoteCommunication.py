@@ -1,42 +1,41 @@
 """
-This file is part of the XVM project.
-
-Copyright (c) 2013-2021 XVM Team.
-
-XVM is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as
-published by the Free Software Foundation, version 3.
-
-XVM is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2017-2022 XVM Contributors
 """
 
-#cpython
+#
+# Imports
+#
+
+# stdlib
 import logging
 
-#xfw.loader
+# xfw.loader
 import xfw_loader.python as loader
 
-#xvm.main
+# xvm.main
 import xvm_main.python.config as config
 
-if loader.is_mod_loaded('com.modxvm.xfw.wwise'):
+
+
+#
+# Initialization
+# 
+
+def init():
     if config.get('sounds/remote_communication', False):
-        try:
-            wwise_module = loader.get_mod_module('com.modxvm.xfw.wwise')
-            if not wwise_module:
-                logging.error("[XVM/Sounds] [remote_communication] XFW.WWISE is failed to load")
+        logger = logging.getLogger('XVM/Sounds')
+        if loader.is_mod_loaded('com.modxvm.xfw.wwise'):
+            try:
+                wwise_module = loader.get_mod_module('com.modxvm.xfw.wwise')
+                wwise_module.wwise_communication_init()
+                logger.info("remoteCcommunication/init: communication with WWISE Authoring Tools is enabled")
 
-            wwise_module.wwise_communication_init()
-            logging.info("[XVM/Sounds] [remote_communication] communication with WWISE Authoring Tools is enabled")
+            except Exception:
+                logger.exception("remoteCcommunication/init:")
+        else:
+            logger.warning('[XVM/Sounds] [remote_communication] failed to load sound banks because XFW.WWISE is not loaded')
 
-        except Exception:
-            logging.exception("[XVM/Sounds] [remote_communication]:")
 
-else:
-    logging.warning('[XVM/Sounds] [remote_communication] failed to load sound banks because XFW.WWISE is not loaded')
+def fini():
+    pass

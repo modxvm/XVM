@@ -1,28 +1,43 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
+# python
+import logging
+
+# BigWorld
 import SoundGroups
 from gui.battle_control import avatar_getter
 from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
-import traceback
 
-from xfw import *
+# XFW
+from xfw.events import registerEvent
+from xfw.wg import getVehCD
+
+# XVM.Main
 import xvm_main.python.config as config
-from xvm_main.python.logger import *
 
-#####################################################################
-# constants
+
+
+#
+# Constants
+#
 
 class XVM_SOUND_EVENT(object):
     SIXTH_SENSE = "xvm_sixthSense"
     SIXTH_SENSE_RUDY = "xvm_sixthSenseRudy"
 
-#####################################################################
-# handlers
 
-@registerEvent(SixthSenseIndicator, 'as_showS')
+
+#
+# handlers
+#
+
 def SixthSenseIndicator_as_showS(self):
     try:
         if config.get('sounds/enabled'):
@@ -30,5 +45,18 @@ def SixthSenseIndicator_as_showS(self):
             # 59393 => Rudy
             soundId = XVM_SOUND_EVENT.SIXTH_SENSE_RUDY if vehCD == 59393 else XVM_SOUND_EVENT.SIXTH_SENSE
             SoundGroups.g_instance.playSound2D(soundId)
-    except:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Sounds').exception('sixthSense/SixthSenseIndicator_as_showS:')
+
+
+
+#
+# Initialization
+#
+
+def init():
+    registerEvent(SixthSenseIndicator, 'as_showS')(SixthSenseIndicator_as_showS)
+
+
+def fini():
+    pass

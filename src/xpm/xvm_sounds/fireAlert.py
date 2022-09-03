@@ -1,29 +1,55 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
+# stdlib
+import logging
+
+# BigWorld
 import SoundGroups
 from gui.Scaleform.daapi.view.battle.shared.timers_panel import TimersPanel
-import traceback
 
-from xfw import *
+# XFW
+from xfw.events import registerEvent
+
+# XVM.Main
 import xvm_main.python.config as config
-from xvm_main.python.logger import *
 
-#####################################################################
-# constants
+
+
+#
+# Constants
+# 
 
 class XVM_SOUND_EVENT(object):
     FIRE_ALERT = "xvm_fireAlert"
 
-#####################################################################
-# handlers
 
-@registerEvent(TimersPanel, '_TimersPanel__setFireInVehicle')
+#
+# Handlers
+#
+
 def _TimersPanel__setFireInVehicle(self, isInFire):
     try:
         if isInFire and config.get('sounds/enabled'):
             SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
     except:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Main').exception('fireAlert/_TimersPanel__setFireInVehicle:')
+
+
+
+#
+# Initialization
+#
+
+def init():
+    registerEvent(TimersPanel, '_TimersPanel__setFireInVehicle')(_TimersPanel__setFireInVehicle)
+
+
+def fini():
+    pass

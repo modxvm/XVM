@@ -1,50 +1,76 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+Copyright (c) 2016-2021 night_dragon_on <https://kr.cm/f/p/14897/>
+"""
 
-# Authors:
-# night_dragon_on <https://kr.cm/f/p/14897/>
-# sirmax <max(at)modxvm.com>
-
-#####################################################################
+#
 # imports
+#
 
+# stdlib
+import logging
+
+# BigWorld
 import SoundGroups
-from Avatar import PlayerAvatar
+from PlayerEvents import g_playerEvents
 from gui.Scaleform.daapi.view.battle.shared.minimap.entries import VehicleEntry
-import traceback
 
-from xfw import *
+# XFW
+from xfw.events import registerEvent
+
+# XVM.Main
 import xvm_main.python.config as config
-from xvm_main.python.logger import *
 
-#####################################################################
-# constants
+
+
+#
+# Constants
+#
 
 class XVM_SOUND_EVENT(object):
     ENEMY_SIGHTED = "xvm_enemySighted"
 
-#####################################################################
-# handlers
+
+
+#
+# Globals
+# 
 
 enemyList = {}
 
-@overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
-def _PlayerAvatar_onBecomeNonPlayer(base, self):
-    try:
-        global enemyList
-        enemyList.clear()
-    except Exception, ex:
-        err(traceback.format_exc())
-    base(self)
 
-@registerEvent(VehicleEntry, 'setActive')
-def setActive(self, active):
-    #log('setActive: {} {} {} {}'.format(self._entryID, self._isEnemy, self._isActive, self._isInAoI))
+
+#
+# Handlers
+#
+
+def _onAvatarBecomeNonPlayer(*args, **kwargs):
+    global enemyList
+    enemyList.clear()
+
+
+def VehicleEntry_setActive(self, active):
     try:
-        if self._isEnemy and self._isActive: # and self._isInAoI?
+        if self._isEnemy and self._isActive:
             if config.get('sounds/enabled'):
                 global enemyList
                 if not self._entryID in enemyList:
                     enemyList[self._entryID] = True
                     SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.ENEMY_SIGHTED)
-    except:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Sounds').exception('enemySighted/VehicleEntry_setActive:')
+
+
+
+#
+# Initialization
+#
+
+def init():
+    g_playerEvents.onAvatarBecomeNonPlayer += _onAvatarBecomeNonPlayer
+    registerEvent(VehicleEntry, 'setActive')(VehicleEntry_setActive)
+
+
+def fini():
+    g_playerEvents.onAvatarBecomeNonPlayer -= _onAvatarBecomeNonPlayer
