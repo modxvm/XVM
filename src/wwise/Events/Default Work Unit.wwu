@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="sixthSense" ID="{DDDFD4AE-81D8-4280-B308-EC6408663332}" ShortID="277785257">
+					<ChildrenList>
+						<Event Name="xvm_sixthSenseVoice" ID="{6F6C548F-71EF-4B4A-A959-AA7CB1B90C4B}">
+							<ChildrenList>
+								<Action Name="" ID="{3221B550-B292-4207-8B47-925B09CE63A7}" ShortID="911769764">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sixthSenseVoice" ID="{433C6D11-D1FC-4935-8ACA-F3895756F28E}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_sixthSenseRudy" ID="{0E13A0CF-F5ED-4CDE-9886-F918BDAF6553}">
+							<ChildrenList>
+								<Action Name="" ID="{7020F112-4175-4177-A981-6C2B8028B1F5}" ShortID="684084132">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sixthSenseRudy" ID="{77C0113B-5FD6-440F-841C-FA89F80B1E72}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_sixthSense" ID="{2793AD98-BA13-481F-B222-A8BF02A6A8F6}">
+							<ChildrenList>
+								<Action Name="" ID="{A2791B51-D7C9-4319-B3C0-A9FE0776CF57}" ShortID="221220628">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sixthSense" ID="{B882E063-7686-4036-A60F-7C30B2F52EE0}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="enemySighted" ID="{7959BF70-5611-4F13-8C4B-B89BA03D2EB1}" ShortID="276262077">
+					<ChildrenList>
+						<Event Name="xvm_enemySighted" ID="{9442EA78-5C28-48B8-BF7B-A7528E4B720A}">
+							<ChildrenList>
+								<Action Name="" ID="{A3BF7856-6FAB-45CC-A975-F33C05722B2D}" ShortID="936211702">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="enemySighted" ID="{750D51A7-EBCA-4CE9-AFC3-537D00BB421D}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_enemySightedVoice" ID="{9C4FF5B6-9854-45EA-B9BD-6BED024B1ACF}">
+							<ChildrenList>
+								<Action Name="" ID="{E879B3CB-6739-443C-81E3-6FAB2FAD94C0}" ShortID="230917220">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="enemySightedVoice" ID="{7A3ECEF6-DB9B-498F-BB93-03DCF16E56B4}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="battleEnd" ID="{100B2654-0BD1-478C-9A54-448B7B755C97}" ShortID="617045995">
+					<ChildrenList>
+						<Event Name="xvm_battleEnd_5_min" ID="{A68429DE-53A6-48F3-8C55-CF2D36106108}">
+							<ChildrenList>
+								<Action Name="" ID="{B866AFA1-DF8A-4650-A50C-DE18FD33F40C}" ShortID="904152404">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="battleEnd_5_min" ID="{52993B4C-1265-48DD-B2E8-C185C3D385FF}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_battleEnd_3_min" ID="{BD0EAF06-B613-4E98-8F95-D4996F14CACF}">
+							<ChildrenList>
+								<Action Name="" ID="{BC7747C3-1485-4360-9F15-8FED9AE62543}" ShortID="812965186">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="battleEnd_3_min" ID="{64CFA0E9-CD7D-4937-930C-B85CC687965C}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_battleEnd_2_min" ID="{AF8CA960-0588-4391-99C2-A11C4BF734E7}">
+							<ChildrenList>
+								<Action Name="" ID="{40FB6AB1-A962-40E6-BDDE-811AFE53C5CF}" ShortID="561575593">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="battleEnd_2_min" ID="{2643AF93-D317-46BA-A88B-1F4EC1DAB8AB}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_battleEnd_1_min" ID="{30F76BD6-D7E7-4343-81AA-26B38E3A30A5}">
+							<ChildrenList>
+								<Action Name="" ID="{EFB73CC3-1D42-4EA2-925F-3A2FBBB96711}" ShortID="810343086">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="battleEnd_1_min" ID="{B2DB4F88-B984-4954-B765-AB19CEF2DD20}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_battleEnd_30_sec" ID="{8ECC7B03-1B57-435D-9104-44322B926124}">
+							<ChildrenList>
+								<Action Name="" ID="{FC0EB35B-1C4D-42C8-A6B4-8CFF3C837DC0}" ShortID="255997193">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="battleEnd_30_sec" ID="{7267A78F-E1F5-48A8-A062-901682C5AF85}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="xvm_battleEnd_5_sec" ID="{3E89952B-61BC-4303-AF6A-B21710AA2F83}">
+							<ChildrenList>
+								<Action Name="" ID="{E643B713-C40C-4C19-AE7C-4AE6DB63C955}" ShortID="410833591">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="battleEnd_5_sec" ID="{73E9C384-3C8C-4951-9699-3C642FD4F585}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="@ wwise_system" ID="{55A153EB-5EFB-47C0-8C7A-BCBDAD6F3049}" ShortID="594886217">
+					<ChildrenList>
+						<Event Name="emptyEvent" ID="{A9C56131-82C7-4427-B318-AED678FDC270}"/>
+					</ChildrenList>
+				</Folder>
+				<Event Name="xvm_fireAlert" ID="{159D421C-B1F1-40EC-86CF-503E3DC6F5E0}">
+					<ChildrenList>
+						<Action Name="" ID="{20A0C08D-9E48-4D6C-836E-83BAE721AFC1}" ShortID="1032043968">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="fireAlert" ID="{FFA941D8-C862-4117-86BE-33FB81A06807}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="xvm_ammoBay" ID="{845DE001-2FDD-44C3-9E6F-271068ABC8DA}">
+					<ChildrenList>
+						<Action Name="" ID="{BDC31C6D-8E46-46E3-A349-4D5C4D0D70EF}" ShortID="484845554">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ammoBay" ID="{A67985DE-B0D7-4210-BDFE-81C89AFF6CC7}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="xvm_gunReloaded" ID="{DDA37D39-786B-4AB6-B72C-423BA4C2C803}">
+					<ChildrenList>
+						<Action Name="" ID="{2F0FEE44-2902-4750-80A3-C1D4E3D436CF}" ShortID="102200319">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="gunReloaded" ID="{648AD3FA-2E0A-43BA-84B9-6A08B048BA98}" WorkUnitID="{47FEE6D6-CBAB-427C-A250-2BADF4F2CA45}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

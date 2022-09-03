@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{A4AC5395-D8B4-42C5-BFD6-8AE495007A44}" SchemaVersion="97">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{A4AC5395-D8B4-42C5-BFD6-8AE495007A44}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="xvm" ID="{A3EF5E1D-C092-4DB8-8295-67694ABAA876}">
+					<ObjectInclusionList>
+						<ObjectRef Name="xvm_fireAlert" ID="{159D421C-B1F1-40EC-86CF-503E3DC6F5E0}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="sixthSense" ID="{DDDFD4AE-81D8-4280-B308-EC6408663332}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="xvm_ammoBay" ID="{845DE001-2FDD-44C3-9E6F-271068ABC8DA}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="battleEnd" ID="{100B2654-0BD1-478C-9A54-448B7B755C97}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="@ wwise_system" ID="{55A153EB-5EFB-47C0-8C7A-BCBDAD6F3049}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="xvm_gunReloaded" ID="{DDA37D39-786B-4AB6-B72C-423BA4C2C803}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="enemySighted" ID="{7959BF70-5611-4F13-8C4B-B89BA03D2EB1}" WorkUnitID="{22EEF783-73AC-4AAB-8706-E7B410AE9DFD}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

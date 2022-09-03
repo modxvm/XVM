@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{F6B2880C-85E5-47FA-A126-645B5DFD9ACC}" SchemaVersion="97">
+	<Conversions>
+		<WorkUnit Name="Factory Conversion Settings" ID="{F6B2880C-85E5-47FA-A126-645B5DFD9ACC}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Vorbis" ID="{09A6A685-7B03-4387-A7EE-705C2A234D14}" ShortID="784869707">
+					<ChildrenList>
+						<Conversion Name="Vorbis Auto Detect High" ID="{6F6A99BE-4FD1-49D3-89AF-54BE30CA1588}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>3</Value>
+										<Value Platform="Windows">3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{542DAA6E-3F31-48E0-9D3E-6D56C6884CB3}" PluginName="Vorbis" CompanyID="0" PluginID="4"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="Vorbis Auto Detect Low" ID="{1FEA84A1-764D-42EF-9C6A-5EA06BFD8AD4}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>1</Value>
+										<Value Platform="Windows">1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{8186DF8B-6B5E-4FFD-B831-7EB838BBF948}" PluginName="Vorbis" CompanyID="0" PluginID="4"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="Vorbis Auto Detect Medium" ID="{C2242190-EA66-4EC8-A876-8713CEEBAAC8}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>2</Value>
+										<Value Platform="Windows">2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{0A3BD25E-3940-4113-B71A-89B756CB88D4}" PluginName="Vorbis" CompanyID="0" PluginID="4"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="Vorbis Quality High" ID="{53A9DE0F-3F4F-4B59-8614-3F9E3C7358FC}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{DC60F5E2-6E6A-4B7B-A942-33762DAF70B6}" PluginName="Vorbis" CompanyID="0" PluginID="4"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="Vorbis Quality Low" ID="{AD876647-70E5-492F-86C9-FFDED7CB6C9E}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{E535CF1C-577D-4953-851F-DD49EED17A4F}" PluginName="Vorbis" CompanyID="0" PluginID="4">
+										<PropertyList>
+											<Property Name="QualityFactor" Type="Real32" Value="0"/>
+										</PropertyList>
+									</ConversionPlugin>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="Vorbis Quality Medium" ID="{01D20CF3-9A4C-4EEE-AE3E-2942B47543E9}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{4B11DD13-E73F-4B55-98F7-4F149D5EA157}" PluginName="Vorbis" CompanyID="0" PluginID="4">
+										<PropertyList>
+											<Property Name="QualityFactor" Type="Real32" Value="2"/>
+										</PropertyList>
+									</ConversionPlugin>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="PCM" ID="{A6753C13-8ABB-4028-8D96-7483524C2618}" ShortID="764934186">
+					<ChildrenList>
+						<Conversion Name="PCM As Input" ID="{E712A671-9647-44EF-8B1B-857926D620F0}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{5B98D4E8-3973-4387-95D1-62496F10E59C}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="PCM Auto Detect Low" ID="{A55FD918-6235-455C-86B9-2C828B495C21}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>1</Value>
+										<Value Platform="Windows">1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{05CCF79F-08D4-42BF-9182-09E11B3BD36F}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="PCM Auto Detect Medium" ID="{E24008BC-4813-4D98-B020-6F66B2750A16}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>2</Value>
+										<Value Platform="Windows">2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{CC3A0202-622F-49B5-9549-237B43494B10}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="PCM Auto Detect High" ID="{103058FA-B09E-42AF-A6BA-B711CD85E365}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>3</Value>
+										<Value Platform="Windows">3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{D80E09E8-2D47-4F1C-AA1F-25BE1F4D60A2}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="ADPCM" ID="{C43B4493-F987-4828-ACDF-DAEAA7564E0A}" ShortID="637086534">
+					<ChildrenList>
+						<Conversion Name="ADPCM As Input" ID="{844B7EC4-A8FF-43AD-821E-25B9459D4413}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{498FC855-843B-426C-A683-E1BF84529B22}" PluginName="ADPCM" CompanyID="0" PluginID="2"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="ADPCM Auto Detect Low" ID="{638FA3E7-2C90-478F-AA99-4F8EC86F3356}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>1</Value>
+										<Value Platform="Windows">1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{532F818A-E503-411C-90E2-1DE4CC46DD57}" PluginName="ADPCM" CompanyID="0" PluginID="2"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="ADPCM Auto Detect Medium" ID="{1ADE8C79-CF88-45CD-8D8B-13FFA25639DF}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>2</Value>
+										<Value Platform="Windows">2</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{DE163207-5873-4611-A4CC-80F38AF77E62}" PluginName="ADPCM" CompanyID="0" PluginID="2"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+						<Conversion Name="ADPCM Auto Detect High" ID="{6D51666E-9C7A-40E4-831D-C445512EBABD}">
+							<PropertyList>
+								<Property Name="Channels" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="LRMix" Type="Real64">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MaxSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="MinSampleRate" Type="int32">
+									<ValueList>
+										<Value Platform="Windows">0</Value>
+									</ValueList>
+								</Property>
+								<Property Name="SampleRate" Type="int32">
+									<ValueList>
+										<Value>3</Value>
+										<Value Platform="Windows">3</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ConversionPluginInfoList>
+								<ConversionPluginInfo Platform="Windows">
+									<ConversionPlugin Name="" ID="{F9EE000E-A66D-47D1-A489-B28D497AB18E}" PluginName="ADPCM" CompanyID="0" PluginID="2"/>
+								</ConversionPluginInfo>
+							</ConversionPluginInfoList>
+						</Conversion>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</Conversions>
+</WwiseDocument>
