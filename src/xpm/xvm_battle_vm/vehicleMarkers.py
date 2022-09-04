@@ -130,11 +130,16 @@ class VehicleMarkers(object):
 
     def daapi_py2as(self, *args):
         try:
-            if self.manager and self.populated:
+            if self.manager:
                 if self.manager._isDAAPIInited():
-                    return self.manager.flashObject.daapi_py2as(*args)
-            elif self.enabled:
-                self.pending_commands.append(args)
+                    # during the battle->lobby transition there is a narrow time window in which the DAAPI connection is closed, but `_isDAAPIInited` is still true
+                    try:
+                        return self.manager.flashObject.daapi_py2as(*args)
+                    except AttributeError:
+                        pass
+                else:
+                    self.pending_commands.append(args)
+            return None
         except Exception:
             self._logger.exception('daapi_py2as')
 
