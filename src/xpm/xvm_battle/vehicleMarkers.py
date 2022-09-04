@@ -167,7 +167,7 @@ def daapi_py2asS(self, *args):
 
 def daapi_as2pyS(self, *args, **kwargs):
     if g_markers:
-        g_markers.onVMCommand(*args, **kwargs)
+        return g_markers.onVMCommand(*args, **kwargs)
 
 MarkersManager.daapi_py2asS = daapi_py2asS
 MarkersManager.daapi_as2py  = daapi_as2pyS
