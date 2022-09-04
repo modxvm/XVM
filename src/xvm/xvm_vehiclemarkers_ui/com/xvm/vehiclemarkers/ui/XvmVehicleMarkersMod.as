@@ -26,6 +26,8 @@ package com.xvm.vehiclemarkers.ui
         static private var _allyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
         static private var _enemyAtlas:String = ATLAS_CONSTANTS.VEHICLE_MARKER_ATLAS;
 
+        private var _daapi_as2py:Function = null;
+
         [Inline]
         static public function get allyAtlas():String
         {
@@ -40,32 +42,25 @@ package com.xvm.vehiclemarkers.ui
 
         public function XvmVehicleMarkersMod():void
         {
-            Xfw.registerCommandProvider(xvm_cmd);
             Logger.setCounterPrefix("V");
 
             this.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded, false, 0, true);
-
-            Xfw.addCommandListener("xvm_vm.as.cmd_response", as_cmd_response);
-
             createBattleControllerListeners();
-
-            Xfw.cmd(XvmCommands.INITIALIZED);
 
             super(Defines.APP_TYPE_VEHICLE_MARKERS);
         }
 
-        private var _lastCmdResponse:*;
-        private function xvm_cmd(... rest):*
+        public function Initialize(daapi_as2py:Function): void
         {
-            rest.unshift("xvm.cmd");
-            _lastCmdResponse = undefined;
-            ExternalInterface.call.apply(null, rest);
-            return _lastCmdResponse;
+            // Will be called from the patched BattleVehicleMarkersApp.swf
+            this._daapi_as2py = daapi_as2py;
+            Xfw.registerCommandProvider(xvm_cmd);
+            Xfw.cmd(XvmCommands.INITIALIZED);
         }
 
-        private function as_cmd_response(value:*):void
+        private function xvm_cmd(... rest):*
         {
-            _lastCmdResponse = value;
+            return _daapi_as2py.apply(this, rest);
         }
 
         private var _initialized:Boolean = false;

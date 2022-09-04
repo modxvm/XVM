@@ -1,7 +1,39 @@
-diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm battleVehicleMarkersApp.orig-0/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm	2019-09-10 14:49:48.950541200 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm	2019-09-10 15:19:32.275344100 +0300
-@@ -41,6 +41,159 @@
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm	2022-09-04 03:53:39.704360000 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/app/impl/BattleVehicleMarkersApp.class.asasm	2022-09-04 03:54:06.700104400 +0300
+@@ -6,6 +6,7 @@
+   flag PROTECTEDNS
+   protectedns ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp")
+   iinit
++   name "net.wg.app.impl:BattleVehicleMarkersApp/BattleVehicleMarkersApp"
+    refid "net.wg.app.impl:BattleVehicleMarkersApp/instance/init"
+    body
+     maxstack 4
+@@ -19,7 +20,7 @@
+      getlocal0
+      findpropstrict      QName(PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), "VehicleMarkersManager")
+      constructprop       QName(PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), "VehicleMarkersManager"), 0
+-     getlex              QName(PrivateNamespace(null, "net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST")
++     getlex              QName(PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST")
+      getlex              QName(PackageNamespace("net.wg.data.constants.generated"), "ROOT_SWF_CONSTANTS")
+      getproperty         QName(PackageNamespace(""), "BATTLE_VEHICLE_MARKERS_REGISTER_CALLBACK")
+      constructsuper      3
+@@ -28,12 +29,14 @@
+     end ; code
+    end ; body
+   end ; method
++  trait slot QName(PackageNamespace(""), "xvm_vm_swf") value Null() end
+   trait method QName(ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), "onLibsLoadingComplete") flag OVERRIDE
+    method
++    name "net.wg.app.impl:BattleVehicleMarkersApp/protected:onLibsLoadingComplete"
+     refid "net.wg.app.impl:BattleVehicleMarkersApp/instance/net.wg.app.impl:BattleVehicleMarkersApp:onLibsLoadingComplete"
+     returns QName(PackageNamespace(""), "void")
+     body
+-     maxstack 1
++     maxstack 2
+      localcount 1
+      initscopedepth 11
+      maxscopedepth 12
+@@ -41,6 +44,162 @@
        getlocal0
        pushscope
  
@@ -16,6 +48,8 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +  end ; trait
 +  trait method QName(PackageNamespace(""), "loadXvm")
 +   method
++    name "net.wg.app.impl:BattleVehicleMarkersApp:loadXvm"
++    refid "net.wg.app.impl:BattleVehicleMarkersApp/instance/loadXvm"
 +    param QName(PackageNamespace(""), "String")
 +    returns QName(PackageNamespace(""), "void")
 +    body
@@ -27,6 +61,8 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +      getlocal0
 +      pushscope
 +
++      debug               1, "param1", 0, 0
++      debug               1, "_loc2_", 1, 18
 +      findpropstrict      QName(PackageNamespace("flash.display"), "Loader")
 +      constructprop       QName(PackageNamespace("flash.display"), "Loader"), 0
 +      coerce              QName(PackageNamespace("flash.display"), "Loader")
@@ -37,20 +73,20 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +      callpropvoid        QName(PackageNamespace(""), "addChild"), 1
 +
 +      getlocal2
-+      getproperty         QName(PackageNamespace(""), "contentLoaderInfo")
++      getproperty         Multiname("contentLoaderInfo", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlex              QName(PackageNamespace("flash.events"), "Event")
-+      getproperty         QName(PackageNamespace(""), "COMPLETE")
++      getproperty         Multiname("COMPLETE", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlocal0
 +      getproperty         QName(PackageNamespace(""), "onSWFLoadedXvm")
-+      callpropvoid        QName(PackageNamespace(""), "addEventListener"), 2
++      callpropvoid        Multiname("addEventListener", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
 +      getlocal2
-+      getproperty         QName(PackageNamespace(""), "contentLoaderInfo")
++      getproperty         Multiname("contentLoaderInfo", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlex              QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+      getproperty         QName(PackageNamespace(""), "IO_ERROR")
++      getproperty         Multiname("IO_ERROR", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlocal0
 +      getproperty         QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+      callpropvoid        QName(PackageNamespace(""), "addEventListener"), 2
++      callpropvoid        Multiname("addEventListener", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
 +      getlocal2
 +      findpropstrict      QName(PackageNamespace("flash.net"), "URLRequest")
@@ -59,9 +95,9 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +      findpropstrict      QName(PackageNamespace("flash.system"), "LoaderContext")
 +      pushfalse
 +      getlex              QName(PackageNamespace("flash.system"), "ApplicationDomain")
-+      getproperty         QName(PackageNamespace(""), "currentDomain")
++      getproperty         Multiname("currentDomain", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      constructprop       QName(PackageNamespace("flash.system"), "LoaderContext"), 2
-+      callpropvoid        QName(PackageNamespace(""), "load"), 2
++      callpropvoid        Multiname("load", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
 +      returnvoid
 +     end ; code
@@ -70,10 +106,12 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +  end ; trait
 +  trait method QName(PackageNamespace(""), "onSWFLoadedXvm")
 +   method
++    name "net.wg.app.impl:BattleVehicleMarkersApp:onSWFLoadedXvm"
++    refid "net.wg.app.impl:BattleVehicleMarkersApp/instance/onSWFLoadedXvm"
 +    param QName(PackageNamespace("flash.events"), "Event")
 +    returns QName(PackageNamespace(""), "void")
 +    body
-+     maxstack 4
++     maxstack 3
 +     localcount 3
 +     initscopedepth 11
 +     maxscopedepth 12
@@ -81,35 +119,36 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +      getlocal0
 +      pushscope
 +
++      debug               1, "param1", 0, 0
++      debug               1, "_loc2_", 1, 27
 +      getlocal1
-+      getproperty         QName(PackageNamespace(""), "currentTarget")
++      getproperty         Multiname("currentTarget", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlex              QName(PackageNamespace("flash.display"), "LoaderInfo")
 +      astypelate
 +      coerce              QName(PackageNamespace("flash.display"), "LoaderInfo")
 +      setlocal2
 +
++      getlocal0
++      getlocal2
++      getproperty         Multiname("content", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
++      setproperty         QName(PackageNamespace(""), "xvm_vm_swf")
++
 +      getlocal2
 +      getlex              QName(PackageNamespace("flash.events"), "Event")
-+      getproperty         QName(PackageNamespace(""), "INIT")
++      getproperty         Multiname("INIT", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlocal0
 +      getproperty         QName(PackageNamespace(""), "onSWFLoadedXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
++      callpropvoid        Multiname("removeEventListener", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
 +      getlocal2
 +      getlex              QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+      getproperty         QName(PackageNamespace(""), "IO_ERROR")
++      getproperty         Multiname("IO_ERROR", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlocal0
 +      getproperty         QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
++      callpropvoid        Multiname("removeEventListener", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
 +      findpropstrict      QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback")
 +      callpropvoid        QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback"), 0
-+
-+      getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
-+      pushstring          "xvm.cmd"
-+      pushstring          "xfw.log"
-+      pushstring          "[VM] registered"
-+      callpropvoid        QName(PackageNamespace(""), "call"), 3
 +
 +      returnvoid
 +     end ; code
@@ -118,10 +157,12 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +  end ; trait
 +  trait method QName(PackageNamespace(""), "onSWFLoadErrorXvm")
 +   method
++    name "net.wg.app.impl:BattleVehicleMarkersApp:onSWFLoadErrorXvm"
++    refid "net.wg.app.impl:BattleVehicleMarkersApp/instance/onSWFLoadErrorXvm"
 +    param QName(PackageNamespace("flash.events"), "IOErrorEvent")
 +    returns QName(PackageNamespace(""), "void")
 +    body
-+     maxstack 5
++     maxstack 3
 +     localcount 3
 +     initscopedepth 11
 +     maxscopedepth 12
@@ -129,8 +170,10 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +      getlocal0
 +      pushscope
 +
++      debug               1, "param1", 0, 0
++      debug               1, "_loc2_", 1, 36
 +      getlocal1
-+      getproperty         QName(PackageNamespace(""), "currentTarget")
++      getproperty         Multiname("currentTarget", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlex              QName(PackageNamespace("flash.display"), "LoaderInfo")
 +      astypelate
 +      coerce              QName(PackageNamespace("flash.display"), "LoaderInfo")
@@ -138,26 +181,76 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/app/impl/BattleVehicleMark
 +
 +      getlocal2
 +      getlex              QName(PackageNamespace("flash.events"), "Event")
-+      getproperty         QName(PackageNamespace(""), "INIT")
++      getproperty         Multiname("INIT", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlocal0
 +      getproperty         QName(PackageNamespace(""), "onSWFLoadedXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
++      callpropvoid        Multiname("removeEventListener", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
 +      getlocal2
 +      getlex              QName(PackageNamespace("flash.events"), "IOErrorEvent")
-+      getproperty         QName(PackageNamespace(""), "IO_ERROR")
++      getproperty         Multiname("IO_ERROR", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
 +      getlocal0
 +      getproperty         QName(PackageNamespace(""), "onSWFLoadErrorXvm")
-+      callpropvoid        QName(PackageNamespace(""), "removeEventListener"), 2
-+
-+      getlex              QName(PackageNamespace("flash.external"), "ExternalInterface")
-+      pushstring          "xvm.cmd"
-+      pushstring          "xfw.log"
-+      pushstring          "[XVM] Error loading xvm_vehiclemarkers_ui.swf: "
-+      getlocal1
-+      add
-+      callpropvoid        QName(PackageNamespace(""), "call"), 3
++      callpropvoid        Multiname("removeEventListener", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")]), 2
 +
        findpropstrict      QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback")
        callpropvoid        QName(ProtectedNamespace("net.wg.app.iml.base:RootApp"), "callRegisterCallback"), 0
  
+@@ -51,6 +210,7 @@
+   end ; trait
+   trait getter QName(PackageNamespace(""), "vehicleMarkersCanvas")
+    method
++    name "net.wg.app.impl:BattleVehicleMarkersApp:vehicleMarkersCanvas/get"
+     refid "net.wg.app.impl:BattleVehicleMarkersApp/instance/vehicleMarkersCanvas/getter"
+     returns QName(PackageNamespace("net.wg.infrastructure.interfaces"), "IRootAppMainContent")
+     body
+@@ -70,6 +230,7 @@
+   end ; trait
+  end ; instance
+  cinit
++  name ""
+   refid "net.wg.app.impl:BattleVehicleMarkersApp/class/init"
+   body
+    maxstack 5
+@@ -84,9 +245,9 @@
+     getlex              QName(PackageNamespace("net.wg.infrastructure.base.meta.impl"), "ClassManagerBattleMarkersMeta")
+     initproperty        QName(PackageNamespace(""), "CLASS_MANAGER_META")
+ 
+-    findproperty        QName(PrivateNamespace(null, "net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST")
++    findproperty        QName(PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST")
+     findpropstrict      Multiname("Vector", [PackageNamespace("__AS3__.vec")])
+-    getproperty         Multiname("Vector", [PrivateNamespace(null, "net.wg.app.impl:BattleVehicleMarkersApp"), PackageNamespace(""), PackageNamespace("__AS3__.vec"), PrivateNamespace(null, "net.wg.app.impl:BattleVehicleMarkersApp/class/init"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), Namespace("http://adobe.com/AS3/2006/builtin"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher")])
++    getproperty         Multiname("Vector", [PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
+     getlex              QName(PackageNamespace(""), "String")
+     applytype           1
+     pushbyte            3
+@@ -94,24 +255,24 @@
+     dup
+     pushbyte            0
+     pushstring          "epicSharedAssets.swf"
+-    setproperty         MultinameL([PackageNamespace("")])
++    setproperty         MultinameL([PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
+ 
+     dup
+     pushbyte            1
+     pushstring          "battleStaticMarkers.swf"
+-    setproperty         MultinameL([PackageNamespace("")])
++    setproperty         MultinameL([PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
+ 
+     dup
+     pushbyte            2
+     pushstring          "battleVehicleMarkers.swf"
+-    setproperty         MultinameL([PackageNamespace("")])
++    setproperty         MultinameL([PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PackageNamespace("net.wg.app.impl"), PackageInternalNs("net.wg.app.impl"), StaticProtectedNs("net.wg.app.iml.base:RootApp"), StaticProtectedNs("net.wg.app.iml.base:BaseRootApp"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), ProtectedNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), StaticProtectedNs("net.wg.app.impl:BattleVehicleMarkersApp"), PrivateNamespace("BattleVehicleMarkersApp.as$3")])
+ 
+-    initproperty        QName(PrivateNamespace(null, "net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST")
++    initproperty        QName(PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST")
+ 
+     returnvoid
+    end ; code
+   end ; body
+  end ; method
+  trait const QName(PackageNamespace(""), "CLASS_MANAGER_META") slotid 1 type QName(PackageNamespace(""), "Class") end
+- trait const QName(PrivateNamespace(null, "net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST") slotid 2 type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace(""), "String")>) end
++ trait const QName(PrivateNamespace("net.wg.app.impl:BattleVehicleMarkersApp"), "LIBS_LIST") slotid 2 type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace(""), "String")>) end
+ end ; class

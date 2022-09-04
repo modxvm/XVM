@@ -1,8 +1,10 @@
 """ XVM (c) https://modxvm.com 2013-2021 """
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
+import logging
 import traceback
 import time
 
@@ -30,6 +32,7 @@ import xvm_main.python.vehinfo as vehinfo
 
 from consts import *
 import shared
+
 
 
 #####################################################################
@@ -99,8 +102,8 @@ def _MarkersManager__init__(base, self):
 @overrideMethod(MarkersManager, '_populate')
 def _MarkersManager_populate(base, self):
     #debug('markers: populate')
-    g_markers.populate()
     base(self)
+    g_markers.populate()
 
 @overrideMethod(MarkersManager, '_dispose')
 def _MarkersManager_dispose(base, self):
@@ -153,15 +156,27 @@ def _VehicleMarkerPlugin__updateVehicleHealth(base, self, vehicleID, handle, new
             return
     base(self, vehicleID, handle, newHealth, aInfo, attackReasonID)
 
-def as_xvm_cmdS(self, *args):
+
+#
+# DAAPI
+#
+
+def daapi_py2asS(self, *args):
     if self._isDAAPIInited():
-        return self.flashObject.as_xvm_cmd(*args)
+        return self.flashObject.daapi_py2as(*args)
 
-MarkersManager.as_xvm_cmdS = as_xvm_cmdS
+def daapi_as2pyS(self, *args, **kwargs):
+    if g_markers:
+        g_markers.onVMCommand(*args, **kwargs)
+
+MarkersManager.daapi_py2asS = daapi_py2asS
+MarkersManager.daapi_as2py  = daapi_as2pyS
 
 
-#####################################################################
+
+#
 # VehicleMarkers
+#
 
 class VehicleMarkers(object):
 
@@ -192,13 +207,12 @@ class VehicleMarkers(object):
         return self.manager._MarkersManager__plugins if self.manager else None
 
     def init(self, manager):
-        return
+        self._logger = logging.getLogger('XVM/Battle/VM')
         self.manager = manager
-        self.manager.addExternalCallback('xvm.cmd', self.onVMCommand)
         self.playerVehicleID = self.sessionProvider.getArenaDP().getPlayerVehicleID()
 
     def populate(self):
-        return
+        self._logger.info('populate')
         self.populated = True
         self.respondConfig()
         self.process_pending_commands()
@@ -211,9 +225,7 @@ class VehicleMarkers(object):
         self.guiType = None
         self.battleType = None
         self.playerVehicleID = 0
-        if self.manager is not None:
-            self.manager.removeExternalCallback('xvm.cmd')
-            self.manager = None
+        self.manager = None
 
     #####################################################################
     # event handlers
@@ -228,6 +240,7 @@ class VehicleMarkers(object):
 
     # returns: (result, status)
     def onVMCommand(self, cmd, *args):
+        #self._logger.info('onVMCommand: %s, %s', cmd, args)
         try:
             if cmd == XVM_VM_COMMAND.LOG:
                 log(*args)
@@ -243,9 +256,9 @@ class VehicleMarkers(object):
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.respondGlobalBattleData()
             elif cmd == XVM_COMMAND.PYTHON_MACRO:
-                self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, pymacro.process_python_macro(args[0]))
+                return pymacro.process_python_macro(args[0])
             elif cmd == XVM_COMMAND.GET_CLAN_ICON:
-                self.call(XVM_VM_COMMAND.AS_CMD_RESPONSE, stats.getClanIcon(int(args[0])))
+                return stats.getClanIcon(int(args[0]))
             elif cmd == XVM_COMMAND.LOAD_STAT_BATTLE:
                 stats.getBattleStat(args, self.call)
             # profiler
@@ -260,13 +273,13 @@ class VehicleMarkers(object):
     def call(self, *args):
         try:
             if self.manager and self.populated:
-                #debug('as_xvm_cmdS: ' + str(args))
-                self.manager.as_xvm_cmdS(*args)
+                #self._logger.info('call: %s', args)
+                self.manager.daapi_py2asS(*args)
             elif self.enabled:
                 #debug('pending: ' + str(args))
                 self.pending_commands.append(args)
-        except Exception, ex:
-            err(traceback.format_exc())
+        except Exception:
+            self._logger.exception('call:')
 
     def respondConfig(self):
         #debug('vm:respondConfig')

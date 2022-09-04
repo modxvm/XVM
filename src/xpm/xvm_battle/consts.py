@@ -29,7 +29,6 @@ class XVM_VM_COMMAND(object):
     # Flash -> Python
     LOG = "xfw.log"
     INITIALIZED = "initialized"
-    AS_CMD_RESPONSE = "xvm_vm.as.cmd_response"
 
 # Battle events
 

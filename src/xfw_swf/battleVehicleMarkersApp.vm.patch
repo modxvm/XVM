@@ -1,12 +1,12 @@
-diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-05-28 14:20:43.836763500 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-05-28 14:23:28.967011700 +0300
-@@ -2029,6 +2029,24 @@
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-09-04 03:53:39.826470300 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-09-04 03:54:06.820719500 +0300
+@@ -2029,6 +2029,25 @@
      end ; body
     end ; method
    end ; trait
 +  trait method QName(PackageNamespace(""), "xvm_active")
 +   method
++    refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/xvm_active"
 +    returns QName(PackageNamespace(""), "Boolean")
 +    body
 +     maxstack 1
@@ -26,26 +26,222 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
    trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateMarkerSettings")
     method
      refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/updateMarkerSettings"
-@@ -2047,6 +2065,13 @@
+@@ -2047,6 +2066,13 @@
        setlocal            9
  
        getlocal0
 +      callproperty        QName(PackageNamespace(""), "xvm_active"), 0
-+      iffalse             XVMACTIVE
++      iffalse             L9
 +
 +      returnvoid
 +
-+XVMACTIVE:
++L9:
 +      getlocal0
        getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "ICON")
        callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
        convert_b
-@@ -4076,6 +4101,26 @@
+@@ -2091,7 +2117,7 @@
+       getlocal3
+       convert_b
+       dup
+-      iffalse             L52
++      iffalse             L56
+ 
+       pop
+       getlocal0
+@@ -2101,8 +2127,8 @@
+       getproperty         QName(PackageNamespace(""), "pName")
+       equals
+       not
+-L52:
+-      iffalse             L65
++L56:
++      iffalse             L69
+ 
+       getlocal0
+       getlocal0
+@@ -2118,14 +2144,14 @@
+       getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "_lastPlayerName")
+       callpropvoid        QName(PackageNamespace(""), "truncateTextFieldText"), 2
+ 
+-L65:
++L69:
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "playerNameField")
+       getlocal3
+       setproperty         QName(PackageNamespace(""), "visible")
+ 
+       getlocal            4
+-      iffalse             L77
++      iffalse             L81
+ 
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleNameField")
+@@ -2134,14 +2160,14 @@
+       getproperty         QName(PackageNamespace(""), "vType")
+       setproperty         QName(PackageNamespace(""), "text")
+ 
+-L77:
++L81:
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "vehicleNameField")
+       getlocal            4
+       setproperty         QName(PackageNamespace(""), "visible")
+ 
+       getlocal            5
+-      iffalse             L89
++      iffalse             L93
+ 
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "healthBar")
+@@ -2150,7 +2176,7 @@
+       getproperty         QName(PackageNamespace(""), "currHealth")
+       setproperty         QName(PackageNamespace(""), "currHealth")
+ 
+-L89:
++L93:
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "healthBar")
+       getlocal            5
+@@ -2163,12 +2189,12 @@
+ 
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "_vehicleDestroyed")
+-      iffalse             L102
++      iffalse             L106
+ 
+       getlocal0
+       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "setDestroyedColorForHP"), 0
+ 
+-L102:
++L106:
+       getlocal0
+       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "setHealthText"), 0
+ 
+@@ -2193,53 +2219,53 @@
+       setproperty         QName(PackageNamespace(""), "visible")
+ 
+       getlocal3
+-      iffalse             L125
++      iffalse             L129
+ 
+       pushbyte            1
+       coerce_a
+-      jump                L127
++      jump                L131
+ 
+-L125:
++L129:
+       pushbyte            0
+       coerce_a
+-L127:
++L131:
+       getlocal            4
+-      iffalse             L132
++      iffalse             L136
+ 
+       pushbyte            1
+       coerce_a
+-      jump                L134
++      jump                L138
+ 
+-L132:
++L136:
+       pushbyte            0
+       coerce_a
+-L134:
++L138:
+       add
+       convert_i
+       setlocal            8
+ 
+       getlocal            5
+-      iftrue              L158
++      iftrue              L162
+ 
+       getlocal            8
+       getlocal            6
+-      iffalse             L145
++      iffalse             L149
+ 
+       pushbyte            1
+       coerce_a
+-      jump                L147
++      jump                L151
+ 
+-L145:
++L149:
+       pushbyte            0
+       coerce_a
+-L147:
++L151:
+       add
+       convert_i
+       dup
+       setlocal            8
+ 
+       pushbyte            0
+-      ifngt               L158
++      ifngt               L162
+ 
+       getlocal            8
+       getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "SHADOW_TYPE_HBAR_OFFSET")
+@@ -2247,10 +2273,10 @@
+       convert_i
+       setlocal            8
+ 
+-L158:
++L162:
+       getlocal            8
+       pushbyte            0
+-      ifngt               L181
++      ifngt               L185
+ 
+       getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "SHADOW_POSITIONS")
+       getlocal            8
+@@ -2274,15 +2300,15 @@
+       pushtrue
+       setproperty         QName(PackageNamespace(""), "visible")
+ 
+-      jump                L185
++      jump                L189
+ 
+-L181:
++L185:
+       getlocal0
+       getproperty         QName(PackageNamespace(""), "bgShadow")
+       pushfalse
+       setproperty         QName(PackageNamespace(""), "visible")
+ 
+-L185:
++L189:
+       getlocal0
+       findpropstrict      Multiname("Vector", [PackageNamespace("__AS3__.vec")])
+       getproperty         Multiname("Vector", [PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin"), PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), PackageNamespace("__AS3__.vec")])
+@@ -2295,12 +2321,12 @@
+       getlocal            5
+       convert_b
+       dup
+-      iftrue              L201
++      iftrue              L205
+ 
+       pop
+       getlocal            6
+       convert_b
+-L201:
++L205:
+       setproperty         MultinameL([PackageNamespace("")])
+ 
+       dup
+@@ -4074,6 +4100,27 @@
+       returnvoid
+      end ; code
      end ; body
-    end ; method
-   end ; trait
++   end ; method
++  end ; trait
 +  trait method QName(PackageNamespace(""), "xfw_updateIconColor")
 +   method
++    refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/xfw_updateIconColor"
 +    returns QName(PackageNamespace(""), "void")
 +    body
 +     maxstack 1
@@ -61,9 +257,7 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +
 +      returnvoid
 +     end ; code
-+     end ; body
-+    end ; method
-+   end ; trait
++    end ; body
+    end ; method
+   end ; trait
   end ; instance
-  cinit
-   refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/class/init"
