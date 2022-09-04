@@ -1,4 +1,7 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+"""
 
 __all__ = ['start', 'stop', 'call']
 
@@ -26,7 +29,7 @@ import xvm_main.python.utils as utils
 
 from xvm_main.python.consts import *
 from xvm_main.python.xvm import g_xvm
-from consts import *
+from xvm_battle.python.consts import *
 
 
 XMQP_DEVELOPMENT = os.environ.get('XMQP_DEVELOPMENT') == '1'

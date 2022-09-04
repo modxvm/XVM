@@ -23,13 +23,6 @@ class XVM_BATTLE_COMMAND(object):
     AS_STEREOSCOPE_TOGGLED = "xvm.as.as_stereoscope_toggled"
     AS_CHANGING_SHELL = "xvm.as.as_changing_shell"
 
-# Markers only commands
-
-class XVM_VM_COMMAND(object):
-    # Flash -> Python
-    LOG = "xfw.log"
-    INITIALIZED = "initialized"
-
 # Battle events
 
 class XVM_BATTLE_EVENT(object):

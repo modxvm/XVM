@@ -6,5 +6,3 @@ import camera
 import fragCorrelationPanel
 import minimap
 import replay
-import vehicleMarkers
-import vehicleMarkersBC

@@ -12,9 +12,9 @@ import xvm_main.python.config as config
 from xvm_main.python.logger import *
 import xvm_main.python.utils as utils
 
-from consts import *
+from xvm_battle.python.consts import *
 import xmqp
-from vehicleMarkers import g_markers
+from xvm_battle_vm.python.vehicleMarkers import g_markers
 
 
 class EVENTS(object):

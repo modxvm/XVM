@@ -45,8 +45,6 @@ from xvm_main.python.logger import *
 
 from consts import *
 import shared
-import xmqp
-import xmqp_events
 
 #####################################################################
 # constants
@@ -71,16 +69,12 @@ def start():
 
 BigWorld.callback(0, start)
 
-g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
-g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
 @registerEvent(game, 'fini')
 def fini():
     g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, g_battle.onXfwCommand)
     g_eventBus.removeListener(XFW_EVENT.APP_INITIALIZED, g_battle.onAppInitialized)
     g_eventBus.removeListener(XFW_EVENT.APP_DESTROYED, g_battle.onAppDestroyed)
-    g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
-    g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
 
 
 #####################################################################
@@ -101,7 +95,6 @@ def _PlayerAvatar_onBecomePlayer(base, self):
             arena.onVehicleKilled += g_battle.onVehicleKilled
             arena.onAvatarReady += g_battle.onAvatarReady
             arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
-            arena.onNewVehicleListReceived += xmqp.start
             arena.onNewVehicleListReceived += g_battle.onNewVehicleListReceived
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
@@ -129,7 +122,6 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
             arena.onVehicleKilled -= g_battle.onVehicleKilled
             arena.onAvatarReady -= g_battle.onAvatarReady
             arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
-            arena.onNewVehicleListReceived -= xmqp.start
             arena.onNewVehicleListReceived -= g_battle.onNewVehicleListReceived
         sessionProvider = dependency.instance(IBattleSessionProvider)
         ctrl = sessionProvider.shared.feedback
@@ -145,7 +137,6 @@ def _PlayerAvatar_onBecomeNonPlayer(base, self):
         ctrl = sessionProvider.shared.ammo
         if ctrl:
             ctrl.onCurrentShellChanged -= g_battle.onCurrentShellChanged
-        xmqp.stop()
     except Exception, ex:
         err(traceback.format_exc())
     base(self)
@@ -520,10 +511,6 @@ class Battle(object):
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
                 return (None, True)
 
-            elif cmd == XVM_BATTLE_COMMAND.XMQP_INIT:
-                xmqp_events.onBattleInit()
-                return (None, True)
-
             elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
                 self.invalidateArenaInfo()
                 return (None, True)
@@ -532,9 +519,6 @@ class Battle(object):
                 n = int(args[0])
                 res = getBattleSubTypeBaseNumber(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
                 return (res, True)
-
-            elif cmd == XVM_BATTLE_COMMAND.MINIMAP_CLICK:
-                return (xmqp_events.send_minimap_click(args[0]), True)
 
         except Exception, ex:
             err(traceback.format_exc())

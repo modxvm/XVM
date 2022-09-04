@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.battle.xmqp",
+    "name": "XVM Battle XMQP",
+    "description": "XVM Battle XMQP module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xfw.libraries", "com.modxvm.xvm","com.modxvm.xvm.battle", "com.modxvm.xvm.battle.vm"],
+
+    "url": "https://modxvm.com/",
+    "url_update": "https://modxvm.com/",
+
+    "wot_version_min": "WOT_VERSION",
+    "wot_version_exactmatch": false,
+
+    "features": ["python"]
+}

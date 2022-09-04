@@ -61,26 +61,7 @@ def _PlayerAvatar_onBecomePlayer(self):
 
 # record
 
-def onXmqpMessage(e):
-    try:
-        if g_replayCtrl.isRecording:
-            global _xvm_record_data
-            if _xvm_record_data:
-                period = g_replayCtrl._BattleReplay__arenaPeriod
-                _xvm_record_data['timing'].append({
-                    'p': period,
-                    't': float("{0:.3f}".format(g_replayCtrl.currentTime)),
-                    'm': 'XMQP',
-                    'd': e.ctx
-                })
-    except Exception as ex:
-        err(traceback.format_exc())
 
-g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
-
-@registerEvent(game, 'fini')
-def fini():
-    g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
 
 @overrideMethod(BattleReplay, 'stop')
 def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestroyed=False):
