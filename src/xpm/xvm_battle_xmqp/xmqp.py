@@ -56,18 +56,22 @@ def _start(e=None):
         token = config.token.token
         if token:
             players = []
-            for (vehicleID, vData) in avatar_getter.getArena().vehicles.iteritems():
-                # ally team only
-                if vData['team'] == avatar_getter.getPlayerTeam():
-                    players.append(vData['accountDBID'])
+            
+            arena = avatar_getter.getArena()
+            if arena is not None:
+                for (vehicleID, vData) in arena.vehicles.iteritems():
+                    # ally team only
+                    if vData['team'] == avatar_getter.getPlayerTeam():
+                        players.append(vData['accountDBID'])
+            
             if XMQP_DEVELOPMENT:
                 accountDBID = utils.getAccountDBID()
                 if accountDBID not in players:
                     players.append(accountDBID)
-                #players.append(42)
-                #players.append(43)
+
             players = list(set(players))
             players.sort()
+
             # start
             stop()
             global _xmqp_thread, _xmqp
