@@ -99,7 +99,6 @@ class VehicleMarkers(object):
         g_playerEvents.onAvatarBecomeNonPlayer += self.onBecomeNonPlayer
 
     def init(self, manager):
-        self._logger.info('init')
         self.manager = manager
         self.playerVehicleID = self.sessionProvider.getArenaDP().getPlayerVehicleID()
 
@@ -110,14 +109,12 @@ class VehicleMarkers(object):
         g_playerEvents.onAvatarBecomeNonPlayer -= self.onBecomeNonPlayer
 
     def populate(self):
-        self._logger.info('populate')
         self.populated = True
         self.respondConfig()
         self.process_pending_commands()
         self.updatePlayerStates()
 
     def destroy(self):
-        self._logger.info('destroy')
         self.pending_commands = []
         self.initialized = False
         self.populated = False
@@ -150,7 +147,6 @@ class VehicleMarkers(object):
                 arena = avatar_getter.getArena()
                 self.guiType = arena.guiType
                 self.battleType = arena.bonusType
-                self._logger.info('[VM] initialized')
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 pass
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
@@ -196,7 +192,6 @@ class VehicleMarkers(object):
         self.respondConfig()
 
     def onVehicleStatisticsUpdate(self, vehicleID):
-        self._logger.info('onVehicleStatisticsUpdate')
         self.updatePlayerState(vehicleID, INV.FRAGS)
 
     def respondConfig(self):
@@ -223,7 +218,6 @@ class VehicleMarkers(object):
             self._logger.exception('respondConfig')
 
     def respondGlobalBattleData(self):
-        self._logger.info('respondGlobalBattleData')
         try:
             if self.active:
                 self.daapi_py2as(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *getGlobalBattleData())
@@ -231,13 +225,11 @@ class VehicleMarkers(object):
             self._logger.exception('respondGlobalBattleData')
 
     def process_pending_commands(self):
-        self._logger.info('process_pending_commands')
         for args in self.pending_commands:
             self.daapi_py2as(*args)
         self.pending_commands = []
 
     def onKeyEvent(self, event):
-        self._logger.info('onKeyEvent')
         try:
             if not event.isRepeatedEvent():
                 if self.active and not MessengerEntry.g_instance.gui.isFocused():
@@ -246,7 +238,6 @@ class VehicleMarkers(object):
             self._logger.exception('onKeyEvent')
 
     def updatePlayerStates(self):
-        self._logger.info('updatePlayerStates')
         for vehicleID, vData in avatar_getter.getArena().vehicles.iteritems():
             self.updatePlayerState(vehicleID, INV.ALL)
 
@@ -285,7 +276,6 @@ class VehicleMarkers(object):
 
 
     def recreateMarkers(self):
-        self._logger.info('recreateMarkers')
         try:
             if self.plugins:
                 plugin = self.plugins.getPlugin('vehicles')
