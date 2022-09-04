@@ -1,34 +1,50 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
+# stdlib
+import logging
+
+# simplejson
 import simplejson
-import traceback
 
+# BigWorld
 import BigWorld
-import game
-from Avatar import PlayerAvatar
 from BattleReplay import BattleReplay, g_replayCtrl
 from PlayerEvents import g_playerEvents
 from gui.shared import g_eventBus, events
 
-from xfw import *
-from xvm_main.python.logger import *
+# XFW
+from xfw import unicode_to_ascii
+from xfw.events import overrideMethod
+
+# XVM Main
 import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
 
-from consts import *
+# XVM Battle
+from xvm_battle.python.consts import XVM_BATTLE_EVENT
 
 
-#####################################################################
-# handlers
+
+#
+# Globals
+#
 
 _xvm_record_data = None
 _xvm_play_data = None
 
-@registerEvent(PlayerAvatar, 'onBecomePlayer')
-def _PlayerAvatar_onBecomePlayer(self):
+
+#
+# handlers
+#
+
+def onAvatarBecomePlayer(*args, **kwargs):
     try:
         if not g_replayCtrl.isPlaying:
             global _xvm_record_data
@@ -40,7 +56,6 @@ def _PlayerAvatar_onBecomePlayer(self):
               'timing': []
             }
         else:
-            #log('play: ' + str(fileName))
             arena_json_data = g_replayCtrl._BattleReplay__replayCtrl.getArenaInfoStr()
             xvm_data = simplejson.loads(arena_json_data).get('xvm', None) if arena_json_data else None
             if xvm_data:
@@ -55,15 +70,10 @@ def _PlayerAvatar_onBecomePlayer(self):
                     }
                     g_playerEvents.onArenaPeriodChange += onArenaPeriodChange
                     next_data_timing()
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Battle/Replay').exception('onAvatarBecomePlayer')
 
 
-# record
-
-
-
-@overrideMethod(BattleReplay, 'stop')
 def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestroyed=False):
     try:
         if self.isRecording:
@@ -75,18 +85,17 @@ def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestro
                     arenaInfo.update({"xvm": utils.pretty_floats(_xvm_record_data)})
                     self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo, separators=(',', ':')))
                 _xvm_record_data = None
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Battle/Replay').exception('_BattleReplay_stop')
 
     return base(self, rewindToTime, delete, isDestroyed)
 
-
-# play
 
 def onArenaPeriodChange(period, periodEndTime, periodLength, periodAdditionalInfo):
     global _xvm_play_data
     _xvm_play_data['period'] = period
     next_data_timing()
+
 
 def next_data_timing():
     global _xvm_play_data
@@ -102,3 +111,35 @@ def next_data_timing():
             BigWorld.callback(0, next_data_timing)
         else:
             BigWorld.callback(_xvm_play_data['value']['t'] - g_replayCtrl.currentTime, next_data_timing)
+
+
+def onXmqpMessage(e):
+    try:
+        if g_replayCtrl.isRecording:
+            global _xvm_record_data
+            if _xvm_record_data:
+                period = g_replayCtrl._BattleReplay__arenaPeriod
+                _xvm_record_data['timing'].append({
+                    'p': period,
+                    't': float("{0:.3f}".format(g_replayCtrl.currentTime)),
+                    'm': 'XMQP',
+                    'd': e.ctx
+                })
+    except Exception as ex:
+        logging.getLogger('XVM/Battle/XMQP').exception('onXmqpMessage')
+
+
+
+#
+# Initialization
+#
+
+def init():
+    overrideMethod(BattleReplay, 'stop')(_BattleReplay_stop)
+    g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
+    g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
+
+
+def fini():
+    g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
+    g_playerEvents.onAvatarBecomePlayer -= onAvatarBecomePlayer

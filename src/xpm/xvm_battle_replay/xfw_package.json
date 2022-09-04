@@ -1,12 +1,13 @@
 {
-    "id": "com.modxvm.xvm.battle.vm",
-    "name": "XVM Battle VM",
-    "description": "XVM Battle VehicleMarkers module",
+    "id": "com.modxvm.xvm.battle.replay",
+    "name": "XVM Battle Replay",
+    "description": "XVM Battle Replay module",
     "version": "XVM_VERSION",
     "dependencies": [
         "com.modxvm.xfw.libraries",
         "com.modxvm.xvm",
-        "com.modxvm.xvm.battle"
+        "com.modxvm.xvm.battle",
+        "com.modxvm.xvm.battle.xmqp"
     ],
     "url": "https://modxvm.com/",
     "url_update": "https://modxvm.com/",

@@ -11,7 +11,6 @@ Copyright (c) 2016-2022 XVM Contributors
 import logging
 
 # BigWorld
-from BattleReplay import g_replayCtrl
 from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus
 from PlayerEvents import g_playerEvents
@@ -60,21 +59,6 @@ def onXfwCommand(cmd, *args):
 
     return (None, False)
 
-def onXmqpMessage(e):
-    try:
-        if g_replayCtrl.isRecording:
-            global _xvm_record_data
-            if _xvm_record_data:
-                period = g_replayCtrl._BattleReplay__arenaPeriod
-                _xvm_record_data['timing'].append({
-                    'p': period,
-                    't': float("{0:.3f}".format(g_replayCtrl.currentTime)),
-                    'm': 'XMQP',
-                    'd': e.ctx
-                })
-    except Exception as ex:
-        logging.getLogger('XVM/Battle/XMQP').exception('onXmqpMessage')
-
 
 
 #
@@ -89,7 +73,6 @@ def xfw_module_init():
         g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
         g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
-        g_eventBus.addListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
         g_playerEvents.onAvatarBecomePlayer += onAvatarBecomePlayer
         g_playerEvents.onAvatarBecomeNonPlayer += onAvatarBecomeNonPlayer
         __initialized = True
@@ -101,7 +84,6 @@ def xfw_module_fini():
         g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
         g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)
-        g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, onXmqpMessage)
         g_playerEvents.onAvatarBecomePlayer -= onAvatarBecomePlayer
         g_playerEvents.onAvatarBecomeNonPlayer -= onAvatarBecomeNonPlayer
         __initialized = False
