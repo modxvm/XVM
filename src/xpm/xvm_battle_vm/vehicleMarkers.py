@@ -109,10 +109,10 @@ class VehicleMarkers(object):
         g_playerEvents.onAvatarBecomeNonPlayer -= self.onBecomeNonPlayer
 
     def populate(self):
-        self.populated = True
         self.respondConfig()
         self.process_pending_commands()
         self.updatePlayerStates()
+        self.populated = True
 
     def destroy(self):
         self.pending_commands = []
@@ -148,10 +148,10 @@ class VehicleMarkers(object):
             if cmd == XVM_VM_COMMAND.LOG:
                 self._logger.info('[VM] %s', *args)
             elif cmd == XVM_VM_COMMAND.INITIALIZED:
-                self.initialized = True
                 arena = avatar_getter.getArena()
                 self.guiType = arena.guiType
                 self.battleType = arena.bonusType
+                self.initialized = True
             elif cmd == XVM_COMMAND.REQUEST_CONFIG:
                 pass
             elif cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
