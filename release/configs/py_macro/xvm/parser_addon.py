@@ -113,7 +113,10 @@ def formatMacro(macro, macros):
                 elif isinstance(_macro, float):
                     fm['prec'] = '.' + str(_prec)
                 elif isinstance(_macro, basestring):
-                    u_macro = unicode(_macro, 'utf8')
+                    if not isinstance(_macro, unicode):
+                        u_macro = unicode(_macro, 'utf8')
+                    else:
+                        u_macro = _macro
                     if len(u_macro) > _prec:
                         if (_prec - len(unicode(fm['suf'], 'utf8'))) > 0:
                             _macro = u_macro[:(_prec - len(fm['suf']))]
