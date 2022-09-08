@@ -87,7 +87,7 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
     if targets & TARGETS.VMM:
         if g_markers.enabled:
-            g_markers.daapi_as2py(XVM_BATTLE_COMMAND.AS_XMQP_EVENT, accountDBID, event, data)
+            g_markers.daapi_py2as(XVM_BATTLE_COMMAND.AS_XMQP_EVENT, accountDBID, event, data)
 
 # battle init
 
