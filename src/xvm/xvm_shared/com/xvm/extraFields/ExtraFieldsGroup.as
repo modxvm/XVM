@@ -35,6 +35,11 @@ package com.xvm.extraFields
 
         private function _init(item:IExtraFieldGroupHolder, formats:Array, isRootLayout:Boolean, defaultTextFormatConfig:CTextFormat):void
         {
+            if (!item)
+            {
+                return;
+            }
+
             const createNewExtraFields:Function = function():ExtraFields
             {
                 return new ExtraFields(
