@@ -3,4 +3,3 @@
 import battle
 import battleloading
 import fragCorrelationPanel
-import minimap
