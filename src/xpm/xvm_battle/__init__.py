@@ -2,6 +2,5 @@
 
 import battle
 import battleloading
-import camera
 import fragCorrelationPanel
 import minimap

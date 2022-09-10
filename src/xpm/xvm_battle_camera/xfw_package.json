@@ -1,0 +1,19 @@
+{
+    "id": "com.modxvm.xvm.battle.camera",
+    "name": "XVM Battle Camera",
+    "description": "XVM Battle Camera module",
+    "version": "XVM_VERSION",
+    "dependencies": [
+        "com.modxvm.xfw.actionscript",
+        "com.modxvm.xfw.libraries",
+        "com.modxvm.xvm",
+        "com.modxvm.xvm.battle"
+    ],
+    "url": "https://modxvm.com/",
+    "url_update": "https://modxvm.com/",
+    "wot_version_min": "WOT_VERSION",
+    "wot_version_exactmatch": false,
+    "features": [
+        "python"
+    ]
+}
