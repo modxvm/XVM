@@ -128,7 +128,7 @@ def _ArenaVehiclesPlugin_setSettings(base, self):
 
 
 def _ArenaVehiclesPlugin_updateSettings(base, self, diff):
-    if g_minimap.active:
+    if g_minimap is not None and g_minimap.active:
         if g_minimap.opt_labelsEnabled:
             if settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP] = DEFAULTS[settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP]
@@ -183,7 +183,7 @@ def _PersonalEntriesPlugin_setSettings(base, self):
 
 
 def _PersonalEntriesPlugin_updateSettings(base, self, diff):
-    if g_minimap.active:
+    if g_minimap is not None and g_minimap.active:
         if g_minimap.opt_linesEnabled:
             if settings_constants.GAME.SHOW_VECTOR_ON_MAP in diff:
                 diff[settings_constants.GAME.SHOW_VECTOR_ON_MAP] = DEFAULTS[settings_constants.GAME.SHOW_VECTOR_ON_MAP]
