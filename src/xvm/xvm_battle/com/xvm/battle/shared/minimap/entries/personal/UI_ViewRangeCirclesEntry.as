@@ -188,16 +188,14 @@ package com.xvm.battle.shared.minimap.entries.personal
         private function updateCirclesVisibility():void
         {
             var playerState:VOPlayerState = BattleState.get(BattleGlobalData.playerVehicleID);
-            if (playerState.isDead)
-            {
-                _circles.visible = false;
-                _circlesAlt.visible = false;
-            }
-            else
-            {
+            if(playerState && !playerState.isDead){
                 var isAltMode:Boolean = UI_Minimap.instance.isAltMode;
                 _circles.visible = !isAltMode;
                 _circlesAlt.visible = isAltMode;
+            }
+            else{
+                _circles.visible = false;
+                _circlesAlt.visible = false;
             }
         }
 
