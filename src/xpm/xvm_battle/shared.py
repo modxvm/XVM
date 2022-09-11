@@ -1,14 +1,25 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2022 XVM Contributors
+"""
 
+#
+# Imports
+#
+
+# BigWorld
 from gui.battle_control import avatar_getter
 
-from xfw import *
-
-from xvm_main.python.logger import *
+# XVM Main
 import xvm_main.python.minimap_circles as minimap_circles
 import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
 
+
+
+#
+# Public
+#
 
 def getGlobalBattleData():
     vehicleID = avatar_getter.getPlayerVehicleID()

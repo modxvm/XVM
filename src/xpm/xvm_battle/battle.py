@@ -1,14 +1,20 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
-import traceback
+# stdlib
+import logging
 import weakref
 
+# BigWorld
 import BigWorld
-import game
 import constants
+from PlayerEvents import g_playerEvents
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
 from helpers import dependency
@@ -20,6 +26,7 @@ from gui.shared.gui_items.Vehicle import VEHICLE_CLASS_NAME
 from gui.shared.utils.functions import getBattleSubTypeBaseNumber
 from gui.battle_control import avatar_getter
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
+from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
 from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
 from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
 from gui.battle_control.controllers.battle_field_ctrl import BattleFieldCtrl
@@ -37,17 +44,25 @@ from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisti
 from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import CommanderCameraHintPlugin, TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin, RoleHelpPlugin, MapsTrainingHelpHintPlugin
 from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
 
-from xfw import *
-from xfw_actionscript.python import *
+# XFW
+from xfw.constants import XFW_COMMAND, XFW_EVENT
+from xfw.events import registerEvent, overrideMethod
 
+# XFW Actionscript
+from xfw_actionscript.python import as_xfw_cmd
+
+# XVM Main
 import xvm_main.python.config as config
-from xvm_main.python.logger import *
 
-from consts import *
+# XVM Battle
+from consts import INT_CD, INV, SPOTTED_STATUS, XVM_BATTLE_COMMAND, XVM_BATTLE_EVENT
 import shared
 
-#####################################################################
-# constants
+
+
+#
+# Constants
+#
 
 NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.EVENT_BATTLES,
@@ -59,104 +74,25 @@ NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
                            ]
 
-#####################################################################
-# initialization/finalization
-
-def start():
-    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, g_battle.onXfwCommand)
-    g_eventBus.addListener(XFW_EVENT.APP_INITIALIZED, g_battle.onAppInitialized)
-    g_eventBus.addListener(XFW_EVENT.APP_DESTROYED, g_battle.onAppDestroyed)
-
-BigWorld.callback(0, start)
 
 
-@registerEvent(game, 'fini')
-def fini():
-    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, g_battle.onXfwCommand)
-    g_eventBus.removeListener(XFW_EVENT.APP_INITIALIZED, g_battle.onAppInitialized)
-    g_eventBus.removeListener(XFW_EVENT.APP_DESTROYED, g_battle.onAppDestroyed)
+#
+# Globals
+#
 
-
-#####################################################################
-# handlers
-
-# PRE-BATTLE
-
+g_battle = None
 isBattleTypeSupported = True
 
-@overrideMethod(PlayerAvatar, 'onBecomePlayer')
-def _PlayerAvatar_onBecomePlayer(base, self):
-    global isBattleTypeSupported
-    base(self)
-    try:
-        arena = avatar_getter.getArena()
-        if arena:
-            isBattleTypeSupported = arena.guiType not in NOT_SUPPORTED_BATTLE_TYPES
-            arena.onVehicleKilled += g_battle.onVehicleKilled
-            arena.onAvatarReady += g_battle.onAvatarReady
-            arena.onVehicleStatisticsUpdate += g_battle.onVehicleStatisticsUpdate
-            arena.onNewVehicleListReceived += g_battle.onNewVehicleListReceived
-        sessionProvider = dependency.instance(IBattleSessionProvider)
-        ctrl = sessionProvider.shared.feedback
-        if ctrl:
-            ctrl.onVehicleFeedbackReceived += g_battle.onVehicleFeedbackReceived
-        ctrl = sessionProvider.shared.vehicleState
-        if ctrl:
-            ctrl.onVehicleStateUpdated += g_battle.onVehicleStateUpdated
-        ctrl = sessionProvider.shared.optionalDevices
-        if ctrl:
-            ctrl.onOptionalDeviceAdded += g_battle.onOptionalDeviceAdded
-            ctrl.onOptionalDeviceUpdated += g_battle.onOptionalDeviceUpdated
-        ctrl = sessionProvider.shared.ammo
-        if ctrl:
-            ctrl.onCurrentShellChanged += g_battle.onCurrentShellChanged
-        g_battle.onStartBattle()
-    except Exception, ex:
-        err(traceback.format_exc())
-
-@overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
-def _PlayerAvatar_onBecomeNonPlayer(base, self):
-    try:
-        arena = avatar_getter.getArena()
-        if arena:
-            arena.onVehicleKilled -= g_battle.onVehicleKilled
-            arena.onAvatarReady -= g_battle.onAvatarReady
-            arena.onVehicleStatisticsUpdate -= g_battle.onVehicleStatisticsUpdate
-            arena.onNewVehicleListReceived -= g_battle.onNewVehicleListReceived
-        sessionProvider = dependency.instance(IBattleSessionProvider)
-        ctrl = sessionProvider.shared.feedback
-        if ctrl:
-            ctrl.onVehicleFeedbackReceived -= g_battle.onVehicleFeedbackReceived
-        ctrl = sessionProvider.shared.vehicleState
-        if ctrl:
-            ctrl.onVehicleStateUpdated -= g_battle.onVehicleStateUpdated
-        ctrl = sessionProvider.shared.optionalDevices
-        if ctrl:
-            ctrl.onOptionalDeviceAdded -= g_battle.onOptionalDeviceAdded
-            ctrl.onOptionalDeviceUpdated -= g_battle.onOptionalDeviceUpdated
-        ctrl = sessionProvider.shared.ammo
-        if ctrl:
-            ctrl.onCurrentShellChanged -= g_battle.onCurrentShellChanged
-    except Exception, ex:
-        err(traceback.format_exc())
-    base(self)
 
 
-# BATTLE
+#
+# Handlers
+#
 
-# on current player enters world
-#@registerEvent(PlayerAvatar, 'onEnterWorld')
-#def _PlayerAvatar_onEnterWorld(self, prereqs):
-#    pass
+# PlayerAvatar
 
-# on current player leaves world
-#@registerEvent(PlayerAvatar, 'onLeaveWorld')
-#def _PlayerAvatar_onLeaveWorld(self):
-#    pass
-
-# on any player marker appear
-@registerEvent(PlayerAvatar, 'vehicle_onAppearanceReady')
 def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
+    # on any player marker appear
     # debug("> _PlayerAvatar_vehicle_onAppearanceReady: hp=%i" % vehicle.health)
     if vehicle.id == self.playerVehicleID:
         g_battle.isSPG = self.vehicleTypeDescriptor.type.getVehicleClass() == VEHICLE_CLASS_NAME.SPG
@@ -164,32 +100,24 @@ def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
     g_battle.updatePlayerState(vehicle.id, INV.ALL)
 
 
-# on any player marker lost
-#@registerEvent(PlayerAvatar, 'vehicle_onLeaveWorld')
-#def _PlayerAvatar_vehicle_onLeaveWorld(self, vehicle):
-#    # debug("> _PlayerAvatar_vehicle_onLeaveWorld: hp=%i" % vehicle.health)
-#    pass
-
-# any vehicle health changed
-@registerEvent(Vehicle, 'onHealthChanged')
-def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
+# Vehicle
+def _Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
+    # any vehicle health changed
     # update only for player vehicle, others handled on vehicle feedback event
     if self.isPlayerVehicle:
         g_battle.onVehicleHealthChanged(self.id, newHealth, attackerID, attackReasonID)
 
 
-@registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setEnemyMaxHealth')
+# BattleFieldCtrl
 def _BattleFieldCtrl__setEnemyMaxHealth(self, vehicleID, currentMaxHealth, newMaxHealth):
     g_battle.updatePlayerState(vehicleID, INV.MAX_HEALTH, newMaxHealth)
 
 
-@registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setAllyMaxHealth')
 def _BattleFieldCtrl__setAllyMaxHealth(self, vehicleID, currentMaxHealth, newMaxHealth):
     g_battle.updatePlayerState(vehicleID, INV.MAX_HEALTH, newMaxHealth)
 
 
-# on vehicle info updated
-@registerEvent(DynSquadFunctional, 'updateVehiclesInfo')
+# DynSquadFunctional
 def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
     # debug("> _DynSquadFunctional_updateVehiclesInfo")
     try:
@@ -198,117 +126,123 @@ def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
             for flags, vo in updated:
                 if flags & INVALIDATE_OP.PREBATTLE_CHANGED and vo.squadIndex > 0:
                     g_battle.updatePlayerState(vo.vehicleID, INV.SQUAD_INDEX) # | INV.PLAYER_STATUS
-    except Exception, ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Battle').exception('_DynSquadFunctional_updateVehiclesInfo')
 
-@registerEvent(DamagePanel, '_updateDeviceState')
+
+# DamagePanel
 def _DamagePanel_updateDeviceState(self, value):
     try:
         as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_DEVICE_STATE, *value)
     except:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Battle').exception('_DamagePanel_updateDeviceState')
 
-@registerEvent(ArenaVehiclesPlugin, '_setInAoI')
+
+# ArenaVehiclesPlugin
 def _ArenaVehiclesPlugin_setInAoI(self, entry, isInAoI):
     try:
         for vehicleID, entry2 in self._entries.iteritems():
             if entry == entry2:
                 g_battle.updateSpottedStatus(vehicleID, isInAoI)
     except:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Battle').exception('_ArenaVehiclesPlugin_setInAoI')
 
-@overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')
+
+# SharedPage
 def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
     if not config.get('battle/showPostmortemTips'):
         value = False
     base(self, value)
 
-@overrideMethod(SharedPage, '_switchToPostmortem')
-def _switchToPostmortem(base, self):
+def _SharedPage_switchToPostmortem(base, self):
     if config.get('battle/showPostmortemTips'):
         base(self)
 
-# force update quests in FullStats
-@overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')
+
+# BSDC
 def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce):
+    # force update quests in FullStats
     base(self, data, True)
 
-# disable battle hints
-@overrideMethod(CommanderCameraHintPlugin, '_CommanderCameraHintPlugin__displayHint')
-def displayHint(base, self, hint):
+
+# Hints
+def _CommanderCameraHintPlugin_displayHint(base, self, hint):
+    # disable battle hints
     if not config.get('battle/showBattleHint'):
         return
     base(self, hint)
 
-@overrideMethod(TrajectoryViewHintPlugin, '_TrajectoryViewHintPlugin__addHint')
-def addHint(base, self):
+
+def _TrajectoryViewHintPlugin_addHint(base, self):
     if not config.get('battle/showBattleHint'):
         return
     base(self)
 
-@overrideMethod(SiegeIndicatorHintPlugin, '_SiegeIndicatorHintPlugin__updateHint')
-def updateHint(base, self):
+
+def _SiegeIndicatorHintPlugin__updateHint(base, self):
     if not config.get('battle/showBattleHint'):
         return
     base(self)
 
-@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayQuestHint')
-def canDisplayQuestHint(base, self):
+
+def _PreBattleHintPlugin__canDisplayQuestHint(base, self):
     if not config.get('battle/showBattleHint'):
         return False
     base(self)
 
-@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayVehicleHelpHint')
-def canDisplayVehicleHelpHint(base, self, typeDescriptor):
+
+def _PreBattleHintPlugin__canDisplayVehicleHelpHint(base, self, typeDescriptor):
     if not config.get('battle/showBattleHint'):
         return False
     base(self, typeDescriptor)
 
-@overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')
-def canDisplayBattleCommunicationHint(base, self):
+
+def _PreBattleHintPlugin__canDisplayBattleCommunicationHint(base, self):
     if not config.get('battle/showBattleHint'):
         return False
     base(self)
 
-@overrideMethod(RadarHintPlugin, '_RadarHintPlugin__areOtherIndicatorsShown')
-def areOtherIndicatorsShown(base, self):
+
+def _RadarHintPlugin__areOtherIndicatorsShown(base, self):
     if not config.get('battle/showBattleHint'):
         return True
     base(self)
 
-@overrideMethod(RoleHelpPlugin, '_RoleHelpPlugin__handleBattleLoading')
-def handleBattleLoading(base, self, event):
+
+def _RoleHelpPlugin__handleBattleLoading(base, self, event):
     if not config.get('battle/showBattleHint'):
         return
     base(self, event)
 
-@overrideMethod(MapsTrainingHelpHintPlugin, '_canDisplayCustomHelpHint')
-def _canDisplayCustomHelpHint(base, self):
+
+def _MapsTrainingHelpHintPlugin_canDisplayCustomHelpHint(base, self):
     if not config.get('battle/showBattleHint'):
         return False
     base(self)
 
 # disable DogTag's
-@overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')
-def onDogTagKillerInPlaySound(base, self):
+def _PostmortemPanel_onDogTagKillerInPlaySound(base, self):
     if not config.get('battle/showPostmortemDogTag', True) or not config.get('battle/showPostmortemTips', True):
         return
     base(self)
 
-@overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')
-def onKillerDogTagSet(base, self, dogTagInfo):
+
+def _PostmortemPanel__onKillerDogTagSet(base, self, dogTagInfo):
     if not config.get('battle/showPostmortemDogTag', True):
         return
     base(self, dogTagInfo)
 
-@overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')
-def as_setPanelHPBarVisibilityStateS(base, self, value):
+
+def _PlayersPanelMetaas_setPanelHPBarVisibilityStateS(base, self, value):
     if config.get('playersPanel/enabled') and config.get('playersPanel/removeHealthPoints'):
         return
     base(self, value)
 
-#####################################################################
+
+
+#
 # Battle
+#
 
 class Battle(object):
 
@@ -323,8 +257,79 @@ class Battle(object):
     appLoader = dependency.descriptor(IAppLoader)
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
 
+    def __init__(self):
+        self._logger = logging.getLogger('XVM/Battle')
+        g_eventBus.addListener(XFW_COMMAND.XFW_CMD, self.onXfwCommand)
+        g_eventBus.addListener(XFW_EVENT.APP_INITIALIZED, self.onAppInitialized)
+        g_eventBus.addListener(XFW_EVENT.APP_DESTROYED, self.onAppDestroyed)
+
+        g_playerEvents.onAvatarBecomePlayer += self.onBecomePlayer
+        g_playerEvents.onAvatarBecomeNonPlayer += self.onBecomeNonPlayer
+
+    def fini(self):
+        g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, self.onXfwCommand)
+        g_eventBus.removeListener(XFW_EVENT.APP_INITIALIZED, self.onAppInitialized)
+        g_eventBus.removeListener(XFW_EVENT.APP_DESTROYED, self.onAppDestroyed)
+    
+        g_playerEvents.onAvatarBecomePlayer -= self.onBecomePlayer
+        g_playerEvents.onAvatarBecomeNonPlayer -= self.onBecomeNonPlayer
+
     def onNewVehicleListReceived(self):
         as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
+
+
+    def onBecomePlayer(self, *args, **kwargs):
+        global isBattleTypeSupported
+        try:
+            arena = avatar_getter.getArena()
+            if arena:
+                isBattleTypeSupported = arena.guiType not in NOT_SUPPORTED_BATTLE_TYPES
+                arena.onVehicleKilled += self.onVehicleKilled
+                arena.onAvatarReady += self.onAvatarReady
+                arena.onVehicleStatisticsUpdate += self.onVehicleStatisticsUpdate
+                arena.onNewVehicleListReceived += self.onNewVehicleListReceived
+            sessionProvider = dependency.instance(IBattleSessionProvider)
+            ctrl = sessionProvider.shared.feedback
+            if ctrl:
+                ctrl.onVehicleFeedbackReceived += self.onVehicleFeedbackReceived
+            ctrl = sessionProvider.shared.vehicleState
+            if ctrl:
+                ctrl.onVehicleStateUpdated += self.onVehicleStateUpdated
+            ctrl = sessionProvider.shared.optionalDevices
+            if ctrl:
+                ctrl.onOptionalDeviceAdded += self.onOptionalDeviceAdded
+                ctrl.onOptionalDeviceUpdated += self.onOptionalDeviceUpdated
+            ctrl = sessionProvider.shared.ammo
+            if ctrl:
+                ctrl.onCurrentShellChanged += self.onCurrentShellChanged
+            self.onStartBattle()
+        except Exception:
+            self._logger.exception('onBecomePlayer')
+
+    def onBecomeNonPlayer(self, *args, **kwargs):
+        try:
+            arena = avatar_getter.getArena()
+            if arena:
+                arena.onVehicleKilled -= self.onVehicleKilled
+                arena.onAvatarReady -= self.onAvatarReady
+                arena.onVehicleStatisticsUpdate -= self.onVehicleStatisticsUpdate
+                arena.onNewVehicleListReceived -= self.onNewVehicleListReceived
+            sessionProvider = dependency.instance(IBattleSessionProvider)
+            ctrl = sessionProvider.shared.feedback
+            if ctrl:
+                ctrl.onVehicleFeedbackReceived -= self.onVehicleFeedbackReceived
+            ctrl = sessionProvider.shared.vehicleState
+            if ctrl:
+                ctrl.onVehicleStateUpdated -= self.onVehicleStateUpdated
+            ctrl = sessionProvider.shared.optionalDevices
+            if ctrl:
+                ctrl.onOptionalDeviceAdded -= self.onOptionalDeviceAdded
+                ctrl.onOptionalDeviceUpdated -= self.onOptionalDeviceUpdated
+            ctrl = sessionProvider.shared.ammo
+            if ctrl:
+                ctrl.onCurrentShellChanged -= self.onCurrentShellChanged
+        except Exception:
+            self._logger.exception('onBecomeNonPlayer')
 
     def onAppInitialized(self, event):
         #log('onAppInitialized: ' + str(event.ctx.ns))
@@ -471,8 +476,8 @@ class Battle(object):
 
             if data:
                 as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_PLAYER_STATE, vehicleID, data)
-        except Exception, ex:
-            err(traceback.format_exc())
+        except Exception:
+            self._logger.exception('updatePlayerState')
 
     def updateTarget(self):
         self.updateTargetCallbackID = None
@@ -489,7 +494,7 @@ class Battle(object):
                         try:
                             battleLoading.invalidateArenaInfo()
                         except Exception:
-                            err(traceback.format_exc())
+                            self._logger.exception('invalidateArenaInfo')
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
             if ctrl and not isinstance(ctrl, EpicStatisticsDataController):
                 ctrl._dispose()
@@ -499,12 +504,8 @@ class Battle(object):
                 self.updatePlayerState(vehicleID, INV.ALL)
             g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.ARENA_INFO_INVALIDATED))
 
-
-    #####################################################################
-    # onXfwCommand
-
-    # returns: (result, status)
     def onXfwCommand(self, cmd, *args):
+        # returns: (result, status)
         try:
             if cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.xvm_battle_swf_initialized = True
@@ -520,8 +521,8 @@ class Battle(object):
                 res = getBattleSubTypeBaseNumber(BigWorld.player().arenaTypeID, n & 0x3F, n >> 6)
                 return (res, True)
 
-        except Exception, ex:
-            err(traceback.format_exc())
+        except Exception:
+            self._logger.exception('onXfwCommand')
             return (None, True)
 
         return (None, False)
@@ -543,4 +544,41 @@ class Battle(object):
             return markers2d_settings.DAMAGE_TYPE.FROM_ENEMY
         return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
 
-g_battle = Battle()
+
+
+#
+# Initialization
+#
+
+def init():
+    global g_battle
+    g_battle = Battle()
+
+    registerEvent(PlayerAvatar, 'vehicle_onAppearanceReady')(_PlayerAvatar_vehicle_onAppearanceReady)
+    registerEvent(Vehicle, 'onHealthChanged')(_Vehicle_onHealthChanged)
+    registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setEnemyMaxHealth')(_BattleFieldCtrl__setEnemyMaxHealth)
+    registerEvent(BattleFieldCtrl, '_BattleFieldCtrl__setAllyMaxHealth')(_BattleFieldCtrl__setAllyMaxHealth)
+    registerEvent(DynSquadFunctional, 'updateVehiclesInfo')(_DynSquadFunctional_updateVehiclesInfo)
+    registerEvent(DamagePanel, '_updateDeviceState')(_DamagePanel_updateDeviceState)
+    registerEvent(ArenaVehiclesPlugin, '_setInAoI')(_ArenaVehiclesPlugin_setInAoI)
+    overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')(_SharedPage_as_setPostmortemTipsVisibleS)
+    overrideMethod(SharedPage, '_switchToPostmortem')(_SharedPage_switchToPostmortem)
+    overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')(_BattleStatisticsDataController_as_setQuestsInfoS)
+    overrideMethod(CommanderCameraHintPlugin, '_CommanderCameraHintPlugin__displayHint')(_CommanderCameraHintPlugin_displayHint)
+    overrideMethod(TrajectoryViewHintPlugin, '_TrajectoryViewHintPlugin__addHint')(_TrajectoryViewHintPlugin_addHint)
+    overrideMethod(SiegeIndicatorHintPlugin, '_SiegeIndicatorHintPlugin__updateHint')(_SiegeIndicatorHintPlugin__updateHint)
+    overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayQuestHint')(_PreBattleHintPlugin__canDisplayQuestHint)
+    overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayVehicleHelpHint')(_PreBattleHintPlugin__canDisplayVehicleHelpHint)
+    overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')(_PreBattleHintPlugin__canDisplayBattleCommunicationHint)
+    overrideMethod(RadarHintPlugin, '_RadarHintPlugin__areOtherIndicatorsShown')(_RadarHintPlugin__areOtherIndicatorsShown)
+    overrideMethod(RoleHelpPlugin, '_RoleHelpPlugin__handleBattleLoading')(_RoleHelpPlugin__handleBattleLoading)
+    overrideMethod(MapsTrainingHelpHintPlugin, '_canDisplayCustomHelpHint')(_MapsTrainingHelpHintPlugin_canDisplayCustomHelpHint)
+    overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')(_PostmortemPanel_onDogTagKillerInPlaySound)
+    overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')(_PostmortemPanel__onKillerDogTagSet)
+    overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')(_PlayersPanelMetaas_setPanelHPBarVisibilityStateS)
+
+
+def fini():
+    global g_battle
+    g_battle.fini()
+    g_battle = None

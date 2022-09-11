@@ -1,23 +1,31 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
+# stdlib
 import cgi
 import re
 
+# BigWorld
 from gui.Scaleform.daapi.view.battle.shared.battle_loading import BattleLoading
 
-from xfw import *
+# XFW
+from xfw.events import overrideMethod
 
-from xvm_main.python.logger import *
+# XVM Main
 import xvm_main.python.config as config
 
 
-#####################################################################
-# handlers
 
-@overrideMethod(BattleLoading, 'as_setTipTitleS')
+#
+# Handlers
+#
+
 def BattleLoading_as_setTipTitleS(base, self, title):
     title = cgi.escape('XVM v{}     {}'.format(config.get('__xvmVersion'), config.get('__xvmIntro')))
     stateInfo = config.get('__stateInfo')
@@ -28,7 +36,7 @@ def BattleLoading_as_setTipTitleS(base, self, title):
     title = '<p align="left"><font size="16">{}</font></p>'.format(title)
     return base(self, title)
 
-@overrideMethod(BattleLoading, 'as_setTipS')
+
 def BattleLoading_as_setTipS(base, self, val):
     stateInfo = config.get('__stateInfo')
     if 'error' in stateInfo and stateInfo['error']:
@@ -37,6 +45,12 @@ def BattleLoading_as_setTipS(base, self, val):
         val = getTipText(stateInfo['warning'])
     return base(self, val)
 
+
+
+#
+# Helpers
+#
+
 def getTipText(text, isError=False):
     text = cgi.escape(text)
     if isError:
@@ -44,3 +58,16 @@ def getTipText(text, isError=False):
         text = re.sub(r'([^/\\]+\.xc)', r'<font color="#FF4040">\1</font>', text)
         text = '<textformat leading="0"><p align="left"><font size="12">{}</font></p></textformat>'.format(text)
     return text
+
+
+
+#
+# Initialization
+#
+
+def init():
+    overrideMethod(BattleLoading, 'as_setTipTitleS')(BattleLoading_as_setTipTitleS)
+    overrideMethod(BattleLoading, 'as_setTipS')(BattleLoading_as_setTipS)
+
+def fini():
+    pass

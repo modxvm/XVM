@@ -1,48 +1,52 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
-import traceback
+# stdlib
+import logging
 
+# BigWorld
 from Avatar import PlayerAvatar
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
 from gui.shared import g_eventBus
 
-from xfw import *
+# XFW
+from xfw.events import registerEvent, overrideMethod
+
+# XVM Main
 from xvm_main.python import config
 
 
-#####################################################################
-# globals
+
+#
+# Globals
+#
 
 ally_frags = 0
 enemy_frags = 0
 ally_vehicles = 0
 enemy_vehicles = 0
 
-#####################################################################
-# handlers
+#
+# Handlers
+#
 
 # show quantity of alive instead of dead in frags panel
 # night_dragon_on <https://kr.cm/f/p/14897/>
 
-def cleanup():
+def _PlayerAvatar__destroyGUI(self):
     global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles
     ally_frags = 0
     enemy_frags = 0
     ally_vehicles = 0
     enemy_vehicles = 0
 
-# AFTER-BATTLE
 
-@registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')
-def destroyGUI(self):
-    cleanup()
-
-# BATTLE
-
-@overrideMethod(FragsCollectableStats, 'getTotalStats')
 def _FragCorrelationPanel_getTotalStats(base, self, arenaVisitor, sessionProvider):
     try:
         global ally_frags, enemy_frags, ally_vehicles, enemy_vehicles
@@ -72,6 +76,21 @@ def _FragCorrelationPanel_getTotalStats(base, self, arenaVisitor, sessionProvide
             return {'leftScope': allyScope, 'rightScope': enemyScope}
         else:
             return {}
-    except Exception, ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Battle/FragCorrelationPanel').exception('_FragCorrelationPanel_getTotalStats')
+
     base(self, arenaVisitor, sessionProvider)
+
+
+
+#
+# Initialization
+#
+
+def init():
+    registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')(_PlayerAvatar__destroyGUI)
+    overrideMethod(FragsCollectableStats, 'getTotalStats')(_FragCorrelationPanel_getTotalStats)
+    pass
+
+def fini():
+    pass
