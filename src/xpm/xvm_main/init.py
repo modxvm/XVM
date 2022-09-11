@@ -20,27 +20,30 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 # Imports
 #
 
+# stdlib
 from datetime import datetime
 from glob import glob
 import os
 import platform
 
+# BigWorld
 import BigWorld
-import game
 from gui.shared import g_eventBus, events
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
+# XFW
 from xfw.constants import XFW_COMMAND, XFW_EVENT
-from xfw.events import registerEvent
 from xfw_loader.python import WOT_VERSION_FULL
 
+# XVM Main
 import config
 from consts import XVM, XVM_EVENT
 from logger import log, warn, trace
+import svcmsg
+from xvm import g_xvm
 import handlers
 import multilaunch
-from xvm import g_xvm
 
 from __version__ import __branch__, __revision__, __node__
 
@@ -97,6 +100,11 @@ def subscribe():
     g_eventBus.addListener(XVM_EVENT.CHECK_ACTIVATION, g_xvm.onCheckActivation)
 
 
+
+#
+# Initialization
+#
+
 def init():
     trace('xvm_main.python.init::init()')
 
@@ -104,6 +112,7 @@ def init():
     subscribe()
     config_load()
 
+    handlers.init()
     multilaunch.init()
 
     g_xvm.initialize()
@@ -111,10 +120,10 @@ def init():
     BigWorld.callback(0, config_load_event)
 
 
-@registerEvent(game, 'fini')
 def fini():
     trace('xvm_main.python.init::fini()')
 
+    handlers.fini()
     multilaunch.fini()
 
     try:

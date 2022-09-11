@@ -30,5 +30,13 @@ def xfw_module_init():
     __xvm_main_loaded = True
 
 
+def xfw_module_fini():
+    from init import fini
+    fini()
+
+    global __xvm_main_loaded
+    __xvm_main_loaded = False
+
+
 def xfw_is_module_loaded():
     return __xvm_main_loaded

@@ -93,22 +93,35 @@ def ProfileTechniqueWindow_RequestData(base, self, vehicleId):
         base(self, vehicleId)
 
 
-# Handlers / PreBattle
 
-def onArenaCreated():
-    # debug('> onArenaCreated')
+#
+# Player Events
+#
+
+def onArenaCreated(*args, **kwargs):
     g_xvm.onArenaCreated()
 
-g_playerEvents.onArenaCreated += onArenaCreated
 
-@overrideMethod(PlayerAvatar, 'onBecomePlayer')
-def _PlayerAvatar_onBecomePlayer(base, self):
+def _PlayerAvatar_onBecomePlayer(*args, **kwargs):
     trace('xvm_main.python.handlers::_PlayerAvatar_onBecomePlayer()')
-    base(self)
     g_xvm.onBecomePlayer()
 
-@overrideMethod(PlayerAvatar, 'onBecomeNonPlayer')
-def _PlayerAvatar_onBecomeNonPlayer(base, self):
-    trace('xvm_main.python.handlers::_PlayerAvatar_onBecomeNonPlayer()')
+
+def _PlayerAvatar_onBecomeNonPlayer(*args, **kwargs):
     g_xvm.onBecomeNonPlayer()
-    base(self)
+
+
+
+#
+# Init
+#
+
+def init():
+    g_playerEvents.onArenaCreated += onArenaCreated
+    g_playerEvents.onAvatarBecomePlayer += _PlayerAvatar_onBecomePlayer
+    g_playerEvents.onAvatarBecomeNonPlayer += _PlayerAvatar_onBecomeNonPlayer
+
+def fini():
+    g_playerEvents.onArenaCreated -= onArenaCreated
+    g_playerEvents.onAvatarBecomePlayer -= _PlayerAvatar_onBecomePlayer
+    g_playerEvents.onAvatarBecomeNonPlayer -= _PlayerAvatar_onBecomeNonPlayer
