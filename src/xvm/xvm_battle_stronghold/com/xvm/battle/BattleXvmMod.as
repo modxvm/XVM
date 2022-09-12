@@ -2,9 +2,11 @@
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
  */
-package com.xvm
+package com.xvm.battle
 {
+    import com.xvm.Defines;
     import com.xvm.battle.BattleXvmView;
+    import com.xvm.battle.stronghold.teamBasesPanel.TeamBasesPanelXvmView;
     import com.xvm.battle.shared.minimap.MinimapXvmView;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
     import com.xvm.infrastructure.XvmModBase;
@@ -22,6 +24,7 @@ package com.xvm
         private static const VIEWS:Object =
         {
             "strongholdBattlePage": [
+                TeamBasesPanelXvmView,
                 MinimapXvmView,
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
