@@ -7,6 +7,7 @@ package com.xvm.battle
     import com.xvm.Defines;
     import com.xvm.battle.BattleXvmView;
     import com.xvm.battle.stronghold.battleloading.StrongholdBattleLoadingXvmView;
+    import com.xvm.battle.stronghold.fullStats.StrongholdFullStatsXvmView;
     import com.xvm.battle.stronghold.playersPanel.StrongholdPlayersPanelXvmView;
     import com.xvm.battle.stronghold.teamBasesPanel.TeamBasesPanelXvmView;
     import com.xvm.battle.shared.minimap.MinimapXvmView;
@@ -27,6 +28,7 @@ package com.xvm.battle
         {
             "strongholdBattlePage": [
                 StrongholdBattleLoadingXvmView,
+                StrongholdFullStatsXvmView,
                 StrongholdPlayersPanelXvmView,
                 TeamBasesPanelXvmView,
                 MinimapXvmView,
