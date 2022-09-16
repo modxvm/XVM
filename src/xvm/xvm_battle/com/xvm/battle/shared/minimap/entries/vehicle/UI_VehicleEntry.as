@@ -146,7 +146,6 @@ package com.xvm.battle.shared.minimap.entries.vehicle
         private function updateVehicleIcon(playerState:VOPlayerState):void
         {
             var currVehAnimation:VehicleAnimationMinimapEntry = XfwUtils.getPrivateField(this, "xfw_currVehicleAnimation");
-            currVehAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.iconScale, playerState, 1);
             if (currVehAnimation != deadAnimation)
             {
@@ -155,6 +154,11 @@ package com.xvm.battle.shared.minimap.entries.vehicle
                     currVehAnimation.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 2.0;
                     currVehAnimation.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0;
                 }
+                currVehAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.iconAlpha, playerState, 100) / 100.0;
+            }
+            else
+            {
+                currVehAnimation.alpha = Macros.FormatNumber(UI_Minimap.cfg.deadAnimationAlpha, playerState, 100) / 100.0;
             }
             currVehAnimation.scaleX = currVehAnimation.scaleY = DEFAULT_VEHICLE_ICON_SCALE * iconScale;
         }

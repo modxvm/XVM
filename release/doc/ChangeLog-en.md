@@ -6,6 +6,12 @@
 
   * Added support for special combat modes in Strongholds
 
+  #### Minimap
+
+  * Added option:
+
+    * `"deadAnimationAlpha"` — transparency of animation when destroying vehicles
+
   * Moved layers on the minimap
 
 ### XVM 9.3.4
