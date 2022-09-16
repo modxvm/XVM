@@ -79,19 +79,19 @@ package com.xvm.battle.shared.minimap
             _substrateHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;
             _substrateHolder.mouseEnabled = false;
             _substrateHolder.mouseChildren = false;
-            
+
             _bottomHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;
             _bottomHolder.mouseEnabled = false;
             _bottomHolder.mouseChildren = false;
-            
-            _normalHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.deadVehicles)) as Sprite;
+
+            _normalHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.personal)) as Sprite;
             _normalHolder.mouseEnabled = false;
             _normalHolder.mouseChildren = false;
-            
-            _topHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.aliveVehicles) + 1) as Sprite;
+
+            _topHolder = entriesContainer.addChildAt(new Sprite(), entriesContainer.getChildIndex(entriesContainer.personal) + 1) as Sprite;
             _topHolder.mouseEnabled = false;
             _topHolder.mouseChildren = false;
-            
+
             //XfwUtils.logChilds(entriesContainer);
 
             setup();

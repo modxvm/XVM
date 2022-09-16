@@ -1,3 +1,13 @@
+### XVM 10.0.0
+
+  * Compatibility with World of Tanks 1.18.0.1
+
+  #### Battle
+
+  * Added support for special combat modes in Strongholds
+
+  * Moved layers on the minimap
+
 ### XVM 9.3.4
 
   * Compatibility with World of Tanks 1.17.1.3
