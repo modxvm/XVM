@@ -212,8 +212,8 @@ package com.xvm.lobby.ui.tankcarousel
                         "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
                         Locale.get("Used slots") + ": " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_USED_SLOTS_COUNT) + "</font></p>";
                     // Centering in height
-                    //renderer.content.txtInfo.y -= 8;
-                    renderer.content.txtInfo.height = renderer.content.txtInfo.textHeight + 5;
+                    //renderer.content.txtInfo.height = renderer.content.txtInfo.textHeight + 5;
+                    renderer.content.txtInfo.autoSize = TextFieldAutoSize.CENTER;
                 }
             }
             if (item.vehicleCarouselVO.buyTank)
@@ -224,7 +224,8 @@ package com.xvm.lobby.ui.tankcarousel
                         "<p align='center'>" + item.vehicleCarouselVO.infoText + " " +
                         "<font face='$FieldFont' size='14' color='#8C8C7E'>" +
                         Locale.get("from") + " " + Xfw.cmd(COMMAND_XVM_CAROUSEL_GET_TOTAL_SLOTS_COUNT) + "</font></p>";
-                    renderer.content.txtInfo.height = renderer.content.txtInfo.textHeight + 5;
+                    //renderer.content.txtInfo.height = renderer.content.txtInfo.textHeight + 5;
+                    renderer.content.txtInfo.autoSize = TextFieldAutoSize.CENTER;
                 }
             }
         }
