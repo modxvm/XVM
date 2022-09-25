@@ -39,6 +39,7 @@ from xfw_loader.python import WOT_VERSION_FULL
 # XVM Main
 import config
 from consts import XVM, XVM_EVENT
+import loadurl
 from logger import log, warn, trace
 import svcmsg
 from xvm import g_xvm
@@ -112,6 +113,7 @@ def init():
     subscribe()
     config_load()
 
+    loadurl.init()
     handlers.init()
     multilaunch.init()
 
@@ -123,6 +125,7 @@ def init():
 def fini():
     trace('xvm_main.python.init::fini()')
 
+    loadurl.fini()
     handlers.fini()
     multilaunch.fini()
 

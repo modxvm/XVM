@@ -4,7 +4,11 @@
     "description": "XVM",
 
     "version": "XVM_VERSION",
-    "dependencies": ["com.modxvm.xfw.libraries"],
+    "dependencies": [
+        "org.pypi.certifi",
+        "org.pypi.urllib3",
+        "com.modxvm.xfw.libraries"
+    ],
     "dependencies_optional": [
         "com.modxvm.xfw.filewatcher",
         "com.modxvm.xfw.multilaunch"

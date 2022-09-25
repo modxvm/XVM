@@ -1,129 +1,120 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2022 XVM Contributors
+"""
 
-import base64
+#
+# Imports
+#
+
+# cpython
 import datetime
-import gzip
-import httplib
-import locale
-import os
-import re
-import StringIO
-import traceback
-from urlparse import urlparse
+import logging
+import urllib
 
-from xfw import IS_DEVELOPMENT, XFW_NO_TOKEN_MASKING
+# certifi
+import certifi
 
-from consts import *
-from logger import *
-import utils
+# urllib3
+import urllib3
 
-try:
-    _proxy = os.environ.get('XVM_HTTPS_PROXY')
-    if _proxy:
-        _proxy = urlparse(_proxy)
-except Exception, ex:
-    _proxy = None
-    err(traceback.format_exc())
+# XFW
+from xfw import XFW_NO_TOKEN_MASKING
+
+# XVM Main
+from .consts import XVM
+from .utils import hide_guid
+
+
+
+#
+# Globals
+#
+
+_urllib_pool = None
 
 _USER_AGENT = 'xvm-{0}#{1}'.format(XVM.XVM_VERSION, XVM.XVM_REVISION)
 
-# result: (response, duration)
+
+
+#
+# Public
+#
+
 def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', showLog=True, api=XVM.API_VERSION):
+    logger = logging.getLogger('XVM/Main/LoadUrl')
+
+    if not _urllib_pool:
+        logger.error('URL loader is not initialized')
+        return (None, None, None)
+
+    # prepare URL
     url = url.replace("{API}", api)
     if req is not None:
         url = url.replace("{REQ}", req)
-    u = urlparse(url)
-    ssl = url.lower().startswith('https://')
+
+    # log
     if showLog:
-        # hide some chars of token in the log
-        path_log = utils.hide_guid(u.path) if not XFW_NO_TOKEN_MASKING else u.path
-        log('  HTTP%s: %s%s' % ('S' if ssl else '', path_log, '?' + u.query if u.query else ''), '[INFO]  ')
+        logger.info('REQ: %s', url if XFW_NO_TOKEN_MASKING else hide_guid(url))
+    time_start = datetime.datetime.now()
 
-    startTime = datetime.datetime.now()
-
-    #import time
-    #time.sleep(3)
-
-    (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, body, content_type)
-    # repeat request on timeout
-    if errStr is not None and 'timed out' in errStr:
-        (response, compressedSize, errStr) = _loadUrl(u, XVM.TIMEOUT, body, content_type)
-
-    elapsed = datetime.datetime.now() - startTime
-    msec = elapsed.seconds * 1000 + elapsed.microseconds / 1000
-    duration = None
-    if response:
-        if showLog:
-            log("  Time: %d ms, Size: %d (%d) bytes" % (msec, compressedSize, len(response)), '[INFO]  ')
-        # debug('response: ' + response)
-        if not response.lower().startswith('onexception'):
-            duration = msec
-
-    return (response, duration, errStr)
-
-def _loadUrl(u, timeout, body, content_type): # timeout in msec
+    # prepare request
+    req_type = "POST" if body else "GET"
+    req_headers = {
+        "User-Agent": _USER_AGENT,
+        "Accept-Encoding": "gzip",
+        "Content-Type": content_type
+    }
+    
+    # response
     response = None
-    compressedSize = None
-    errStr = None
-    conn = None
+    response_errmsg = ''
     try:
-        #log(u)
-        cls = httplib.HTTPSConnection if u.scheme.lower() == 'https' else httplib.HTTPConnection
-        global _proxy
-        #log(_proxy)
-        if _proxy:
-            conn = cls(_proxy.hostname, _proxy.port, timeout=timeout / 1000)
-            headers = {}
-            if _proxy.username and _proxy.password:
-                auth = '%s:%s' % (_proxy.username, _proxy.password)
-                headers['Proxy-Authorization'] = 'Basic ' + base64.b64encode(auth)
-            #log(headers)
-            conn.set_tunnel(u.hostname, u.port, headers=headers)
-        else:
-            conn = cls(u.netloc, timeout=timeout / 1000)
-
-        global _USER_AGENT
-        headers = {
-            "User-Agent": _USER_AGENT,
-            "Accept-Encoding": "gzip",
-            "Content-Type": content_type}
-        conn.request("POST" if body else "GET", u.path + ('?' + u.query if u.query else ''), body, headers)
-        resp = conn.getresponse()
-        # log(resp.status)
-
-        response = resp.read()
-        compressedSize = len(response)
-
-        encoding = resp.getheader('content-encoding')
-
-        if encoding is None:
-            pass  # leave response as is
-        elif encoding == 'gzip':
-            response = gzip.GzipFile(fileobj=StringIO.StringIO(response)).read()
-        else:
-            raise Exception('Encoding not supported: %s' % encoding)
-
-        # log(response)
-        if resp.status not in [200, 202, 204, 401]:  # 200 OK, 202 Accepted, 204 No Content
-            m = re.search(r'<body[^>]+?>\r?\n?(.+?)</body>', response, flags=re.S | re.I)
-            if m:
-                response = m.group(1)
-            response = re.sub(r'<[^>]+>', '', response)
-            response = re.sub(r'nginx/\d+\.\d+\.\d+', '', response)
-            response = response.strip()
-            raise Exception('HTTP Error: [%i] %s. Response: %s' % (resp.status, resp.reason, response[:256]))
-
+        response = _urllib_pool.request(req_type, url, headers = req_headers, body = body, timeout = XVM.TIMEOUT)
+    except urllib3.exceptions.TimeoutError:
+        logger.warning('timeout')
     except Exception as ex:
-        response = None
-        errStr = str(ex)
-        if not isinstance(errStr, unicode):
-            errStr = errStr.decode(locale.getdefaultlocale()[1]).encode("utf-8")
-        # log(errStr)
-        tb = traceback.format_exc(1).split('\n')
-        err('loadUrl failed: %s%s' % (utils.hide_guid(errStr), tb[1]))
+        logger.exception('on request')
+        response_errmsg = str(ex)
 
-    finally:
-        if conn is not None:
-           conn.close()
+    # log
+    time_elapsed = datetime.datetime.now() - time_start
+    time_elapsed_ms = time_elapsed.seconds * 1000 + time_elapsed.microseconds / 1000
+    if showLog:
+        logging.getLogger('XVM/Main/LoadUrl').info('RESP: status=%s, time=%s', response.status, time_elapsed_ms)
 
-    return (response, compressedSize, errStr)
+    # return
+    if response.status in [200, 202, 204]:
+        return (response.data, time_elapsed_ms, response_errmsg)
+    else:
+        return (None, time_elapsed_ms, response_errmsg)
+
+
+
+#
+# Initialization
+#
+
+def init():
+    global _urllib_pool
+
+    proxy = None
+    if not proxy:
+        proxy = urllib.getproxies().get("https")
+    if not proxy:
+        proxy = urllib.getproxies().get("http")
+    
+    opts =  {
+        "num_pools": 2,
+        "cert_reqs": "CERT_REQUIRED",
+        "ca_certs": certifi.where(),
+    }
+
+    if proxy:
+        _urllib_pool = urllib3.ProxyManager(proxy, **opts)
+    else:
+        _urllib_pool = urllib3.PoolManager(**opts)
+
+def fini():
+    global _urllib_pool
+    _urllib_pool = None
