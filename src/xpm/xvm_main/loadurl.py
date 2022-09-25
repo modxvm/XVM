@@ -73,6 +73,7 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
         response = _urllib_pool.request(req_type, url, headers = req_headers, body = body, timeout = XVM.TIMEOUT)
     except urllib3.exceptions.TimeoutError:
         logger.warning('timeout')
+        response_errmsg = 'timeout'
     except Exception as ex:
         logger.exception('on request')
         response_errmsg = str(ex)
