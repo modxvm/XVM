@@ -261,8 +261,28 @@ detect_actionscript_sdk(){
 }
 
 detect_java(){
-    if ! (hash java 2>/dev/null); then
-        echo -e "${BOLD_RED}!!! java is not found${DEFAULT}"
+    detect_os
+
+    #check full path for windows
+    if [[ "$XVMBUILD_JAVA_FILEPATH" == "" ]]; then
+        if [ "$OS" == "Windows" ]; then
+            if [ -f "/c/Software/Java/jdk-19/bin/java.exe" ]; then
+                export PATH=$PATH:/c/Software/Java/jdk-19/bin/
+                export XVMBUILD_JAVA_FILEPATH="/c/Software/Java/jdk-19/bin/java.exe"
+            fi
+        fi
+    fi
+
+    #*nix and fallback
+    if [[ "$XVMBUILD_JAVA_FILEPATH" == "" ]]; then
+        if hash "java" 2>/dev/null; then
+            export XVMBUILD_JAVA_FILEPATH="java"
+        fi
+    fi
+
+    #check results
+    if [[ "$XVMBUILD_JAVA_FILEPATH" == "" ]]; then
+        echo -e "${BOLD_RED}!!! Java is not found${DEFAULT}"
         exit 1
     fi
 }
