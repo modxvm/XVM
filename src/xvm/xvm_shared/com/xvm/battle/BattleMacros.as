@@ -328,14 +328,20 @@ package com.xvm.battle
             m_globals["hp"] = function(o:IVOMacrosOptions):Number
             {
                 var ps:VOPlayerState = o as VOPlayerState;
-                return ps ? ps.curHealth : NaN;
+                return ps ? ps.curHealth || ps.maxHealth : NaN;
             }
 
             // {{hp-max}}
             m_globals["hp-max"] = function(o:IVOMacrosOptions):Number
             {
+
                 var ps:VOPlayerState = o as VOPlayerState;
-                return ps ? ps.maxHealth : NaN;
+                var maxHealth:int = ps ? ps.maxHealth : NaN;
+                if (!isNaN(maxHealth) && maxHealth > m_globals["hpmax_team"])
+                {
+                    m_globals["hpmax_team"] = maxHealth;
+                }
+                return maxHealth;
             }
 
             // {{hp-ratio}}

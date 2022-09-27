@@ -954,7 +954,7 @@ package com.xvm
                     }
                     if (!isNaN(value))
                     {
-                        var maxHp:Number = m_globals["maxhp"];
+                        var maxHp:Number = m_globals["hpmax_team"];
                         res = Math.round(parseInt(norm) * value / maxHp).toString();
                     }
                     m_prepare_value_cache[key] = res;
@@ -1103,8 +1103,8 @@ package com.xvm
 
             if (vehCD != 0)
             {
-                if (!m_globals["maxhp"] || m_globals["maxhp"] < vdata.hpTop)
-                    m_globals["maxhp"] = vdata.hpTop;
+                if (!m_globals["hpmax_team"] || m_globals["hpmax_team"] < vdata.hpTop)
+                    m_globals["hpmax_team"] = vdata.hpTop;
             }
 
             // {{veh-id}}
