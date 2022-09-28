@@ -14,6 +14,14 @@
 
   * Moved layers on the minimap
 
+  #### Carousel
+
+  * Added options in the `"carousel"/"normal"/"fields"` and `"carousel"/"small"/"fields"` sections:
+
+    * `"coreBorder"` — Core Vehicles mark for the Battle Pass
+
+  * Added macro `{{v.core}}`
+
 ### XVM 9.3.4
 
   * Compatibility with World of Tanks 1.17.1.3

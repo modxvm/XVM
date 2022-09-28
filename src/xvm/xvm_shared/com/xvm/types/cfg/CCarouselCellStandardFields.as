@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var actionPrice:CCarouselCellStandardField;
         public var clanLock:CCarouselCellStandardField;
         public var crystalsBorder:CCarouselCellStandardField;
+        public var coreBorder:CCarouselCellStandardField;
         public var crystalsIcon:CCarouselCellStandardField;
         public var favorite:CCarouselCellStandardField;
         public var flag:CCarouselCellStandardField;

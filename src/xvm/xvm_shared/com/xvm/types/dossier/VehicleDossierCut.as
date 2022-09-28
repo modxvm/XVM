@@ -66,6 +66,7 @@ package com.xvm.types.dossier
                 camouflageWinter = vdossier.camouflageWinter;
                 camouflageDesert = vdossier.camouflageDesert;
                 camouflageCount = vdossier.camouflageCount;
+                core = vdossier.coreVehicle ? "core" : null;
             }
 
             // Calculations
@@ -211,5 +212,6 @@ package com.xvm.types.dossier
         public var elite:String;
         public var selected:String;
         public var levelPostProgress:Number;
+        public var core:String;
     }
 }

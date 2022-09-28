@@ -19,8 +19,7 @@ def requestDossier(args):
 import traceback
 
 import BigWorld
-from helpers.i18n import makeString
-from items import vehicles
+from battle_pass_common import BATTLE_PASS_CONFIG_NAME
 from dossiers2.ui.achievements import ACHIEVEMENT_BLOCK as _AB
 from gui.impl import backport
 from gui.shared.gui_items import GUI_ITEM_TYPE
@@ -28,13 +27,17 @@ from gui.shared.utils.requesters import REQ_CRITERIA
 from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.view.lobby.profile.QueuedVehicleDossierReceiver import QueuedVehicleDossierReceiver
+from items import vehicles
 from items.components.c11n_constants import SeasonType
 from helpers import dependency
+from helpers.i18n import makeString
+from helpers.server_settings import ServerSettings
 from skeletons.gui.shared import IItemsCache
 from skeletons.gui.lobby_context import ILobbyContext
 
 from xfw import *
 from xfw_actionscript.python import *
+from xfw.events import registerEvent
 
 from consts import *
 from logger import *
@@ -101,6 +104,7 @@ class _Dossier(object):
         self.__dataReceiver = QueuedVehicleDossierReceiver()
         self.__dataReceiver.onDataReceived += self.__requestedDataReceived
         self._cache = {}
+        self.coreVehiclesCD = []
 
     def _dispose(self):
         self.__dataReceiver.onDataReceived -= self.__requestedDataReceived
@@ -150,12 +154,8 @@ class _Dossier(object):
         # vehicle dossier
         vehicle = self.itemsCache.items.getItemByCD(vehCD)
 
-        levelPostProgress = 0 if vehicle.isPostProgressionExists else -1
-        for step in vehicle.postProgression.iterOrderedSteps():
-            level = step.getLevel()
-            if step.isReceived() and level > levelPostProgress:
-                levelPostProgress = level
-
+        coreVehicle = vehCD in self.coreVehiclesCD
+        levelPostProgress = self.__getLevelPostProgress(vehicle)
         rent = vehicle.isRented
         multiNation = vehicle.hasNationGroup
         outfit = vehicle.getOutfit(SeasonType.SUMMER)
@@ -180,6 +180,7 @@ class _Dossier(object):
         if cache_item is not None and cache_item['totalBattles'] == totalBattles:
             self.__updateCamouflageResult(cache_item, summer_camo, winter_camo, desert_camo)
             self._cache[cache_key]['levelPostProgress'] = levelPostProgress
+            self._cache[cache_key]['coreVehicle'] = coreVehicle
             return cache_item
 
         xpVehs = self.itemsCache.items.stats.vehiclesXPs
@@ -218,10 +219,19 @@ class _Dossier(object):
         res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned)
         self.__updateCamouflageResult(res, summer_camo, winter_camo, desert_camo)
         res['levelPostProgress'] = levelPostProgress
+        res['coreVehicle'] = coreVehicle
         self._cache[cache_key] = res
         return res
 
     # PRIVATE
+
+    def __getLevelPostProgress(self, vehicle):
+        levelPostProgress = 0 if vehicle.isPostProgressionExists else -1
+        for step in vehicle.postProgression.iterOrderedSteps():
+            level = step.getLevel()
+            if step.isReceived() and level > levelPostProgress:
+                levelPostProgress = level
+        return levelPostProgress
 
     # check vehicle dossier already loaded and cached
     def __isVehicleDossierLoaded(self, accountDBID, vehCD):
@@ -261,7 +271,6 @@ class _Dossier(object):
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.EPIC_RANDOM:
             return dossier.getEpicRandomStats()
         raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
-
 
     def __prepareCommonResult(self, accountDBID, dossier):
         stats = self.__getStatsBlock(dossier)
@@ -303,7 +312,6 @@ class _Dossier(object):
             'battleLifeTime': glob.getBattleLifeTime(),
             'mileage': glob.getMileage(),
             'treesCut': glob.getTreesCut()}
-
 
     def __prepareAccountResult(self, accountDBID, dossier):
         if dossier is None:
@@ -373,8 +381,16 @@ class _Dossier(object):
 
 _dossier = None
 
+
+def ServerSettings_set(self, serverSettings):
+    battle_pass = serverSettings.get(BATTLE_PASS_CONFIG_NAME, {})
+    _dossier.coreVehiclesCD = battle_pass.get('season', {}).get('specialVehicles', [])
+
+
 def _init():
     global _dossier
     _dossier = _Dossier()
+    registerEvent(ServerSettings, 'set')(ServerSettings_set)
+
 
 BigWorld.callback(0, _init)

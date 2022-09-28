@@ -96,6 +96,7 @@ package com.xvm.lobby.ui.tankcarousel
             _setupStandardFieldCrystalsBorder();
             _setupStandardFieldCrystalsIcon();
             _setupStandardFieldStats();
+            _setupStandardFieldCoreBorder();
             //}, 1000);
         }
 
@@ -473,6 +474,14 @@ package com.xvm.lobby.ui.tankcarousel
                 _setupStandardFieldAlpha(renderer.content.extraGlow, cfg.fields.crystalsBorder);
             }
             _setupStandardFieldAlpha(renderer.content.crystalsGlowBlend, cfg.fields.crystalsBorder);
+        }
+
+        private function _setupStandardFieldCoreBorder():void
+        {
+            if (renderer.content.bpSpecialBorder.visible)
+            {
+                _setupStandardFieldAlpha(renderer.content.bpSpecialBorder, cfg.fields.coreBorder);
+            }
         }
 
         private function _setupStandardFieldCrystalsIcon():void
