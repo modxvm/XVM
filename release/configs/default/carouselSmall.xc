@@ -75,7 +75,7 @@
       // Иконка в поле статистики "stats" для техники с возможностью заработка бон.
       "crystalsIcon": { "enabled": true, "dx": 0, "dy": 0, "alpha": 100 },
       // Core Vehicles mark for the Battle Pass.
-      // Маркер ключевой техники бевого пропуска.
+      // Маркер ключевой техники боевого пропуска.
       "coreBorder": { "enabled": true, "alpha": 100 },
       // Stats field that appears on the mouse hover.
       // Поле статистики, отображаемое при наведении мыши.
