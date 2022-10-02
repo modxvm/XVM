@@ -9,6 +9,7 @@ Copyright (c) 2013-2022 XVM Contributors
 
 # cpython
 import datetime
+from distutils import errors
 import logging
 import urllib
 
@@ -72,8 +73,11 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
     try:
         response = _urllib_pool.request(req_type, url, headers = req_headers, body = body, timeout = XVM.TIMEOUT)
     except urllib3.exceptions.TimeoutError:
-        logger.warning('timeout')
+        logger.warning('TimeoutError')
         response_errmsg = 'timeout'
+    except urllib3.exceptions.MaxRetryError:
+        logger.warning('MaxRetryError')
+        response_errmsg = 'maximum retries count'
     except Exception as ex:
         logger.exception('on request')
         response_errmsg = str(ex)
