@@ -9,7 +9,6 @@ Copyright (c) 2013-2022 XVM Contributors
 
 # cpython
 import datetime
-from distutils import errors
 import logging
 import urllib
 
