@@ -1,31 +1,36 @@
 diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 21:37:07.443285700 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 21:44:32.522631200 +0300
-@@ -1963,6 +1963,12 @@
-       coerce              QName(PackageNamespace("flash.geom"), "Point")
-       setlocal            9
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 23:29:26.574415000 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 23:46:00.944900300 +0300
+@@ -2992,6 +2992,13 @@
+       pushscope
  
+       getlocal0
 +      callproperty        QName(PackageNamespace(""), "xvm_active"), 0
-+      iffalse             XVMACTIVE
++      iffalse             L6
 +
 +      returnvoid
 +
-+XVMACTIVE:
++L6:
++      getlocal0
        getlocal0
-       getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "ICON")
-       callproperty        QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
-@@ -4429,6 +4435,44 @@
+       callproperty        QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updatePartsVisibility"), 0
+       callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "layoutParts"), 1
+@@ -4427,6 +4434,48 @@
+       returnvoid
+      end ; code
      end ; body
-    end ; method
-   end ; trait
++   end ; method
++  end ; trait
 +  trait method QName(PackageNamespace(""), "xvm_active")
 +   method
++    name "xvm_active"
++    refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/xvm_active"
 +    returns QName(PackageNamespace(""), "Boolean")
 +    body
 +     maxstack 1
 +     localcount 1
-+     initscopedepth 11
-+     maxscopedepth 12
++     initscopedepth 0
++     maxscopedepth 1
 +     code
 +      getlocal0
 +      pushscope
@@ -38,12 +43,14 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +  end ; trait
 +  trait method QName(PackageNamespace(""), "xfw_updateIconColor")
 +   method
++    name "xfw_updateIconColor"
++    refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/xfw_updateIconColor"
 +    returns QName(PackageNamespace(""), "void")
 +    body
 +     maxstack 1
 +     localcount 1
-+     initscopedepth 15
-+     maxscopedepth 16
++     initscopedepth 0
++     maxscopedepth 1
 +     code
 +      getlocal0
 +      pushscope
@@ -53,9 +60,7 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +
 +      returnvoid
 +     end ; code
-+     end ; body
-+    end ; method
-+   end ; trait
++    end ; body
+    end ; method
+   end ; trait
   end ; instance
-  cinit
-   refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/class/init"
