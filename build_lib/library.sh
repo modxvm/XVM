@@ -182,6 +182,8 @@ install_actionscript_sdk(){
 #  - $PATHS+=$ASSDK_HOME/bin
 #
 detect_actionscript_sdk(){
+    detect_java
+
     if [ "$ROYALE_HOME" != "" -a -d "$ROYALE_HOME" ]; then
         export ASSDK_HOME="$ROYALE_HOME"
         export ASSDK_TYPE="royale"
@@ -261,6 +263,12 @@ detect_actionscript_sdk(){
 }
 
 detect_java(){
+    #skip if already detected
+    if [[ "$XVMBUILD_JAVA_FILEPATH" != "" ]]; then
+        return
+    fi
+
+    #find os
     detect_os
 
     #check full path for windows
