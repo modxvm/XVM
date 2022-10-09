@@ -1,16 +1,16 @@
 diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/components/SmallSkillsList.class.asasm lobby.orig-0/net/wg/gui/lobby/components/SmallSkillsList.class.asasm
---- lobby.orig-0.orig/net/wg/gui/lobby/components/SmallSkillsList.class.asasm	2016-10-14 14:58:31.388506000 +0300
-+++ lobby.orig-0/net/wg/gui/lobby/components/SmallSkillsList.class.asasm	2016-10-22 20:47:55.528900000 +0300
-@@ -136,7 +136,7 @@
-       dup
-       setlocal            7
+--- lobby.orig-0.orig/net/wg/gui/lobby/components/SmallSkillsList.class.asasm	2022-10-09 17:56:25.848328300 +0300
++++ lobby.orig-0/net/wg/gui/lobby/components/SmallSkillsList.class.asasm	2022-10-09 17:56:24.315556500 +0300
+@@ -158,7 +158,7 @@
+       initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "_isEmptySkillShifted")
  
+       getlocal            6
 -      getlex              QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "MAX_RENDER_SKILLS")
 +      getlex              QName(PackageNamespace(""), "MAX_RENDER_SKILLS")
-       ifnge               L119
+       ifnge               L133
  
        getlocal0
-@@ -736,14 +736,14 @@
+@@ -840,9 +840,9 @@
      pushstring          "%"
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "PERCENT_SIGN")
  
@@ -20,11 +20,13 @@ diff -Naur lobby.orig-0.orig/net/wg/gui/lobby/components/SmallSkillsList.class.a
 -    initproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "MAX_RENDER_SKILLS")
 +    initproperty        QName(PackageNamespace(""), "MAX_RENDER_SKILLS")
  
-     returnvoid
-    end ; code
+     findproperty        QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "SHIFT_SKILLS_COUNT")
+     pushbyte            2
+@@ -853,6 +853,6 @@
    end ; body
   end ; method
   trait const QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "PERCENT_SIGN") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("%") end
 - trait const QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "MAX_RENDER_SKILLS") slotid 2 type QName(PackageNamespace(""), "int") value Integer(5) end
 + trait slot QName(PackageNamespace(""), "MAX_RENDER_SKILLS") slotid 2 type QName(PackageNamespace(""), "int") value Integer(5) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.lobby.components:SmallSkillsList"), "SHIFT_SKILLS_COUNT") slotid 3 type QName(PackageNamespace(""), "int") value Integer(2) end
  end ; class

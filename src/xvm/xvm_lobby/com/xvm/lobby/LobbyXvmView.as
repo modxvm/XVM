@@ -120,11 +120,13 @@ package com.xvm.lobby
                     btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
                 }
 
+				/* TODO: WoT 1.18.1
                 btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
                 if (btn)
                 {
                     btn.headerButtonData.isUseFreeSize = false;
                 }
+				*/
             });
         }
 
