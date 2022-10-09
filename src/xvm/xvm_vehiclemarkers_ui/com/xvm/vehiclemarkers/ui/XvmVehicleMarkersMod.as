@@ -60,6 +60,10 @@ package com.xvm.vehiclemarkers.ui
 
         private function xvm_cmd(... rest):*
         {
+            if(_daapi_as2py == null){
+                return null;
+            }
+
             return _daapi_as2py.apply(this, rest);
         }
 
