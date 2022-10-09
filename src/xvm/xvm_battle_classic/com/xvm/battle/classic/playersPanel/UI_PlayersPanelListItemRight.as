@@ -91,7 +91,7 @@ package com.xvm.battle.classic.playersPanel
 
         override public function setState(param1:uint):void
         {
-            if (XfwUtils.getPrivateField(this, "") != param1)
+            if (this.state != param1)
             {
                 super.setState(param1);
                 proxy.invalidate(PlayersPanelListItemProxyBase.INVALIDATE_PANEL_STATE);
