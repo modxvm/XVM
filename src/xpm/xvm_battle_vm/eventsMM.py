@@ -67,7 +67,7 @@ def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
         base(self, flag)
 
 
-def _VehicleMarkerPlugin__updateVehicleHealth(base, self, vehicleID, handle, newHealth, aInfo, attackReasonID):
+def _VehicleMarkerPlugin_updateVehicleHealth(base, self, vehicleID, handle, newHealth, aInfo, attackReasonID):
     if g_markers.active:
         if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
             attackerID = aInfo.vehicleID if aInfo else 0
@@ -92,7 +92,7 @@ def init():
     overrideMethod(MarkersManager, 'createMarker')(_MarkersManager_createMarker)
     overrideMethod(MarkersManager, 'destroyMarker')(_MarkersManager_destroyMarker)
     overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')(_MarkersManager_as_setShowExInfoFlagS)
-    overrideMethod(VehicleMarkerPlugin, '_VehicleMarkerPlugin__updateVehicleHealth')(_VehicleMarkerPlugin__updateVehicleHealth)
+    overrideMethod(VehicleMarkerPlugin, '_updateVehicleHealth')(_VehicleMarkerPlugin_updateVehicleHealth)
 
 def fini():
     pass

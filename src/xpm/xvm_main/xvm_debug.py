@@ -60,14 +60,14 @@ from logger import *
 #############################
 # BattleResults
 
-@decorators.process('loadStats')
+@decorators.adisp_process('loadStats')
 def _showBattleResults(arenaUniqueID):
     if IS_DEVELOPMENT:
         battleResults = dependency.instance(IBattleResultsService)
         ctx = RequestResultsContext(arenaUniqueID, showImmediately=False, showIfPosted=True, resetCache=False)
         yield battleResults.requestResults(ctx)
 
-#@decorators.process('loadStats')
+#@decorators.adisp_process('loadStats')
 #def _showWindow(self, notification, arenaUniqueID):
 #    uniqueID = long(arenaUniqueID)
 #    result = yield self.battleResults.requestResults(RequestResultsContext(uniqueID, showImmediately=False, showIfPosted=True, resetCache=False))

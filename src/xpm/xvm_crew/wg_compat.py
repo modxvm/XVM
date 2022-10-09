@@ -3,12 +3,12 @@
 from CurrentVehicle import g_currentVehicle
 from gui import SystemMessages
 from gui.shared.gui_items.processors.tankman import TankmanReturn
-from gui.shared.utils.decorators import process
+from gui.shared.utils import decorators
 
 
 class _WGCompat():
 
-    @process('crewReturning')
+    @decorators.adisp_process('crewReturning')
     def processReturnCrew(self, print_message = True):
         if not g_currentVehicle.isInHangar() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked() or g_currentVehicle.isCrewFull():
             return
@@ -17,7 +17,7 @@ class _WGCompat():
             SystemMessages.pushI18nMessage(result.userMsg, type=result.sysMsgType)
 
 
-    @process('crewReturning')
+    @decorators.adisp_process('crewReturning')
     def processReturnCrewForVehicleSelectorPopup(self, vehicle):
         if not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
             yield TankmanReturn(vehicle).request()
