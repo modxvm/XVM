@@ -136,7 +136,7 @@ diff -Naur battle.orig-0.orig/net/wg/infrastructure/helpers/statisticsDataContro
 +      pushscope
 +
 +      getlocal0
-+      getproperty         QName(PrivateNamespace(null, "net.wg.infrastructure.helpers.statisticsDataController:BattleStatisticDataController/instance"), "_componentControllers")
++      getproperty         QName(ProtectedNamespace("net.wg.infrastructure.helpers.statisticsDataController:BattleStatisticDataController"), "_componentControllers")
 +      returnvalue
 +     end ; code
 +    end ; body

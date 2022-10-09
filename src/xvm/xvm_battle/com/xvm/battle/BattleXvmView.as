@@ -4,28 +4,41 @@
  */
 package com.xvm.battle
 {
+	
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+
     import com.greensock.TweenLite;
-    import com.xfw.*;
-    import com.xfw.events.*;
-    import com.xvm.*;
-    import com.xvm.infrastructure.*;
-    import com.xvm.battle.events.*;
+    
+	import scaleform.clik.utils.WeakReference;
+
+	import net.wg.gui.battle.views.BaseBattlePage;
+    import net.wg.gui.battle.views.debugPanel.DebugPanel;
+	import net.wg.infrastructure.events.LifeCycleEvent;
+	import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
+    import net.wg.infrastructure.helpers.statisticsDataController.intarfaces.IBattleComponentDataController;
+	import net.wg.infrastructure.interfaces.IView;
+		
+	import com.xfw.Logger;
+	import com.xfw.Xfw;
+	import com.xfw.XfwUtils;
+	import com.xfw.events.ObjectEvent;
+
+	import com.xvm.Config;
+	import com.xvm.Defines;
+	import com.xvm.Xvm;
+	import com.xvm.XvmCommands;
+	import com.xvm.battle.events.PlayerStateEvent;
     import com.xvm.battle.shared.battleClock.BattleClock;
     import com.xvm.battle.shared.battleLabels.BattleLabels;
     import com.xvm.battle.shared.elements.BattleElements;
     import com.xvm.battle.shared.zoomIndicator.ZoomIndicator;
-    import com.xvm.types.cfg.*;
-    import flash.display.*;
-    import flash.events.*;
-    import flash.text.*;
-    import net.wg.gui.battle.views.*;
-    import net.wg.gui.battle.views.debugPanel.*;
-    // TODO:1.10.0
-    //import net.wg.gui.battle.views.ticker.*;
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    import scaleform.clik.utils.*;
-    import scaleform.gfx.*;
+	import com.xvm.infrastructure.XvmViewBase;
+	import com.xvm.types.cfg.CHotkeys;
+
 
     public class BattleXvmView extends XvmViewBase
     {
@@ -72,9 +85,26 @@ package com.xvm.battle
         {
             super(view);
             _battlePageRef = new WeakReference(super.view);
-
             _battleController = new BattleXvmComponentController();
-            XfwUtils.getPrivateField(XfwUtils.getPrivateField(battlePage, "xfw_battleStatisticDataController"), "xfw_componentControllers").unshift(_battleController);
+
+			if (battlePage == null){
+				Logger.add("BattleXvmView::ctor() --> battlePage is null");
+				return;
+			}
+
+			var bsdc:BattleStatisticDataController = XfwUtils.getPrivateField(battlePage, "xfw_battleStatisticDataController");
+			if (bsdc == null){
+				Logger.add("BattleXvmView::ctor() --> failed to get battleStatisticDataController");
+				return;
+			}
+
+			var cc:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdc, "xfw_componentControllers");
+			if (cc == null){
+				Logger.add("BattleXvmView::ctor() --> failed to get componentControllers");
+				return;
+			}
+
+            cc.unshift(_battleController);
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
