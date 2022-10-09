@@ -69,7 +69,10 @@ package com.xvm.lobby.crew
             if (enablePrevCrewCheckBox)
             {
                 Xfw.removeCommandListener(COMMAND_XVM_CREW_AS_VEHICLE_CHANGED, onVehicleChanged);
-                enablePrevCrewCheckBox.dispose();
+                if(!enablePrevCrewCheckBox.isDisposed())
+                {
+                    enablePrevCrewCheckBox.dispose();
+                }
                 enablePrevCrewCheckBox = null;
             }
         }
