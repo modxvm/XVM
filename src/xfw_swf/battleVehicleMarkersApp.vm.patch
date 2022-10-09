@@ -1,21 +1,20 @@
 diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm
---- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 17:50:22.293222500 +0300
-+++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 17:51:33.311474100 +0300
-@@ -1964,6 +1964,13 @@
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 21:37:07.443285700 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarker.class.asasm	2022-10-09 21:44:32.522631200 +0300
+@@ -1963,6 +1963,12 @@
+       coerce              QName(PackageNamespace("flash.geom"), "Point")
        setlocal            9
  
-       getlocal0
 +      callproperty        QName(PackageNamespace(""), "xvm_active"), 0
 +      iffalse             XVMACTIVE
 +
 +      returnvoid
 +
 +XVMACTIVE:
-+      getlocal0
+       getlocal0
        getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "ICON")
        callproperty        QName(ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "getIsPartVisible"), 1
-       convert_b
-@@ -2978,6 +2985,24 @@
+@@ -4429,6 +4435,44 @@
      end ; body
     end ; method
    end ; trait
@@ -37,13 +36,6 @@ diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMa
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker"), "updateMarkerSettings")
-    method
-     refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarker/updateMarkerSettings"
-@@ -4429,6 +4454,26 @@
-     end ; body
-    end ; method
-   end ; trait
 +  trait method QName(PackageNamespace(""), "xfw_updateIconColor")
 +   method
 +    returns QName(PackageNamespace(""), "void")
