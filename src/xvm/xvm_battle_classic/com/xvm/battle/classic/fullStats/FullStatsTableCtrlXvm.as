@@ -22,13 +22,12 @@ package com.xvm.battle.classic.fullStats
 
         public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
-            var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
-            return new StatsTableItemXvm(table, col, row);
+            return new StatsTableItemXvm(this.table, col, row);
         }
 
         public function createSquadItem(col:int, row:int):DynamicSquadCtrl
         {
-            var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
+			var table:FullStatsTable = FullStatsTable(this.table)
             var index:int = col * numRows + row;
             return new DynamicSquadCtrlXvm(
                 col == 0,

@@ -347,7 +347,7 @@ package com.xvm.battle.shared.playersPanel
 
         protected function get state():int
         {
-            return fix_state(XfwUtils.getPrivateField(ui, "xfw_state"));
+			return fix_state(ui.state);
         }
 
 

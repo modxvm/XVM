@@ -8,7 +8,7 @@ package com.xvm.wg
 
         private var _dict:Dictionary = null;
 
-        private var _target = null;
+        private var _target:* = null;
 
         private var _lock:Boolean = false;
 

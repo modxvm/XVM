@@ -17,7 +17,7 @@ package com.xvm.battle.ranked.fullStats
 
         public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
-            return new StatsTableItemXvm(XfwUtils.getPrivateField(this, 'xfw_table'), col, row);
+            return new StatsTableItemXvm(this.table, col, row);
         }
     }
 }

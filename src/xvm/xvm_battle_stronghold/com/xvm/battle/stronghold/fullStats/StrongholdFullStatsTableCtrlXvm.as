@@ -23,8 +23,7 @@ package com.xvm.battle.stronghold.fullStats
 
         public function createPlayerStatsItem(col:int, row:int):StatsTableItem
         {
-            var table:FullStatsTable = XfwUtils.getPrivateField(this, "xfw_table");
-            return new StrongholdStatsTableItemXvm(table, col, row);
+            return new StrongholdStatsTableItemXvm(this.table, col, row);
         }
 
     }

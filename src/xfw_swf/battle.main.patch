@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm battle.orig-0/net/wg/gui/battle/views/BaseBattlePage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm	2021-12-03 00:25:05.722143600 +0300
-+++ battle.orig-0/net/wg/gui/battle/views/BaseBattlePage.class.asasm	2021-12-03 00:25:47.555658900 +0300
-@@ -54,6 +54,25 @@
+--- battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm	2022-10-09 17:24:10.605988200 +0300
++++ battle.orig-0/net/wg/gui/battle/views/BaseBattlePage.class.asasm	2022-10-09 17:33:18.989392800 +0300
+@@ -97,6 +97,25 @@
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "vehicleMessageList") type QName(PackageNamespace("net.wg.gui.battle.views.vehicleMessages"), "VehicleMessages") end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "vehicleErrorMessageList") type QName(PackageNamespace("net.wg.gui.battle.views.messages"), "MessageListDAAPI") end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "playerMessageList") type QName(PackageNamespace("net.wg.gui.battle.views.messages"), "MessageListDAAPI") end
@@ -26,8 +26,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
 +  end ; trait
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "battleStatisticDataController") type QName(PackageNamespace("net.wg.infrastructure.helpers.statisticsDataController"), "BattleStatisticDataController") end
    trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "postmortemTips") type QName(PackageNamespace("net.wg.gui.battle.views.postmortemPanel"), "BasePostmortemPanel") value Null() end
-   trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "isPostMortem") type QName(PackageNamespace(""), "Boolean") value False() end
-@@ -1307,6 +1326,30 @@
+   trait slot QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "piercingDebugPanel") type QName(PackageNamespace("net.wg.gui.battle.views.piercingDebugPanel"), "PiercingDebugPanel") value Null() end
+@@ -1492,6 +1511,30 @@
      end ; body
     end ; method
    end ; trait
@@ -58,11 +58,11 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
    trait method QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "updateBattleDamageLogPosInPostmortem")
     method
      refid "net.wg.gui.battle.views:BaseBattlePage/instance/net.wg.gui.battle.views:BaseBattlePage:updateBattleDamageLogPosInPostmortem"
-@@ -2127,6 +2170,28 @@
+@@ -2173,6 +2216,28 @@
      end ; body
     end ; method
    end ; trait
-+  trait method QName(PackageNamespace(""), "xfw_onMiniMapTrySizeChangeHandler")
++  trait method QName(PackageNamespace(""), "xfw_onMinimapSizeChangedHandler")
 +   method
 +    param QName(PackageNamespace("net.wg.gui.battle.views.minimap.events"), "MinimapEvent")
 +    returns QName(PackageNamespace(""), "void")
@@ -77,24 +77,24 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
 +
 +      getlocal0
 +      getlocal1
-+      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views:BaseBattlePage"), "onMiniMapTrySizeChangeHandler"), 1
++      callpropvoid        QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "onMinimapSizeChangedHandler"), 1
 +
 +      returnvoid
 +     end ; code
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.views:BaseBattlePage"), "onMiniMapTrySizeChangeHandler")
+   trait method QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "onMinimapSizeChangedHandler")
     method
-     refid "net.wg.gui.battle.views:BaseBattlePage/instance/net.wg.gui.battle.views:BaseBattlePage/onMiniMapTrySizeChangeHandler"
-@@ -2148,6 +2213,28 @@
+     refid "net.wg.gui.battle.views:BaseBattlePage/instance/net.wg.gui.battle.views:BaseBattlePage:onMinimapSizeChangedHandler"
+@@ -2331,6 +2396,28 @@
  
        returnvoid
       end ; code
 +    end ; body
 +   end ; method
 +  end ; trait
-+  trait method QName(PackageNamespace(""), "xfw_onMiniMapChangeHandler")
++  trait method QName(PackageNamespace(""), "xfw_onMinimapTrySizeChangedHandler")
 +   method
 +    param QName(PackageNamespace("net.wg.gui.battle.views.minimap.events"), "MinimapEvent")
 +    returns QName(PackageNamespace(""), "void")
@@ -109,7 +109,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
 +
 +      getlocal0
 +      getlocal1
-+      callpropvoid        QName(ProtectedNamespace("net.wg.gui.battle.views:BaseBattlePage"), "onMiniMapChangeHandler"), 1
++      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.views:BaseBattlePage"), "onMinimapTrySizeChangedHandler"), 1
 +
 +      returnvoid
 +     end ; code
@@ -117,8 +117,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/BaseBattlePage.class.asasm
     end ; method
    end ; trait
 diff -Naur battle.orig-0.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.class.asasm battle.orig-0/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.class.asasm
---- battle.orig-0.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.class.asasm	2019-12-12 22:06:47.932729000 +0200
-+++ battle.orig-0/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.class.asasm	2019-12-12 22:09:08.131790800 +0200
+--- battle.orig-0.orig/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.class.asasm	2022-10-09 17:16:31.355272700 +0300
++++ battle.orig-0/net/wg/infrastructure/helpers/statisticsDataController/BattleStatisticDataController.class.asasm	2022-10-09 17:23:09.061859900 +0300
 @@ -49,7 +49,45 @@
      end ; code
     end ; body
@@ -142,7 +142,7 @@ diff -Naur battle.orig-0.orig/net/wg/infrastructure/helpers/statisticsDataContro
 +    end ; body
 +   end ; method
 +  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.infrastructure.helpers.statisticsDataController:BattleStatisticDataController/instance"), "_componentControllers") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.infrastructure.helpers.statisticsDataController.intarfaces"), "IBattleComponentDataController")>) end
+   trait slot QName(ProtectedNamespace("net.wg.infrastructure.helpers.statisticsDataController:BattleStatisticDataController"), "_componentControllers") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.infrastructure.helpers.statisticsDataController.intarfaces"), "IBattleComponentDataController")>) end
 +  trait getter QName(PackageNamespace(""), "xfw_questProgressViews")
 +   method
 +    returns TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.views.questProgress.interfaces"), "IQuestProgressViewUpdatable")>)

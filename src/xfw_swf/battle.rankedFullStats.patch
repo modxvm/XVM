@@ -1,32 +1,6 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm
 --- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:22:46.252495700 +0300
 +++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:37:13.443596100 +0300
-@@ -56,6 +56,25 @@
-     end ; code
-    end ; body
-   end ; method
-+  trait getter QName(PackageNamespace(""), "xfw_table")
-+   method
-+    returns QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTable")
-+    body
-+     maxstack 1
-+     localcount 1
-+     initscopedepth 11
-+     maxscopedepth 12
-+     code
-+      getlocal0
-+      pushscope
-+
-+      getlocal0
-+      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "_table")
-+      returnvalue
-+     end ; code
-+    end ; body
-+   end ; method
-+  end ; trait
-   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "_table") type QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats"), "FullStatsTable") value Null() end
-   trait method QName(PackageNamespace(""), "setTeamsInfo") flag OVERRIDE
-    method
 @@ -107,7 +107,7 @@
        getlocal0
        getlocal1
