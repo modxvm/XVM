@@ -1,4 +1,7 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2022 XVM Contributors
+"""
 
 #####################################################################
 # imports
@@ -7,8 +10,8 @@ import traceback
 import simplejson
 
 from account_helpers.AccountSettings import AccountSettings, DEFAULT_VALUES, KEY_FILTERS
-from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, ROYALE_CAROUSEL_FILTER_2, MAPBOX_CAROUSEL_FILTER_2
-from account_helpers.AccountSettings import CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, ROYALE_CAROUSEL_FILTER_CLIENT_1, MAPBOX_CAROUSEL_FILTER_CLIENT_1
+from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, ROYALE_CAROUSEL_FILTER_2, MAPBOX_CAROUSEL_FILTER_2, FUN_RANDOM_CAROUSEL_FILTER_2, COMP7_CAROUSEL_FILTER_2 
+from account_helpers.AccountSettings import CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, ROYALE_CAROUSEL_FILTER_CLIENT_1, MAPBOX_CAROUSEL_FILTER_CLIENT_1, FUN_RANDOM_CAROUSEL_FILTER_CLIENT_1, COMP7_CAROUSEL_FILTER_CLIENT_1 
 from account_helpers.settings_core.ServerSettingsManager import ServerSettingsManager
 from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
 from gui.shared.utils.functions import makeTooltip
@@ -50,7 +53,7 @@ class PREFS(object):
 class USERPREFS(object):
     CAROUSEL_FILTERS = "users/{accountDBID}/tankcarousel/filters"
 
-_SUPPORTED_SECTIONS = (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, ROYALE_CAROUSEL_FILTER_2, MAPBOX_CAROUSEL_FILTER_2)
+_SUPPORTED_SECTIONS = (CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, ROYALE_CAROUSEL_FILTER_2, MAPBOX_CAROUSEL_FILTER_2, FUN_RANDOM_CAROUSEL_FILTER_2, COMP7_CAROUSEL_FILTER_2)
 
 #####################################################################
 # initialization/finalization
@@ -90,7 +93,7 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
 
 @overrideStaticMethod(AccountSettings, 'setFilter')
 def _AccountSettings_setFilter(base, name, value):
-    if name in (CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, ROYALE_CAROUSEL_FILTER_CLIENT_1, MAPBOX_CAROUSEL_FILTER_CLIENT_1):
+    if name in (CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, ROYALE_CAROUSEL_FILTER_CLIENT_1, MAPBOX_CAROUSEL_FILTER_CLIENT_1, FUN_RANDOM_CAROUSEL_FILTER_CLIENT_1, COMP7_CAROUSEL_FILTER_CLIENT_1):
         value = {key: value for key, value in value.iteritems() if key not in PREFS.XVM_KEYS}
     base(name, value)
 
