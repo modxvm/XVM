@@ -171,6 +171,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_rts']
                 elif arenaGuiType == ARENA_GUI_TYPE.SORTIE_2 or arenaGuiType == ARENA_GUI_TYPE.FORT_BATTLE_2:
                     as_paths += ['as_battle_stronghold']
+                elif arenaGuiType == ARENA_GUI_TYPE.COMP7:
+                    as_paths += ['as_battle_comp7']
                 else:
                     as_paths += ['as_battle_classic']
             else:
