@@ -72,6 +72,7 @@ NOT_SUPPORTED_BATTLE_TYPES = [constants.ARENA_GUI_TYPE.TUTORIAL,
                            constants.ARENA_GUI_TYPE.RTS,
                            constants.ARENA_GUI_TYPE.RTS_TRAINING,
                            constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
+                           constants.ARENA_GUI_TYPE.COMP7
                            ]
 
 
