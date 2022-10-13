@@ -55,6 +55,15 @@ package com.xvm.battle.classic.fullStats
             component.y = fullStats.y;
             component.visible = fullStats.visible;
             qpw[qidx] = component.getStatsProgressView();
+            var reservesStats:IReservesStats = component as IReservesStats;
+            if(reservesStats)
+            {
+                var reservesView:IDAAPIModule = component.getReservesView();
+                if(reservesView)
+                {
+                    XfwUtils.getPrivateField(page, 'xfw_registerComponent')(reservesView, BATTLE_VIEW_ALIASES.PERSONAL_RESERVES_TAB);
+                }
+            }
             page.fullStats = component;
             page.addChildAt(component, idx);
             bsdController.registerComponentController(page.fullStats);
