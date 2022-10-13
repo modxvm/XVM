@@ -152,6 +152,7 @@ package com.xvm.lobby
                 if (btn)
                 {
                     var ctxBattleSelector:HBC_BattleSelector = btn.content as HBC_BattleSelector;
+                    btn.headerButtonData.resizePriority = 0;
                     ctxBattleSelector.wideScreenPrc = 0;
                     ctxBattleSelector.availableWidth = 0;
                 }
