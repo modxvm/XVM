@@ -204,7 +204,7 @@
         "strength": 1                 // интенсивность
       },
       // Формат текста. См. описание макросов в macros.txt
-      "format": "<font color='{{x-spotted?#FFBB00|#FFFFFF}}' alpha='{{x-spotted?#FF|#80}}'>{{x-spotted?&#x70;|{{x-sense-on?&#x70;}}}}</font> {{x-overturned?&#x112;}}"
+      "format": "<font color='{{x-spotted?#FFBB00|#FFFFFF}}' alpha='{{x-spotted?#FF|#80}}'>&#x70;</font> {{x-overturned?&#x112;}}"
     },
     // Position of the player.
     // Порядковый номер игрока.

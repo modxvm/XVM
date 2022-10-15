@@ -1,3 +1,11 @@
+### XVM 10.1.0
+
+  * Compatibility with World of Tanks 1.18.1.0
+
+  #### Battle
+
+  * `{{x-sense-on}}` macro removed from config
+
 ### XVM 10.0.0
 
   * Compatibility with World of Tanks 1.18.0.1

@@ -185,7 +185,6 @@ Legend:
 │SDH│ macro              │ BL│ PP│ SF│ MM│ VM│BLb│ Description
 ├───┼────────────────────┼───┼───┼───┼───┼───┼───┼─────────────────────────────────────────────────
 │ H │ {{x-enabled}}      │   │ X │ X │ X │ X │   │ value 'true' if XMQP services enabled, empty - if not
-│ H │ {{x-sense-on}}     │   │ X │ X │ X │ X │   │ value 'true' if player studied "sixth sense" perk, empty - if not
 │ H │ {{x-spotted}}      │   │   │   │ X │ X │   │ value 'true' if player vehicle is spotted, empty - if not
 │ H │ {{x-fire}}         │   │   │   │ X │ X │   │ value 'true' if fire in vehicle, empty - if not
 │ H │ {{x-overturned}}   │   │   │   │ X │ X │   │ value 'true' if player vehicle is overturned, empty - if not
