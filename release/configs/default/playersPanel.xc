@@ -43,7 +43,7 @@
         "font": "xvm",
         "size": 24
       },
-      "format": "<font color='{{alive?{{x-spotted?#FFBB00|#D9D9D9}}|#FFFFFF}}' alpha='{{alive?#FF|#80}}'>{{alive?&#x70;}}</font>",
+      "format": "<font color='{{x-spotted?#FFBB00|#D9D9D9}}'>{{alive?{{x-enabled?&#x70;}}}}</font>",
       "shadow": {}
     },
     // Clan icon.
