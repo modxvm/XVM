@@ -113,6 +113,8 @@ package com.xvm
         public static const RTS:Number = 39;
         public static const RTS_1x1:Number = 40;
         public static const RTS_BOOTCAMP:Number = 41;
+        public static const FUN_RANDOM:Number = 42
+        public static const COMP7:Number = 43
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
