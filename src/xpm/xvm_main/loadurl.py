@@ -70,7 +70,7 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
     response = None
     response_errmsg = ''
     try:
-        response = _urllib_pool.request(req_type, url, headers = req_headers, body = body, timeout = XVM.TIMEOUT)
+        response = _urllib_pool.request(req_type, url, headers = req_headers, body = body, retries = XVM.RETRIES, timeout = XVM.TIMEOUT)
     except urllib3.exceptions.TimeoutError:
         logger.warning('TimeoutError')
         response_errmsg = 'timeout'

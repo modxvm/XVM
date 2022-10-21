@@ -12,7 +12,8 @@ class XVM(object):
 
     API_VERSION = '4.0'
     SERVERS = ['https://stat.modxvm.com:443/{API}/{REQ}']
-    TIMEOUT = 5.0
+    TIMEOUT = 2
+    RETRIES = 2
 
     XMQP_SERVER_TEMPLATE = 'xmqp{HASH}.modxvm.com'
     XMQP_SERVER_PORT_BASE = 5600
