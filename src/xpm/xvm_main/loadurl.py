@@ -88,7 +88,7 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
         logging.getLogger('XVM/Main/LoadUrl').info('RESP: status=%s, time=%s', response.status, time_elapsed_ms)
 
     # return
-    if response.status in [200, 202, 204]:
+    if response.status in [200, 202, 204, 401]:
         return (response.data, time_elapsed_ms, response_errmsg)
     else:
         return (None, time_elapsed_ms, response_errmsg)
