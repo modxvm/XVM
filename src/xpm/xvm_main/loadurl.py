@@ -119,6 +119,8 @@ def init():
     else:
         _urllib_pool = urllib3.PoolManager(**opts)
 
+    logging.getLogger("urllib3").setLevel(logging.ERROR)
+
 def fini():
     global _urllib_pool
     _urllib_pool = None
