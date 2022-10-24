@@ -103,8 +103,9 @@ def init():
     global _urllib_pool
 
     proxy = None
-    if not proxy:
-        proxy = urllib.getproxies().get("https")
+    #TODO: reenable after WoT py2->py3 transition
+    #if not proxy:
+    #    proxy = urllib.getproxies().get("https")
     if not proxy:
         proxy = urllib.getproxies().get("http")
     
