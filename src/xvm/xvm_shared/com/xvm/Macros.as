@@ -482,6 +482,14 @@ package com.xvm
                     }
                     else
                     {
+                        // Fix triple closing curly braces
+                        if (part.slice(0, idx).indexOf('{') >= 0)
+                        {
+                            var j:int = 2;
+                            while (part.charAt(idx + j) == '}') ++j;
+                            if ((j & 1) == 1) ++idx;
+                        }
+
                         var _FormatPart_out:MacrosResult = new MacrosResult();
                         res += _FormatPart(part.slice(0, idx), options, _FormatPart_out) + part.slice(idx + 2);
                         __out.isStaticMacro &&= _FormatPart_out.isStaticMacro;
