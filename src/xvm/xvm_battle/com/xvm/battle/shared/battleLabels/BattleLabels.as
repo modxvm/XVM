@@ -36,15 +36,27 @@ package com.xvm.battle.shared.battleLabels
 
             _substrateHolder = battlePage.addChildAt(new Sprite(), 0) as Sprite;
             _substrateHolder.mouseEnabled = false;
+            _substrateHolder.name = "_substrateHolder";
 
             _bottomHolder = battlePage.addChildAt(new Sprite(), 1) as Sprite;
             _bottomHolder.mouseEnabled = false;
+            _bottomHolder.name = "_bottomHolder";
 
-            _normalHolder = battlePage.addChild(new Sprite()) as Sprite;
+            var radialMenu:DisplayObject = battlePage.getChildByName("radialMenu");
+            if (radialMenu == null)
+            {
+                _normalHolder = battlePage.addChild(new Sprite()) as Sprite;
+            }
+            else
+            {
+                _normalHolder = battlePage.addChildAt(new Sprite(), battlePage.getChildIndex(radialMenu)) as Sprite;
+            }
             _normalHolder.mouseEnabled = false;
+            _normalHolder.name = "_normalHolder";
 
             _topHolder = battlePage.addChild(new Sprite()) as Sprite;
-            _topHolder.mouseEnabled =false
+            _topHolder.mouseEnabled = false;
+            _topHolder.name = "_topHolder";
 
             createExtraFields();
         }
