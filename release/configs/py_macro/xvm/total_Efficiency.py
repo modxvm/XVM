@@ -295,10 +295,13 @@ def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
         if attackerID == _player.playerVehicleID:
             if not dmgAlly and self.id in allyVehicles:
                 dmgAlly = True
+                isUpdate = True
             if attackReasonID == 0:
                 numberHitsDealt += 1
-            damageKind = ATTACK_REASONS[attackReasonID] if attackReasonID < 8 else 'other'
-            isUpdate = True
+                isUpdate = True
+            if not self.isPlayerVehicle:
+                damageKind = ATTACK_REASONS[attackReasonID] if attackReasonID < 8 else 'other'
+                isUpdate = True
     if isUpdate:
         updateLabels.update()
 
