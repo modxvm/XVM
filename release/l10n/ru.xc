@@ -198,7 +198,7 @@
 
     // Token
     "token/services_unavailable": "Сетевые сервисы недоступны.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>подробнее</font></a>",
-    "token/services_inactive": "Сетевые сервисы неактивны.<br><a href='#XVM_SITE_INACTIVE#'><font size='12'>Активировать</font></a>&nbsp;&nbsp;&nbsp;<a href='#XVM_CHECK_ACTIVATION#'><font size='12'>Проверить активацию</font></a>",
+    "token/services_inactive": "Сетевые сервисы неактивны для этого игрового клиента.<br><a href='#XVM_SITE_INACTIVE#'><font size='12'>Активировать</font></a>&nbsp;&nbsp;&nbsp;<a href='#XVM_CHECK_ACTIVATION#'><font size='12'>Проверить активацию</font></a>",
     "token/services_not_activated": "Не удалось активировать сетевые сервисы. Перед проверкой активируйте сервисы в личном кабинете на сайте XVM.<br><a href='#XVM_SITE_INACTIVE#'><font size='12'>Активировать</font></a>&nbsp;&nbsp;&nbsp;<a href='#XVM_CHECK_ACTIVATION#'><font size='12'>Проверить активацию</font></a>",
     "token/blocked": "Статус: <font color='#FF0000'>Заблокирован</font>&nbsp;&nbsp;<a href='#XVM_SITE_BLOCKED#'><font size='11'>подробнее</font></a>",
     "token/active": "Статус:<tab/><font color='#00FF00'>Активен</font>",

@@ -198,7 +198,7 @@
 
     // Token
     "token/services_unavailable": "Network services unavailable.&nbsp;&nbsp;<a href='#XVM_SITE_UNAVAILABLE#'><font size='11'>more info</font></a>",
-    "token/services_inactive": "Network services inactive.&nbsp;&nbsp;<br><a href='#XVM_SITE_INACTIVE#'><font size='12'>Activate</font></a>&nbsp;&nbsp;&nbsp;<a href='#XVM_CHECK_ACTIVATION#'><font size='12'>Check activation</font></a>",
+    "token/services_inactive": "Network services are not active for this game client.&nbsp;&nbsp;<br><a href='#XVM_SITE_INACTIVE#'><font size='12'>Activate</font></a>&nbsp;&nbsp;&nbsp;<a href='#XVM_CHECK_ACTIVATION#'><font size='12'>Check activation</font></a>",
     "token/services_not_activated": "Failed to activate network services. Before checking, activate the services in your account on the XVM website.<br><a href='#XVM_SITE_INACTIVE#'><font size='12'>Activate</font></a>&nbsp;&nbsp;&nbsp;<a href='#XVM_CHECK_ACTIVATION#'><font size='12'>Check activation</font></a>",
     "token/blocked": "Status: <font color='#FF0000'>Blocked</font>&nbsp;&nbsp;<a href='#XVM_SITE_BLOCKED#'><font size='11'>more info</font></a>",
     "token/active": "Status:<tab/><font color='#00FF00'>Active</font>",
