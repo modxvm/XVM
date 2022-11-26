@@ -1,3 +1,5 @@
+import xvm_main.python.config as config
+
 
 def parser_addon(strHTML, dict_macros):
     if not isinstance(strHTML, str):
@@ -153,6 +155,11 @@ def _parser(strHTML, macros):
         if not ((start >= 0) and (end >= 2)):
             break
         substr = strHTML[start:end]
+        if substr[2] == '.':
+            value = config.get(substr[3:-2].replace('.', '/'), '@dl%s@')
+            if value != '@dl%s@':
+                strHTML = '%s%s%s' % (strHTML[0:start], value, strHTML[end:])
+                continue
         for s in macros.iterkeys():
             begin = substr.find(s)
             if (begin == 2) and (substr[(2 + len(s))] in ('?', '%', '|',  '>', '<', '!', '=', '~')):
