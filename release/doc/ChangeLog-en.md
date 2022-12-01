@@ -1,6 +1,6 @@
-### XVM 10.1.3
+### XVM 10.2.0
 
-  * 
+  * Compatibility with World of Tanks 1.19.0.1
 
 ### XVM 10.1.2
 
