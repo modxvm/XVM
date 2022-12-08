@@ -32,7 +32,8 @@ package com.xvm.lobby.widgets
             }
             if (extraFieldsWidgetsTop)
             {
-                extraFieldsWidgetsTop.visible = true;
+                var page:LobbyPage = view as LobbyPage;
+                extraFieldsWidgetsTop.visible = page.header.visible;
             }
         }
 
@@ -65,6 +66,7 @@ package com.xvm.lobby.widgets
                 {
                     index = 0;
                     extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsBottom.name = "extraFieldsWidgetsBottom";
                     extraFieldsWidgetsBottom.visible = false;
                 }
             }
@@ -76,6 +78,7 @@ package com.xvm.lobby.widgets
                 {
                     index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
                     extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsNormal.name = "extraFieldsWidgetsNormal";
                     extraFieldsWidgetsNormal.visible = false;
                 }
             }
@@ -87,9 +90,19 @@ package com.xvm.lobby.widgets
                 {
                     index = page.getChildIndex(page.header) + 1;
                     extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    extraFieldsWidgetsTop.name = "extraFieldsWidgetsTop";
                     extraFieldsWidgetsTop.visible = false;
                 }
             }
+
+            //for  (var i:int = 0; i < page.numChildren; ++i)
+            //{
+                //var child:DisplayObject = page.getChildAt(i) as DisplayObject;
+                //if (child)
+                //{
+                    //Logger.add(child.name + " = " + i);
+                //}
+            //}
 
             onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);
         }
