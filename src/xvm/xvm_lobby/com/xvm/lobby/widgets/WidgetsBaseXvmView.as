@@ -5,6 +5,7 @@
 package com.xvm.lobby.widgets
 {
     import com.xfw.*;
+    import com.xvm.Defines;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -85,10 +86,13 @@ package com.xvm.lobby.widgets
                 var w:CWidget = ObjectConverter.convertData(cfg[i], CWidget);
                 if (w != null)
                 {
+                    w.enabled = w.enabled == null ? true : w.enabled;
                     if (w.enabled)
                     {
+                        w.type = w.type == null ? Defines.WIDGET_TYPE_EXTRAFIELD : w.type;
                         if (w.type == type)
                         {
+                            w.layer = w.layer == null ? Defines.LAYER_NORMAL : w.layer;
                             if (w.layer.toLowerCase() == layer)
                             {
                                 if (w.formats)
