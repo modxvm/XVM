@@ -1,6 +1,8 @@
 ### XVM 10.2.1
 
-  * 
+  #### damageLog
+
+  * Added "armor_not_hit" parameter to "hit-effects" and "c:hit-effects" sections
 
 ### XVM 10.2.0
 

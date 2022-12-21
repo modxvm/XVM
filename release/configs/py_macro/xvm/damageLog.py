@@ -16,7 +16,7 @@ from helpers import dependency
 from items import _xml#, vehicles
 from skeletons.gui.battle_session import IBattleSessionProvider
 from skeletons.gui.game_control import IBootcampController
-from vehicle_systems.tankStructure import TankPartIndexes
+from vehicle_systems.tankStructure import TankPartIndexes, TankPartNames
 
 from xfw.events import registerEvent, overrideMethod
 from xfw_actionscript.python import *
@@ -91,7 +91,8 @@ HIT_EFFECT_CODES = {
     3: 'armor_pierced_no_damage',
     4: 'armor_pierced',
     5: 'critical_hit',
-    6: 'armor_pierced_device'
+    6: 'armor_pierced_device',
+    7: 'armor_not_hit'
 }
 
 RATINGS = {
@@ -292,7 +293,7 @@ class Data(object):
                      'compName': 'unknown',
                      'splashHit': 'no-splash',
                      'criticalHit': False,
-                     'hitEffect': 'unknown',
+                     'hitEffect': HIT_EFFECT_CODES[None],
                      'damage': 0,
                      'dmgRatio': 0,
                      'oldHealth': 0,
@@ -458,7 +459,7 @@ class Data(object):
         self.data['critDevice'] = 'no-critical'
         self.data['criticalHit'] = False
         self.data['isDamage'] = False
-        self.data['hitEffect'] = 'unknown'
+        self.data['hitEffect'] = HIT_EFFECT_CODES[None]
         self.data['splashHit'] = 'no-splash'
         self.data['attackReasonID'] = 0
         self.data['numCrits'] = 0
@@ -466,19 +467,26 @@ class Data(object):
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
         if not vehicle.isStarted:
             return
-        maxComponentIdx = TankPartIndexes.ALL[-1]
-        wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
-        if wheelsConfig:
-            maxComponentIdx += wheelsConfig.getWheelsCount()
-        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx, vehicle.typeDescriptor)
-        if decodedPoints:
-            maxPriorityHitPoint = decodedPoints[-1]
-            maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
-            self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
-            compName = decodedPoints[0].componentName
+        collisionComponent = vehicle.appearance.collisions
+        maxComponentIdx = vehicle.calcMaxComponentIdx()
+        if lastMaterialIsShield:
+            self.data['hitEffect'] = HIT_EFFECT_CODES[7]
+            compIdx, hitEffectCode, startPoint, endPoint = DamageFromShotDecoder.decodeSegment(points[0], collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
+            convertedCompIdx = DamageFromShotDecoder.convertComponentIndex(compIdx, vehicle.typeDescriptor)
+            compName = TankPartIndexes.getName(compIdx)
+            if not compName:
+                compName = collisionComponent.getPartName(maxComponentIdx + convertedCompIdx + 1) if convertedCompIdx < 0 else TankPartNames.CHASSIS
             self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         else:
-            self.data['compName'] = 'unknown'
+            decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
+            if decodedPoints:
+                maxPriorityHitPoint = decodedPoints[-1]
+                maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
+                self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
+                compName = decodedPoints[0].componentName
+                self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
+            else:
+                self.data['compName'] = 'unknown'
         if damageFactor == 0:
             self.data['isAlive'] = bool(vehicle.isCrewActive)
 
@@ -504,14 +512,14 @@ class Data(object):
 
     def updateStunInfo(self, vehicle, stunDuration):
         self.data['stun-duration'] = stunDuration
-        if (not self.data['isDamage']) and (self.data['hitEffect'] in ('armor_pierced_no_damage', 'critical_hit')):
+        if (not self.data['isDamage']) and (self.data['hitEffect'] in (HIT_EFFECT_CODES[3], HIT_EFFECT_CODES[5])):
             self.updateData()
 
     def showVehicleDamageInfo(self, player, vehicleID, damageIndex, extraIndex, entityID, equipmentID, isAttachingToVehicle=False):
         dataUpdate = {
             'attackerID': entityID,
             'costShell': 'unknown',
-            'hitEffect': 'unknown',
+            'hitEffect': HIT_EFFECT_CODES[None],
             'damage': 0,
             'shellKind': 'not_shell',
             'splashHit': 'no-splash',
@@ -705,8 +713,8 @@ class _Base(object):
                        'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
                        'type-shell': conf['typeShell'][value['shellKind']],
                        'c:type-shell': conf['c_typeShell'][value['shellKind']],
-                       'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], 'unknown'),
-                       'hit-effects': conf['hitEffect'].get(value['hitEffect'], 'unknown'),
+                       'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], HIT_EFFECT_CODES[None]),
+                       'hit-effects': conf['hitEffect'].get(value['hitEffect'], HIT_EFFECT_CODES[None]),
                        'crit-device': conf['critDevice'].get(value.get('critDevice', '')),
                        'number': value['number'],
                        'dmg': value['damage'],
@@ -823,7 +831,7 @@ class DamageLog(_Base):
         parametersDmg['numCrits'] += self.dataLog['numCrits']
         parametersDmg['criticalHit'] = (parametersDmg['criticalHit'] or self.dataLog['criticalHit'])
         if parametersDmg['damage'] > 0:
-            self.dataLog['hitEffect'] = 'armor_pierced'
+            self.dataLog['hitEffect'] = HIT_EFFECT_CODES[4]
         self.dataLog['criticalHit'] = parametersDmg['criticalHit']
         self.dataLog['damage'] = parametersDmg['damage']
         self.dataLog['numCrits'] = parametersDmg['numCrits']

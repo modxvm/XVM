@@ -174,6 +174,7 @@
         "final_ricochet": "{{l10n:final_ricochet}}",                   // ricochet / рикошет.
         "armor_not_pierced": "{{l10n:armor_not_pierced}}",             // not penetrated / не пробито.
         "armor_pierced_no_damage": "{{l10n:armor_pierced_no_damage}}", // no damage / без урона.
+        "armor_not_hit": "{{l10n:armor_pierced_no_damage}}",           // no hit on the hull, turret and gun / нет попадания по корпусу, башне и орудию.
         "unknown": "{{l10n:armor_pierced_no_damage}}"                  // unknown / неизвестно.
       },
       // Color by hit kind (macro {{c:hit-effects}}).
@@ -184,6 +185,7 @@
         "final_ricochet": "#CCCCCC",          // ricochet / рикошет.
         "armor_not_pierced": "#CCCCCC",       // not penetrated / не пробито.
         "armor_pierced_no_damage": "#CCCCCC", // no damage / без урона.
+        "armor_not_hit": "#CCCCCC",           // no hit on the hull, turret and gun / нет попадания по корпусу, башне и орудию.
         "unknown": "#CCCCCC"                  // unknown / неизвестно.
       },
       // Critical hit (macro {{critical-hit}}).
