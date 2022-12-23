@@ -1,5 +1,8 @@
 ### XVM 10.2.1
 
+  * Совместимость с World of Tanks 1.19.0.2
+  * Различные исправления и улучшения
+
   #### damageLog
 
   * В секции "hit-effects" и "c:hit-effects" добавлен параметр "armor_not_hit"
