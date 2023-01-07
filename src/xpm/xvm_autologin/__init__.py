@@ -1,33 +1,39 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2016-2022 XVM Contributors
+"""
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
-import traceback
-
-import BigWorld
-from gui.Scaleform.daapi.view.login.LoginView import LoginView
-from xfw import *
-
-from xvm_main.python.logger import *
-import xvm_main.python.config as config
+import autologin
+import version_label
 
 
-#####################################################################
-# handlers
 
-firsttime = True
+#
+# XFW API
+#
 
-@overrideMethod(LoginView, 'as_setVersionS')
-def LoginView_as_setVersionS(base, self, version):
-    base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
+__initialized = False
 
-@overrideMethod(LoginView, '_populate')
-def LoginView_populate(base, self):
-    base(self)
-    if not isReplay() and not self.loginManager.wgcAvailable:
-        global firsttime
-        if firsttime:
-            firsttime = False
-            if config.get('login/autologin'):
-                BigWorld.callback(0, self.as_doAutoLoginS)
+def xfw_module_init():
+    global __initialized
+    if not __initialized:
+        autologin.init()
+        version_label.init()
+        __initialized = True
+    
+
+def xfw_module_fini():
+    global __initialized
+    if __initialized:
+        autologin.fini()
+        version_label.fini()
+        __initialized = False
+
+
+def xfw_is_module_loaded():
+    global __initialized
+    return __initialized
