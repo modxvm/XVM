@@ -85,10 +85,10 @@ VEHICLE_CLASSES_SHORT = {
 
 HIT_EFFECT_CODES = {
     None: 'unknown',
-    0: 'intermediate_ricochet',
-    1: 'final_ricochet',
-    2: 'armor_not_pierced',
-    3: 'armor_pierced_no_damage',
+    0: 'armor_pierced_no_damage',
+    1: 'intermediate_ricochet',
+    2: 'final_ricochet',
+    3: 'armor_not_pierced',
     4: 'armor_pierced',
     5: 'critical_hit',
     6: 'armor_pierced_device',
@@ -469,7 +469,8 @@ class Data(object):
             return
         collisionComponent = vehicle.appearance.collisions
         maxComponentIdx = vehicle.calcMaxComponentIdx()
-        if lastMaterialIsShield:
+        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
+        if not decodedPoints:
             self.data['hitEffect'] = HIT_EFFECT_CODES[7]
             compIdx, hitEffectCode, startPoint, endPoint = DamageFromShotDecoder.decodeSegment(points[0], collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
             convertedCompIdx = DamageFromShotDecoder.convertComponentIndex(compIdx, vehicle.typeDescriptor)
@@ -478,15 +479,11 @@ class Data(object):
                 compName = collisionComponent.getPartName(maxComponentIdx + convertedCompIdx + 1) if convertedCompIdx < 0 else TankPartNames.CHASSIS
             self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         else:
-            decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
-            if decodedPoints:
-                maxPriorityHitPoint = decodedPoints[-1]
-                maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
-                self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
-                compName = decodedPoints[0].componentName
-                self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
-            else:
-                self.data['compName'] = 'unknown'
+            maxPriorityHitPoint = decodedPoints[-1]
+            maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
+            self.data['hitEffect'] = HIT_EFFECT_CODES[min(3, maxHitEffectCode)]
+            compName = decodedPoints[0].componentName
+            self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         if damageFactor == 0:
             self.data['isAlive'] = bool(vehicle.isCrewActive)
 
