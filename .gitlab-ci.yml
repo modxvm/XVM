@@ -1,3 +1,11 @@
+variables:
+  IS_DEV_BUILD:
+    value: "True"
+    options:
+      - "True"
+      - "False"
+    description: "True: build & deploy as nightly. False: build and deploy as release."
+
 stages:
   - build-xfw-as
   - build-xfw-packages
