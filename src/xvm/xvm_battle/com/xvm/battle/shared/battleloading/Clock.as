@@ -4,31 +4,39 @@
  */
 package com.xvm.battle.shared.battleloading
 {
-    import com.xfw.*;
-    import com.xvm.*;
-    import com.xvm.types.cfg.*;
-    import flash.text.*;
-    import flash.utils.*;
-    import net.wg.gui.battle.battleloading.*;
-    import net.wg.gui.tutorial.controls.*;
-    import net.wg.infrastructure.interfaces.entity.*;
-    import scaleform.gfx.*;
+	import com.xfw.XfwUtils;
+	
+	import com.xvm.Config;
+	import com.xvm.types.cfg.CBattleLoading;
+	
+	import flash.text.AntiAliasType;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+	
+	import flash.utils.setInterval;
+	
+	import net.wg.gui.battle.battleloading.BaseLoadingForm;
+	import net.wg.infrastructure.interfaces.entity.IDisposable;
 
+	import scaleform.gfx.TextFieldEx;
+	
     public class Clock implements IDisposable
     {
-        private var form:BaseTipLoadingForm;
+        private var form:BaseLoadingForm;
         private var clock:TextField;
         private var clockFormat:String;
 
         private var _disposed: Boolean = false;
 
-        public function Clock(form:BaseTipLoadingForm)
+        public function Clock(form:BaseLoadingForm)
         {
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init(form);
         }
 
-        private function _init(form:BaseTipLoadingForm):void
+        private function _init(form:BaseLoadingForm):void
         {
             if (!form)
                 return;
