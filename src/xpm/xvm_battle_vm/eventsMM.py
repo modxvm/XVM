@@ -7,6 +7,7 @@
 from BattleReplay import g_replayCtrl
 from constants import ATTACK_REASONS
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
+from gui.Scaleform.daapi.view.battle.shared.markers2d.settings import CommonMarkerType
 from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin
 
 # XFW
@@ -40,12 +41,12 @@ def _MarkersManager_dispose(base, self):
     base(self)
 
 
-def _MarkersManager_createMarker(base, self, symbol, matrixProvider = None, active = True):
+def _MarkersManager_createMarker(base, self, symbol, matrixProvider=None, active=True, markerType=CommonMarkerType.NORMAL):
     if g_markers.active:
         if symbol == 'VehicleMarker':
             symbol = AS_SYMBOLS.AS_VEHICLE_MARKER
 
-    markerID = base(self, symbol, matrixProvider, active)
+    markerID = base(self, symbol, matrixProvider, active, markerType)
     return markerID
 
 
