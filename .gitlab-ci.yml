@@ -30,7 +30,7 @@ build-lesta:
     - XVMBUILD_FLAVOR="lesta" ./build.sh
   artifacts:
     paths:
-      - ~output/lesta/
+      - ~output/lesta/deploy/
     expire_in: 1 day
 
 build-wg:
@@ -39,7 +39,7 @@ build-wg:
     - XVMBUILD_FLAVOR="wg" ./build.sh
   artifacts:
     paths:
-      - ~output/wg/
+      - ~output/wg/deploy/
     expire_in: 1 day
 
 installer:
