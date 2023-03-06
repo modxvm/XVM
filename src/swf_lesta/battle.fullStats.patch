@@ -1,0 +1,38 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm battle.orig-0/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2020-09-28 16:07:39.228762900 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2020-09-28 16:09:12.759486300 +0300
+@@ -114,14 +114,14 @@
+       getlocal0
+       getlocal1
+       getlocal2
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "createPlayerStatsItem"), 2
++      callproperty        QName(PackageNamespace(""), "createPlayerStatsItem"), 2
+       coerce              QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.fullStats.tableItem"), "StatsTableItem")
+       setlocal3
+ 
+       getlocal0
+       getlocal1
+       getlocal2
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "createSquadItem"), 2
++      callproperty        QName(PackageNamespace(""), "createSquadItem"), 2
+       coerce              QName(PackageNamespace("net.wg.gui.battle.random.views.stats.components.fullStats.tableItem"), "DynamicSquadCtrl")
+       dup
+       setlocal            4
+@@ -813,7 +813,7 @@
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "createPlayerStatsItem")
++  trait method QName(PackageNamespace(""), "createPlayerStatsItem")
+    method
+     refid "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl/instance/net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl/createPlayerStatsItem"
+     param QName(PackageNamespace(""), "int")
+@@ -839,7 +839,7 @@
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl"), "createSquadItem")
++  trait method QName(PackageNamespace(""), "createSquadItem")
+    method
+     refid "net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl/instance/net.wg.gui.battle.random.views.stats.components.fullStats:FullStatsTableCtrl/createSquadItem"
+     param QName(PackageNamespace(""), "int")

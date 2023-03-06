@@ -1,0 +1,69 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.class.asasm battle.orig-0/net/wg/gui/battle/battleloading/BattleLoadingForm.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/battleloading/BattleLoadingForm.class.asasm	2017-08-04 10:19:54.171745100 +0300
++++ battle.orig-0/net/wg/gui/battle/battleloading/BattleLoadingForm.class.asasm	2017-08-04 10:22:33.704172700 +0300
+@@ -43,8 +43,65 @@
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_enemyDP") type QName(PackageNamespace("net.wg.gui.battle.battleloading.data"), "VehiclesDataProvider") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_leftTeamName") type QName(PackageNamespace(""), "String") value Utf8("") end
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_rightTeamName") type QName(PackageNamespace(""), "String") value Utf8("") end
++  trait getter QName(PackageNamespace(""), "xfw_allyRenderers")
++   method
++    returns TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.battleloading.renderers"), "IBattleLoadingRenderer")>)
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_allyRenderers")
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_allyRenderers") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.battleloading.renderers"), "IBattleLoadingRenderer")>) end
++  trait getter QName(PackageNamespace(""), "xfw_enemyRenderers")
++   method
++    returns TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.battleloading.renderers"), "IBattleLoadingRenderer")>)
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_enemyRenderers")
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_enemyRenderers") type TypeName(QName(PackageNamespace("__AS3__.vec"), "Vector")<QName(PackageNamespace("net.wg.gui.battle.battleloading.renderers"), "IBattleLoadingRenderer")>) end
++  trait getter QName(PackageNamespace(""), "xfw_renderersContainer")
++   method
++    returns QName(PackageNamespace("net.wg.gui.battle.battleloading.renderers"), "BaseRendererContainer")
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 11
++     maxscopedepth 12
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_renderersContainer")
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.battleloading:BattleLoadingForm"), "_renderersContainer") type QName(PackageNamespace("net.wg.gui.battle.battleloading.renderers"), "BaseRendererContainer") end
+   trait method QName(PackageNamespace(""), "addVehiclesInfo") flag OVERRIDE
+    method

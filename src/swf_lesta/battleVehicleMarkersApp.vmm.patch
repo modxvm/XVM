@@ -1,0 +1,84 @@
+diff -Naur battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm
+--- battleVehicleMarkersApp.orig-0.orig/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2022-10-09 23:03:54.562693100 +0300
++++ battleVehicleMarkersApp.orig-0/net/wg/gui/battle/views/vehicleMarkers/VehicleMarkersManager.class.asasm	2022-10-09 23:09:51.666213900 +0300
+@@ -167,8 +167,8 @@
+     refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager/instance/net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager:onPopulate"
+     returns QName(PackageNamespace(""), "void")
+     body
+-     maxstack 1
+-     localcount 1
++     maxstack 2
++     localcount 2
+      initscopedepth 14
+      maxscopedepth 15
+      code
+@@ -177,6 +177,36 @@
+ 
+       getlocal0
+       callsupervoid       QName(ProtectedNamespace("net.wg.gui.battle.components:BattleDAAPIComponent"), "onPopulate"), 0
++      getlocal0
++      coerce              QName(PackageNamespace(""), "Object")
++      setlocal1
++
++      getlocal1
++      getproperty         Multiname("parent", [PrivateNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:VehicleMarkersManagerMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleDAAPIComponent"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:BattleDAAPIComponentMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), StaticProtectedNs("Object"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), PrivateNamespace("FilePrivateNS:VehicleMarkersManager"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++      pushnull
++      equals
++      not
++      dup
++      iffalse             L21
++
++      pop
++      getlocal1
++      getproperty         Multiname("parent", [PrivateNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:VehicleMarkersManagerMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleDAAPIComponent"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:BattleDAAPIComponentMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), StaticProtectedNs("Object"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), PrivateNamespace("FilePrivateNS:VehicleMarkersManager"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++      getproperty         Multiname("xvm_vm_swf", [PrivateNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:VehicleMarkersManagerMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleDAAPIComponent"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:BattleDAAPIComponentMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), StaticProtectedNs("Object"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), PrivateNamespace("FilePrivateNS:VehicleMarkersManager"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++      pushnull
++      equals
++      not
++L21:
++      iffalse             L28
++
++      getlocal1
++      getproperty         Multiname("parent", [PrivateNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:VehicleMarkersManagerMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleDAAPIComponent"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:BattleDAAPIComponentMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), StaticProtectedNs("Object"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), PrivateNamespace("FilePrivateNS:VehicleMarkersManager"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++      getproperty         Multiname("xvm_vm_swf", [PrivateNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:VehicleMarkersManagerMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleDAAPIComponent"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:BattleDAAPIComponentMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), StaticProtectedNs("Object"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), PrivateNamespace("FilePrivateNS:VehicleMarkersManager"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++      getlocal0
++      getproperty         QName(PackageNamespace(""), "daapi_as2py")
++      callpropvoid        Multiname("Initialize", [PrivateNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), ProtectedNamespace("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:VehicleMarkersManagerMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleDAAPIComponent"), StaticProtectedNs("net.wg.infrastructure.base.meta.impl:BattleDAAPIComponentMeta"), StaticProtectedNs("net.wg.gui.battle.components:BattleUIComponent"), StaticProtectedNs("flash.display:MovieClip"), StaticProtectedNs("flash.display:Sprite"), StaticProtectedNs("flash.display:DisplayObjectContainer"), StaticProtectedNs("flash.display:InteractiveObject"), StaticProtectedNs("flash.display:DisplayObject"), StaticProtectedNs("flash.events:EventDispatcher"), StaticProtectedNs("Object"), PackageNamespace("net.wg.gui.battle.views.vehicleMarkers"), PackageInternalNs("net.wg.gui.battle.views.vehicleMarkers"), PrivateNamespace("FilePrivateNS:VehicleMarkersManager"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")]), 1
++
++L28:
+       returnvoid
+      end ; code
+     end ; body
+@@ -842,6 +872,32 @@
+      end ; code
+     end ; body
+    end ; method
++  end ; trait
++  trait slot QName(PackageNamespace(""), "daapi_as2py") type QName(PackageNamespace(""), "Function") end
++  trait method QName(PackageNamespace(""), "daapi_py2as")
++   method
++    name "daapi_py2as"
++    refid "net.wg.gui.battle.views.vehicleMarkers:VehicleMarkersManager/instance/daapi_py2as"
++    flag NEED_REST
++    flag HAS_PARAM_NAMES
++    body
++     maxstack 3
++     localcount 4
++     initscopedepth 0
++     maxscopedepth 1
++     code
++      getlocal0
++      pushscope
++
++      getlex              QName(PackageNamespace("com.xfw"), "Xfw")
++      getproperty         QName(PackageNamespace(""), "as_xfw_cmd")
++      getlocal0
++      getlocal1
++      callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "apply"), 2
++      returnvalue
++     end ; code
++    end ; body
++   end ; method
+   end ; trait
+  end ; instance
+  cinit

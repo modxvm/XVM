@@ -1,0 +1,21 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:22:46.252495700 +0300
++++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/fullStats/FullStatsTableCtrl.class.asasm	2018-08-05 20:37:13.443596100 +0300
+@@ -107,7 +107,7 @@
+       getlocal0
+       getlocal1
+       getlocal2
+-      callproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "createPlayerStatsItem"), 2
++      callproperty        QName(PackageNamespace(""), "createPlayerStatsItem"), 2
+       coerce              QName(PackageNamespace("net.wg.gui.battle.ranked.stats.components.fullStats.tableItem"), "StatsTableItem")
+       setlocal3
+ 
+@@ -496,7 +496,7 @@
+     end ; body
+    end ; method
+   end ; trait
+-  trait method QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl"), "createPlayerStatsItem")
++  trait method QName(PackageNamespace(""), "createPlayerStatsItem")
+    method
+     refid "net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl/instance/net.wg.gui.battle.ranked.stats.components.fullStats:FullStatsTableCtrl/createPlayerStatsItem"
+     param QName(PackageNamespace(""), "int")

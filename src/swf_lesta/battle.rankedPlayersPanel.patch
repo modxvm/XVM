@@ -1,0 +1,58 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm battle.orig-0/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2017-06-08 23:04:51.419893000 +0300
++++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListLeft.class.asasm	2017-06-08 23:17:23.298237900 +0300
+@@ -36,7 +36,7 @@
+       getlocal0
+       pushscope
+ 
+-      getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE")
++      getlex              QName(PackageNamespace(""), "LINKAGE")
+       returnvalue
+      end ; code
+     end ; body
+@@ -92,13 +92,13 @@
+     getlocal0
+     pushscope
+ 
+-    findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE")
++    findproperty        QName(PackageNamespace(""), "LINKAGE")
+     pushstring          "RankedPlayersPanelListItemLeftUI"
+-    initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE")
++    initproperty        QName(PackageNamespace(""), "LINKAGE")
+ 
+     returnvoid
+    end ; code
+   end ; body
+  end ; method
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListLeft"), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemLeftUI") end
++ trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemLeftUI") end
+ end ; class
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm battle.orig-0/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2017-06-08 23:04:47.296276900 +0300
++++ battle.orig-0/net/wg/gui/battle/ranked/stats/components/playersPanel/list/PlayersPanelListRight.class.asasm	2017-06-08 23:17:23.303741700 +0300
+@@ -36,7 +36,7 @@
+       getlocal0
+       pushscope
+ 
+-      getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE")
++      getlex              QName(PackageNamespace(""), "LINKAGE")
+       returnvalue
+      end ; code
+     end ; body
+@@ -92,13 +92,13 @@
+     getlocal0
+     pushscope
+ 
+-    findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE")
++    findproperty        QName(PackageNamespace(""), "LINKAGE")
+     pushstring          "RankedPlayersPanelListItemRightUI"
+-    initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE")
++    initproperty        QName(PackageNamespace(""), "LINKAGE")
+ 
+     returnvoid
+    end ; code
+   end ; body
+  end ; method
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:PlayersPanelListRight"), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemRightUI") end
++ trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemRightUI") end
+ end ; class

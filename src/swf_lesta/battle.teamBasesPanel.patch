@@ -1,0 +1,177 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2021-12-03 00:25:06.003092900 +0300
++++ battle.orig-0/net/wg/gui/battle/epicRandom/views/EpicRandomPage.class.asasm	2021-12-03 00:25:47.839444000 +0300
+@@ -1466,6 +1466,28 @@
+     end ; body
+    end ; method
+   end ; trait
++  trait method QName(PackageNamespace(""), "xfw_onTeamBasesPanelUIChangeHandler")
++   method
++    param QName(PackageNamespace("flash.events"), "Event")
++    returns QName(PackageNamespace(""), "void")
++    body
++     maxstack 1
++     localcount 2
++     initscopedepth 15
++     maxscopedepth 16
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getlocal1
++      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.epicRandom.views:EpicRandomPage"), "onTeamBasesPanelUIChangeHandler"), 1
++
++      returnvoid
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.epicRandom.views:EpicRandomPage"), "onTeamBasesPanelUIChangeHandler")
+    method
+     refid "net.wg.gui.battle.epicRandom.views:EpicRandomPage/instance/net.wg.gui.battle.epicRandom.views:EpicRandomPage/onTeamBasesPanelUIChangeHandler"
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-12-03 00:25:06.049134300 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2021-12-03 00:25:47.847451000 +0300
+@@ -1567,6 +1567,28 @@
+     end ; body
+    end ; method
+   end ; trait
++  trait method QName(PackageNamespace(""), "xfw_onTeamBasesPanelUIChangeHandler")
++   method
++    param QName(PackageNamespace("flash.events"), "Event")
++    returns QName(PackageNamespace(""), "void")
++    body
++     maxstack 1
++     localcount 2
++     initscopedepth 15
++     maxscopedepth 16
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      getlocal1
++      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "onTeamBasesPanelUIChangeHandler"), 1
++
++      returnvoid
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "onTeamBasesPanelUIChangeHandler")
+    method
+     refid "net.wg.gui.battle.random.views:BattlePage/instance/net.wg.gui.battle.random.views:BattlePage/onTeamBasesPanelUIChangeHandler"
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm	2021-10-11 00:44:11.457580600 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamBasesPanel.class.asasm	2021-10-11 00:56:44.029047400 +0300
+@@ -921,6 +921,26 @@
+     end ; body
+    end ; method
+   end ; trait
++  trait method QName(PackageNamespace(""), "xfw_updatePositions")
++   method
++    returns QName(PackageNamespace(""), "void")
++    body
++     maxstack 1
++     localcount 1
++     initscopedepth 15
++     maxscopedepth 16
++     code
++      getlocal0
++      pushscope
++
++      getlocal0
++      callpropvoid        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "updatePositions"), 0
++
++      returnvoid
++     end ; code
++    end ; body
++   end ; method
++  end ; trait
+   trait method QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "updatePositions")
+    method
+     refid "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/instance/net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel/updatePositions"
+@@ -1221,7 +1241,48 @@
+    end ; code
+   end ; body
+  end ; method
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "RENDERER_HEIGHT") slotid 1 type QName(PackageNamespace(""), "Number") value Integer(34) end
++ trait getter QName(PackageNamespace(""), "xfw_RENDERER_HEIGHT")
++  method
++   returns QName(PackageNamespace(""), "Number")
++   body
++    maxstack 1
++    localcount 1
++    initscopedepth 11
++    maxscopedepth 12
++    code
++     getlocal0
++     pushscope
++
++     getlocal0
++     getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "RENDERER_HEIGHT")
++     returnvalue
++    end ; code
++   end ; body
++  end ; method
++ end ; trait
++ trait setter QName(PackageNamespace(""), "xfw_RENDERER_HEIGHT")
++  method
++   param QName(PackageNamespace(""), "Number")
++   returns QName(PackageNamespace(""), "void")
++   body
++    maxstack 2
++    localcount 2
++    initscopedepth 11
++    maxscopedepth 12
++    code
++     getlocal0
++     pushscope
++
++     getlocal0
++     getlocal1
++     initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "RENDERER_HEIGHT")
++
++     returnvoid
++    end ; code
++   end ; body
++  end ; method
++ end ; trait
++ trait slot QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "RENDERER_HEIGHT") slotid 1 type QName(PackageNamespace(""), "Number") value Integer(34) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "ASSERT_MSG") slotid 2 type QName(PackageNamespace(""), "String") value Utf8("[TeamBasesPanel] Can't find teamCaptureBar with id=") end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "DEF_MAX_BARS_COUNT") slotid 3 type QName(PackageNamespace(""), "uint") value Integer(0) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamBasesPanel"), "ALPHA_FADE_SPEED") slotid 4 type QName(PackageNamespace(""), "Number") value Integer(500) end
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm	2021-10-11 00:44:10.841756100 +0300
++++ battle.orig-0/net/wg/gui/battle/random/views/teamBasesPanel/TeamCaptureBar.class.asasm	2021-10-11 00:56:44.037055200 +0300
+@@ -175,7 +175,7 @@
+       getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ALPHA_FADE_SPEED")
+       getlocal0
+       pushstring          "y"
+-      getlex              QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_Y")
++      getlex              QName(PackageNamespace(""), "EXIT_TWEEN_Y")
+       pushstring          "alpha"
+       pushbyte            0
+       newobject           2
+@@ -928,9 +928,9 @@
+     pushshort           500
+     initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ALPHA_FADE_SPEED")
+ 
+-    findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_Y")
++    findproperty        QName(PackageNamespace(""), "EXIT_TWEEN_Y")
+     pushbyte            246
+-    initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_Y")
++    initproperty        QName(PackageNamespace(""), "EXIT_TWEEN_Y")
+ 
+     findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_DELAY")
+     pushshort           4500
+@@ -1011,7 +1011,7 @@
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "POINTS_2_BAR_RATIO") slotid 3 type QName(PackageNamespace(""), "Number") value Double(0.01) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ANIMATE_STEP_TIME") slotid 4 type QName(PackageNamespace(""), "Number") value Integer(40) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ALPHA_FADE_SPEED") slotid 5 type QName(PackageNamespace(""), "Number") value Integer(500) end
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_Y") slotid 6 type QName(PackageNamespace(""), "int") value Integer(-10) end
++ trait slot QName(PackageNamespace(""), "EXIT_TWEEN_Y") slotid 6 type QName(PackageNamespace(""), "Number") value Integer(-10) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "EXIT_TWEEN_DELAY") slotid 7 type QName(PackageNamespace(""), "Number") value Integer(4500) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "ZERO_STRING") slotid 8 type QName(PackageNamespace(""), "String") value Utf8("0") end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views.teamBasesPanel:TeamCaptureBar"), "TWEEN_EASE_IN_OUT") slotid 9 type QName(PackageNamespace(""), "Array") end
