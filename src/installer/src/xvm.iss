@@ -1,4 +1,9 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2017-2023 XVM Contributors
+
+#define APP_WEBSITE    "https://modxvm.com/"
 #define APP_DIR_UNINST "xvm_uninst"
+
 #define OPENWGUTILS_DIR_SRC    "."
 #define OPENWGUTILS_DIR_UNINST APP_DIR_UNINST
 
@@ -7,13 +12,13 @@
 #include "openwg.utils.iss"
 
 [Setup]
-AppCopyright    = "2022 (c) XVM Team"
+AppCopyright    = "2023 (c) XVM Team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
 AppName         = "XVM"
 AppPublisher    = "XVM Team"
-AppPublisherURL = "https://modxvm.com/"
-AppSupportURL   = "https://modxvm.com/"
-AppUpdatesURL   = "https://modxvm.com/"
+AppPublisherURL = {#APP_WEBSITE}
+AppSupportURL   = {#APP_WEBSITE}
+AppUpdatesURL   = {#APP_WEBSITE}
 AppVersion      = {#VersionXVM}
 
 WizardImageFile      = images\big_image.bmp
@@ -35,9 +40,9 @@ DisableDirPage=false
 OutputDir=..\output
 OutputBaseFilename=setup_xvm
 
-UninstallFilesDir={app}\xvm_uninst
-
+UninstallFilesDir={app}\{#APP_DIR_UNINST}
 DefaultDirName=C:\
+UsePreviousAppDir=yes
 
 [Tasks]
 Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked;
@@ -45,18 +50,21 @@ Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked;
 [Run]
 Filename: https://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall nowait shellexec;
 
-[Components]
-;Name: "XVM"; Description: "{cm:component_XVM}"; Types: full compact custom; Flags: fixed;
 
 [Files]
 ;backup
 Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall;
 Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_backup\mods\shared_resources\xvm\res"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall;
 
-;xvm
-Source: "..\..\..\~output\deploy\mods\*"; DestDir: "{app}\mods"; Flags: createallsubdirs recursesubdirs
-Source: "..\..\..\~output\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Flags: createallsubdirs recursesubdirs
-Source: "..\..\..\~output\deploy\readme*.*"; DestDir: "{app}"
+;xvm/WG
+Source: "..\..\..\~output\wg\deploy\mods\*"    ; DestDir: "{app}\mods"    ; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+Source: "..\..\..\~output\wg\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs; 
+Source: "..\..\..\~output\wg\deploy\readme*.*" ; DestDir: "{app}"         ; Check: not CHECK_IsLesta;                                     
+
+;xvm/Lesta
+Source: "..\..\..\~output\lesta\deploy\mods\*"    ; DestDir: "{app}\mods"    ; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+Source: "..\..\..\~output\lesta\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs; 
+Source: "..\..\..\~output\lesta\deploy\readme*.*" ; DestDir: "{app}"         ; Check: CHECK_IsLesta;                                     
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
@@ -129,10 +137,49 @@ var
   WotList: TNewComboBox;
 
 
+//
+// Checks
+//
+
+function CHECK_IsLesta(): Boolean;
+var
+  Flavour: Integer;
+begin
+  Flavour := WotList_Selected_Record(WotList).LauncherFlavour
+  Result := Flavour = 4;
+end;
+
+
+//
+// Placeholders
+//
+
+function PH_Folder_Mods(s: String): String;
+begin
+  Result := WotList_Selected_Record(WotList).PathMods;
+end;
+
+function PH_Folder_Resmods(s: String): String;
+begin
+  Result := WotList_Selected_Record(WotList).PathResmods;
+end;
+
 
 //
 // Initialize
 //
+
+function InitializeSetup: Boolean;
+begin
+  Result := True;
+end;
+
+
+function InitializeUninstall: Boolean;
+begin
+  Result := True;
+end;
+
 
 procedure InitializeWizard();
 begin
@@ -142,11 +189,15 @@ begin
       WizardForm.DirBrowseButton.Left + WizardForm.DirBrowseButton.Width,
       WizardForm.DirEdit.Height
   );
+  WotList.ItemIndex := WOT_ClientFind(WizardForm.DirEdit.Text);
+
+  if (WotList.ItemIndex = -1) and (WotList.Items.Count > 1) then
+    WotList.ItemIndex := 0;
+  WotList.OnChange(WotList);
+
   WizardForm.DirEdit.Visible := False;
-  WizardForm.DirEdit.Text := '';
   WizardForm.DirBrowseButton.Visible := False;
 end;
-
 
 
 //
@@ -155,21 +206,64 @@ end;
 
 procedure CurPageChanged_wpSelectDir();
 begin
-  if WotList.ItemIndex = -1 then
-  begin
-    WotList.ItemIndex := 0;
-  end;
+end;
 
-  WotList.OnChange(WotList);
+
+procedure CurPageChanged_wpSelectComponents();
+var
+  Index: Integer;
+  IsLesta: Boolean;
+  ItemCaption: String;
+begin
+  IsLesta := CHECK_IsLesta();
+
+  for Index := 0 to WizardForm.ComponentsList.Items.Count - 1 do
+  begin
+    ItemCaption := WizardForm.ComponentsList.ItemCaption[Index];
+    if ((pos('Lesta', ItemCaption) <> 0) and (not IsLesta)) or ((pos('WG', ItemCaption) <> 0) and IsLesta) then
+    begin
+        WizardForm.ComponentsList.Checked[Index] := false; 
+        WizardForm.ComponentsList.ItemEnabled[Index] := false;   
+    end;
+  end;
 end;
 
 
 procedure CurPageChanged(CurPage: Integer);
 begin
-  if (CurPage = wpSelectDir) then
-  begin
-    CurPageChanged_wpSelectDir();
-  end;
+  case CurPage of
+    wpSelectDir: CurPageChanged_wpSelectDir();
+    wpSelectComponents: CurPageChanged_wpSelectComponents();
+  end
+end;
+
+
+
+//
+// CurUninstallStepChanged
+//
+
+procedure CurUninstallStepChanged_usUninstall();
+begin
+  OPENWG_DllUnload();
+  OPENWG_DllDelete();
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  case CurUninstallStep of
+    usUninstall: CurUninstallStepChanged_usUninstall();
+  end
+end;
+
+
+
+//
+// DeinitializeUninstall
+//
+
+procedure DeinitializeUninstall();
+begin
 end;
 
 
@@ -180,11 +274,24 @@ end;
 
 function NextButtonClick_wpSelectDir(): Boolean;
 begin
-  if not FileExists(ExpandConstant('{app}\WorldOfTanks.exe')) then
+  Result := True;
+
+  // TODO
+  // check for version
+  // if not WotList_Selected_VersionMatch(WotList, '{#WOT_VERSION_PATTERN}') then
+  // begin
+  //   MsgBox(ExpandConstant('{cm:version_not_match}'), mbError, MB_OK);
+  //   Result := False;
+  //   Exit;
+  // end;
+
+  // check for running client
+  if WotList_Selected_IsStarted(WotList) then
   begin
-    MsgBox(ExpandConstant('{cm:wotNotFound}'), mbError, MB_OK);
-    Result := False;
-    Exit;
+    if (MsgBox('The selected client is running.%n%nDo you want to terminate the selected client?'), mbConfirmation, MB_YESNO) = IDYES) then 
+      WotList_Selected_Terminate(WotList)
+    else
+      Result := False;
   end;
 end;
 
@@ -193,8 +300,8 @@ function NextButtonClick(CurPage: Integer): Boolean;
 begin
   Result := True;
 
-  if (CurPage = wpSelectDir) then
-  begin
-    Result := NextButtonClick_wpSelectDir();
+  case CurPage of
+    wpSelectDir: Result := NextButtonClick_wpSelectDir();
   end;
 end;
+
