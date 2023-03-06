@@ -1118,7 +1118,8 @@ def Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, dama
 @registerEvent(Vehicle, 'updateStunInfo')
 def Vehicle_updateStunInfo(self):
     if self.isPlayerVehicle and isShowDamageLog:
-        stunDuration = self.stunInfo - BigWorld.serverTime() if self.stunInfo else None
+        stunInfo = self.getStunInfo()
+        stunDuration = stunInfo.duration if stunInfo.duration > 0.0 else None
         if stunDuration is not None:
             data.updateStunInfo(self, stunDuration)
 
