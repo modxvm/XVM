@@ -28,7 +28,7 @@ git_get_repostats "$currentdir/../../"
 
 clear()
 {
-  rm -rf "../../~output/xvm/res_mods/~ver/scripts"
+  rm -rf "../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/~ver/scripts"
 
   # remove _version_.py files
   for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
@@ -40,8 +40,8 @@ clear()
 
 make_dirs()
 {
-  mkdir -p ../../~output/xvm/res_mods/configs/xvm/
-  mkdir -p ../../~output/xvm/res_mods/mods/shared_resources/
+  mkdir -p ../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/configs/xvm/
+  mkdir -p ../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/shared_resources/
 }
 
 build()
@@ -51,10 +51,10 @@ build()
 
   [ "$d" = "$f" ] && d=""
 
-  py_dir="../../~output/xvm/res_mods/$2/python/$d"
-  py_file="../../~output/xvm/res_mods/$2/python/$f"
-  cmp_dir="../../~output/xvm/res_mods/cmp/$2/python/$d"
-  cmp_file="../../~output/xvm/res_mods/cmp/$2/python/$f.tmp"
+  py_dir="../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/$2/python/$d"
+  py_file="../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/$2/python/$f"
+  cmp_dir="../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/cmp/$2/python/$d"
+  cmp_file="../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/cmp/$2/python/$f.tmp"
 
   if [ -f "$py_file" ] && [ -f "$cmp_file" ] && cmp "$1" "$cmp_file" >/dev/null 2>&1; then
     return 0
@@ -119,7 +119,7 @@ for fn in $(find . -type "f" -name "*xfw_package.json"); do
 
   echo "$f"
 
-  outpath="../../~output/xvm/res_mods/mods/xfw_packages/$m/xfw_package.json"
+  outpath="../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/$m/xfw_package.json"
   cp "$fn" "$outpath"
   sed -i "s/XVM_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g" "$outpath"
   sed -i "s/WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$outpath"
@@ -127,7 +127,7 @@ done
 
 # generate default config from .xc files and xvm.xc.sample
 echo 'generate default_config.py and xvm.xc.sample'
-dc_fn=../../~output/xvm/res_mods/mods/xfw_packages/xvm_main/python/default_config.py
+dc_fn=../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/xvm_main/python/default_config.py
 rm -f "${dc_fn}c"
 "$XVMBUILD_PYTHON_FILEPATH" -c "
 import sys
@@ -144,7 +144,7 @@ rm -f "${dc_fn}c"
 [ ! -f ${dc_fn} ] && exit
 
 xvm_xc_sample_src=../../release/configs/xvm.xc.sample
-xvm_xc_sample_trgt=../../~output/xvm/res_mods/mods/xfw_packages/xvm_main/python/default_xvm_xc.py
+xvm_xc_sample_trgt=../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/xvm_main/python/default_xvm_xc.py
 echo -e -n "# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''" > $xvm_xc_sample_trgt
 cat $xvm_xc_sample_src >> $xvm_xc_sample_trgt
 echo "'''" >> $xvm_xc_sample_trgt

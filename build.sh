@@ -60,6 +60,11 @@ if [[ "$XVMBUILD_L10N_URL" == "" ]]; then
     export XVMBUILD_L10N_URL="https://translate.modxvm.com/downloads/xvm-client/xvm-client-l10n_json.zip"
 fi
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
@@ -68,11 +73,11 @@ fi
 clean_sha1()
 {
     pushd "$XVMBUILD_ROOT_PATH" > /dev/null
-    rm -rf ~output/xvm/cmp/
-    rm -rf ~output/xvm/res_mods/cmp/
-    rm -rf ~output/xvm/sha1/
-    rm -rf ~output/xfw/sha1/
-    rm -rf ~output/xfw/cmp/
+    rm -rf ~output/$XVMBUILD_FLAVOR/xvm/cmp/
+    rm -rf ~output/$XVMBUILD_FLAVOR/xvm/res_mods/cmp/
+    rm -rf ~output/$XVMBUILD_FLAVOR/xvm/sha1/
+    rm -rf ~output/$XVMBUILD_FLAVOR/xfw/sha1/
+    rm -rf ~output/$XVMBUILD_FLAVOR/xfw/cmp/
     popd > /dev/null
 }
 
@@ -105,8 +110,8 @@ function build_xfw_packages()
     ./build.sh || exit 1
     popd > /dev/null
 
-    mkdir -p "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
-    cp -rf ~output/xfw/wotmod/*.wotmod "~output/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    mkdir -p "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    cp -rf ~output/$XVMBUILD_FLAVOR/xfw/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
 }
 
 function build_xfw_swf()
@@ -114,7 +119,7 @@ function build_xfw_swf()
     echo ""
     echo "Building XFW SWF"
 
-    pushd src/xfw_swf > /dev/null
+    pushd src/swf_$XVMBUILD_FLAVOR > /dev/null
     ./build.sh || exit 1
     popd > /dev/null
 }
@@ -148,8 +153,8 @@ function build_xvm_actionscript(){
         fi
     done
 
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
-    cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
+    cp -rf $XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
 
     popd > /dev/null
 }
@@ -169,8 +174,8 @@ function build_xvm_python()
     unset XPM_CLEAR
     unset XPM_RUN_TEST
 
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
-    cp -rf "$XVMBUILD_ROOT_PATH"/~output/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/xfw_packages/"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
+    cp -rf $XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
 
     popd >/dev/null
 }
@@ -180,8 +185,8 @@ function download_translations()
     echo ""
     echo "Download translations..."
 
-    mkdir -p "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/"
-    pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/l10n/"
+    pushd "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/l10n/" >/dev/null
     mkdir -p temp
     cd temp
     wget --output-document=l10n.zip "$XVMBUILD_L10N_URL"
@@ -200,7 +205,7 @@ calc_hash_for_xvm_integrity()
     echo ""
     echo "Calculating hashes for xvm_integrity"
 
-    pushd ~output/deploy > /dev/null
+    pushd ~output/$XVMBUILD_FLAVOR/deploy > /dev/null
 
     hash_dir='res_mods/mods/xfw_packages/xvm_integrity/python'
     hash_file="$hash_dir/hash_table.py"
@@ -223,20 +228,20 @@ copy_files()
     echo "Copy files..."
 
     # rename version-dependent folder
-    mkdir -p "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/$XVMBUILD_WOT_VERSION"
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/$XVMBUILD_WOT_VERSION"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/"
 
     # cp non-binary files
-    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/"
+    cp -rf "$XVMBUILD_ROOT_PATH"/release/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/"
 
     #move config
-    rm -rf "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
-    mv "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/configs/xvm/"
-    rm -r "$XVMBUILD_ROOT_PATH"/~output/deploy/res_mods/mods/shared_resources/xvm/configs/
+    rm -rf "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/configs/xvm/"
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/configs/xvm/"
+    mv $XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/configs/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/configs/xvm/"
+    rm -r "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/configs/"
 
     # put readmes on root
-    pushd "$XVMBUILD_ROOT_PATH/~output/deploy/res_mods/mods/shared_resources/xvm/doc/" > /dev/null
+    pushd "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/doc/" > /dev/null
     find . -name "readme-*.txt" -exec cp {} ../../../../../ \;
     popd > /dev/null
 }

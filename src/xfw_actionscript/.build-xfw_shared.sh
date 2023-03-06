@@ -22,6 +22,11 @@ set -e
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 XVMBUILD_ROOT_PATH="$currentdir/../../"
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
 detect_os
@@ -31,6 +36,6 @@ class="com.xfw.Xfw"
 build_as3_swc \
     -inline \
     -source-path xfw_shared \
-    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
-    -output ../../~output/xfw/swc/xfw_shared.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swc/xfw_shared.swc \
     -include-classes $class

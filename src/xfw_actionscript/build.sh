@@ -22,9 +22,14 @@ set -e
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 XVMBUILD_ROOT_PATH="$currentdir/../../"
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
-mkdir -p "$XVMBUILD_ROOT_PATH/~output/xfw/swf/"
+mkdir -p "$XVMBUILD_ROOT_PATH/$XVMBUILD_FLAVOR/~output/xfw/swf/"
 
 projects="
     wg_lobby_ui

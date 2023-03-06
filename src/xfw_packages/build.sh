@@ -32,16 +32,21 @@ source "$currentdir/../../build/xvm-build.conf"
 ####      CONFIG      ####
 ##########################
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
 if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
   XVMBUILD_ROOT_PATH="$currentdir/../.."
 fi
 
 if [ "$XVMBUILD_XFW_PACKAGES_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_PACKAGES_OUTPUTPATH="~output/xfw/packages/"
+  XVMBUILD_XFW_PACKAGES_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/xfw/packages/"
 fi
 
 if [ "$XVMBUILD_XFW_WOTMOD_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output/xfw/wotmod/"
+  XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/xfw/wotmod/"
 fi
 
 outputpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
@@ -76,8 +81,7 @@ copy_fonts()
 copy_swf()
 {
   mkdir -p "$1/res/gui/flash/"
-  cp -rf "$XVMBUILD_ROOT_PATH/~output/xfw/swf_wg/." "$1/res/gui/flash"
-  cp -rf "$XVMBUILD_ROOT_PATH/~output/xfw/swf/." "$1/res/gui/flash"
+  cp -rf "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/xfw/swf/." "$1/res/gui/flash"
 }
 
 copy_license()

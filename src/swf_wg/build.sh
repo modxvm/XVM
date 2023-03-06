@@ -24,6 +24,11 @@
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$currentdir"/../../build_lib/library.sh
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
 detect_os
 detect_arch
 
@@ -49,7 +54,7 @@ if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
 fi
 
 if [ "$XVMBUILD_XFW_WG_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_WG_OUTPUTPATH="~output/xfw/swf_wg"
+  XVMBUILD_XFW_WG_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/xfw/swf"
 fi
 
 

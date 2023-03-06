@@ -5,6 +5,7 @@
 
 XVM_DIRS="res/icons res/locker audioww"
 XVM_FILES="l10n/en.xc l10n/ru.xc"
+XVMBUILD_FLAVOR="wg"
 
 #############################
 # INTERNAL
@@ -29,10 +30,10 @@ install_xfw()
 {
   echo "=> xfw"
   rm -f "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION"/com.modxvm.*.wotmod || err "[install_xfw]"
-  cp -a ../~output/xfw/wotmod/com.modxvm.*.wotmod "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION/" || err "[install_xfw]"
+  cp -a ../~output/$XVMBUILD_FLAVOR/xfw/wotmod/com.modxvm.*.wotmod "$WOT_PATH/mods/$XVMBUILD_WOT_VERSION/" || err "[install_xfw]"
   # for debug only
   mkdir -p "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"
-  cp -a ../~output/xfw/swf/*.swf "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"
+  cp -a ../~output/$XVMBUILD_FLAVOR/xfw/swf/*.swf "$WOT_PATH/res_mods/$XVMBUILD_WOT_VERSION/gui/flash/" || err "[install_xfw]"
 }
 
 install_xvm()
@@ -40,7 +41,7 @@ install_xvm()
   echo "=> xvm"
   rm -rf "$WOT_PATH/res_mods/mods/xfw_packages" || err "[install_xvm] rm"
   mkdir -p "$WOT_PATH/res_mods/mods/xfw_packages" || err "[install_xvm] mkdir"
-  cp -a ../~output/xvm/res_mods/mods/xfw_packages/xvm_* "$WOT_PATH/res_mods/mods/xfw_packages/" || err "[install_xvm] cp"
+  cp -a ../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/xvm_* "$WOT_PATH/res_mods/mods/xfw_packages/" || err "[install_xvm] cp"
 }
 
 copy_configs()

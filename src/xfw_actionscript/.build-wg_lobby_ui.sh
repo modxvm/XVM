@@ -8,6 +8,11 @@ set -e
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 XVMBUILD_ROOT_PATH="$currentdir/../../"
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
 detect_os
@@ -17,10 +22,10 @@ class="\$AppLinks"
 build_as3_swc \
     -source-path wg/lobby_links \
     -source-path wg/lobby_ui/* \
-    -external-library-path+=../wg_swc/common-1.0-SNAPSHOT.swc \
-    -external-library-path+=../wg_swc/common_i18n_library-1.0-SNAPSHOT.swc \
-    -external-library-path+=../wg_swc/base_app-1.0-SNAPSHOT.swc \
-    -external-library-path+=../wg_swc/gui_base-1.0-SNAPSHOT.swc \
-    -external-library-path+=../wg_swc/gui_lobby-1.0-SNAPSHOT.swc \
-    -output ../../~output/xfw/swc/wg_lobby_ui.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common_i18n_library-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_lobby-1.0-SNAPSHOT.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swc/wg_lobby_ui.swc \
     -include-classes $class

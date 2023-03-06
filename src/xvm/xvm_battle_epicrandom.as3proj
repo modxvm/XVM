@@ -58,11 +58,11 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="..\wg_swc\common-1.0-SNAPSHOT.swc" />
-    <element path="..\wg_swc\common_i18n_library-1.0-SNAPSHOT.swc" />
-    <element path="..\wg_swc\base_app-1.0-SNAPSHOT.swc" />
-    <element path="..\wg_swc\gui_base-1.0-SNAPSHOT.swc" />
-    <element path="..\wg_swc\gui_battle-1.0-SNAPSHOT.swc" />
+    <element path="..\swc_wg\common-1.0-SNAPSHOT.swc" />
+    <element path="..\swc_wg\common_i18n_library-1.0-SNAPSHOT.swc" />
+    <element path="..\swc_wg\base_app-1.0-SNAPSHOT.swc" />
+    <element path="..\swc_wg\gui_base-1.0-SNAPSHOT.swc" />
+    <element path="..\swc_wg\gui_battle-1.0-SNAPSHOT.swc" />
     <element path="..\..\~output\xfw\swc\wg_battle_epicrandom_ui.swc" />
     <element path="..\..\~output\xfw\swc\xfw.swc" />
   </externalLibraryPaths>
