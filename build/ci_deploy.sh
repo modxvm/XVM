@@ -30,8 +30,8 @@ pack_xvm(){
     echo "$REPOSITORY_HASH" >> "$XVMBUILD_ROOT_PATH"/~output/pack/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
     echo "$REPOSITORY_BRANCH" >> "$XVMBUILD_ROOT_PATH"/~output/pack/"${XVMBUILD_XVM_VERSION}_${REPOSITORY_COMMITS_NUMBER}"
 
-    cp -r "$XVMBUILD_ROOT_PATH/~output/lesta/" "$XVMBUILD_ROOT_PATH/~output/pack/"
-    cp -r "$XVMBUILD_ROOT_PATH/~output/wg/" "$XVMBUILD_ROOT_PATH/~output/pack/"
+    cp -r "$XVMBUILD_ROOT_PATH/~output/lesta/deploy/." "$XVMBUILD_ROOT_PATH/~output/pack/lesta/"
+    cp -r "$XVMBUILD_ROOT_PATH/~output/wg/deploy/." "$XVMBUILD_ROOT_PATH/~output/pack/wg/"
 
 
     pushd "$XVMBUILD_ROOT_PATH"/~output/pack/ > /dev/null
