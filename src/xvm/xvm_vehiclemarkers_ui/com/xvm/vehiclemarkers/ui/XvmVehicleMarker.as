@@ -185,11 +185,17 @@ package com.xvm.vehiclemarkers.ui
                 dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.SET_SPEAKING, playerState, exInfo));
             }
         }
-		
+
+        // TODO: Add location and visibility setting.
+        override public function activateHover(value:Boolean):void
+        {
+            super.activateHover(false);
+        }
+
 		private final function setupVehicleIcon():void
         {
 			var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
-			
+
             var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
             var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
             if (atlasManager.isAtlasInitialized(atlasName))
