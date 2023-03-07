@@ -29,6 +29,7 @@ package com.xvm.vehiclemarkers.ui
         private var maxHealth:int = 0;
 
         private var actionMarkerComponent:ActionMarkerComponent = null;
+        private var hoverMarkerComponent:HoverMarkerComponent = null;
         private var vehicleStatusMarkerComponent:VehicleStatusMarkerComponent = null;
         private var contourIconComponent:ContourIconComponent = null;
         private var damageIndicatorComponent:DamageIndicatorComponent = null;
@@ -190,18 +191,22 @@ package com.xvm.vehiclemarkers.ui
         override public function activateHover(value:Boolean):void
         {
             super.activateHover(false);
+            if (hoverMarkerComponent)
+            {
+                hoverMarkerComponent.activateHover(value);
+            }
         }
 
-		private final function setupVehicleIcon():void
+        private final function setupVehicleIcon():void
         {
-			var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
+            var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
 
             var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
             var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
             if (atlasManager.isAtlasInitialized(atlasName))
             {
                 RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-				XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
+                XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
             }
         }
 
@@ -242,6 +247,7 @@ package com.xvm.vehiclemarkers.ui
             contourIconComponent = new ContourIconComponent(this);
             levelIconComponent = new LevelIconComponent(this);
             actionMarkerComponent = new ActionMarkerComponent(this);
+            hoverMarkerComponent = new HoverMarkerComponent(this);
             vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
             healthBarComponent = new HealthBarComponent(this);
             textFieldsComponent = new TextFieldsComponent(this);
@@ -270,6 +276,11 @@ package com.xvm.vehiclemarkers.ui
             {
                 actionMarkerComponent.dispose();
                 actionMarkerComponent = null;
+            }
+            if (hoverMarkerComponent)
+            {
+                hoverMarkerComponent.dispose();
+                hoverMarkerComponent = null;
             }
             if (vehicleStatusMarkerComponent)
             {

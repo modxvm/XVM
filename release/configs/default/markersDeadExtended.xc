@@ -224,6 +224,14 @@
       "y": -67,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
     },
+    // Hover marker
+    // Маркер по наведению
+    "hoverMarker": {
+      "enabled": true,   // false - disable        / не отображать.
+      "x": 0,            // Position on the X axis / Положение по оси X.
+      "y": -80,          // Position on the Y axis / Положение по оси Y.
+      "alpha": 100       // Opacity                / Прозрачность.
+    },
     // Stun marker and consumables marker in "Frontline Returns" mode (smoke screen, morale boost, engineering crew).
     // Маркер оглушения и маркер боевого снаряжения в режиме "Линия фронта" (дымовая завеса, воодушевление, инженерный отряд).
     "vehicleStatusMarker": {
@@ -323,6 +331,14 @@
       "enabled": true,
       "x": 0,
       "y": -67,
+      "alpha": 100
+    },
+    // Hover marker
+    // Маркер по наведению
+    "hoverMarker": {
+      "enabled": true,
+      "x": 0,
+      "y": -80,
       "alpha": 100
     },
     // Stun marker and consumables marker in "Frontline Returns" mode (smoke screen, morale boost, engineering crew).

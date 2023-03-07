@@ -9,6 +9,7 @@ package com.xvm.types.cfg
     public dynamic class CMarkers4 implements ICloneable
     {
         public var actionMarker:CMarkersActionMarker;
+        public var hoverMarker:CMarkersHoverMarker;
         public var contourIcon:CMarkersContourIcon;
         public var damageIndicator:CMarkersDamageIndicator;
         public var damageText:CMarkersDamageText;
@@ -30,6 +31,10 @@ package com.xvm.types.cfg
             if (actionMarker)
             {
                 actionMarker.applyGlobalMacros();
+            }
+            if (hoverMarker)
+            {
+                hoverMarker.applyGlobalMacros();
             }
             if (contourIcon)
             {
