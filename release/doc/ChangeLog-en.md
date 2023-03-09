@@ -1,6 +1,8 @@
-### XVM 10.3.1
+### XVM 10.4.0
 
-  * 
+  * Compatibility with World of Tanks 1.20.0.0
+  * Compatibility with Mir Tankov 1.20.0.0
+  * Markers: added ability to move/hide hover marker
 
 ### XVM 10.3.0
 
