@@ -20,12 +20,12 @@ detect_actionscript_sdk
 
 class="\$AppLinks"
 build_as3_swc \
-    -source-path wg/lobby_links \
-    -source-path wg/lobby_ui/* \
+    -source-path lobby_links \
+    -source-path lobby_ui/* \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common_i18n_library-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_lobby-1.0-SNAPSHOT.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swc/wg_lobby_ui.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/swc/wg_lobby_ui.swc \
     -include-classes $class

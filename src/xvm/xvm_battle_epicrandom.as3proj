@@ -53,8 +53,8 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="..\..\~output\xvm\swc\xvm_shared.swc" />
-    <element path="..\..\~output\xvm\swc\xvm_app.swc" />
+    <element path="..\..\~output\swc\xvm_shared.swc" />
+    <element path="..\..\~output\swc\xvm_app.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -63,8 +63,8 @@
     <element path="..\swc_wg\base_app-1.0-SNAPSHOT.swc" />
     <element path="..\swc_wg\gui_base-1.0-SNAPSHOT.swc" />
     <element path="..\swc_wg\gui_battle-1.0-SNAPSHOT.swc" />
-    <element path="..\..\~output\xfw\swc\wg_battle_epicrandom_ui.swc" />
-    <element path="..\..\~output\xfw\swc\xfw.swc" />
+    <element path="..\..\~output\swc\wg_battle_epicrandom_ui.swc" />
+    <element path="..\..\~output\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

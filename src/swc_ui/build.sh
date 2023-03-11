@@ -2,7 +2,7 @@
 
 # This file is part of the XVM Framework project.
 #
-# Copyright (c) 2014-2020 XVM Team.
+# Copyright (c) 2014-2021 XVM Team.
 #
 # XVM Framework is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -29,18 +29,20 @@ fi
 
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
+projects="
+    wg_lobby_ui
+    wg_battle_classic_ui
+    wg_battle_event_ui
+    wg_battle_epicbattle_ui
+    wg_battle_epicrandom_ui
+    wg_battle_ranked_ui
+    wg_battle_royale_ui
+    wg_vm_ui
+"
 
-detect_os
-detect_actionscript_sdk
+for project in ${projects}; do
+    echo "building ${project}"
+    . .build-${project}.sh
+done
 
-class="\$AppLinks"
-build_as3_swc \
-    -source-path wg/battleVehicleMarkersApp_links \
-    -source-path wg/battleVehicleMarkersApp_ui/* \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common_i18n_library-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_battle-1.0-SNAPSHOT.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swc/wg_vm_ui.swc \
-    -include-classes $class
+echo ""

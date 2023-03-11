@@ -37,5 +37,5 @@ build_as3_swc \
     -inline \
     -source-path xfw_shared \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swc/xfw_shared.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
     -include-classes $class

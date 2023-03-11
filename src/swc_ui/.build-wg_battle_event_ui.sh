@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+
 set -e
 
 currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
@@ -31,24 +32,13 @@ source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 detect_os
 detect_actionscript_sdk
 
-class="com.xfw.XfwView"
+class="\$AppLinks"
 build_as3_swc \
-    -inline \
-    -source-path xfw \
+    -source-path battle_ui/event \
+    -source-path battle_ui/ui/* \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common_i18n_library-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
-    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/swc/xfw.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_battle-1.0-SNAPSHOT.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/swc/wg_battle_event_ui.swc \
     -include-classes $class
-
-doc="xfw/com/xfw/XfwView.as"
-build_as3_swf \
-    -inline \
-    -source-path xfw \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
-    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swf/xfw.swf \
-    $doc

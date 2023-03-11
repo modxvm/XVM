@@ -25,7 +25,7 @@ build_as3_swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/xfw/swc/xfw.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/xvm/swc/xvm_shared.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/xvm/swc/xvm_app.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xvm_shared.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/swc/xvm_app.swc \
     -include-classes $class

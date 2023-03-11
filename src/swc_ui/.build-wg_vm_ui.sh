@@ -2,7 +2,7 @@
 
 # This file is part of the XVM Framework project.
 #
-# Copyright (c) 2014-2021 XVM Team.
+# Copyright (c) 2014-2020 XVM Team.
 #
 # XVM Framework is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -29,16 +29,18 @@ fi
 
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
+
 detect_os
 detect_actionscript_sdk
 
 class="\$AppLinks"
 build_as3_swc \
-    -source-path wg/battle_ui/event \
-    -source-path wg/battle_ui/ui/* \
+    -source-path battleVehicleMarkersApp_links \
+    -source-path battleVehicleMarkersApp_ui/* \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common_i18n_library-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_battle-1.0-SNAPSHOT.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/xfw/swc/wg_battle_event_ui.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/swc/wg_vm_ui.swc \
     -include-classes $class

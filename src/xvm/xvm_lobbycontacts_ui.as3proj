@@ -61,9 +61,9 @@
     <element path="..\swc_wg\base_app-1.0-SNAPSHOT.swc" />
     <element path="..\swc_wg\gui_base-1.0-SNAPSHOT.swc" />
     <element path="..\swc_wg\gui_lobby-1.0-SNAPSHOT.swc" />
-    <element path="..\..\~output\xfw\swc\wg_lobby_ui.swc" />
-    <element path="..\..\~output\xfw\swc\xfw.swc" />
-    <element path="..\..\~output\xvm\swc\xvm_lobby.swc" />
+    <element path="..\..\~output\swc\wg_lobby_ui.swc" />
+    <element path="..\..\~output\swc\xfw.swc" />
+    <element path="..\..\~output\swc\xvm_lobby.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

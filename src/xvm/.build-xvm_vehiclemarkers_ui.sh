@@ -25,8 +25,8 @@ build_as3_swf \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_battle-1.0-SNAPSHOT.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/xfw/swc/wg_vm_ui.swc \
-    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/xfw/swc/xfw_shared.swc \
-    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/xvm/swc/xvm_shared.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/wg_vm_ui.swc \
+    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
+    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xvm_shared.swc \
     -output ../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/xvm_battle/as_battle/xvm_vehiclemarkers_ui.swf \
     $doc

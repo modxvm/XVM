@@ -27,8 +27,8 @@ build_as3_swf \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_lobby-1.0-SNAPSHOT.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/xfw/swc/wg_lobby_ui.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/xfw/swc/xfw.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/xvm/swc/xvm_lobby.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/wg_lobby_ui.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xvm_lobby.swc \
     -output ../../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/xvm_lobby/as_lobby/xvm_lobby_ui.swf \
     $doc

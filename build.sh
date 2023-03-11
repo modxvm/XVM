@@ -91,6 +91,16 @@ extend_path()
 ####  BUILD FUNCTIONS ####
 ##########################
 
+function build_swc_ui()
+{
+    echo ""
+    echo "Building SWC UI"
+
+    pushd src/swc_ui > /dev/null
+    ./build.sh || exit 1
+    popd > /dev/null
+}
+
 function build_xfw_actionscript()
 {
     echo ""
@@ -269,7 +279,12 @@ detect_ffdec
 
 #build components
 args="$*"
-args="${args:=xfw_actionscript xfw_swf xfw_packages xvm_actionscript xvm_python pack}" # default - build all
+args="${args:=swc_ui xfw_actionscript xfw_swf xfw_packages xvm_actionscript xvm_python pack}" # default - build all
+
+if [[ " $args " =~ " swc_ui " ]]; then
+    detect_actionscript_sdk
+    build_swc_ui
+fi
 
 if [[ " $args " =~ " xfw_actionscript " ]]; then
     detect_actionscript_sdk
