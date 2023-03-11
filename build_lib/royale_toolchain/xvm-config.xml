@@ -56,9 +56,7 @@
 
       <!-- Turn on generation of debuggable SWFs. False by default for mxmlc, -->
       <!-- but true by default for compc. -->
-      <!--
-      <debug>true</debug>
-      -->
+      <debug>false</debug>
 
       <!-- List of SWC files or directories to compile against but to omit from -->
       <!-- linking.                                                             -->

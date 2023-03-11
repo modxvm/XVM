@@ -14,20 +14,15 @@ AS_VERSION_PLAYER="10.2"
 AS_VERSION_SWF="11"
 
 #Apache Roayler constants
-APACHE_ROYALE_DOWNLOADLINK="https://archive.apache.org/dist/royale/0.9.7/binaries/apache-royale-0.9.7-bin-js-swf.tar.gz"
-APACHE_ROYALE_VER="0.9.7"
+APACHE_ROYALE_DOWNLOADLINK="https://archive.apache.org/dist/royale/0.9.9/binaries/apache-royale-0.9.9-bin-js-swf.tar.gz"
+APACHE_ROYALE_VER="0.9.9"
 
 # AS3 compilation
 build_as3_swf(){
-    if [[ "$XFW_DEVELOPMENT" != "" ]]; then
-        opt="-compiler.debug=true"
-    else
-        opt="-compiler.optimize=true -compiler.verbose-stacktraces=false -compiler.debug=false"
-    fi
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH $opt "$@"
+        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH "$@"
     else
-        "$XVMBUILD_MXMLC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF $opt "$@"
+        "$XVMBUILD_MXMLC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
     fi
 }
 
