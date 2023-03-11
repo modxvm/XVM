@@ -1,0 +1,16 @@
+{
+    "id": "com.modxvm.xvm.autologin",
+    "name": "XVM Autologin",
+    "description": "XVM Autologin module",
+
+    "version": "XVM_VERSION",
+    "dependencies": ["com.modxvm.xvm"],
+
+    "url": "https://modxvm.com/",
+    "url_update": "https://modxvm.com/",
+
+    "wot_version_min": "WOT_VERSION",
+    "wot_version_exactmatch": false,
+
+    "features": ["python"]
+}

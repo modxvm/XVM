@@ -91,24 +91,41 @@ extend_path()
 ####  BUILD FUNCTIONS ####
 ##########################
 
+function build_swf_vendor()
+{
+    echo ""
+    echo "Building SWF Vendor"
+
+    pushd src/swf_$XVMBUILD_FLAVOR > /dev/null
+    ./build.sh || exit 1
+    popd > /dev/null
+}
+
 function build_swc_ui()
 {
     echo ""
     echo "Building SWC UI"
+    
+    detect_actionscript_sdk
 
     pushd src/swc_ui > /dev/null
     ./build.sh || exit 1
     popd > /dev/null
 }
 
-function build_xfw_actionscript()
+function build_swf_xvm()
 {
     echo ""
-    echo "Building XFW Actionscript"
+    echo "Building SWF XVM"
+    
+    
 
-    pushd src/xfw_actionscript > /dev/null
+    pushd src/swf_xvm > /dev/null
     ./build.sh || exit 1
     popd > /dev/null
+
+    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
+    cp -rf $XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
 }
 
 function build_xfw_packages()
@@ -121,60 +138,15 @@ function build_xfw_packages()
     popd > /dev/null
 
     mkdir -p "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
-    cp -rf ~output/$XVMBUILD_FLAVOR/xfw/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    cp -rf ~output/$XVMBUILD_FLAVOR/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
 }
 
-function build_xfw_swf()
-{
-    echo ""
-    echo "Building XFW SWF"
-
-    pushd src/swf_$XVMBUILD_FLAVOR > /dev/null
-    ./build.sh || exit 1
-    popd > /dev/null
-}
-
-function build_xvm_actionscript(){
-    echo ""
-    echo "Building XVM actionscript"
-
-    pushd src/xvm/ > /dev/null
-
-    top="
-        _xvm_shared
-        _xvm_app
-        xvm_lobby
-    "
-
-    for proj in $top; do
-        echo "Building $proj"
-        # shellcheck source=/dev/null
-        . ".build-${proj}.sh"
-    done
-
-    for proj in *.as3proj; do
-        exists=0
-        proj=${proj%.*}
-        for e in $top; do [[ "$e" == "$proj" ]] && { exists=1; break; } done
-        if [ $exists -eq 0 ]; then
-            echo "Building $proj"
-            # shellcheck source=/dev/null
-            . ".build-${proj}.sh"
-        fi
-    done
-
-    mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
-    cp -rf $XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/xfw_packages/"
-
-    popd > /dev/null
-}
-
-function build_xvm_python()
+function build_python()
 {
     echo ""
     echo "Building XVM Python"
 
-    pushd src/xpm > /dev/null
+    pushd src/python > /dev/null
 
     export XPM_CLEAR=0
     export XPM_RUN_TEST=0
@@ -279,33 +251,26 @@ detect_ffdec
 
 #build components
 args="$*"
-args="${args:=swc_ui xfw_actionscript xfw_swf xfw_packages xvm_actionscript xvm_python pack}" # default - build all
+args="${args:=swf_vendor swc_ui swf_xvm xfw_packages python pack}" # default - build all
+
+if [[ " $args " =~ " swf_vendor " ]]; then
+    build_swf_vendor
+fi
 
 if [[ " $args " =~ " swc_ui " ]]; then
-    detect_actionscript_sdk
     build_swc_ui
 fi
 
-if [[ " $args " =~ " xfw_actionscript " ]]; then
-    detect_actionscript_sdk
-    build_xfw_actionscript
-fi
-
-if [[ " $args " =~ " xfw_swf " ]]; then
-    build_xfw_swf
+if [[ " $args " =~ " swf_xvm " ]]; then
+    build_swf_xvm
 fi
 
 if [[ " $args " =~ " xfw_packages " ]]; then
     build_xfw_packages
 fi
 
-if [[ " $args " =~ " xvm_python " ]]; then
-    build_xvm_python
-fi
-
-if [[ " $args " =~ " xvm_actionscript " ]]; then
-    detect_actionscript_sdk
-    build_xvm_actionscript
+if [[ " $args " =~ " python " ]]; then
+    build_python
 fi
 
 if [[ " $args " =~ " pack " && "$XFW_DEVELOPMENT" == "" ]]; then

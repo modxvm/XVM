@@ -42,11 +42,11 @@ if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
 fi
 
 if [ "$XVMBUILD_XFW_PACKAGES_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_PACKAGES_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/xfw/packages/"
+  XVMBUILD_XFW_PACKAGES_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/packages/"
 fi
 
 if [ "$XVMBUILD_XFW_WOTMOD_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/xfw/wotmod/"
+  XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/wotmod/"
 fi
 
 outputpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
@@ -81,7 +81,7 @@ copy_fonts()
 copy_swf()
 {
   mkdir -p "$1/res/gui/flash/"
-  cp -rf "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/xfw/swf/." "$1/res/gui/flash"
+  cp -rf "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/swf/." "$1/res/gui/flash"
 }
 
 copy_license()

@@ -54,7 +54,7 @@ if [ "$XVMBUILD_ROOT_PATH" == "" ]; then
 fi
 
 if [ "$XVMBUILD_XFW_WG_OUTPUTPATH" == "" ]; then
-  XVMBUILD_XFW_WG_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/xfw/swf"
+  XVMBUILD_XFW_WG_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/swf"
 fi
 
 
