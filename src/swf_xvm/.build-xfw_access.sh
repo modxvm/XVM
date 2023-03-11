@@ -30,13 +30,65 @@ fi
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
 detect_os
+detect_arch
+detect_patch
+detect_unzip
 detect_actionscript_sdk
 
+# modify PATH
+PATH="$currentdir"/../../build_lib/bin/"$OS"_"$arch"/:$PATH
+
+# create temp dir
+TMP_DIR="../../~output/$XVMBUILD_FLAVOR/tmp/xfw_access"
+rm -rf "$TMP_DIR"
+mkdir -p "$TMP_DIR"
+
+# compile
 class="com.xfw.XfwAccess"
 build_as3_swc \
     -inline \
     -source-path xfw_access \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
     -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
-    -output ../../~output/$XVMBUILD_FLAVOR/swc/xfw_access.swc \
+    -output "$TMP_DIR/xfw_access.swc" \
     -include-classes $class
+
+pushd "$TMP_DIR" > /dev/null
+
+# unpack
+unzip "./xfw_access.swc"
+rm "./xfw_access.swc"
+
+# get hash
+hash1=$(sha256sum "./library.swf" | awk '{print $1}')
+echo $hash1
+
+# disassemble
+abcexport "./library.swf"
+rabcdasm "./library-0.abc"
+
+# patch
+patch --binary -p0 < "$currentdir/xfw_access/postbuild.patch" || exit 1
+
+# replace
+rabcasm library-0/library-0.main.asasm
+abcreplace library.swf 0 library-0/library-0.main.abc
+
+rm "library-0.abc"
+rm -r "./library-0"
+
+# get hash
+hash2=$(sha256sum "./library.swf" | awk '{print $1}')
+echo $hash2
+
+# replace hash
+sed -i "s/$hash1/$hash2/" ./catalog.xml
+
+# zip
+zip xfw_access.swc ./catalog.xml ./library.swf
+rm ./catalog.xml ./library.swf
+
+rm -rf "$currentdir/../../~output/$XVMBUILD_FLAVOR/swc/xfw_access.swc"
+mv "./xfw_access.swc" "$currentdir/../../~output/$XVMBUILD_FLAVOR/swc/xfw_access.swc"
+
+popd > /dev/null
