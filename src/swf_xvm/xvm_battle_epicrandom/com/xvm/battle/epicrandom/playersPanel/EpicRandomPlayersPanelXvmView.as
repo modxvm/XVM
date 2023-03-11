@@ -37,8 +37,8 @@ package com.xvm.battle.epicrandom.playersPanel
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
 
-            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
-            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+            var bsdController:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'xfw_battleStatisticDataController')
+            var cController:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdController, 'xfw_componentControllers');
             cController.splice(cController.indexOf(page.epicRandomPlayersPanel), 1);
 
             var idx:int = page.getChildIndex(page.epicRandomPlayersPanel);
@@ -50,7 +50,7 @@ package com.xvm.battle.epicrandom.playersPanel
             page.epicRandomPlayersPanel = component;
             page.addChildAt(page.epicRandomPlayersPanel, idx);
             bsdController.registerComponentController(page.epicRandomPlayersPanel);
-            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.epicRandomPlayersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
+            XfwAccess.getPrivateField(page, 'xfw_registerComponent')(page.epicRandomPlayersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
         }
     }
 }

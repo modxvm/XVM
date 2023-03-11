@@ -4,6 +4,7 @@
  */
 package com.xvm.battle.ranked.battleloading
 {
+    import com.xfw.XfwAccess;
     import com.xfw.XfwUtils;
     import com.xvm.battle.shared.battleloading.XvmBattleLoadingItemRendererProxyBase;
     import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
@@ -18,7 +19,7 @@ package com.xvm.battle.ranked.battleloading
         public function XvmRankedBattleLoadingItemRendererProxy(ui:BasePlayerItemRenderer, uiType:String,
             container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
         {
-            _rankIcon = XfwUtils.getPrivateField(ui as RankedPlayerItemRenderer, 'xfw_rankIcon');
+            _rankIcon = XfwAccess.getPrivateField(ui as RankedPlayerItemRenderer, 'xfw_rankIcon');
             super(ui, uiType, container, position, isEnemy, selfBg, invalidateFunc);
         }
 

@@ -5,6 +5,8 @@
 package com.xvm.lobby.ui.profile
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
+    import com.xfw.XfwUtils;
     import com.xvm.*;
     import com.xvm.lobby.ui.profile.components.*;
     import com.xvm.types.dossier.*;
@@ -112,16 +114,16 @@ package com.xvm.lobby.ui.profile
 
                 if (xteTF)
                 {
-                    var xte:Number = XfwUtils.getPrivateField(data, "xvm_xte");
+                    var xte:Number = XfwAccess.getPrivateField(data, "xvm_xte");
                     //Logger.add("id=" + data.id + " xte=" + data.xvm_xte + " flag=" + data.xvm_xte_flag);
-                    if (xte < 0 || (XfwUtils.getPrivateField(data, "xvm_xte_flag") & 0x01) != 0)
+                    if (xte < 0 || (XfwAccess.getPrivateField(data, "xvm_xte_flag") & 0x01) != 0)
                     {
                         var vdossier:VehicleDossier = Dossier.getVehicleDossier(data.id, tech.accountDBID);
                         if (vdossier)
                         {
                             xte = vdossier.xte;
-                            XfwUtils.setPrivateField(data, "xvm_xte", vdossier.xte);
-                            XfwUtils.setPrivateField(data, "xvm_xte_flag", XfwUtils.getPrivateField(data, "xvm_xte_flag") & ~0x01);
+                            XfwAccess.setPrivateField(data, "xvm_xte", vdossier.xte);
+                            XfwAccess.setPrivateField(data, "xvm_xte_flag", XfwAccess.getPrivateField(data, "xvm_xte_flag") & ~0x01);
                         }
                     }
 
@@ -138,7 +140,7 @@ package com.xvm.lobby.ui.profile
                     else
                     {
                         var value:String = xte == 100 ? "XX" : (xte < 10 ? "0" : "") + xte;
-                        if ((XfwUtils.getPrivateField(data, "xvm_xte_flag") & 0x01) != 0)
+                        if ((XfwAccess.getPrivateField(data, "xvm_xte_flag") & 0x01) != 0)
                             value = "<font alpha='#50'>(</font>" + value + "<font alpha='#50'>)</font>";
                         xteTF.htmlText = Sprintf.format("<p align='center'><font face='$FieldFont' size='15' color='%s'>%s</font></p>",
                             MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_X, xte, NaN), value);

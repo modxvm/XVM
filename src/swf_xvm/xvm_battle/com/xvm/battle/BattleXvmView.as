@@ -27,7 +27,8 @@ package com.xvm.battle
 
 	import com.xfw.Logger;
 	import com.xfw.Xfw;
-	import com.xfw.XfwUtils;
+	import com.xfw.XfwAccess;
+    import com.xfw.XfwUtils;
 	import com.xfw.events.ObjectEvent;
 
 	import com.xvm.Config;
@@ -95,13 +96,13 @@ package com.xvm.battle
 				return;
 			}
 
-			var bsdc:BattleStatisticDataController = XfwUtils.getPrivateField(battlePage, "xfw_battleStatisticDataController");
+			var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(battlePage, "xfw_battleStatisticDataController");
 			if (bsdc == null){
 				Logger.add("BattleXvmView::ctor() --> failed to get battleStatisticDataController");
 				return;
 			}
 
-			var cc:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdc, "xfw_componentControllers");
+			var cc:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdc, "xfw_componentControllers");
 			if (cc == null){
 				Logger.add("BattleXvmView::ctor() --> failed to get componentControllers");
 				return;

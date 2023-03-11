@@ -5,6 +5,7 @@
 package com.xvm.battle.stronghold.battleloading
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.*;
     import com.xvm.battle.BattleGlobalData;
     import com.xvm.battle.shared.battleloading.Clock;
@@ -125,11 +126,11 @@ package com.xvm.battle.stronghold.battleloading
             {
                 var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
 
-                var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
+                var atlas:Atlas = XfwAccess.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
                     atlasMgr.registerAtlas(newAtlas);
-                    atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
+                    atlas = XfwAccess.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }
@@ -144,9 +145,9 @@ package com.xvm.battle.stronghold.battleloading
 
         private function initRenderers():void
         {
-            var allyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_allyRenderers');
-            var enemyRenderers:Vector.<IBattleLoadingRenderer> = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_enemyRenderers');
-            var renderersContainer:BaseRendererContainer = XfwUtils.getPrivateField(battleLoadingForm, 'xfw_renderersContainer');
+            var allyRenderers:Vector.<IBattleLoadingRenderer> = XfwAccess.getPrivateField(battleLoadingForm, 'xfw_allyRenderers');
+            var enemyRenderers:Vector.<IBattleLoadingRenderer> = XfwAccess.getPrivateField(battleLoadingForm, 'xfw_enemyRenderers');
+            var renderersContainer:BaseRendererContainer = XfwAccess.getPrivateField(battleLoadingForm, 'xfw_renderersContainer');
 
 
             var renderer:BasePlayerItemRenderer;

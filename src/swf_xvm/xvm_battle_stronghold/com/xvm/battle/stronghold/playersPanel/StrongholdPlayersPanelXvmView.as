@@ -5,6 +5,7 @@
 package com.xvm.battle.stronghold.playersPanel
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.infrastructure.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
@@ -37,8 +38,8 @@ package com.xvm.battle.stronghold.playersPanel
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
-            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController')
-            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+            var bsdController:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'xfw_battleStatisticDataController')
+            var cController:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdController, 'xfw_componentControllers');
             cController.splice(cController.indexOf(page.playersPanel), 1);
 
             var idx:int = page.getChildIndex(page.playersPanel);
@@ -51,7 +52,7 @@ package com.xvm.battle.stronghold.playersPanel
             page.addChildAt(page.playersPanel, idx);
 
             bsdController.registerComponentController(page.playersPanel);
-            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.playersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
+            XfwAccess.getPrivateField(page, 'xfw_registerComponent')(page.playersPanel, BATTLE_VIEW_ALIASES.PLAYERS_PANEL);
         }
 
     }

@@ -5,6 +5,7 @@
 package com.xvm.battle.stronghold.fullStats
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
@@ -88,11 +89,11 @@ package com.xvm.battle.stronghold.fullStats
             {
                 var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
 
-                var atlas:Atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
+                var atlas:Atlas = XfwAccess.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
                     atlasMgr.registerAtlas(newAtlas);
-                    atlas = XfwUtils.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
+                    atlas = XfwAccess.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }

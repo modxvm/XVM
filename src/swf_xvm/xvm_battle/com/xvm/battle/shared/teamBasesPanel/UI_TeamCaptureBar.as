@@ -10,12 +10,18 @@ package com.xvm.battle.shared.teamBasesPanel
     import flash.text.TextFormatAlign;
     import flash.text.TextField;
     import flash.text.TextFieldAutoSize;
+    
     import mx.utils.StringUtil;
+    
     import scaleform.gfx.TextFieldEx;
+    
     import net.wg.gui.battle.random.views.teamBasesPanel.TeamCaptureBar;
+    
     import com.xfw.Logger;
     import com.xfw.Xfw;
+    import com.xfw.XfwAccess;
     import com.xfw.XfwUtils;
+
     import com.xvm.Config;
     import com.xvm.Defines;
     import com.xvm.Macros;
@@ -52,7 +58,7 @@ package com.xvm.battle.shared.teamBasesPanel
 
         public function UI_TeamCaptureBar()
         {
-            XfwUtils.setPrivateField(TeamCaptureBar, "EXIT_TWEEN_Y", HIDE_ICONS_HACK_OFFSET_Y);
+            XfwAccess.setPrivateField(TeamCaptureBar, "EXIT_TWEEN_Y", HIDE_ICONS_HACK_OFFSET_Y);
 
             //Logger.add("UI_TeamCaptureBar()");
             super();

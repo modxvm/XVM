@@ -49,6 +49,7 @@
   <!-- SWC Include Libraries -->
   <includeLibraries>
     <element path="..\..\..\~output\wg\swc\xfw_shared.swc" />
+    <element path="..\..\..\~output\wg\swc\xfw_access.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>

@@ -9,6 +9,7 @@ package com.xvm.battle.shared.teamBasesPanel
     import net.wg.data.constants.Linkages;
     import com.xfw.Logger;
     import com.xfw.Xfw;
+    import com.xfw.XfwAccess;
     import com.xfw.XfwUtils;
     import com.xfw.events.BooleanEvent;
     import com.xvm.Config;
@@ -33,7 +34,7 @@ package com.xvm.battle.shared.teamBasesPanel
             //Logger.add("UI_teamBasesPanel()");
             super();
 
-            DEFAULT_RENDERER_LENGTH = XfwUtils.getPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT");
+            DEFAULT_RENDERER_LENGTH = XfwAccess.getPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT");
 
             // https://ci.modxvm.com/sonarqube/coding_rules?open=flex%3AS1447&rule_key=flex%3AS1447
             _init();
@@ -88,25 +89,25 @@ package com.xvm.battle.shared.teamBasesPanel
             {
                 if (Macros.FormatBooleanGlobal(Config.config.captureBar.enabled, true))
                 {
-                    XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", XVM_CAPTURE_BAR_LINKAGE);
+                    XfwAccess.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", XVM_CAPTURE_BAR_LINKAGE);
 
                     y = Macros.FormatNumberGlobal(Config.config.captureBar.y, DEFAULT_Y);
 
-                    XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH);
+                    XfwAccess.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH);
                 }
                 else
                 {
-                    XfwUtils.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
+                    XfwAccess.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
 
                     y = DEFAULT_Y;
 
-                    XfwUtils.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);
+                    XfwAccess.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);
                 }
 
                 // TODO: The game crashes on replay of EpicRandom when xfw_updatePositions() is called
                 if (Xvm.appType != Defines.APP_TYPE_BATTLE_EPICRANDOM)
                 {
-                    XfwUtils.getPrivateField(this, 'xfw_updatePositions')();
+                    XfwAccess.getPrivateField(this, 'xfw_updatePositions')();
                 }
             }
             catch (ex:Error)

@@ -5,6 +5,7 @@
 package com.xvm.battle.stronghold.fullStats
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.infrastructure.*;
     import flash.display.*;
     import net.wg.gui.battle.interfaces.*;
@@ -42,9 +43,9 @@ package com.xvm.battle.stronghold.fullStats
             var fullStats:DisplayObject = page.fullStats as DisplayObject;
             var idx:int = page.getChildIndex(fullStats);
 
-            var bsdController:BattleStatisticDataController = XfwUtils.getPrivateField(page, 'xfw_battleStatisticDataController');
-            var qpw:Vector.<IQuestProgressViewUpdatable> = XfwUtils.getPrivateField(bsdController, 'xfw_questProgressViews');
-            var cController:Vector.<IBattleComponentDataController> = XfwUtils.getPrivateField(bsdController, 'xfw_componentControllers');
+            var bsdController:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'xfw_battleStatisticDataController');
+            var qpw:Vector.<IQuestProgressViewUpdatable> = XfwAccess.getPrivateField(bsdController, 'xfw_questProgressViews');
+            var cController:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdController, 'xfw_componentControllers');
 
             var qidx:int = qpw.indexOf((fullStats as IFullStats).getStatsProgressView());
 
@@ -59,7 +60,7 @@ package com.xvm.battle.stronghold.fullStats
             page.fullStats = component;
             page.addChildAt(component, idx);
             bsdController.registerComponentController(page.fullStats);
-            XfwUtils.getPrivateField(page, 'xfw_registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
+            XfwAccess.getPrivateField(page, 'xfw_registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
         }
     }
 

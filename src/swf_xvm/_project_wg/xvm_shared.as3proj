@@ -59,6 +59,7 @@
   <externalLibraryPaths>
     <element path="..\..\swc_wg\common-1.0-SNAPSHOT.swc" />
     <element path="..\..\..\~output\wg\swc\xfw_shared.swc" />
+    <element path="..\..\..\~output\wg\swc\xfw_access.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

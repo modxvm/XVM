@@ -39,6 +39,7 @@ build_as3_swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
+    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_access.swc \
     -output ../../~output/$XVMBUILD_FLAVOR/swc/xfw.swc \
     -include-classes $class
 
@@ -50,5 +51,6 @@ build_as3_swf \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
+    -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_access.swc \
     -output ../../~output/$XVMBUILD_FLAVOR/swf/xfw.swf \
     $doc

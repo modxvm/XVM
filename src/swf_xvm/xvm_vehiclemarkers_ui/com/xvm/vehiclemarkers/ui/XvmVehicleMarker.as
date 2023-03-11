@@ -5,6 +5,7 @@
 package com.xvm.vehiclemarkers.ui
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.*;
     import com.xvm.battle.*;
     import com.xvm.battle.events.*;
@@ -206,7 +207,7 @@ package com.xvm.vehiclemarkers.ui
             if (atlasManager.isAtlasInitialized(atlasName))
             {
                 RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-                XfwUtils.getPrivateField(this, 'xfw_updateIconColor')();
+                XfwAccess.getPrivateField(this, 'xfw_updateIconColor')();
             }
         }
 

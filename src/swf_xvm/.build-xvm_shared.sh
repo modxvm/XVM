@@ -24,5 +24,6 @@ build_as3_swc \
     -source-path xvm_shared \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
     -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_access.swc \
     -output ../../~output/$XVMBUILD_FLAVOR/swc/xvm_shared.swc \
     -include-classes $class

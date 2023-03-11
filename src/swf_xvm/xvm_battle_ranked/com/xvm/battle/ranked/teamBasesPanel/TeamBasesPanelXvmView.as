@@ -5,6 +5,7 @@
 package com.xvm.battle.ranked.teamBasesPanel
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.battle.shared.teamBasesPanel.UI_teamBasesPanel;
     import com.xvm.infrastructure.*;
     import flash.events.Event;
@@ -45,7 +46,7 @@ package com.xvm.battle.ranked.teamBasesPanel
             component.visible = battlePage.teamBasesPanelUI.visible;
             battlePage.teamBasesPanelUI = component;
             battlePage.addChildAt(battlePage.teamBasesPanelUI, idx);
-            XfwUtils.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            XfwAccess.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
         }
     }
 }

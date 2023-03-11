@@ -5,6 +5,7 @@
 
 package com.xvm.battle.stronghold.teamBasesPanel
 {
+    import com.xfw.XfwAccess;
     import com.xfw.XfwUtils;
     import com.xvm.battle.shared.teamBasesPanel.UI_teamBasesPanel;
     import com.xvm.infrastructure.XvmViewBase;
@@ -47,7 +48,7 @@ package com.xvm.battle.stronghold.teamBasesPanel
             component.visible = battlePage.teamBasesPanelUI.visible;
             battlePage.teamBasesPanelUI = component;
             battlePage.addChildAt(battlePage.teamBasesPanelUI, idx);
-            XfwUtils.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            XfwAccess.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
         }
     }
 

@@ -7,6 +7,7 @@
 package com.xvm.lobby.ui.battleresults
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xfw.events.ObjectEvent;
     import com.xvm.*;
     import com.xvm.lobby.vo.VOLobbyMacrosOptions;
@@ -278,7 +279,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function compactQuests():void
         {
-            var progressReport:SubtasksList = XfwUtils.getPrivateField(this, "xfw_progressReport");
+            var progressReport:SubtasksList = XfwAccess.getPrivateField(this, "xfw_progressReport");
             if (progressReport)
             {
                 progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);

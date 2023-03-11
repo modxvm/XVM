@@ -53,6 +53,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="..\..\..\~output\lesta\swc\xfw_shared.swc" />
+    <element path="..\..\..\~output\lesta\swc\xfw_access.swc" />
     <element path="..\..\..\~output\lesta\swc\xvm_shared.swc" />
   </libraryPaths>
   <!-- External Libraries -->

@@ -5,6 +5,7 @@
 package com.xvm.lobby.ui.profile
 {
     import com.xfw.*;
+    import com.xfw.XfwAccess;
     import com.xvm.lobby.ui.profile.components.*;
     import flash.utils.*;
     import net.wg.gui.lobby.profile.pages.technique.TechDetailedUnitGroup
@@ -57,7 +58,7 @@ package com.xvm.lobby.ui.profile
             {
                 super.draw();
 
-                var group:TechDetailedUnitGroup = XfwUtils.getPrivateField(this, "xfw_group");
+                var group:TechDetailedUnitGroup = XfwAccess.getPrivateField(this, "xfw_group");
                 if (group)
                 {
                     if (group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))

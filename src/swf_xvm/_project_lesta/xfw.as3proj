@@ -49,6 +49,7 @@
   <!-- SWC Include Libraries -->
   <includeLibraries>
     <element path="..\..\..\~output\lesta\swc\xfw_shared.swc" />
+    <element path="..\..\..\~output\lesta\swc\xfw_access.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
