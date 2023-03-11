@@ -48,7 +48,7 @@
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
-    <element path="..\..\..\~output\swc\xfw_shared.swc" />
+    <element path="..\..\..\~output\wg\swc\xfw_shared.swc" />
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
@@ -92,7 +92,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="..\..\utils\test.sh" />
+    <option testMovieCommand="..\..\..\utils\test.sh" />
   </options>
   <!-- Plugin storage -->
   <storage />

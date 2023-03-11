@@ -59,8 +59,8 @@
     <element path="..\..\swc_wg\common-1.0-SNAPSHOT.swc" />
     <element path="..\..\swc_wg\base_app-1.0-SNAPSHOT.swc" />
     <element path="..\..\swc_wg\gui_base-1.0-SNAPSHOT.swc" />
-    <element path="..\..\..\~output\swc\xfw.swc" />
-    <element path="..\..\..\~output\swc\xvm_shared.swc" />
+    <element path="..\..\..\~output\wg\swc\xfw.swc" />
+    <element path="..\..\..\~output\wg\swc\xvm_shared.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>
@@ -86,12 +86,12 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">bash .build-_xvm_app.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="True">bash ..\.build-_xvm_app.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="..\..\utils\test.sh" />
+    <option testMovieCommand="..\..\..\utils\test.sh" />
   </options>
   <!-- Plugin storage -->
   <storage />
