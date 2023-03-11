@@ -101,10 +101,8 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 #
 
 def BCBattleResult_as_setDataS(base, self, data):
-    try:
+    if data and 'xvm_data' in data:
         del data['xvm_data']
-    except Exception:
-        logging.getLogger('XVM/BattleResults').exception('BCBattleResult_as_setDataS')
 
     return base(self, data)
 
