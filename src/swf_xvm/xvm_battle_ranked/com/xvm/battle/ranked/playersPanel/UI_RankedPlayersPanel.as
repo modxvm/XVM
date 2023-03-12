@@ -356,11 +356,11 @@ package com.xvm.battle.ranked.playersPanel
             {
                 var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
 
-                var atlas:Atlas = XfwAccess.getPrivateField(atlasMgr , 'xfw_getAtlas')(newAtlas);
+                var atlas:Atlas = XfwAccess.getPrivateField(atlasMgr , 'getAtlas')(newAtlas);
                 if (atlas == null)
                 {
                     atlasMgr.registerAtlas(newAtlas);
-                    atlas = XfwAccess.getPrivateField(atlasMgr , 'xfw_getAtlas')(newAtlas);
+                    atlas = XfwAccess.getPrivateField(atlasMgr , 'getAtlas')(newAtlas);
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }

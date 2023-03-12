@@ -46,7 +46,7 @@ package com.xvm.battle.ranked.teamBasesPanel
             component.visible = battlePage.teamBasesPanelUI.visible;
             battlePage.teamBasesPanelUI = component;
             battlePage.addChildAt(battlePage.teamBasesPanelUI, idx);
-            XfwAccess.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            XfwAccess.getPrivateField(battlePage, 'registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
         }
     }
 }

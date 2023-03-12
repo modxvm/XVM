@@ -47,7 +47,7 @@ package com.xvm.battle.classic.teamBasesPanel
             battlePage.teamBasesPanelUI = component;
             battlePage.addChildAt(battlePage.teamBasesPanelUI, idx);
 
-            XfwAccess.getPrivateField(battlePage, 'xfw_registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
+            XfwAccess.getPrivateField(battlePage, 'registerComponent')(battlePage.teamBasesPanelUI, BATTLE_VIEW_ALIASES.TEAM_BASES_PANEL);
 
             component.addEventListener(Event.CHANGE, XfwAccess.getPrivateField(battlePage, "xfw_onTeamBasesPanelUIChangeHandler"));
         }

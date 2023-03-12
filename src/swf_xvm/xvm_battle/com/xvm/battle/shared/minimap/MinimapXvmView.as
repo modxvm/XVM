@@ -70,7 +70,7 @@ package com.xvm.battle.shared.minimap
             page.addChildAt(page.minimap, idx);
             //page.minimap.validateNow(); // TODO: remove? brokes initial size restoring
 
-            XfwAccess.getPrivateField(page, 'xfw_registerComponent')(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
+            XfwAccess.getPrivateField(page, 'registerComponent')(page.minimap, BATTLE_VIEW_ALIASES.MINIMAP);
 
             // restore event handlers setted up in the BaseBattlePage.configUI()
             component.addEventListener(MinimapEvent.TRY_SIZE_CHANGED, onMiniMapTrySizeChangeHandler, false, 0, true);

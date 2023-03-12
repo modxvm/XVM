@@ -42,9 +42,9 @@ package com.xvm.battle.ranked.fullStats
             var fullStats:DisplayObject = page.fullStats as DisplayObject;
             var idx:int = page.getChildIndex(fullStats);
 
-            var bsdController:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'xfw_battleStatisticDataController');
-            var qpw:Vector.<IQuestProgressViewUpdatable> = XfwAccess.getPrivateField(bsdController, 'xfw_questProgressViews');
-            var cController:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdController, 'xfw_componentControllers');
+            var bsdController:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'battleStatisticDataController');
+            var qpw:Vector.<IQuestProgressViewUpdatable> = XfwAccess.getPrivateField(bsdController, '_questProgressViews');
+            var cController:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdController, '_componentControllers');
 
             var qidx:int = qpw.indexOf((fullStats as IFullStats).getStatsProgressView());
             page.unregisterComponent(BATTLE_VIEW_ALIASES.FULL_STATS);
@@ -61,7 +61,7 @@ package com.xvm.battle.ranked.fullStats
             page.fullStats = component;
             page.addChildAt(component, idx);
             bsdController.registerComponentController(page.fullStats);
-            XfwAccess.getPrivateField(page, 'xfw_registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
+            XfwAccess.getPrivateField(page, 'registerComponent')(page.fullStats, BATTLE_VIEW_ALIASES.FULL_STATS);
         }
     }
 }

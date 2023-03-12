@@ -34,8 +34,8 @@ package com.xvm.battle.stronghold.battleloading
         private function init():void
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING);
-            var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'xfw_battleStatisticDataController');
-            var cc:Vector.<IBattleComponentDataController> =XfwAccess.getPrivateField(bsdc, 'xfw_componentControllers');
+            var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'battleStatisticDataController');
+            var cc:Vector.<IBattleComponentDataController> =XfwAccess.getPrivateField(bsdc, '_componentControllers');
 
             cc.splice(cc.indexOf(page.battleLoading), 1);
             var idx:int = page.getChildIndex(page.battleLoading);
@@ -47,7 +47,7 @@ package com.xvm.battle.stronghold.battleloading
             page.battleLoading = component;
             page.addChildAt(page.battleLoading, idx);
             bsdc.registerComponentController(page.battleLoading);
-            XfwAccess.getPrivateField(page, 'xfw_registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
+            XfwAccess.getPrivateField(page, 'registerComponent')(page.battleLoading, BATTLE_VIEW_ALIASES.BATTLE_LOADING);
         }
 
     }

@@ -96,13 +96,13 @@ package com.xvm.battle
 				return;
 			}
 
-			var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(battlePage, "xfw_battleStatisticDataController");
+			var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(battlePage, "battleStatisticDataController");
 			if (bsdc == null){
 				Logger.add("BattleXvmView::ctor() --> failed to get battleStatisticDataController");
 				return;
 			}
 
-			var cc:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdc, "xfw_componentControllers");
+			var cc:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdc, "_componentControllers");
 			if (cc == null){
 				Logger.add("BattleXvmView::ctor() --> failed to get componentControllers");
 				return;

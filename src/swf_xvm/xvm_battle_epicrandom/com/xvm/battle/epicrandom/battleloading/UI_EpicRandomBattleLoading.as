@@ -131,11 +131,11 @@ package com.xvm.battle.epicrandom.battleloading
             {
                 var atlasMgr:AtlasManager = App.atlasMgr as AtlasManager;
 
-                var atlas:Atlas = XfwAccess.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
+                var atlas:Atlas = XfwAccess.getPrivateField(atlasMgr, 'getAtlas')(newAtlas) as Atlas;
                 if (atlas == null)
                 {
                     App.atlasMgr.registerAtlas(newAtlas);
-                    atlas = XfwAccess.getPrivateField(atlasMgr, 'xfw_getAtlas')(newAtlas) as Atlas;
+                    atlas = XfwAccess.getPrivateField(atlasMgr, 'getAtlas')(newAtlas) as Atlas;
                     atlas.addEventListener(AtlasEvent.ATLAS_INITIALIZED, onAtlasInitializedHandler, false, 0, true);
                 }
             }
