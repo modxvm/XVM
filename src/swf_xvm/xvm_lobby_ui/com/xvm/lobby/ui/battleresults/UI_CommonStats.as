@@ -279,7 +279,7 @@ package com.xvm.lobby.ui.battleresults
 
         private function compactQuests():void
         {
-            var progressReport:SubtasksList = XfwAccess.getPrivateField(this, "xfw_progressReport");
+            var progressReport:SubtasksList = XfwAccess.getPrivateField(this, "_progressReport");
             if (progressReport)
             {
                 progressReport.linkage = getQualifiedClassName(UI_BR_SubtaskComponent);

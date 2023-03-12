@@ -40,7 +40,7 @@ package com.xvm.lobby.profile
         {
             super.onBeforePopulate(e);
 
-            var sectionsDataUtil:LinkageUtils = XfwAccess.getPrivateField(tabNavigator, 'xfw_sectionsDataUtil');
+            var sectionsDataUtil:LinkageUtils = XfwAccess.getPrivateField(tabNavigator, '_sectionsDataUtil');
             sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_PAGE, "com.xvm.lobby.ui.profile::UI_ProfileTechniquePage");
             sectionsDataUtil.addEntity(Aliases.PROFILE_TECHNIQUE_WINDOW, "com.xvm.lobby.ui.profile::UI_ProfileTechniqueWindow");
             if (Config.networkServicesSettings.statAwards)

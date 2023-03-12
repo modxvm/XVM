@@ -103,7 +103,7 @@ package com.xvm.lobby
 
                 var btn:HeaderButton;
 
-                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "xfw_headerButtonsHelper");
+                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
 
                 btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
                 if (btn)
@@ -135,7 +135,7 @@ package com.xvm.lobby
         {
             var btn:HeaderButton;
 
-            var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "xfw_headerButtonsHelper");
+            var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
 
             if (!Config.config.hangar.showCreateSquadButtonText)
             {

@@ -116,7 +116,7 @@ package com.xvm.lobby.ui.limits
             try
             {
                 var minWidth:int;
-                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "xfw_headerButtonsHelper");
+                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
 
                 if (goldLocker)
                 {
@@ -134,7 +134,7 @@ package com.xvm.lobby.ui.limits
                             if (goldContent.bounds.width < minWidth)
                             {
                                 goldContent.bounds.width = minWidth;
-                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, XfwAccess.getPrivateField(goldContent, "xfw_leftPadding"), XfwAccess.getPrivateField(goldContent, "xfw_rightPadding")));
+                                goldContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, goldContent.bounds.width, XfwAccess.getPrivateField(goldContent, "leftPadding"), XfwAccess.getPrivateField(goldContent, "rightPadding")));
                             }
                         }
                     }
@@ -157,7 +157,7 @@ package com.xvm.lobby.ui.limits
                             if (freeXpContent.bounds.width < minWidth)
                             {
                                 freeXpContent.bounds.width = minWidth;
-                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, XfwAccess.getPrivateField(freeXpContent, "xfw_leftPadding"), XfwAccess.getPrivateField(freeXpContent, "xfw_rightPadding")));
+                                freeXpContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, freeXpContent.bounds.width, XfwAccess.getPrivateField(freeXpContent, "leftPadding"), XfwAccess.getPrivateField(freeXpContent, "rightPadding")));
                             }
                         }
                     }
@@ -179,7 +179,7 @@ package com.xvm.lobby.ui.limits
                             if (crystalContent.bounds.width < minWidth)
                             {
                                 crystalContent.bounds.width = minWidth;
-                                crystalContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, crystalContent.bounds.width, XfwAccess.getPrivateField(crystalContent, "xfw_leftPadding"), XfwAccess.getPrivateField(crystalContent, "xfw_rightPadding")));
+                                crystalContent.dispatchEvent(new HeaderEvents(HeaderEvents.HBC_SIZE_UPDATED, crystalContent.bounds.width, XfwAccess.getPrivateField(crystalContent, "leftPadding"), XfwAccess.getPrivateField(crystalContent, "rightPadding")));
                             }
                         }
                     }

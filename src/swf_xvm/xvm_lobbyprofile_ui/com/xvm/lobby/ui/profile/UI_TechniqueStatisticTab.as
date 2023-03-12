@@ -58,7 +58,7 @@ package com.xvm.lobby.ui.profile
             {
                 super.draw();
 
-                var group:TechDetailedUnitGroup = XfwAccess.getPrivateField(this, "xfw_group");
+                var group:TechDetailedUnitGroup = XfwAccess.getPrivateField(this, "_group");
                 if (group)
                 {
                     if (group.unitRendererLinkage != getQualifiedClassName(UI_StatisticsDashLineTextItemIRenderer))

@@ -45,7 +45,7 @@ package com.xvm.lobby.ui.contacts
                         {
                             if (myData.data)
                             {
-                                var contactItem:ContactItemUI = XfwAccess.getPrivateField(this, "xfw_contactItem");
+                                var contactItem:ContactItemUI = XfwAccess.getPrivateField(this, "contactItem");
                                 if (contactItem == null)
                                 {
                                     contactItem = new UI_ContactItem();
@@ -60,7 +60,7 @@ package com.xvm.lobby.ui.contacts
 
                 super.draw();
 
-                if (XfwAccess.getPrivateField(this, "xfw_currentContentItem") is ContactItem)
+                if (XfwAccess.getPrivateField(this, "_currentContentItem") is ContactItem)
                 {
                     var d:ContactsListTreeItemInfo = data as ContactsListTreeItemInfo;
                     if (d != null)
