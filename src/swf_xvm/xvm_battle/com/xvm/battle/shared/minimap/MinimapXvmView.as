@@ -45,19 +45,19 @@ package com.xvm.battle.shared.minimap
 
             var minimapEntryController:MinimapEntryController = MinimapEntryController.instance;
 
-            var scalableEntries:Vector.<DisplayObject> = XfwAccess.getPrivateField(minimapEntryController, "xfw_scalableEntries");
+            var scalableEntries:Vector.<DisplayObject> = XfwAccess.getPrivateField(minimapEntryController, "_scalableEntries");
             while (scalableEntries.length)
             {
                 minimapEntryController.unregisterScalableEntry(scalableEntries[0], true);
             }
 
-            var vehicleEntries:Vector.<IVehicleMinimapEntry> = XfwAccess.getPrivateField(minimapEntryController, "xfw_vehicleEntries");
+            var vehicleEntries:Vector.<IVehicleMinimapEntry> = XfwAccess.getPrivateField(minimapEntryController, "_vehicleEntries");
             while (vehicleEntries.length)
             {
                 minimapEntryController.unregisterVehicleEntry(vehicleEntries[0]);
             }
 
-            var vehicleLabelEntries:Vector.<IVehicleMinimapEntry> = XfwAccess.getPrivateField(minimapEntryController, "xfw_vehicleLabelsEntries");
+            var vehicleLabelEntries:Vector.<IVehicleMinimapEntry> = XfwAccess.getPrivateField(minimapEntryController, "_vehicleLabelsEntries");
             vehicleLabelEntries.splice(0, vehicleLabelEntries.length);
 
             var idx:int = page.getChildIndex(page.minimap);
@@ -74,8 +74,8 @@ package com.xvm.battle.shared.minimap
 
             // restore event handlers setted up in the BaseBattlePage.configUI()
             component.addEventListener(MinimapEvent.TRY_SIZE_CHANGED, onMiniMapTrySizeChangeHandler, false, 0, true);
-            component.addEventListener(MinimapEvent.SIZE_CHANGED, XfwAccess.getPrivateField(page, "xfw_onMinimapSizeChangedHandler"), false, 0, true);
-            component.addEventListener(MinimapEvent.VISIBILITY_CHANGED, XfwAccess.getPrivateField(page, "xfw_onMinimapSizeChangedHandler"), false, 0, true);
+            component.addEventListener(MinimapEvent.SIZE_CHANGED, XfwAccess.getPrivateField(page, "onMinimapSizeChangedHandler"), false, 0, true);
+            component.addEventListener(MinimapEvent.VISIBILITY_CHANGED, XfwAccess.getPrivateField(page, "onMinimapSizeChangedHandler"), false, 0, true);
         }
 
         private function onMiniMapTrySizeChangeHandler(e:MinimapEvent):void
@@ -86,7 +86,7 @@ package com.xvm.battle.shared.minimap
             }
             else
             {
-                XfwAccess.getPrivateField(page, 'xfw_onMinimapTrySizeChangedHandler')(e);
+                XfwAccess.getPrivateField(page, 'onMinimapTrySizeChangedHandler')(e);
             }
         }
     }
