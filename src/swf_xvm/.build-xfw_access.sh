@@ -39,7 +39,7 @@ detect_actionscript_sdk
 PATH="$currentdir"/../../build_lib/bin/"$OS"_"$arch"/:$PATH
 
 # create temp dir
-TMP_DIR="../../~output/$XVMBUILD_FLAVOR/tmp/xfw_access"
+TMP_DIR="$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/tmp/xfw_access"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
 
@@ -47,9 +47,9 @@ mkdir -p "$TMP_DIR"
 class="com.xfw.XfwAccess"
 build_as3_swc \
     -inline \
-    -source-path xfw_access \
-    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
-    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc \
+    -source-path "$currentdir/xfw_access" \
+    -external-library-path+="$currentdir/../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc" \
+    -external-library-path+="$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/swc/xfw_shared.swc" \
     -output "$TMP_DIR/xfw_access.swc" \
     -include-classes $class
 
@@ -64,15 +64,15 @@ hash1=$(sha256sum "./library.swf" | awk '{print $1}')
 echo $hash1
 
 # disassemble
-abcexport "./library.swf"
-rabcdasm "./library-0.abc"
+abcexport "./library.swf" || exit 1
+rabcdasm "./library-0.abc" || exit 1
 
 # patch
 patch --binary -p0 < "$currentdir/xfw_access/postbuild.patch" || exit 1
 
 # replace
-rabcasm library-0/library-0.main.asasm
-abcreplace library.swf 0 library-0/library-0.main.abc
+rabcasm library-0/library-0.main.asasm || exit 1
+abcreplace library.swf 0 library-0/library-0.main.abc || exit 1
 
 rm "library-0.abc"
 rm -r "./library-0"

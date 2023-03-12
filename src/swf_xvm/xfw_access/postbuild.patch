@@ -6,7 +6,7 @@
       getlocal1
       getlocal2
 -     getproperty         MultinameL([PrivateNamespace("com.xfw:XfwAccess"), StaticProtectedNs("com.xfw:XfwAccess"), StaticProtectedNs("Object"), PackageNamespace("com.xfw"), PackageInternalNs("com.xfw"), PrivateNamespace("FilePrivateNS:XfwAccess"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
-+     getproperty         MultinameL([PrivateNamespace(null), PrivateNamespace(null,"4"), PrivateNamespace("com.xfw:XfwAccess"), StaticProtectedNs("com.xfw:XfwAccess"), StaticProtectedNs("Object"), PackageNamespace("com.xfw"), PackageInternalNs("com.xfw"), PrivateNamespace("FilePrivateNS:XfwAccess"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++     getproperty         MultinameL([PrivateNamespace(null), ProtectedNamespace(null), StaticProtectedNs(null), ExplicitNamespace(null), PackageInternalNs(null), PackageNamespace(null), Namespace(null)])
       setlocal3
  
       getlocal3
@@ -15,7 +15,7 @@
       getlocal2
       getlocal3
 -     setproperty         MultinameL([PrivateNamespace("com.xfw:XfwAccess"), StaticProtectedNs("com.xfw:XfwAccess"), StaticProtectedNs("Object"), PackageNamespace("com.xfw"), PackageInternalNs("com.xfw"), PrivateNamespace("FilePrivateNS:XfwAccess"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
-+     setproperty         MultinameL([PrivateNamespace(null), PrivateNamespace(null,"4"), PrivateNamespace("com.xfw:XfwAccess"), StaticProtectedNs("com.xfw:XfwAccess"), StaticProtectedNs("Object"), PackageNamespace("com.xfw"), PackageInternalNs("com.xfw"), PrivateNamespace("FilePrivateNS:XfwAccess"), PackageNamespace(""), Namespace("http://adobe.com/AS3/2006/builtin")])
++     setproperty         MultinameL([PrivateNamespace(null), ProtectedNamespace(null), StaticProtectedNs(null), ExplicitNamespace(null), PackageInternalNs(null), PackageNamespace(null), Namespace(null)])
  
  L18:
       jump                L51
