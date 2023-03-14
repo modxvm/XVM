@@ -343,12 +343,18 @@
       "alpha": 100       // Opacity                / Прозрачность.
     },
     // Hover marker
-    // Маркер по наведениюы
+    // Маркер по наведению
     "hoverMarker": {
       "enabled": true,   // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
       "y": -80,          // Position on the Y axis / Положение по оси Y.
-      "alpha": 100       // Opacity                / Прозрачность.
+      "alpha": 100,      // Opacity                / Прозрачность.
+      "glow": {
+        "enabled": true,   // false - disable        / не отображать.
+        "x": 0,            // Position on the X axis / Положение по оси X.
+        "y": 85,           // Position on the Y axis / Положение по оси Y.
+        "alpha": 50        // Opacity                / Прозрачность.
+      }
     },
     // Stun marker and consumables marker in "Frontline Returns" mode (smoke screen, morale boost, engineering crew).
     // Маркер оглушения и маркер боевого снаряжения в режиме "Линия фронта" (дымовая завеса, воодушевление, инженерный отряд).
@@ -460,7 +466,13 @@
       "enabled": true,
       "x": 0,
       "y": -80,
-      "alpha": 100
+      "alpha": 100,
+      "glow": {
+        "enabled": true,
+        "x": 0,
+        "y": 85,
+        "alpha": 50
+      }
     },
     // Stun marker and consumables marker in "Frontline Returns" mode (smoke screen, morale boost, engineering crew).
     // Маркер оглушения и маркер боевого снаряжения в режиме "Линия фронта" (дымовая завеса, воодушевление, инженерный отряд).
