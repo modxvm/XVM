@@ -52,7 +52,7 @@ post_telegram()
   XVMBUILD_XVM_COMMITMSG=$(htmlencode "$REPOSITORY_SUBJECT")
   XVMBUILD_XVM_COMMITBODY=$(htmlencode "$REPOSITORY_BODY")
 
-  printf "<b>Build:</b> <a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>${XVMBUILD_XVM_VERSION}_$REPOSITORY_COMMITS_NUMBER (branch $REPOSITORY_BRANCH)</a>\nWoT version: $XVMBUILD_WOT_VERSION_wg (WG) / $XVMBUILD_WOT_VERSION_lesta (Lesta) /  \n<b>Date:</b> $builddate\n<b>Download:</b> <a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b> $XVMBUILD_XVM_COMMITAUTHOR\n<b>Description:</b> $XVMBUILD_XVM_COMMITMSG\n\n$XVMBUILD_XVM_COMMITBODY" | telegram-send --stdin --disable-web-page-preview --format html --config /tmp/ci_notify_telegram.conf
+  printf "<b>Build:</b> <a href='$XVMBUILD_URL_REPO/$REPOSITORY_HASH'>${XVMBUILD_XVM_VERSION}_$REPOSITORY_COMMITS_NUMBER (branch $REPOSITORY_BRANCH)</a>\n<b>WoT version:</b> $XVMBUILD_WOT_VERSION_wg (WG) / $XVMBUILD_WOT_VERSION_lesta (Lesta) \n<b>Date:</b> $builddate\n<b>Download:</b> <a href='$downloadlinkzip'>.zip archive</a> | <a href='$downloadlinkexe'>.exe installer</a>\n<b>Author:</b> $XVMBUILD_XVM_COMMITAUTHOR\n<b>Description:</b> $XVMBUILD_XVM_COMMITMSG\n\n$XVMBUILD_XVM_COMMITBODY" | telegram-send --stdin --disable-web-page-preview --format html --config /tmp/ci_notify_telegram.conf
 }
 
 
