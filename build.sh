@@ -65,6 +65,8 @@ if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
     export XVMBUILD_FLAVOR="wg"
 fi
 
+WOT_VERSION=$(echo '$XVMBUILD_WOT_VERSION_'"${XVMBUILD_FLAVOR}" | envsubst)
+
 ##########################
 #### HELPER FUNCTIONS ####
 ##########################
@@ -137,8 +139,8 @@ function build_xfw_packages()
     ./build.sh || exit 1
     popd > /dev/null
 
-    mkdir -p "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
-    cp -rf ~output/$XVMBUILD_FLAVOR/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$XVMBUILD_WOT_VERSION/com.modxvm.xfw/"
+    mkdir -p "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/"
+    cp -rf ~output/$XVMBUILD_FLAVOR/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/"
 }
 
 function build_python()
@@ -210,7 +212,7 @@ copy_files()
     echo "Copy files..."
 
     # rename version-dependent folder
-    mkdir -p "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/$XVMBUILD_WOT_VERSION"
+    mkdir -p "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/$WOT_VERSION"
     mkdir -p  "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/res_mods/mods/shared_resources/xvm/"
 
     # cp non-binary files

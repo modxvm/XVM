@@ -113,7 +113,7 @@ prepare_meta(){
     else
         sed -i "s/.REPOSITORY_COMMITS_NUMBER//g" "$dlmeta_output"
     fi
-    sed -i "s/XVMBUILD_WOT_VERSION/$XVMBUILD_WOT_VERSION/g" "$dlmeta_output"
+    sed -i "s/XVMBUILD_WOT_VERSION/$XVMBUILD_WOT_VERSION_wg/g" "$dlmeta_output"
     sed -i "s,XVMBUILD_MX_URL_EXE,$XVMBUILD_MX_URL_EXE,g" "$dlmeta_output"
     sed -i "s,XVMBUILD_MX_URL_ZIP,$XVMBUILD_MX_URL_ZIP,g" "$dlmeta_output"
     sed -i "s,XVMBUILD_URL_REPO,$XVMBUILD_URL_REPO,g" "$dlmeta_output"
@@ -141,8 +141,15 @@ deploy_nightly_meta(){
     echo $REPOSITORY_COMMITS_NUMBER > xvm_version.txt
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "xvm_version.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/xvm_version.txt"
 
-    echo "$XVMBUILD_WOT_VERSION" > wot_version.txt
+    echo "$XVMBUILD_WOT_VERSION_wg" > wot_version.txt
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "wot_version.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/wot_version.txt"
+
+    echo "$XVMBUILD_WOT_VERSION_wg" > wot_version_wg.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "wot_version_wg.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/wot_version_wg.txt"
+
+    echo "$XVMBUILD_WOT_VERSION_lesta" > wot_version_lesta.txt
+    sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "wot_version_lesta.txt" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/wot_version_lesta.txt"
+
 
     #XVM Website Meta (Nightly Builds)
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "$dlmeta_output" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/dl_meta.json"

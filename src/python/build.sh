@@ -22,6 +22,14 @@ detect_git
 git_get_repostats "$currentdir/../../"
 
 
+# $XVMBUILD_FLAVOR
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
+fi
+
+WOT_VERSION=$(echo '$XVMBUILD_WOT_VERSION_'"${XVMBUILD_FLAVOR}" | envsubst)
+
+
 ##########################
 ####  BUILD FUNCTIONS ####
 ##########################
@@ -94,7 +102,7 @@ echo 'updating versions'
 for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "# This file was created automatically from build script" > $dir/__version__.py
   echo "__xvm_version__ = '$XVMBUILD_XVM_VERSION'" >> $dir/__version__.py
-  echo "__wot_version__ = '$XVMBUILD_WOT_VERSION'" >> $dir/__version__.py
+  echo "__wot_version__ = '$WOT_VERSION'" >> $dir/__version__.py
   echo "__revision__ = '$REPOSITORY_COMMITS_NUMBER'" >> $dir/__version__.py
   echo "__branch__ = '$REPOSITORY_BRANCH'" >> $dir/__version__.py
   echo "__node__ = '$REPOSITORY_HASH'" >> $dir/__version__.py

@@ -54,7 +54,7 @@ prepare_defines()
 {
     cp "$XVMINST_ROOT_PATH/src/xvm_defines_template.iss" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
 
-    sed -i "s/XVM_WOTVERSION/${XVMBUILD_WOT_VERSION}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
+    sed -i "s/XVM_WOTVERSION/${XVMBUILD_WOT_VERSION_wg}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
     sed -i "s/XVM_VERSION/${XVMBUILD_XVM_VERSION}/g" "$XVMINST_ROOT_PATH/temp/defines/xvm_defines.iss"
 }
 
@@ -72,7 +72,7 @@ prepare_languages()
     for file in *.tpl; do
        lang="${file%.*}"
        cp "$file" "../l10n_result/$lang"
-       sed -i "s/{#VersionWOT}/${XVMBUILD_WOT_VERSION}/g" ../l10n_result/$lang
+       sed -i "s/{#VersionWOT}/${XVMBUILD_WOT_VERSION_wg}/g" ../l10n_result/$lang
        sed -i "s/{#VersionXVM}/${XVMBUILD_XVM_VERSION}/g" ../l10n_result/$lang
     done
 
