@@ -85,6 +85,14 @@ package com.xvm
             }
             else if (appType & Defines.APP_TYPE_LOBBY)
             {
+                Logger.add("Lobby Init");
+                if(CLIENT::LESTA){
+                    Logger.add("  * Client = LESTA")
+                }
+                if(CLIENT::WG){
+                    Logger.add("  * Client = WG")
+                }
+
                 Xfw.addCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
             }
 

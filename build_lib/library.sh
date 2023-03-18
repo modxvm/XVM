@@ -19,18 +19,36 @@ APACHE_ROYALE_VER="0.9.9"
 
 # AS3 compilation
 build_as3_swf(){
+    is_lesta="false"
+    is_wg="true"
+    if [ "$XVMBUILD_FLAVOR" == "lesta" ]; then
+        is_lesta="true"
+    fi
+    if [ "$XVMBUILD_FLAVOR" == "wg" ]; then
+        is_wg="true"
+    fi
+
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH "$@"
+        "$XVMBUILD_MXMLC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH -define+=CLIENT::LESTA,$is_lesta -define+=CLIENT::WG,$is_wg "$@"
     else
-        "$XVMBUILD_MXMLC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
+        "$XVMBUILD_MXMLC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -define+=CLIENT::LESTA,$is_lesta -define+=CLIENT::WG,$is_wg "$@"
     fi
 }
 
 build_as3_swc(){
+    is_lesta="false"
+    is_wg="true"
+    if [ "$XVMBUILD_FLAVOR" == "lesta" ]; then
+        is_lesta="true"
+    fi
+    if [ "$XVMBUILD_FLAVOR" == "wg" ]; then
+        is_wg="true"
+    fi
+
     if [ "$ASSDK_TYPE" == "royale" ]; then
-        "$XVMBUILD_COMPC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH "$@"
+        "$XVMBUILD_COMPC_FILEPATH" -targets=SWF -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -load-config $XVMBUILD_ROYALECONFIG_PATH -define+=CLIENT::LESTA,$is_lesta -define+=CLIENT::WG,$is_wg "$@"
     else
-        "$XVMBUILD_COMPC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF "$@"
+        "$XVMBUILD_COMPC_FILEPATH" -target-player $AS_VERSION_PLAYER -swf-version $AS_VERSION_SWF -define+=CLIENT::LESTA,$is_lesta -define+=CLIENT::WG,$is_wg "$@"
     fi
 }
 
