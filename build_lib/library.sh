@@ -20,7 +20,7 @@ APACHE_ROYALE_VER="0.9.9"
 # AS3 compilation
 build_as3_swf(){
     is_lesta="false"
-    is_wg="true"
+    is_wg="false"
     if [ "$XVMBUILD_FLAVOR" == "lesta" ]; then
         is_lesta="true"
     fi
@@ -37,7 +37,7 @@ build_as3_swf(){
 
 build_as3_swc(){
     is_lesta="false"
-    is_wg="true"
+    is_wg="false"
     if [ "$XVMBUILD_FLAVOR" == "lesta" ]; then
         is_lesta="true"
     fi
