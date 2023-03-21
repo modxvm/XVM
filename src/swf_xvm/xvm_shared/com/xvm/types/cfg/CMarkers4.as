@@ -18,6 +18,7 @@ package com.xvm.types.cfg
         public var healthBar:CMarkersHealthBar;
         public var levelIcon:CMarkersLevelIcon;
         public var textFields:Array;
+		public var vehicleDist:CMarkersVehicleDist;
         public var vehicleIcon:CMarkersVehicleIcon;
         public var vehicleStatusMarker:CMarkersVehicleStatusMarker;
 
@@ -60,6 +61,10 @@ package com.xvm.types.cfg
             {
                 vehicleStatusMarker.applyGlobalMacros();
             }
-        }
+            if (vehicleDist)
+            {
+                vehicleDist.applyGlobalMacros();
+            }
+		}
     }
 }

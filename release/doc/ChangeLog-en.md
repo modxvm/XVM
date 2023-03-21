@@ -1,5 +1,7 @@
 ### XVM 10.4.1
 
+  * Markers: added display of distance to vehicles (only for Lesta)
+
 ### XVM 10.4.0
 
   * Compatibility with World of Tanks 1.20.0.0

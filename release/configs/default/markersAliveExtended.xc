@@ -56,6 +56,31 @@
       // Текст при взрыве боеукладки (см. описание макросов в macros_ru.txt).
       "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
     },
+    // Vehicle distance (Lesta only).
+    // Дистанция до техники (только для Lesta).
+    "vehicleDist": {
+      "enabled": true,
+      "x": 0,
+      "y": -66,
+      "alpha": 100,
+      "align": "center",
+      "textFormat": {
+        "font": "$FieldFont",
+        "size": 13,
+        "color": null,
+        "bold": false,
+        "italic": false
+      },
+      "shadow": {
+        "enabled": true,
+        "distance": 0,
+        "angle": 45,
+        "color": "0x000000",
+        "alpha": 100,
+        "blur": 6,
+        "strength": 2
+      }
+    },
     // Text field with the name of the player.
     // Текстовое поле с именем игрока.
     "playerName": {
@@ -216,6 +241,11 @@
     "damageTextSquadman": {
       "$ref": { "path":"def.damageText" }
     },
+    // Distance to allied vehicles (Lesta only).
+    // Дистанция до техники союзников (только для Lesta).
+    "vehicleDist": {
+      "$ref": { "path":"def.vehicleDist" }
+    },
     // Vehicle contour icon.
     // Контурная иконка танка.
     "contourIcon": {
@@ -256,7 +286,7 @@
     "hoverMarker": {
       "enabled": true,   // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
-      "y": -80,          // Position on the Y axis / Положение по оси Y.
+      "y": -88,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100,      // Opacity                / Прозрачность.
       "glow": {
         "enabled": true,   // false - disable        / не отображать.
@@ -270,7 +300,7 @@
     "vehicleStatusMarker": {
       "enabled": true,   // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
-      "y": -67,          // Position on the Y axis / Положение по оси Y.
+      "y": -92,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
     },
     // Damage indicator (ricochet, critical hit, ...).
@@ -341,6 +371,11 @@
     "damageTextSquadman": {
       "$ref": { "path":"def.damageText" }
     },
+    // Distance to enemy vehicles (Lesta only).
+    // Дистанция до техники противников (только для Lesta).
+    "vehicleDist": {
+      "$ref": { "path":"def.vehicleDist" }
+    },
     // Vehicle contour icon.
     // Контурная иконка танка.
     "contourIcon": {
@@ -372,7 +407,7 @@
     "hoverMarker": {
       "enabled": true,
       "x": 0,
-      "y": -80,
+      "y": -88,
       "alpha": 100,
       "glow": {
         "enabled": true,
@@ -386,7 +421,7 @@
     "vehicleStatusMarker": {
       "enabled": true,
       "x": 0,
-      "y": -67,
+      "y": -92,
       "alpha": 100
     },
     // Damage indicator (ricochet, critical hit, ...).

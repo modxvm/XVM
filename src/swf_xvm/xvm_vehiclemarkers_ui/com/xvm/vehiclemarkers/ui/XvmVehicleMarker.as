@@ -14,6 +14,7 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.vo.*;
     import flash.events.*;
     import net.wg.data.constants.Values;
+	import net.wg.gui.battle.battleRoyale.views.components.fullStats.nationsVehiclesCounter.BattleRoyaleNationsVehiclesCounter;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersConstants;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
     import net.wg.gui.battle.views.vehicleMarkers.events.*;
@@ -35,6 +36,7 @@ package com.xvm.vehiclemarkers.ui
         private var contourIconComponent:ContourIconComponent = null;
         private var damageIndicatorComponent:DamageIndicatorComponent = null;
         private var damageTextComponent:DamageTextComponent = null;
+        private var vehicleDistComponent:VehicleDistComponent = null;
         private var healthBarComponent:HealthBarComponent = null;
         private var levelIconComponent:LevelIconComponent = null;
         private var textFieldsComponent:TextFieldsComponent = null;
@@ -188,15 +190,24 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        // TODO: Add location and visibility setting.
         override public function activateHover(value:Boolean):void
         {
             super.activateHover(false);
+			
             if (hoverMarkerComponent)
             {
                 hoverMarkerComponent.activateHover(value);
             }
         }
+
+	CLIENT::LESTA
+	{		
+        override public function setDistance(dist:String) : void
+        {
+			super.setDistance(dist);
+			vehicleDistComponent.setDistance(dist);
+        }
+	}
 
         private final function setupVehicleIcon():void
         {
@@ -251,6 +262,10 @@ package com.xvm.vehiclemarkers.ui
             hoverMarkerComponent = new HoverMarkerComponent(this);
             vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
             healthBarComponent = new HealthBarComponent(this);
+			CLIENT::LESTA
+			{		
+				vehicleDistComponent = new VehicleDistComponent(this);
+			}
             textFieldsComponent = new TextFieldsComponent(this);
             damageIndicatorComponent = new DamageIndicatorComponent(this);
             damageTextComponent = new DamageTextComponent(this);
@@ -308,7 +323,12 @@ package com.xvm.vehiclemarkers.ui
                 damageTextComponent.dispose();
                 damageTextComponent = null;
             }
-        }
+            if (vehicleDistComponent)
+            {
+                vehicleDistComponent.dispose();
+                vehicleDistComponent = null;
+            }
+		}
 
         private function init(vehicleID:Number):void
         {
