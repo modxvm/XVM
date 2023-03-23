@@ -42,10 +42,6 @@ package com.xvm.vehiclemarkers.ui.components
 		{
 			cfg = e.cfg.vehicleDist;
 			isAlive = e.playerState.isAlive;
-			if (!(cfg && cfg.enabled))
-			{
-				return;
-			}
 			
 			if (!this.initialized)
 			{
@@ -61,6 +57,7 @@ package com.xvm.vehiclemarkers.ui.components
 				textField.y = 0;
 				textField.width = 100;
 				textField.height = 100;
+				textField.visible = cfg && cfg.enabled
 				settingTextField(e);
 				textField.htmlText = text;
 			}
@@ -81,7 +78,12 @@ package com.xvm.vehiclemarkers.ui.components
 			cfg = e.cfg.vehicleDist;
 			if (cfg && cfg.enabled)
 			{
+				textField.visible = true;
 				settingTextField(e);
+			}
+			else
+			{
+				textField.visible = false;
 			}
 		}
 		
@@ -100,7 +102,7 @@ package com.xvm.vehiclemarkers.ui.components
 		
 		private function settingTextField(e:XvmVehicleMarkerEvent):void
 		{
-			if (!textField)
+			if (!textField.visible)
 			{
 				return;
 			}

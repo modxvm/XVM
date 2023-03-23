@@ -59,7 +59,7 @@
     // Vehicle distance (Lesta only).
     // Дистанция до техники (только для Lesta).
     "vehicleDist": {
-      "enabled": true,
+      "enabled": false,
       "x": 0,
       "y": -66,
       "alpha": 100,
