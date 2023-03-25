@@ -32,10 +32,10 @@ package com.xvm.vehiclemarkers.ui.components
         public final function update(e:XvmVehicleMarkerEvent):void
         {
             var cfg:CMarkersContourIcon = e.cfg.contourIcon;
-            var enabled:Boolean = cfg.enabled;
+            var visible:Boolean = cfg.enabled  && !marker.isStickyAndOutOfScreen;
             var marker_vehicleIcon:MovieClip = marker.vehicleIcon;
-            marker_vehicleIcon.visible = enabled;
-            if (enabled)
+            marker_vehicleIcon.visible = visible;
+            if (visible)
             {
                 marker_vehicleIcon.x = cfg.x;
                 marker_vehicleIcon.y = cfg.y;

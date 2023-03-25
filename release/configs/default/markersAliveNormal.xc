@@ -370,7 +370,7 @@
     "actionMarker": {
       "enabled": true,   // false - disable        / не отображать.
       "x": 0,            // Position on the X axis / Положение по оси X.
-      "y": -67,          // Position on the Y axis / Положение по оси Y.
+      "y": -86,          // Position on the Y axis / Положение по оси Y.
       "alpha": 100       // Opacity                / Прозрачность.
     },
     // Hover marker
@@ -493,7 +493,7 @@
     "actionMarker": {
       "enabled": true,
       "x": 0,
-      "y": -67,
+      "y": -86,
       "alpha": 100
     },
     // Hover marker

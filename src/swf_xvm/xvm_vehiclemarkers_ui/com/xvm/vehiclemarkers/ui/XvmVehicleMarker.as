@@ -22,6 +22,8 @@ package com.xvm.vehiclemarkers.ui
 
     public class XvmVehicleMarker extends VehicleMarker
     {
+		public var isStickyAndOutOfScreen:Boolean = false;
+
         private static const INVALIDATE_DATA:uint = 1 << 29;
 
         private var vehicleID:Number = NaN;
@@ -193,7 +195,7 @@ package com.xvm.vehiclemarkers.ui
         override public function activateHover(value:Boolean):void
         {
             super.activateHover(false);
-			
+
             if (hoverMarkerComponent)
             {
                 hoverMarkerComponent.activateHover(value);
@@ -201,13 +203,24 @@ package com.xvm.vehiclemarkers.ui
         }
 
 	CLIENT::LESTA
-	{		
+	{
         override public function setDistance(dist:String) : void
         {
 			super.setDistance(dist);
 			vehicleDistComponent.setDistance(dist);
         }
 	}
+
+		override public function setIsStickyAndOutOfScreen(isStickyAndOutOfScreen:Boolean) : void
+		{
+			super.setIsStickyAndOutOfScreen(isStickyAndOutOfScreen);
+			this.isStickyAndOutOfScreen = isStickyAndOutOfScreen;
+			var playerState:VOPlayerState = BattleState.get(vehicleID);
+            if (playerState)
+            {
+                dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
+            }
+		}
 
         private final function setupVehicleIcon():void
         {
@@ -263,7 +276,7 @@ package com.xvm.vehiclemarkers.ui
             vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
             healthBarComponent = new HealthBarComponent(this);
 			CLIENT::LESTA
-			{		
+			{
 				vehicleDistComponent = new VehicleDistComponent(this);
 			}
             textFieldsComponent = new TextFieldsComponent(this);

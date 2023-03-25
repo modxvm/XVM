@@ -48,7 +48,7 @@ package com.xvm.vehiclemarkers.ui.components
                 hoverMarker.x = Macros.FormatNumber(cfg.x, playerState);
                 hoverMarker.y = Macros.FormatNumber(cfg.y, playerState);
                 hoverMarker.alpha = Macros.FormatNumber(cfg.alpha, playerState) / 100.0;
-                
+
                 var glowMC:DisplayObject = hoverMarker.getChildAt(0);
                 glowMC.visible = cfg.glow.enabled;
                 glowMC.x = Macros.FormatNumber(cfg.glow.x, playerState);

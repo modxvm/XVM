@@ -15,19 +15,19 @@ package com.xvm.vehiclemarkers.ui.components
 	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import scaleform.gfx.TextFieldEx;
-	
+
 	public final class VehicleDistComponent extends VehicleMarkerComponentBase implements IVehicleMarkerComponent
 	{
 		private var text:String         = "";
 		private var textField:TextField = null;
 		private var cfg:CMarkersVehicleDist;
 		private var isAlive:Boolean;
-		
+
 		public final function VehicleDistComponent(marker:XvmVehicleMarker)
 		{
 			super(marker);
 		}
-		
+
 		override protected function onDispose():void
 		{
 			if (textField)
@@ -37,12 +37,12 @@ package com.xvm.vehiclemarkers.ui.components
 			}
 			super.onDispose();
 		}
-		
+
 		public final function init(e:XvmVehicleMarkerEvent):void
 		{
 			cfg = e.cfg.vehicleDist;
 			isAlive = e.playerState.isAlive;
-			
+
 			if (!this.initialized)
 			{
 				this.initialized = true;
@@ -62,12 +62,12 @@ package com.xvm.vehiclemarkers.ui.components
 				textField.htmlText = text;
 			}
 		}
-		
+
 		public final function onExInfo(e:XvmVehicleMarkerEvent):void
 		{
 			update(e);
 		}
-		
+
 		public final function update(e:XvmVehicleMarkerEvent):void
 		{
 			if (e.playerState)
@@ -76,7 +76,8 @@ package com.xvm.vehiclemarkers.ui.components
 			}
 
 			cfg = e.cfg.vehicleDist;
-			if (cfg && cfg.enabled)
+			var visible:Boolean = cfg && cfg.enabled && !marker.isStickyAndOutOfScreen;
+			if (visible)
 			{
 				textField.visible = true;
 				settingTextField(e);
@@ -86,7 +87,7 @@ package com.xvm.vehiclemarkers.ui.components
 				textField.visible = false;
 			}
 		}
-		
+
 		public function setDistance(dist:String):void
 		{
 			if (this.text == dist)
@@ -99,14 +100,14 @@ package com.xvm.vehiclemarkers.ui.components
 				this.textField.htmlText = isAlive ? dist : "";
 			}
 		}
-		
+
 		private function settingTextField(e:XvmVehicleMarkerEvent):void
 		{
 			if (!textField.visible)
 			{
 				return;
 			}
-			
+
 			var playerState:VOPlayerState = e.playerState;
 			textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
 			textField.y = Macros.FormatNumber(cfg.y, playerState, -66);

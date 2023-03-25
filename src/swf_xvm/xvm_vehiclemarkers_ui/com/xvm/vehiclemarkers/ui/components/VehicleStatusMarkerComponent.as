@@ -33,10 +33,10 @@ package com.xvm.vehiclemarkers.ui.components
         public final function update(e:XvmVehicleMarkerEvent):void
         {
             var cfg:CMarkersVehicleStatusMarker = e.cfg.vehicleStatusMarker;
-            var enabled:Boolean = cfg.enabled;
+            var visible:Boolean = cfg.enabled && !marker.isStickyAndOutOfScreen;
             var marker_statusContainer:VehicleStatusContainerMarker = marker.statusContainer;
-            marker_statusContainer.visible = enabled;
-            if (enabled)
+            marker_statusContainer.visible = visible;
+            if (visible)
             {
                 var playerState:VOPlayerState = e.playerState;
                 marker_statusContainer.x = Macros.FormatNumber(cfg.x, playerState);

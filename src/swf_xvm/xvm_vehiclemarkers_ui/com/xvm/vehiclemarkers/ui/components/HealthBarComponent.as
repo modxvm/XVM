@@ -69,9 +69,9 @@ package com.xvm.vehiclemarkers.ui.components
         public final function update(e:XvmVehicleMarkerEvent):void
         {
             var cfg:CMarkersHealthBar = e.cfg.healthBar;
-            var enabled:Boolean = cfg.enabled;
-            healthBar.visible = enabled;
-            if (enabled)
+            var visible:Boolean = cfg.enabled  && !marker.isStickyAndOutOfScreen;
+            healthBar.visible = visible;
+            if (visible)
             {
                 var playerState:VOPlayerState = e.playerState;
 

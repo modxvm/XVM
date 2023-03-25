@@ -32,10 +32,10 @@ package com.xvm.vehiclemarkers.ui.components
         public final function update(e:XvmVehicleMarkerEvent):void
         {
             var cfg:CMarkersLevelIcon = e.cfg.levelIcon;
-            var enabled:Boolean = cfg.enabled;
+            var visible:Boolean = cfg.enabled && !marker.isStickyAndOutOfScreen;
             var marker_levelIcon:MovieClip = marker.levelIcon;
-            marker_levelIcon.visible = enabled;
-            if (enabled)
+            marker_levelIcon.visible = visible;
+            if (visible)
             {
                 marker_levelIcon.x = cfg.x;
                 marker_levelIcon.y = cfg.y;

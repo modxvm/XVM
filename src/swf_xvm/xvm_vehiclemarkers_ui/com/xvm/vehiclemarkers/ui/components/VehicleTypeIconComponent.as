@@ -40,7 +40,7 @@ package com.xvm.vehiclemarkers.ui.components
         public final function update(e:XvmVehicleMarkerEvent):void
         {
             var cfg:CMarkersVehicleIcon = e.cfg.vehicleIcon;
-            var visible:Boolean = cfg.enabled || (showSpeaker && marker.isSpeaking());
+            var visible:Boolean = (cfg.enabled || (showSpeaker && marker.isSpeaking())) && !marker.isStickyAndOutOfScreen;
             var marker_marker:VehicleIconAnimation = marker.marker;
             marker_marker.vehicleTypeIcon.visible = visible;
             if (visible)

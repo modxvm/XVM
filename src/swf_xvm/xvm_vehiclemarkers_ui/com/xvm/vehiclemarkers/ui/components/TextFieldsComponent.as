@@ -28,6 +28,7 @@ package com.xvm.vehiclemarkers.ui.components
         private var exInfoDirty:Boolean;
         private var lastState:String;
         private var currentPlayerState:VOPlayerState;
+		private var isPrevStickyAndOutOfScreen:Boolean = false;
 
         public final function TextFieldsComponent(marker:XvmVehicleMarker)
         {
@@ -105,9 +106,10 @@ package com.xvm.vehiclemarkers.ui.components
         private function updateExtraFieldsVisibility(playerState:VOPlayerState, exInfo:Boolean):void
         {
             currentPlayerState = playerState;
+			var isStickyAndOutOfScreen:Boolean = marker.isStickyAndOutOfScreen;
             var currentState:String = XvmVehicleMarkerState.getCurrentState(playerState, exInfo);
             var extraFields:ExtraFields = extraFieldsHolders[lastState];
-            if (lastState != currentState)
+            if ((lastState != currentState) || (isPrevStickyAndOutOfScreen != isStickyAndOutOfScreen))
             {
                 if (extraFields)
                 {
@@ -120,8 +122,9 @@ package com.xvm.vehiclemarkers.ui.components
                     var exState:String = XvmVehicleMarkerState.getCurrentState(playerState, !exInfo);
                     initState(exState, playerState);
                 }
-                extraFields.visible = true;
+                extraFields.visible = true && !isStickyAndOutOfScreen;
                 lastState = currentState;
+				isPrevStickyAndOutOfScreen = isStickyAndOutOfScreen;
             }
         }
 
