@@ -207,9 +207,9 @@
     "token/unknown_status": "Неизвестный статус",
 
     // Stats link
-    "stats_link/svcmsg": "<a href='event:https://stats.modxvm.com/ru/stats/players/{0}#svcmsg'><font color='#E2D2A2'>Ваша статистика на сайте XVM</font></a>",
-    "stats_link/profile_self": "<a href='event:https://stats.modxvm.com/ru/stats/players/{0}#profile'><font face='$FieldFont' size='14' color='#E2D2A2'><u>Ваша статистика на сайте XVM</u></font></a>",
-    "stats_link/profile": "<a href='event:https://stats.modxvm.com/ru/stats/players/{0}#profile'><font face='$FieldFont' size='14' color='#E2D2A2'><u>Статистика игрока на сайте XVM</u></font></a>",
+    "stats_link/svcmsg": "<a href='event:https://modxvm.com/ru/stats/players/{0}#svcmsg'><font color='#E2D2A2'>Ваша статистика на сайте XVM</font></a>",
+    "stats_link/profile_self": "<a href='event:https://modxvm.com/ru/stats/players/{0}#profile'><font face='$FieldFont' size='14' color='#E2D2A2'><u>Ваша статистика на сайте XVM</u></font></a>",
+    "stats_link/profile": "<a href='event:https://modxvm.com/ru/stats/players/{0}#profile'><font face='$FieldFont' size='14' color='#E2D2A2'><u>Статистика игрока на сайте XVM</u></font></a>",
 
     // Lobby header
     "lobby/header/gold_locked_tooltip": "Золото заблокировано",

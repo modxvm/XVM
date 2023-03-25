@@ -12,7 +12,7 @@ If you can write code, [you can help us make it better for everyone](https://doc
 * [XVM Localization](https://koreanrandom.com/forum/topic/27394-xvm-localization/)
 * [User manual: installation and configuration](https://modxvm.com/en/xvm-installation-and-settings/)
 * [FAQ](https://modxvm.com/en/faq/)
-* [World of Tanks Players Statistics](https://stats.modxvm.com/en/stats/players/top/region)
+* [World of Tanks Players Statistics](https://modxvm.com/en/stats/players/top/region)
 
 ### Official Support Forums
 
