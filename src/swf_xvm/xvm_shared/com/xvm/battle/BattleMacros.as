@@ -452,7 +452,7 @@ package com.xvm.battle
          */
         private static function getSystemColorKey(o:VOPlayerState):String
         {
-            return o ? getEntityName(o) + "_" + (/*isBase ? "base" :*/ o.isAlive ? "alive" : o.isBlown ? "blowedup" : "dead") : null;
+            return o ?  (o.isCurrentPlayer ? "self" : getEntityName(o)) + "_" + (/*isBase ? "base" :*/ o.isAlive ? "alive" : o.isBlown ? "blowedup" : "dead") : null;
         }
 
         /**
@@ -504,8 +504,9 @@ package com.xvm.battle
 
         private static function getDmgSrcColorValueKey(o:VOPlayerState):String
         {
+			var isSelf:Boolean = o.damageInfo ? o.damageInfo.attackerID == o.vehicleID : false;
             var damageSource:String = damageFlagToDamageSource(o.damageInfo.damageFlag);
-            var damageDest:String = o.isTeamKiller ? (o.isAlly ? "ally" : "enemy") + "tk" : getEntityName(o);
+            var damageDest:String = o.isTeamKiller ? (o.isAlly ? "ally" : "enemy") + "tk" : isSelf ? "self" : getEntityName(o);
             return damageSource + "_" + damageDest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");
         }
 
@@ -590,8 +591,7 @@ package com.xvm.battle
         private static function getEntityName(o:VOPlayerState):String
         {
             if (o) {
-                var isSelf:Boolean = o.damageInfo ? o.damageInfo.attackerID == o.vehicleID : false;
-                return isSelf ? "self" : !o.isAlly ? "enemy" : o.isSquadPersonal ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
+                return !o.isAlly ? "enemy" : o.isSquadPersonal ? "squadman" : o.isTeamKiller ? "teamKiller" : "ally";
             }
             return null
         }

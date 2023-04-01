@@ -54,9 +54,9 @@
       "enemy_alive":         ${"def.en"},
       "enemy_dead":          "0x840500",
       "enemy_blowedup":      "0x5A0401",
-      "self_alive":          ${"def.self"},
-      "self_dead":           "0xBB00BB",
-      "self_blowedup":       "0x990099"
+      "player_alive":        ${"def.pl"},
+      "player_dead":         "0xDDAA00",
+      "player_blowedup":     "0xBB9900"
     },
     // Dynamic color by damage kind.
     // Динамический цвет по типу урона.
