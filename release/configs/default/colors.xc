@@ -36,11 +36,11 @@
     // Системные цвета.
     "system": {
       // Format:    object_state
-      // Object:    ally, squadman, teamKiller, enemy, self.
+      // Object:    ally, squadman, teamKiller, enemy, player.
       // State:     alive, dead, blowedup.
       // ----
       // Формат:    объект_состояние
-      // Объект:    ally - союзник, squadman - взводный, teamKiller - тимкиллер, enemy - противник, self - урон наносимый самому себе.
+      // Объект:    ally - союзник, squadman - взводный, teamKiller - тимкиллер, enemy - противник, player - игрок.
       // Состояние: alive - живой, dead - мертвый, blowedup - взорвана боеукладка.
       "ally_alive":          ${"def.al"},
       "ally_dead":           "0x009900",
