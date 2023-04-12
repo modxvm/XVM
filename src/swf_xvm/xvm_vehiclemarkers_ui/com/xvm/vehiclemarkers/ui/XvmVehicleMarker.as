@@ -206,7 +206,7 @@ package com.xvm.vehiclemarkers.ui
 	{
         override public function setDistance(dist:String) : void
         {
-			super.setDistance(dist);
+			super.setDistance("");
 			vehicleDistComponent.setDistance(dist);
         }
 	}
