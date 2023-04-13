@@ -57,14 +57,15 @@ package com.xvm.vehiclemarkers.ui.components
 				textField.y = 0;
 				textField.width = 100;
 				textField.height = 100;
-				textField.visible = cfg && cfg.enabled
 				settingTextField(e);
-				textField.htmlText = text;
+				textField.visible = cfg && cfg.enabled && !marker.isStickyAndOutOfScreen;
+				//textField.htmlText = text;
 			}
 		}
 
 		public final function onExInfo(e:XvmVehicleMarkerEvent):void
 		{
+			cfg = e.cfg.vehicleDist;			
 			update(e);
 		}
 
@@ -74,18 +75,13 @@ package com.xvm.vehiclemarkers.ui.components
 			{
 				isAlive = e.playerState.isAlive;
 			}
-
-			cfg = e.cfg.vehicleDist;
-			var visible:Boolean = cfg && cfg.enabled && !marker.isStickyAndOutOfScreen;
-			if (visible)
+			
+			textField.visible = cfg && cfg.enabled && !marker.isStickyAndOutOfScreen;
+			if (textField.visible)
 			{
-				textField.visible = true;
 				settingTextField(e);
 			}
-			else
-			{
-				textField.visible = false;
-			}
+			
 		}
 
 		public function setDistance(dist:String):void
@@ -95,19 +91,14 @@ package com.xvm.vehiclemarkers.ui.components
 				return;
 			}
 			this.text = dist;
-			if (this.textField)
+			if (textField && textField.visible)
 			{
-				this.textField.htmlText = isAlive ? dist : "";
+				textField.htmlText = isAlive ? text : "";
 			}
 		}
 
 		private function settingTextField(e:XvmVehicleMarkerEvent):void
 		{
-			if (!textField.visible)
-			{
-				return;
-			}
-
 			var playerState:VOPlayerState = e.playerState;
 			textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
 			textField.y = Macros.FormatNumber(cfg.y, playerState, -66);
@@ -120,6 +111,7 @@ package com.xvm.vehiclemarkers.ui.components
 			textField.defaultTextFormat = Utils.createTextFormatFromConfig(cfg.textFormat, playerState);
 			textField.filters = Utils.createShadowFiltersFromConfig(cfg.shadow, playerState);
 			textField.x -= (textField.width / 2.0);
+			textField.htmlText = isAlive ? text : "";
 		}
 	}
 }
