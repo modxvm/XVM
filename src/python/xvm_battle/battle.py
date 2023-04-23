@@ -41,7 +41,7 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehicles
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.postmortem_panel import PostmortemPanel
 from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisticsDataController
-from gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins import CommanderCameraHintPlugin, TrajectoryViewHintPlugin, SiegeIndicatorHintPlugin, PreBattleHintPlugin, RadarHintPlugin, RoleHelpPlugin, MapsTrainingHelpHintPlugin
+import gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins as hint_plugin
 from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
 
 # XFW
@@ -166,59 +166,11 @@ def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce
 
 
 # Hints
-def _CommanderCameraHintPlugin_displayHint(base, self, hint):
-    # disable battle hints
+def _hint_plugin_createPlugins(base):
     if not config.get('battle/showBattleHint'):
-        return
-    base(self, hint)
+        return {}
+    return base()
 
-
-def _TrajectoryViewHintPlugin_addHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return
-    base(self)
-
-
-def _SiegeIndicatorHintPlugin__updateHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return
-    base(self)
-
-
-def _PreBattleHintPlugin__canDisplayQuestHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return False
-    base(self)
-
-
-def _PreBattleHintPlugin__canDisplayVehicleHelpHint(base, self, typeDescriptor):
-    if not config.get('battle/showBattleHint'):
-        return False
-    base(self, typeDescriptor)
-
-
-def _PreBattleHintPlugin__canDisplayBattleCommunicationHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return False
-    base(self)
-
-
-def _RadarHintPlugin__areOtherIndicatorsShown(base, self):
-    if not config.get('battle/showBattleHint'):
-        return True
-    base(self)
-
-
-def _RoleHelpPlugin__handleBattleLoading(base, self, event):
-    if not config.get('battle/showBattleHint'):
-        return
-    base(self, event)
-
-
-def _MapsTrainingHelpHintPlugin_canDisplayCustomHelpHint(base, self):
-    if not config.get('battle/showBattleHint'):
-        return False
-    base(self)
 
 # disable DogTag's
 def _PostmortemPanel_onDogTagKillerInPlaySound(base, self):
@@ -565,15 +517,7 @@ def init():
     overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')(_SharedPage_as_setPostmortemTipsVisibleS)
     overrideMethod(SharedPage, '_switchToPostmortem')(_SharedPage_switchToPostmortem)
     overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')(_BattleStatisticsDataController_as_setQuestsInfoS)
-    overrideMethod(CommanderCameraHintPlugin, '_CommanderCameraHintPlugin__displayHint')(_CommanderCameraHintPlugin_displayHint)
-    overrideMethod(TrajectoryViewHintPlugin, '_TrajectoryViewHintPlugin__addHint')(_TrajectoryViewHintPlugin_addHint)
-    overrideMethod(SiegeIndicatorHintPlugin, '_SiegeIndicatorHintPlugin__updateHint')(_SiegeIndicatorHintPlugin__updateHint)
-    overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayQuestHint')(_PreBattleHintPlugin__canDisplayQuestHint)
-    overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayVehicleHelpHint')(_PreBattleHintPlugin__canDisplayVehicleHelpHint)
-    overrideMethod(PreBattleHintPlugin, '_PreBattleHintPlugin__canDisplayBattleCommunicationHint')(_PreBattleHintPlugin__canDisplayBattleCommunicationHint)
-    overrideMethod(RadarHintPlugin, '_RadarHintPlugin__areOtherIndicatorsShown')(_RadarHintPlugin__areOtherIndicatorsShown)
-    overrideMethod(RoleHelpPlugin, '_RoleHelpPlugin__handleBattleLoading')(_RoleHelpPlugin__handleBattleLoading)
-    overrideMethod(MapsTrainingHelpHintPlugin, '_canDisplayCustomHelpHint')(_MapsTrainingHelpHintPlugin_canDisplayCustomHelpHint)
+    overrideMethod(hint_plugin, 'createPlugins')(_hint_plugin_createPlugins)
     overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')(_PostmortemPanel_onDogTagKillerInPlaySound)
     overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')(_PostmortemPanel__onKillerDogTagSet)
     overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')(_PlayersPanelMetaas_setPanelHPBarVisibilityStateS)
