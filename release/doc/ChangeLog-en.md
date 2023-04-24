@@ -2,6 +2,7 @@
 
   * Markers: added display of distance to vehicles (only for Lesta)
   * Changed several options under `"colors"/"system"`
+  * Various fixes and improvements
 
 ### XVM 10.4.0
 
