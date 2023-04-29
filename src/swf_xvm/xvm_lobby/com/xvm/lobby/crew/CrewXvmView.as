@@ -15,6 +15,7 @@ package com.xvm.lobby.crew
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
 
+    //TODO: broken on Lesta 1.20.1
     public class CrewXvmView extends XvmViewBase
     {
         private static const SETTINGS_AUTO_PREV_CREW:String = "users/{accountDBID}/crew/auto_prev_crew/";
@@ -25,7 +26,8 @@ package com.xvm.lobby.crew
         private static const L10N_ENABLE_PREV_CREW:String = "lobby/crew/enable_prev_crew";
         private static const L10N_ENABLE_PREV_CREW_TOOLTIP:String = "lobby/crew/enable_prev_crew_tooltip";
 
-        private var enablePrevCrewCheckBox:CheckBox;
+        private var enablePrevCrewCheckBox:CheckBox = null;
+
         private var prevInvID:Number;
         private var currentInvID:Number;
         private var savedValue:Boolean = false;
@@ -85,14 +87,16 @@ package com.xvm.lobby.crew
         {
             try
             {
-                xpToTmenCheckbox_y = page.tmenXpPanel.xpToTmenCheckbox.y;
-                enablePrevCrewCheckBox = page.tmenXpPanel.addChild(new CheckBoxTankers()) as CheckBox;
-                enablePrevCrewCheckBox.autoSize = "left";
-                enablePrevCrewCheckBox.addEventListener(MouseEvent.ROLL_OVER, handleMouseRollOver, false, 0, true);
-                enablePrevCrewCheckBox.addEventListener(Event.SELECT, onEnablePrevCrewSwitched, false, 0, true);
-                enablePrevCrewCheckBox.x = page.tmenXpPanel.xpToTmenCheckbox.x;
-                enablePrevCrewCheckBox.label = Locale.get(L10N_ENABLE_PREV_CREW);
-                enablePrevCrewCheckBox.toolTip = Locale.get(L10N_ENABLE_PREV_CREW_TOOLTIP);
+                CLIENT::WG{
+                    xpToTmenCheckbox_y = page.tmenXpPanel.xpToTmenCheckbox.y;
+                    enablePrevCrewCheckBox = page.tmenXpPanel.addChild(new CheckBoxTankers()) as CheckBox;
+                    enablePrevCrewCheckBox.autoSize = "left";
+                    enablePrevCrewCheckBox.addEventListener(MouseEvent.ROLL_OVER, handleMouseRollOver, false, 0, true);
+                    enablePrevCrewCheckBox.addEventListener(Event.SELECT, onEnablePrevCrewSwitched, false, 0, true);
+                    enablePrevCrewCheckBox.x = page.tmenXpPanel.xpToTmenCheckbox.x;
+                    enablePrevCrewCheckBox.label = Locale.get(L10N_ENABLE_PREV_CREW);
+                    enablePrevCrewCheckBox.toolTip = Locale.get(L10N_ENABLE_PREV_CREW_TOOLTIP);
+                }
 
                 //Logger.add('init');
             }
@@ -119,22 +123,24 @@ package com.xvm.lobby.crew
 
             currentInvID = invID;
 
-            enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = invID > 0;
-            if (!enablePrevCrewCheckBox.enabled)
-            {
-                page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y;
-                return null;
+            CLIENT::WG {
+                enablePrevCrewCheckBox.enabled = enablePrevCrewCheckBox.visible = invID > 0;
+                if (!enablePrevCrewCheckBox.enabled)
+                {
+                    page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y;
+                    return null;
+                }
+
+                savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentInvID, Config.config.hangar.crewReturnByDefault);
+                enablePrevCrewCheckBox.selected = savedValue;
+
+                page.tmenXpPanel.validateNow();
+
+                page.tmenXpPanel.checkboxTankersBg.visible = true;
+                page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y - 10;
+                enablePrevCrewCheckBox.y = xpToTmenCheckbox_y + (isElite ? 7 : 0);
             }
-
-            savedValue = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_AUTO_PREV_CREW + currentInvID, Config.config.hangar.crewReturnByDefault);
-            enablePrevCrewCheckBox.selected = savedValue;
-
-            page.tmenXpPanel.validateNow();
-
-            page.tmenXpPanel.checkboxTankersBg.visible = true;
-            page.tmenXpPanel.xpToTmenCheckbox.y = xpToTmenCheckbox_y - 10;
-            enablePrevCrewCheckBox.y = xpToTmenCheckbox_y + (isElite ? 7 : 0);
-
+                
             if (prevInvID != currentInvID)
             {
                 prevInvID = currentInvID;
@@ -146,7 +152,7 @@ package com.xvm.lobby.crew
 
         private function onEnablePrevCrewSwitched(e:Event):void
         {
-            if (enablePrevCrewCheckBox.enabled)
+            if (enablePrevCrewCheckBox && enablePrevCrewCheckBox.enabled)
             {
                 if (enablePrevCrewCheckBox.selected != savedValue)
                 {
