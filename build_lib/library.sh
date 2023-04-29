@@ -287,7 +287,10 @@ detect_java(){
     #check full path for windows
     if [[ "$XVMBUILD_JAVA_FILEPATH" == "" ]]; then
         if [ "$OS" == "Windows" ]; then
-            if [ -f "/c/Software/Java/jdk-19/bin/java.exe" ]; then
+            if [ -f "/c/Program Files/Java/jdk-20/bin/java.exe" ]; then
+                export PATH="$PATH:/c/Program Files/Java/jdk-20/bin"
+                export XVMBUILD_JAVA_FILEPATH="/c/Program Files/Java/jdk-20/bin/java.exe"
+            elif [ -f "/c/Software/Java/jdk-19/bin/java.exe" ]; then
                 export PATH=$PATH:/c/Software/Java/jdk-19/bin/
                 export XVMBUILD_JAVA_FILEPATH="/c/Software/Java/jdk-19/bin/java.exe"
             fi
