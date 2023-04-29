@@ -221,11 +221,10 @@ class _MinimapCircles(object):
                 if crewman is None:
                     self.is_full_crew = False
                 elif crewman.invID == tankman.invID:
-                    (factor, addition) = tankman.descriptor.efficiencyOnVehicle(self.vehicleItem.descriptor)
                     crew_member = {
                         'position': slotIdx,
                         'isFemale': tankman.descriptor.isFemale,
-                        'level': tankman.roleLevel * factor,
+                        'level': tankman.roleLevel * tankman.descriptor.efficiencyOnVehicle(self.vehicleItem.descriptor),
                         'skill': {}
                     }
 
