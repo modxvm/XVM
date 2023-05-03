@@ -4,8 +4,6 @@
 #define APP_WEBSITE    "https://modxvm.com/"
 #define APP_DIR_UNINST "xvm_uninst"
 
-#define WOT_VERSION_PATTERN "1.20.0.*"
-
 #define OPENWGUTILS_DIR_SRC    "."
 #define OPENWGUTILS_DIR_UNINST APP_DIR_UNINST
 
@@ -53,8 +51,8 @@ Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked;
 Filename: https://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall nowait shellexec;
 
 [CustomMessages]
-en.version_not_match=This client is not supported.%n%nThis installer only supports WoT v{#WOT_VERSION_PATTERN}
-ru.version_not_match=Выбранный клиент не поддерживается.%n%nЭтот установщик поддерживает только WoT v{#WOT_VERSION_PATTERN}
+en.version_not_match=This client is not supported.%n%nThis installer only supports WoT v{#VersionWOT}
+ru.version_not_match=Выбранный клиент не поддерживается.%n%nЭтот установщик поддерживает только WoT v{#VersionWOT}
 en.client_started=The selected client is running.%n%nDo you want to terminate the selected client?
 ru.client_started=Выбранный клиент запущен.%n%nЖелаете ли вы закрыть выбранный клиент?
 
@@ -284,7 +282,7 @@ begin
   Result := True;
 
   // check for version
-  if not WotList_Selected_VersionMatch(WotList, '{#WOT_VERSION_PATTERN}') then
+  if not WotList_Selected_VersionMatch(WotList, '{#VersionWOT}') then
   begin
     MsgBox(ExpandConstant('{cm:version_not_match}'), mbError, MB_OK);
     Result := False;
