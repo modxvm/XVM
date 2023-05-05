@@ -271,8 +271,8 @@ def MainView_dispose(self, *args, **kwargs):
 
 @overrideMethod(tooltips, 'getUnlockPrice')
 @dependency.replace_none_kwargs(itemsCache=IItemsCache)
-def getUnlockPrice(base, compactDescr, parentCD = None, vehicleLevel = UNKNOWN_VEHICLE_LEVEL, itemsCache = None):
-    isAvailable, cost, need, defCost, discount = base(compactDescr, parentCD, vehicleLevel)
+def getUnlockPrice(base, compactDescr, parentCD=None, vehicleLevel=UNKNOWN_VEHICLE_LEVEL, blueprintCount=0, itemsCache=None):
+    isAvailable, cost, need, defCost, discount = base(compactDescr, parentCD, vehicleLevel, blueprintCount, itemsCache=itemsCache)
     if cfg_hangar_enableFreeXpLocker and not freeXP_enable:
         need += itemsCache.items.stats.actualFreeXP
     return (isAvailable, cost, need, defCost, discount)
