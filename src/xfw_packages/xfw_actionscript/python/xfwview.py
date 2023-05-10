@@ -16,12 +16,18 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
+#
+# Imports
+#
+
+# stdlib
 import os
 import glob
 import logging
 import traceback
 import weakref
 
+# BigWorld
 from constants import ARENA_GUI_TYPE
 from gui import DialogsInterface, SystemMessages
 from gui.app_loader.settings import APP_NAME_SPACE
@@ -37,14 +43,23 @@ from frameworks.wulf import WindowLayer
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
+# XFW.Loader
 import xfw_loader.python as loader
 
+# XFW
 from xfw import IS_DEVELOPMENT
 from xfw.constants import *
 from xfw.logger import *
 
+# XFW.Actionscript
 from . import swf
 from .swfloadedinfo import swf_loaded_info
+
+
+
+#
+# Defines
+#
 
 _LOG_COMMANDS = [
     COMMAND.XFW_COMMAND_INITIALIZED,
@@ -53,6 +68,15 @@ _LOG_COMMANDS = [
 
 _WOT_ROOT = '../../../'
 
+
+class XfwArenaGuiType:
+    COSMIC_EVENT = 32
+
+
+
+#
+# Classes
+#
 
 class _XfwInjectorView(View):
 
@@ -173,6 +197,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_stronghold']
                 elif arenaGuiType == ARENA_GUI_TYPE.COMP7:
                     as_paths += ['as_battle_comp7']
+                elif arenaGuiType == XfwArenaGuiType.COSMIC_EVENT:
+                    as_paths += ['as_battle_cosmic']
                 else:
                     as_paths += ['as_battle_classic']
             else:

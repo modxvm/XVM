@@ -53,6 +53,14 @@ projects="
     xvm_battle_stronghold
 "
 
+# cosmic is the WG exclusive
+if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
+    projects="
+        $projects
+        xvm_battle_cosmic
+    "
+fi
+
 for project in ${projects}; do
     echo "building ${project}"
     . .build-${project}.sh
