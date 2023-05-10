@@ -47,6 +47,7 @@ UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.RTS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
     constants.ARENA_GUI_TYPE.COMP7,
+    32, #CosmicEvent
 ]
 
 
