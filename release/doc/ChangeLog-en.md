@@ -1,6 +1,13 @@
 ### XVM 10.4.2
 
-  * 
+  #### damageLog
+
+  * Added "flame" parameter to "type-shells" and "c:type-shell" sections (Lesta)
+  * Added parameter "groupDamageFromShots"
+
+  #### hitLog
+
+  * Added "flame" parameter to "type-shells" and "c:type-shell" sections (Lesta)
 
 ### XVM 10.4.1
 

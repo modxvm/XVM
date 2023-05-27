@@ -372,7 +372,8 @@ class DataHitLog(object):
             shell = shot.shell
             intCD = shell.compactDescr
             self.shells[intCD] = {}
-            self.shells[intCD]['shellKind'] = str(shell.kind).lower() if not shell.hasStun else 'high_explosive_stun'
+            shellKind = str(shell.kind).lower()
+            self.shells[intCD]['shellKind'] = 'high_explosive_stun' if shellKind == 'high_explosive' and shell.hasStun else shellKind
             self.shells[intCD]['shellDamage'] = shell.damage[0]
             self.shells[intCD]['costShell'] = 'gold-shell' if shell.id[1] in goldShells else 'silver-shell'
 
