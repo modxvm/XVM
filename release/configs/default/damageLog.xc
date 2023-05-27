@@ -83,6 +83,9 @@
       // true - summarize damages from ramming, crash, falling (if more than one damage per second).
       // true - суммировать повреждения от тарана, столкновения, падения (если больше одного повреждения в секунду).
       "groupDamagesFromRamming_WorldCollision": true,
+      // true - summarize damages from shots (if more than one damage per second).
+      // true - суммировать повреждения от выстрелов (если больше одного повреждения в секунду).
+      "groupDamageFromShots": true,
       // true - summarize damages from artillery strike and airstrike (if more than one damage per second).
       // true - суммировать повреждения от артудара и авионалета (если больше одного повреждения в секунду).
       "groupDamageFromArtAndAirstrike": true,
@@ -133,6 +136,7 @@
         "armor_piercing_cr": "<font color='{{c:costShell}}'>{{l10n:armor_piercing_cr}}</font>", // armor piercing composite rigid / бронебойный подкалиберный.
         "armor_piercing_he": "<font color='{{c:costShell}}'>{{l10n:armor_piercing_he}}</font>", // armor piercing high explosive / бронебойно-фугасный.
         "hollow_charge": "<font color='{{c:costShell}}'>{{l10n:hollow_charge}}</font>",         // high explosive anti-tank / кумулятивный.
+        "flame": "<font color='{{c:costShell}}'>{{l10n:flame}}</font>",                         // flame / пламя. (Lesta)
         "not_shell": ""                                                                         // another source of damage / другой источник урона.
       },
       // Color by shell kind (macro {{c:type-shell}}).
@@ -144,6 +148,7 @@
         "armor_piercing_cr": "#CCCCCC",   // armor piercing composite rigid / бронебойный подкалиберный.
         "armor_piercing_he": "#CCCCCC",   // armor piercing high explosive / бронебойно-фугасный.
         "hollow_charge": "#CCCCCC",       // high explosive anti-tank / кумулятивный.
+        "flame": "#CCCCCC",               // flame / пламя. (Lesta)
         "not_shell": "#CCCCCC"            // another source of damage / другой источник урона.
       },
       // Vehicle type (macro {{vtype}}).

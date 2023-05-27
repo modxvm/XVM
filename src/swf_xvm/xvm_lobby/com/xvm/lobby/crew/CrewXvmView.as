@@ -15,7 +15,6 @@ package com.xvm.lobby.crew
     import net.wg.infrastructure.interfaces.*;
     import net.wg.infrastructure.events.*;
 
-    //TODO: broken on Lesta 1.20.1
     public class CrewXvmView extends XvmViewBase
     {
         private static const SETTINGS_AUTO_PREV_CREW:String = "users/{accountDBID}/crew/auto_prev_crew/";

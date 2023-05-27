@@ -33,7 +33,7 @@ on_fire = 0
 isDownAlt = False
 damageLogConfig = {}
 macros = None
-chooseRating = None
+chooseRating = []
 isImpact = False
 isShowDamageLog = True
 
@@ -189,6 +189,7 @@ class GROUP_DAMAGE(object):
     RAMMING_COLLISION = 'groupDamagesFromRamming_WorldCollision'
     FIRE = 'groupDamagesFromFire'
     ART_AND_AIRSTRIKE = 'groupDamageFromArtAndAirstrike'
+    SHOTS = 'groupDamageFromShots'
 
 
 class EVENTS_NAMES(object):
@@ -401,7 +402,8 @@ class Data(object):
         for shot in attacker['vehicleType'].gun.shots:
             _shell = shot.shell
             if effectsIndex == _shell.effectsIndex:
-                self.data['shellKind'] = str(_shell.kind).lower() if not _shell.hasStun else 'high_explosive_stun'
+                shellKind = str(_shell.kind).lower()
+                self.data['shellKind'] = 'high_explosive_stun' if shellKind == 'high_explosive' and _shell.hasStun else shellKind
                 self.data['caliber'] = _shell.caliber
                 self.data['shellDamage'] = _shell.damage[0]
                 _id = _shell.id
@@ -598,6 +600,7 @@ class _Base(object):
         self.S_GROUP_DAMAGE_RAMMING_COLLISION = section + GROUP_DAMAGE.RAMMING_COLLISION
         self.S_GROUP_DAMAGE_FIRE = section + GROUP_DAMAGE.FIRE
         self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE = section + GROUP_DAMAGE.ART_AND_AIRSTRIKE
+        self.S_GROUP_DAMAGE_SHOTS = section + GROUP_DAMAGE.SHOTS
         self.S_SHADOW = section + SHADOW
         self.SHADOW_DISTANCE = self.S_SHADOW + SHADOW_OPTIONS.DISTANCE
         self.SHADOW_ANGLE = self.S_SHADOW + SHADOW_OPTIONS.ANGLE
@@ -616,6 +619,8 @@ class _Base(object):
         self.dictVehicle = {}
         self.shadow = {}
         self._data = None
+        self.x = 0
+        self.y = 0
 
     def reset(self):
         self.dictVehicle = {}
@@ -735,6 +740,14 @@ class _Base(object):
                 SHADOW_OPTIONS.QUALITY: parser(_config.get(self.SHADOW_QUALITY))
                 }
 
+    def isGroupDmg(self):
+        attackReasonID = data.data['attackReasonID']
+        isGroupRamming_WorldCollision = (attackReasonID in [2, 3]) and _config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
+        isGroupFire = (attackReasonID == 1) and _config.get(self.S_GROUP_DAMAGE_FIRE)
+        isGroupArtAndAirstrike = (attackReasonID in [24, 25]) and _config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
+        isGroupShots = (attackReasonID == 0) and _config.get(self.S_GROUP_DAMAGE_SHOTS)
+        return isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike or isGroupShots
+
 
 class DamageLog(_Base):
 
@@ -758,7 +771,7 @@ class DamageLog(_Base):
         self.section = section
         self.callEvent = True
 
-    def reset(self, section):
+    def reset(self, section=None):
         super(DamageLog, self).reset()
         self.listLog = []
         self.scrollList = []
@@ -857,13 +870,6 @@ class DamageLog(_Base):
             self.dictVehicle[attackerID] = {}
         self.addLine(attackerID, attackReasonID)
 
-    def isGroupDmg(self):
-        attackReasonID = data.data['attackReasonID']
-        isGroupRamming_WorldCollision = (attackReasonID in [2, 3]) and _config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
-        isGroupFire = (attackReasonID == 1) and _config.get(self.S_GROUP_DAMAGE_FIRE)
-        isGroupArtAndAirstrike = (attackReasonID in [24, 25]) and _config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
-        return isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike
-
     def output(self):
         if _config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
             self.reset_scrolling()
@@ -950,13 +956,6 @@ class LastHit(_Base):
             self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['numCrits'], dataLog['hitTime'], attackReasonID)
             dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
         return dataLog
-
-    def isGroupDmg(self):
-        attackReasonID = data.data['attackReasonID']
-        isGroupRamming_WorldCollision = (attackReasonID in [2, 3]) and _config.get(self.S_GROUP_DAMAGE_RAMMING_COLLISION)
-        isGroupFire = (attackReasonID == 1) and _config.get(self.S_GROUP_DAMAGE_FIRE)
-        isGroupArtAndAirstrike = (attackReasonID in [24, 25]) and _config.get(self.S_GROUP_DAMAGE_ART_AND_AIRSTRIKE)
-        return isGroupRamming_WorldCollision or isGroupFire or isGroupArtAndAirstrike
 
     def output(self):
         if _config.get(self.S_SHOW_HIT_NO_DAMAGE) or data.data['isDamage']:
