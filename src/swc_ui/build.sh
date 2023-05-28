@@ -40,11 +40,17 @@ projects="
     wg_vm_ui
 "
 
-# cosmic is the WG exclusive
+# special projects for WG
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
         $projects 
-        wg_battle_cosmic_ui
+    "
+fi
+
+# special projects for Lesta
+if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
+    projects="
+        $projects 
     "
 fi
 

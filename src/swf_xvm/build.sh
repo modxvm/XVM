@@ -53,11 +53,17 @@ projects="
     xvm_battle_stronghold
 "
 
-# cosmic is the WG exclusive
+# special projects for WG
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
         $projects
-        xvm_battle_cosmic
+    "
+fi
+
+# special projects for Lesta
+if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
+    projects="
+        $projects
     "
 fi
 

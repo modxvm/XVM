@@ -69,10 +69,6 @@ _LOG_COMMANDS = [
 _WOT_ROOT = '../../../'
 
 
-class XfwArenaGuiType:
-    COSMIC_EVENT = 32
-
-
 
 #
 # Classes
@@ -197,8 +193,6 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_stronghold']
                 elif arenaGuiType == ARENA_GUI_TYPE.COMP7:
                     as_paths += ['as_battle_comp7']
-                elif arenaGuiType == XfwArenaGuiType.COSMIC_EVENT:
-                    as_paths += ['as_battle_cosmic']
                 else:
                     as_paths += ['as_battle_classic']
             else:
