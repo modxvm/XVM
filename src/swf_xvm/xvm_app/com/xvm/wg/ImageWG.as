@@ -41,6 +41,11 @@ package com.xvm.wg
             addChild(this._bitmap);
         }
 
+        public function clearImage() : void
+        {
+            this.removeImgData();
+        }
+
         public final function dispose() : void
         {
             this.onDispose();
