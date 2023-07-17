@@ -847,7 +847,7 @@ g_hitLogs = HitLogs()
 
 
 @registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')
-def PlayerAvatar__processVehicleAmmo(self, vehicleID, compactDescr, quantity, quantityInClip, _, __, ___)):
+def PlayerAvatar__processVehicleAmmo(self, vehicleID, compactDescr, quantity, quantityInClip, _, __, ___):
     if battle.isBattleTypeSupported and _config.get(HIT_LOG_ENABLED, True):
         g_dataHitLog.intCD = compactDescr
 
