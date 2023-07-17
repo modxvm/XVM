@@ -27,7 +27,7 @@ def checkNames(vehs):
 # PRIVATE
 
 _data = {
-    # Last update: 06.03.2023
+    # Last update WG: 10.05.2023
     "china:Ch00_ClingeBot_SH":                           'CB·ch',
     "china:Ch01_Type59":                                 'Typ59',
     "china:Ch01_Type59_Gold":                            'Typ59g',
@@ -312,6 +312,7 @@ _data = {
     "germany:G71_JagdPantherII":                         'JagP2',
     "germany:G72_JagdPz_E100":                           'Jpz100',
     "germany:G73_E50_Ausf_M":                            'E·50m',
+    "germany:G73_E50_Ausf_M_7x7":                        'E·50m',
     "germany:G76_Pz_Sfl_IVc":                            'PzS4c',
     "germany:G77_PzIV_Schmalturm":                       'Pz4s',
     "germany:G78_Panther_M10":                           'PanM10',
@@ -394,6 +395,7 @@ _data = {
     "germany:G160_Pz_Kpfw_35_R_mit_T_26_Turm":           'Pz35R',
     "germany:G161_Pz_Kpfw_M15_38_t":                     'PzM15',
     "germany:G163_Pz_Kpfw_KW_Ir_mit_75mm_kwk40":         'pz.75.40',
+    "germany:G166_LKpz_70_K":                            'LKpz.70.K',
     "italy:It03_M15_42":                                 'M15/42',
     "italy:It04_Fiat_3000":                              'Fiat3000',
     "italy:It05_Carro_L6_40":                            'L6/40',
@@ -461,6 +463,12 @@ _data = {
     "japan:J30_Edelweiss":                               'Edelw',
   # "japan:J31_Ho_To":                                   'ho·to',
     "japan:J31_Type_5_KaRi":                             'KaRi',
+    "japan:J32_Chi_To_SPG":                              'ChiTo',
+    "japan:J33_Ho_Ri_2":                                 'HoRi·2',
+    "japan:J34_Ho_Ri_1":                                 'HoRi·1',
+    "japan:J35_Ho_Ri_3":                                 'HoRi·3',
+    "japan:J37_Type_3_Ho_Ni_III":                        'HoNi',
+    "japan:J38_Type_95_Ji_Ro":                           'JiRo',
     "poland:Pl01_TKS_20mm":                              'tks20',
     "poland:Pl03_PzV_Poland":                            'Pudel',
     "poland:Pl05_50TP_Tyszkiewicza":                     '50TP',
@@ -483,6 +491,7 @@ _data = {
     "poland:Pl21_CS_63":                                 'cs·63',
     "poland:Pl22_CS_59":                                 'cs·59',
     "poland:Pl23_CS_53":                                 'cs·53',
+    "poland:Pl24_56TP":                                  '56TP',
     "poland:Pl25_CS_52_C":                               'cs·52',
     "sweden:S01_Strv_74_A2":                             'm42·57',
     "sweden:S02_Strv_M42":                               'm/42',
@@ -521,6 +530,7 @@ _data = {
     "sweden:S31_Strv_K":                                 'strv·K',
     "sweden:S32_Bofors_Tornvagn":                        'Tornvagn',
     "sweden:S33_Latta_Stridsfordon":                     'Strids',
+    "sweden:S33_Latt_Stridsfordon_120":                  'Strids·120',
     "sweden:S34_Lago_M38":                               'lago.M38',
     "uk:GB01_Medium_Mark_I":                             'Med1',
   # "uk:GB01_Medium_Mark_I_bot":                         'Med1',
@@ -702,6 +712,7 @@ _data = {
     "usa:A68_T28_Prototype":                             'T28Pr',
     "usa:A69_T110E5":                                    '110e5',
     "usa:A69_T110E5_cl":                                 'T110E5 cl',
+    "usa:A69_T110E5_7x7":                                'T110E5',
     "usa:A71_T21":                                       'T21',
     "usa:A71_T21_MapsTraining_Dummy_LT_2":               'T21',
     "usa:A72_T25_2":                                     'T25/2',
@@ -712,6 +723,7 @@ _data = {
     "usa:A80_T26_E4_SuperPershing_FL":                   'T26e4·fl',
     "usa:A81_T95_E2":                                    'T95e2',
     "usa:A83_T110E4":                                    '110e4',
+    "usa:A83_T110E4_7x7":                                '110e4',
     "usa:A85_T110E3":                                    '110e3',
     "usa:A86_T23E3":                                     'T23e3',
     "usa:A87_M44":                                       'M44',
@@ -775,8 +787,9 @@ _data = {
     "usa:A148_Convertible_Medium_Tank_T3":               'T3 Conv.',
     "usa:A149_AMBT":                                     'ambt',
     "usa:A150_MBT_B":                                    'mbt·b',
+    "usa:A151_TS_60":                                    'ts·60',
     "usa:A152_M_Project_2":                              'Improv',
-  # "usa:A152_M_Project":                                'Improv',
+    "usa:A152_M_Project":                                'Improv',
     "usa:A156_T54_2022":                                 'T54·2022',
     "usa:A158_T832":                                     'T832',
     "ussr:Observer":                                     '',
@@ -958,6 +971,7 @@ _data = {
     "ussr:R157_Object_279R":                             'obj279R',
     "ussr:R158_LT_432":                                  'lt432',
     "ussr:R159_SU_130PM":                                'Su130pm',
+    "ussr:R159_SU_130PM_DR":                             'Su130pm·dr',
     "ussr:R160_T_50_2":                                  't50·2',
     "ussr:R161_T_116":                                   't116',
     "ussr:R165_Object_703_II":                           'obj703·2(122)',
@@ -985,5 +999,7 @@ _data = {
     "ussr:R195_T34M_54":                                 't34m-54',
     "ussr:R197_KV_1S_MZ":                                'Kv·1s·MZ',
     "ussr:R202_SU_2_122":                                'Su·2·122',
-    "ussr:R205_Tank_Rozanova":                           'Rozanov'
+    "ussr:R205_Tank_Rozanova":                           'Rozanov',
+    "ussr:R207_HT_130":                                  'HT·130',
+    "ussr:R208_Object_156O":                             'obj1560'
 }
