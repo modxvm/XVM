@@ -8,7 +8,7 @@ If you can write code, [you can help us make it better for everyone](https://doc
 * [Homepage](https://modxvm.com/en/)
 * [News](https://modxvm.com/en/news/)
 * [Download XVM](https://modxvm.com/en/download-xvm/)
-* [Test Versions (aka Nightly Builds)](https://nightly.modxvm.com/) — Don't use them if you are not an experienced tester. Nightly Builds might be unstable or not work at all.
+* [Test Versions (aka Nightly Builds)](https://nightly.modxvm.com/)
 * [XVM Localization](https://koreanrandom.com/forum/topic/27394-xvm-localization/)
 * [User manual: installation and configuration](https://modxvm.com/en/xvm-installation-and-settings/)
 * [FAQ](https://modxvm.com/en/faq/)
