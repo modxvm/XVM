@@ -16,6 +16,7 @@ from helpers import dependency
 from items import _xml
 from skeletons.gui.battle_session import IBattleSessionProvider
 from vehicle_systems.tankStructure import TankPartIndexes
+from realm import CURRENT_REALM
 
 import xvm_battle.python.battle as battle
 import xvm_main.python.config as config
@@ -846,8 +847,11 @@ class HitLogs(object):
 g_hitLogs = HitLogs()
 
 
-@registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')
-def PlayerAvatar__processVehicleAmmo(self, vehicleID, compactDescr, quantity, quantityInClip, _, __, ___):
+def PlayerAvatar__processVehicleAmmo_lesta(self, vehicleID, compactDescr, quantity, quantityInClip, _, __):
+    if battle.isBattleTypeSupported and _config.get(HIT_LOG_ENABLED, True):
+        g_dataHitLog.intCD = compactDescr
+
+def PlayerAvatar__processVehicleAmmo_wg(self, vehicleID, compactDescr, quantity, quantityInClip, _, __, ___):
     if battle.isBattleTypeSupported and _config.get(HIT_LOG_ENABLED, True):
         g_dataHitLog.intCD = compactDescr
 
@@ -966,3 +970,13 @@ def hLog_x():
 def hLog_y():
     return g_hitLogs.log.y
 
+
+
+#
+# Registration
+#
+
+if CURRENT_REALM == 'RU':
+    registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')(PlayerAvatar__processVehicleAmmo_lesta)
+else:
+    registerEvent(PlayerAvatar, '_PlayerAvatar__processVehicleAmmo')(PlayerAvatar__processVehicleAmmo_wg)
