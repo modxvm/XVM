@@ -69,6 +69,8 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
     # response
     response = None
     response_errmsg = ''
+    response_status = 0
+
     try:
         response = _urllib_pool.request(req_type, url, headers = req_headers, body = body, retries = XVM.RETRIES, timeout = XVM.TIMEOUT)
     except urllib3.exceptions.TimeoutError:
@@ -81,14 +83,17 @@ def loadUrl(url, req=None, body=None, content_type='text/plain; charset=utf-8', 
         logger.exception('on request')
         response_errmsg = str(ex)
 
+    if response is not None:
+        response_status = response.status
+
     # log
     time_elapsed = datetime.datetime.now() - time_start
     time_elapsed_ms = time_elapsed.seconds * 1000 + time_elapsed.microseconds / 1000
     if showLog:
-        logging.getLogger('XVM/Main/LoadUrl').info('RESP: status=%s, time=%s', response.status, time_elapsed_ms)
+        logger.info('RESP: status=%s, time=%s', response_status, time_elapsed_ms)
 
     # return
-    if response.status in [200, 202, 204, 401]:
+    if response is not None and response_status in [200, 202, 204, 401]:
         return (response.data, time_elapsed_ms, response_errmsg)
     else:
         return (None, time_elapsed_ms, response_errmsg)
