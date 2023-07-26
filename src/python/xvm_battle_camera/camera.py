@@ -24,6 +24,7 @@ from helpers.EffectsList import _FlashBangEffectDesc
 import Math
 from PlayerEvents import g_playerEvents
 from skeletons.gui.battle_session import IBattleSessionProvider
+from realm import CURRENT_REALM
 
 # XFW
 from xfw.events import overrideMethod, registerEvent
@@ -256,8 +257,7 @@ def _CrosshairPanelContainer_as_setSettingsS(base, self, data):
 # Strategic Camera
 #
 
-def _StrategicCamera_create(base, self, onChangeControlMode = None):
-    #debug('_StrategicCamera_create')
+def _StrategicCamera_create_common(self):
     if config.get('battle/camera/enabled'):
         c = config.get('battle/camera/strategic')
         cfg = self._cfg
@@ -270,7 +270,15 @@ def _StrategicCamera_create(base, self, onChangeControlMode = None):
         if value is not None:
             cfg['distRange'] = [float(i) for i in value]
 
+
+def _StrategicCamera_create_wg(base, self, onChangeControlMode = None):
+    _StrategicCamera_create_common(self)
     base(self, onChangeControlMode)
+
+
+def _StrategicCamera_create_lesta(base, self, onChangeControlMode = None, useShotMaxDistance=True):
+    _StrategicCamera_create_common(self)
+    base(self, onChangeControlMode, useShotMaxDistance)
 
 
 
@@ -307,7 +315,10 @@ def init():
     overrideMethod(CrosshairPanelContainer, 'as_setSettingsS')(_CrosshairPanelContainer_as_setSettingsS)
 
     # strategic camera
-    overrideMethod(StrategicCamera, 'create')(_StrategicCamera_create)
+    if CURRENT_REALM == 'RU':
+        overrideMethod(StrategicCamera, 'create')(_StrategicCamera_create_lesta)
+    else:
+        overrideMethod(StrategicCamera, 'create')(_StrategicCamera_create_wg)
 
 
 def fini():
