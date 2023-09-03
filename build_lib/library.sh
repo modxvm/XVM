@@ -360,6 +360,8 @@ detect_python(){
                 export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python/27_64/python.exe"  #Mikhail's path
             elif [ -f "/c/Software/Python27/python.exe" ]; then
                 export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python27/python.exe"  #Mikhail's second path
+            elif [ -f "/c/Software/Python/2.7/python.exe" ]; then
+                export XVMBUILD_PYTHON_FILEPATH="/c/Software/Python/2.7/python.exe"  #Mikhail's third path
             elif [ -f "/c/Program Files/Python27/python.exe" ]; then
                 export XVMBUILD_PYTHON_FILEPATH="/c/Program Files/Python27/python.exe"  #MSVS default path
             fi

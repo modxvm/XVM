@@ -1,5 +1,4 @@
-diff -Naur battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm battle.orig-0/net/wg/data/constants/Linkages.class.asasm
---- battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2023-09-04 01:55:44.831482000 +0300
+--- battle.orig-0/net/wg/data/constants/Linkages.class.asasm.orig	2023-09-04 01:55:44.831482000 +0300
 +++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm	2023-09-04 01:55:51.661853800 +0300
 @@ -2438,7 +2438,7 @@
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 281 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
