@@ -1095,13 +1095,13 @@ def _Vehicle__onAppearanceReady(self, appearance):
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
-def Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
+def Vehicle_showDamageFromShot(self, *args, **kwargs):
     global isImpact
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event(EVENTS_NAMES.ON_IMPACT)
     if self.isPlayerVehicle and data.data['isAlive'] and isShowDamageLog:
-        data.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield)
+        data.showDamageFromShot(self, *args, **kwargs)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')

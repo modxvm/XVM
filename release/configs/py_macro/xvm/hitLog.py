@@ -873,13 +873,13 @@ def DestructibleEntity_onHealthChanged(self, newHealth, attackerID, attackReason
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
-def _Vehicle_showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
+def _Vehicle_showDamageFromShot(self, attackerID, *args, **kwargs):
     if battle.isBattleTypeSupported and (g_dataHitLog.playerVehicleID == attackerID) and self.isAlive() and _config.get(HIT_LOG_ENABLED, True):
-        g_dataHitLog.showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield)
+        g_dataHitLog.showDamageFromShot(self, attackerID, *args, **kwargs)
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
-def _Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
+def _Vehicle_showDamageFromExplosion(self, attackerID, *args, **kwargs):
     if battle.isBattleTypeSupported and (g_dataHitLog.playerVehicleID == attackerID) and self.isAlive() and _config.get(HIT_LOG_ENABLED, True):
         g_dataHitLog.splashHit = True
         g_dataHitLog.criticalHit = False
