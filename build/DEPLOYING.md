@@ -6,7 +6,6 @@
     * `/build/xvm-build.conf`
         * XVM version
         * WoT version
-        * `-dev` version suffix
 * ChangeLogs:
     * `/release/doc/ChangeLog-*.md`
 * Info about the released version. It's used to notify users about available updates:

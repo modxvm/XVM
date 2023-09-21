@@ -2,10 +2,10 @@
 
 from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
 
-from __version__ import __xvm_version__, __wot_version__, __revision__, __development__
+from __version__ import __xvm_version__, __wot_version__, __revision__
 
 class XVM(object):
-    XVM_VERSION    = __xvm_version__ + ('-dev' if __development__ == 'True' else '')
+    XVM_VERSION    = __xvm_version__
     XVM_REVISION   = __revision__
     WOT_VERSION    = __wot_version__
     XVM_INTRO      = 'https://modxvm.com'

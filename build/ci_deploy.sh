@@ -68,25 +68,6 @@ deploy_nightly_files(){
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "$localpath" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$remotepath"
 }
 
-deploy_release_files(){
-    echo ""
-    echo "Deploying XVM Release"
-
-    git_get_repostats "$XVMBUILD_ROOT_PATH"
-
-    #ZIP
-    localpath="$XVMBUILD_ROOT_PATH"/~output/pack/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".zip
-
-    remotepath="$XVM_RELEASE_UPLOAD_PATH"/xvm_"$XVMBUILD_XVM_VERSION".zip
-    sshpass -p "$XVM_RELEASE_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVM_RELEASE_SSH_STRICT_HOST_KEY_CHECKING" -P "$XVM_RELEASE_SSH_PORT" -r "$localpath" "$XVM_RELEASE_UPLOAD_USER@$XVM_RELEASE_UPLOAD_HOST:$remotepath"
-
-    #INSTALLER
-    localpath="$XVMBUILD_ROOT_PATH"/~output/installer/xvm_"$XVMBUILD_XVM_VERSION"_"$REPOSITORY_COMMITS_NUMBER"_"$REPOSITORY_BRANCH"_"$REPOSITORY_HASH".exe
-
-    remotepath="$XVM_RELEASE_UPLOAD_PATH"/xvm_"$XVMBUILD_XVM_VERSION".exe
-    sshpass -p "$XVM_RELEASE_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVM_RELEASE_SSH_STRICT_HOST_KEY_CHECKING" -P "$XVM_RELEASE_SSH_PORT" -r "$localpath" "$XVM_RELEASE_UPLOAD_USER@$XVM_RELEASE_UPLOAD_HOST:$remotepath"
-}
-
 prepare_meta(){
     echo ""
     echo "Preparing Meta"
@@ -107,12 +88,7 @@ prepare_meta(){
     sed -i "s/REPOSITORY_BRANCH/$REPOSITORY_BRANCH/g" "$dlmeta_output"
     sed -i "s/REPOSITORY_HASH/$REPOSITORY_HASH/g" "$dlmeta_output"
     sed -i "s/XVMBUILD_XVM_VERSION/$XVMBUILD_XVM_VERSION/g" "$dlmeta_output"
-    if [ "$XVMBUILD_DEVELOPMENT" = "True" ];
-    then
-        sed -i "s/REPOSITORY_COMMITS_NUMBER/$REPOSITORY_COMMITS_NUMBER/g" "$dlmeta_output"
-    else
-        sed -i "s/.REPOSITORY_COMMITS_NUMBER//g" "$dlmeta_output"
-    fi
+    sed -i "s/REPOSITORY_COMMITS_NUMBER/$REPOSITORY_COMMITS_NUMBER/g" "$dlmeta_output"
     sed -i "s/XVMBUILD_WOT_VERSION/$XVMBUILD_WOT_VERSION_wg/g" "$dlmeta_output"
     sed -i "s,XVMBUILD_MX_URL_EXE,$XVMBUILD_MX_URL_EXE,g" "$dlmeta_output"
     sed -i "s,XVMBUILD_MX_URL_ZIP,$XVMBUILD_MX_URL_ZIP,g" "$dlmeta_output"
@@ -155,24 +131,11 @@ deploy_nightly_meta(){
     sshpass -p "$XVMBUILD_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVMBUILD_UPLOAD_KEYCHECK" -P "$XVMBUILD_UPLOAD_PORT" -r "$dlmeta_output" "$XVMBUILD_UPLOAD_USER@$XVMBUILD_UPLOAD_HOST:$XVMBUILD_UPLOAD_PATH/$REPOSITORY_BRANCH/dl_meta.json"
 }
 
-deploy_release_meta(){
-    echo ""
-    echo "Deploying XVM Release Meta"
-
-    sshpass -p "$XVM_RELEASE_UPLOAD_PASSWORD" scp -o "StrictHostKeyChecking=$XVM_RELEASE_SSH_STRICT_HOST_KEY_CHECKING" -P "$XVM_RELEASE_SSH_PORT" -r "$dlmeta_output" "$XVM_RELEASE_UPLOAD_USER@$XVM_RELEASE_UPLOAD_HOST:$XVM_RELEASE_UPLOAD_PATH/dl_meta.json"
-}
-
 pack_xvm
 #pack_xfw
 prepare_meta
 
-if [ "$XVMBUILD_DEVELOPMENT" = "True" ];
-then
-    deploy_nightly_files
-    deploy_nightly_meta
-else
-    deploy_release_files
-    deploy_release_meta
-fi
+deploy_nightly_files
+deploy_nightly_meta
 
 clean_repodir

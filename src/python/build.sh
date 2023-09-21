@@ -106,7 +106,6 @@ for dir in $(find . -maxdepth 1 -type "d" ! -path "."); do
   echo "__revision__ = '$REPOSITORY_COMMITS_NUMBER'" >> $dir/__version__.py
   echo "__branch__ = '$REPOSITORY_BRANCH'" >> $dir/__version__.py
   echo "__node__ = '$REPOSITORY_HASH'" >> $dir/__version__.py
-  echo "__development__ = '$XVMBUILD_DEVELOPMENT'" >> $dir/__version__.py
   echo "__flavor__ = '$XVMBUILD_FLAVOR'" >> $dir/__version__.py
 done
 

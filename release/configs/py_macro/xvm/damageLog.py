@@ -1105,13 +1105,13 @@ def Vehicle_showDamageFromShot(self, *args, **kwargs):
 
 
 @registerEvent(Vehicle, 'showDamageFromExplosion')
-def Vehicle_showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor):
+def Vehicle_showDamageFromExplosion(self, *args, **kwargs):
     global isImpact
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
         as_event(EVENTS_NAMES.ON_IMPACT)
     if self.isPlayerVehicle and data.data['isAlive'] and isShowDamageLog:
-        data.showDamageFromExplosion(self, attackerID, center, effectsIndex, damageFactor)
+        data.showDamageFromExplosion(self, *args, **kwargs)
 
 
 @registerEvent(Vehicle, 'updateStunInfo')
