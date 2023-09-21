@@ -55,7 +55,7 @@ package com.xvm.battle.stronghold.fullStats
         private var _playerNameTF:TextField;
         private var _vehicleNameTF:TextField;
         private var _fragsTF:TextField;
-        //private var _vehicleIcon:BattleAtlasSprite;
+        //private var vehicleIcon:BattleAtlasSprite;
         private var _vehicleLevelIcon:BattleAtlasSprite;
         private var _playerStatus:PlayerStatusView;
         private var _vehicleTypeIcon:BattleAtlasSprite;
@@ -91,7 +91,7 @@ package com.xvm.battle.stronghold.fullStats
             _vehicleTypeIcon = table.vehicleTypeCollection[index];
             _icoIGR = table.icoIGRCollection[index];
             _badge = table.rankBadgesCollection[index];
-            //_vehicleIcon = table.vehicleIconCollection[index];
+            //vehicleIcon = table.vehicleIconCollection[index];
             _vehicleLevelIcon = table.vehicleLevelCollection[index];
             _playerStatus = table.playerStatusCollection[index];
 
@@ -101,7 +101,7 @@ package com.xvm.battle.stronghold.fullStats
             DEFAULT_VEHICLE_NAME_WIDTH = 105; // vehicleNameTF.width;
             DEFAULT_FRAGS_X = _fragsTF.x;
             DEFAULT_FRAGS_WIDTH = _fragsTF.width;
-            DEFAULT_VEHICLE_ICON_X = _vehicleIcon.x;
+            DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
             DEFAULT_VEHICLE_LEVEL_X = _vehicleLevelIcon.x;
             DEFAULT_VEHICLE_TYPE_ICON_X = _vehicleTypeIcon.x;
 
@@ -222,8 +222,8 @@ package com.xvm.battle.stronghold.fullStats
             {
                 var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
-                _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
-                _vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
+                vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
+                vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
             }
             if (isInvalid(FullStatsValidationType.VEHICLE_NAME))
             {
@@ -293,8 +293,8 @@ package com.xvm.battle.stronghold.fullStats
                 {
                     atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
-                _vehicleIcon.graphics.clear();
-                App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, _vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
+                vehicleIcon.graphics.clear();
+                App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
             }
             if (updateVehicleLevelIcon)
             {
@@ -422,11 +422,11 @@ package com.xvm.battle.stronghold.fullStats
             {
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
-                    _vehicleIcon.scaleX = 1;
+                    vehicleIcon.scaleX = 1;
                 }
                 else
                 {
-                    _vehicleIcon.scaleX = -1;
+                    vehicleIcon.scaleX = -1;
                 }
             }
 
@@ -533,18 +533,18 @@ package com.xvm.battle.stronghold.fullStats
         {
             if (_isLeftPanel)
             {
-                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
-                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
                 }
                 else
                 {
-                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
                 }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
@@ -604,15 +604,15 @@ package com.xvm.battle.stronghold.fullStats
                 if (_isLeftPanel)
                 {
                     offsetX = EXTRA_FIELDS_X_LEFT;
-                    bindToIconOffset = _vehicleIcon.x - offsetX;
+                    bindToIconOffset = vehicleIcon.x - offsetX;
                 }
                 else
                 {
                     offsetX = EXTRA_FIELDS_X_RIGHT;
-                    bindToIconOffset = _vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
+                    bindToIconOffset = vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 }
                 extraFields.visible = true;
-                extraFields.update(currentPlayerState, bindToIconOffset, offsetX, _vehicleIcon.y);
+                extraFields.update(currentPlayerState, bindToIconOffset, offsetX, vehicleIcon.y);
             }
         }
     }
