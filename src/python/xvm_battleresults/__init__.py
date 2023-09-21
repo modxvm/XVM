@@ -51,12 +51,12 @@ _XVM_DATA_STATS_BLOCK = None
 #
 
 # wait for loading xvm_battleresults_ui.swf
-def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID):
-    event_dispatcher_showBattleResultsWindow(base, arenaUniqueID)
+def event_dispatcher_showBattleResultsWindow_proxy(base, arenaUniqueID, *args, **kwargs):
+    event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, 0, *args, **kwargs)
 
-def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt=0):
+def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt, *args, **kwargs):
     if cnt < 5 and not swf_loaded_info.swf_loaded_get('xvm_lobby_ui.swf'):
-        BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt + 1))
+        BigWorld.callback(0, lambda: event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt + 1, *args, **kwargs))
     else:
         base(arenaUniqueID)
 
