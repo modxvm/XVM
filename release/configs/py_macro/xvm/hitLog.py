@@ -342,7 +342,7 @@ class DataHitLog(object):
             self.data['shortUserString'] = l10n(PILLBOX).format(self.entityNumber)
         self.updateData()
 
-    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
+    def showDamageFromShot(self, vehicle, attackerID, points, *args, **kwargs):
         maxComponentIdx = TankPartIndexes.ALL[-1]
         wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
         if wheelsConfig:

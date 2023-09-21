@@ -466,7 +466,7 @@ class Data(object):
         self.data['attackReasonID'] = 0
         self.data['numCrits'] = 0
 
-    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, lastMaterialIsShield):
+    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, *args, **kwargs):
         if not vehicle.isStarted:
             return
         collisionComponent = vehicle.appearance.collisions
@@ -501,7 +501,7 @@ class Data(object):
 
         self.hitShell(attackerID, effectsIndex, damageFactor)
 
-    def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor):
+    def showDamageFromExplosion(self, vehicle, attackerID, center, effectsIndex, damageFactor, *args, **kwargs):
         self.data['splashHit'] = 'splash'
         # self.data['criticalHit'] = False
         if damageFactor == 0:
