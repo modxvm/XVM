@@ -55,7 +55,6 @@ package com.xvm.battle.classic.fullStats
         private var _playerNameTF:TextField;
         private var _vehicleNameTF:TextField;
         private var _fragsTF:TextField;
-        //private var vehicleIcon:BattleAtlasSprite;
         private var _vehicleLevelIcon:BattleAtlasSprite;
         private var _playerStatus:PlayerStatusView;
         private var _vehicleTypeIcon:BattleAtlasSprite;
@@ -91,7 +90,6 @@ package com.xvm.battle.classic.fullStats
             _vehicleTypeIcon = table.vehicleTypeCollection[index];
             _icoIGR = table.icoIGRCollection[index];
             _badge = table.rankBadgesCollection[index];
-            //vehicleIcon = table.vehicleIconCollection[index];
             _vehicleLevelIcon = table.vehicleLevelCollection[index];
             _playerStatus = table.playerStatusCollection[index];
 
@@ -101,9 +99,15 @@ package com.xvm.battle.classic.fullStats
             DEFAULT_VEHICLE_NAME_WIDTH = 105; // vehicleNameTF.width;
             DEFAULT_FRAGS_X = _fragsTF.x;
             DEFAULT_FRAGS_WIDTH = _fragsTF.width;
-            DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
             DEFAULT_VEHICLE_LEVEL_X = _vehicleLevelIcon.x;
             DEFAULT_VEHICLE_TYPE_ICON_X = _vehicleTypeIcon.x;
+            
+            CLIENT::WG {
+                DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
+            }
+            CLIENT::LESTA {
+                DEFAULT_VEHICLE_ICON_X = _vehicleIcon.x;
+            }
 
             // align fields
             _fragsTF.y -= 1;
@@ -222,8 +226,14 @@ package com.xvm.battle.classic.fullStats
             {
                 var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
-                vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
-                vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
+                CLIENT::WG {
+                    vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
+                    vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
+                }
+                CLIENT::LESTA {
+                    _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
+                    _vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
+                }
             }
             if (isInvalid(FullStatsValidationType.VEHICLE_NAME))
             {
@@ -293,8 +303,15 @@ package com.xvm.battle.classic.fullStats
                 {
                     atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
-                vehicleIcon.graphics.clear();
-                App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
+
+                CLIENT::WG {
+                    vehicleIcon.graphics.clear();
+                    App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
+                }
+                CLIENT::LESTA {
+                    _vehicleIcon.graphics.clear();
+                    App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, _vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
+                }
             }
             if (updateVehicleLevelIcon)
             {
@@ -420,13 +437,11 @@ package com.xvm.battle.classic.fullStats
 
             if (!_isLeftPanel)
             {
-                if (Config.config.battle.mirroredVehicleIcons)
-                {
-                    vehicleIcon.scaleX = 1;
+                CLIENT::WG {
+                    vehicleIcon.scaleX = Config.config.battle.mirroredVehicleIcons ? 1 : -1;
                 }
-                else
-                {
-                    vehicleIcon.scaleX = -1;
+                CLIENT::LESTA {
+                    _vehicleIcon.scaleX = Config.config.battle.mirroredVehicleIcons ? 1 : -1;
                 }
             }
 
@@ -533,19 +548,24 @@ package com.xvm.battle.classic.fullStats
         {
             if (_isLeftPanel)
             {
-                vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                CLIENT::WG {
+                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                }
+                CLIENT::LESTA {
+                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                }
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
-                if (Config.config.battle.mirroredVehicleIcons)
-                {
-                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight;
+                var icon_x = Config.config.battle.mirroredVehicleIcons ? DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight : DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH
+                CLIENT::WG {
+                    vehicleIcon.x = icon_x;
                 }
-                else
-                {
-                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH;
+                CLIENT::LESTA {
+                    _vehicleIcon.x = icon_x;
                 }
+
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
             }
             alignVehicleLevelIcon();
@@ -601,18 +621,30 @@ package com.xvm.battle.classic.fullStats
             {
                 var offsetX:Number;
                 var bindToIconOffset:Number;
+                var icon_x:Number;
+                var icon_y:Number;
+
+                CLIENT::WG {
+                    icon_x = vehicleIcon.x;
+                    icon_y = vehicleIcon.y;
+                }
+                CLIENT::LESTA {
+                    icon_x = _vehicleIcon.x;
+                    icon_y = _vehicleIcon.y;
+                }
+
                 if (_isLeftPanel)
                 {
                     offsetX = EXTRA_FIELDS_X_LEFT;
-                    bindToIconOffset = vehicleIcon.x - offsetX;
+                    bindToIconOffset = icon_x - offsetX;
                 }
                 else
                 {
                     offsetX = EXTRA_FIELDS_X_RIGHT;
-                    bindToIconOffset = vehicleIcon.x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
+                    bindToIconOffset = icon_x - offsetX + (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 }
                 extraFields.visible = true;
-                extraFields.update(currentPlayerState, bindToIconOffset, offsetX, vehicleIcon.y);
+                extraFields.update(currentPlayerState, bindToIconOffset, offsetX, icon_y);
             }
         }
     }
