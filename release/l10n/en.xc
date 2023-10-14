@@ -154,6 +154,7 @@
     "radio_range/actual": "actual",
     "lowAmmo": "Low ammo",
     "shootingRadius": "Shooting radius",
+    "flameMaxDistance": "Flamethrower radius",
     "pitchLimitsSide": "Elevation arc (side)",
     "pitchLimitsRear": "Elevation arc (rear)",
     "terrainResistance": "Terrain resistance (hard/medium/soft)",

@@ -154,6 +154,7 @@
     "radio_range/actual": "расчетная",
     "lowAmmo": "Мало снарядов",
     "shootingRadius": "Дальность стрельбы",
+    "flameMaxDistance": "Дальность огнеметания",
     "pitchLimitsSide": "Углы вертикальной наводки сбоку (град)",
     "pitchLimitsRear": "Углы вертикальной наводки сзади (град)",
     "terrainResistance": "Сопротивление грунтов (тверд./средн./мягк.)",

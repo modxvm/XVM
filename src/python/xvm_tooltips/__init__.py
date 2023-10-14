@@ -425,7 +425,10 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'shootingRadius':
                     viewRange, shellRadius, artiRadius = _getRanges(turret, gun, vehicle.nationName, vehicle.type)
                     if vehicle.type == 'SPG':
-                        tooltip_add_param(self, result, tooltip_with_units(l10n('shootingRadius'), l10n('(m)')), artiRadius)
+                        if artiRadius > 0:
+                            tooltip_add_param(self, result, tooltip_with_units(l10n('shootingRadius'), l10n('(m)')), artiRadius)
+                        else:
+                            tooltip_add_param(self, result, tooltip_with_units(l10n('flameMaxDistance'), l10n('(m)')), shellRadius)
                     elif shellRadius < 707:
                         tooltip_add_param(self, result, tooltip_with_units(l10n('shootingRadius'), l10n('(m)')), shellRadius)
                 #reverse max speed
