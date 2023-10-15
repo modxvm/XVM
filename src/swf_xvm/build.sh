@@ -57,6 +57,7 @@ projects="
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
         $projects
+        xvm_battle_halloween
     "
 fi
 

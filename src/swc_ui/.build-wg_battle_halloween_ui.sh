@@ -29,35 +29,16 @@ fi
 
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 
-projects="
-    wg_lobby_ui
-    wg_battle_classic_ui
-    wg_battle_event_ui
-    wg_battle_epicbattle_ui
-    wg_battle_epicrandom_ui
-    wg_battle_ranked_ui
-    wg_battle_royale_ui
-    wg_vm_ui
-"
+detect_os
+detect_actionscript_sdk
 
-# special projects for WG
-if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
-    projects="
-        $projects 
-        wg_battle_halloween_ui
-    "
-fi
-
-# special projects for Lesta
-if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
-    projects="
-        $projects 
-    "
-fi
-
-for project in ${projects}; do
-    echo "building ${project}"
-    . .build-${project}.sh
-done
-
-echo ""
+class="\$AppLinks"
+build_as3_swc \
+    -source-path battle_ui/halloween \
+    -source-path battle_ui/ui/* \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/common_i18n_library-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
+    -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_battle-1.0-SNAPSHOT.swc \
+    -output ../../~output/$XVMBUILD_FLAVOR/swc/wg_battle_halloween_ui.swc \
+    -include-classes $class

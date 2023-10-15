@@ -69,6 +69,10 @@ _LOG_COMMANDS = [
 _WOT_ROOT = '../../../'
 
 
+class XfwArenaGuiType:
+    HALLOWEEN_EVENT = 101
+
+
 
 #
 # Classes
@@ -193,6 +197,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_stronghold']
                 elif arenaGuiType == ARENA_GUI_TYPE.COMP7:
                     as_paths += ['as_battle_comp7']
+                elif arenaGuiType == XfwArenaGuiType.HALLOWEEN_EVENT:
+                    as_paths += ['as_battle_halloween']
                 else:
                     as_paths += ['as_battle_classic']
             else:
