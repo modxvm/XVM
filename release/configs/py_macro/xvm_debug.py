@@ -1,29 +1,25 @@
-import traceback
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2023 XVM Contributors
+"""
 
+#
+# Imports
+#
+
+# BigWorld
+import GUI
+
+# XFW
 from xfw import *
 from xfw_actionscript.python import *
-from xvm_main.python.logger import *
 
-#######################################
-# add perks for every tankman in the crew
-ADD_PERKS_COUNT = 8
-from gui.Scaleform.daapi.view.lobby.hangar.Crew import Crew
-#@overrideMethod(Crew, 'as_tankmenResponseS')
-def as_tankmenResponseS(base, self, data):
-    for t in data['tankmen']:
-        if t['skills']:
-            for x in range(0, ADD_PERKS_COUNT):
-                t['skills'].insert(0, data['tankmen'][0]['skills'][0].copy())
-                t['skills'][0]['id'] = x + 1
-                t['skills'][0]['level'] = 100
-    #log(data)
-    base(self, data)
+# XVM
+from xvm_main.python.logger import *
 
 
 #######################################
 # test as_callback()
-
-import GUI
 
 _xvm_debug_data = None
 _xvm_debug_x = 0
