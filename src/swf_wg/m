@@ -1,5 +1,4 @@
-diff -Naur lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm lobby.orig-0/net/wg/data/constants/Linkages.class.asasm
---- lobby.orig-0.orig/net/wg/data/constants/Linkages.class.asasm	2023-10-15 20:09:39.434271600 +0300
+--- lobby.orig-0/net/wg/data/constants/Linkages.class.asasm.orig	2023-10-15 20:09:39.434271600 +0300
 +++ lobby.orig-0/net/wg/data/constants/Linkages.class.asasm	2023-10-15 20:10:13.508653900 +0300
 @@ -2335,7 +2335,7 @@
   trait const QName(PackageNamespace(""), "CHART_STATISTICS_VIEW") slotid 206 type QName(PackageNamespace(""), "String") value Utf8("ChartsStatisticsView_UI") end
