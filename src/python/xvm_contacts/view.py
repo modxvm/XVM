@@ -1,4 +1,7 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2023 XVM Contributors
+"""
 
 from messenger.gui.Scaleform.view.lobby.contact_manage_note_views import ContactEditNoteView
 
