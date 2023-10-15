@@ -1,10 +1,23 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2023 XVM Contributors
+"""
 
+#
+# Imports
+#
+
+# BigWorld
 from CurrentVehicle import g_currentVehicle
 from gui import SystemMessages
 from gui.shared.gui_items.processors.tankman import TankmanReturn
 from gui.shared.utils import decorators
 
+
+
+#
+# Classes
+#
 
 class _WGCompat():
 
@@ -22,5 +35,15 @@ class _WGCompat():
         if not (vehicle.isCrewFull or vehicle.isInBattle or vehicle.isLocked):
             yield TankmanReturn(vehicle).request()
 
+    @decorators.adisp_process('unloading')
+    def processUnloadCrew():
+        result = yield TankmanUnload(g_currentVehicle.item.invID).request()
+        if result.userMsg:
+            SystemMessages.pushI18nMessage(result.userMsg, type=result.sysMsgType)
+
+
+#
+# Globals
+#
 
 g_instance = _WGCompat()
