@@ -22,7 +22,6 @@ import net.wg.gui.lobby.LobbyPage; LobbyPage;
 import net.wg.gui.lobby.battleResults.BattleResults; BattleResults;
 import net.wg.gui.lobby.battleResults.components.EfficiencyIconRenderer; EfficiencyIconRenderer;
 import net.wg.gui.lobby.hangar.Hangar; Hangar;
-import net.wg.gui.lobby.hangar.crew.CrewItemRenderer; CrewItemRenderer;
 import net.wg.gui.lobby.hangar.tcarousel.SmallTankIcon; SmallTankIcon;
 import net.wg.gui.lobby.hangar.tcarousel.TankIcon; TankIcon;
 import net.wg.gui.lobby.header.headerButtonBar.HBC_BattleSelector; HBC_BattleSelector;
@@ -50,10 +49,6 @@ ContactsTreeItemRendererUI;
 
 // contactsListPopover.swf
 ContactNoteManageViewUI;
-
-// crew.swf
-CrewItemRendererUI;
-CrewItemRendererSmallUI;
 
 // guiControlsLobby.swf
 CheckBoxTankers;

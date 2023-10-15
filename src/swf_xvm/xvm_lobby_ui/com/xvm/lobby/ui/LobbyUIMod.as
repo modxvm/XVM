@@ -12,10 +12,6 @@ package com.xvm.lobby.ui
     UI_CommonStats;
     UI_ProgressElement;
 
-    import com.xvm.lobby.ui.crew.*;
-    UI_CrewItemRenderer;
-    UI_CrewItemRendererSmall;
-
     import com.xvm.lobby.ui.limits.*;
     LimitsUIImpl;
 
