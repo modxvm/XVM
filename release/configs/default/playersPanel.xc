@@ -240,7 +240,7 @@
       "nickShadowLeft": null,
       "nickShadowRight": null,
       // Offset of X value for prestige level.
-      // Смещение координаты X для уровня престижа.
+      // Смещение координаты X для уровня элитности.
       "prestigeOffsetXLeft": 0,
       "prestigeOffsetXRight": 0,
       // Offset of X value for vehicle name column.
@@ -500,7 +500,7 @@
       "nickShadowLeft": null,
       "nickShadowRight": null,
       // Offset of X value for prestige level.
-      // Смещение координаты X для уровня престижа.
+      // Смещение координаты X для уровня элитности.
       "prestigeOffsetXLeft": 0,
       "prestigeOffsetXRight": 0,
       // Offset of X value for vehicle name column.
@@ -628,7 +628,7 @@
       "nickShadowLeft": null,
       "nickShadowRight": null,
       // Offset of X value for prestige level.
-      // Смещение координаты X для уровня престижа.
+      // Смещение координаты X для уровня элитности.
       "prestigeOffsetXLeft": 0,
       "prestigeOffsetXRight": 0,
       // Offset of X value for vehicle name column.
