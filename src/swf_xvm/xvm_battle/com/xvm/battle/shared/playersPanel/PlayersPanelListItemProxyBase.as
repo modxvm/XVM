@@ -111,6 +111,7 @@ package com.xvm.battle.shared.playersPanel
         private var DEFAULT_VEHICLE_LEVEL_X:int;
         private var DEFAULT_FRAGS_WIDTH:int;
         private var DEFAULT_VEHICLE_WIDTH:int;
+        private var DEFAULT_PRESTIGE_WIDTH:int;
         private var DEFAULT_BADGEICON_WIDTH:int;
         private var DEFAULT_PLAYERNAMECUT_WIDTH:int;
         private var DEFAULT_SPOTTED_INDICATOR_X:int;
@@ -197,6 +198,10 @@ package com.xvm.battle.shared.playersPanel
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
             DEFAULT_SPOTTED_INDICATOR_X = ui.spottedIndicator.x;
             DEFAULT_SPOTTED_INDICATOR_Y = ui.spottedIndicator.y;
+
+            CLIENT::WG{
+                DEFAULT_PRESTIGE_WIDTH = ui.prestigeLevel.width;
+            }
 
             _setup();
         }
@@ -490,6 +495,10 @@ package com.xvm.battle.shared.playersPanel
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                     ui.spottedIndicator.x = DEFAULT_SPOTTED_INDICATOR_X;
                     ui.spottedIndicator.y = DEFAULT_SPOTTED_INDICATOR_Y;
+
+                    CLIENT::WG {
+                        ui.prestigeLevel.width = DEFAULT_PRESTIGE_WIDTH;
+                    }
                 }
 
                 setup();
@@ -517,27 +526,18 @@ package com.xvm.battle.shared.playersPanel
                     ui.badge.visible = false;
                     ui.playerNameCutTF.visible = false;
                     ui.playerNameFullTF.visible = false;
+                    CLIENT::WG {
+                        ui.prestigeLevel.visible = false;
+                    }
+
                     if (mcfg.standardFields)
                     {
                         var len:int = mcfg.standardFields.length;
                         for (var i:int = 0; i < len; ++i)
                         {
-                            switch (mcfg.standardFields[i].toLowerCase())
-                            {
-                                case "frags":
-                                    ui.fragsTF.visible = true;
-                                    break;
-                                case "badge":
-                                    ui.badge.visible = true;
-                                    break;
-                                case "nick":
-                                    ui.playerNameFullTF.visible = true;
-                                    break;
-                                case "vehicle":
-                                    ui.vehicleTF.visible = true;
-                                    break;
-                                default:
-                                    break;
+                            var field:DisplayObject = _getFieldByConfigName(mcfg.standardFields[i].toLowerCase());
+                            if(field != null){
+                                field.visible = true;
                             }
                         }
                     }
@@ -779,7 +779,8 @@ package com.xvm.battle.shared.playersPanel
 
         private function _getFieldByConfigName(fieldName:String):DisplayObject
         {
-            switch (fieldName.toLowerCase())
+            var name:String = fieldName.toLowerCase();
+            switch (name)
             {
                 case "frags":
                     return ui.fragsTF;
@@ -788,10 +789,17 @@ package com.xvm.battle.shared.playersPanel
                 case "nick":
                     return ui.playerNameFullTF;
                 case "vehicle":
-                    return  ui.vehicleTF;
+                    return ui.vehicleTF;
                 default:
                     break;
             }
+
+            CLIENT::WG {
+                if(name == "prestige"){
+                    return ui.prestigeLevel;
+                }
+            }
+
             return null;
         }
 
@@ -863,6 +871,7 @@ package com.xvm.battle.shared.playersPanel
                 default:
                     break;
             }
+
             return w;
         }
 
@@ -885,6 +894,13 @@ package com.xvm.battle.shared.playersPanel
                 default:
                     break;
             }
+
+            CLIENT::WG{
+                if(field == ui.prestigeLevel){
+                    return Macros.FormatNumber(mcfg.prestigeOffsetXLeft, currentPlayerState, 0);
+                }
+            }
+
             return 0;
         }
 
@@ -907,6 +923,13 @@ package com.xvm.battle.shared.playersPanel
                 default:
                     break;
             }
+
+            CLIENT::WG{
+                if(field == ui.prestigeLevel){
+                    return Macros.FormatNumber(mcfg.prestigeOffsetXRight, currentPlayerState, 0);
+                }
+            }
+
             return 0;
         }
 
@@ -1057,81 +1080,3 @@ package com.xvm.battle.shared.playersPanel
         }
     }
 }
-
-/* TODO
-
-    private function _internal_createMenuForNoneState(mc:MovieClip)
-    {
-        var cf:Object = cfg.none.extraFields[isLeftPanel ? "leftPanel" : "rightPanel"];
-        if (!cf.formats)
-            return;
-        var menu_mc:UIComponent = UIComponent.createInstance(mc, "HiddenButton", MENU_MC_NAME, mc.getNextHighestDepth(), {
-            _x: isLeftPanel ? 0 : -cf.width,
-            width: cf.width,
-            height: cf.height,
-            panel: isLeftPanel ? _root["leftPanel"] : _root["rightPanel"],
-            owner: this } );
-        menu_mc.addEventListener("rollOver", wrapper, "onItemRollOver");
-        menu_mc.addEventListener("rollOut", wrapper, "onItemRollOut");
-        menu_mc.addEventListener("releaseOutside", wrapper, "onItemReleaseOutside");
-    }
-
-        GlobalEventDispatcher.addEventListener(Events.E_UPDATE_STAGE, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.E_STAT_LOADED, this, invalidate);
-        GlobalEventDispatcher.addEventListener(Events.E_BATTLE_STATE_CHANGED, this, onBattleStateChanged);
-
-    private static function createMouseHandler(extraPanels:MovieClip):Void
-    {
-        var mouseHandler:Object = {};
-        Mouse.addListener(mouseHandler);
-        mouseHandler.onMouseDown = function(button, target)
-        {
-            //Logger.add(target + " " + button);
-            if (_root["leftPanel"].state != net.wargaming.ingame.PlayersPanel.STATES.none.name)
-                return;
-
-            if (!_root.g_cursorVisible)
-                return;
-
-            var t = null;
-            for (var n in extraPanels)
-            {
-                var a:MovieClip = extraPanels[n];
-                if (a == null)
-                    continue;
-                var b:MovieClip = a[PlayerListItemRenderer.MENU_MC_NAME];
-                if (b == null)
-                    continue;
-                if (b.hitTest(_root._xmouse, _root._ymouse, true))
-                {
-                    t = b;
-                    break;
-                }
-            }
-            if (t == null)
-                return;
-
-            var data = t.owner.wrapper.data;
-            if (data == null)
-                return;
-
-            if (button == Mouse.RIGHT)
-            {
-                var xmlKeyConverter = new net.wargaming.managers.XMLKeyConverter();
-                net.wargaming.ingame.MinimapEntry.unhighlightLastEntry();
-                var ignored = net.wargaming.messenger.MessengerUtils.isIgnored(data);
-                net.wargaming.ingame.BattleContextMenuHandler.showMenu(extraPanels, data, [
-                    [ { id: net.wargaming.messenger.MessengerUtils.isFriend(data) ? "removeFromFriends" : "addToFriends", disabled: !data.isEnabledInRoaming } ],
-                    [ ignored ? "removeFromIgnored" : "addToIgnored" ],
-                    t.panel.getDenunciationsSubmenu(xmlKeyConverter, data.denunciations, data.squad),
-                    [ !ignored && _global.wg_isShowVoiceChat ? (net.wargaming.messenger.MessengerUtils.isMuted(data) ? "unsetMuted" : "setMuted") : null ]
-                    ]);
-            }
-            else if (!net.wargaming.ingame.BattleContextMenuHandler.hitTestToCurrentMenu())
-            {
-                gfx.io.GameDelegate.call("Battle.selectPlayer", [data.vehId]);
-            }
-        }
-    }
-
-*/

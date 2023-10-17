@@ -75,6 +75,7 @@ package com.xvm.battle.classic.playersPanel
 
         override protected function updatePositionsLeft(lastX:int):void
         {
+            super.updatePositionsLeft(); 
             ui.x = -(lastX - (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             //Logger.add("ui.x=" + ui.x + " ui.vehicleIcon.x=" + ui.vehicleIcon.x);
             ui.dynamicSquad.x = -ui.x;
@@ -82,6 +83,7 @@ package com.xvm.battle.classic.playersPanel
 
         override protected function updatePositionsRight(lastX:int):void
         {
+            super.updatePositionsRight(); 
             ui.x = -(lastX + (mopt_removeSquadIcon ? 0 : SQUAD_ITEMS_AREA_WIDTH));
             ui.dynamicSquad.x = -ui.x;
             ui.dogTag.x = -ui.x + (mopt_removeSquadIcon ? 0 : DOG_TAG_OFFSET);

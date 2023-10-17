@@ -172,9 +172,9 @@
       // false - отключить.
       "enabled": true,
       // Displayed standard fields in this mode and their order.
-      // Available names: "frags", "badge", "nick", "vehicle".
+      // Available names: "frags", "badge", "nick", "vehicle", "prestige".
       // Отображаемые стандартные поля в данном режиме, и их порядок.
-      // Допустимые названия: "frags", "badge", "nick", "vehicle".
+      // Допустимые названия: "frags", "badge", "nick", "vehicle", "prestige".
       "standardFields": [ "frags" ],
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
@@ -239,6 +239,10 @@
       // Тень для поля имени игрока (по умолчанию null = без тени, как в чистом клиенте).
       "nickShadowLeft": null,
       "nickShadowRight": null,
+      // Offset of X value for prestige level.
+      // Смещение координаты X для уровня престижа.
+      "prestigeOffsetXLeft": 0,
+      "prestigeOffsetXRight": 0,
       // Offset of X value for vehicle name column.
       // Смещение координаты X для поля названия танка.
       "vehicleOffsetXLeft": 0,
@@ -301,9 +305,9 @@
       // false - отключить.
       "enabled": true,
       // Displayed standard fields in this mode and their order.
-      // Available names: "frags", "badge", "nick", "vehicle".
+      // Available names: "frags", "badge", "nick", "vehicle", "prestige".
       // Отображаемые стандартные поля в данном режиме, и их порядок.
-      // Допустимые названия: "frags", "badge", "nick", "vehicle".
+      // Допустимые названия: "frags", "badge", "nick", "vehicle", "prestige".
       "standardFields": [ "frags", "badge", "nick" ],
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
@@ -428,9 +432,9 @@
       // false - отключить.
       "enabled": true,
       // Displayed standard fields in this mode and their order.
-      // Available names: "frags", "badge", "nick", "vehicle".
+      // Available names: "frags", "badge", "nick", "vehicle", "prestige".
       // Отображаемые стандартные поля в данном режиме, и их порядок.
-      // Допустимые названия: "frags", "badge", "nick", "vehicle".
+      // Допустимые названия: "frags", "badge", "nick", "vehicle", "prestige".
       "standardFields": [ "frags", "vehicle" ],
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
@@ -495,6 +499,10 @@
       // Тень для поля имени игрока (по умолчанию null = без тени, как в чистом клиенте).
       "nickShadowLeft": null,
       "nickShadowRight": null,
+      // Offset of X value for prestige level.
+      // Смещение координаты X для уровня престижа.
+      "prestigeOffsetXLeft": 0,
+      "prestigeOffsetXRight": 0,
       // Offset of X value for vehicle name column.
       // Смещение координаты X для поля названия танка.
       "vehicleOffsetXLeft": 0,
@@ -555,10 +563,10 @@
       // false - отключить.
       "enabled": true,
       // Displayed standard fields in this mode and their order.
-      // Available names: "frags", "badge", "nick", "vehicle".
+      // Available names: "frags", "badge", "nick", "vehicle", "prestige".
       // Отображаемые стандартные поля в данном режиме, и их порядок.
-      // Допустимые названия: "frags", "badge", "nick", "vehicle".
-      "standardFields": [ "frags", "badge", "nick", "vehicle" ],
+      // Допустимые названия: "frags", "badge", "nick", "vehicle", "prestige".
+      "standardFields": [ "frags", "badge", "nick", "vehicle"],
       // true - disable platoon/rank icons.
       // true - убрать отображение иконки взвода/ранга.
       "removeSquadIcon": false,
@@ -619,6 +627,10 @@
       // Тень для поля имени игрока (по умолчанию null = без тени, как в чистом клиенте).
       "nickShadowLeft": null,
       "nickShadowRight": null,
+      // Offset of X value for prestige level.
+      // Смещение координаты X для уровня престижа.
+      "prestigeOffsetXLeft": 0,
+      "prestigeOffsetXRight": 0,
       // Offset of X value for vehicle name column.
       // Смещение координаты X для поля названия танка.
       "vehicleOffsetXLeft": 0,
