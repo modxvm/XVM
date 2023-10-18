@@ -31,6 +31,8 @@ from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import Ses
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
+from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
+from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 from gui.shared.gui_items.Tankman import Tankman
 
 from xfw import *
@@ -66,18 +68,11 @@ def onConfigLoaded(self, e=None):
 
     Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
 
-g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
-
-@registerEvent(game, 'fini')
-def fini():
-    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
-
 
 #####################################################################
 # handlers
 
 # replace original 'NOT_FULL_AMMO_MULTIPLIER'
-@overrideMethod(Vehicle, 'isAmmoFull')
 def Vehicle_isAmmoFull(base, self):
     try:
         if self.isOnlyForEventBattles:
@@ -92,7 +87,6 @@ def Vehicle_isAmmoFull(base, self):
         return base(self)
 
 # barracks: add nation flag and skills for tanksman
-@overrideMethod(barrack, '_packActiveTankman')
 def barrack_packActiveTankman(base, tankman):
     try:
         if isinstance(tankman, Tankman):
@@ -139,7 +133,6 @@ def barrack_packActiveTankman(base, tankman):
 
 
 # low ammo => vehicle not ready
-@overrideMethod(Vehicle, 'isReadyToPrebattle')
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     if isInBootcamp():
         return
@@ -155,7 +148,6 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     return base(self, *args, **kwargs)
 
 # low ammo => vehicle not ready
-@overrideMethod(Vehicle, 'isReadyToFight')
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     if isInBootcamp():
         return
@@ -171,7 +163,6 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     return base.fget(self, *args, **kwargs) # base is property
 
 # low ammo => vehicle not ready (disable red button)
-@overrideMethod(CurrentVehicleActionsValidator, '_validate')
 def _CurrentVehicleActionsValidator_validate(base, self):
     res = base(self)
     if isInBootcamp():
@@ -189,21 +180,18 @@ def _CurrentVehicleActionsValidator_validate(base, self):
     return res
 
 # low ammo => write on carousel's vehicle 'low ammo'
-@overrideMethod(helpers.i18n, 'makeString')
 def _i18n_makeString(base, key, *args, **kwargs):
     if key == MENU.TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL: # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
 
 # hide referral program button
-@overrideMethod(MessengerBarMeta, 'as_setInitDataS')
 def MessengerBarMeta_as_setInitDataS(base, self, data):
     if not config.get('hangar/showReferralButton', True) and ('isReferralEnabled' in data):
         data['isReferralEnabled'] = False
     return base(self, data)
 
 # hide shared chat button
-@overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')
 def handleLazyChannelCtlInited(base, self, event):
     if not config.get('hangar/showGeneralChatButton', True):
         ctx = event.ctx
@@ -217,35 +205,30 @@ def handleLazyChannelCtlInited(base, self, event):
     return base(self, event)
 
 # hide premium vehicle on the background in the hangar
-@overrideMethod(HeroTank, 'recreateVehicle')
 def recreateVehicle(base, self, typeDescriptor=None, state=ModelStates.UNDAMAGED, callback=None, outfit=None):
     if not config.get('hangar/showPromoPremVehicle', True):
         return
     base(self, typeDescriptor, state, callback, outfit)
 
 # hide display pop-up messages in the hangar
-@overrideMethod(TeaserViewer, 'show')
 def show(base, self, teaserData, promoCount):
     if not config.get('hangar/combatIntelligence/showPopUpMessages', True):
         return
     base(self, teaserData, promoCount)
 
 # hide display unread notifications counter in the menu
-@overrideMethod(PromoController, 'getPromoCount')
 def getPromoCount(base, self):
     if not config.get('hangar/combatIntelligence/showUnreadCounter', True):
         return
     base(self)
 
 # hide ranked battle results window
-@overrideMethod(RankedBattlesResults, '_populate')
 def _populate(base, self):
     if not config.get('hangar/showRankedBattleResults', True):
         return
     base(self)
 
 # hide display session statistics button
-@overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')
 def updateSessionStatsBtn(base, self):
     if not config.get('hangar/sessionStatsButton/showButton', True):
         self.as_setSessionStatsButtonVisibleS(False)
@@ -254,30 +237,88 @@ def updateSessionStatsBtn(base, self):
     base(self)
 
 # hide display the counter of spent battles on the button
-@overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')
 def updateBatteleCount(base, self):
     if not config.get('hangar/sessionStatsButton/showBattleCount', True):
         return
     base(self)
 
 # hide display widget with daily quests
-@overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')
 def shouldHide(base, self):
     if not config.get('hangar/showDailyQuestWidget', True):
         return True
     return base(self)
 
 # hide display pop-up window when receiving progressive decals
-@overrideMethod(ProgressiveItemsRewardHandler, '_showAward')
 def _showAward(base, self, ctx):
     if not config.get('hangar/showProgressiveDecalsWindow', True):
         return
     base(self, ctx)
 
 # hide display banner of various events in the hangar
-@overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')
 def updateEntries(base, self):
     if not config.get('hangar/showEventBanner', True):
         self.as_updateEntriesS([])
         return
     base(self)
+
+# hide prestige (elite levels) system widget in the hangar
+def Hangar_as_setPrestigeWidgetVisibleS(base, self, value):
+    if not config.get('hangar/showHangarPrestigeWidget', True):
+        value = False
+    return base(self, value)
+
+# hide prestige (elite levels) system widget in the profile 
+def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
+    if not config.get('hangar/showProfilePrestigeWidget', True):
+        value = False
+    return base(self, value)
+
+
+#
+# XFW API
+#
+
+__initialized = False
+
+def xfw_module_init():
+    global __initialized
+    if not __initialized:
+        g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+        overrideMethod(Vehicle, 'isAmmoFull')(Vehicle_isAmmoFull)
+        overrideMethod(Vehicle, 'isReadyToPrebattle')(Vehicle_isReadyToPrebattle)
+        overrideMethod(Vehicle, 'isReadyToFight')(Vehicle_isReadyToFight)
+        overrideMethod(CurrentVehicleActionsValidator, '_validate')(_CurrentVehicleActionsValidator_validate)
+        overrideMethod(helpers.i18n, 'makeString')(_i18n_makeString)
+
+        overrideMethod(barrack, '_packActiveTankman')(barrack_packActiveTankman)
+        overrideMethod(MessengerBarMeta, 'as_setInitDataS')(MessengerBarMeta_as_setInitDataS)
+        overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')(handleLazyChannelCtlInited)
+        overrideMethod(HeroTank, 'recreateVehicle')(recreateVehicle)
+        overrideMethod(TeaserViewer, 'show')(show)
+        overrideMethod(PromoController, 'getPromoCount')(getPromoCount)
+        overrideMethod(RankedBattlesResults, '_populate')(_populate)
+        overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(updateSessionStatsBtn)
+        overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(updateBatteleCount)
+
+        overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(shouldHide)
+        overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(_showAward)
+        overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(updateEntries)
+
+        if getRegion() != 'RU':
+            override(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
+            override(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
+
+        __initialized = True
+
+
+def xfw_module_fini():
+    global __initialized
+    if __initialized:
+        g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+        __initialized = False
+
+
+def xfw_is_module_loaded():
+    global __initialized
+    return __initialized
