@@ -679,9 +679,6 @@ package com.xvm.battle.shared.playersPanel
         private function _updateVehicleIconPositionLeft():void
         {
             var vehicleIconX:int = VEHICLE_ICON_LEFT_X + _getFieldOffsetXLeft(ui.vehicleIcon);
-            CLIENT::WG{
-                vehicleIconX += ui.prestigeLevel.x;
-            }
             var vehicleLevelX:int = VEHICLE_LEVEL_LEFT_X + _getFieldOffsetXLeft(ui.vehicleLevel) - ui.vehicleLevel.width / 2;
             ui.hpBarPlayersPanelListItem.setParentX(-this.x);
             ui.hpBarPlayersPanelListItem.setVehicleIconX(vehicleIconX);
@@ -715,11 +712,6 @@ package com.xvm.battle.shared.playersPanel
                 vehicleLevelX = VEHICLE_LEVEL_RIGHT_X - _getFieldOffsetXRight(ui.vehicleLevel) - ICONS_AREA_WIDTH - ui.vehicleLevel.width / 2 + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 ui.hpBarPlayersPanelListItem.setVehicleIconX(vehicleIconX + ICONS_AREA_WIDTH);
             }
-
-            CLIENT::WG{
-                vehicleIconX += ui.prestigeLevel.x;
-            }
-
             if (ui.vehicleIcon.scaleX != vehicleIconScaleX)
             {
                 ui.vehicleIcon.scaleX = vehicleIconScaleX;
@@ -1055,7 +1047,6 @@ package com.xvm.battle.shared.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.SHORT:
-                case PLAYERS_PANEL_STATE.SHORT_NO_BADGES:
                     if (extraFieldsShort)
                     {
                         extraFieldsShort.visible = true;
@@ -1063,7 +1054,6 @@ package com.xvm.battle.shared.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.MEDIUM:
-                case PLAYERS_PANEL_STATE.MEDIUM_NO_BADGES:
                     if (extraFieldsMedium)
                     {
                         extraFieldsMedium.visible = true;
@@ -1071,7 +1061,6 @@ package com.xvm.battle.shared.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.LONG:
-                case PLAYERS_PANEL_STATE.LONG_NO_BADGES:
                     if (extraFieldsLong)
                     {
                         extraFieldsLong.visible = true;
@@ -1079,7 +1068,6 @@ package com.xvm.battle.shared.playersPanel
                     }
                     break;
                 case PLAYERS_PANEL_STATE.FULL:
-                case PLAYERS_PANEL_STATE.FULL_NO_BADGES:
                     if (extraFieldsFull)
                     {
                         extraFieldsFull.visible = true;
