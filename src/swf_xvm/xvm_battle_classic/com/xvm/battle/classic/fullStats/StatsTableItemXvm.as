@@ -48,6 +48,7 @@ package com.xvm.battle.classic.fullStats
         private var DEFAULT_VEHICLE_ICON_X:Number;
         private var DEFAULT_VEHICLE_LEVEL_X:Number;
         private var DEFAULT_VEHICLE_TYPE_ICON_X:Number;
+        private var DEFAULT_PRESTIGE_LEVEL_X:Number;
 
         private var cfg:CStatisticForm;
 
@@ -76,6 +77,10 @@ package com.xvm.battle.classic.fullStats
 
         private var currentPlayerState:VOPlayerState;
 
+        CLIENT::WG{
+            private var _prestigeLevel:PrestigeLevel = null;
+        }
+
         public function StatsTableItemXvm(table:MovieClip, col:int, row:int)
         {
             //Logger.add("StatsTableItemXvm");
@@ -101,9 +106,13 @@ package com.xvm.battle.classic.fullStats
             DEFAULT_FRAGS_WIDTH = _fragsTF.width;
             DEFAULT_VEHICLE_LEVEL_X = _vehicleLevelIcon.x;
             DEFAULT_VEHICLE_TYPE_ICON_X = _vehicleTypeIcon.x;
-
-
             DEFAULT_VEHICLE_ICON_X = _vehicleIcon.x;
+
+            CLIENT::WG {
+                _prestigeLevel = table.prestigeLevelCollection[index];
+                DEFAULT_PRESTIGE_LEVEL_X = _prestigeLevel.x;
+            }
+
 
             // align fields
             _fragsTF.y -= 1;
@@ -177,6 +186,15 @@ package com.xvm.battle.classic.fullStats
         {
             _hasBadge = cfg.removeRankBadgeIcon ? false : _hasBadge;
             super.setBadge(_badgeVO, _hasBadge);
+        }
+
+        CLIENT::WG {
+            override public function setPrestige(markId: int, level: int):void
+            {
+                if(!cfg.removePrestigeLevel){
+                    super.setPrestige(markId, level);
+                }
+            }
         }
 
         override public function setSuffixBadge(suffixBadgeType:String):void
