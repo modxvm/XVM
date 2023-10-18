@@ -24,7 +24,7 @@ package com.xvm.lobby
             addChild(lobbyXvmMod);
 
             // loading ui mods
-            XfwComponent.tryLoadUISWF("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf", "crew.swf" ]);
+            XfwComponent.tryLoadUISWF("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf"]);
 
             // mod: online
             // init as earlier as possible
