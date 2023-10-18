@@ -64,6 +64,8 @@ class IllegalChecker(ast.NodeVisitor):
     def visit_Call(self, node):
         if isinstance(node.func, ast.Attribute):
             return
+        if not hasattr(node.func, 'id'):
+            return
         if node.func.id in self.illegal_functions:
             self.errors += 'Illegal function call "{}"'.format(node.func.id),
 
