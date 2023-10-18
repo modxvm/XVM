@@ -306,8 +306,8 @@ def xfw_module_init():
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(updateEntries)
 
         if getRegion() != 'RU':
-            override(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
-            override(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
+            overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
+            overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
 
         __initialized = True
 
