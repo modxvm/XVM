@@ -10,6 +10,9 @@
     // true - show "Premium shop" button.
     // true - показать кнопку "Премиум магазин".
     "showPremiumShopButton": true,
+    // true - show "WoT Plus" subscription button.
+    // true - показать кнопку подписки "WoT Plus".
+    "showWotPlusButton": true,
     // true - show "Create squad" text on the squad creation button.
     // true - показать текст "Создать взвод" на кнопке создания взвода.
     "showCreateSquadButtonText": true,

@@ -93,7 +93,7 @@ package com.xvm.lobby
             }
         }
 
-        // prem and premShop buttons
+        // prem, premShop and WoT Plus buttons
 
         private function setupHeaderButtons():void
         {
@@ -119,6 +119,16 @@ package com.xvm.lobby
                     btn.mouseEnabled = Config.config.hangar.showPremiumShopButton;
                     btn.mouseChildren = Config.config.hangar.showPremiumShopButton;
                     btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
+                }
+
+                CLIENT::WG {
+                    btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_WOT_PLUS);
+                    if (btn)
+                    {
+                        btn.mouseEnabled = Config.config.hangar.showWotPlusButton;
+                        btn.mouseChildren = Config.config.hangar.showWotPlusButton;
+                        btn.alpha = Config.config.hangar.showWotPlusButton ? 1 : 0;
+                    }
                 }
 
 				/* TODO: WoT 1.18.1
