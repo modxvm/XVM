@@ -14,8 +14,8 @@ AS_VERSION_PLAYER="10.2"
 AS_VERSION_SWF="11"
 
 #Apache Roayler constants
-APACHE_ROYALE_DOWNLOADLINK="https://archive.apache.org/dist/royale/0.9.9/binaries/apache-royale-0.9.9-bin-js-swf.tar.gz"
-APACHE_ROYALE_VER="0.9.9"
+APACHE_ROYALE_DOWNLOADLINK="https://archive.apache.org/dist/royale/0.9.10/binaries/apache-royale-0.9.10-bin-js-swf.tar.gz"
+APACHE_ROYALE_VER="0.9.10"
 
 # AS3 compilation
 build_as3_swf(){
