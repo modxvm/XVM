@@ -32,6 +32,7 @@ from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import 
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
+from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 from gui.shared.gui_items.Tankman import Tankman
 
@@ -274,6 +275,16 @@ def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
     return base(self, value)
 
 
+# hide premium account, shop and WoT Plus buttons
+def LobbyHeader_as_setHeaderButtonsS(base, self, data):
+    if not config.get('hangar/showWotPlusButton') and self.BUTTONS.WOT_PLUS in data:
+        data.remove(self.BUTTONS.WOT_PLUS)
+    if not config.get('hangar/showBuyPremiumButton') and self.BUTTONS.PREM in data:
+        data.remove(self.BUTTONS.PREM)
+    if not config.get('hangar/showPremiumShopButton') and self.BUTTONS.PREMSHOP in data:
+        data.remove(self.BUTTONS.PREMSHOP)
+    return base(self, data)
+
 #
 # XFW API
 #
@@ -304,6 +315,8 @@ def xfw_module_init():
         overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(shouldHide)
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(_showAward)
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(updateEntries)
+
+        overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
 
         if getRegion() != 'RU':
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)

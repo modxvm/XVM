@@ -20,9 +20,6 @@ package com.xvm.types.cfg
         public var onlineServers:COnlineServers;
         public var serverInfo:CHangarElement;
         public var vehicleName: CHangarElement;
-        public var showBuyPremiumButton:*;
-        public var showPremiumShopButton:*;
-        public var showWotPlusButton:*;
         public var showCreateSquadButtonText:*;
         public var showBattleTypeSelectorText:*;
         public var carousel:CCarousel;

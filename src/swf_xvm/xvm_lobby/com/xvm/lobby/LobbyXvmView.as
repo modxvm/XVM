@@ -61,7 +61,6 @@ package com.xvm.lobby
         public function setup():void
         {
             setupServerInfo();
-            setupHeaderButtons();
         }
 
         // server info
@@ -91,54 +90,6 @@ package com.xvm.lobby
                 page.header.onlineCounter.alpha = cfg.alpha / 100.0;
                 page.header.onlineCounter.rotation = cfg.rotation;
             }
-        }
-
-        // prem, premShop and WoT Plus buttons
-
-        private function setupHeaderButtons():void
-        {
-            App.utils.scheduler.scheduleOnNextFrame(function():void
-            {
-                onGraphicsRectanglesUpdateHandler(null);
-
-                var btn:HeaderButton;
-
-                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
-
-                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_PREM);
-                if (btn)
-                {
-                    btn.mouseEnabled = Config.config.hangar.showBuyPremiumButton;
-                    btn.mouseChildren = Config.config.hangar.showBuyPremiumButton;
-                    btn.alpha = Config.config.hangar.showBuyPremiumButton ? 1 : 0;
-                }
-
-                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_PREMSHOP);
-                if (btn)
-                {
-                    btn.mouseEnabled = Config.config.hangar.showPremiumShopButton;
-                    btn.mouseChildren = Config.config.hangar.showPremiumShopButton;
-                    btn.alpha = Config.config.hangar.showPremiumShopButton ? 1 : 0;
-                }
-
-                CLIENT::WG {
-                    btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_WOT_PLUS);
-                    if (btn)
-                    {
-                        btn.mouseEnabled = Config.config.hangar.showWotPlusButton;
-                        btn.mouseChildren = Config.config.hangar.showWotPlusButton;
-                        btn.alpha = Config.config.hangar.showWotPlusButton ? 1 : 0;
-                    }
-                }
-
-				/* TODO: WoT 1.18.1
-                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
-                if (btn)
-                {
-                    btn.headerButtonData.isUseFreeSize = false;
-                }
-				*/
-            });
         }
 
         private function onGraphicsRectanglesUpdateHandler(e:Event):void
