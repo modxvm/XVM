@@ -81,7 +81,11 @@
           <path-element>{playerglobalHome}/{targetPlayerMajorVersion}.{targetPlayerMinorVersion}</path-element>
 
           <path-element>libs/adobe_flexsdk/core.swc</path-element>
+          <path-element>libs/adobe_flexsdk/framework.swc</path-element>
+          <path-element>libs/adobe_flexsdk/mx.swc</path-element>
+          
           <path-element>libs/adobe_libs/flash.swc</path-element>
+
           <path-element>libs/adobe_tlfconversion/textLayout.swc</path-element>
 
           <path-element>libs/greensock/greensock.swc</path-element>
