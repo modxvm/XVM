@@ -1,0 +1,9 @@
+{
+    "xfw_prefix": "xvm_actionscript_vendor",
+    "xfw_dependencies": [],
+    "xfw_features": ["actionscript","python"],
+    "xfw_url": "https://gitlab.com/xvm/xvm",
+    "xfw_url_update": "https://gitlab.com/xvm/xvm",
+    "xfw_wot_versions": ["1.22.1.0"],
+    "xfw_wot_versions_strategy": "allow_newer"
+}

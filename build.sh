@@ -87,10 +87,8 @@ function build_swf_vendor()
 {
     echo ""
     echo "Building SWF Vendor"
-
-    pushd src/swf_$XVMBUILD_FLAVOR > /dev/null
-    ./build.sh || exit 1
-    popd > /dev/null
+    pwsh ./build.ps1 || exit 1
+    cp -rf $XVMBUILD_ROOT_PATH/~output/xvm_actionscript_vendor/deploy/* "$XVMBUILD_ROOT_PATH/~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/"
 }
 
 function build_swc_ui()

@@ -1,0 +1,10 @@
+{    
+    "id": "com.modxvm.xvm.actionscript.vendor",
+    "name": "XVM Actionscript Vendor",
+    "description": "Contains fixes for the some stuff",
+    "version": "",
+ 
+    "path_license": "../../LICENSE.txt",
+
+    "build_devel": false
+}
