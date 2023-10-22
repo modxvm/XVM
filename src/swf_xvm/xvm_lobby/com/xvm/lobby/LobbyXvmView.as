@@ -61,6 +61,7 @@ package com.xvm.lobby
         public function setup():void
         {
             setupServerInfo();
+            setupHeaderButtons();
         }
 
         // server info
@@ -92,7 +93,15 @@ package com.xvm.lobby
             }
         }
 
-        private function onGraphicsRectanglesUpdateHandler(e:Event):void
+        private function setupHeaderButtons():void
+        {
+            App.utils.scheduler.scheduleOnNextFrame(function():void
+            {
+                onGraphicsRectanglesUpdateHandler();
+            });
+        }
+
+        private function onGraphicsRectanglesUpdateHandler(e:Event = null):void
         {
             var btn:HeaderButton;
 
