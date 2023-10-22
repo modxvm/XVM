@@ -203,6 +203,9 @@ detect_actionscript_sdk(){
     elif [ -d "/c/Apache Royale/royale-asjs" ]; then
         export ASSDK_HOME="/c/Apache Royale/royale-asjs"
         export ASSDK_TYPE="royale"
+    elif [ -d "/opt/apache-royale-$APACHE_ROYALE_VER-bin-js-swf/royale-asjs" ]; then
+        export ASSDK_HOME="/opt/apache-royale-$APACHE_ROYALE_VER-bin-js-swf/royale-asjs"
+        export ASSDK_TYPE="royale"
     elif [ -d "/opt/apache-royale/royale-asjs" ]; then
         export ASSDK_HOME="/opt/apache-royale/royale-asjs"
         export ASSDK_TYPE="royale"
@@ -253,23 +256,6 @@ detect_actionscript_sdk(){
         echo -e "${BOLD_RED}!!! Apache Royale/Flex compc file is not found${DEFAULT}"
         exit 1
     fi
-
-    # fallback PLAYERGLOBAL_HOME variable
-    if [ "$PLAYERGLOBAL_HOME" == "" ]; then
-        export PLAYERGLOBAL_HOME="$ASSDK_HOME/frameworks/libs/player"
-    fi
-
-    # download playerglobal if not found
-    for playerglobalver in $AS_VERSION_PLAYERGLOBAL
-    do
-        if [ ! -f "$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc" ]; then
-            if ! detect_wget; then
-                exit 1
-            fi
-            mkdir -p "$PLAYERGLOBAL_HOME/$playerglobalver/"
-            wget "https://github.com/nexussays/playerglobal/raw/master/$playerglobalver/playerglobal.swc" --output-document="$PLAYERGLOBAL_HOME/$playerglobalver/playerglobal.swc"
-        fi
-    done
 
     # set roayle config path
     export XVMBUILD_ROYALECONFIG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/royale_toolchain/xvm-config.xml"
