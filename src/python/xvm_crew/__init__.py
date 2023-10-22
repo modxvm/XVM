@@ -14,7 +14,6 @@ import logging
 # BigWorld
 import BigWorld
 from PlayerEvents import g_playerEvents
-# from gui.shared import g_eventBus
 from CurrentVehicle import _CurrentVehicle, g_currentVehicle
 from gui.Scaleform.daapi.view.lobby.cyberSport.VehicleSelectorPopup import VehicleSelectorPopup
 from helpers import dependency
@@ -27,18 +26,20 @@ from xfw_actionscript.python import *
 
 # XVM
 import xvm_main.python.config as config
-# from xvm_main.python.xvm import l10n
 import xvm_main.python.userprefs as userprefs
 
 # XVM Crew
 import wg_compat
 
 
+
 #
-# Logger
+# Globals
 #
 
 logger = logging.getLogger(__name__)
+
+
 
 #
 # Constants
@@ -62,8 +63,9 @@ class USERPREFS(object):
     AUTO_PREV_CREW = "users/{accountDBID}/crew/auto_prev_crew/"
 
 
+
 #
-# Handlers
+# Crew class
 #
 
 class Crew(object):
@@ -104,7 +106,7 @@ class Crew(object):
                     if userprefs.get(USERPREFS.AUTO_PREV_CREW + str(vehicle.invID), True):
                         wg_compat.g_instance.processReturnCrewForVehicleSelectorPopup(vehicle)
 
-    def isCrewAvailable(self):
+    def isLastCrewAvailable(self):
         vehicle = g_currentVehicle.item
         lastCrewIDs = vehicle.lastCrew
         if lastCrewIDs is None:
@@ -121,39 +123,26 @@ class Crew(object):
         self.__callbackID = None
         if not g_currentVehicle.isInHangar() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked() or g_currentVehicle.isCrewFull():
             return
-        if not self.isCrewAvailable():
+        if not self.isLastCrewAvailable():
             return
         wg_compat.g_instance.processReturnCrew()
 
 g_crew = Crew()
 
-#
-# Handlers/XFW
-#
 
-# returns: (result, status)
-# def onXfwCommand(cmd, *args):
-#     try:
-#         if cmd == COMMANDS.PUT_PREVIOUS_CREW:
-#             if g_currentVehicle.isInHangar() and not (g_currentVehicle.isCrewFull() or g_currentVehicle.isInBattle() or g_currentVehicle.isLocked()):
-#                 PutPreviousCrew(g_currentVehicle, False)
-#             return (None, True)
-#     except Exception:
-#         logger.exception('onXfwCommand')
-#         return (None, True)
-#     return (None, False)
 
 #
 # Handlers/AppLoader
 #
 
 def onGUISpaceEntered(spaceID):
-    logger.info('onGUISpaceEntered, spaceID = %s', spaceID)
     if spaceID == GuiGlobalSpaceID.LOBBY:
         g_crew.init()
         g_currentVehicle.onChanged += g_currentVehicle_onChanged
     elif spaceID in (GuiGlobalSpaceID.LOGIN, GuiGlobalSpaceID.BATTLE, ):
         g_crew.invalidate()
+
+
 
 #
 # Handlers/g_currentVehicle
@@ -164,6 +153,8 @@ def g_currentVehicle_onChanged():
         g_crew.handleVehicleChange()
     except:
         logger.exception('g_currentVehicle_onChanged')
+
+
 
 #
 # Handlers/VehicleSelectorPopup
@@ -176,6 +167,8 @@ def VehicleSelectorPopup_onSelectVehicles(base, self, items):
     except:
         logger.exception('VehicleSelectorPopup_onSelectVehicles')
 
+
+
 #
 # XFW API
 #
@@ -185,7 +178,6 @@ __initialized = False
 def xfw_module_init():
     global __initialized
     if not __initialized:
-        # g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         dependency.instance(IAppLoader).onGUISpaceEntered += onGUISpaceEntered
         overrideMethod(VehicleSelectorPopup, 'onSelectVehicles')(VehicleSelectorPopup_onSelectVehicles)
         __initialized = True
@@ -199,7 +191,6 @@ def xfw_module_fini():
         except dependency.DependencyError:
             pass
         g_currentVehicle.onChanged -= g_currentVehicle_onChanged
-        # g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         __initialized = False
 
 
