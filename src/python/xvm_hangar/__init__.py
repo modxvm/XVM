@@ -27,14 +27,17 @@ from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.AwardController import ProgressiveItemsRewardHandler
 from gui.game_control.PromoController import PromoController
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
+from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
+from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 from gui.shared.gui_items.Tankman import Tankman
+from notification.NotificationListView import NotificationListView
 
 from xfw import *
 
@@ -274,7 +277,6 @@ def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
         value = False
     return base(self, value)
 
-
 # hide premium account, shop and WoT Plus buttons
 def LobbyHeader_as_setHeaderButtonsS(base, self, data):
     if not config.get('hangar/showWotPlusButton') and self.BUTTONS.WOT_PLUS in data:
@@ -284,6 +286,30 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, data):
     if not config.get('hangar/showPremiumShopButton') and self.BUTTONS.PREMSHOP in data:
         data.remove(self.BUTTONS.PREMSHOP)
     return base(self, data)
+
+# hide button counters in lobbyHeader
+def LobbyHeader__setCounter(base, self, alias, counter=None):
+    if not config.get('hangar/showButtonCounters'):
+        return
+    return base(self, alias, counter)
+
+# hide button counters on customization button
+def AmmunitionPanel_as_setCustomizationBtnCounterS(base, self, value):
+    if not config.get('hangar/showButtonCounters'):
+        value = 0
+    return base(self, value)
+
+# hide counter on service channel button
+def NotificationListButton__setState(base, self, count):
+    if not config.get('hangar/showButtonCounters'):
+        return
+    return base(self, count)
+
+# hide counters in service channel
+def NotificationListView__updateCounters(base, self):
+    if not config.get('hangar/showButtonCounters'):
+        return
+    return base(self)
 
 #
 # XFW API
@@ -317,6 +343,10 @@ def xfw_module_init():
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(updateEntries)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
+        overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(LobbyHeader__setCounter)
+        overrideMethod(AmmunitionPanel, 'as_setCustomizationBtnCounterS')(AmmunitionPanel_as_setCustomizationBtnCounterS)
+        overrideMethod(NotificationListButton, '_NotificationListButton__setState')(NotificationListButton__setState)
+        overrideMethod(NotificationListView, '_NotificationListView__updateCounters')(NotificationListView__updateCounters)
 
         if getRegion() != 'RU':
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)

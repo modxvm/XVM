@@ -46,6 +46,9 @@
     // true - show elite levels widget in the profile for vehicle statistics.
     // true - показывать виджет уровней элитности в профиле для статистики техники.
     "showProfilePrestigeWidget": true,
+    // true - show counter on buttons for new items.
+    // true - показывать счётчик на кнопках для новых вещей.
+    "showButtonCounters": true,
     // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu.
     // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню.
     "combatIntelligence": {
