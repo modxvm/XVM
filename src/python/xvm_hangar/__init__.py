@@ -279,17 +279,17 @@ def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
 
 # hide premium account, shop and WoT Plus buttons
 def LobbyHeader_as_setHeaderButtonsS(base, self, data):
-    if not config.get('hangar/showWotPlusButton') and self.BUTTONS.WOT_PLUS in data:
+    if not config.get('hangar/showWotPlusButton', True) and self.BUTTONS.WOT_PLUS in data:
         data.remove(self.BUTTONS.WOT_PLUS)
-    if not config.get('hangar/showBuyPremiumButton') and self.BUTTONS.PREM in data:
+    if not config.get('hangar/showBuyPremiumButton', True) and self.BUTTONS.PREM in data:
         data.remove(self.BUTTONS.PREM)
-    if not config.get('hangar/showPremiumShopButton') and self.BUTTONS.PREMSHOP in data:
+    if not config.get('hangar/showPremiumShopButton', True) and self.BUTTONS.PREMSHOP in data:
         data.remove(self.BUTTONS.PREMSHOP)
     return base(self, data)
 
 # hide button counters in lobbyHeader
 def LobbyHeader__setCounter(base, self, alias, counter=None):
-    if not config.get('hangar/showButtonCounters'):
+    if not config.get('hangar/showButtonCounters', True):
         return
     return base(self, alias, counter)
 
@@ -301,13 +301,13 @@ def AmmunitionPanel_as_setCustomizationBtnCounterS(base, self, value):
 
 # hide counter on service channel button
 def NotificationListButton__setState(base, self, count):
-    if not config.get('hangar/showButtonCounters'):
+    if not config.get('hangar/showButtonCounters', True):
         return
     return base(self, count)
 
 # hide counters in service channel
 def NotificationListView__updateCounters(base, self):
-    if not config.get('hangar/showButtonCounters'):
+    if not config.get('hangar/showButtonCounters', True):
         return
     return base(self)
 
