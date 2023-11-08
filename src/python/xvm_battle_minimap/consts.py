@@ -44,7 +44,8 @@ UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.RTS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
     constants.ARENA_GUI_TYPE.COMP7,
-    101 #Halloween
+    101, #Halloween
+    200 # Halloween Lesta
 ]
 
 
@@ -52,7 +53,8 @@ UNSUPPORTED_BATTLE_TYPES = [
     constants.ARENA_BONUS_TYPE.BOOTCAMP,
     constants.ARENA_BONUS_TYPE.EVENT_BATTLES,
     constants.ARENA_BONUS_TYPE.COMP7,
-    101 #Halloween
+    101, #Halloween
+    200 # Halloween Lesta
 ]
 
 
