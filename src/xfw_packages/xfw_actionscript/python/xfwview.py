@@ -197,6 +197,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_stronghold']
                 elif arenaGuiType == ARENA_GUI_TYPE.COMP7:
                     as_paths += ['as_battle_comp7']
+                elif arenaGuiType == ARENA_GUI_TYPE.WINBACK:
+                    as_paths += ['as_battle_winback']
                 elif arenaGuiType == XfwArenaGuiType.HALLOWEEN_EVENT:
                     as_paths += ['as_battle_halloween']
                 else:

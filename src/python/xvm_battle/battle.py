@@ -64,17 +64,19 @@ import shared
 # Constants
 #
 
-NOT_SUPPORTED_BATTLE_TYPES = [ constants.ARENA_GUI_TYPE.EVENT_BATTLES,
-                           constants.ARENA_GUI_TYPE.BOOTCAMP,
-                           constants.ARENA_GUI_TYPE.BATTLE_ROYALE,
-                           constants.ARENA_GUI_TYPE.MAPS_TRAINING,
-                           constants.ARENA_GUI_TYPE.RTS,
-                           constants.ARENA_GUI_TYPE.RTS_TRAINING,
-                           constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
-                           constants.ARENA_GUI_TYPE.COMP7,
-                           101, # Halloween
-                           200 # Halloween Lesta
-                           ]
+NOT_SUPPORTED_BATTLE_TYPES = [ 
+    constants.ARENA_GUI_TYPE.EVENT_BATTLES,
+    constants.ARENA_GUI_TYPE.BOOTCAMP,
+    constants.ARENA_GUI_TYPE.BATTLE_ROYALE,
+    constants.ARENA_GUI_TYPE.MAPS_TRAINING,
+    constants.ARENA_GUI_TYPE.RTS,
+    constants.ARENA_GUI_TYPE.RTS_TRAINING,
+    constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
+    constants.ARENA_GUI_TYPE.COMP7,
+    constants.ARENA_GUI_TYPE.WINBACK, # TODO: fix broken totalEfficiency and hitLog due to broken PlayerPanels
+    101, # Halloween
+    200  # Halloween Lesta
+]
 
 
 
@@ -308,7 +310,8 @@ class Battle(object):
                                         VIEW_ALIAS.EPIC_BATTLE_PAGE,
                                         VIEW_ALIAS.RANKED_BATTLE_PAGE,
                                         VIEW_ALIAS.BATTLE_ROYALE_PAGE,
-                                        VIEW_ALIAS.STRONGHOLD_BATTLE_PAGE]:
+                                        VIEW_ALIAS.STRONGHOLD_BATTLE_PAGE,
+                                        VIEW_ALIAS.WINBACK_BATTLE_PAGE]:
             self.battle_page = weakref.proxy(view)
 
     def onStartBattle(self):

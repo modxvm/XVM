@@ -2,7 +2,7 @@
 
 # This file is part of the XVM Framework project.
 #
-# Copyright (c) 2014-2021 XVM Team.
+# Copyright (c) 2014-2023 XVM Team.
 #
 # XVM Framework is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as
@@ -51,6 +51,7 @@ projects="
     xvm_battle_royale
     xvm_battle_rts
     xvm_battle_stronghold
+    xvm_battle_winback
 "
 
 # special projects for WG
