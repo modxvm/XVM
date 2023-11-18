@@ -2,7 +2,7 @@
 
 # This file is part of the XVM project.
 #
-# Copyright (c) 2014-2021 XVM Team.
+# Copyright (c) 2014-2023 XVM Team.
 #
 # XVM is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as

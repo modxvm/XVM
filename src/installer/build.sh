@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# XVM Team (c) https://modxvm.com 2014-2021
+# XVM Team (c) https://modxvm.com 2014-2023
 # XVM nightly build system
 
 XVMINST_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
