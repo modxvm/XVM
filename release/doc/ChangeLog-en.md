@@ -1,3 +1,10 @@
+### XVM 10.8.1
+
+  #### damageLog, hitLog
+
+  * Added support for vehicle names from vehicleNames.xc to the {{vehicle}} macro
+  * Added macro {{vehicle-short}} with support for vehicle names from vehicleNames.xc
+
 ### XVM 10.4.2
 
   #### damageLog

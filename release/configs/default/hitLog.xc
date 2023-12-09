@@ -21,7 +21,10 @@
     {{c:team-dmg}}         - color by team attachment of the targets / цвет по командной принадлежности цели (союзник, противник, урон по себе).
     {{costShell}}          - shell currency (gold, credits) / валюта снаряда (золото, кредиты).
     {{c:costShell}}        - color by shell currency / цвет по валюте снаряда.
-    {{vehicle}}            - attacker vehicle name (for firing points, the name is taken from the localization files, the "pillbox" parameter) / название техники цели (для огневых точек название берется из файлов локализации, параметр "pillbox").
+    {{vehicle}}            - attacker vehicle name (for firing points, the name is taken from the localization files, the "pillbox" parameter, for vehicles from the file vehicleNames.xc)
+                             название техники цели (для огневых точек название берется из файлов локализации, параметр "pillbox", для техники из файла vehicleNames.xc).
+    {{vehicle-short}}      - attacker shortened vehicle name (for firing points, the name is taken from the localization files, the "pillbox" parameter, for vehicles from the file vehicleNames.xc)
+                             укороченое название техники цели (для огневых точек название берется из файлов локализации, параметр "pillbox", для техники из файла vehicleNames.xc).
     {{name}}               - nickname target / никнейм цели.
     {{comp-name}}          - vehicle part that was hit (turret, hull, chassis, gun) / часть техники, в которую было попадание (башня, корпус, ходовая, орудие).
     {{clan}}               - clan name with brackets (empty if no clan) / название клана в скобках (пусто, если игрок не в клане).

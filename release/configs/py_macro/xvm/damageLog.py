@@ -24,6 +24,7 @@ from xfw_actionscript.python import *
 import xvm_battle.python.battle as battle
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
+import xvm_main.python.vehinfo_short as vehinfo_short
 from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
 
@@ -304,6 +305,7 @@ class Data(object):
                      'shellKind': 'not_shell',
                      'teamDmg': 'unknown',
                      'attackerVehicleType': 'not_vehicle',
+                     'userString': '',
                      'shortUserString': '',
                      'name': '',
                      'clanAbbrev': '',
@@ -349,6 +351,7 @@ class Data(object):
         self.data['teamDmg'] = 'unknown'
         self.data['attackerVehicleType'] = 'not_vehicle'
         self.data['attackerVehicleName'] = ''
+        self.data['userString'] = ''
         self.data['shortUserString'] = ''
         self.data['name'] = ''
         self.data['clanAbbrev'] = ''
@@ -363,7 +366,18 @@ class Data(object):
                     _type = vehicleType.type
                     self.data['attackerVehicleName'] = vehicleType.name.replace(':', '-', 1) if vehicleType.name else ''
                     self.data['attackerVehicleType'] = list(_type.tags.intersection(VEHICLE_CLASSES))[0]
-                    self.data['shortUserString'] = _type.shortUserString
+                    vehicleNames = _config.get('vehicleNames/' + self.data['attackerVehicleName'])
+                    if vehicleNames:
+                        self.data['userString'] = vehicleNames['name'] if vehicleNames['name'] is not None else _type.shortUserString
+                        if vehicleNames['short'] is None:
+                            self.data['shortUserString'] = vehinfo_short.getShortName(vehicleType.name, vehicleType.level,self.data['attackerVehicleType'])
+                        else:
+                            self.data['shortUserString'] = vehicleNames['short']
+                    else:
+                        self.data['userString'] = _type.shortUserString
+                        self.data['shortUserString'] = vehinfo_short.getShortName(vehicleType.name, vehicleType.level,self.data['attackerVehicleType'])
+                    if self.data['shortUserString'] is None:
+                        self.data['shortUserString'] = self.data['userString']
                     self.data['level'] = vehicleType.level
                     self.data['nation'] = nations.NAMES[_type.customizationNationID]
                     if self.data['attackReasonID'] == 2:
@@ -661,7 +675,8 @@ class _Base(object):
             xwtr = value.get('xwtr', None)
             xeff = value.get('xeff', None)
             xwgr = value.get('xwgr', None)
-            macros = {'vehicle': value['shortUserString'],
+            macros = {'vehicle': value['userString'],
+                      'vehicle-short': value['shortUserString'],
                       'name': value['name'],
                       'clannb': value['clanAbbrev'],
                       'clan': ''.join(['[', value['clanAbbrev'], ']']) if value['clanAbbrev'] else '',

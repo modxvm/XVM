@@ -21,6 +21,7 @@ from realm import CURRENT_REALM
 import xvm_battle.python.battle as battle
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
+import xvm_main.python.vehinfo_short as vehinfo_short
 from xfw.events import registerEvent
 from xfw_actionscript.python import *
 from xvm_main.python.logger import *
@@ -123,7 +124,8 @@ class Macros(dict):
         xwtr = value.get('xwtr', None)
         xeff = value.get('xeff', None)
         xwgr = value.get('xwgr', None)
-        self['vehicle'] = value['shortUserString']
+        self['vehicle'] = value['userString']
+        self['vehicle-short'] = value['shortUserString']
         self['name'] = value['name']
         self['clannb'] = value['clanAbbrev']
         self['clan'] = ''.join(['[', value['clanAbbrev'], ']']) if value['clanAbbrev'] else ''
@@ -204,6 +206,7 @@ class DataHitLog(object):
             'isAlive': True,
             'compName': None,
             'attackedVehicleType': 'not_vehicle',
+            'userString': None,
             'shortUserString': None,
             'level': None,
             'nation': None,
@@ -245,6 +248,7 @@ class DataHitLog(object):
 
     def resetData(self):
         self.data['attackedVehicleType'] = 'not_vehicle'
+        self.data['userString'] = ''
         self.data['shortUserString'] = ''
         self.data['attackerVehicleName'] = ''
         self.data['level'] = None
@@ -282,14 +286,25 @@ class DataHitLog(object):
                     _type = vehicleType.type
                     self.data['attackedVehicleType'] = list(_type.tags.intersection(VEHICLE_CLASSES))[0]
                     self.data['attackerVehicleName'] = vehicleType.name.replace(':', '-', 1) if vehicleType.name else ''
-                    self.data['shortUserString'] = _type.shortUserString
+                    vehicleNames = _config.get('vehicleNames/' + self.data['attackerVehicleName'])
+                    if vehicleNames:
+                        self.data['userString'] = vehicleNames['name'] if vehicleNames['name'] is not None else _type.shortUserString
+                        if vehicleNames['short'] is None:
+                            self.data['shortUserString'] = vehinfo_short.getShortName(vehicleType.name, vehicleType.level, self.data['attackedVehicleType'])
+                        else:
+                            self.data['shortUserString'] = vehicleNames['short']
+                    else:
+                        self.data['userString'] = _type.shortUserString
+                        self.data['shortUserString'] = vehinfo_short.getShortName(vehicleType.name, vehicleType.level,self.data['attackedVehicleType'])
+                    if self.data['shortUserString'] is None:
+                        self.data['shortUserString'] = self.data['userString']
                     self.data['level'] = vehicleType.level
                     self.data['nation'] = nations.NAMES[_type.customizationNationID]
                     if self.data['attackReasonID'] == 2:
                         self.data['diff-masses'] = (self.player.vehicleTypeDescriptor.physics['weight'] - vehicleType.physics['weight']) / 1000.0
                 self.setRatings()
             elif not self.isVehicle:
-                self.data['shortUserString'] = l10n(PILLBOX).format(self.entityNumber)
+                self.data['userString'] = self.data['shortUserString'] = l10n(PILLBOX).format(self.entityNumber)
                 self.compName = None
                 self.criticalHit = None
             self.data['clanicon'] = _stat.getClanIcon(self.vehicleID)
@@ -339,7 +354,6 @@ class DataHitLog(object):
         if not self.isVehicle:
             self.entityNumber = vehicle.destructibleEntityID
             self.data['teamDmg'] = 'ally-dmg' if vehicle.isPlayerTeam else 'enemy-dmg'
-            self.data['shortUserString'] = l10n(PILLBOX).format(self.entityNumber)
         self.updateData()
 
     def showDamageFromShot(self, vehicle, attackerID, points, *args, **kwargs):

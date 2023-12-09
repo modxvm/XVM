@@ -1,3 +1,10 @@
+### XVM 10.8.1
+
+  #### damageLog, hitLog
+
+  * В макрос {{vehicle}} добавлена поддержка названий техники из vehicleNames.xc
+  * Добавлен макрос {{vehicle-short}} c поддержкой названий техники из vehicleNames.xc
+
 ### XVM 10.4.2
 
   #### damageLog

@@ -23,7 +23,8 @@
     {{c:team-dmg}}     - color by team attachment of the attacker (ally , enemy, self damage) / цвет по командной принадлежности атакующего (союзник, противник, урон по себе).
     {{costShell}}      - shell currency (gold, credits) / валюта снаряда (золото, кредиты).
     {{c:costShell}}    - color by shell currency / цвет по валюте снаряда.
-    {{vehicle}}        - attacker vehicle name / название техники атакующего.
+    {{vehicle}}        - attacker vehicle name (vehicleNames.xc)/ название техники атакующего (vehicleNames.xc).
+    {{vehicle-short}}  - attacker shortened vehicle name (vehicleNames.xc) / укороченное название техники атакующего (vehicleNames.xc).
     {{name}}           - attacker nickname / никнейм атакующего.
     {{critical-hit}}   - critical hit / критическое попадание.
     {{comp-name}}      - vehicle part that was hit (turret, hull, chassis, gun) / часть техники, в которую было попадание (башня, корпус, ходовая, орудие).
