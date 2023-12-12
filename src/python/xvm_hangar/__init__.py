@@ -138,33 +138,35 @@ def barrack_packActiveTankman(base, tankman):
 
 # low ammo => vehicle not ready
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
+    result = base(self, *args, **kwargs)
     if isInBootcamp():
-        return
+        return result
     elif self.isOnlyForEventBattles:
-        return True
+        return result
     elif self.isOnlyForBattleRoyaleBattles:
-        return True
+        return result
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
     except Exception as ex:
         err(traceback.format_exc())
-    return base(self, *args, **kwargs)
+    return result
 
 # low ammo => vehicle not ready
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
+    result = base.fget(self, *args, **kwargs)
     if isInBootcamp():
-        return
+        return result
     elif self.isOnlyForEventBattles:
-        return
+        return result
     elif self.isOnlyForBattleRoyaleBattles:
-        return
+        return result
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
     except Exception as ex:
         err(traceback.format_exc())
-    return base.fget(self, *args, **kwargs) # base is property
+    return result # base is property
 
 # low ammo => vehicle not ready (disable red button)
 def _CurrentVehicleActionsValidator_validate(base, self):
