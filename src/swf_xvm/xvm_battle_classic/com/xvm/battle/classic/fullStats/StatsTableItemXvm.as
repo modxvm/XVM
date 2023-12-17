@@ -48,7 +48,8 @@ package com.xvm.battle.classic.fullStats
         private var DEFAULT_VEHICLE_ICON_X:Number;
         private var DEFAULT_VEHICLE_LEVEL_X:Number;
         private var DEFAULT_VEHICLE_TYPE_ICON_X:Number;
-        private var DEFAULT_PRESTIGE_LEVEL_X:Number;
+        //private var DEFAULT_PRESTIGE_LEVEL_X:Number;
+        private var PRESTIGE_LEVEL_OFFSET_X:Number = 0;
 
         private var cfg:CStatisticForm;
 
@@ -110,7 +111,8 @@ package com.xvm.battle.classic.fullStats
 
             CLIENT::WG {
                 _prestigeLevel = table.prestigeLevelCollection[index];
-                DEFAULT_PRESTIGE_LEVEL_X = _prestigeLevel.x;
+				PRESTIGE_LEVEL_OFFSET_X = Config.config.statisticForm.removePrestigeLevel ? 15 : 0;
+                //DEFAULT_PRESTIGE_LEVEL_X = _prestigeLevel.x;
             }
 
 
@@ -518,12 +520,12 @@ package com.xvm.battle.classic.fullStats
         {
             if (_isLeftPanel)
             {
-                _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X + cfg.vehicleFieldOffsetXLeft + (DEFAULT_VEHICLE_NAME_WIDTH - cfg.vehicleFieldWidthLeft);
+                _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X + PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleFieldOffsetXLeft + (DEFAULT_VEHICLE_NAME_WIDTH - cfg.vehicleFieldWidthLeft);
                 _vehicleNameTF.width = cfg.vehicleFieldWidthLeft;
             }
             else
             {
-                _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X - cfg.vehicleFieldOffsetXRight;
+                _vehicleNameTF.x = DEFAULT_VEHICLE_NAME_X - PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleFieldOffsetXRight;
                 _vehicleNameTF.width = cfg.vehicleFieldWidthRight;
             }
         }
@@ -546,13 +548,13 @@ package com.xvm.battle.classic.fullStats
         {
             if (_isLeftPanel)
             {
-                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + cfg.vehicleIconOffsetXLeft;
-                _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + cfg.vehicleIconOffsetXLeft;
+                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
+                _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
-                _vehicleIcon.x = Config.config.battle.mirroredVehicleIcons ? DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight : DEFAULT_VEHICLE_ICON_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH
-                _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - cfg.vehicleIconOffsetXRight;
+                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight - (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
+                _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight;
             }
             alignVehicleLevelIcon();
         }
@@ -561,17 +563,17 @@ package com.xvm.battle.classic.fullStats
         {
             if (_isLeftPanel)
             {
-                _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + cfg.vehicleIconOffsetXLeft;
+                _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
                 if (Config.config.battle.mirroredVehicleIcons)
                 {
-                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight;
+                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight;
                 }
                 else
                 {
-                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
+                    _vehicleLevelIcon.x = DEFAULT_VEHICLE_LEVEL_X + PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight - ICONS_AREA_WIDTH + MIRRORED_VEHICLE_LEVEL_ICON_OFFSET;
                 }
             }
             _vehicleLevelIcon.isCentralizeByX = true;
