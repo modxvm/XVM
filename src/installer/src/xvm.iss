@@ -1,5 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
-// Copyright (c) 2017-2023 XVM Contributors
+// Copyright (c) 2017-2024 XVM Contributors
 
 #define APP_WEBSITE    "https://modxvm.com/"
 #define APP_DIR_UNINST "xvm_uninst"
@@ -12,7 +12,7 @@
 #include "openwg.utils.iss"
 
 [Setup]
-AppCopyright    = "2023 (c) XVM Team"
+AppCopyright    = "2024 (c) XVM Team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
 AppName         = "XVM"
 AppPublisher    = "XVM Team"
@@ -51,8 +51,8 @@ Name: "xvmbackup"; Description: "{cm:backupXVM}"; Flags: unchecked;
 Filename: https://modxvm.com/; Description: "{cm:websiteXVM}"; Flags: postinstall nowait shellexec;
 
 [CustomMessages]
-en.version_not_match=This client is not supported.%n%nThis installer only supports WoT v{#VersionWOT}
-ru.version_not_match=Выбранный клиент не поддерживается.%n%nЭтот установщик поддерживает только WoT v{#VersionWOT}
+en.version_not_match=This client is not supported.%n%nThis installer only supports WoT v{#VersionWOT} or MT v{#VersionMT}
+ru.version_not_match=Выбранный клиент не поддерживается.%n%nЭтот установщик поддерживает только WoT v{#VersionWOT} или МТ v{#VersionMT}
 en.client_started=The selected client is running.%n%nDo you want to terminate the selected client?
 ru.client_started=Выбранный клиент запущен.%n%nЖелаете ли вы закрыть выбранный клиент?
 
@@ -63,18 +63,20 @@ Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_ba
 
 ;xvm/WG
 Source: "..\..\..\~output\wg\deploy\mods\*"    ; DestDir: "{app}\mods"    ; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
-Source: "..\..\..\~output\wg\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs; 
-Source: "..\..\..\~output\wg\deploy\readme*.*" ; DestDir: "{app}"         ; Check: not CHECK_IsLesta;                                     
+Source: "..\..\..\~output\wg\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+Source: "..\..\..\~output\wg\deploy\readme*.*" ; DestDir: "{app}"         ; Check: not CHECK_IsLesta;
 
 ;xvm/Lesta
 Source: "..\..\..\~output\lesta\deploy\mods\*"    ; DestDir: "{app}\mods"    ; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
-Source: "..\..\..\~output\lesta\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs; 
-Source: "..\..\..\~output\lesta\deploy\readme*.*" ; DestDir: "{app}"         ; Check: CHECK_IsLesta;                                     
+Source: "..\..\..\~output\lesta\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+Source: "..\..\..\~output\lesta\deploy\readme*.*" ; DestDir: "{app}"         ; Check: CHECK_IsLesta;
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
 Type: filesandordirs; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\com.modxvm.*.wotmod"
 Type: dirifempty; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\"
+Type: filesandordirs; Name: "{app}\mods\{#VersionMT}\com.modxvm.xfw\com.modxvm.*.wotmod"
+Type: dirifempty; Name: "{app}\mods\{#VersionMT}\com.modxvm.xfw\"
 
 ;mods\ver\temp
 Type: filesandordirs; Name: "{app}\mods\temp\com.modxvm.*"
@@ -88,6 +90,8 @@ Type: dirifempty; Name: "{app}\res_mods\mods\"
 ;res_mods\ver\audioww
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\audioww\xvm.bnk"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\audioww\"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionMT}\audioww\xvm.bnk"
+Type: dirifempty; Name: "{app}\res_mods\{#VersionMT}\audioww\"
 
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
@@ -103,6 +107,8 @@ Type: files; Name: "{app}\readme-*.txt"
 ;mods\ver\com.modxvm.xfw\*.wotmod
 Type: filesandordirs; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\com.modxvm.*.wotmod"
 Type: dirifempty; Name: "{app}\mods\{#VersionWOT}\com.modxvm.xfw\"
+Type: filesandordirs; Name: "{app}\mods\{#VersionMT}\com.modxvm.xfw\com.modxvm.*.wotmod"
+Type: dirifempty; Name: "{app}\mods\{#VersionMT}\com.modxvm.xfw\"
 
 ;mods\ver\temp
 Type: filesandordirs; Name: "{app}\mods\temp\com.modxvm.*"
@@ -120,6 +126,8 @@ Type: dirifempty; Name: "{app}\res_mods\mods\"
 ;res_mods\ver\audioww
 Type: filesandordirs; Name: "{app}\res_mods\{#VersionWOT}\audioww\xvm.bnk"
 Type: dirifempty; Name: "{app}\res_mods\{#VersionWOT}\audioww\"
+Type: filesandordirs; Name: "{app}\res_mods\{#VersionMT}\audioww\xvm.bnk"
+Type: dirifempty; Name: "{app}\res_mods\{#VersionMT}\audioww\"
 
 ;configs\xvm\py_macro
 Type: filesandordirs; Name: "{app}\res_mods\configs\xvm\py_macro\xvm\*.pyc"
@@ -227,8 +235,8 @@ begin
     ItemCaption := WizardForm.ComponentsList.ItemCaption[Index];
     if ((pos('Lesta', ItemCaption) <> 0) and (not IsLesta)) or ((pos('WG', ItemCaption) <> 0) and IsLesta) then
     begin
-        WizardForm.ComponentsList.Checked[Index] := false; 
-        WizardForm.ComponentsList.ItemEnabled[Index] := false;   
+        WizardForm.ComponentsList.Checked[Index] := false;
+        WizardForm.ComponentsList.ItemEnabled[Index] := false;
     end;
   end;
 end;
@@ -282,7 +290,7 @@ begin
   Result := True;
 
   // check for version
-  if not WotList_Selected_VersionMatch(WotList, '{#VersionWOT}') then
+  if (not CHECK_IsLesta and not WotList_Selected_VersionMatch(WotList, '{#VersionWOT}')) or (CHECK_IsLesta and not WotList_Selected_VersionMatch(WotList, '{#VersionMT}')) then
   begin
     MsgBox(ExpandConstant('{cm:version_not_match}'), mbError, MB_OK);
     Result := False;
