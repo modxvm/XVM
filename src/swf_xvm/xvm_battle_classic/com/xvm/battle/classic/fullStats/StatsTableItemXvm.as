@@ -48,7 +48,9 @@ package com.xvm.battle.classic.fullStats
         private var DEFAULT_VEHICLE_ICON_X:Number;
         private var DEFAULT_VEHICLE_LEVEL_X:Number;
         private var DEFAULT_VEHICLE_TYPE_ICON_X:Number;
-        //private var DEFAULT_PRESTIGE_LEVEL_X:Number;
+        CLIENT::WG {
+            private var DEFAULT_PRESTIGE_LEVEL_X:Number;
+        }
         private var PRESTIGE_LEVEL_OFFSET_X:Number = 0;
 
         private var cfg:CStatisticForm;
@@ -111,10 +113,9 @@ package com.xvm.battle.classic.fullStats
 
             CLIENT::WG {
                 _prestigeLevel = table.prestigeLevelCollection[index];
-				PRESTIGE_LEVEL_OFFSET_X = Config.config.statisticForm.removePrestigeLevel ? 15 : 0;
-                //DEFAULT_PRESTIGE_LEVEL_X = _prestigeLevel.x;
+                DEFAULT_PRESTIGE_LEVEL_X = _prestigeLevel.x;
+                PRESTIGE_LEVEL_OFFSET_X = Config.config.statisticForm.removePrestigeLevel ? 15 : 0;
             }
-
 
             // align fields
             _fragsTF.y -= 1;
@@ -191,9 +192,10 @@ package com.xvm.battle.classic.fullStats
         }
 
         CLIENT::WG {
-            override public function setPrestige(markId: int, level: int):void
+            override public function setPrestige(markId:int, level:int):void
             {
-                if(!cfg.removePrestigeLevel){
+                if (!cfg.removePrestigeLevel)
+                {
                     super.setPrestige(markId, level);
                 }
             }
@@ -489,6 +491,9 @@ package com.xvm.battle.classic.fullStats
             alignVehicleNameTF();
             alignFragsTF();
             alignVehicleIcon();
+            CLIENT::WG {
+                alignPrestigeIcon();
+            }
         }
 
         private function alignPlayerNameTF():void
@@ -557,6 +562,20 @@ package com.xvm.battle.classic.fullStats
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight;
             }
             alignVehicleLevelIcon();
+        }
+
+        CLIENT::WG {
+            private function alignPrestigeIcon():void
+            {
+                if (_isLeftPanel)
+                {
+                    _prestigeLevel.x = DEFAULT_PRESTIGE_LEVEL_X + cfg.prestigeOffsetXLeft;
+                }
+                else
+                {
+                    _prestigeLevel.x = DEFAULT_PRESTIGE_LEVEL_X - cfg.prestigeOffsetXRight;
+                }
+            }
         }
 
         private function alignVehicleLevelIcon():void

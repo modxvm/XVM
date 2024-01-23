@@ -95,6 +95,12 @@
     // X offset for enemies vehicle icons.
     // Смещение по оси X иконки танка противников.
     "vehicleIconOffsetXRight": 27,
+    // X offset for allies elite levels icons.
+    // Смещение по оси X иконки уровня элитности союзников.
+    "prestigeOffsetXLeft": 26,
+    // X offset for enemies elite levels icons.
+    // Смещение по оси X иконки уровня элитности противников.
+    "prestigeOffsetXRight": 26,
     // X offset for allies frags.
     // Смещение по оси X фрагов союзников.
     "fragsFieldOffsetXLeft": 19,
