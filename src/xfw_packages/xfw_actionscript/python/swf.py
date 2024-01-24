@@ -27,6 +27,7 @@ from gui.Scaleform.framework.application import AppEntry
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
+from skeletons.gui.impl import IGuiLoader
 
 from xfw.constants import *
 from xfw.events import *
@@ -77,13 +78,27 @@ debug('[XFW] _start')
 #    from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers_settings
 #    markers_settings.MARKERS_MANAGER_SWF = 'xfw_battleVehicleMarkersApp.swf'
 
+def _getParentWindow():
+    guiLoader = dependency.instance(IGuiLoader)
+    parentWindow = None
+    if guiLoader and guiLoader.windowsManager:
+        parentWindow = guiLoader.windowsManager.getMainWindow()
+    return parentWindow
+
+def _loadXFWView():
+    global appNS
+    appLoader = dependency.instance(IAppLoader)
+    app = appLoader.getApp(appNS)
+    parent = _getParentWindow()
+    app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, parent=parent))
+
 def _appInitialized(event):
     if isInBootcamp():
        return
     debug('[XFW] _appInitialized: {}'.format(event.ns))
     try:
-        app_loader = dependency.instance(IAppLoader)
-        app = app_loader.getApp(event.ns)
+        appLoader = dependency.instance(IAppLoader)
+        app = appLoader.getApp(event.ns)
         if app is not None:
             global g_xfwview
             g_xfwview = None
@@ -92,13 +107,12 @@ def _appInitialized(event):
             appNS = event.ns
             swf_loaded_info.clear()
             if event.ns == APP_NAME_SPACE.SF_LOBBY:
-                #BigWorld.callback(0, lambda: app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, None)))
-                app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, None))
+                _loadXFWView()
             elif event.ns == APP_NAME_SPACE.SF_BATTLE:
-                if app_loader.getSpaceID() in [GuiGlobalSpaceID.BATTLE_LOADING, GuiGlobalSpaceID.BATTLE]:
-                    app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, None))
+                if appLoader.getSpaceID() in [GuiGlobalSpaceID.BATTLE_LOADING, GuiGlobalSpaceID.BATTLE]:
+                    _loadXFWView()
                 else:
-                    BigWorld.callback(0, lambda: app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, None)))
+                    BigWorld.callback(0, _loadXFWView)
     except:
         err(traceback.format_exc())
     g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.APP_INITIALIZED, event))
