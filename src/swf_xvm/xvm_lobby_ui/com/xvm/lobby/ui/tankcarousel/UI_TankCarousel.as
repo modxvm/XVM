@@ -113,27 +113,12 @@ package com.xvm.lobby.ui.tankcarousel
             {
                 return super.getNewHelper();
             }
-                
+
+            var newHelper:ITankCarouselHelper = this.helper;
+
             try {
                 var cellType:String = StringUtils.trim(_cfg.cellType.toLowerCase());
-                if (cellType != "small")
-                {
-                    if (cellType != "normal")
-                    {
-                        var normalHelper:TankCarouselHelper = new TankCarouselHelper(_cfg.normal);
-                        var h:int = (normalHelper.verticalGap + normalHelper.rendererHeight) * this._rowCount - normalHelper.verticalGap;
-                        if (App.appHeight - h < THRESHOLD)
-                        {
-                            cellType = "small";
-                        }
-                        else
-                        {
-                            cellType = "normal";
-                        }
-                    }
-                }
 
-                var newHelper:ITankCarouselHelper = this.helper;
                 switch (cellType)
                 {
                     case "small":
@@ -150,14 +135,18 @@ package com.xvm.lobby.ui.tankcarousel
                             invalidate(InvalidationType.SETTINGS);
                         }
                         break;
+                    case "default":
+                        newHelper = super.getNewHelper();
+                        break;
                 }
             }
             catch (ex:Error)
             {
-                    Logger.err(ex);
+                Logger.err(ex);
+                return super.getNewHelper();
             }
+
             return newHelper;
-    
         }
 
 
