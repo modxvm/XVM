@@ -7,6 +7,9 @@ package com.xvm.battle.shared.battleloading
     import flash.text.TextField;
     import net.wg.data.VO.daapi.DAAPIVehicleInfoVO;
     import net.wg.gui.battle.components.BattleAtlasSprite;
+    CLIENT::WG {
+        import net.wg.gui.battle.components.PrestigeLevel;
+    }
     import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.icons.PlayerActionMarker;
 
@@ -23,6 +26,9 @@ package com.xvm.battle.shared.battleloading
         function get playerActionMarker():PlayerActionMarker;
         function get selfBg():BattleAtlasSprite;
         function get icoIGR():BattleAtlasSprite;
+        CLIENT::WG {
+            function get prestigeLevel():PrestigeLevel;
+        }
 
         function setData(data:DAAPIVehicleInfoVO):void;
     }

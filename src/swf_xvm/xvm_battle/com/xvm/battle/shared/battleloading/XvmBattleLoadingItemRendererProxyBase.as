@@ -25,6 +25,9 @@ package com.xvm.battle.shared.battleloading
     import net.wg.gui.battle.battleloading.renderers.BasePlayerItemRenderer;
     import net.wg.gui.battle.battleloading.renderers.BaseRendererContainer;
     import net.wg.gui.battle.components.BattleAtlasSprite;
+    CLIENT::WG {
+        import net.wg.gui.battle.components.PrestigeLevel;
+    }
     import net.wg.gui.battle.views.stats.constants.PlayerStatusSchemeName;
     import net.wg.gui.components.controls.BadgeComponent;
     import net.wg.gui.components.icons.PlayerActionMarker;
@@ -75,6 +78,9 @@ package com.xvm.battle.shared.battleloading
         private var _icoTester:BattleAtlasSprite;
         private var _backTester:BattleAtlasSprite;
         private var _selfBg:BattleAtlasSprite;
+        CLIENT::WG {
+            private var _prestigeLevel:PrestigeLevel;
+        }
 
         private var _substrateHolder:Sprite;
         private var _bottomHolder:Sprite;
@@ -144,6 +150,9 @@ package com.xvm.battle.shared.battleloading
                 _icoTester = container.icoTestersEnemy[position];
                 _backTester = container.backTestersEnemy[position];
                 _badge = container.badgesEnemy[position];
+                CLIENT::WG {
+                    _prestigeLevel = container.prestigeLevelsEnemy[position];
+                }
             }
             else
             {
@@ -157,6 +166,9 @@ package com.xvm.battle.shared.battleloading
                 _icoTester = container.icoTestersAlly[position];
                 _backTester = container.backTestersAlly[position];
                 _badge = container.badgesAlly[position];
+                CLIENT::WG {
+                    _prestigeLevel = container.prestigeLevelsAlly[position];
+                }
             }
 
             // align fields
@@ -211,6 +223,9 @@ package com.xvm.battle.shared.battleloading
             _icoTester = null;
             _backTester = null;
             _selfBg = null;
+            CLIENT::WG {
+                _prestigeLevel = null;
+            }
 
             _ui = null;
         }
@@ -234,6 +249,13 @@ package com.xvm.battle.shared.battleloading
             if (cfg.removeTesterIcon)
             {
                 _model.suffixBadgeType = "";
+            }
+            CLIENT::WG {
+                if (cfg.removePrestigeLevel)
+                {
+                    _model.prestigeMarkId = 0;
+                    _model.prestigeLevel = 0;
+                }
             }
         }
 
@@ -339,6 +361,13 @@ package com.xvm.battle.shared.battleloading
         public function get icoIGR():BattleAtlasSprite
         {
             return _icoIGR;
+        }
+
+        CLIENT::WG {
+            public function get prestigeLevel():PrestigeLevel
+            {
+                return _prestigeLevel;
+            }
         }
 
         // IExtraFieldGroupHolder
