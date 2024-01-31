@@ -121,11 +121,11 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (cellType != "normal")
                     {
-                        cellType = isSmallDoubleCarouselEnabled ? "small" : "normal";
+                        cellType = super.isSmallDoubleCarouselEnabled ? "small" : "normal";
                     }
                 }
 
-                var newHelper:ITankCarouselHelper = helper;
+                var newHelper:ITankCarouselHelper = this.helper;
 
                 switch (cellType)
                 {
