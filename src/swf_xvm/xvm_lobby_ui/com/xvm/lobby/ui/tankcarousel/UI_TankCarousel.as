@@ -114,6 +114,8 @@ package com.xvm.lobby.ui.tankcarousel
                 return super.getNewHelper();
             }
 
+            var newHelper:ITankCarouselHelper = this.helper;
+
             try {
                 var cellType:String = StringUtils.trim(_cfg.cellType.toLowerCase());
 
@@ -121,11 +123,14 @@ package com.xvm.lobby.ui.tankcarousel
                 {
                     if (cellType != "normal")
                     {
-                        cellType = super.isSmallDoubleCarouselEnabled ? "small" : "normal";
+                        CLIENT::WG {
+                            cellType = this.smallDoubleCarouselEnable ? "small" : "normal";
+                        }
+                        CLIENT::LESTA {
+                            cellType = this.isSmallDoubleCarouselEnabled ? "small" : "normal";
+                        }
                     }
                 }
-
-                var newHelper:ITankCarouselHelper = this.helper;
 
                 switch (cellType)
                 {
