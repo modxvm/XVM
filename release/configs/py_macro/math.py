@@ -1,4 +1,9 @@
-﻿from xvm import calculator
+﻿"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
+from xvm import calculator
 
 @xvm.export('calc')
 def calc(expression, *args):

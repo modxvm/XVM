@@ -1,4 +1,9 @@
-﻿from math import ceil
+﻿"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
+from math import ceil
 import xvm_main.python.config as config
 import xvm_main.python.vehinfo as vehinfo
 from xvm_main.python.logger import *

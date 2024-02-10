@@ -1,3 +1,8 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) ktulho
+"""
+
 from math import sin, cos, asin, acos, radians, degrees
 from operator import add, sub, mul, truediv
 

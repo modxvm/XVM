@@ -1,3 +1,8 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
 @xvm.export('replace')
 def str_replace(str, old, new, max=-1):
     return str.replace(old, new, max)

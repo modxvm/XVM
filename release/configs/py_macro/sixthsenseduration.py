@@ -1,3 +1,8 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
 # settings
 from gui import GUI_SETTINGS
 import xvm_main.python.config as config

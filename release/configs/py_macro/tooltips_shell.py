@@ -1,13 +1,18 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
 import ResMgr
 import nations
+from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_data_provider import CarouselDataProvider
+from gui.shared.formatters import text_styles
+from gui.shared.tooltips import formatters
+from gui.shared.tooltips.shell import CommonStatsBlockConstructor
 from helpers import dependency
 from helpers.i18n import makeString
 from constants import ITEM_DEFS_PATH
 from skeletons.gui.shared import IItemsCache
-from gui.shared.tooltips.shell import CommonStatsBlockConstructor
-from gui.shared.tooltips import formatters
-from gui.shared.formatters import text_styles
-from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_data_provider import CarouselDataProvider
 
 from xvm_main.python.logger import *
 from xfw import *

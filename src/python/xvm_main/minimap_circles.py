@@ -1,7 +1,7 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
 """
-@author Omegaice
-@author Maxim Schedriviy <max(at)modxvm.com>
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+Copyright (c) Omegaice
 """
 
 def getMinimapCirclesData():

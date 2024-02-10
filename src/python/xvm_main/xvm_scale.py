@@ -1,9 +1,13 @@
-""" XVM (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+Copyright (c) Maxim Schedriviy
+Copyright (c) Seriych
+"""
+
 """
  XVM Scale for ratings
  https://kr.cm/f/t/2625/
- @author seriych <seriych(at)modxvm.com>
- @author Maxim Schedriviy <max(at)modxvm.com>
 """
 
 import xvm_scale_data

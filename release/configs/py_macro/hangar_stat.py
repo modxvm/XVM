@@ -1,3 +1,8 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
 from datetime import datetime
 from helpers import dependency
 from skeletons.gui.game_control import IBootcampController

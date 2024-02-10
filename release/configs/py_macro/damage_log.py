@@ -1,4 +1,9 @@
-﻿from xvm import damageLog
+﻿"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
+from xvm import damageLog
 
 
 @xvm.export('xvm.damageLog.log', deterministic=False)

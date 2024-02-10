@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# XVM Team (c) https://modxvm.com 2014-2023
-# XVM nightly build system
+# SPDX-License-Identifier: LGPL-3.0-or-later
+# Copyright (c) 2013-2024 XVM Contributors
 
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$CURRENT_PATH"

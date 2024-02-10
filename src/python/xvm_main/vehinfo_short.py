@@ -1,4 +1,7 @@
-""" XVM (c) https://modxvm.com 2013-2023 """
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
 
 # This Python file uses the following encoding: utf-8
 

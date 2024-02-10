@@ -1,6 +1,6 @@
 """
 SPDX-License-Identifier: GPL-3.0-or-later
-Copyright (c) 2017-2022 XVM Contributors
+Copyright (c) 2013-2024 XVM Contributors
 """
 
 #

@@ -1,3 +1,8 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) ktulho
+"""
+
 # Addons: "HitLog"
 # ktulho <https://kr.cm/f/p/17624/>
 

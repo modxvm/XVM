@@ -1,4 +1,7 @@
-""" XFW Library (c) https://modxvm.com 2013-2021 """
+"""
+SPDX-License-Identifier: LGPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
 
 #################################################################
 # WG-Specific

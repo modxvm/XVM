@@ -1,3 +1,8 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2024 XVM Contributors
+"""
+
 import gui.Scaleform.daapi.view.lobby.barracks.barracks_data_provider as barrack
 import nations
 from gui.shared.gui_items.Tankman import Tankman

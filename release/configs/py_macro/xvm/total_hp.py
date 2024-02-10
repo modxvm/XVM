@@ -1,3 +1,9 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) night_dragon_on
+Copyright (c) ktulho
+"""
+
 # Addons: "totalHp", "avgDamage" and "mainGun"
 # night_dragon_on <https://kr.cm/f/p/14897/>
 # ktulho <https://kr.cm/f/p/17624/>
