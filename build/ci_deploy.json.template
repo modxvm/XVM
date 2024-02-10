@@ -1,20 +1,24 @@
 [
     {
-        "date"          : "XVMBUILD_MX_DATE",
-        "size"          : "XVMBUILD_MX_SIZE_EXE",
-        "branch"        : "REPOSITORY_BRANCH",
-        "xvm_version"   : "XVMBUILD_XVM_VERSION.REPOSITORY_COMMITS_NUMBER",
-        "wot_version"   : "XVMBUILD_WOT_VERSION",
-        "url"           : "XVMBUILD_MX_URL_EXE",
-        "changelog_url" : "XVMBUILD_URL_REPO/REPOSITORY_HASH"
+        "date"              : "XVMBUILD_MX_DATE",
+        "size"              : "XVMBUILD_MX_SIZE_EXE",
+        "branch"            : "REPOSITORY_BRANCH",
+        "xvm_version"       : "XVMBUILD_XVM_VERSION.REPOSITORY_COMMITS_NUMBER",
+        "wot_version"       : "XVMBUILD_WOT_VERSION_wg",
+        "wot_version_lesta" : "XVMBUILD_WOT_VERSION_lesta",
+        "commit_hash"       : "REPOSITORY_HASH",
+        "url"               : "XVMBUILD_MX_URL_EXE",
+        "changelog_url"     : "XVMBUILD_URL_REPO/REPOSITORY_HASH"
     },
     {
-        "date"          : "XVMBUILD_MX_DATE",
-        "size"          : "XVMBUILD_MX_SIZE_ZIP",
-        "branch"        : "REPOSITORY_BRANCH",
-        "xvm_version"   : "XVMBUILD_XVM_VERSION.REPOSITORY_COMMITS_NUMBER",
-        "wot_version"   : "XVMBUILD_WOT_VERSION",
-        "url"           : "XVMBUILD_MX_URL_ZIP",
-        "changelog_url" : "XVMBUILD_URL_REPO/REPOSITORY_HASH"
+        "date"              : "XVMBUILD_MX_DATE",
+        "size"              : "XVMBUILD_MX_SIZE_ZIP",
+        "branch"            : "REPOSITORY_BRANCH",
+        "xvm_version"       : "XVMBUILD_XVM_VERSION.REPOSITORY_COMMITS_NUMBER",
+        "wot_version"       : "XVMBUILD_WOT_VERSION_wg",
+        "wot_version_lesta" : "XVMBUILD_WOT_VERSION_lesta",
+        "commit_hash"       : "REPOSITORY_HASH",
+        "url"               : "XVMBUILD_MX_URL_ZIP",
+        "changelog_url"     : "XVMBUILD_URL_REPO/REPOSITORY_HASH"
     }
 ]
