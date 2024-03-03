@@ -394,7 +394,7 @@ class DataHitLog(object):
             self.shells[intCD] = {}
             shellKind = str(shell.kind).lower()
             self.shells[intCD]['shellKind'] = 'high_explosive_stun' if shellKind == 'high_explosive' and shell.hasStun else shellKind
-            self.shells[intCD]['shellDamage'] = shell.damage[0]
+            self.shells[intCD]['shellDamage'] = shell.armorDamage[0] if hasattr(shell, 'armorDamage') else shell.damage[0]
             self.shells[intCD]['costShell'] = 'gold-shell' if shell.id[1] in goldShells else 'silver-shell'
 
     def onAppearanceReady(self, vehicle):
