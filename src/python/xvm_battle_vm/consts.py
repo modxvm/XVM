@@ -10,6 +10,9 @@ Copyright (c) 2013-2024 XVM Contributors
 # BigWorld
 import constants
 
+# XFW
+from xfw import getRegion
+
 
 
 #
@@ -47,16 +50,15 @@ UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.RTS,
     constants.ARENA_GUI_TYPE.RTS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
-    constants.ARENA_GUI_TYPE.COMP7,
-    101, #Halloween
-    200 # Halloween Lesta
+    constants.ARENA_GUI_TYPE.COMP7
 ]
-
 
 UNSUPPORTED_BATTLE_TYPES = [
     constants.ARENA_BONUS_TYPE.BOOTCAMP,
     constants.ARENA_BONUS_TYPE.EVENT_BATTLES,
-    constants.ARENA_BONUS_TYPE.COMP7,
-    101, #Halloween
-    200 # Halloween Lesta
+    constants.ARENA_BONUS_TYPE.COMP7
 ]
+
+if getRegion() == 'RU':
+    UNSUPPORTED_GUI_TYPES.append(constants.ARENA_GUI_TYPE.EPIC_BATTLE)
+    UNSUPPORTED_GUI_TYPES.append(constants.ARENA_GUI_TYPE.EPIC_TRAINING)
