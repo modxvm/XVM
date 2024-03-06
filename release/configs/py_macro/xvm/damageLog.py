@@ -424,7 +424,7 @@ class Data(object):
                 shellKind = str(_shell.kind).lower()
                 self.data['shellKind'] = 'high_explosive_stun' if shellKind == 'high_explosive' and _shell.hasStun else shellKind
                 self.data['caliber'] = _shell.caliber
-                self.data['shellDamage'] = _shell.damage[0]
+                self.data['shellDamage'] = _shell.armorDamage[0] if hasattr(_shell, 'armorDamage') else _shell.damage[0]
                 _id = _shell.id
                 nation = nations.NAMES[_id[0]]
                 self.data['costShell'] = 'gold-shell' if _id[1] in self.shells[nation] else 'silver-shell'

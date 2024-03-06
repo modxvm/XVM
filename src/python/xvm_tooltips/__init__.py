@@ -380,7 +380,8 @@ def CommonStatsBlockConstructor_construct(base, self):
                 elif paramName == 'damageAvgSummary':
                     damageAvgSummary_arr = []
                     for shot in gun.shots:
-                        damageAvg_str = formatNumber(shot.shell.damage[0])
+                        damage = shot.shell.armorDamage[0] if hasattr(shot.shell, 'armorDamage') else shot.shell.damage[0]
+                        damageAvg_str = formatNumber(damage)
                         if costShell[shot.shell.compactDescr] == 'gold':
                             damageAvg_str = gold_pad(damageAvg_str)
                         damageAvgSummary_arr.append(damageAvg_str)
