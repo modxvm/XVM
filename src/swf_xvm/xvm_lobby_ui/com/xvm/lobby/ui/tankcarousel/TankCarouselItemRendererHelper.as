@@ -289,14 +289,18 @@ package com.xvm.lobby.ui.tankcarousel
 
         private function _setupStandardFieldXp():void
         {
-            //TODO: removed in lesta
             CLIENT::WG 
             {
-                var dx:Number = DEFAULT_WIDTH - renderer.content.imgXp.x;
-                _setupStandardFieldAlpha(renderer.content.imgXp, cfg.fields.xp);
-                _setupStandardFieldScale(renderer.content.imgXp, cfg.fields.xp);
-                renderer.content.imgXp.x = DEFAULT_WIDTH - dx * renderer.content.imgXp.scaleX + cfg.fields.xp.dx;
+                var imgXp:Image = renderer.content.imgXp;
             }
+            CLIENT::LESTA 
+            {
+                var imgXp:TankMissionBadge = renderer.missionBadge;
+            }
+            var dx:Number = DEFAULT_WIDTH - imgXp.x;
+            _setupStandardFieldAlpha(imgXp, cfg.fields.xp);
+            _setupStandardFieldScale(imgXp, cfg.fields.xp);
+            imgXp.x = DEFAULT_WIDTH - dx * imgXp.scaleX + cfg.fields.xp.dx;
         }
 
         private function _setupStandardTextField(field:TextField, cfg:CCarouselCellStandardField, dy:Number):void
