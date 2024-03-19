@@ -22,14 +22,13 @@ from gui.shared.utils.requesters.StatsRequester import StatsRequester
 from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
-from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView
+from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView as CustomizationMainView
 from gui.Scaleform.genConsts.CURRENCIES_CONSTANTS import CURRENCIES_CONSTANTS
 from gui.shared.formatters import text_styles
 from gui.shared.money import Currency
 from gui.shared.tooltips.common import HeaderMoneyAndXpTooltipData
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
-from gui.impl.lobby.crew.dialogs.enlarge_barracks_dialog import EnlargeBarracksDialog
 
 # XFW
 from xfw import *
@@ -101,7 +100,7 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            handlersInvalidate("onBuyConfirmed(False)", MainView_handler)
+            handlersInvalidate("onBuyConfirmed(False)", CustomizationMainView_handler)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
@@ -213,13 +212,13 @@ TechTree_handler = None
 
 def TechTree_populate(base, self, *args, **kwargs):
     global TechTree_handler
+    base(self, *args, **kwargs)
     TechTree_handler = self
-    return base(self, *args, **kwargs)
 
 def TechTree_dispose(base, self, *args, **kwargs):
     global TechTree_handler
     TechTree_handler = None
-    return base(self, *args, **kwargs)
+    base(self, *args, **kwargs)
 
 
 
@@ -231,31 +230,31 @@ Research_handler = None
 
 def Research_populate(base, self, *args, **kwargs):
     global Research_handler
+    base(self, *args, **kwargs)
     Research_handler = self
-    return base(self, *args, **kwargs)
 
 def Research_dispose(base, self, *args, **kwargs):
     global Research_handler
     Research_handler = None
-    return base(self, *args, **kwargs)
+    base(self, *args, **kwargs)
 
 
 
 #
-# Handlers/MainView
+# Handlers/CustomizationMainView
 #
 
-MainView_handler = None
+CustomizationMainView_handler = None
 
-def MainView_populate(base, self, *args, **kwargs):
-    global MainView_handler
-    MainView_handler = self
-    return base(self, *args, **kwargs)
+def CustomizationMainView_populate(base, self, *args, **kwargs):
+    global CustomizationMainView_handler
+    base(self, *args, **kwargs)
+    CustomizationMainView_handler = self
 
-def MainView_dispose(base, self, *args, **kwargs):
-    global MainView_handler
-    MainView_handler = None
-    return base(self, *args, **kwargs)
+def CustomizationMainView_dispose(base, self, *args, **kwargs):
+    global CustomizationMainView_handler
+    CustomizationMainView_handler = None
+    base(self, *args, **kwargs)
 
 
 
@@ -303,8 +302,8 @@ def xfw_module_init():
         overrideMethod(Research, '_populate')(Research_populate)
         overrideMethod(Research, '_dispose')(Research_dispose)
 
-        overrideMethod(MainView, '_dispose')(MainView_populate)
-        overrideMethod(MainView, '_dispose')(MainView_dispose) 
+        overrideMethod(CustomizationMainView, '_populate')(CustomizationMainView_populate)
+        overrideMethod(CustomizationMainView, '_dispose')(CustomizationMainView_dispose)
 
         overrideMethod(tooltips, 'getUnlockPrice')(tooltips_getUnlockPrice)
         import gui.shared.tooltips.module as tooltips_module
