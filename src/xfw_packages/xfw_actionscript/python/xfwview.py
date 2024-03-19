@@ -57,7 +57,7 @@ _WOT_ROOT = '../../../'
 
 
 class XfwArenaGuiType:
-    HALLOWEEN_EVENT = 101
+    COSMIC_EVENT = 300
 
 
 
@@ -178,16 +178,16 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_royale']
                 elif arenaGuiType == ARENA_GUI_TYPE.EVENT_BATTLES:
                     as_paths += ['as_battle_event']
-                elif arenaGuiType == ARENA_GUI_TYPE.RTS or arenaGuiType == ARENA_GUI_TYPE.RTS_TRAINING or arenaGuiType == ARENA_GUI_TYPE.RTS_BOOTCAMP :
+                elif arenaGuiType in (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP):
                     as_paths += ['as_battle_rts']
-                elif arenaGuiType == ARENA_GUI_TYPE.SORTIE_2 or arenaGuiType == ARENA_GUI_TYPE.FORT_BATTLE_2:
+                elif arenaGuiType in (ARENA_GUI_TYPE.SORTIE_2, ARENA_GUI_TYPE.FORT_BATTLE_2):
                     as_paths += ['as_battle_stronghold']
                 elif arenaGuiType == ARENA_GUI_TYPE.COMP7:
                     as_paths += ['as_battle_comp7']
                 elif arenaGuiType == ARENA_GUI_TYPE.WINBACK:
                     as_paths += ['as_battle_winback']
-                elif arenaGuiType == XfwArenaGuiType.HALLOWEEN_EVENT:
-                    as_paths += ['as_battle_halloween']
+                elif arenaGuiType == XfwArenaGuiType.COSMIC_EVENT:
+                    as_paths += ['as_battle_cosmic']
                 else:
                     as_paths += ['as_battle_classic']
             else:

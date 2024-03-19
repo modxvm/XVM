@@ -11,6 +11,9 @@ Copyright (c) 2013-2024 XVM Contributors
 from account_helpers.settings_core import settings_constants
 import constants
 
+# XFW
+from xfw import *
+
 
 
 #
@@ -44,17 +47,14 @@ UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.RTS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
     constants.ARENA_GUI_TYPE.COMP7,
-    101, #Halloween
-    200 # Halloween Lesta
+    300 # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta)
 ]
 
 
 UNSUPPORTED_BATTLE_TYPES = [
     constants.ARENA_BONUS_TYPE.BOOTCAMP,
     constants.ARENA_BONUS_TYPE.EVENT_BATTLES,
-    constants.ARENA_BONUS_TYPE.COMP7,
-    101, #Halloween
-    200 # Halloween Lesta
+    constants.ARENA_BONUS_TYPE.COMP7
 ]
 
 
@@ -63,20 +63,24 @@ CIRCLES_SETTINGS = (
     settings_constants.GAME.MINIMAP_MAX_VIEW_RANGE,
     settings_constants.GAME.MINIMAP_VIEW_RANGE,
     settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP,
-    settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE)
+    settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE
+)
 
 
 LINES_SETTINGS = (
     settings_constants.GAME.SHOW_VECTOR_ON_MAP,
-    settings_constants.GAME.SHOW_SECTOR_ON_MAP)
+    settings_constants.GAME.SHOW_SECTOR_ON_MAP
+)
 
 
 LABELS_SETTINGS = (
-    settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP)
+    settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP
+)
 
 
 HP_SETTINGS = (
-    settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP)
+    settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP
+)
 
 
 DEFAULTS = {

@@ -7,11 +7,11 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import net.wg.halloween.battle.HalloweenBattlePage;
+    import net.wg.gui.battle.cosmic.CosmicBattlePage;
 
     public class BattleXvmMod extends XvmModBase
     {
-        public static const APP_TYPE:int = Defines.APP_TYPE_BATTLE_HALLOWEEN;
+        public static const APP_TYPE:int = Defines.APP_TYPE_BATTLE_COSMIC;
 
         public override function get logPrefix():String
         {
@@ -20,19 +20,12 @@ package com.xvm.battle
 
         private static const VIEWS:Object =
         {
-            "halloweenBattlePage": [
-                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
-            ]
+            "cosmicBattlePage": []
         }
 
         public override function get views():Object
         {
             return VIEWS;
-        }
-
-        public static function get halloweenBattlePage():HalloweenBattlePage
-        {
-            return BattleXvmView.battlePage as HalloweenBattlePage;
         }
     }
 }

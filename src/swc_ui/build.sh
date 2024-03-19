@@ -29,15 +29,14 @@ projects="
 # special projects for WG
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
-        $projects 
-        wg_battle_halloween_ui
+        $projects
     "
 fi
 
 # special projects for Lesta
 if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
     projects="
-        $projects 
+        $projects
     "
 fi
 

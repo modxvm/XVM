@@ -45,8 +45,7 @@ import gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins as hint_plugin
 from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
 
 # XFW
-from xfw.constants import XFW_COMMAND, XFW_EVENT
-from xfw.events import registerEvent, overrideMethod
+from xfw import *
 
 # XFW Actionscript
 from xfw_actionscript.python import as_xfw_cmd
@@ -73,9 +72,7 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     constants.ARENA_GUI_TYPE.RTS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
     constants.ARENA_GUI_TYPE.COMP7,
-    constants.ARENA_GUI_TYPE.WINBACK, # TODO: fix broken totalEfficiency and hitLog due to broken PlayerPanels
-    101, # Halloween
-    200  # Halloween Lesta
+    constants.ARENA_GUI_TYPE.WINBACK # TODO: fix broken totalEfficiency and hitLog due to broken PlayerPanels
 ]
 
 
