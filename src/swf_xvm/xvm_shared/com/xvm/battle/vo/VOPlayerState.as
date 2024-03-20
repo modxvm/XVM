@@ -377,13 +377,13 @@ package com.xvm.battle.vo
 
         internal function set_curHealth(value:Number):void
         {
-            //DESTR_BY_FALL_RAMMING = -2
-            //FUEL_EXPLODED = -3
-            //AMMO_BAY_DESTROYED = -5
-            //TURRET_DETACHED = -13
+            // DESTR_BY_FALL_RAMMING = -2
+            // FUEL_EXPLODED = -3
+            // AMMO_BAY_DESTROYED = -5
+            // TURRET_DETACHED = -13
             if (value < 0)
             {
-                _isBlown = value < -3;
+                _isBlown = value == -5 || value == -13;
                 value = 0;
             }
             __curHealth = value;

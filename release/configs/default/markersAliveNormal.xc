@@ -56,8 +56,8 @@
       // Текст при взрыве боеукладки (см. описание макросов в macros_ru.txt).
       "blowupMessage": "{{l10n:blownUp}}\n{{dmg}}"
     },
-    // Vehicle distance (Lesta only).
-    // Дистанция до техники (только для Lesta).
+    // Vehicle distance.
+    // Дистанция до техники.
     "vehicleDist": {
       "enabled": true,
       "x": 0,
@@ -333,8 +333,8 @@
     "damageTextSquadman": {
       "$ref": { "path":"def.damageText" }
     },
-    // Distance to allied vehicles (Lesta only).
-    // Дистанция до техники союзников (только для Lesta).
+    // Distance to allied vehicles.
+    // Дистанция до техники союзников.
     "vehicleDist": {
       "$ref": { "path":"def.vehicleDist" }
     },
@@ -465,8 +465,8 @@
     "damageTextSquadman": {
       "$ref": { "path":"def.damageText" }
     },
-    // Distance to enemy vehicles (Lesta only).
-    // Дистанция до техники противников (только для Lesta).
+    // Distance to enemy vehicles.
+    // Дистанция до техники противников.
     "vehicleDist": {
       "$ref": { "path":"def.vehicleDist" }
     },

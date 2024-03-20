@@ -25,7 +25,7 @@ def xfw_module_init():
         eventsMM.init()
 
         __initialized = True
-    
+
 
 
 def xfw_module_fini():
@@ -42,6 +42,7 @@ def xfw_module_fini():
         
         import eventsMM
         eventsMM.fini()
+
         __initialized = False
 
 

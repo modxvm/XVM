@@ -14,7 +14,7 @@ package com.xvm.vehiclemarkers.ui
     import com.xvm.vo.*;
     import flash.events.*;
     import net.wg.data.constants.Values;
-	import net.wg.gui.battle.battleRoyale.views.components.fullStats.nationsVehiclesCounter.BattleRoyaleNationsVehiclesCounter;
+    import net.wg.gui.battle.battleRoyale.views.components.fullStats.nationsVehiclesCounter.BattleRoyaleNationsVehiclesCounter;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersConstants;
     import net.wg.gui.battle.views.vehicleMarkers.VehicleMarkersManager;
     import net.wg.gui.battle.views.vehicleMarkers.events.*;
@@ -22,7 +22,7 @@ package com.xvm.vehiclemarkers.ui
 
     public class XvmVehicleMarker extends VehicleMarker
     {
-		public var isStickyAndOutOfScreen:Boolean = false;
+        public var isStickyAndOutOfScreen:Boolean = false;
 
         private static const INVALIDATE_DATA:uint = 1 << 29;
 
@@ -202,25 +202,30 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-	CLIENT::LESTA
-	{
-        override public function setDistance(dist:String) : void
+        public function xvm_setDistance(dist:String):void
         {
-			super.setDistance("");
-			vehicleDistComponent.setDistance(dist);
+            vehicleDistComponent.setDistance(dist);
         }
-	}
 
-		override public function setIsStickyAndOutOfScreen(isStickyAndOutOfScreen:Boolean) : void
-		{
-			super.setIsStickyAndOutOfScreen(isStickyAndOutOfScreen);
-			this.isStickyAndOutOfScreen = isStickyAndOutOfScreen;
-			var playerState:VOPlayerState = BattleState.get(vehicleID);
+        CLIENT::LESTA
+        {
+            override public function setDistance(dist:String):void
+            {
+                super.setDistance("");
+                xvm_setDistance(dist);
+            }
+        }
+
+        override public function setIsStickyAndOutOfScreen(isStickyAndOutOfScreen:Boolean):void
+        {
+            super.setIsStickyAndOutOfScreen(isStickyAndOutOfScreen);
+            this.isStickyAndOutOfScreen = isStickyAndOutOfScreen;
+            var playerState:VOPlayerState = BattleState.get(vehicleID);
             if (playerState)
             {
                 dispatchEvent(new XvmVehicleMarkerEvent(XvmVehicleMarkerEvent.UPDATE, playerState, exInfo));
             }
-		}
+        }
 
         private final function setupVehicleIcon():void
         {
@@ -275,10 +280,7 @@ package com.xvm.vehiclemarkers.ui
             hoverMarkerComponent = new HoverMarkerComponent(this);
             vehicleStatusMarkerComponent = new VehicleStatusMarkerComponent(this);
             healthBarComponent = new HealthBarComponent(this);
-			CLIENT::LESTA
-			{
-				vehicleDistComponent = new VehicleDistComponent(this);
-			}
+            vehicleDistComponent = new VehicleDistComponent(this);
             textFieldsComponent = new TextFieldsComponent(this);
             damageIndicatorComponent = new DamageIndicatorComponent(this);
             damageTextComponent = new DamageTextComponent(this);
@@ -341,7 +343,7 @@ package com.xvm.vehiclemarkers.ui
                 vehicleDistComponent.dispose();
                 vehicleDistComponent = null;
             }
-		}
+        }
 
         private function init(vehicleID:Number):void
         {

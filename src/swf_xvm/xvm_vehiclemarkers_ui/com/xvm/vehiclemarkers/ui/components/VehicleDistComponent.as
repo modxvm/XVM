@@ -65,12 +65,12 @@ package com.xvm.vehiclemarkers.ui.components
 
 		public final function onExInfo(e:XvmVehicleMarkerEvent):void
 		{
-			cfg = e.cfg.vehicleDist;			
 			update(e);
 		}
 
 		public final function update(e:XvmVehicleMarkerEvent):void
 		{
+			cfg = e.cfg.vehicleDist;
 			if (e.playerState)
 			{
 				isAlive = e.playerState.isAlive;
@@ -99,6 +99,9 @@ package com.xvm.vehiclemarkers.ui.components
 
 		private function settingTextField(e:XvmVehicleMarkerEvent):void
 		{
+			if (!cfg)
+				return;
+
 			var playerState:VOPlayerState = e.playerState;
 			textField.x = Macros.FormatNumber(cfg.x, playerState, 0);
 			textField.y = Macros.FormatNumber(cfg.y, playerState, -66);
