@@ -36,28 +36,28 @@ from xvm_main.python.xvm import l10n
 import parser_addon
 from xvm.damageLog import keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
 
-BATTLE_TYPE = {ARENA_GUI_TYPE.UNKNOWN: "unknown",
-               ARENA_GUI_TYPE.RANDOM: "regular",
-               ARENA_GUI_TYPE.TRAINING: "training",
-               ARENA_GUI_TYPE.CYBERSPORT: "cybersport",
-               ARENA_GUI_TYPE.EVENT_BATTLES: "event_battles",
-               ARENA_GUI_TYPE.FALLOUT_CLASSIC: "fallout_classic",
-               ARENA_GUI_TYPE.FALLOUT_MULTITEAM: "fallout_multiteam",
-               ARENA_GUI_TYPE.SORTIE_2: "sortie_2",
-               ARENA_GUI_TYPE.FORT_BATTLE_2: "fort_battle_2",
-               ARENA_GUI_TYPE.RANKED: "ranked",
-               ARENA_GUI_TYPE.BOOTCAMP: "bootcamp",
-               ARENA_GUI_TYPE.EPIC_RANDOM: "epic_random",
-               ARENA_GUI_TYPE.EPIC_RANDOM_TRAINING: "epic_random_training",
-               ARENA_GUI_TYPE.EPIC_BATTLE: "epic_battle",
-               ARENA_GUI_TYPE.EPIC_TRAINING: "epic_battle",
-               ARENA_GUI_TYPE.BATTLE_ROYALE: "battle_royale",
-               ARENA_GUI_TYPE.MAPBOX: "mapbox",
-               ARENA_GUI_TYPE.MAPS_TRAINING: "maps_training",
-               ARENA_GUI_TYPE.RTS: "rts",
-               ARENA_GUI_TYPE.RTS_TRAINING: "rts_training",
-               ARENA_GUI_TYPE.RTS_BOOTCAMP: "rts_bootcamp",
-               }
+BATTLE_TYPE = {
+    ARENA_GUI_TYPE.UNKNOWN: "unknown",
+    ARENA_GUI_TYPE.RANDOM: "regular",
+    ARENA_GUI_TYPE.TRAINING: "training",
+    ARENA_GUI_TYPE.CYBERSPORT: "cybersport",
+    ARENA_GUI_TYPE.EVENT_BATTLES: "event_battles",
+    ARENA_GUI_TYPE.FALLOUT_CLASSIC: "fallout_classic",
+    ARENA_GUI_TYPE.FALLOUT_MULTITEAM: "fallout_multiteam",
+    ARENA_GUI_TYPE.SORTIE_2: "sortie_2",
+    ARENA_GUI_TYPE.FORT_BATTLE_2: "fort_battle_2",
+    ARENA_GUI_TYPE.RANKED: "ranked",
+    ARENA_GUI_TYPE.EPIC_RANDOM: "epic_random",
+    ARENA_GUI_TYPE.EPIC_RANDOM_TRAINING: "epic_random_training",
+    ARENA_GUI_TYPE.EPIC_BATTLE: "epic_battle",
+    ARENA_GUI_TYPE.EPIC_TRAINING: "epic_battle",
+    ARENA_GUI_TYPE.BATTLE_ROYALE: "battle_royale",
+    ARENA_GUI_TYPE.MAPBOX: "mapbox",
+    ARENA_GUI_TYPE.MAPS_TRAINING: "maps_training",
+    ARENA_GUI_TYPE.RTS: "rts",
+    ARENA_GUI_TYPE.RTS_TRAINING: "rts_training",
+    ARENA_GUI_TYPE.RTS_BOOTCAMP: "rts_bootcamp",
+}
 
 HIT_LOG = 'hitLog/'
 FORMAT_HISTORY = 'formatHistory'

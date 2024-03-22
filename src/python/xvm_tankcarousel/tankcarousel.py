@@ -99,10 +99,6 @@ XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
     #log('xvm_tankcarousel: Hangar::as_setCarouselS, linkage=%s, alias=%s' % (linkage, alias))
 
-    #do not modify tankcarousel in bootcamp
-    if isInBootcamp():
-        return base(self, linkage, alias)
-
     #do not modify tankcarousel in events
     isEvent = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.EVENT_BATTLES) if self.prbDispatcher is not None else False
     if isEvent:

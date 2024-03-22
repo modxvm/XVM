@@ -142,9 +142,7 @@ def barrack_packActiveTankman(base, tankman):
 # low ammo => vehicle not ready
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     result = base(self, *args, **kwargs)
-    if isInBootcamp():
-        return result
-    elif self.isOnlyForEventBattles:
+    if self.isOnlyForEventBattles:
         return result
     elif self.isOnlyForBattleRoyaleBattles:
         return result
@@ -158,9 +156,7 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
 # low ammo => vehicle not ready
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     result = base.fget(self, *args, **kwargs)
-    if isInBootcamp():
-        return result
-    elif self.isOnlyForEventBattles:
+    if self.isOnlyForEventBattles:
         return result
     elif self.isOnlyForBattleRoyaleBattles:
         return result
@@ -174,9 +170,7 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
 # low ammo => vehicle not ready (disable red button)
 def _CurrentVehicleActionsValidator_validate(base, self):
     res = base(self)
-    if isInBootcamp():
-        return res
-    elif g_currentVehicle.isOnlyForEventBattles():
+    if g_currentVehicle.isOnlyForEventBattles():
         return res
     elif g_currentVehicle.isOnlyForBattleRoyaleBattles():
         return res

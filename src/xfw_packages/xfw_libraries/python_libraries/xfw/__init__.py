@@ -66,7 +66,6 @@ __all__ = [
     'getBattleApp',
     'getCurrentAccountDBID',
     'isReplay',
-    'isInBootcamp',
     'getArenaPeriod',
     'getCurrentBattleInfo',
     'getVehCD',

@@ -5,7 +5,6 @@ Copyright (c) 2013-2024 XVM Contributors
 
 from datetime import datetime
 from helpers import dependency
-from skeletons.gui.game_control import IBootcampController
 from skeletons.gui.shared import IItemsCache
 
 from xvm_main.python import stats, utils
@@ -31,8 +30,6 @@ def stat_update(formatDate):
 
 @xvm.export('winrate_next')
 def winrate_next(diff):
-    if dependency.instance(IBootcampController).isInBootcamp():
-        return
     itemsCache = dependency.instance(IItemsCache)
     battles = itemsCache.items.getAccountDossier().getRandomStats().getBattlesCount()
     if battles is None:

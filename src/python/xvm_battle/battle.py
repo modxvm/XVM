@@ -65,7 +65,6 @@ import shared
 
 NOT_SUPPORTED_BATTLE_TYPES = [ 
     constants.ARENA_GUI_TYPE.EVENT_BATTLES,
-    constants.ARENA_GUI_TYPE.BOOTCAMP,
     constants.ARENA_GUI_TYPE.BATTLE_ROYALE,
     constants.ARENA_GUI_TYPE.MAPS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS,

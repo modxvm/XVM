@@ -17,7 +17,6 @@ from constants import VEHICLE_HIT_FLAGS
 from gui.Scaleform.daapi.view.battle.shared.frag_correlation_bar import FragCorrelationBar
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
-from skeletons.gui.game_control import IBootcampController
 from skeletons.gui.shared import IItemsCache
 
 import xvm_battle.python.battle as battle
@@ -111,7 +110,7 @@ def updateTeamHealth(self, alliesHP, enemiesHP, totalAlliesHP, totalEnemiesHP):
 @registerEvent(Hangar, '_Hangar__updateParams')
 def Hangar__updateParams(self):
     global playerAvgDamage
-    if dependency.instance(IBootcampController).isInBootcamp() or not g_currentVehicle.isPresent():
+    if not g_currentVehicle.isPresent():
         return
     else:
         itemsCache = dependency.instance(IItemsCache)

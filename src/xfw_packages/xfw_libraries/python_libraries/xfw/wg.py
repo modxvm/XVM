@@ -15,7 +15,6 @@ from gui.battle_control import avatar_getter
 from gui.shared.utils import getPlayerDatabaseID
 from helpers import dependency, getClientLanguage
 from skeletons.gui.app_loader import IAppLoader
-from skeletons.gui.game_control import IBootcampController
 
 def getLobbyApp():
     return dependency.instance(IAppLoader).getDefLobbyApp()
@@ -38,10 +37,6 @@ def isReplay():
         _replayCtrl = BattleReplay.g_replayCtrl
         _isReplay = _replayCtrl.isPlaying
     return _isReplay
-
-
-def isInBootcamp():
-    return dependency.instance(IBootcampController).isInBootcamp()
 
 def getArenaPeriod():
     try:

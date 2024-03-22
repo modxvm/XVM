@@ -328,9 +328,6 @@ class Xvm(object):
                 userprefs.set(args[0], args[1])
                 return (None, True)
 
-            if cmd == XVM_COMMAND.IS_IN_BOOTCAMP:
-                return (isInBootcamp(), True)
-
             if cmd == XVM_COMMAND.OPEN_WEB_BROWSER:
                 BigWorld.wg_openWebBrowser(args[0])
                 return (None, True)

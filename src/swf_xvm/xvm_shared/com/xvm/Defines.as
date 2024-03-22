@@ -94,7 +94,6 @@ package com.xvm
         public static const BATTLE_TYPE_SORTIE_2:Number = 20;
         public static const BATTLE_TYPE_FORT_BATTLE_2:Number = 21;
         public static const BATTLE_TYPE_RANKED:Number = 22;
-        public static const BATTLE_TYPE_BOOTCAMP:Number = 23;
         public static const BATTLE_TYPE_EPIC_RANDOM:Number = 24;
         public static const BATTLE_TYPE_EPIC_RANDOM_TRAINING:Number = 25;
         public static const BATTLE_TYPE_EVENT_BATTLES_2:Number = 26;

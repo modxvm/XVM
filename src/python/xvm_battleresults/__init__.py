@@ -18,7 +18,6 @@ import simplejson
 import BigWorld
 from gui.shared import event_dispatcher
 from gui.Scaleform.daapi.view.battle_results_window import BattleResultsWindow
-from gui.Scaleform.daapi.view.bootcamp.BCBattleResult import BCBattleResult
 from gui.Scaleform.genConsts.BATTLE_RESULTS_PREMIUM_STATES import BATTLE_RESULTS_PREMIUM_STATES
 from gui.battle_results import composer
 from gui.battle_results.components import base
@@ -97,18 +96,6 @@ def BattleResultsWindow_as_setDataS(base, self, data):
 
 
 #
-# BCBattleResult
-#
-
-def BCBattleResult_as_setDataS(base, self, data):
-    if data and 'xvm_data' in data:
-        del data['xvm_data']
-
-    return base(self, data)
-
-
-
-#
 # DynamicPremiumState
 #
 
@@ -151,7 +138,6 @@ def xfw_module_init():
 
         overrideMethod(event_dispatcher, 'showBattleResultsWindow')(event_dispatcher_showBattleResultsWindow_proxy)
         overrideMethod(BattleResultsWindow, 'as_setDataS')(BattleResultsWindow_as_setDataS)
-        overrideMethod(BCBattleResult, 'as_setDataS')(BCBattleResult_as_setDataS)
         overrideMethod(DynamicPremiumState, 'getVO')(_DynamicPremiumState_getVO)
         overrideMethod(composer.StatsComposer, '__init__')(_StatsComposer__init__)
         __initialized = True

@@ -113,9 +113,6 @@
       // Ranked battle.
       // Ранговый бой.
       "ranked": "",
-      // Proving ground.
-      // Учебный бой.
-      "bootcamp": "",
       // Grand battles.
       // Генеральное сражение.
       "epic_random": "",

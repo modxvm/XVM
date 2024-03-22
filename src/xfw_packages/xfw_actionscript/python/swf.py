@@ -20,7 +20,6 @@ from xfw.constants import *
 from xfw.events import *
 from xfw.logger import *
 import xfw_vfs as vfs
-from xfw import isInBootcamp
 
 from .swfloadedinfo import swf_loaded_info
 
@@ -80,8 +79,6 @@ def _loadXFWView():
     app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, parent=parent))
 
 def _appInitialized(event):
-    if isInBootcamp():
-       return
     debug('[XFW] _appInitialized: {}'.format(event.ns))
     try:
         appLoader = dependency.instance(IAppLoader)
@@ -105,8 +102,6 @@ def _appInitialized(event):
     g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.APP_INITIALIZED, event))
 
 def _appDestroyed(event):
-    if isInBootcamp():
-       return
     g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.APP_DESTROYED, event))
 
 g_eventBus.addListener(events.AppLifeCycleEvent.INITIALIZED, _appInitialized)
