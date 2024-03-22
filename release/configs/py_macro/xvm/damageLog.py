@@ -20,7 +20,6 @@ from gui.shared.utils.TimeInterval import TimeInterval
 from helpers import dependency
 from items import _xml#, vehicles
 from skeletons.gui.battle_session import IBattleSessionProvider
-from skeletons.gui.game_control import IBootcampController
 from vehicle_systems.tankStructure import TankPartIndexes, TankPartNames
 
 from xfw.events import registerEvent, overrideMethod
@@ -277,7 +276,6 @@ def readyConfig(section):
 
 class Data(object):
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
-    bootcampController = dependency.descriptor(IBootcampController)
 
     def __init__(self):
         self.reset()
@@ -334,8 +332,6 @@ class Data(object):
                      }
 
     def updateData(self):
-        if self.bootcampController.isInBootcamp():
-            return
         player = BigWorld.player()
         self.data['dmgRatio'] = self.data['damage'] * 100 // self.data['maxHealth']
         attackerID = self.data['attackerID']
