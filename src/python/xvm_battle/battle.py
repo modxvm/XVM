@@ -149,7 +149,7 @@ def _ArenaVehiclesPlugin_setInAoI(self, entry, isInAoI):
 
 
 # SharedPage
-def _SharedPage_as_setPostmortemTipsVisibleS(base, self, value):
+def _SharedPage_as_handlePostmortemTips(base, self, value):
     if not config.get('battle/showPostmortemTips'):
         value = False
     base(self, value)
@@ -515,7 +515,10 @@ def init():
     registerEvent(DynSquadFunctional, 'updateVehiclesInfo')(_DynSquadFunctional_updateVehiclesInfo)
     registerEvent(DamagePanel, '_updateDeviceState')(_DamagePanel_updateDeviceState)
     registerEvent(ArenaVehiclesPlugin, '_setInAoI')(_ArenaVehiclesPlugin_setInAoI)
-    overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')(_SharedPage_as_setPostmortemTipsVisibleS)
+    if hasattr(SharedPage, 'as_onPostmortemActiveS'):
+        overrideMethod(SharedPage, 'as_onPostmortemActiveS')(_SharedPage_as_handlePostmortemTips)
+    else:
+        overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')(_SharedPage_as_handlePostmortemTips)
     overrideMethod(SharedPage, '_switchToPostmortem')(_SharedPage_switchToPostmortem)
     overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')(_BattleStatisticsDataController_as_setQuestsInfoS)
     overrideMethod(hint_plugin, 'createPlugins')(_hint_plugin_createPlugins)
