@@ -381,11 +381,9 @@ package com.xvm.battle.vo
             // FUEL_EXPLODED = -3
             // AMMO_BAY_DESTROYED = -5
             // TURRET_DETACHED = -13
+            _isBlown = value == -5 || value == -13;
             if (value < 0)
-            {
-                _isBlown = value == -5 || value == -13;
                 value = 0;
-            }
             __curHealth = value;
             eventsToDispatch[PlayerStateEvent.PLAYERS_HP_CHANGED] = true;
             if (isCurrentPlayer)
