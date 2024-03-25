@@ -226,14 +226,28 @@ package com.xvm.battle.ranked.playersPanel
             updateBattleStatePlayersPanelData();
         }
 
-        private function onListRollOverHandler(e:MouseEvent):void
-        {
-            _isMouseRollOver = true;
+        CLIENT::WG {
+            override protected function onListRollOverHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = true;
+            }
+
+            override protected function onListRollOutHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = false;
+            }
         }
 
-        private function onListRollOutHandler(e:MouseEvent):void
-        {
-            _isMouseRollOver = false;
+        CLIENT::LESTA {
+            private function onListRollOverHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = true;
+            }
+
+            private function onListRollOutHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = false;
+            }
         }
 
         // for extraFields in the "none" mode

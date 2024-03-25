@@ -285,16 +285,30 @@ package com.xvm.battle.winback.playersPanel
             }
         }
 
-        // PRIVATE
+        CLIENT::WG {
+            override protected function onListRollOverHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = true;
+            }
 
-        private function onListRollOverHandler(e:MouseEvent):void
-        {
-            _isMouseRollOver = true;
+            override protected function onListRollOutHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = false;
+            }
         }
 
-        private function onListRollOutHandler(e:MouseEvent):void
-        {
-            _isMouseRollOver = false;
+        // PRIVATE
+
+        CLIENT::LESTA {
+            private function onListRollOverHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = true;
+            }
+
+            private function onListRollOutHandler(e:MouseEvent):void
+            {
+                _isMouseRollOver = false;
+            }
         }
 
         private function registerPlayersPanelMacros():void
