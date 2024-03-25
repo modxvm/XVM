@@ -23,7 +23,6 @@ from gui.Scaleform.locale.MENU import MENU
 from gui.shared.items_parameters import formatters as param_formatter
 from gui.shared.items_parameters.formatters import measureUnitsForParameter, MEASURE_UNITS
 from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
-from gui.shared.items_parameters.params_helper import idealCrewComparator as idealCrewComparator_helper
 from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.shared.tooltips import getUnlockPrice
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
@@ -46,6 +45,11 @@ from xvm_main.python.logger import *
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
+
+if getRegion() != 'RU':
+    from gui.shared.items_parameters.params_helper import similarCrewComparator as crewComparator_helper
+else:
+    from gui.shared.items_parameters.params_helper import idealCrewComparator as crewComparator_helper
 
 #####################################################################
 # globals
@@ -297,7 +301,7 @@ def CommonStatsBlockConstructor_construct(base, self):
         veh_descr = vehicle.descriptor
         gun = vehicle.gun.descriptor
         turret = vehicle.turret.descriptor
-        comparator = idealCrewComparator_helper(vehicle)
+        comparator = crewComparator_helper(vehicle)
         vehicleCommonParams = getParameters_helper(vehicle)
         veh_type_inconfig = vehicle.type.replace('AT-SPG', 'TD')
         clipGunInfoShown = False

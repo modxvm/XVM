@@ -30,8 +30,8 @@ from .consts import AS_SYMBOLS
 # Handlers
 #
 
-def _MarkersManager__init__(base, self):
-    base(self)
+def _MarkersManager__init__(base, self, *args, **kwargs):
+    base(self, *args, **kwargs)
     g_markers.init(self)
 
 
