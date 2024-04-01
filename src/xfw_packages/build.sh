@@ -34,10 +34,15 @@ if [ "$XVMBUILD_XFW_WOTMOD_OUTPUTPATH" == "" ]; then
   XVMBUILD_XFW_WOTMOD_OUTPUTPATH="~output/$XVMBUILD_FLAVOR/wotmod/"
 fi
 
+if [ "$XVMBUILD_XFW_WOTMOD_OUTPUTPATH_OPENWG" == "" ]; then
+  XVMBUILD_XFW_WOTMOD_OUTPUTPATH_OPENWG="~output/$XVMBUILD_FLAVOR/wotmod_openwg/"
+fi
+
 WOT_VERSION=$(echo '$XVMBUILD_WOT_VERSION_'"${XVMBUILD_FLAVOR}" | envsubst)
 
 outputpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_PACKAGES_OUTPUTPATH"
 wotmodpath="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH"
+wotmodpath_openwg="$XVMBUILD_ROOT_PATH/$XVMBUILD_XFW_WOTMOD_OUTPUTPATH_OPENWG"
 
 libraries=(
   'xfw_actionscript'
@@ -152,10 +157,16 @@ prepare_metaxml()
   sed -i s/XFW_VERSION/$XVMBUILD_XVM_VERSION.$REPOSITORY_COMMITS_NUMBER$REPOSITORY_BRANCH_FORFILE/g "$2"
 }
 
-install_wotmod()
+install_wotmod_xfw()
 {
     mkdir -p "$wotmodpath/"
-    cp -rf "$currentdir/_wotmod/." "$wotmodpath/"
+    cp -rf "$currentdir/_wotmod_xfw/." "$wotmodpath/"
+}
+
+install_wotmod_openwg()
+{
+    mkdir -p "$wotmodpat_openwg/"
+    cp -rf "$currentdir/_wotmod_openwg/." "$wotmodpath_openwg/"
 }
 
 pack_package()
@@ -213,12 +224,16 @@ git_get_repostats "$XVMBUILD_ROOT_PATH"
 
 rm -rf "$outputpath"
 rm -rf "$wotmodpath"
+rm -rf "$wotmodpath_openwg"
+
 
 mkdir -p "$outputpath"
 mkdir -p "$wotmodpath"
+mkdir -p "$wotmodpath_openwg"
 
 for (( i=0; i<${#libraries[@]}; i++ )); do
   build_package ${libraries[$i]}
 done
 
-install_wotmod
+install_wotmod_xfw
+install_wotmod_openwg

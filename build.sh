@@ -116,7 +116,11 @@ function build_xfw_packages()
     popd > /dev/null
 
     mkdir -p "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/"
+    mkdir -p "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/net.openwg/"
+    
     cp -rf ~output/$XVMBUILD_FLAVOR/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/"
+    cp -rf ~output/$XVMBUILD_FLAVOR/wotmod_openwg/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/net.openwg/"
+    
 }
 
 function build_python()
