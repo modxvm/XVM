@@ -154,7 +154,11 @@ def _ArcadeCamera_create(base, self, onChangeControlMode = None, postmortemMode 
             defMin = 2
             defMax = 25
             cfg['distRange'] = MinMax(float(value[0]), float(value[1])) if value[0] != value[1] else MinMax(defMin, defMax)
-            self._ArcadeCamera__distRange = cfg['distRange']
+            # Different on both realms
+            # WG (1.24.1 CT) => self._distRange
+            # Lesta (1.25) => self._ArcadeCamera__distRange (old)
+            distRangeAttr = '_distRange' if hasattr(self, '_distRange') else '_ArcadeCamera__distRange'
+            setattr(self, distRangeAttr, cfg['distRange'])
 
         value = c['startDist']
         if value is not None:
