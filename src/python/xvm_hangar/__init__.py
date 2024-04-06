@@ -8,10 +8,7 @@ Copyright (c) 2013-2024 XVM Contributors
 
 import traceback
 
-import game
 import helpers
-import nations
-import gui.Scaleform.daapi.view.lobby.barracks.barracks_data_provider as barrack
 from CurrentVehicle import g_currentVehicle
 from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
@@ -56,20 +53,12 @@ import counters
 #####################################################################
 # globals
 
-cfg_hangar_barracksShowFlags = True
-cfg_hangar_barracksShowSkills = True
 cfg_hangar_blockVehicleIfLowAmmo = False
 
 #####################################################################
 # initialization/finalization
 
 def onConfigLoaded(self, e=None):
-    global cfg_hangar_barracksShowFlags
-    cfg_hangar_barracksShowFlags = config.get('hangar/barracksShowFlags', True)
-
-    global cfg_hangar_barracksShowSkills
-    cfg_hangar_barracksShowSkills = config.get('hangar/barracksShowSkills', True)
-
     global cfg_hangar_blockVehicleIfLowAmmo
     cfg_hangar_blockVehicleIfLowAmmo = config.get('hangar/blockVehicleIfLowAmmo', False)
 
@@ -92,52 +81,6 @@ def Vehicle_isAmmoFull(base, self):
     except Exception as ex:
         err(traceback.format_exc())
         return base(self)
-
-# barracks: add nation flag and skills for tanksman
-def barrack_packActiveTankman(base, tankman):
-    try:
-        if isinstance(tankman, Tankman):
-            tankmanData = barrack._packTankmanData(tankman)
-
-            if tankman.isInTank:
-                actionBtnLabel = MENU.BARRACKS_BTNUNLOAD
-                actionBtnTooltip = TOOLTIPS.BARRACKS_TANKMEN_UNLOAD
-            else:
-                actionBtnLabel = MENU.BARRACKS_BTNDISSMISS
-                actionBtnTooltip = TOOLTIPS.BARRACKS_TANKMEN_DISMISS
-            tankmanData.update({'isRankNameVisible': True,
-                                'recoveryPeriodText': None,
-                                'actionBtnLabel': actionBtnLabel,
-                                'actionBtnTooltip': actionBtnTooltip,
-                                'skills': None,
-                                'isSkillsVisible': False})
-
-            if cfg_hangar_barracksShowFlags or cfg_hangar_barracksShowSkills:
-                imgPath = 'img://../mods/shared_resources/xvm/res/icons/barracks'
-                tankmanData['rank'] = tankmanData['role']
-                tankman_role_arr = []
-                if cfg_hangar_barracksShowFlags:
-                    tankman_role_arr.append("<img src='%s/nations/%s.png' vspace='-3'>" % (imgPath, nations.NAMES[tankmanData['nationID']]))
-                if cfg_hangar_barracksShowSkills:
-                    tankman_role_arr.append('')
-                    itemsCache = dependency.instance(IItemsCache)
-                    tankman_full_info = itemsCache.items.getTankman(tankmanData['tankmanID'])
-                    if tankman_full_info is not None:
-                        for skill in tankman_full_info.skills:
-                            tankman_role_arr[-1] += "<img src='%s/skills/%s' vspace='-3'>" % (imgPath, skill.icon)
-                        if len(tankman_full_info.skills):
-                            tankman_role_arr[-1] += "%s%%" % tankman_full_info.descriptor.lastSkillLevel
-                        if tankman_full_info.hasNewSkill and tankman_full_info.newSkillCount[0] > 0:
-                            tankman_role_arr[-1] += "<img src='%s/skills/new_skill.png' vspace='-3'>x%s" % (imgPath, tankman_full_info.newSkillCount[0])
-                    if not tankman_role_arr[-1]:
-                        tankman_role_arr[-1] = l10n('noSkills')
-                    tankmanData['role'] = ' '.join(tankman_role_arr)
-            return tankmanData
-        else:
-            return tankman
-    except Exception as ex:
-        err(traceback.format_exc())
-
 
 # low ammo => vehicle not ready
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
@@ -327,7 +270,6 @@ def xfw_module_init():
         overrideMethod(CurrentVehicleActionsValidator, '_validate')(_CurrentVehicleActionsValidator_validate)
         overrideMethod(helpers.i18n, 'makeString')(_i18n_makeString)
 
-        overrideMethod(barrack, '_packActiveTankman')(barrack_packActiveTankman)
         overrideMethod(MessengerBarMeta, 'as_setInitDataS')(MessengerBarMeta_as_setInitDataS)
         overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')(handleLazyChannelCtlInited)
         overrideMethod(HeroTank, 'recreateVehicle')(recreateVehicle)
