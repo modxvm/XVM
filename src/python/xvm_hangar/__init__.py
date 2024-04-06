@@ -46,6 +46,13 @@ from xvm_main.python.consts import *
 from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
+if getRegion() != 'RU':
+    # Lootboxes widget / WG related import
+    from event_lootboxes.gui.impl.lobby.event_lootboxes.entry_point_view import EventLootBoxesEntryPointWidget as LootBoxesEntryPointWidget
+else:
+    # Lootboxes widget / Lesta related import
+    from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
+
 import svcmsg
 import battletype
 import counters
@@ -207,6 +214,12 @@ def updateEntries(base, self):
         return
     base(self)
 
+# hide lootboxes widget in tank carousel in hangar
+def LootBoxesEntryPointWidget_getIsActive(base, state):
+    if not config.get('hangar/showLootboxesWidget', True):
+        return False
+    return base(state)
+
 # hide prestige (elite levels) system widget in the hangar
 def Hangar_as_setPrestigeWidgetVisibleS(base, self, value):
     if not config.get('hangar/showHangarPrestigeWidget', True):
@@ -282,6 +295,7 @@ def xfw_module_init():
         overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(shouldHide)
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(_showAward)
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(updateEntries)
+        overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPointWidget_getIsActive)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
         overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(LobbyHeader__setCounter)

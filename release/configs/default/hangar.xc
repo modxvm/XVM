@@ -40,6 +40,9 @@
     // true - show banner of various events in the hangar.
     // true - показывать баннер различных событий в ангаре.
     "showEventBanner": true,
+    // true - show lootbox widget in hangar.
+    // true - показывать виджет лутбоксов в ангаре.
+    "showLootboxesWidget": true,
     // true - show elite levels widget in the hangar.
     // true - показывать виджет уровней элитности в ангаре.
     "showHangarPrestigeWidget": true,
