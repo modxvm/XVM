@@ -27,21 +27,31 @@ from .consts import AS_SYMBOLS
 
 
 #
+# Helpers
+#
+
+def isKillCamMarkersManager(manager):
+    return type(manager).__name__ == 'KillCamMarkersManager'
+
+#
 # Handlers
 #
 
 def _MarkersManager__init__(base, self, *args, **kwargs):
     base(self, *args, **kwargs)
-    g_markers.init(self)
+    if not isKillCamMarkersManager(self):
+        g_markers.init(self)
 
 
 def _MarkersManager_populate(base, self):
     base(self)
-    g_markers.populate()
+    if not isKillCamMarkersManager(self):
+        g_markers.populate()
 
 
 def _MarkersManager_dispose(base, self):
-    g_markers.destroy()
+    if not isKillCamMarkersManager(self):
+        g_markers.destroy()
     base(self)
 
 

@@ -3,8 +3,6 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-from xfw import getRegion
-
 #
 # XFW API
 #
@@ -15,19 +13,17 @@ def xfw_module_init():
     global __initialized
 
     if not __initialized:
-        # Temporary disable on WG 1.24.1
-        if getRegion() == 'RU':
-            import vehicleMarkers
-            vehicleMarkers.init()
+        import vehicleMarkers
+        vehicleMarkers.init()
 
-            import eventsAvatar
-            eventsAvatar.init()
+        import eventsAvatar
+        eventsAvatar.init()
 
-            import eventsBSDC
-            eventsBSDC.init()
+        import eventsBSDC
+        eventsBSDC.init()
 
-            import eventsMM
-            eventsMM.init()
+        import eventsMM
+        eventsMM.init()
 
         __initialized = True
 
@@ -35,18 +31,17 @@ def xfw_module_init():
 def xfw_module_fini():
     global __initialized
     if __initialized:
-        if getRegion() == 'RU':
-            import vehicleMarkers
-            vehicleMarkers.fini()
+        import vehicleMarkers
+        vehicleMarkers.fini()
 
-            import eventsAvatar
-            eventsAvatar.fini()
+        import eventsAvatar
+        eventsAvatar.fini()
 
-            import eventsBSDC
-            eventsBSDC.fini()
+        import eventsBSDC
+        eventsBSDC.fini()
 
-            import eventsMM
-            eventsMM.fini()
+        import eventsMM
+        eventsMM.fini()
 
         __initialized = False
 
