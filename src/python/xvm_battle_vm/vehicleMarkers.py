@@ -67,7 +67,6 @@ def daapi_as2pyS(self, *args, **kwargs):
 #
 
 class VehicleMarkers(object):
-
     sessionProvider = dependency.descriptor(IBattleSessionProvider)
     enabled = True
     allyVehicleDistEnabled = False
@@ -105,6 +104,10 @@ class VehicleMarkers(object):
         g_keyEventHandlers.add(self.onKeyEvent)
         g_playerEvents.onAvatarBecomePlayer += self.onBecomePlayer
         g_playerEvents.onAvatarBecomeNonPlayer += self.onBecomeNonPlayer
+
+    @staticmethod
+    def isValidManager(manager):
+        return type(manager).__name__ != 'KillCamMarkersManager'
 
     def init(self, manager):
         self.manager = manager
