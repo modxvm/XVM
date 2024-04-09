@@ -74,9 +74,6 @@
       // Clan wars.
       // Клановый бой.
       "clan": "clan",
-      // Battle training.
-      // Боевое обучение.
-      "tutorial": "",
       // Team battles.
       // Командный бой.
       "cybersport": "cybersport",
@@ -92,12 +89,6 @@
       // Periodic Tournament (event) GM.
       // Периодический турнир (ивент) ГК.
       "tournament_clan": "tournament_clan",
-      // Sandbox PVE, <10 battles.
-      // Песочный PVE, <10 боев.
-      "rated_sandbox": "",
-      // Sandbox PVE, >10 battles.
-      // Песочный PVE, >10 боев.
-      "sandbox": "",
       // Steel Hunt.
       // Стальная охота.
       "fallout_classic": "",

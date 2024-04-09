@@ -106,14 +106,11 @@ package com.xvm
                 case 2: return 'training';
                 case 4: return 'tournament';
                 case 5: return 'clan';
-                case 6: return 'tutorial';
                 case 7: return 'cybersport';
                 case 9: return 'event_battles';
                 case 13: return 'global_map';
                 case 14: return 'tournament_regular';
                 case 15: return 'tournament_clan';
-                case 16: return 'rated_sandbox';
-                case 17: return 'sandbox';
                 case 18: return 'fallout_classic';
                 case 19: return 'fallout_multiteam';
                 case 20: return 'sortie_2';
@@ -137,6 +134,15 @@ package com.xvm
                 case 39: return 'rts';
                 case 40: return 'rts_1x1';
                 case 41: return 'rts_bootcamp';
+                case 42: return 'fun_random';
+                case 43: return 'comp7';
+                case 44: return 'winback';
+                case 46: return 'random_np2';
+                case 47: return 'tournament_comp7';
+                case 48: return 'training_comp7';
+                case 50: return 'versusai';
+                case 51: return 'cosmic';
+                case 100: return 'story_mode';
                 default: return 'unknown';
             }
         }

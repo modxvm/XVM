@@ -29,16 +29,13 @@ package com.xvm.types.cfg
         public var maps_training:String;
         public var mapbox:String;
         public var ranked:String;
-        public var rated_sandbox:String;
         public var regular:String;
-        public var sandbox:String;
         public var sortie_2:String;
         public var tournament:String;
         public var tournament_clan:String;
         public var tournament_event:String;
         public var tournament_regular:String;
         public var training:String;
-        public var tutorial:String;
         public var unknown:String;
         public var weekend_brawl:String;
         public var rts:String;
