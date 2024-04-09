@@ -36,6 +36,12 @@ from xvm_main.python.xvm import l10n
 import parser_addon
 from xvm.damageLog import keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
 
+# WG 1.24.1 only
+TOURNAMENT_COMP7 = 33
+TRAINING_COMP7 = 34
+# Lesta only
+VERSUS_AI = 31000
+
 BATTLE_TYPE = {
     ARENA_GUI_TYPE.UNKNOWN: "unknown",
     ARENA_GUI_TYPE.RANDOM: "regular",
@@ -57,6 +63,12 @@ BATTLE_TYPE = {
     ARENA_GUI_TYPE.RTS: "rts",
     ARENA_GUI_TYPE.RTS_TRAINING: "rts_training",
     ARENA_GUI_TYPE.RTS_BOOTCAMP: "rts_bootcamp",
+    ARENA_GUI_TYPE.FUN_RANDOM: "fun_random",
+    ARENA_GUI_TYPE.COMP7: "comp7",
+    ARENA_GUI_TYPE.WINBACK: "winback",
+    TOURNAMENT_COMP7: "tournament_comp7",
+    TRAINING_COMP7: "training_comp7",
+    VERSUS_AI: "versusai"
 }
 
 HIT_LOG = 'hitLog/'
