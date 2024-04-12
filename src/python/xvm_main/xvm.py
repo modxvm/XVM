@@ -219,7 +219,7 @@ class Xvm(object):
 
             self.showXvmServicesLobbyMessage()
 
-        except Exception, ex:
+        except Exception as ex:
             err(traceback.format_exc())
 
 
@@ -245,7 +245,7 @@ class Xvm(object):
                 as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE,
                            g_currentVehicle.item.intCD,
                            minimap_circles.getMinimapCirclesData())
-        except Exception, ex:
+        except Exception as ex:
             err(traceback.format_exc())
 
 
@@ -265,14 +265,14 @@ class Xvm(object):
         trace('onBecomePlayer')
         try:
             pass
-        except Exception, ex:
+        except Exception as ex:
             err(traceback.format_exc())
 
     def onBecomeNonPlayer(self):
         trace('onBecomeNonPlayer')
         try:
             pass
-        except Exception, ex:
+        except Exception as ex:
             err(traceback.format_exc())
 
 
@@ -363,7 +363,7 @@ class Xvm(object):
                 g_eventBus.handleEvent(events.HasCtxEvent(cmd, args[0]))
                 return (None, True)
 
-        except Exception, ex:
+        except Exception as ex:
             err(traceback.format_exc())
             return (None, True)
 
@@ -419,13 +419,13 @@ class Xvm(object):
                     app = getLobbyApp()
                     if app:
                         as_xfw_cmd(XVM_COMMAND.AS_ON_KEY_EVENT, event.key, event.isKeyDown())
-        except Exception, ex:
+        except Exception as ex:
             err('onKeyEvent(): ' + traceback.format_exc())
 
     def onUpdateStage(self):
         try:
             as_xfw_cmd(XVM_COMMAND.AS_ON_UPDATE_STAGE)
-        except Exception, ex:
+        except Exception as ex:
             err('onUpdateStage(): ' + traceback.format_exc())
 
     def onViewLoaded(self, view, loadParams):

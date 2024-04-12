@@ -231,7 +231,7 @@ def _load_xvmscale_data_callback(url, bytes):
                 userprefs.set('cache/xvmscales.json.gz', bytes)
             global _xvmscale_data
             _xvmscale_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 def _load_wn8_data_callback(url, bytes):
@@ -248,7 +248,7 @@ def _load_wn8_data_callback(url, bytes):
                     vinfo['wn8expWinRate'] = float(x['expWinRate'])
                     vinfo['wn8expDef'] = float(x['expDef'])
                     vinfo['wn8expFrag'] = float(x['expFrag'])
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 def _load_xte_data_callback(url, bytes):
@@ -265,7 +265,7 @@ def _load_xte_data_callback(url, bytes):
                     vinfo['topdmg'] = float(v['td'])
                     vinfo['avgfrg'] = float(v['af'])
                     vinfo['topfrg'] = float(v['tf'])
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 def _load_xtdb_data_callback(url, bytes):
@@ -275,7 +275,7 @@ def _load_xtdb_data_callback(url, bytes):
                 userprefs.set('cache/xtdb.json.gz', bytes)
             global _xtdb_data
             _xtdb_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 
@@ -361,5 +361,5 @@ def initialize():
         filecache.get_url(_XTE_DATA_URL, _load_xte_data_callback)
         filecache.get_url(_XTDB_DATA_URL, _load_xtdb_data_callback)
 
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())

@@ -98,7 +98,7 @@ def compareVersions(v1, v2):
                 return -1
             if int(a) > int(b):
                 return 1
-    except Exception, ex:
+    except Exception as ex:
         # err(traceback.format_exc())
         return -2
     return 0

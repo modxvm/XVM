@@ -46,6 +46,6 @@ def ModuleInfoWindow_as_setModuleInfoS(base, self, moduleInfo):
                 moduleInfo['parameters']['params'].append({'type': '<h>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h>', 'value': '<h>' + str(artiRadius) + '</h>'})
             elif shellRadius < 707:     # not arti, short range weapons
                 moduleInfo['parameters']['params'].append({'type': '<h>' + l10n('shootingRadius') + ' <p>' + l10n('(m)') + '</p></h>', 'value': '<h>' + str(shellRadius) + '</h>'})
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
     return base(self, moduleInfo)

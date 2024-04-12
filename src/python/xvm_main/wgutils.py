@@ -26,5 +26,5 @@ def reloadHangar():
                 if view is not None:
                     view.destroy()
                 g_eventDispatcher.loadHangar()
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())

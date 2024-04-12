@@ -60,7 +60,7 @@ def checkIntegrity(*args, **kwargs):
         thread.daemon = False
         thread.start()
         BigWorld.callback(0.05, _checkResult)
-    except Exception, ex:
+    except Exception as ex:
         err('checkIntegrity() exception: ' + traceback.format_exc())
 
 
@@ -107,7 +107,7 @@ def _checkIntegrityAsync(*args, **kwargs):
                             result.append('hash mismatch in file: %s' % file_fullpath)
         with lock:
             integrity_result = result
-    except Exception, ex:
+    except Exception as ex:
         err('_checkIntegrityAsync() exception: ' + traceback.format_exc())
         with lock:
             integrity_result = ['Error']
