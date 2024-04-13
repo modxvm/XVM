@@ -241,7 +241,7 @@ class Xvm(object):
         try:
             minimap_circles.updateCurrentVehicle()
             lobby = getLobbyApp()
-            if lobby is not None:
+            if lobby is not None and g_currentVehicle.item is not None:
                 as_xfw_cmd(XVM_COMMAND.AS_UPDATE_CURRENT_VEHICLE,
                            g_currentVehicle.item.intCD,
                            minimap_circles.getMinimapCirclesData())
