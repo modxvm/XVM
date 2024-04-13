@@ -64,7 +64,7 @@ def update_conf_hp():
         for type, color in hp_colors.iteritems():
             color = color[-6:]
             hp_colors[type] = {'red': int(color[0:2], 16), 'green' : int(color[2:4], 16), 'blue': int(color[4:6], 16)}
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 def color_gradient(color1, color2, ratio):
@@ -75,7 +75,7 @@ def color_gradient(color1, color2, ratio):
                 color1['green'] * ratio + color2['green'] * ratio_comp,
                 color1['blue'] * ratio + color2['blue'] * ratio_comp,
                 )
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
         return 'FFFFFF'
 
@@ -94,7 +94,7 @@ def update_hp():
             total_hp_color = color_gradient(hp_colors['neutral'], hp_colors['neutral'], 1)
             total_hp_sign = '&#61;'
         as_event('ON_UPDATE_HP')
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 

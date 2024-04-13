@@ -72,7 +72,7 @@ def __read_file(file_name):
 def __execute(code, file_name, context):
     try:
         exec(code, context)
-    except Exception, e:
+    except Exception as e:
         error_name = e.__class__.__name__
         message = e.args[0]
         cl, exc, tb = sys.exc_info()

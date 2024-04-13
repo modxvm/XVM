@@ -289,7 +289,7 @@ class XvmServicesToken(object):
             (data, errStr) = xvmapi.getToken()
             #log(utils.hide_guid(data))
             self.update(data, errStr)
-        except Exception, ex:
+        except Exception as ex:
             err(traceback.format_exc())
 
     def update(self, data={}, errStr=None):

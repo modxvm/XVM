@@ -85,7 +85,7 @@ def onXfwCommand(cmd, *args):
             itemsCache = dependency.instance(IItemsCache)
             freeSlots = itemsCache.items.inventory.getFreeSlots(itemsCache.items.stats.vehicleSlots)
             return (freeSlots + get_used_slots_count(), True)
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)
@@ -255,7 +255,7 @@ def update_config(*args, **kwargs):
     try:
         global carousel_config
         carousel_config = config.get('hangar/carousel')
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
 
 def confirmReserveVehicle(self):

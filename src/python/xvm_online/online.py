@@ -100,7 +100,7 @@ class _Get_online(object):
                 return
             try:
                 self._respond()
-            except Exception, ex:
+            except Exception as ex:
                 err('_checkResult() exception: ' + traceback.format_exc())
             finally:
                 self.thread = None
@@ -138,7 +138,7 @@ class _Get_online(object):
                 res.append({'cluster': host, 'people_online': data_dict.get(host, self.hangarErrorString if self.hangarSpace.inited else self.loginErrorString)})
             if (self.hangarSpace.inited and self.hangarShowTitle) or (not self.hangarSpace.inited and self.loginShowTitle):
                 res.insert(0, {'cluster': '###best_online###', 'people_online': best_online})  # will appear first, key is replaced by localized "Online"
-        except Exception, ex:
+        except Exception as ex:
             err('_getOnlineAsync() exception: ' + traceback.format_exc())
         with self.lock:
             self.resp = res

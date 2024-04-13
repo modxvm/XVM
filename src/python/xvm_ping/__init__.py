@@ -64,7 +64,7 @@ def onXfwCommand(cmd, *args):
         if cmd == XVM_PING_COMMAND.GETCURRENTSERVER:
             getCurrentServer()
             return (None, True)
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
         return (None, True)
     return (None, False)

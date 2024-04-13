@@ -101,7 +101,7 @@ def BattleResultsCache_get(base, self, arenaUniqueID, callback):
                 if callback is not None:
                     #log('callback: ' + str(callback))
                     callback(AccountCommands.RES_CACHE, BattleResultsCache.convertToFullForm(battleResults))
-    except Exception, ex:
+    except Exception as ex:
         err(traceback.format_exc())
         base(self, arenaUniqueID, callback)
 
