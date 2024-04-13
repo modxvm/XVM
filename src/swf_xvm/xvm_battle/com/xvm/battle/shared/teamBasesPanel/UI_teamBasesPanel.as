@@ -92,6 +92,10 @@ package com.xvm.battle.shared.teamBasesPanel
                     XfwAccess.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", XVM_CAPTURE_BAR_LINKAGE);
 
                     y = Macros.FormatNumberGlobal(Config.config.captureBar.y, DEFAULT_Y);
+                    CLIENT::WG {
+                        XfwAccess.setPrivateField(parent, '_teamBasesPanelY', y);
+                        XfwAccess.setPrivateField(parent, '_teamBasesPanelDefaultY', y);
+                    }
 
                     XfwAccess.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", Macros.FormatNumberGlobal(Config.config.captureBar.distanceOffset, 0) + DEFAULT_RENDERER_LENGTH);
                 }
@@ -100,6 +104,10 @@ package com.xvm.battle.shared.teamBasesPanel
                     XfwAccess.setPrivateField(Linkages, "CAPTURE_BAR_LINKAGE", DEFAULT_CAPTURE_BAR_LINKAGE);
 
                     y = DEFAULT_Y;
+                    CLIENT::WG {
+                        XfwAccess.setPrivateField(parent, '_teamBasesPanelY', DEFAULT_Y);
+                        XfwAccess.setPrivateField(parent, '_teamBasesPanelDefaultY', DEFAULT_Y);
+                    }
 
                     XfwAccess.setPrivateField(TeamBasesPanel, "xfw_RENDERER_HEIGHT", DEFAULT_RENDERER_LENGTH);
                 }
