@@ -19,7 +19,7 @@ from skeletons.gui.impl import IGuiLoader
 from xfw.constants import *
 from xfw.events import *
 from xfw.logger import *
-import xfw_vfs as vfs
+import openwg_vfs as vfs
 
 from .swfloadedinfo import swf_loaded_info
 
