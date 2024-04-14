@@ -97,23 +97,27 @@ package com.xvm.battle.winback.playersPanel
             listRight.removeEventListener(MouseEvent.ROLL_OVER, XfwAccess.getPrivateField(this, 'xfw_onListRollOverHandler'));
             listRight.removeEventListener(MouseEvent.ROLL_OUT, XfwAccess.getPrivateField(this, 'xfw_onListRollOutHandler'));
 
-            listLeft.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
-            listLeft.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
+            // WG (1.24.1+) only note:
+            // Using private _onListRollOverHandler instead of override protected onListRollOverHandler 
+            // because otherwise it will be stuck in loop onMouseMoveHandler -> self-call overridden 
+            // onListRollOverHandler and not the WG's implementation as we need
+            listLeft.addEventListener(MouseEvent.ROLL_OVER, _onListRollOverHandler, false, 0, true);
+            listLeft.addEventListener(MouseEvent.ROLL_OUT, _onListRollOutHandler, false, 0, true);
             listLeft.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
 
-            listRight.addEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler, false, 0, true);
-            listRight.addEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler, false, 0, true);
+            listRight.addEventListener(MouseEvent.ROLL_OVER, _onListRollOverHandler, false, 0, true);
+            listRight.addEventListener(MouseEvent.ROLL_OUT, _onListRollOutHandler, false, 0, true);
             listRight.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler, false, 0, true);
         }
 
         override protected function onDispose():void
         {
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
-            listLeft.removeEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler);
-            listLeft.removeEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler);
+            listLeft.removeEventListener(MouseEvent.ROLL_OVER, _onListRollOverHandler);
+            listLeft.removeEventListener(MouseEvent.ROLL_OUT, _onListRollOutHandler);
             listLeft.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
-            listRight.removeEventListener(MouseEvent.ROLL_OVER, onListRollOverHandler);
-            listRight.removeEventListener(MouseEvent.ROLL_OUT, onListRollOutHandler);
+            listRight.removeEventListener(MouseEvent.ROLL_OVER, _onListRollOverHandler);
+            listRight.removeEventListener(MouseEvent.ROLL_OUT, _onListRollOutHandler);
             listRight.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
             super.onDispose();
         }
@@ -250,13 +254,13 @@ package com.xvm.battle.winback.playersPanel
         // for extraFields in the "none" mode
         public function onMouseRollOverHandler(e:MouseEvent):void
         {
-            onListRollOverHandler(e);
+            _onListRollOverHandler(e);
         }
 
         // for extraFields in the "none" mode
         public function onMouseRollOutHandler(e:MouseEvent):void
         {
-            onListRollOutHandler(e);
+            _onListRollOutHandler(e);
         }
 
         public function onMouseMoveHandler(e:MouseEvent):void
@@ -285,30 +289,16 @@ package com.xvm.battle.winback.playersPanel
             }
         }
 
-        CLIENT::WG {
-            override protected function onListRollOverHandler(e:MouseEvent):void
-            {
-                _isMouseRollOver = true;
-            }
-
-            override protected function onListRollOutHandler(e:MouseEvent):void
-            {
-                _isMouseRollOver = false;
-            }
-        }
-
         // PRIVATE
 
-        CLIENT::LESTA {
-            private function onListRollOverHandler(e:MouseEvent):void
-            {
-                _isMouseRollOver = true;
-            }
+        private function onListRollOverHandler(e:MouseEvent):void
+        {
+            _isMouseRollOver = true;
+        }
 
-            private function onListRollOutHandler(e:MouseEvent):void
-            {
-                _isMouseRollOver = false;
-            }
+        private function onListRollOutHandler(e:MouseEvent):void
+        {
+            _isMouseRollOver = false;
         }
 
         private function registerPlayersPanelMacros():void
