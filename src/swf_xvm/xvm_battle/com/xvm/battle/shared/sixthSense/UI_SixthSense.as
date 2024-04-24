@@ -13,23 +13,29 @@ package com.xvm.battle.shared.sixthSense
     public class UI_SixthSense extends sixthSenseUI
     {
         private var _loader:ImageXVM;
-        private var _isPathValid:Boolean;
-        private var _isLoadComplete:Boolean;
-        private var _isImageLoading:Boolean;
-        private var _currentAlpha:int = 0;
-        private var _isShown:Boolean;
+        private var _imagePathValid:Boolean;
+        private var _imageLoading:Boolean;
+        private var _imageLoaded:Boolean;
+        private var _spotted:Boolean;
+        private var _shown:Boolean;
+        CLIENT::LESTA {
+            private var _immediate:Boolean;
+            private var _permanent:Boolean;
+        }
 
         public function UI_SixthSense()
         {
             super();
             mouseEnabled = false;
-            
+
             Xvm.addEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             _loader = new ImageXVM();
             _loader.addEventListener(Event.COMPLETE, onImageSuccessLoadHandler, false, 0, true);
             _loader.addEventListener(IOErrorEvent.IO_ERROR, onImageFaultLoadHandler, false, 0, true);
             _loader.alpha = 0;
-            _currentAlpha = 0;
+            CLIENT::LESTA {
+                addEventListener(EVENT_POSITION_CHANGED, onSixthSensePositionChanged);
+            }
         }
 
         override protected function configUI():void
@@ -38,20 +44,48 @@ package com.xvm.battle.shared.sixthSense
             onConfigLoaded(null);
         }
 
-        override public function as_show():void
-        {
-            _isShown = true;
-            checkImage();
+        CLIENT::WG {
+            override public function as_show():void
+            {
+                _spotted = true;
+                updateState();
+            }
+
+            override public function as_hide():void
+            {
+                _spotted = false;
+                updateState();
+            }
         }
 
-        override public function as_hide():void
-        {
-            _isShown = false;
-            checkImage();
+        CLIENT::LESTA {
+            override public function as_show(immediate:Boolean):void
+            {
+                _spotted = true;
+                _immediate = immediate;
+                updateState();
+            }
+
+            override public function as_showIndicator():void
+            {
+                _permanent = true;
+                updateState();
+            }
+
+            override public function as_hide(immediate:Boolean):void
+            {
+                _spotted = false;
+                _permanent = false;
+                _immediate = immediate;
+                updateState();
+            }
         }
 
         override protected function onDispose():void
         {
+            CLIENT::LESTA {
+                removeEventListener(EVENT_POSITION_CHANGED, onSixthSensePositionChanged);
+            }
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, onConfigLoaded);
             _loader.removeEventListener(Event.COMPLETE, onImageSuccessLoadHandler);
             _loader.removeEventListener(IOErrorEvent.IO_ERROR, onImageFaultLoadHandler);
@@ -60,22 +94,21 @@ package com.xvm.battle.shared.sixthSense
             super.onDispose();
         }
 
+        public function get isCustomImageMode():Boolean
+        {
+            return _imagePathValid && _imageLoaded;
+        }
+
         // PRIVATE
 
         private function onConfigLoaded(event:Event):void
         {
-            var iconPath:String = Config.config.battle.sixthSenseIcon;
-            if (iconPath)
-            {
-                iconPath = Utils.fixImgTagSrc(Macros.FormatStringGlobal(iconPath));
-                _isPathValid = true;
-                _isImageLoading = true;
-                _loader.source = iconPath;
+            updateImage();
+            CLIENT::WG {
+                updateAlpha();
             }
-            else
-            {
-                _isPathValid = false;
-            }
+            updateScale();
+            updatePosition();
         }
 
         private function onImageSuccessLoadHandler():void
@@ -88,60 +121,188 @@ package com.xvm.battle.shared.sixthSense
                 }
                 addChild(_loader);
             }
+
             _loader.x = -_loader.width / 2;
             _loader.y = -_loader.height / 2;
-            _isImageLoading = false;
-            _isLoadComplete = true;
-            checkImage();
+            _imageLoading = false;
+            _imageLoaded = true;
+            updateState();
         }
 
         private function onImageFaultLoadHandler():void
         {
-            _isImageLoading = false;
-            _isLoadComplete = false;
-            checkImage();
+            _imageLoading = false;
+            _imageLoaded = false;
+            updateState();
         }
 
-        private function checkImage():void
+        private function updateImage():void
         {
-            if (!_isImageLoading)
+            var iconPath:String = Config.config.battle.sixthSense.icon;
+
+            if (iconPath)
             {
-                if (_isPathValid && _isLoadComplete)
+                iconPath = Utils.fixImgTagSrc(Macros.FormatStringGlobal(iconPath));
+                _imagePathValid = true;
+                _imageLoading = true;
+                _loader.source = iconPath;
+            }
+            else
+            {
+                _imagePathValid = false;
+            }
+        }
+
+        CLIENT::WG {
+            private function updateAlpha():void
+            {
+                alpha = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.alpha, 100) / 100.0;
+            }
+        }
+
+        private function updateScale():void
+        {
+            var scale:Number = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.scale, 1);
+            scaleX = scaleY = isNaN(scale) ? 1 : scale;
+        }
+
+        private function updatePosition():void
+        {
+            CLIENT::LESTA {
+                var useOldInitialPosition:Boolean = Macros.FormatBooleanGlobal(Config.config.battle.sixthSense.useOldInitialPosition, false);
+                if (useOldInitialPosition)
                 {
-                    if (_isShown)
+                    x = App.appWidth >> 1;
+                    y = App.appHeight >> 2;
+                }
+            }
+            x += Macros.FormatNumberGlobal(Config.config.battle.sixthSense.offsetX, 0);
+            y += Macros.FormatNumberGlobal(Config.config.battle.sixthSense.offsetY, 0);
+        }
+
+        CLIENT::WG {
+            private function updateState():void
+            {
+                if (_imageLoading)
+                    return;
+
+                if (!isCustomImageMode)
+                {
+                    if (_spotted)
                     {
-                        if (_loader.alpha != 1)
+                        if (!_shown)
                         {
-                            TweenLite.to(_loader, 0.2, {alpha: 1});
-                            _currentAlpha = 1;
+                            super.as_show();
+                            _shown = true;
                         }
                     }
                     else
                     {
-                        if (_loader.alpha != 0)
+                        if (_shown)
                         {
-                            TweenLite.to(_loader, 0.5, {alpha: 0});
-                            _currentAlpha = 1;
+                            super.as_hide();
+                            _shown = false;
                         }
+                    }
+
+                    return;
+                }
+
+                TweenLite.killTweensOf(_loader);
+
+                if (_spotted)
+                {
+                    if (!_shown)
+                    {
+                        TweenLite.to(_loader, 0.2, {alpha: 1});
+                        _shown = true;
                     }
                 }
                 else
                 {
-                    if (_isShown)
+                    if (_shown)
                     {
-                        if (_currentAlpha != 1)
+                        TweenLite.to(_loader, 0.5, {alpha: 0});
+                        _shown = false;
+                    }
+                }
+            }
+        }
+
+        CLIENT::LESTA {
+            private function onSixthSensePositionChanged(event:Event):void
+            {
+                updatePosition();
+            }
+
+            private function updateState():void
+            {
+                if (_imageLoading)
+                    return;
+
+                if (!isCustomImageMode)
+                {
+                    if (_spotted)
+                    {
+                        if (!_shown)
                         {
-                            super.as_show();
-                            _currentAlpha = 1;
+                            super.as_show(_immediate);
+                            _shown = true;
+                        }
+                        else if (_shown && _permanent)
+                        {
+                            super.as_showIndicator();
                         }
                     }
                     else
                     {
-                        if (_currentAlpha != 0)
+                        if (_shown)
                         {
-                            super.as_hide();
-                            _currentAlpha = 0;
+                            super.as_hide(_immediate);
+                            _shown = false;
                         }
+                    }
+
+                    return;
+                }
+
+                TweenLite.killTweensOf(_loader);
+
+                if (_spotted)
+                {
+                    if (!_shown)
+                    {
+                        visible = true;
+                        if (!_immediate)
+                        {
+                            TweenLite.to(_loader, 0.2, {alpha: 1});
+                        }
+                        else
+                        {
+                            _loader.alpha = 1;
+                        }
+                        _shown = true;
+                    }
+                }
+                else
+                {
+                    if (_shown)
+                    {
+                        if (!_immediate)
+                        {
+                            TweenLite.to(_loader, 0.5, {
+                                alpha: 0,
+                                onComplete: function():void {
+                                    visible = false;
+                                }
+                            });
+                        }
+                        else
+                        {
+                            _loader.alpha = 0;
+                            visible = false;
+                        }
+                        _shown = false;
                     }
                 }
             }

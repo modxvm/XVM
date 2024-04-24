@@ -12,7 +12,7 @@ package com.xvm.types.cfg
         public var mirroredVehicleIcons:*;
         public var highlightVehicleIcon:*;
         public var clockFormat:String;
-        public var sixthSenseIcon:String;
+        public var sixthSense:CSixthSense;
         public var elements:Array;
         public var camera:CCamera;
 
@@ -26,7 +26,6 @@ package com.xvm.types.cfg
             mirroredVehicleIcons = Macros.FormatBooleanGlobal(mirroredVehicleIcons, true);
             highlightVehicleIcon = Macros.FormatBooleanGlobal(highlightVehicleIcon, true);
             clockFormat = Macros.FormatStringGlobal(clockFormat, "H:i");
-            sixthSenseIcon = Macros.FormatStringGlobal(sixthSenseIcon, "xvm://res/SixthSense.png");
         }
     }
 }

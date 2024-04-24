@@ -187,7 +187,7 @@ def _TimersPanel_showDeathZoneTimer(self, value):
 from gui.Scaleform.daapi.view.battle.shared.indicators import SixthSenseIndicator
 
 @registerEvent(SixthSenseIndicator, 'as_showS')
-def _SixthSenseIndicator_as_showS(self):
+def _SixthSenseIndicator_as_showS(self, *args, **kwargs):
     if xmqp.is_active():
         xmqp.call({'event': EVENTS.XMQP_SPOTTED})
 

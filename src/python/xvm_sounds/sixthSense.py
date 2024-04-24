@@ -38,7 +38,7 @@ class XVM_SOUND_EVENT(object):
 # handlers
 #
 
-def SixthSenseIndicator_as_showS(self):
+def SixthSenseIndicator_as_showS(self, *args, **kwargs):
     try:
         if config.get('sounds/enabled'):
             vehCD = getVehCD(avatar_getter.getPlayerVehicleID())

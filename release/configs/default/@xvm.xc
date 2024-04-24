@@ -82,10 +82,6 @@
   // Панель счёта в бою.
   "fragCorrelation": ${"battle.xc":"fragCorrelation"},
 
-  // Ingame crits panel by "expert" skill.
-  // Внутриигровая панель критов от навыка "эксперт".
-  "expertPanel": ${"battle.xc":"expertPanel"},
-
   // Battle interface text fields
   // Текстовые поля боевого интерфейса
   "battleLabels": ${"battleLabels.xc":"labels"},
