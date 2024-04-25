@@ -18,6 +18,7 @@ source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
 projects="
     wg_lobby_ui
     wg_battle_classic_ui
+    wg_battle_comp7_ui
     wg_battle_event_ui
     wg_battle_epicbattle_ui
     wg_battle_epicrandom_ui

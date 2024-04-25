@@ -4,12 +4,11 @@
  */
 package com.xvm.battle
 {
+    import com.xfw.*;
+    import com.xvm.*;
+    import com.xvm.infrastructure.*;
+    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
     import net.wg.gui.battle.comp7.Comp7BattlePage;
-	
-	import com.xvm.Defines;
-	import com.xvm.battle.BattleXvmView;
-	import com.xvm.infrastructure.XvmModBase;
-	
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -23,6 +22,7 @@ package com.xvm.battle
         private static const VIEWS:Object =
         {
             "comp7BattlePage": [
+                SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
         }
@@ -32,7 +32,7 @@ package com.xvm.battle
             return VIEWS;
         }
 
-        public static function get eventBattlePage():Comp7BattlePage
+        public static function get comp7BattlePage():Comp7BattlePage
         {
             return BattleXvmView.battlePage as Comp7BattlePage;
         }
