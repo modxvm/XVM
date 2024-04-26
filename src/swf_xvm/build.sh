@@ -52,6 +52,7 @@ if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
     projects="
         $projects
         xvm_battle_cosmic
+        xvm_battle_historical
     "
 fi
 

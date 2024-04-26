@@ -60,6 +60,8 @@ class XfwArenaGuiType:
     # WG 1.24.1
     TOURNAMENT_COMP7 = 33
     TRAINING_COMP7 = 34
+    # Lesta 1.26
+    HISTORICAL_BATTLES = 101
     # Lesta 1.25
     COSMIC_EVENT = 300
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
@@ -192,6 +194,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_comp7']
                 elif arenaGuiType == ARENA_GUI_TYPE.WINBACK:
                     as_paths += ['as_battle_winback']
+                elif arenaGuiType == XfwArenaGuiType.HISTORICAL_BATTLES:
+                    as_paths += ['as_battle_historical']
                 elif arenaGuiType == XfwArenaGuiType.COSMIC_EVENT:
                     as_paths += ['as_battle_cosmic']
                 else:
