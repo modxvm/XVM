@@ -283,6 +283,22 @@ package com.xvm.battle.shared.sixthSense
                         }
                         _shown = true;
                     }
+                    else if (_shown && _permanent)
+                    {
+                        var permanentScale:Number = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
+                        permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
+                        if (permanentScale != 1)
+                        {
+                            TweenLite.to(_loader, 0.2, {
+                                scaleX: permanentScale,
+                                scaleY: permanentScale,
+                                onUpdate: function():void {
+                                    _loader.x = -_loader.width / 2;
+                                    _loader.y = -_loader.height / 2;
+                                }
+                            });
+                        }
+                    }
                 }
                 else
                 {
@@ -294,6 +310,9 @@ package com.xvm.battle.shared.sixthSense
                                 alpha: 0,
                                 onComplete: function():void {
                                     visible = false;
+                                    _loader.scaleX = _loader.scaleY = 1;
+                                    _loader.x = -_loader.width / 2;
+                                    _loader.y = -_loader.height / 2;
                                 }
                             });
                         }
@@ -301,6 +320,9 @@ package com.xvm.battle.shared.sixthSense
                         {
                             _loader.alpha = 0;
                             visible = false;
+                            _loader.scaleX = _loader.scaleY = 1;
+                            _loader.x = -_loader.width / 2;
+                            _loader.y = -_loader.height / 2;
                         }
                         _shown = false;
                     }

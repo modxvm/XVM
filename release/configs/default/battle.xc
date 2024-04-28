@@ -35,24 +35,31 @@
       // Y offset relative to initial position of the indicator
       // Смещение по оси Y относительно изначальной позиции индикатора
       "offsetY": 0,
-      // Use the old indicator position above crosshair in the middle
-      // of the screen (only for Lesta since 1.26)
-      // Использовать старую позицию индикатора над прицелом по центру
-      // экрана (только для Lesta с патча 1.26)
-      "useOldInitialPosition": false,
-      // Opacity of the indicator in percents (0..100) (only for WG,
-      // on Lesta use ingame settings)
-      // Прозрачность индикатора в процентах (0..100) (только для WG,
-      // для Lesta используйте внутриигровые настройки)
+      // Use the old indicator position above crosshair in the middle of the screen
+      // (Only for Lesta)
+      // Использовать старую позицию индикатора над прицелом по центру экрана
+      // (Только для Lesta)
+      "useOldInitialPosition": true,
+      // Opacity of the indicator in percents (0..100)
+      // (Only for WG, on Lesta use ingame settings)
+      // Прозрачность индикатора в процентах (0..100)
+      // (Только для WG, для Lesta используйте внутриигровые настройки)
       "alpha": 100,
       // Scale of the indicator (0..1)
       // Масштаб индикатора (0..1)
       "scale": 1,
+      // Scale of the custom image indicator in permanent mode, когда уменьшается лампа в размере (0..1)
+      // (Only for Lesta)
+      // Масштаб индикатора с пользовательским изображением в постоянном режиме, когда уменьшается лампа в размере (0..1)
+      // (Только для Lesta)
+      "permanentScale": 0.7,
       // Path to sixth sense icon ("" for original icon).
       // Путь к иконке 6-го чувства ("" для оригинальной иконки).
       "icon": "xvm://res/SixthSense.png",
       // Duration of the sixth sense indicator (msec).
+      // On Lesta defines time after which indicator will enter permanent state.
       // Длительность отображения индикатора 6-го чувства (мсек).
+      // На Lesta определяет время после которого индикатор перейдёт в постоянное состояние.
       "duration": 2000
     },
     // GUI elements settings (experts only).
