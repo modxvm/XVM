@@ -20,6 +20,7 @@ import datetime
 import locale
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
+from skeletons.account_helpers.settings_core import ISettingsCore
 
 _defaultlocale = locale.getdefaultlocale()[1]
 _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
@@ -131,31 +132,47 @@ def total_hp_getMainGun(a, b, dmg_total):
     return a if total_hp.mainGun(dmg_total) is not None else b
 
 
-#Screen size
+# Screen size
+
+def getInterfaceScale():
+    settingsCore = dependency.instance(ISettingsCore)
+    scale = settingsCore.interfaceScale.get()
+    return scale
 
 @xvm.export('xvm.screenWidth', deterministic=False)
 def xvm_screenWidth():
-    return BigWorld.screenWidth()
+    scale = getInterfaceScale()
+    return int(BigWorld.screenWidth() / scale)
 
 
 @xvm.export('xvm.screenHeight', deterministic=False)
 def xvm_screenHeight():
-    return BigWorld.screenHeight()
+    scale = getInterfaceScale()
+    return int(BigWorld.screenHeight() / scale)
+
+
+@xvm.export('xvm.screenScale', deterministic=False)
+def xvm_screenScale():
+    scale = getInterfaceScale()
+    return scale
 
 
 @xvm.export('xvm.screenVCenter', deterministic=False)
 def xvm_screenVCenter():
-    return BigWorld.screenHeight() // 2
+    scale = getInterfaceScale()
+    return int(BigWorld.screenHeight() / scale / 2)
 
 
 @xvm.export('xvm.screenHCenter', deterministic=False)
 def xvm_screenHCenter():
-    return BigWorld.screenWidth() // 2
+    scale = getInterfaceScale()
+    return int(BigWorld.screenWidth() / scale / 2)
 
 
 @xvm.export('xvm.XFromRight', deterministic=False)
 def xvm_XFromRight(x=0):
-    screenWidth = BigWorld.screenWidth()
+    scale = getInterfaceScale()
+    screenWidth = int(BigWorld.screenWidth() / scale)
     try:
         return screenWidth - float(x)
     except ValueError:
@@ -164,7 +181,8 @@ def xvm_XFromRight(x=0):
 
 @xvm.export('xvm.YFromBottom', deterministic=False)
 def xvm_YFromBottom(y=0):
-    screenHeight = BigWorld.screenHeight()
+    scale = getInterfaceScale()
+    screenHeight = int(BigWorld.screenHeight() / scale)
     try:
         return screenHeight - float(y)
     except ValueError:
