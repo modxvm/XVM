@@ -38,6 +38,12 @@
       "lightbulb": "",
       "lightbulb_02": "",
       "sixthSense": "",
+      // 
+      // Disable original sixth sense light bulb unspotted sound event on Lesta (Variant 1, Variant 2, User sound).
+      // Отключить оригинальный звук выхода из засвета лампы шестого чувства на Lesta (Вариант 1, Вариант 2, Пользовательский).
+      // "lightbulb_off": "",
+      // "lightbulb_02_off": "",
+      // "sixthSense_off": "",
       //
       // Disable original enemy detection event.
       // Отключить оригинальный звук обнаружения противника.
