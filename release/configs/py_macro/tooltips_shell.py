@@ -43,6 +43,9 @@ def getGuns():
         i18n_veh = v_v['userString'].asString
         xmlPath = '%svehicles/%s/%s.xml' % (ITEM_DEFS_PATH, nation, veh)
         vehicle = ResMgr.openSection(xmlPath)
+        if vehicle is None:
+            warn('py_macro/tooltips_shell: %s is present in nation\'s list.xml but missing in VFS!' % xmlPath)
+            continue
         turrets0 = vehicle['turrets0']
         result.update({gun: (result.get(gun, set()) | {makeString(i18n_veh)}) for turret in turrets0.values() for gun in turret['guns'].keys()})
     return result
