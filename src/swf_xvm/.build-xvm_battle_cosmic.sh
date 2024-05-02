@@ -9,9 +9,8 @@ currentdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 XVMBUILD_ROOT_PATH="$currentdir/../../"
 
 # $XVMBUILD_FLAVOR
-if [[ "$XVMBUILD_FLAVOR" != "lesta" ]]; then
-    echo "ERROR: This project is only for Lesta client!"
-    exit 1
+if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
+    export XVMBUILD_FLAVOR="wg"
 fi
 
 source "$XVMBUILD_ROOT_PATH/build_lib/library.sh"
