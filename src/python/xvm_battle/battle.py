@@ -154,13 +154,22 @@ def _ArenaVehiclesPlugin_setInAoI(self, entry, isInAoI):
 
 
 # SharedPage
+IGNORED_BATTLE_PAGES = (
+    'HistoricalBattlePage',
+)
+
+# In some event battle pages we shouldn't hide postmortem tips
+# as it handles postmortem timers or something else
+def isIgnoredBattlePage(battlePage):
+    return type(battlePage).__name__ in IGNORED_BATTLE_PAGES
+
 def _SharedPage_as_handlePostmortemTips(base, self, value):
-    if not config.get('battle/showPostmortemTips'):
+    if not config.get('battle/showPostmortemTips') and not isIgnoredBattlePage(self):
         value = False
     base(self, value)
 
 def _SharedPage_switchToPostmortem(base, self):
-    if config.get('battle/showPostmortemTips'):
+    if config.get('battle/showPostmortemTips') and not isIgnoredBattlePage(self):
         base(self)
 
 
