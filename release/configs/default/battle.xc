@@ -10,6 +10,9 @@
     // false - disable pop-up panel at the bottom after death.
     // false - отключить всплывающую внизу панель после смерти.
     "showPostmortemTips": true,
+    // false - disable ally dog tag animation before battle start.
+    // false - отключить анимацию личного жетона союзника перед стартом боя.
+    "showPrebattleDogTags": true,
     // false - disable pop-up panel with enemy's dog tag.
     // false - отключить всплывающую внизу панель с личным жетоном противника.
     "showPostmortemDogTag": true,

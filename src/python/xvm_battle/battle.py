@@ -43,6 +43,7 @@ from gui.Scaleform.daapi.view.battle.shared.postmortem_panel import PostmortemPa
 from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisticsDataController
 import gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins as hint_plugin
 from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
+from gui.battle_control.controllers.dog_tags_ctrl import DogTagsController
 
 # XFW
 from xfw import *
@@ -188,6 +189,12 @@ def _hint_plugin_createPlugins(base):
 
 
 # disable DogTag's
+def _DogTagsController__canShowMarkers(base, self):
+    if not config.get('battle/showPrebattleDogTags', True):
+        return False
+    return base(self)
+
+
 def _PostmortemPanel_onDogTagKillerInPlaySound(base, self):
     if not config.get('battle/showPostmortemDogTag', True) or not config.get('battle/showPostmortemTips', True):
         return
@@ -540,6 +547,9 @@ def init():
     overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')(_PostmortemPanel_onDogTagKillerInPlaySound)
     overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')(_PostmortemPanel__onKillerDogTagSet)
     overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')(_PlayersPanelMetaas_setPanelHPBarVisibilityStateS)
+    
+    if getRegion() != 'RU':
+        overrideMethod(DogTagsController, '_DogTagsController__canShowMarkers')(_DogTagsController__canShowMarkers)
 
 
 def fini():
