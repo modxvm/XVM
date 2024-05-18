@@ -49,6 +49,12 @@
     // true - show elite levels widget in the profile for vehicle statistics.
     // true - показывать виджет уровней элитности в профиле для статистики техники.
     "showProfilePrestigeWidget": true,
+    // true - show reward window for unlocking new achievements.
+    // true - показывать окно награды за получение новых достижений.
+    "showAchievementRewardWindow": true,
+    // true - show popups in top right corner for unlocking new achievement.
+    // true - показывать всплывающие окна в правом верхнем углу за получение новых достижений.
+    "showAchievementPopups": true,
     // true - show counter on buttons for new items.
     // true - показывать счётчик на кнопках для новых вещей.
     "showButtonCounters": true,

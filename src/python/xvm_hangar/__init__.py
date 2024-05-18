@@ -266,6 +266,20 @@ def NotificationListView__updateCounters(base, self):
         return
     return base(self)
 
+# hide achievement reward fullscreen window
+def RewardScreenCommand_execute(base, self):
+    if config.get('hangar/showAchievementRewardWindow', True):
+        base(self)
+        return
+    self.release()
+
+# hide achievement popups
+def EarningAnimationCommand_execute(base, self):
+    if config.get('hangar/showAchievementPopups', True):
+        base(self)
+        return
+    self.release()
+
 #
 # XFW API
 #
@@ -304,8 +318,12 @@ def xfw_module_init():
         overrideMethod(NotificationListView, '_NotificationListView__updateCounters')(NotificationListView__updateCounters)
 
         if getRegion() != 'RU':
+            from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
+
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
+            overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
+            overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
 
         __initialized = True
 
