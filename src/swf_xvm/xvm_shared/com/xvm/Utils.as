@@ -141,8 +141,14 @@ package com.xvm
                 case 47: return 'tournament_comp7';
                 case 48: return 'training_comp7';
                 case 50: return 'versusai';
-                case 51: return 'cosmic';
-                case 100: return 'story_mode';
+                case 100:
+                    CLIENT::WG {
+                        return 'story_mode_onboarding';
+                    }
+                    CLIENT::LESTA {
+                        return 'story_mode';
+                    }
+                case 104: return 'story_mode_regular';
                 default: return 'unknown';
             }
         }

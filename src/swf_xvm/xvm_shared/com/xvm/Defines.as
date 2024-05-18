@@ -112,13 +112,17 @@ package com.xvm
         public static const BATTLE_TYPE_FUN_RANDOM:Number = 42;
         public static const BATTLE_TYPE_COMP7:Number = 43;
         public static const BATTLE_TYPE_WINBACK:Number = 44;
-        public static const BATTLE_TYPE_RANDOM_NP2:Number = 46;
-        public static const BATTLE_TYPE_TOURNAMENT_COMP7:Number = 47;
-        public static const BATTLE_TYPE_TRAINING_COMP7:Number = 48;
-        public static const BATTLE_TYPE_VERSUS_AI:Number = 50;
-        public static const BATTLE_TYPE_COSMIC:Number = 51;
-        public static const BATTLE_TYPE_STORY_MODE:Number = 100;
-        public static const BATTLE_TYPE_HISTORICAL_BATTLES:Number = 101;
+        CLIENT::WG {
+            public static const BATTLE_TYPE_RANDOM_NP2:Number = 46;
+            public static const BATTLE_TYPE_TOURNAMENT_COMP7:Number = 47;
+            public static const BATTLE_TYPE_TRAINING_COMP7:Number = 48;
+            public static const BATTLE_TYPE_STORY_MODE_ONBOARDING:Number = 100;
+            public static const BATTLE_TYPE_STORY_MODE_REGULAR:Number = 104;
+        }
+        CLIENT::LESTA {
+            public static const BATTLE_TYPE_VERSUS_AI:Number = 50;
+            public static const BATTLE_TYPE_STORY_MODE:Number = 100;
+        }
 
         // Events
         public static const XVM_EVENT_CONFIG_LOADED:String = "xvm.config_loaded";
