@@ -15,10 +15,7 @@ from gui.prb_control.entities.base.actions_validator import CurrentVehicleAction
 from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.locale.MENU import MENU
-from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.shared.gui_items.Vehicle import Vehicle
-from helpers import dependency
-from skeletons.gui.shared import IItemsCache
 from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from HeroTank import HeroTank
@@ -27,17 +24,13 @@ from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.AwardController import ProgressiveItemsRewardHandler
 from gui.game_control.PromoController import PromoController
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
-from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
-from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
-from gui.shared.gui_items.Tankman import Tankman
-from notification.NotificationListView import NotificationListView
 
 from xfw import *
 
@@ -52,10 +45,6 @@ if getRegion() != 'RU':
 else:
     # Lootboxes widget / Lesta related import
     from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
-
-import svcmsg
-import battletype
-import counters
 
 #####################################################################
 # globals
@@ -242,30 +231,6 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, data):
         data.remove(self.BUTTONS.PREMSHOP)
     return base(self, data)
 
-# hide button counters in lobbyHeader
-def LobbyHeader__setCounter(base, self, alias, counter=None):
-    if not config.get('hangar/showButtonCounters', True):
-        return
-    return base(self, alias, counter)
-
-# hide button counters on customization button
-def AmmunitionPanel_as_setCustomizationBtnCounterS(base, self, value):
-    if not config.get('hangar/showButtonCounters'):
-        value = 0
-    return base(self, value)
-
-# hide counter on service channel button
-def NotificationListButton__setState(base, self, count):
-    if not config.get('hangar/showButtonCounters', True):
-        return
-    return base(self, count)
-
-# hide counters in service channel
-def NotificationListView__updateCounters(base, self):
-    if not config.get('hangar/showButtonCounters', True):
-        return
-    return base(self)
-
 # hide achievement reward fullscreen window
 def RewardScreenCommand_execute(base, self):
     if config.get('hangar/showAchievementRewardWindow', True):
@@ -312,10 +277,6 @@ def xfw_module_init():
         overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPointWidget_getIsActive)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
-        overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(LobbyHeader__setCounter)
-        overrideMethod(AmmunitionPanel, 'as_setCustomizationBtnCounterS')(AmmunitionPanel_as_setCustomizationBtnCounterS)
-        overrideMethod(NotificationListButton, '_NotificationListButton__setState')(NotificationListButton__setState)
-        overrideMethod(NotificationListView, '_NotificationListView__updateCounters')(NotificationListView__updateCounters)
 
         if getRegion() != 'RU':
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
@@ -325,6 +286,15 @@ def xfw_module_init():
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
 
+        import battletype
+        battletype.init()
+
+        import counters
+        counters.init()
+
+        import svcmsg
+        svcmsg.init()
+
         __initialized = True
 
 
@@ -332,6 +302,16 @@ def xfw_module_fini():
     global __initialized
     if __initialized:
         g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+        import battletype
+        battletype.fini()
+
+        import counters
+        counters.fini()
+
+        import svcmsg
+        svcmsg.fini()
+
         __initialized = False
 
 

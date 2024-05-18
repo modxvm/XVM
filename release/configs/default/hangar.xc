@@ -55,17 +55,14 @@
     // true - show popups in top right corner for unlocking new achievement.
     // true - показывать всплывающие окна в правом верхнем углу за получение новых достижений.
     "showAchievementPopups": true,
-    // true - show counter on buttons for new items.
-    // true - показывать счётчик на кнопках для новых вещей.
-    "showButtonCounters": true,
     // "Combat Intelligence" - show/hide notifications in the main window and counters in the menu.
     // "Полевая почта" - показывать/прятать уведомления в главном окне и счетчики в меню.
     "combatIntelligence": {
-      // false - disable display pop-up messages in the hangar.
-      // false - отключить отображение всплывающих сообщений в ангаре.
+      // true - show pop-up messages in the hangar.
+      // true - отображать всплывающих сообщений в ангаре.
       "showPopUpMessages": true,
-      // false - disable display unread notifications counter in the menu.
-      // false - отключить отображение счетчика непрочитанных уведомлений в меню.
+      // true - show unread notifications counter in the menu.
+      // true - отображать счетчика непрочитанных уведомлений в меню.
       "showUnreadCounter": true
     },
     // Parameters of the "Session statistics" button.
@@ -178,15 +175,6 @@
     // Below this percentage, ammo is low. (0 - 100)
     // Ниже этого процента, снарядов считается мало. (0 - 100)
     "lowAmmoPercentage": 20,
-    // Behavior of the system channel notifications button on new notifications:
-    //   none  - do nothing;
-    //   blink - blink button;
-    //   full  - blink and show counter (default client behavior).
-    // Поведение кнопки оповещений системного канала при новых оповещениях:
-    //   none  - ничего не делать;
-    //   blink - мигать кнопкой;
-    //   full  - мигать и показать счетчик (поведение клиента по-умолчанию).
-    "notificationsButtonType": "full",
     // true - hide price button in tech tree.
     // true - прятать кнопку с ценой в дереве исследований.
     "hidePricesInTechTree": false,
@@ -428,6 +416,15 @@
     // true - show notifications counters in the window and on the button "Exterior".
     // true - показать счетчики уведомлений в окне и на кнопке "Внешний вид".
     "showCustomizationCounter": true,
+    // true - show counter on notification list (service channel) button.
+    // true - показать счетчик уведомлений на кнопке центра оповещений (системного канала).
+    "showNotificationButtonCounter": true,
+    // true - show counter in notification list (service channel).
+    // true - показать счетчик уведомлений в центре оповещений (системном канале).
+    "showNotificationListCounters": true,
+    // true - allow notification list (service channel) button blinking.
+    // true - разрешить мигание кнопки центра оповещений (системного канала).
+    "allowNotificationsButtonBlinking": true,
     // Parameters for tank carousel.
     // Параметры карусели танков.
     "carousel": ${"carousel.xc":"carousel"},

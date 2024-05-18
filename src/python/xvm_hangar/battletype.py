@@ -4,19 +4,18 @@ Copyright (c) 2013-2024 XVM Contributors
 Copyright (c) 2020 Andrii Andrushchyshyn
 """
 
-#Python
-import logging
+# Imports
 
 # WoT
 from gui.Scaleform.daapi.view.lobby.header import battle_selector_items
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.shared import g_eventBus, events
 
-#XFW
+# XFW
 from xfw_actionscript.python import as_xfw_cmd
 from xfw.events import *
 
-#XVM
+# XVM
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 
@@ -33,15 +32,26 @@ class XVM_Hangar_BattleType(object):
             if actionName is not None:
                 battle_selector_items.getItems().select(actionName)
 
-g_xvm_hangar_battle_type = XVM_Hangar_BattleType()
+g_xvm_hangar_battle_type = None
 
-@registerEvent(battle_selector_items._BattleSelectorItems, 'select')
 def select(self, action, onlyActive=False):
     if config.get('hangar/restoreBattleType', False) and self.isSelected(action):
         userprefs.set(g_xvm_hangar_battle_type._userpref, action)
 
-#needed for {{battleType}} macro
-@overrideMethod(LobbyHeader, 'as_updateBattleTypeS')
+
+# needed for {{battleType}} macro
 def _LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew):
     base(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew)
     as_xfw_cmd('xvm_hangar.as_update_battle_type', battleTypeID)
+
+
+def init():
+    global g_xvm_hangar_battle_type
+    g_xvm_hangar_battle_type = XVM_Hangar_BattleType()
+    registerEvent(battle_selector_items._BattleSelectorItems, 'select')(select)
+    overrideMethod(LobbyHeader, 'as_updateBattleTypeS')(_LobbyHeader_as_updateBattleTypeS)
+
+
+def fini():
+    global g_xvm_hangar_battle_type
+    g_xvm_hangar_battle_type = None
