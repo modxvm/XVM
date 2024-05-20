@@ -159,6 +159,9 @@ def _getStartPageAlias(self, alias, isProfilePage):
     startPage = config.get('userInfo/profileStartPage' if isProfilePage else 'userInfo/contactsStartPage').lower()
 
     #log('startPage={}'.format(startPage))
+    if startPage == 'achievements' and getRegion() != 'RU':
+        return VIEW_ALIAS.PROFILE_ACHIEVEMENTS_PAGE
+
     if startPage == 'awards':
         return VIEW_ALIAS.PROFILE_AWARDS
 
@@ -173,4 +176,4 @@ def _getStartPageAlias(self, alias, isProfilePage):
         if isHofEnabled:
             return VIEW_ALIAS.PROFILE_HOF
 
-    return VIEW_ALIAS.PROFILE_SUMMARY_PAGE if isProfilePage else VIEW_ALIAS.PROFILE_SUMMARY_WINDOW
+    return VIEW_ALIAS.PROFILE_TOTAL_PAGE
