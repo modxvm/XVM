@@ -109,9 +109,6 @@
     // true - return crew check box is selected by default.
     // true - включить галочку возврата экипажа по умолчанию.
     "crewReturnByDefault": false,
-    // Number of perks to show without grouping.
-    // Количество перков, которые отображаются без группировки.
-    "crewMaxPerksCount": 8,
     // Show/hide common quests button or change its parameters.
     // Показать/спрятать кнопку общих задач, или изменить ее параметры.
     "commonQuests": {

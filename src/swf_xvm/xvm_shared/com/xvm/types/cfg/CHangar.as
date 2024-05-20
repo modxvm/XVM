@@ -15,7 +15,6 @@ package com.xvm.types.cfg
         public var masteryMarkInTechTree:*;
         public var enableCrewAutoReturn:*;
         public var crewReturnByDefault:*;
-        public var crewMaxPerksCount:*;
         public var pingServers:CPingServers;
         public var onlineServers:COnlineServers;
         public var serverInfo:CHangarElement;
