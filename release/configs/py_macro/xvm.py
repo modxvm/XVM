@@ -22,7 +22,11 @@ from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 from skeletons.account_helpers.settings_core import ISettingsCore
 
-_defaultlocale = locale.getdefaultlocale()[1]
+_default_encoding = locale.getpreferredencoding()
+# Fallback to explicit UTF-8 encoding usage on Windows
+# if the beta global UTF-8 support is enabled in Region settings
+if _default_encoding == 'cp65001':
+    _default_encoding = 'utf-8'
 _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
                 'a', 'A', 'b', 'B', 'p' ] # single
 
@@ -64,10 +68,10 @@ def xvm_formatDate(formatDate):
             formatDate = formatDate.replace('%{}'.format(value), '{%s}' % value)
         return formatDate
 
-    formatDate = formatDate.decode('utf8').encode(_defaultlocale)
+    formatDate = formatDate.decode('utf-8').encode(_default_encoding)
     for directive in _DIRECTIVES:
         formatDate = processDirective(directive, formatDate)
-    t = dt.strftime(formatDate).decode(_defaultlocale)
+    t = dt.strftime(formatDate).decode(_default_encoding)
     return t.format(**d)
 
 
