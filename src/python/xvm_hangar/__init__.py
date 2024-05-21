@@ -3,11 +3,15 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
+# Python
 import traceback
 
+
+# WoT
 import helpers
 from CurrentVehicle import g_currentVehicle
 from gui.shared import g_eventBus
@@ -32,8 +36,10 @@ from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 
+# XFW
 from xfw import *
 
+# XVM.Main
 import xvm_main.python.config as config
 from xvm_main.python.consts import *
 from xvm_main.python.logger import *
@@ -46,13 +52,19 @@ else:
     # Lootboxes widget / Lesta related import
     from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
 
-#####################################################################
-# globals
+
+
+#
+# Globals
+#
 
 cfg_hangar_blockVehicleIfLowAmmo = False
 
-#####################################################################
-# initialization/finalization
+
+
+#
+# Configuration
+#
 
 def onConfigLoaded(self, e=None):
     global cfg_hangar_blockVehicleIfLowAmmo
@@ -61,8 +73,9 @@ def onConfigLoaded(self, e=None):
     Vehicle.NOT_FULL_AMMO_MULTIPLIER = config.get('hangar/lowAmmoPercentage', 20) / 100.0
 
 
-#####################################################################
-# handlers
+#
+# Handlers/LowAmmoValidators
+#
 
 # replace original 'NOT_FULL_AMMO_MULTIPLIER'
 def Vehicle_isAmmoFull(base, self):
@@ -78,6 +91,7 @@ def Vehicle_isAmmoFull(base, self):
         err(traceback.format_exc())
         return base(self)
 
+
 # low ammo => vehicle not ready
 def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     result = base(self, *args, **kwargs)
@@ -91,6 +105,7 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     except Exception as ex:
         err(traceback.format_exc())
     return result
+
 
 # low ammo => vehicle not ready
 def Vehicle_isReadyToFight(base, self, *args, **kwargs):
@@ -106,8 +121,9 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
         err(traceback.format_exc())
     return result # base is property
 
+
 # low ammo => vehicle not ready (disable red button)
-def _CurrentVehicleActionsValidator_validate(base, self):
+def CurrentVehicleActionsValidator_validate(base, self):
     res = base(self)
     if g_currentVehicle.isOnlyForEventBattles():
         return res
@@ -121,11 +137,18 @@ def _CurrentVehicleActionsValidator_validate(base, self):
             err(traceback.format_exc())
     return res
 
+
 # low ammo => write on carousel's vehicle 'low ammo'
 def _i18n_makeString(base, key, *args, **kwargs):
     if key == MENU.TANKCAROUSEL_VEHICLESTATES_AMMONOTFULL: # originally returns empty string
         return l10n('lowAmmo')
     return base(key, *args, **kwargs)
+
+
+
+#
+# Handlers/MessengerBar
+#
 
 # hide referral program button
 def MessengerBarMeta_as_setInitDataS(base, self, data):
@@ -133,8 +156,9 @@ def MessengerBarMeta_as_setInitDataS(base, self, data):
         data['isReferralEnabled'] = False
     return base(self, data)
 
+
 # hide shared chat button
-def handleLazyChannelCtlInited(base, self, event):
+def _LobbyEntry__handleLazyChannelCtlInited(base, self, event):
     if not config.get('hangar/showGeneralChatButton', True):
         ctx = event.ctx
         controller = ctx.get('controller')
@@ -146,62 +170,112 @@ def handleLazyChannelCtlInited(base, self, event):
             return
     return base(self, event)
 
+
+
+#
+# Handlers/HeroTank
+#
+
 # hide premium vehicle on the background in the hangar
-def recreateVehicle(base, self, typeDescriptor=None, state=ModelStates.UNDAMAGED, callback=None, outfit=None):
+def HeroTank_recreateVehicle(base, self, typeDescriptor=None, state=ModelStates.UNDAMAGED, callback=None, outfit=None):
     if not config.get('hangar/showPromoPremVehicle', True):
         return
     base(self, typeDescriptor, state, callback, outfit)
 
+
+
+#
+# Handlers/CombatIntelligence
+#
+
 # hide display pop-up messages in the hangar
-def show(base, self, teaserData, promoCount):
+def TeaserViewer_show(base, self, teaserData, promoCount):
     if not config.get('hangar/combatIntelligence/showPopUpMessages', True):
         return
     base(self, teaserData, promoCount)
 
+
 # hide display unread notifications counter in the menu
-def getPromoCount(base, self):
+def PromoController_getPromoCount(base, self):
     if not config.get('hangar/combatIntelligence/showUnreadCounter', True):
         return
     base(self)
 
+
+
+#
+# Handlers/RankedBattlesResults
+#
+
 # hide ranked battle results window
-def _populate(base, self):
+def RankedBattlesResults_populate(base, self):
     if not config.get('hangar/showRankedBattleResults', True):
         return
     base(self)
 
+
+
+#
+# Handlers/SessionStatsButton
+#
+
 # hide display session statistics button
-def updateSessionStatsBtn(base, self):
+def _MessengerBar__updateSessionStatsBtn(base, self):
     if not config.get('hangar/sessionStatsButton/showButton', True):
         self.as_setSessionStatsButtonVisibleS(False)
         self._MessengerBar__onSessionStatsBtnOnlyOnceHintHidden(True) # hide display session statistics help hints
         return
     base(self)
 
+
 # hide display the counter of spent battles on the button
-def updateBatteleCount(base, self):
+def _SessionStatsButton__updateBatteleCount(base, self):
     if not config.get('hangar/sessionStatsButton/showBattleCount', True):
         return
     base(self)
 
+
+
+#
+# Handlers/DailyQuestWidget
+#
+
 # hide display widget with daily quests
-def shouldHide(base, self):
+def _DailyQuestWidget__shouldHide(base, self):
     if not config.get('hangar/showDailyQuestWidget', True):
         return True
     return base(self)
 
+
+
+#
+# Handlers/ProgressiveItemsRewardHandler
+#
+
 # hide display pop-up window when receiving progressive decals
-def _showAward(base, self, ctx):
+def ProgressiveItemsRewardHandler_showAward(base, self, ctx):
     if not config.get('hangar/showProgressiveDecalsWindow', True):
         return
     base(self, ctx)
 
+
+
+#
+# Handlers/EventEntryPointsContainer
+#
+
 # hide display banner of various events in the hangar
-def updateEntries(base, self):
+def _EventEntryPointsContainer__updateEntries(base, self):
     if not config.get('hangar/showEventBanner', True):
         self.as_updateEntriesS([])
         return
     base(self)
+
+
+
+#
+# Handlers/LootBoxesEntryPointWidget
+#
 
 # hide lootboxes widget in tank carousel in hangar
 def LootBoxesEntryPointWidget_getIsActive(base, state):
@@ -209,17 +283,30 @@ def LootBoxesEntryPointWidget_getIsActive(base, state):
         return False
     return base(state)
 
+
+
+#
+# Handlers/Prestige (WG)
+#
+
 # hide prestige (elite levels) system widget in the hangar
 def Hangar_as_setPrestigeWidgetVisibleS(base, self, value):
     if not config.get('hangar/showHangarPrestigeWidget', True):
         value = False
     return base(self, value)
 
+
 # hide prestige (elite levels) system widget in the profile 
 def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
     if not config.get('hangar/showProfilePrestigeWidget', True):
         value = False
     return base(self, value)
+
+
+
+#
+# Handlers/LobbyHeader
+#
 
 # hide premium account, shop and WoT Plus buttons
 def LobbyHeader_as_setHeaderButtonsS(base, self, data):
@@ -231,6 +318,12 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, data):
         data.remove(self.BUTTONS.PREMSHOP)
     return base(self, data)
 
+
+
+#
+# Handlers/Achievements (WG)
+#
+
 # hide achievement reward fullscreen window
 def RewardScreenCommand_execute(base, self):
     if config.get('hangar/showAchievementRewardWindow', True):
@@ -238,12 +331,15 @@ def RewardScreenCommand_execute(base, self):
         return
     self.release()
 
+
 # hide achievement popups
 def EarningAnimationCommand_execute(base, self):
     if config.get('hangar/showAchievementPopups', True):
         base(self)
         return
     self.release()
+
+
 
 #
 # XFW API
@@ -259,21 +355,21 @@ def xfw_module_init():
         overrideMethod(Vehicle, 'isAmmoFull')(Vehicle_isAmmoFull)
         overrideMethod(Vehicle, 'isReadyToPrebattle')(Vehicle_isReadyToPrebattle)
         overrideMethod(Vehicle, 'isReadyToFight')(Vehicle_isReadyToFight)
-        overrideMethod(CurrentVehicleActionsValidator, '_validate')(_CurrentVehicleActionsValidator_validate)
+        overrideMethod(CurrentVehicleActionsValidator, '_validate')(CurrentVehicleActionsValidator_validate)
         overrideMethod(helpers.i18n, 'makeString')(_i18n_makeString)
 
         overrideMethod(MessengerBarMeta, 'as_setInitDataS')(MessengerBarMeta_as_setInitDataS)
-        overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')(handleLazyChannelCtlInited)
-        overrideMethod(HeroTank, 'recreateVehicle')(recreateVehicle)
-        overrideMethod(TeaserViewer, 'show')(show)
-        overrideMethod(PromoController, 'getPromoCount')(getPromoCount)
-        overrideMethod(RankedBattlesResults, '_populate')(_populate)
-        overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(updateSessionStatsBtn)
-        overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(updateBatteleCount)
+        overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')(_LobbyEntry__handleLazyChannelCtlInited)
+        overrideMethod(HeroTank, 'recreateVehicle')(HeroTank_recreateVehicle)
+        overrideMethod(TeaserViewer, 'show')(TeaserViewer_show)
+        overrideMethod(PromoController, 'getPromoCount')(PromoController_getPromoCount)
+        overrideMethod(RankedBattlesResults, '_populate')(RankedBattlesResults_populate)
+        overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(_MessengerBar__updateSessionStatsBtn)
+        overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(_SessionStatsButton__updateBatteleCount)
 
-        overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(shouldHide)
-        overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(_showAward)
-        overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(updateEntries)
+        overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
+        overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(ProgressiveItemsRewardHandler_showAward)
+        overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
         overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPointWidget_getIsActive)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)

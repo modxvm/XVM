@@ -3,16 +3,29 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
+#
+# Imports
+#
+
+# WoT
 from gui.Scaleform.daapi.view.lobby.customization.customization_bottom_panel import CustomizationBottomPanel
 from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 from notification.NotificationListView import NotificationListView
 
+# XFW
 from xfw import *
+
+# XVM.Main
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
+
+
+#
+# Handlers/Counters
+#
 
 def _LobbyHeader__setCounter(base, self, alias, counter=None):
     if config.get('hangar/notificationCounter/{0}'.format(alias), True):
@@ -43,6 +56,11 @@ def _NotificationListView__updateCounters(base, self):
         return
     base(self)
 
+
+
+#
+# Submodule lifecycle
+#
 
 def init():
     overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(_LobbyHeader__setCounter)
