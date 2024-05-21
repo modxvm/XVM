@@ -274,7 +274,7 @@ def _EventEntryPointsContainer__updateEntries(base, self):
 
 
 #
-# Handlers/LootBoxesEntryPointWidget
+# Handlers/CarouselEntryPoints
 #
 
 # hide lootboxes widget in tank carousel in hangar
@@ -282,6 +282,20 @@ def LootBoxesEntryPointWidget_getIsActive(base, state):
     if not config.get('hangar/showLootboxesWidget', True):
         return False
     return base(state)
+
+
+def Hangar_as_setComp7TournamentBannerVisibleS(base, self, visible):
+    if not config.get('hangar/showComp7TournamentWidget', True):
+        visible = False
+    return base(self, visible)
+
+
+# Destroy widget if hidden
+def TournamentsWidgetComponent_makeInjectView(base, self):
+    if not config.get('hangar/showComp7TournamentWidget', True):
+        self.destroy()
+        return
+    return base(self)
 
 
 
@@ -376,9 +390,12 @@ def xfw_module_init():
 
         if getRegion() != 'RU':
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
+            from gui.impl.lobby.comp7.tournaments_widget import TournamentsWidgetComponent
 
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
+            overrideMethod(Hangar, 'as_setComp7TournamentBannerVisibleS')(Hangar_as_setComp7TournamentBannerVisibleS)
+            overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
 
