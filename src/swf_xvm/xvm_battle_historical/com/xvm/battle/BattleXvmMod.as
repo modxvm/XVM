@@ -8,7 +8,6 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
-    import net.wg.gui.battle.historicalBattles.HBBattlePage;
 
     public class BattleXvmMod extends XvmModBase
     {

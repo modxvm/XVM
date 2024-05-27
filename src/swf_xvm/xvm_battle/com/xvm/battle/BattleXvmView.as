@@ -19,9 +19,6 @@ package com.xvm.battle
     import net.wg.gui.battle.comp7.Comp7BattlePage;
     import net.wg.gui.battle.eventBattle.views.EventBattlePage;
     import net.wg.gui.battle.views.BaseBattlePage;
-    CLIENT::LESTA {
-        import net.wg.gui.battle.historicalBattles.HBBattlePage;
-    }
     import net.wg.gui.battle.views.debugPanel.DebugPanel;
     import net.wg.infrastructure.events.LifeCycleEvent;
     import net.wg.infrastructure.helpers.statisticsDataController.BattleStatisticDataController;
@@ -95,15 +92,6 @@ package com.xvm.battle
             super(view);
             _battlePageRef = new WeakReference(super.view);
 
-            CLIENT::LESTA {
-                // Prevent obsolete warnings about missing battleStatisticDataController
-                // in Historical Battles game mode
-                if (battlePage is HBBattlePage)
-                {
-                    return;
-                }
-            }
-
             _battleController = new BattleXvmComponentController();
 
             if (battlePage == null)
@@ -157,9 +145,6 @@ package com.xvm.battle
                 }
 
                 var isSupportBattleType:Boolean = !(battlePage is BattleRoyalePage || battlePage is Comp7BattlePage || battlePage is EventBattlePage);
-                CLIENT::LESTA {
-                    isSupportBattleType = isSupportBattleType && !(battlePage is HBBattlePage);
-                }
 
                 if (Config.config.battle.elements && isSupportBattleType)
                 {
