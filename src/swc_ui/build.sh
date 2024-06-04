@@ -24,6 +24,7 @@ projects="
     wg_battle_epicrandom_ui
     wg_battle_ranked_ui
     wg_battle_royale_ui
+    wg_battle_storymode_ui
     wg_vm_ui
 "
 

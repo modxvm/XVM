@@ -60,8 +60,13 @@ class XfwArenaGuiType:
     # WG 1.24.1
     TOURNAMENT_COMP7 = 33
     TRAINING_COMP7 = 34
+    # _ONBOARDING (WG 1.25) / STORY_MODE (Lesta)
+    STORY_MODE_ONBOARDING = 100
+    # STORY_MODE_REGULAR (WG 1.25)
+    STORY_MODE = 104
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
     COMP7_RANGE = (ARENA_GUI_TYPE.COMP7, TOURNAMENT_COMP7, TRAINING_COMP7, )
+    STORY_MODE_RANGE = (STORY_MODE_ONBOARDING, STORY_MODE, )
 
 
 
@@ -188,8 +193,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_stronghold']
                 elif arenaGuiType in XfwArenaGuiType.COMP7_RANGE:
                     as_paths += ['as_battle_comp7']
-                elif arenaGuiType == ARENA_GUI_TYPE.WINBACK:
-                    as_paths += ['as_battle_winback']
+                elif arenaGuiType in XfwArenaGuiType.STORY_MODE_RANGE:
+                    as_paths += ['as_battle_storymode']
                 else:
                     as_paths += ['as_battle_classic']
             else:

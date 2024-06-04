@@ -36,6 +36,7 @@ projects="
     xvm_battle_ranked
     xvm_battle_royale
     xvm_battle_rts
+    xvm_battle_storymode
     xvm_battle_stronghold
     xvm_battle_winback
 "
