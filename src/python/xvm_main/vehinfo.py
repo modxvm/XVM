@@ -93,12 +93,6 @@ def getXtdbDataArray(vehCD):
 
 # PRIVATE
 
-_XVMSCALE_DATA_URL = 'https://static.modxvm.com/xvmscales.json.gz'
-_WN8_DATA_URL = 'https://static.modxvm.com/wn8-data-exp/json/wn8exp.json.gz'
-_XTE_DATA_URL = 'https://static.modxvm.com/xte.json.gz'
-_XTDB_DATA_URL = 'https://static.modxvm.com/xtdb.json.gz'
-
-
 from math import sin, radians
 import gzip
 import StringIO
@@ -107,9 +101,12 @@ import traceback
 import BigWorld
 import ResMgr
 import nations
+from gun_rotation_shared import calcPitchLimitsFromDesc
 from items import vehicles
 
 import simplejson
+
+from xfw import getRegion
 
 from logger import *
 import filecache
@@ -117,12 +114,17 @@ import reserve
 import userprefs
 import vehinfo_short
 import vehinfo_tiers
-from gun_rotation_shared import calcPitchLimitsFromDesc
 
 _vehicleInfoData = None
 _xvmscale_data = None
 _xte_data = None
 _xtdb_data = None
+
+_FLAVOR = 'wg' if getRegion() != 'RU' else 'lesta'
+_XVMSCALE_DATA_URL = 'https://static.modxvm.com/xvmscales-%s.json.gz' % _FLAVOR
+_WN8_DATA_URL = 'https://static.modxvm.com/wn8-data-exp/json/%s/wn8exp.json.gz' % _FLAVOR
+_XTE_DATA_URL = 'https://static.modxvm.com/xte.json.gz'
+_XTDB_DATA_URL = 'https://static.modxvm.com/xtdb.json.gz'
 
 TURRET_TYPE_ONLY_ONE = 0
 TURRET_TYPE_TOP_GUN_POSSIBLE = 1
