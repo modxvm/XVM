@@ -123,8 +123,8 @@ _xtdb_data = None
 _FLAVOR = 'wg' if getRegion() != 'RU' else 'lesta'
 _XVMSCALE_DATA_URL = 'https://static.modxvm.com/xvmscales-%s.json.gz' % _FLAVOR
 _WN8_DATA_URL = 'https://static.modxvm.com/wn8-data-exp/json/%s/wn8exp.json.gz' % _FLAVOR
-_XTE_DATA_URL = 'https://static.modxvm.com/xte.json.gz'
-_XTDB_DATA_URL = 'https://static.modxvm.com/xtdb.json.gz'
+_XTE_DATA_URL = 'https://static.modxvm.com/xte-%s.json.gz' % _FLAVOR
+_XTDB_DATA_URL = 'https://static.modxvm.com/xtdb-%s.json.gz' % _FLAVOR
 
 TURRET_TYPE_ONLY_ONE = 0
 TURRET_TYPE_TOP_GUN_POSSIBLE = 1
