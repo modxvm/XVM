@@ -63,6 +63,13 @@ package com.xvm.lobby.ui.tankcarousel
             return _padding;
         }
 
+        CLIENT::WG {
+            public function get isSmall():Boolean
+            {
+                throw new AbstractException(XfwUtils.stack() + " " + Errors.ABSTRACT_INVOKE);
+            }
+        }
+
         public function get rendererVisibleHeight():int
         {
             return _visibleHeight;
