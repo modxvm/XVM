@@ -119,7 +119,7 @@ package com.xvm.vehiclemarkers.ui
         CLIENT::WG {
             override public function updateHealth(newHealth:int, isPlayer:Boolean, damageType:String):void
             {
-                var damageFlag:int = damageType.split(",")[3];
+                var damageFlag:int = damageType.split(",")[2];
                 xvm_updateHealth(newHealth, damageFlag, damageType);
             }
         }
