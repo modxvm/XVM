@@ -504,7 +504,7 @@ package com.xvm.battle
 
         private static function getDmgSrcColorValueKey(o:VOPlayerState):String
         {
-			var isSelf:Boolean = o.damageInfo ? o.damageInfo.attackerID == o.vehicleID : false;
+            var isSelf:Boolean = o.damageInfo ? o.damageInfo.attackerID == o.vehicleID : false;
             var damageSource:String = damageFlagToDamageSource(o.damageInfo.damageFlag);
             var damageDest:String = o.isTeamKiller ? (o.isAlly ? "ally" : "enemy") + "tk" : isSelf ? "self" : getEntityName(o);
             return damageSource + "_" + damageDest + "_" + (o.isAlive ? "hit" : o.isBlown ? "blowup" : "kill");

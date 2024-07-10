@@ -394,7 +394,8 @@ def xfw_module_init():
 
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
-            overrideMethod(Hangar, 'as_setComp7TournamentBannerVisibleS')(Hangar_as_setComp7TournamentBannerVisibleS)
+            if hasattr(Hangar, 'as_setComp7TournamentBannerVisibleS'):
+                overrideMethod(Hangar, 'as_setComp7TournamentBannerVisibleS')(Hangar_as_setComp7TournamentBannerVisibleS)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)

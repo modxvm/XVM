@@ -18,8 +18,8 @@ package com.xvm.battle.shared.sixthSense
         private var _imageLoaded:Boolean;
         private var _spotted:Boolean;
         private var _shown:Boolean;
+        private var _immediate:Boolean;
         CLIENT::LESTA {
-            private var _immediate:Boolean;
             private var _permanent:Boolean;
         }
 
@@ -51,9 +51,10 @@ package com.xvm.battle.shared.sixthSense
                 updateState();
             }
 
-            override public function as_hide():void
+            override public function as_hide(immediate:Boolean):void
             {
                 _spotted = false;
+                _immediate = immediate;
                 updateState();
             }
         }
@@ -200,7 +201,7 @@ package com.xvm.battle.shared.sixthSense
                     {
                         if (_shown)
                         {
-                            super.as_hide();
+                            super.as_hide(_immediate);
                             _shown = false;
                         }
                     }
@@ -222,7 +223,14 @@ package com.xvm.battle.shared.sixthSense
                 {
                     if (_shown)
                     {
-                        TweenLite.to(_loader, 0.5, {alpha: 0});
+                        if (!_immediate)
+                        {
+                            TweenLite.to(_loader, 0.5, {alpha: 0});
+                        }
+                        else
+                        {
+                            _loader.alpha = 0;
+                        }
                         _shown = false;
                     }
                 }

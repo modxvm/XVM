@@ -16,6 +16,13 @@ package com.xvm.lobby.ui.tankcarousel
             return getQualifiedClassName(UI_TankCarouselItemRenderer);
         }
 
+        CLIENT::WG {
+            override public function get isSmall():Boolean
+            {
+                return false;
+            }
+        }
+
         // PROTECTED
 
         override protected function get DEFAULT_RENDERER_WIDTH():int

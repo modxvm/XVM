@@ -17,6 +17,7 @@ from helpers import dependency
 from PlayerEvents import g_playerEvents
 from gui import g_keyEventHandlers
 from gui.battle_control import avatar_getter
+from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
 from gui.impl import backport
 from gui.impl.gen import R
 from gui.shared import g_eventBus, events
@@ -40,7 +41,7 @@ from xvm_battle.python.consts import INV, XVM_BATTLE_COMMAND
 from xvm_battle.python.shared import getGlobalBattleData
 
 # XVM Battle VM
-from .consts import XVM_VM_COMMAND, UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES
+from .consts import DAMAGE_TYPE, XVM_VM_COMMAND, UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES
 
 
 
@@ -362,6 +363,21 @@ class VehicleMarkers(object):
                     self.vehiclePlugin.addVehicleInfo(vInfo, arenaDP)
         except Exception:
             self._logger.exception('recreateMarkers')
+
+    def getVehicleDamageType(self, attackerInfo):
+        if not attackerInfo:
+            return DAMAGE_TYPE.FROM_UNKNOWN
+        attackerID = attackerInfo.vehicleID
+        if attackerID == self.playerVehicleID:
+            return DAMAGE_TYPE.FROM_PLAYER
+        entityName = self.sessionProvider.getCtx().getPlayerGuiProps(attackerID, attackerInfo.team)
+        if entityName == PLAYER_GUI_PROPS.squadman:
+            return DAMAGE_TYPE.FROM_SQUAD
+        if entityName == PLAYER_GUI_PROPS.ally:
+            return DAMAGE_TYPE.FROM_ALLY
+        if entityName == PLAYER_GUI_PROPS.enemy:
+            return DAMAGE_TYPE.FROM_ENEMY
+        return DAMAGE_TYPE.FROM_UNKNOWN
 
 
 

@@ -19,6 +19,14 @@ from xfw import *
 # Constants
 #
 
+class DAMAGE_TYPE(object):
+    FROM_UNKNOWN = 0
+    FROM_ALLY = 1
+    FROM_ENEMY = 2
+    FROM_SQUAD = 3
+    FROM_PLAYER = 4
+
+
 class XVM_VM_COMMAND(object):
     LOG = "xfw.log"
     INITIALIZED = "initialized"

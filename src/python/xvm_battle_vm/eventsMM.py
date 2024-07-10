@@ -15,6 +15,7 @@ from gui.Scaleform.daapi.view.battle.shared.markers2d.settings import CommonMark
 from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin
 
 # XFW
+from xfw import getRegion
 from xfw.events import overrideMethod
 
 # XVM Main
@@ -79,11 +80,20 @@ def _VehicleMarkerPlugin_updateVehicleHealth(base, self, vehicleID, handle, newH
     if g_markers.active:
         if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
             attackerID = aInfo.vehicleID if aInfo else 0
-            self._invokeMarker(handle,
+            isPlayer = attackerID == self._playerVehicleID
+            damageFlag = g_markers.getVehicleDamageType(aInfo)
+            if getRegion() != 'RU':
+                self._invokeMarker(handle,
+                                'updateHealth',
+                                newHealth,
+                                isPlayer,
+                                ','.join([ATTACK_REASONS[attackReasonID], str(attackerID), str(damageFlag)]))
+            else:
+                self._invokeMarker(handle,
                                'updateHealth',
                                newHealth,
-                               self._VehicleMarkerPlugin__getVehicleDamageType(aInfo),
-                               '{},{}'.format(ATTACK_REASONS[attackReasonID], str(attackerID)))
+                               damageFlag,
+                               ','.join([ATTACK_REASONS[attackReasonID], str(attackerID)]))
             return
     base(self, vehicleID, handle, newHealth, aInfo, attackReasonID)
 

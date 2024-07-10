@@ -82,10 +82,12 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        override public function settingsUpdate(param0:int):void
-        {
-            super.settingsUpdate(param0);
-            setupVehicleIcon();
+        CLIENT::LESTA {
+            override public function settingsUpdate(param0:int):void
+            {
+                super.settingsUpdate(param0);
+                setupVehicleIcon();
+            }
         }
 
         override protected function draw():void
@@ -113,7 +115,23 @@ package com.xvm.vehiclemarkers.ui
         }
 
         // HACK: transfer attackerID in the damageType argument
-        override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
+        // Since WG 1.25.1 - now including damageFlag as third string argument due to damageFlag removal
+        CLIENT::WG {
+            override public function updateHealth(newHealth:int, isPlayer:Boolean, damageType:String):void
+            {
+                var damageFlag:int = damageType.split(",")[3];
+                xvm_updateHealth(newHealth, damageFlag, damageType);
+            }
+        }
+
+        CLIENT::LESTA {
+            override public function updateHealth(newHealth:int, damageFlag:int, damageType:String):void
+            {
+                xvm_updateHealth(newHealth, damageFlag, damageType);
+            }
+        }
+
+        private function xvm_updateHealth(newHealth:int, damageFlag:int, damageType:String):void
         {
             this.curHealth = newHealth;
             var playerState:VOPlayerState = BattleState.get(vehicleID);
@@ -121,11 +139,11 @@ package com.xvm.vehiclemarkers.ui
             {
                 var damageTypeSplitted:Array = damageType.split(",");
                 damageType = damageTypeSplitted[0];
-                var attackerID : Number = Number(damageTypeSplitted[1]);
+                var attackerID:Number = Number(damageTypeSplitted[1]);
                 if (!playerState.isAlive && damageFlag == Defines.FROM_UNKNOWN && attackerID == 0)
                 {
                     playerState.damageInfo = null;
-                    playerState.update({curHealth : newHealth});
+                    playerState.update({curHealth: newHealth});
                 }
                 else
                 {
@@ -164,23 +182,46 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        override public function updateState(param1:String, param2:Boolean, param3:String = "", param4:String = ""):void
-        {
-            super.updateState(param1, param2, param3, param4);
-            if (param4 != Values.EMPTY_STR)
+        CLIENT::WG {
+            override public function updateState(newState:String, immediate:Boolean, text:String = "", iconAnimation:String = "", isFrequent:Boolean = false):void
             {
-                var playerState:VOPlayerState = BattleState.get(vehicleID);
-                if (playerState)
+                super.updateState(newState, immediate, text, iconAnimation, isFrequent);
+                if (iconAnimation != Values.EMPTY_STR)
                 {
-                    playerState.update({
-                        markerState: new VOMarkerState({
-                            criticalHitLabelText: param3,
-                            hitExplosionAnimationType: param4
-                        })
-                    });
+                    var playerState:VOPlayerState = BattleState.get(vehicleID);
+                    if (playerState)
+                    {
+                        playerState.update({
+                            markerState: new VOMarkerState({
+                                criticalHitLabelText: text,
+                                hitExplosionAnimationType: iconAnimation
+                            })
+                        });
+                    }
                 }
+                invalidate(INVALIDATE_DATA);
             }
-            invalidate(INVALIDATE_DATA);
+        }
+
+        CLIENT::LESTA {
+            override public function updateState(newState:String, immediate:Boolean, text:String = "", iconAnimation:String = ""):void
+            {
+                super.updateState(newState, immediate, text, iconAnimation);
+                if (iconAnimation != Values.EMPTY_STR)
+                {
+                    var playerState:VOPlayerState = BattleState.get(vehicleID);
+                    if (playerState)
+                    {
+                        playerState.update({
+                            markerState: new VOMarkerState({
+                                criticalHitLabelText: text,
+                                hitExplosionAnimationType: iconAnimation
+                            })
+                        });
+                    }
+                }
+                invalidate(INVALIDATE_DATA);
+            }
         }
 
         override public function setSpeaking(value:Boolean):void
