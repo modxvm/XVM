@@ -18,7 +18,7 @@ from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPan
 from gui.Scaleform.daapi.view.meta.DamagePanelMeta import DamagePanelMeta
 from gui.shared.utils.TimeInterval import TimeInterval
 from helpers import dependency
-from items import _xml#, vehicles
+from items import _xml, vehicles
 from skeletons.gui.battle_session import IBattleSessionProvider
 from vehicle_systems.tankStructure import TankPartIndexes, TankPartNames
 
@@ -62,21 +62,23 @@ ATTACK_REASONS = {
     16: 'none',
     17: 'spawned_bot_explosion',
     18: 'berserker_eq',
-    19: 'spawned_bot_ram',
-    20: 'smoke'
+    19: 'smoke',
+    20: 'corrodingShot',
+    21: 'AdaptationHealthRestore',
+    22: 'thunderStrike',
+    23: 'fireCircle',
+    24: 'clingBrander',
+    25: 'ram_cling_brander',
+    26: 'ram_brander',
+    27: 'fort_artillery_eq',
+    28: 'static_deathzone',
+    29: 'cgf_world'
 }
 
 SHOT_EFFECTS_INDEXES = {
-    # 41: 9,
-    # 42: 9,
-    # 43: 11,
-    # 44: 9,
-    # 45: 11
-    35: 9,
-    36: 9,
-    37: 11,
-    38: 9,
-    39: 11
+    index: (9 if 'artilleryID' in effect else 11)
+    for index, effect in enumerate(vehicles.g_cache.shotEffects)
+    if 'artilleryID' in effect or 'airstrikeID' in effect
 }
 
 VEHICLE_CLASSES_SHORT = {
