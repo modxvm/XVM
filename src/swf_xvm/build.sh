@@ -33,6 +33,7 @@ projects="
     xvm_battle_epicbattle
     xvm_battle_epicrandom
     xvm_battle_event
+    xvm_battle_event_special
     xvm_battle_ranked
     xvm_battle_royale
     xvm_battle_rts
@@ -45,7 +46,6 @@ projects="
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
         $projects
-        xvm_battle_cosmic
     "
 fi
 
@@ -53,8 +53,6 @@ fi
 if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
     projects="
         $projects
-        xvm_battle_cosmic
-        xvm_battle_historical
     "
 fi
 

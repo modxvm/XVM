@@ -8,7 +8,6 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
-    import net.wg.gui.battle.eventBattle.views.EventBattlePage;
 
     public class BattleXvmMod extends XvmModBase
     {
@@ -30,11 +29,6 @@ package com.xvm.battle
         public override function get views():Object
         {
             return VIEWS;
-        }
-
-        public static function get eventBattlePage():EventBattlePage
-        {
-            return BattleXvmView.battlePage as EventBattlePage;
         }
     }
 }

@@ -39,7 +39,6 @@ fi
 if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
     projects="
         $projects
-        wg_battle_historical_ui
     "
 fi
 

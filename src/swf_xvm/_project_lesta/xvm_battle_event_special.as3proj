@@ -4,7 +4,7 @@
   <output>
     <movie outputType="CustomBuild" />
     <movie input="" />
-    <movie path="..\..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_royale\xvm_battle_historical.swf" />
+    <movie path="..\..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_event_special\xvm_battle_event_special.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -16,7 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="..\xvm_battle" />
-    <class path="..\xvm_battle_historical" />
+    <class path="..\xvm_battle_event_special" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -63,7 +63,6 @@
     <element path="..\..\swc_lesta\base_app-1.0-SNAPSHOT.swc" />
     <element path="..\..\swc_lesta\gui_base-1.0-SNAPSHOT.swc" />
     <element path="..\..\swc_lesta\gui_battle-1.0-SNAPSHOT.swc" />
-    <element path="..\..\..\~output\lesta\swc\wg_battle_historical_ui.swc" />
     <element path="..\..\..\~output\lesta\swc\xfw.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
@@ -90,7 +89,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False">bash ..\.build-xvm_battle_historical.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="False">bash ..\.build-xvm_battle_event_special.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
