@@ -16,10 +16,8 @@ internal class $AppLinks
  */
 
 // minimapEntriesLibrary.swf
-ArcadeCameraEntry;
 CellFlashEntry;
 DeadPointEntry;
-StrategicCameraEntry;
 VideoCameraEntry;
 ViewPointEntry;
 ViewRangeCirclesEntry;

@@ -25,14 +25,20 @@ package com.xvm.battle.shared.minimap
     import net.wg.infrastructure.events.*;
     import scaleform.gfx.*;
 
-    UI_ArcadeCameraEntry;
     UI_CellFlashEntry;
     UI_DeadPointEntry;
-    UI_StrategicCameraEntry;
     UI_VideoCameraEntry;
     UI_ViewPointEntry;
     UI_ViewRangeCirclesEntry;
     UI_VehicleEntry;
+    CLIENT::WG {
+    UI_ArcadeCameraEntry;
+    UI_StrategicCameraEntry;
+    }
+    CLIENT::LESTA {
+    UI_DirectionEntry;
+    UI_RectangleAreaMinimapEntry;
+    }
 
     public class UI_Minimap extends minimapUI implements IExtraFieldGroupHolder
     {
