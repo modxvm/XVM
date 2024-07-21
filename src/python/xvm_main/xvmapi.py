@@ -3,7 +3,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-import simplejson
+import json
 from consts import *
 from xfw import getCurrentBattleInfo, urlSafeBase64Encode
 import urllib
@@ -26,7 +26,7 @@ def getServerMessage():
 def getStats(request):
     (data, errStr) = _exec('getStats/{token}/{request}?battleInfo={battleInfo}', params={
         'request': request,
-        'battleInfo': urlSafeBase64Encode(simplejson.dumps(getCurrentBattleInfo(), separators=(',', ':'), sort_keys=True))})
+        'battleInfo': urlSafeBase64Encode(json.dumps(getCurrentBattleInfo(), separators=(',', ':'), sort_keys=True))})
     return data
 
 def getStatsReplay(request):
@@ -36,7 +36,7 @@ def getStatsReplay(request):
 def getStatsBattleResults(request, battleinfo):
     (data, errStr) = _exec('getStatsBattleResults/{token}/{request}?battleInfo={battleInfo}', params={
         'request': request,
-        'battleInfo': urlSafeBase64Encode(simplejson.dumps(battleinfo, separators=(',', ':'), sort_keys=True))})
+        'battleInfo': urlSafeBase64Encode(json.dumps(battleinfo, separators=(',', ':'), sort_keys=True))})
     return data
 
 def getStatsByNick(region, nick):
@@ -55,7 +55,6 @@ from random import randint
 import traceback
 
 from xfw import *
-import simplejson
 
 from logger import *
 from loadurl import loadUrl
@@ -84,7 +83,7 @@ def _exec(req, data=None, showLog=True, api=XVM.API_VERSION, params={}):
 
         (response, duration, errStr) = loadUrl(url, body=data)
 
-        return (None if not response else unicode_to_ascii(simplejson.loads(response)), errStr)
+        return (None if not response else unicode_to_ascii(json.loads(response)), errStr)
     except Exception as ex:
         err(traceback.format_exc())
         err('url = {}'.format(utils.hide_guid(url)))

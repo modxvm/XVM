@@ -9,7 +9,7 @@ __all__ = ['start', 'stop', 'call']
 
 import os
 import threading
-import simplejson
+import json
 import traceback
 import uuid
 
@@ -189,7 +189,7 @@ class _XMQP(object):
         if self.is_consuming and self._exchange_name is not None:
             try:
                 #self._correlation_id = str(uuid.uuid4())
-                message = simplejson.dumps({'accountDBID': utils.getAccountDBID(), 'data': data}, separators=(',',':'))
+                message = json.dumps({'accountDBID': utils.getAccountDBID(), 'data': data}, separators=(',',':'))
                 debug('[XMQP] call: %s' % utils.hide_guid(message))
                 self._channel.basic_publish(
                     exchange=self._exchange_name,
@@ -227,12 +227,12 @@ class _XMQP(object):
             #if body != 'ok':
             #    debug('[XMQP] Received message #%s: %s' % (basic_deliver.delivery_tag, body))
             if self._exchange_correlation_id == properties.correlation_id:
-                response = simplejson.loads(body)
+                response = json.loads(body)
                 if 'exchange' in response:
                     self._exchange_name = response['exchange']
                     global players_capabilities
                     for accountDBID, data in response['users'].iteritems():
-                        players_capabilities[int(accountDBID)] = simplejson.loads(data) if data else {}
+                        players_capabilities[int(accountDBID)] = json.loads(data) if data else {}
                     self.bind_channel()
                 else:
                     log("[XMQP] ERROR: response='{}'".format(body))
@@ -240,7 +240,7 @@ class _XMQP(object):
             else:
             #elif basic_deliver.exchange:
                 #debug('[XMQP] recv: {} {}'.format(properties.headers.get('userId', None), body))
-                response = simplejson.loads(body)
+                response = json.loads(body)
                 g_eventBus.handleEvent(events.HasCtxEvent(XVM_BATTLE_EVENT.XMQP_MESSAGE, response))
         except Exception as ex:
             err(traceback.format_exc())
@@ -409,10 +409,10 @@ class _XMQP(object):
     def get_exchange_name(self):
         debug('[XMQP] Getting exchange name')
         self._exchange_correlation_id = str(uuid.uuid4())
-        message = simplejson.dumps({
+        message = json.dumps({
             'token': config.token.token,
             'players': self._players,
-            'capabilities': simplejson.dumps(getCapabilitiesData(), separators=(',',':'))},
+            'capabilities': json.dumps(getCapabilitiesData(), separators=(',',':'))},
             separators=(',',':'))
         debug('[XMQP] %s' % utils.hide_guid(message))
         self._channel.basic_publish(

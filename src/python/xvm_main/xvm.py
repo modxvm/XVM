@@ -4,7 +4,7 @@ Copyright (c) 2013-2024 XVM Contributors
 """
 
 import traceback
-import simplejson
+import json
 
 import BigWorld
 from CurrentVehicle import g_currentVehicle
@@ -288,7 +288,7 @@ class Xvm(object):
     def onXfwCommand(self, cmd, *args):
         try:
             if IS_DEVELOPMENT and cmd in _LOG_COMMANDS:
-                debug("cmd=" + str(cmd) + " args=" + simplejson.dumps(args))
+                debug("cmd=" + str(cmd) + " args=" + json.dumps(args))
 
             # common
 

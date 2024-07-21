@@ -112,7 +112,7 @@ class _Ping(object):
                 self.thread = None
 
     def _respond(self):
-        # debug("respond: " + simplejson.dumps(self.resp))
+        # debug("respond: " + json.dumps(self.resp))
         from . import XVM_PING_COMMAND
         as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, self.resp)
 
