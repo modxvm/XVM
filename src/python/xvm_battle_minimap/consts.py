@@ -20,6 +20,13 @@ from xfw import *
 # Enums
 #
 
+class ADDITIONAL_ENTRY_SYMBOL_NAME:
+    ARCADE_CAMERA = 'ArcadeCameraEntry'
+    STRATEGIC_CAMERA = 'StrategicCameraEntry'
+    DIRECTION_ENTRY = 'DirectionEntry'
+    RECTANGLE_AREA = 'RectangleAreaMinimapEntry'
+
+
 class XVM_ENTRY_SYMBOL_NAME(object):
     VEHICLE = 'com.xvm.battle.shared.minimap.entries.vehicle::UI_VehicleEntry'
     VIEW_POINT = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewPointEntry'
@@ -27,10 +34,14 @@ class XVM_ENTRY_SYMBOL_NAME(object):
     VIDEO_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_VideoCameraEntry'
     ARCADE_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_ArcadeCameraEntry'
     STRATEGIC_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_StrategicCameraEntry'
+    # Renamed ARCADE_CAMERA and STRATEGIC_CAMERA entries for Lesta since 1.28.0.0
+    DIRECTION_ENTRY = 'com.xvm.battle.shared.minimap.entries.personal::UI_DirectionEntry'
+    RECTANGLE_AREA = 'com.xvm.battle.shared.minimap.entries.personal::UI_RectangleAreaMinimapEntry'
     VIEW_RANGE_CIRCLES = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewRangeCirclesEntry'
     MARK_CELL = 'com.xvm.battle.shared.minimap.entries.personal::UI_CellFlashEntry'
     DEL_ENTRY_SYMBOLS = [VEHICLE, VIEW_POINT, DEAD_POINT, VIDEO_CAMERA,
-                         ARCADE_CAMERA, STRATEGIC_CAMERA, VIEW_RANGE_CIRCLES, MARK_CELL]
+                         ARCADE_CAMERA, STRATEGIC_CAMERA, DIRECTION_ENTRY,
+                         RECTANGLE_AREA, VIEW_RANGE_CIRCLES, MARK_CELL]
 
 
 
@@ -48,10 +59,12 @@ UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.COMP7,
     33,  # constants.ARENA_GUI_TYPE.TOURNAMENT_COMP7 (WG 1.24.1)
     34,  # constants.ARENA_GUI_TYPE.TRAINING_COMP7 (WG 1.24.1)
-    # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 newbie tutorial)
+    # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
-    104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 pve event)
+    104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
+    300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
+    400, # constants.ARENA_GUI_TYPE.RACES (Lesta 1.28.0.0)
 ]
 
 

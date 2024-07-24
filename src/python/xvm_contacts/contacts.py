@@ -25,7 +25,7 @@ def setXvmContactData(uid, value):
 
 from random import randint
 import traceback
-import simplejson
+import json
 
 from gui import SystemMessages
 
@@ -74,7 +74,7 @@ class _Contacts:
                 if self.cached_data is None or self.cached_token != token:
                     self.cached_token = token
                     json_data = self._doRequest('getComments')
-                    data = {'ver':_CONTACTS_DATA_VERSION,'players':{}} if json_data is None else simplejson.loads(json_data)
+                    data = {'ver':_CONTACTS_DATA_VERSION,'players':{}} if json_data is None else json.loads(json_data)
                     if data['ver'] != _CONTACTS_DATA_VERSION:
                         pass # data = convertOldVersion(data)
                     self.cached_data = data
@@ -123,7 +123,7 @@ class _Contacts:
             else:
                 self.cached_data['players'][str(uid)] = value
 
-            json_data = simplejson.dumps(self.cached_data, separators=(',',':'))
+            json_data = json.dumps(self.cached_data, separators=(',',':'))
             #log(json_data)
             self._doRequest('addComments', json_data)
 

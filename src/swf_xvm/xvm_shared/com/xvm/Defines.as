@@ -121,6 +121,8 @@ package com.xvm
         }
         CLIENT::LESTA {
             public static const BATTLE_TYPE_VERSUS_AI:Number = 50;
+            public static const BATTLE_TYPE_COSMIC:Number = 51;
+            public static const BATTLE_TYPE_RACES:Number = 52;
             public static const BATTLE_TYPE_STORY_MODE:Number = 100;
         }
 
@@ -157,21 +159,21 @@ package com.xvm
         public static const WIDGET_TYPE_EXTRAFIELD:String = "extrafield";
 
         // App types
-        public static const APP_TYPE_UNKNOWN:int =           0x0000;
-        public static const APP_TYPE_LOBBY:int =             0x0001;
-        public static const APP_TYPE_BATTLE_CLASSIC:int =    0x0002;
-        public static const APP_TYPE_BATTLE_EPICBATTLE:int = 0x0004;
-        public static const APP_TYPE_BATTLE_EPICRANDOM:int = 0x0008;
-        public static const APP_TYPE_BATTLE_RANKED:int =     0x0010;
-        public static const APP_TYPE_VEHICLE_MARKERS:int =   0x0020;
-        public static const APP_TYPE_BATTLE_ROYALE:int =     0x0040;
-        public static const APP_TYPE_BATTLE_EVENT:int =      0x0080;
-        public static const APP_TYPE_BATTLE_RTS:int =        0x0100;
-        public static const APP_TYPE_BATTLE_COMP7:int =      0x0200;
-        public static const APP_TYPE_BATTLE_WINBACK:int =    0x0400;
-        public static const APP_TYPE_BATTLE_STORY_MODE:int = 0x0800;
-        public static const APP_TYPE_BATTLE_COSMIC:int =     0x1000;
-        public static const APP_TYPE_BATTLE_HISTORICAL:int = 0x2000;
-        public static const APP_TYPE_BATTLE:int =            APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED | APP_TYPE_BATTLE_ROYALE | APP_TYPE_BATTLE_EVENT | APP_TYPE_BATTLE_RTS | APP_TYPE_BATTLE_COMP7 | APP_TYPE_BATTLE_WINBACK | APP_TYPE_BATTLE_STORY_MODE | APP_TYPE_BATTLE_COSMIC | APP_TYPE_BATTLE_HISTORICAL;
+        public static const APP_TYPE_UNKNOWN:int =              0x0000;
+        public static const APP_TYPE_LOBBY:int =                0x0001;
+        public static const APP_TYPE_BATTLE_CLASSIC:int =       0x0002;
+        public static const APP_TYPE_BATTLE_EPICBATTLE:int =    0x0004;
+        public static const APP_TYPE_BATTLE_EPICRANDOM:int =    0x0008;
+        public static const APP_TYPE_BATTLE_RANKED:int =        0x0010;
+        public static const APP_TYPE_VEHICLE_MARKERS:int =      0x0020;
+        public static const APP_TYPE_BATTLE_ROYALE:int =        0x0040;
+        public static const APP_TYPE_BATTLE_EVENT:int =         0x0080;
+        public static const APP_TYPE_BATTLE_EVENT_SPECIAL:int = 0x0100;
+        public static const APP_TYPE_BATTLE_RTS:int =           0x0200;
+        public static const APP_TYPE_BATTLE_COMP7:int =         0x0400;
+        public static const APP_TYPE_BATTLE_WINBACK:int =       0x0800;
+        public static const APP_TYPE_BATTLE_STORY_MODE:int =    0x1000;
+        public static const APP_TYPE_BATTLE_RESERVED:int =      0x2000;
+        public static const APP_TYPE_BATTLE:int =               APP_TYPE_BATTLE_CLASSIC | APP_TYPE_BATTLE_EPICBATTLE | APP_TYPE_BATTLE_EPICRANDOM | APP_TYPE_BATTLE_RANKED | APP_TYPE_BATTLE_ROYALE | APP_TYPE_BATTLE_EVENT | APP_TYPE_BATTLE_EVENT_SPECIAL | APP_TYPE_BATTLE_RTS | APP_TYPE_BATTLE_COMP7 | APP_TYPE_BATTLE_WINBACK | APP_TYPE_BATTLE_STORY_MODE | APP_TYPE_BATTLE_RESERVED;
     }
 }

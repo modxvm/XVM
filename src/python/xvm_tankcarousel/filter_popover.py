@@ -7,7 +7,7 @@ Copyright (c) 2013-2024 XVM Contributors
 # imports
 
 import traceback
-import simplejson
+import json
 
 from account_helpers.AccountSettings import AccountSettings, DEFAULT_VALUES, KEY_FILTERS
 from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, MAPBOX_CAROUSEL_FILTER_2, FUN_RANDOM_CAROUSEL_FILTER_2, COMP7_CAROUSEL_FILTER_2
@@ -107,7 +107,7 @@ def _ServerSettingsManager_getSection(base, self, section, defaults = None):
     res = base(self, section, defaults)
     if section in _SUPPORTED_SECTIONS:
         try:
-            filterData = simplejson.loads(userprefs.get(USERPREFS.CAROUSEL_FILTERS, '{}'))
+            filterData = json.loads(userprefs.get(USERPREFS.CAROUSEL_FILTERS, '{}'))
             prefs = filterData.get('prefs', [])
         except Exception as ex:
             err(traceback.format_exc())
@@ -122,7 +122,7 @@ def _ServerSettingsManager_setSections(base, self, sections, settings):
             try:
                 prefs = [key for key, value in settings.iteritems() if key in PREFS.XVM_KEYS and value]
                 settings = {key: value for key, value in settings.iteritems() if key not in PREFS.XVM_KEYS}
-                userprefs.set(USERPREFS.CAROUSEL_FILTERS, simplejson.dumps({'prefs': prefs}, separators=(',', ':')))
+                userprefs.set(USERPREFS.CAROUSEL_FILTERS, json.dumps({'prefs': prefs}, separators=(',', ':')))
             except Exception as ex:
                 err(traceback.format_exc())
     return base(self, sections, settings)

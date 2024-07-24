@@ -4,7 +4,7 @@
   <output>
     <movie outputType="CustomBuild" />
     <movie input="" />
-    <movie path="..\..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_royale\xvm_battle_event.swf" />
+    <movie path="..\..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_event\xvm_battle_event.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />

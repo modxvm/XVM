@@ -9,10 +9,8 @@ Copyright (c) 2013-2024 XVM Contributors
 
 # CPython
 import logging
+import json
 from pprint import pprint
-
-# Simplejson
-import simplejson
 
 # BigWorld
 import BigWorld
@@ -85,7 +83,7 @@ def BattleResultsWindow_as_setDataS(base, self, data):
             #log(data['xvm_data'])
             data['xvm_data']['regionNameStr'] = data['common']['regionNameStr']
             data['xvm_data']['arenaUniqueID'] = str(self._BattleResultsWindow__arenaUniqueID)
-            data['common']['regionNameStr'] = simplejson.dumps(data['xvm_data'], separators=(',',':'))
+            data['common']['regionNameStr'] = json.dumps(data['xvm_data'], separators=(',',':'))
     
         if 'xvm_data' in data:
             del data['xvm_data']

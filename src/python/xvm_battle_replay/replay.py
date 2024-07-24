@@ -9,9 +9,7 @@ Copyright (c) 2013-2024 XVM Contributors
 
 # stdlib
 import logging
-
-# simplejson
-import simplejson
+import json
 
 # BigWorld
 import BigWorld
@@ -57,7 +55,7 @@ def onAvatarBecomePlayer(*args, **kwargs):
             }
         else:
             arena_json_data = g_replayCtrl._BattleReplay__replayCtrl.getArenaInfoStr()
-            xvm_data = simplejson.loads(arena_json_data).get('xvm', None) if arena_json_data else None
+            xvm_data = json.loads(arena_json_data).get('xvm', None) if arena_json_data else None
             if xvm_data:
                 xvm_data = unicode_to_ascii(xvm_data)
                 if xvm_data.get('ver', None) == '1.0':
@@ -81,9 +79,9 @@ def _BattleReplay_stop(base, self, rewindToTime = None, delete = False, isDestro
             if _xvm_record_data:
                 arenaInfoStr = self._BattleReplay__replayCtrl.getArenaInfoStr()
                 if arenaInfoStr:
-                    arenaInfo = simplejson.loads(arenaInfoStr)
+                    arenaInfo = json.loads(arenaInfoStr)
                     arenaInfo.update({"xvm": utils.pretty_floats(_xvm_record_data)})
-                    self._BattleReplay__replayCtrl.setArenaInfoStr(simplejson.dumps(arenaInfo, separators=(',', ':')))
+                    self._BattleReplay__replayCtrl.setArenaInfoStr(json.dumps(arenaInfo, separators=(',', ':')))
                 _xvm_record_data = None
     except Exception:
         logging.getLogger('XVM/Battle/Replay').exception('_BattleReplay_stop')

@@ -3,7 +3,7 @@ diff -Naur battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm battle.
 +++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm    2024-05-27 02:50:54.122948200 +0300
 @@ -2428,7 +2428,7 @@
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 275 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
-  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 276 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end  
+  trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 276 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_TASK_SEPARATOR") slotid 277 type QName(PackageNamespace(""), "String") value Utf8("battleProgressTaskSeparatorUI") end
 - trait const QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 278 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end
 + trait slot QName(PackageNamespace(""), "CAPTURE_BAR_LINKAGE") slotid 278 type QName(PackageNamespace(""), "String") value Utf8("TeamCaptureBarUI") end

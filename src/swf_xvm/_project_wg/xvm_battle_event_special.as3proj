@@ -4,7 +4,7 @@
   <output>
     <movie outputType="CustomBuild" />
     <movie input="" />
-    <movie path="..\..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_cosmic\xvm_battle_cosmic.swf" />
+    <movie path="..\..\..\~output\res_mods\mods\xfw_packages\xvm_battle\as_battle_event_special\xvm_battle_event_special.swf" />
     <movie fps="50" />
     <movie width="1024" />
     <movie height="768" />
@@ -16,7 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="..\xvm_battle" />
-    <class path="..\xvm_battle_cosmic" />
+    <class path="..\xvm_battle_event_special" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -89,7 +89,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False">bash ..\.build-xvm_battle_cosmic.sh</postBuildCommand>
+  <postBuildCommand alwaysRun="False">bash ..\.build-xvm_battle_event_special.sh</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />

@@ -64,9 +64,15 @@ class XfwArenaGuiType:
     STORY_MODE_ONBOARDING = 100
     # STORY_MODE_REGULAR (WG 1.25)
     STORY_MODE = 104
+    # Lesta 1.25.0.0
+    COSMIC_EVENT = 300
+    # Lesta 1.28.0.0
+    RACES = 400
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
     COMP7_RANGE = (ARENA_GUI_TYPE.COMP7, TOURNAMENT_COMP7, TRAINING_COMP7, )
     STORY_MODE_RANGE = (STORY_MODE_ONBOARDING, STORY_MODE, )
+    EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, )
+    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, RACES, )
 
 
 
@@ -185,8 +191,10 @@ class _XfwComponent(BaseDAAPIComponent):
                     as_paths += ['as_battle_epicbattle']
                 elif arenaGuiType == ARENA_GUI_TYPE.BATTLE_ROYALE:
                     as_paths += ['as_battle_royale']
-                elif arenaGuiType == ARENA_GUI_TYPE.EVENT_BATTLES:
+                elif arenaGuiType in XfwArenaGuiType.EVENT_RANGE:
                     as_paths += ['as_battle_event']
+                elif arenaGuiType in XfwArenaGuiType.EVENT_SPECIAL_RANGE:
+                    as_paths += ['as_battle_event_special']
                 elif arenaGuiType in XfwArenaGuiType.RTS_RANGE:
                     as_paths += ['as_battle_rts']
                 elif arenaGuiType in ARENA_GUI_TYPE.STRONGHOLD_RANGE:

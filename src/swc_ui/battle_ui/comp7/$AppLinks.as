@@ -16,14 +16,20 @@ internal class $AppLinks
  */
 
 // minimapEntriesLibrary.swf
-ArcadeCameraEntry;
 CellFlashEntry;
 DeadPointEntry;
-StrategicCameraEntry;
 VideoCameraEntry;
 ViewPointEntry;
 ViewRangeCirclesEntry;
 VehicleEntry;
+CLIENT::WG {
+ArcadeCameraEntry;
+StrategicCameraEntry;
+}
+CLIENT::LESTA {
+DirectionEntry;
+RectangleAreaMinimapEntry;
+}
 
 // sixthSense.swf
 sixthSenseUI;

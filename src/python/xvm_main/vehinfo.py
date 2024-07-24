@@ -93,18 +93,17 @@ def getXtdbDataArray(vehCD):
 
 # PRIVATE
 
-from math import sin, radians
+import json
 import gzip
 import StringIO
 import traceback
+from math import sin, radians
 
 import BigWorld
 import ResMgr
 import nations
 from gun_rotation_shared import calcPitchLimitsFromDesc
 from items import vehicles
-
-import simplejson
 
 from xfw import getRegion
 
@@ -232,7 +231,7 @@ def _load_xvmscale_data_callback(url, bytes):
             if url is not None:
                 userprefs.set('cache/xvmscales.json.gz', bytes)
             global _xvmscale_data
-            _xvmscale_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            _xvmscale_data = json.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
     except Exception as ex:
         err(traceback.format_exc())
 
@@ -241,7 +240,7 @@ def _load_wn8_data_callback(url, bytes):
         if bytes:
             if url is not None:
                 userprefs.set('cache/wn8exp.json.gz', bytes)
-            data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            data = json.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
             for x in data['data']:
                 vinfo = getVehicleInfoData(int(x['IDNum']))
                 if vinfo is not None:
@@ -259,7 +258,7 @@ def _load_xte_data_callback(url, bytes):
             if url is not None:
                 userprefs.set('cache/xte.json.gz', bytes)
             global _xte_data
-            _xte_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            _xte_data = json.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
             for k, v in _xte_data.iteritems():
                 vinfo = getVehicleInfoData(int(k))
                 if vinfo is not None:
@@ -276,7 +275,7 @@ def _load_xtdb_data_callback(url, bytes):
             if url is not None:
                 userprefs.set('cache/xtdb.json.gz', bytes)
             global _xtdb_data
-            _xtdb_data = simplejson.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
+            _xtdb_data = json.loads(gzip.GzipFile(fileobj=StringIO.StringIO(bytes)).read())
     except Exception as ex:
         err(traceback.format_exc())
 

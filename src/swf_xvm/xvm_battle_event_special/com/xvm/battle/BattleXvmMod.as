@@ -7,11 +7,10 @@ package com.xvm.battle
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
-    import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
 
     public class BattleXvmMod extends XvmModBase
     {
-        public static const APP_TYPE:int = Defines.APP_TYPE_BATTLE_HISTORICAL;
+        public static const APP_TYPE:int = Defines.APP_TYPE_BATTLE_EVENT_SPECIAL;
 
         public override function get logPrefix():String
         {
@@ -20,10 +19,8 @@ package com.xvm.battle
 
         private static const VIEWS:Object =
         {
-            "historicalBattles": [
-                SixthSenseXvmView,
-                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
-            ]
+            "cosmicBattlePage": [],
+            "racesBattlePage": []
         }
 
         public override function get views():Object

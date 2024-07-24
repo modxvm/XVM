@@ -1,0 +1,21 @@
+diff -Naur battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/personal/DirectionMinimapEntry.class.asasm battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/personal/DirectionMinimapEntry.class.asasm
+--- battle.orig-0.orig/net/wg/gui/battle/views/minimap/components/entries/personal/DirectionMinimapEntry.class.asasm        2024-07-22 22:33:45.041859800 +0000
++++ battle.orig-0/net/wg/gui/battle/views/minimap/components/entries/personal/DirectionMinimapEntry.class.asasm     2024-07-22 22:44:43.119114800 +0000
+@@ -189,12 +189,17 @@
+
+       getlocal0
+       getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap.components.entries.personal:DirectionMinimapEntry"), "_distanceDrawer")
++      iffalse             L25
++
++      getlocal0
++      getproperty         QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap.components.entries.personal:DirectionMinimapEntry"), "_distanceDrawer")
+       callpropvoid        QName(PackageNamespace(""), "dispose"), 0
+
+       getlocal0
+       pushnull
+       initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.views.minimap.components.entries.personal:DirectionMinimapEntry"), "_distanceDrawer")
+
++L25:
+       getlocal0
+       callsupervoid       QName(ProtectedNamespace("net.wg.gui.battle.components:BattleUIComponent"), "onDispose"), 0
+       returnvoid

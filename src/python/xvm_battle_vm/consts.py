@@ -61,10 +61,12 @@ UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.COMP7,
     33, # constants.ARENA_GUI_TYPE.TOURNAMENT_COMP7 (WG 1.24.1)
     34, # constants.ARENA_GUI_TYPE.TRAINING_COMP7 (WG 1.24.1)
-    # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 newbie tutorial)
+    # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
-    104,  # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 pve event)
+    104,  # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
+    300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
+    400, # constants.ARENA_GUI_TYPE.RACES (Lesta 1.28.0.0)
 ]
 
 UNSUPPORTED_BATTLE_TYPES = [

@@ -37,9 +37,9 @@ from xvm_main.python.consts import XVM_EVENT
 from xvm_battle.python.battle import g_battle
 
 # XVM Battle VM
-from .consts import XVM_ENTRY_SYMBOL_NAME, UNSUPPORTED_BATTLE_TYPES, \
-     UNSUPPORTED_GUI_TYPES, CIRCLES_SETTINGS, LABELS_SETTINGS, LINES_SETTINGS,\
-     HP_SETTINGS, DEFAULTS  
+from .consts import ADDITIONAL_ENTRY_SYMBOL_NAME, XVM_ENTRY_SYMBOL_NAME,\
+     UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES, CIRCLES_SETTINGS, \
+     LABELS_SETTINGS, LINES_SETTINGS, HP_SETTINGS, DEFAULTS
 
 
 
@@ -79,10 +79,14 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
             symbol = XVM_ENTRY_SYMBOL_NAME.DEAD_POINT
         elif symbol == ENTRY_SYMBOL_NAME.VIDEO_CAMERA:
             symbol = XVM_ENTRY_SYMBOL_NAME.VIDEO_CAMERA
-        elif symbol == ENTRY_SYMBOL_NAME.ARCADE_CAMERA:
+        elif symbol == ADDITIONAL_ENTRY_SYMBOL_NAME.ARCADE_CAMERA:
             symbol = XVM_ENTRY_SYMBOL_NAME.ARCADE_CAMERA
-        elif symbol == ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA:
+        elif symbol == ADDITIONAL_ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA:
             symbol = XVM_ENTRY_SYMBOL_NAME.STRATEGIC_CAMERA
+        elif symbol == ADDITIONAL_ENTRY_SYMBOL_NAME.DIRECTION_ENTRY:
+            symbol = XVM_ENTRY_SYMBOL_NAME.DIRECTION_ENTRY
+        elif symbol == ADDITIONAL_ENTRY_SYMBOL_NAME.RECTANGLE_AREA:
+            symbol = XVM_ENTRY_SYMBOL_NAME.RECTANGLE_AREA
         elif symbol == ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES:
             symbol = XVM_ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES
         else:
