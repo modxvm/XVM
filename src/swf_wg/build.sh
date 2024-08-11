@@ -27,7 +27,7 @@ detect_patch
 ####      CONFIG      ####
 ##########################
 
-#EXTRACT_ONLY=1
+# EXTRACT_ONLY=1
 
 files=(
   'battle'

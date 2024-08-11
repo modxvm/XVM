@@ -1,21 +1,21 @@
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm
---- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm	2023-10-15 20:06:10.590182500 +0300
-+++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm	2023-10-15 20:07:21.044299300 +0300
-@@ -2124,7 +2124,7 @@
-     initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET")
- 
+--- battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.asasm    2024-08-11 23:22:26.656359400 +0000
++++ battle.orig-0/net/wg/gui/battle/random/views/BattlePage.class.asasm 2024-08-11 23:23:31.115619300 +0000
+@@ -2604,7 +2604,7 @@
+     initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING")
+
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
 -    pushbyte            6
 +    pushbyte            156
      initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT")
- 
+
      findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH")
-@@ -2159,7 +2159,7 @@
+@@ -2646,7 +2646,7 @@
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "OFFSET_MAP_INFO_X") slotid 1 type QName(PackageNamespace(""), "uint") value Integer(70) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_X_POSITION") slotid 2 type QName(PackageNamespace(""), "int") value Integer(229) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING") slotid 3 type QName(PackageNamespace(""), "int") value Integer(3) end
-  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "CONSUMABLES_POPUP_OFFSET") slotid 4 type QName(PackageNamespace(""), "int") value Integer(60) end
-- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT") slotid 5 type QName(PackageNamespace(""), "int") value Integer(6) end
-+ trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT") slotid 5 type QName(PackageNamespace(""), "int") value Integer(-100) end
-  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH") slotid 6 type QName(PackageNamespace(""), "int") value Integer(0) end
-  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MESSANGER_SWAP_AREA_TOP_OFFSET") slotid 7 type QName(PackageNamespace(""), "Number") value Integer(-27) end
-  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "QUEST_PROGRESS_TOP_SHIFT") slotid 8 type QName(PackageNamespace(""), "int") value Integer(45) end
+- trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT") slotid 4 type QName(PackageNamespace(""), "int") value Integer(6) end
++ trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT") slotid 4 type QName(PackageNamespace(""), "int") value Integer(-100) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH") slotid 5 type QName(PackageNamespace(""), "int") value Integer(0) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "TWEEN_DURATION") slotid 6 type QName(PackageNamespace(""), "uint") value Integer(300) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "TEAM_BASES_PANEL_OFFSET") slotid 7 type QName(PackageNamespace(""), "uint") value Integer(10) end
