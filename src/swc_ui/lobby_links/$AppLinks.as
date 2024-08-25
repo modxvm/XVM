@@ -53,7 +53,6 @@ ContactNoteManageViewUI;
 // guiControlsLobby.swf
 CheckBoxTankers;
 ProfileSortingButton_UI;
-SmallSkillsListUI;
 TextAreaSimple;
 
 // guiControlsLobbyBattle.swf
