@@ -37,6 +37,7 @@ import parser_addon
 from xvm.damageLog import keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
 
 # WG 1.24.1 only
+WINBACK = 31
 TOURNAMENT_COMP7 = 33
 TRAINING_COMP7 = 34
 # Lesta only
@@ -65,7 +66,7 @@ BATTLE_TYPE = {
     ARENA_GUI_TYPE.RTS_BOOTCAMP: "rts_bootcamp",
     ARENA_GUI_TYPE.FUN_RANDOM: "fun_random",
     ARENA_GUI_TYPE.COMP7: "comp7",
-    ARENA_GUI_TYPE.WINBACK: "winback",
+    WINBACK: "winback",
     TOURNAMENT_COMP7: "tournament_comp7",
     TRAINING_COMP7: "training_comp7",
     VERSUS_AI: "versusai"

@@ -72,7 +72,7 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     constants.ARENA_GUI_TYPE.RTS_TRAINING,
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
     constants.ARENA_GUI_TYPE.COMP7,
-    constants.ARENA_GUI_TYPE.WINBACK, # TODO: fix broken totalEfficiency and hitLog due to broken PlayerPanels
+    31, # constants.ARENA_GUI_TYPE.WINBACK (remove in Lesta since 1.29) # TODO: fix broken totalEfficiency and hitLog due to broken PlayerPanels
     33, # constants.ARENA_GUI_TYPE.TOURNAMENT_COMP7 (WG 1.24.1)
     34, # constants.ARENA_GUI_TYPE.TRAINING_COMP7 (WG 1.24.1)
     # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
