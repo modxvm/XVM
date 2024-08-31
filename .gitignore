@@ -32,3 +32,12 @@ __version__.py
 
 #Test files
 utils/replays/*
+src/wwise_wg/.backup/
+
+src/wwise_wg/.cache/
+
+*.wsettings
+
+*.validationcache
+
+*.log
