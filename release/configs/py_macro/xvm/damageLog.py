@@ -482,6 +482,7 @@ class Data(object):
         self.data['splashHit'] = 'no-splash'
         self.data['attackReasonID'] = 0
         self.data['numCrits'] = 0
+        self.data['shellDamage'] = None
 
     def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, *args, **kwargs):
         if not vehicle.isStarted:
