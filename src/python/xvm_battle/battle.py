@@ -328,8 +328,7 @@ class Battle(object):
                                         VIEW_ALIAS.EPIC_BATTLE_PAGE,
                                         VIEW_ALIAS.RANKED_BATTLE_PAGE,
                                         VIEW_ALIAS.BATTLE_ROYALE_PAGE,
-                                        VIEW_ALIAS.STRONGHOLD_BATTLE_PAGE,
-                                        VIEW_ALIAS.WINBACK_BATTLE_PAGE]:
+                                        VIEW_ALIAS.STRONGHOLD_BATTLE_PAGE]:
             self.battle_page = weakref.proxy(view)
 
     def onStartBattle(self):
