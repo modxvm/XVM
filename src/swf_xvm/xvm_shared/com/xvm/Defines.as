@@ -131,7 +131,7 @@ package com.xvm
         public static const XVM_EVENT_ATLAS_LOADED:String = "xvm.atlas_loaded";
 
         // Level in roman numerals
-        public static const ROMAN_LEVEL:Vector.<String> = new <String>[ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" ];
+        public static const ROMAN_LEVEL:Vector.<String> = new <String>[ "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI" ];
         ROMAN_LEVEL.fixed = true;
 
         // constants.VEHICLE_MISC_STATUS
