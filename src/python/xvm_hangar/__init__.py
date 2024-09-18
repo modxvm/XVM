@@ -284,15 +284,15 @@ def LootBoxesEntryPointWidget_getIsActive(base, state):
     return base(state)
 
 
-def Hangar_as_setComp7TournamentBannerVisibleS(base, self, visible):
-    if not config.get('hangar/showComp7TournamentWidget', True):
+def Hangar_as_setEventTournamentBannerVisibleS(base, self, visible):
+    if not config.get('hangar/showEventTournamentWidget', True):
         visible = False
     return base(self, visible)
 
 
 # Destroy widget if hidden
 def TournamentsWidgetComponent_makeInjectView(base, self):
-    if not config.get('hangar/showComp7TournamentWidget', True):
+    if not config.get('hangar/showEventTournamentWidget', True):
         self.destroy()
         return
     return base(self)
@@ -322,15 +322,18 @@ def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
 # Handlers/LobbyHeader
 #
 
+LOBBY_HEADER_BUTTON_TO_CONFIG = {
+    LobbyHeader.BUTTONS.WOT_PLUS: 'showWotPlusButton',
+    LobbyHeader.BUTTONS.PREM: 'showBuyPremiumButton',
+    LobbyHeader.BUTTONS.PREMSHOP: 'showPremiumShopButton'
+}
+
 # hide premium account, shop and WoT Plus buttons
-def LobbyHeader_as_setHeaderButtonsS(base, self, data):
-    if not config.get('hangar/showWotPlusButton', True) and self.BUTTONS.WOT_PLUS in data:
-        data.remove(self.BUTTONS.WOT_PLUS)
-    if not config.get('hangar/showBuyPremiumButton', True) and self.BUTTONS.PREM in data:
-        data.remove(self.BUTTONS.PREM)
-    if not config.get('hangar/showPremiumShopButton', True) and self.BUTTONS.PREMSHOP in data:
-        data.remove(self.BUTTONS.PREMSHOP)
-    return base(self, data)
+def LobbyHeader_as_setHeaderButtonsS(base, self, buttons):
+    for button, key in LOBBY_HEADER_BUTTON_TO_CONFIG.iteritems():
+        if not config.get('hangar/%s' % key, True) and button in buttons:
+            buttons.remove(button)
+    return base(self, buttons)
 
 
 
@@ -394,8 +397,8 @@ def xfw_module_init():
 
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
-            if hasattr(Hangar, 'as_setComp7TournamentBannerVisibleS'):
-                overrideMethod(Hangar, 'as_setComp7TournamentBannerVisibleS')(Hangar_as_setComp7TournamentBannerVisibleS)
+            if hasattr(Hangar, 'as_setEventTournamentBannerVisibleS'):
+                overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)

@@ -43,9 +43,9 @@
     // true - show lootbox widget in hangar.
     // true - показывать виджет лутбоксов в ангаре.
     "showLootboxesWidget": true,
-    // true - show "Onslaught" game mode tournaments widget in hangar.
-    // true - показывать виджет турниров в режиме "Натиск" в ангаре.
-    "showComp7TournamentWidget": true,
+    // true - show event tournaments widget in hangar.
+    // true - показывать виджет ивентовых турниров в ангаре.
+    "showEventTournamentWidget": true,
     // true - show elite levels widget in the hangar.
     // true - показывать виджет уровней элитности в ангаре.
     "showHangarPrestigeWidget": true,
