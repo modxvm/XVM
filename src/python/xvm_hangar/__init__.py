@@ -284,10 +284,10 @@ def LootBoxesEntryPointWidget_getIsActive(base, state):
     return base(state)
 
 
-def Hangar_as_setEventTournamentBannerVisibleS(base, self, visible):
+def Hangar_as_setEventTournamentBannerVisibleS(base, self, alias, visible):
     if not config.get('hangar/showEventTournamentWidget', True):
         visible = False
-    return base(self, visible)
+    return base(self, alias, visible)
 
 
 # Destroy widget if hidden
