@@ -115,11 +115,9 @@ package com.xvm.vehiclemarkers.ui
         }
 
         // HACK: transfer attackerID in the damageType argument
-        // Since WG 1.25.1 - now including damageFlag as third string argument due to damageFlag removal
         CLIENT::WG {
-            override public function updateHealth(newHealth:int, isPlayer:Boolean, damageType:String):void
+            override public function updateHealth(newHealth:int, damageFlag:uint, damageType:String):void
             {
-                var damageFlag:int = damageType.split(",")[2];
                 xvm_updateHealth(newHealth, damageFlag, damageType);
             }
         }
