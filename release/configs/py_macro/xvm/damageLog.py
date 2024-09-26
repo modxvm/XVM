@@ -1049,7 +1049,7 @@ def as_updateSummaryStunValueS(base, self, value):
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
-def Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
+def Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID, *args, **kwargs):
     global on_fire, isImpact
     if not isImpact and self.isPlayerVehicle:
         isImpact = True
