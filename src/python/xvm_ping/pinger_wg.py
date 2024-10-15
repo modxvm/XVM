@@ -3,37 +3,54 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#############################
-# Command
+#
+# Imports
+#
 
-def ping():
-    _ping.ping_request()
+# stdlib
+import logging
 
-#############################
-# Private
-
-import traceback
-
+# BigWorld
 import BigWorld
 import Settings
 from predefined_hosts import g_preDefinedHosts
 from helpers import dependency
-from skeletons.connection_mgr import IConnectionManager
 
+# XFW
 from xfw import *
+
+# XFW ActionScript
 from xfw_actionscript.python import *
 
-from xvm_main.python.logger import *
+# XVM Main
 import xvm_main.python.config as config
 
+# XVM Ping
 from . import XVM_PING_COMMAND
 
-#############################
-# consts
+
+
+#
+# Constants
+#
+
 SMOOTHNESS = 4 # we will take minimal of results (WGPinger might return higher than actual results, but not less than actual)
 DUMMY_ADDRESS = 'localhost' # for distinguishing our requests
 
-#############################
+
+
+#
+# Public
+#
+
+def ping():
+    _ping.ping_request()
+
+
+
+#
+# Classes
+#
 
 class _Ping(object):
     hangarSpace = dependency.descriptor(IHangarSpace)
@@ -55,8 +72,8 @@ class _Ping(object):
                 if self.url_to_serverName: # if url_to_serverName is empty, leave it empty
                     self.url_to_serverName[DUMMY_ADDRESS] = DUMMY_ADDRESS
             BigWorld.WGPinger.ping(self.url_to_serverName.keys())
-        except Exception as ex:
-            err('ping_request() exception: ' + traceback.format_exc())
+        except Exception:
+            logging.getLogger('XVM/Ping').exception('ping_request')
 
     def results_arrived(self, results):
         try:
@@ -81,7 +98,7 @@ class _Ping(object):
                 ping_results['###best_ping###'] = best_ping # will be first in sorting by server, key is replaced by localized "Ping"
             as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, ping_results)
         except Exception as ex:
-            err('results_arrived() exception: ' + traceback.format_exc())
+            logging.getLogger('XVM/Ping').exception('results_arrived')
             as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, {'Error': ex})
 
     def smooth_ping(self, server_name, new_value = 0):
@@ -94,7 +111,7 @@ class _Ping(object):
                     self.ping_history[server_name].pop(0)
             return min(self.ping_history[server_name])
         except:
-            err('smooth_ping() exception: ' + traceback.format_exc())
+            logging.getLogger('XVM/Ping').exception('smooth_ping')
             return new_value
 
 _ping = _Ping()

@@ -3,59 +3,67 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#############################
+#
+# Imports
+#
+
+# stdlib
+import logging
+import threading
+
+# BigWorld
+import BigWorld
+import ResMgr
+from skeletons.gui.shared.utils import IHangarSpace
+from helpers import dependency
+
+# XFW Loader
+import xfw_loader.python as loader
+
+# XFW
+from xfw import *
+
+# XFW ActionScript
+from xfw_actionscript.python import *
+
+# XVM Main
+import xvm_main.python.config as config
+from xvm_main.python.xvm import l10n
+
+
+
+#
 # Public
+#
 
 def ping():
     _ping.ping()
 
+
 def update_config(*args, **kwargs):
     _ping.update_config()
 
-#############################
-# Private
 
-#cpython
-import logging
-import traceback
-import threading
 
-#BigWorld
-import BigWorld
-import ResMgr
-from helpers import dependency
-from skeletons.gui.shared.utils import IHangarSpace
-
-#xfw.loader
-import xfw_loader.python as loader
-
-#xfw.libraries
-from xfw import *
-
-#xfw.actionscript
-from xfw_actionscript.python import *
-
-#xvm.main
-from xvm_main.python.logger import *
-import xvm_main.python.config as config
-from xvm_main.python.xvm import l10n
-
+#
+# Classes
+#
 
 class _Ping(object):
     hangarSpace = dependency.descriptor(IHangarSpace)
 
     def __init__(self):
         self.xfwping = None
-        self.lock = threading.RLock()
         self.thread = None
-        self.resp = None
+        self.lock = threading.RLock()
+        self.response = None
         self.done_config = False
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
 
-        #import XFW.Ping
+        # import XFW.Ping
         self.xfwping = loader.get_mod_module('com.modxvm.xfw.ping')
         if not self.xfwping:
-            logging.warning("[XVM/Ping] [pinger/init]: failed to import XFW.Ping. Ping results will be unavailable.")
+            logging.getLogger('XVM/Ping').warning("[pinger/init]: failed to import XFW.Ping. Ping results will be unavailable.")
 
     def update_config(self):
         self.loginErrorString = l10n(config.get('login/pingServers/errorString', '--'))
@@ -90,7 +98,7 @@ class _Ping(object):
         with self.lock:
             if self.thread is not None:
                 return
-        self.resp = None
+        self.response = None
         # create thread
         self.thread = threading.Thread(target=self._pingAsync)
         self.thread.daemon = False
@@ -101,23 +109,22 @@ class _Ping(object):
     def _checkResult(self):
         with self.lock:
             # debug("checkResult: " + ("no" if self.resp is None else "yes"))
-            if self.resp is None:
+            if self.response is None:
                 BigWorld.callback(0.05, self._checkResult)
                 return
             try:
                 self._respond()
             except Exception:
-                err('_checkResult() exception: ' + traceback.format_exc())
+                logging.getLogger('XVM/Ping').exception('_checkResult')
             finally:
                 self.thread = None
 
     def _respond(self):
         # debug("respond: " + json.dumps(self.resp))
         from . import XVM_PING_COMMAND
-        as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, self.resp)
+        as_xfw_cmd(XVM_PING_COMMAND.AS_PINGDATA, self.response)
 
     # Threaded
-
     def _pingAsync(self):
         try:
             res = []
@@ -132,7 +139,8 @@ class _Ping(object):
 
                 if hostping < 0:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if self.hangarSpace.inited else self.loginErrorString)})
-                    debug('Ping has returned non-zero status: %d' % hostping)
+                    # TODO: fixup DEBUG loglevel for stdlib logging
+                    logging.getLogger('XVM/Ping').info('Ping has returned non-zero status: %d' % hostping)
                     continue
 
                 res.append({'cluster': host, 'time': hostping})
@@ -142,9 +150,9 @@ class _Ping(object):
                 res.insert(0, {'cluster': '###best_ping###', 'time': best_ping}) # will appear first, key is replaced by localized "Ping"
 
         except Exception:
-            err('_pingAsync() exception: ' + traceback.format_exc())
+            logging.getLogger('XVM/Ping').exception('_pingAsync')
 
         with self.lock:
-            self.resp = res
+            self.response = res
 
 _ping = _Ping()
