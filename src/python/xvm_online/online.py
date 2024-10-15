@@ -3,19 +3,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#############################
-# Command
+#
+# Imports
+#
 
-def online():
-    _get_online.get_online()
-
-def update_config(*args, **kwargs):
-    _get_online.update_config()
-
-#############################
-# imports
-
-import traceback
+import logging
 import threading
 
 import BigWorld
@@ -33,23 +25,40 @@ import xvm_main.python.config as config
 import xvm_main.python.xvmapi as xvmapi
 
 
-#############################
 
-class _Get_online(object):
+#
+# Public
+#
+
+def online():
+    _online_stats.get_online()
+
+
+def update_config(*args, **kwargs):
+    _online_stats.update_config()
+
+
+
+#
+# Classes
+#
+
+class _OnlineStats(object):
     hangarSpace = dependency.descriptor(IHangarSpace)
 
     def __init__(self):
         self.loginSection = None
         if getRegion() not in URLS.WG_API_SERVERS:
-            warn('xvm_online: no API available for this server')
+            logging.getLogger('XVM/Online').warning('No API available for this server')
             return
         self.lock = threading.RLock()
         self.thread = None
-        self.resp = None
+        self.response = None
         self.done_config = False
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
         self.region = getRegion().upper()
-        if 'CT' in URLS.WG_API_SERVERS and self.region == 'CT': # CT is uncommented in xfw.constants to check on test server
+        # CT is uncommented in xfw.constants to check on test server
+        if 'CT' in URLS.WG_API_SERVERS and self.region == 'CT':
             self.region = 'RU'
 
     def update_config(self):
@@ -84,7 +93,7 @@ class _Get_online(object):
         with self.lock:
             if self.thread is not None:
                 return
-        self.resp = None
+        self.response = None
         # create thread
         self.thread = threading.Thread(target=self._getOnlineAsync)
         self.thread.daemon = False
@@ -95,19 +104,19 @@ class _Get_online(object):
     def _checkResult(self):
         with self.lock:
             # debug("checkResult: " + ("no" if self.resp is None else "yes"))
-            if self.resp is None:
+            if self.response is None:
                 BigWorld.callback(1, self._checkResult)
                 return
             try:
                 self._respond()
-            except Exception as ex:
-                err('_checkResult() exception: ' + traceback.format_exc())
+            except Exception:
+                logging.getLogger('XVM/Online').exception('_checkResult')
             finally:
                 self.thread = None
 
     def _respond(self):
         from . import XVM_ONLINE_COMMAND
-        as_xfw_cmd(XVM_ONLINE_COMMAND.AS_ONLINEDATA, self.resp)
+        as_xfw_cmd(XVM_ONLINE_COMMAND.AS_ONLINEDATA, self.response)
 
     # Threaded
     def _getOnlineAsync(self):
@@ -139,8 +148,8 @@ class _Get_online(object):
             if (self.hangarSpace.inited and self.hangarShowTitle) or (not self.hangarSpace.inited and self.loginShowTitle):
                 res.insert(0, {'cluster': '###best_online###', 'people_online': best_online})  # will appear first, key is replaced by localized "Online"
         except Exception as ex:
-            err('_getOnlineAsync() exception: ' + traceback.format_exc())
+            logging.getLogger('XVM/Online').exception('_getOnlineAsync')
         with self.lock:
-            self.resp = res
+            self.response = res
 
-_get_online = _Get_online()
+_online_stats = _OnlineStats()
