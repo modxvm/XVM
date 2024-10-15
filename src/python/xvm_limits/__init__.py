@@ -312,7 +312,7 @@ def xfw_module_init():
         tooltips_vehicle.getUnlockPrice = tooltips.getUnlockPrice
 
         __initialized = True
-    
+
 
 def xfw_module_fini():
     global __initialized

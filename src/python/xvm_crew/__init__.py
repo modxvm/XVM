@@ -186,7 +186,7 @@ def xfw_module_fini():
     global __initialized
     if __initialized:
         try:
-            dependency.instance(IAppLoader).onGUISpaceEntered += onGUISpaceEntered
+            dependency.instance(IAppLoader).onGUISpaceEntered -= onGUISpaceEntered
         except dependency.DependencyError:
             pass
         g_currentVehicle.onChanged -= g_currentVehicle_onChanged

@@ -11,7 +11,7 @@ Copyright (c) 2013-2024 XVM Contributors
 from messenger.gui.Scaleform.meta.ContactNoteManageViewMeta import ContactNoteManageViewMeta
 
 # XFW
-from xfw.events import overrideMethod
+from xfw import *
 
 
 

@@ -7,22 +7,25 @@ Copyright (c) 2013-2024 XVM Contributors
 # Imports
 #
 
-import ast
-import compileall
-
+# stdlib
 import sys
 import os
 import glob
 import traceback
+import logging
+import ast
+import compileall
 
-from gui.shared import g_eventBus
-
+# XFW Loader
 from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
 
-from xvm_main.python.consts import XVM, XVM_EVENT
-from xvm_main.python.logger import debug, err, log, trace
+# XVM Main
+from xvm_main.python.consts import *
+from xvm_main.python.logger import *
 
+# XVM PyMacro
 import parser
+
 
 
 #
@@ -46,7 +49,7 @@ class XvmNamespace(object):
         def decorator(func):
             f = _container.get(function_name)
             if f:
-                log('[PY_MACRO] Override {}'.format(function_name))
+                logging.getLogger('XVM/PyMacro').info('Override {}'.format(function_name))
             _container[function_name] = (func, deterministic)
             return func
         return decorator
@@ -81,13 +84,13 @@ def __execute(code, file_name, context):
 
 
 def __load_lib(file_name):
-    debug("[PY_MACRO] __load_lib('{}')".format(
-        file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
+    # TODO: fixup DEBUG loglevel for stdlib logging
+    logging.getLogger('XVM/PyMacro').info("__load_lib('{}')".format(file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
     try:
         code = parser.parse(__read_file(file_name), file_name)
         __execute(code, file_name, {'xvm': XvmNamespace})
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/PyMacro').exception('__load_lib')
         return None
 
 
@@ -142,8 +145,8 @@ def process(arg):
     try:
         (func, deterministic) = __get_function(arg)
         return (func(), deterministic)
-    except Exception as ex:
-        err(traceback.format_exc() + "arg='{}'".format(arg))
+    except Exception:
+        logging.getLogger('XVM/PyMacro').exception("process: arg='{}'".format(arg))
         return (None, True)
 
 
