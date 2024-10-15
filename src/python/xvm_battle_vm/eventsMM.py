@@ -80,19 +80,8 @@ def _VehicleMarkerPlugin_updateVehicleHealth(base, self, vehicleID, handle, newH
     if g_markers.active:
         if not (g_replayCtrl.isPlaying and g_replayCtrl.isTimeWarpInProgress):
             attackerID = aInfo.vehicleID if aInfo else 0
-            isPlayer = attackerID == self._playerVehicleID
             damageFlag = g_markers.getVehicleDamageType(aInfo)
-            if getRegion() != 'RU':
-                self._invokeMarker(handle,
-                                'updateHealth',
-                                newHealth,
-                                isPlayer,
-                                ','.join([ATTACK_REASONS[attackReasonID], str(attackerID), str(damageFlag)]))
-            else:
-                self._invokeMarker(handle,
-                               'updateHealth',
-                               newHealth,
-                               damageFlag,
+            self._invokeMarker(handle, 'updateHealth', newHealth, damageFlag,
                                ','.join([ATTACK_REASONS[attackReasonID], str(attackerID)]))
             return
     base(self, vehicleID, handle, newHealth, aInfo, attackReasonID)

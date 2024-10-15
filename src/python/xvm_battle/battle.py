@@ -110,7 +110,7 @@ def _PlayerAvatar_vehicle_onAppearanceReady(self, vehicle):
 
 
 # Vehicle
-def _Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
+def _Vehicle_onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID, *args, **kwargs):
     # any vehicle health changed
     # update only for player vehicle, others handled on vehicle feedback event
     if self.isPlayerVehicle:

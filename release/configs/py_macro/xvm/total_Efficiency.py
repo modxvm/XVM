@@ -280,7 +280,7 @@ def BattleRibbonsPanel__onRibbonAdded(self, ribbon):
 
 
 @registerEvent(Vehicle, 'onHealthChanged')
-def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID):
+def onHealthChanged(self, newHealth, oldHealth, attackerID, attackReasonID, *args, **kwargs):
     global enemiesHealth, numberHitsDealt, damageReceived, numberDamagesDealt, numberDamagedVehicles, dmgAlly, damageKind, damagesSquad
     if not battle.isBattleTypeSupported:
         return

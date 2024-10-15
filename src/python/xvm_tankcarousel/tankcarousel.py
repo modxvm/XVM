@@ -3,12 +3,15 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
-from functools import partial
-import traceback
+# stdlib
+import functools
+import logging
 
+# BigWorld
 import BigWorld
 import game
 from constants import QUEUE_TYPE
@@ -31,11 +34,14 @@ from frameworks.wulf import WindowLayer
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
+# XFW
 from xfw import *
+
+# XFW ActionScript
 from xfw_actionscript.python import *
 
+# XVM Main
 from xvm_main.python.consts import *
-from xvm_main.python.logger import *
 import xvm_main.python.config as config
 import xvm_main.python.dossier as dossier
 import xvm_main.python.vehinfo as vehinfo
@@ -44,37 +50,35 @@ import xvm_main.python.reserve as reserve
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
 
-
-#####################################################################
-# constants
-
-class XVM_CAROUSEL_COMMAND(object):
-    GET_USED_SLOTS_COUNT = 'xvm_carousel.get_used_slots_count'
-    GET_TOTAL_SLOTS_COUNT = 'xvm_carousel.get_total_slots_count'
-
-class VEHICLE(object):
-    CHECKRESERVE = 'confirmReserveVehicle'
-    UNCHECKRESERVE = 'uncheckReserveVehicle'
+# XVM TankCarousel
+from .consts import XVM_LOBBY_SWF_FILENAME, AS_SYMBOLS, XVM_CAROUSEL_COMMAND, VEHICLE
 
 
-#####################################################################
-# initialization/finalization
 
-def start():
-    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, update_config)
-    update_config()
+#
+# Globals
+#
 
-BigWorld.callback(0, start)
-
-@registerEvent(game, 'fini')
-def fini():
-    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, update_config)
+carousel_config = {}
 
 
-#####################################################################
-# onXfwCommand
+
+#
+# Configuration
+#
+
+def onConfigUpdated(*args, **kwargs):
+    try:
+        global carousel_config
+        carousel_config = config.get('hangar/carousel')
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('onConfigUpdated')
+
+
+
+#
+# Handlers/XFW
+#
 
 # returns: (result, status)
 def onXfwCommand(cmd, *args):
@@ -85,61 +89,125 @@ def onXfwCommand(cmd, *args):
             itemsCache = dependency.instance(IItemsCache)
             freeSlots = itemsCache.items.inventory.getFreeSlots(itemsCache.items.stats.vehicleSlots)
             return (freeSlots + get_used_slots_count(), True)
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('onXfwCommand')
         return (None, True)
     return (None, False)
 
 
-# handlers
+def onSwfLoaded(e):
+    logging.getLogger('XVM/TankCarousel').info('xvm_tankcarousel: onSwfLoaded: {}'.format(e.ctx))
+    if e.ctx.lower() == XVM_LOBBY_SWF_FILENAME:
+        g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
+        wgutils.reloadHangar()
 
-XVM_LOBBY_UI_SWF = 'xvm_lobby_ui.swf'
 
-@overrideMethod(Hangar, 'as_setCarouselS')
+
+#
+# Handlers/CM
+#
+
+def _SimpleVehicleCMHandler__init__(base, self, cmProxy, ctx=None, handlers=None, *args, **kwargs):
+    try:
+        if handlers:
+            handlers.update({
+                VEHICLE.CHECK_RESERVE: VEHICLE.CHECK_RESERVE,
+                VEHICLE.UNCHECK_RESERVE: VEHICLE.UNCHECK_RESERVE})
+        base(self, cmProxy, ctx, handlers)
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('_SimpleVehicleCMHandler__init__')
+
+
+def _VehicleContextMenuHandler_generateOptions(base, self, ctx=None, *args, **kwargs):
+    result = base(self, ctx)
+    try:
+        if reserve.is_reserved(self.vehCD):
+            result.insert(-1, self._makeItem(VEHICLE.UNCHECK_RESERVE, l10n('uncheck_reserve_menu')))
+        else:
+            result.insert(-1, self._makeItem(VEHICLE.CHECK_RESERVE, l10n('check_reserve_menu')))
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('_VehicleContextMenuHandler_generateOptions')
+    return result
+
+
+def confirmReserveVehicle(self):
+    try:
+        dialog = SimpleDialogMeta(l10n('reserve_confirm_title'), l10n('reserve_confirm_message'), I18nConfirmDialogButtons())
+        callback = functools.partial(checkReserveVehicle, self.vehCD)
+        showDialog(dialog, callback)
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('confirmReserveVehicle')
+
+
+def checkReserveVehicle(vehCD, result):
+    try:
+        if result:
+            updateReserve(vehCD, True)
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('checkReserveVehicle')
+
+
+def uncheckReserveVehicle(self):
+    try:
+        updateReserve(self.vehCD, False)
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('uncheckReserveVehicle')
+
+
+def updateReserve(vehCD, isReserved):
+    try:
+        reserve.set_reserved(vehCD, isReserved)
+        as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataArray())
+        app = getLobbyApp()
+        criteria = {POP_UP_CRITERIA.VIEW_ALIAS: VIEW_ALIAS.LOBBY_HANGAR}
+        hangar = app.containerManager.getView(WindowLayer.SUB_VIEW, criteria=criteria)
+        if hangar:
+            alias = hangar._Hangar__currentCarouselAlias
+            tankCarousel = hangar.getComponent(alias)
+            if tankCarousel is not None:
+                tankCarousel.updateVehicles()
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('updateReserve')
+
+
+
+#
+# Handlers/Hangar
+#
+
 def _Hangar_as_setCarouselS(base, self, linkage, alias):
-    #log('xvm_tankcarousel: Hangar::as_setCarouselS, linkage=%s, alias=%s' % (linkage, alias))
+    # logging.getLogger('XVM/TankCarousel').info('xvm_tankcarousel: Hangar::as_setCarouselS, linkage=%s, alias=%s' % (linkage, alias))
 
-    #do not modify tankcarousel in events
+    # Do not modify tankcarousel in events
     isEvent = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.EVENT_BATTLES) if self.prbDispatcher is not None else False
     if isEvent:
         return base(self, linkage, alias)
 
-    #do not modify tankcarousel in battle royale
+    # Do not modify tankcarousel in battle royale
     isRoyale = self.prbDispatcher.getFunctionalState().isQueueSelected(QUEUE_TYPE.BATTLE_ROYALE) if self.prbDispatcher is not None else False
     if isRoyale:
         return base(self, linkage, alias)
 
-    #in other cases, replace UI linkage with XVMs one
-    if swf_loaded_info.swf_loaded_get(XVM_LOBBY_UI_SWF):
+    # In other cases, replace UI linkage with XVMs one
+    if swf_loaded_info.swf_loaded_get(XVM_LOBBY_SWF_FILENAME):
         if linkage == HANGAR_ALIASES.TANK_CAROUSEL_UI:
-            linkage = 'com.xvm.lobby.ui.tankcarousel::UI_TankCarousel'
+            linkage = AS_SYMBOLS.AS_XVM_TANK_CAROUSEL
     else:
-        log('WARNING: as_setCarouselS: ({}) {} is not loaded'.format(linkage, XVM_LOBBY_UI_SWF))
+        logging.getLogger('XVM/TankCarousel').warning('as_setCarouselS: (%s) %s is not loaded', linkage, XVM_LOBBY_SWF_FILENAME)
         g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
         g_eventBus.addListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
 
     return base(self, linkage, alias)
 
 
-def onSwfLoaded(e):
-    log('xvm_tankcarousel: onSwfLoaded: {}'.format(e.ctx))
-    if e.ctx.lower() == XVM_LOBBY_UI_SWF:
-        g_eventBus.removeListener(XFW_EVENT.SWF_LOADED, onSwfLoaded)
-        wgutils.reloadHangar()
-
-carousel_config = {}
-
 # added sorting orders for tanks in carousel
-@overrideClassMethod(CarouselDataProvider, '_vehicleComparisonKey')
 def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
     try:
         global carousel_config
         if not 'sorting_criteria' in carousel_config:
             return base(vehicle)
 
-        comparisonKey = [
-            not vehicle.isEvent,
-            not vehicle.isFavorite]
+        comparisonKey = [not vehicle.isEvent, not vehicle.isFavorite]
 
         for sort_criterion in carousel_config['sorting_criteria']:
             if sort_criterion.find('-') == 0:
@@ -190,33 +258,10 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
 
         return tuple(comparisonKey)
 
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/TankCarousel').exception('_CarouselDataProvider_vehicleComparisonKey')
 
-@overrideMethod(hangar_cm_handlers.SimpleVehicleCMHandler, '__init__')
-def _SimpleVehicleCMHandler__init__(base, self, cmProxy, ctx=None, handlers = None):
-    try:
-        if handlers:
-            handlers.update({
-                VEHICLE.CHECKRESERVE: VEHICLE.CHECKRESERVE,
-                VEHICLE.UNCHECKRESERVE: VEHICLE.UNCHECKRESERVE})
-        base(self, cmProxy, ctx, handlers)
-    except Exception as ex:
-        err(traceback.format_exc())
 
-@overrideMethod(hangar_cm_handlers.VehicleContextMenuHandler, '_generateOptions')
-def _VehicleContextMenuHandler_generateOptions(base, self, ctx = None):
-    result = base(self, ctx)
-    try:
-        if reserve.is_reserved(self.vehCD):
-            result.insert(-1, self._makeItem(VEHICLE.UNCHECKRESERVE, l10n('uncheck_reserve_menu')))
-        else:
-            result.insert(-1, self._makeItem(VEHICLE.CHECKRESERVE, l10n('check_reserve_menu')))
-    except Exception as ex:
-        err(traceback.format_exc())
-    return result
-
-@overrideMethod(HangarCarouselDataProvider, '_getSupplyIndices')
 def _HangarCarouselDataProvider_getSupplyIndices(base, self):
     supplyIndices = base(self)
     if config.get('hangar/carousel/hideBuySlot'):
@@ -230,67 +275,49 @@ def _HangarCarouselDataProvider_getSupplyIndices(base, self):
         self._supplyItems = [x for x in self._supplyItems if not x.get('buyTank', False)]
     return supplyIndices
 
-@overrideMethod(carousel_data_provider, '_isLockedBackground')
 def _carousel_data_provider_isLockedBackground(base, vState, vStateLvl):
     if not config.get('hangar/carousel/enableLockBackground', True):
         return False
     return base(vState, vStateLvl)
 
-# filter visibility
-@registerEvent(TankCarousel, '__init__')
+# Handle filter visibility
 def _TankCarousel__init__(self):
     _usedFilters = tuple(_filter for _filter in self._usedFilters if config.get('hangar/carousel/filters/{}/enabled'.format(_filter), True))
     self._usedFilters = _usedFilters
 
 
-#####################################################################
-# internal
+
+#
+# Helpers
+#
 
 def get_used_slots_count():
     itemsCache = dependency.instance(IItemsCache)
     vehiclesCriteria = REQ_CRITERIA.INVENTORY | ~REQ_CRITERIA.VEHICLE.BATTLE_ROYALE
     return len(itemsCache.items.getVehicles(vehiclesCriteria))
 
-def update_config(*args, **kwargs):
-    try:
-        global carousel_config
-        carousel_config = config.get('hangar/carousel')
-    except Exception as ex:
-        err(traceback.format_exc())
 
-def confirmReserveVehicle(self):
-    try:
-        showDialog(SimpleDialogMeta(l10n('reserve_confirm_title'), l10n('reserve_confirm_message'), I18nConfirmDialogButtons()), partial(checkReserveVehicle, self.vehCD))
-    except Exception as ex:
-        err(traceback.format_exc())
 
-def checkReserveVehicle(vehCD, result):
-    try:
-        if result:
-            updateReserve(vehCD, True)
-    except Exception as ex:
-        err(traceback.format_exc())
+#
+# Initialization
+#
 
-def uncheckReserveVehicle(self):
-    try:
-        updateReserve(self.vehCD, False)
-    except Exception as ex:
-        err(traceback.format_exc())
+def init():
+    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigUpdated)
 
-def updateReserve(vehCD, isReserved):
-    try:
-        reserve.set_reserved(vehCD, isReserved)
-        as_xfw_cmd(XVM_COMMAND.AS_UPDATE_RESERVE, vehinfo.getVehicleInfoDataArray())
-        app = getLobbyApp()
-        hangar = app.containerManager.getView(WindowLayer.SUB_VIEW,
-            criteria={POP_UP_CRITERIA.VIEW_ALIAS: VIEW_ALIAS.LOBBY_HANGAR})
-        #log(str(hangar))
-        if hangar:
-            tankCarousel = hangar.getComponent(hangar._Hangar__currentCarouselAlias)
-            if tankCarousel is not None:
-                tankCarousel.updateVehicles()
-    except Exception as ex:
-        err(traceback.format_exc())
+    overrideMethod(Hangar, 'as_setCarouselS')(_Hangar_as_setCarouselS)
+    overrideClassMethod(CarouselDataProvider, '_vehicleComparisonKey')(_CarouselDataProvider_vehicleComparisonKey)
+    overrideMethod(hangar_cm_handlers.SimpleVehicleCMHandler, '__init__')(_SimpleVehicleCMHandler__init__)
+    overrideMethod(hangar_cm_handlers.VehicleContextMenuHandler, '_generateOptions')(_VehicleContextMenuHandler_generateOptions)
+    overrideMethod(HangarCarouselDataProvider, '_getSupplyIndices')(_HangarCarouselDataProvider_getSupplyIndices)
+    overrideMethod(carousel_data_provider, '_isLockedBackground')(_carousel_data_provider_isLockedBackground)
+    registerEvent(TankCarousel, '__init__')(_TankCarousel__init__)
 
-hangar_cm_handlers.VehicleContextMenuHandler.confirmReserveVehicle = confirmReserveVehicle
-hangar_cm_handlers.VehicleContextMenuHandler.uncheckReserveVehicle = uncheckReserveVehicle
+    hangar_cm_handlers.VehicleContextMenuHandler.confirmReserveVehicle = confirmReserveVehicle
+    hangar_cm_handlers.VehicleContextMenuHandler.uncheckReserveVehicle = uncheckReserveVehicle
+
+
+def fini():
+    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
+    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigUpdated)

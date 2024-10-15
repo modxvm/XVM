@@ -13,7 +13,7 @@ import logging
 # BigWorld
 from PlayerEvents import g_playerEvents
 
-# XFW.Multilaunch
+# XFW Loader
 import xfw_loader.python as loader
 
 # XVM

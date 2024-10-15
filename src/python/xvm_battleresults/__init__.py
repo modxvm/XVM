@@ -144,7 +144,6 @@ def xfw_module_init():
 def xfw_module_fini():
     global __initialized
     if __initialized:
-
         __initialized = False
 
 

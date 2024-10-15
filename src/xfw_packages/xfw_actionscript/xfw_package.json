@@ -10,7 +10,7 @@
     "url_update": "https://modxvm.com/",
 
     "wot_version_min": "WOT_VERSION",
-    "wot_version_exactmatch": true,
+    "wot_version_exactmatch": false,
 
     "features": ["actionscript", "python"],
     "features_provide": ["actionscript"]

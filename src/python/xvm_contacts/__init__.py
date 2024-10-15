@@ -7,7 +7,7 @@ Copyright (c) 2013-2024 XVM Contributors
 # Imports
 #
 
-# Big Worls
+# BigWorld
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
 from gui.shared.tooltips.common import ContactTooltipData
 from frameworks.wulf import WindowLayer
@@ -17,10 +17,11 @@ from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHa
 
 # XFW
 from xfw import *
+
+# XFW ActionScript
 from xfw_actionscript.python import *
 
 # XVM
-from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
 # XVM Contacts
@@ -74,20 +75,19 @@ def ContactConverter_makeVO(base, cls, contact, useBigIcons = False):
 #
 
 # TODO: broken since WoT 1.22.1 preload
-
-#def PlayerContactsCMHandler_getHandlers(base, self):
+# def PlayerContactsCMHandler_getHandlers(base, self):
 #    handlers = base(self)
 #    handlers.update({MENU.XVM_EDIT_CONTACT_DATA: '_XvmEditContactData'})
 #    return handlers
 
 
-#def PlayerContactsCMHandler_generateOptions(base, self, ctx = None):
+# def PlayerContactsCMHandler_generateOptions(base, self, ctx = None):
 #    #log('PlayerContactsCMHandler_generateOptions')
 #    options = base(self, ctx)
 #    options.append(self._makeItem(MENU.XVM_EDIT_CONTACT_DATA, l10n('Edit data'), optInitData={'enabled': contacts.isAvailable()}))
 #    return options
 
-#def _XvmEditContactData(self):
+# def _XvmEditContactData(self):
 #    as_xfw_cmd(COMMANDS.AS_EDIT_CONTACT_DATA, self.userName, self.databaseID)
 
 

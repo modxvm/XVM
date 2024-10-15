@@ -3,8 +3,38 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#####################################################################
-# constants
+#
+# Imports
+#
+
+# stdlib
+import logging
+
+# BigWorld
+import BigWorld
+from gui.shared import g_eventBus
+from predefined_hosts import g_preDefinedHosts
+from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
+from skeletons.connection_mgr import IConnectionManager
+from helpers import dependency
+
+# XFW
+from xfw import *
+
+# XFW ActionScript
+from xfw_actionscript.python import *
+
+# XVM Main
+from xvm_main.python.consts import *
+
+# XVM Ping
+import pinger
+
+
+
+#
+# Constants
+#
 
 class XVM_PING_COMMAND(object):
     PING = "xvm_ping.ping"
@@ -13,47 +43,10 @@ class XVM_PING_COMMAND(object):
     AS_CURRENTSERVER = "xvm_ping.as.currentserver"
 
 
-#####################################################################
-# includes
 
-import traceback
-
-import BigWorld
-import game
-from gui.shared import g_eventBus
-from predefined_hosts import g_preDefinedHosts
-from gui.Scaleform.daapi.view.meta.LobbyHeaderMeta import LobbyHeaderMeta
-from helpers import dependency
-from skeletons.connection_mgr import IConnectionManager
-
-from xfw import *
-from xfw_actionscript.python import *
-
-from xvm_main.python.consts import *
-from xvm_main.python.logger import *
-
-import pinger
-#import pinger_wg as pinger
-
-
-#####################################################################
-# initialization/finalization
-
-def start():
-    g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
-    pinger.update_config()
-
-BigWorld.callback(0, start)
-
-
-@registerEvent(game, 'fini')
-def fini():
-    g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
-    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
-
-#####################################################################
-# onXfwCommand
+#
+# Handlers/XFW
+#
 
 # returns: (result, status)
 def onXfwCommand(cmd, *args):
@@ -61,11 +54,11 @@ def onXfwCommand(cmd, *args):
         if cmd == XVM_PING_COMMAND.PING:
             pinger.ping()
             return (None, True)
-        if cmd == XVM_PING_COMMAND.GETCURRENTSERVER:
+        elif cmd == XVM_PING_COMMAND.GETCURRENTSERVER:
             getCurrentServer()
             return (None, True)
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Ping').exception('onXfwCommand')
         return (None, True)
     return (None, False)
 
@@ -75,18 +68,21 @@ def getCurrentServer(*args, **kwargs):
     as_xfw_cmd(XVM_PING_COMMAND.AS_CURRENTSERVER, connectionMgr.serverUserName if len(connectionMgr.serverUserName) < 13 else connectionMgr.serverUserNameShort)
 
 
-#####################################################################
-# handlers
 
-@registerEvent(LobbyHeaderMeta, 'as_setServerS')
-def LobbyHeaderMeta_as_setServerS(*args, **kwargs):
+#
+# Handlers/LobbyHeader
+#
+
+def LobbyHeader_as_setServerS(*args, **kwargs):
     getCurrentServer()
 
 
-#####################################################################
-# WGPinger (WARNING: bugs with the multiple hosts)
 
-#@overrideMethod(g_preDefinedHosts, 'autoLoginQuery')
+#
+# Handlers/WGPinger
+#
+
+# WGPinger (WARNING: bugs with the multiple hosts)
 def PreDefinedHostList_autoLoginQuery(base, callback):
     # debug('> PreDefinedHostList_autoLoginQuery')
     import pinger_wg
@@ -101,5 +97,42 @@ def PreDefinedHostList_autoLoginQuery(base, callback):
 
 def PreDefinedHostList_onPingPerformed(result):
     # debug('login ping: end')
+    import pinger_wg
     pinger_wg.request_sent = False
     g_preDefinedHosts._PreDefinedHostList__onPingPerformed(result)
+
+
+
+#
+# XFW API
+#
+
+__initialized = False
+
+def xfw_module_init():
+    global __initialized
+    if not __initialized:
+        pinger.update_config()
+
+        registerEvent(LobbyHeader, 'as_setServerS')(LobbyHeader_as_setServerS)
+        # Read the comment for handler
+        # overrideMethod(g_preDefinedHosts, 'autoLoginQuery')(PreDefinedHostList_autoLoginQuery)
+
+        g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
+        g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
+
+        __initialized = True
+
+
+def xfw_module_fini():
+    global __initialized
+    if __initialized:
+        g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
+        g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
+
+        __initialized = False
+
+
+def xfw_is_module_loaded():
+    global __initialized
+    return __initialized

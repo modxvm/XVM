@@ -109,12 +109,7 @@ package com.xvm.battle.winback.fullStats
             DEFAULT_FRAGS_WIDTH = _fragsTF.width;
             DEFAULT_VEHICLE_LEVEL_X = _vehicleLevelIcon.x;
             DEFAULT_VEHICLE_TYPE_ICON_X = _vehicleTypeIcon.x;
-            CLIENT::WG {
-                DEFAULT_VEHICLE_ICON_X = vehicleIcon.x;
-            }
-            CLIENT::LESTA {
-                DEFAULT_VEHICLE_ICON_X = _vehicleIcon.x;
-            }
+            DEFAULT_VEHICLE_ICON_X = _vehicleIcon.x;
 
             CLIENT::WG {
                 _prestigeLevel = table.prestigeLevelCollection[index];
@@ -250,14 +245,8 @@ package com.xvm.battle.winback.fullStats
             {
                 var schemeName:String = getSchemeNameForVehicle(currentPlayerState);
                 var colorScheme:IColorScheme = App.colorSchemeMgr.getScheme(schemeName);
-                CLIENT::WG {
-                    vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
-                    vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
-                }
-                CLIENT::LESTA {
-                    _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
-                    _vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
-                }
+                _vehicleIcon.transform.colorTransform = colorScheme.colorTransform;
+                _vehicleIcon.alpha *= cfg.vehicleIconAlpha / 100.0;
             }
             if (isInvalid(FullStatsValidationType.VEHICLE_NAME))
             {
@@ -328,14 +317,9 @@ package com.xvm.battle.winback.fullStats
                     atlasName = ATLAS_CONSTANTS.BATTLE_ATLAS;
                 }
 
-                CLIENT::WG {
-                    vehicleIcon.graphics.clear();
-                    App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
-                }
-                CLIENT::LESTA {
-                    _vehicleIcon.graphics.clear();
-                    App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, _vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
-                }
+                _vehicleIcon.graphics.clear();
+                App.atlasMgr.drawGraphics(atlasName, _vehicleIconName, _vehicleIcon.graphics, "unknown" /*BattleLoadingHelper.VEHICLE_TYPE_UNKNOWN*/);
+
             }
             if (updateVehicleLevelIcon)
             {
@@ -461,12 +445,7 @@ package com.xvm.battle.winback.fullStats
 
             if (!_isLeftPanel)
             {
-                CLIENT::WG {
-                    vehicleIcon.scaleX = Config.config.battle.mirroredVehicleIcons ? 1 : -1;
-                }
-                CLIENT::LESTA {
-                    _vehicleIcon.scaleX = Config.config.battle.mirroredVehicleIcons ? 1 : -1;
-                }
+                _vehicleIcon.scaleX = Config.config.battle.mirroredVehicleIcons ? 1 : -1;
             }
 
             createExtraFields();
@@ -575,22 +554,12 @@ package com.xvm.battle.winback.fullStats
         {
             if (_isLeftPanel)
             {
-                CLIENT::WG {
-                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
-                }
-                CLIENT::LESTA {
-                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
-                }
+                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X - PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X + PRESTIGE_LEVEL_OFFSET_X + cfg.vehicleIconOffsetXLeft;
             }
             else
             {
-                CLIENT::WG {
-                    vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight - (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
-                }
-                CLIENT::LESTA {
-                    _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight - (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
-                }
+                _vehicleIcon.x = DEFAULT_VEHICLE_ICON_X + PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight - (Config.config.battle.mirroredVehicleIcons ? 0 : ICONS_AREA_WIDTH);
                 _vehicleTypeIcon.x = DEFAULT_VEHICLE_TYPE_ICON_X - PRESTIGE_LEVEL_OFFSET_X - cfg.vehicleIconOffsetXRight;
             }
             alignVehicleLevelIcon();
@@ -663,14 +632,8 @@ package com.xvm.battle.winback.fullStats
                 var icon_x:Number;
                 var icon_y:Number;
 
-                CLIENT::WG {
-                    icon_x = vehicleIcon.x;
-                    icon_y = vehicleIcon.y;
-                }
-                CLIENT::LESTA {
-                    icon_x = _vehicleIcon.x;
-                    icon_y = _vehicleIcon.y;
-                }
+                icon_x = _vehicleIcon.x;
+                icon_y = _vehicleIcon.y;
 
                 if (_isLeftPanel)
                 {

@@ -3,42 +3,46 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
-import traceback
+# stdlib
+import logging
 from math import degrees, pi
 
-from constants import SHELL_TYPES, ITEM_DEFS_PATH
-import game
+# BigWorld/WoT
+import BigWorld
+import ResMgr
+import nations
 import gui.shared.tooltips.vehicle as tooltips_vehicle
 from gun_rotation_shared import calcPitchLimitsFromDesc
-from helpers import i18n
 from gui import g_htmlTemplates
 from gui.shared import g_eventBus
 from gui.shared.formatters import text_styles
 from gui.shared.tooltips import formatters
 from gui.shared.gui_items import GUI_ITEM_TYPE
-from gui.Scaleform.locale.MENU import MENU
 from gui.shared.items_parameters import formatters as param_formatter
 from gui.shared.items_parameters.formatters import measureUnitsForParameter, MEASURE_UNITS
 from gui.shared.items_parameters.params_helper import getParameters as getParameters_helper
-from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
 from gui.shared.tooltips import getUnlockPrice
+from gui.shared.utils.requesters.ItemsRequester import ItemsRequester
+from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
+from gui.Scaleform.locale.MENU import MENU
 from gui.Scaleform.locale.TOOLTIPS import TOOLTIPS
 from gui.Scaleform.locale.STORAGE import STORAGE
 from gui.Scaleform.locale.RES_ICONS import RES_ICONS
-from gui.Scaleform.genConsts.TOOLTIPS_CONSTANTS import TOOLTIPS_CONSTANTS
 from gui.Scaleform.framework.tooltip_mgr import ToolTip
 from gui.shared.tooltips.module import ModuleBlockTooltipData
 from gui.impl.backport.backport_system_locale import getNiceNumberFormat
-import ResMgr
-import nations
-import BigWorld
 from items import _xml
+from helpers import i18n
+from constants import SHELL_TYPES, ITEM_DEFS_PATH
 
+# XFW
 from xfw import *
 
+# XVM Main
 import xvm_main.python.config as config
 from xvm_main.python.consts import *
 from xvm_main.python.logger import *
@@ -46,41 +50,69 @@ from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
 
+# BigWorld per-realm imports
 if getRegion() != 'RU':
     from gui.shared.items_parameters.params_helper import similarCrewComparator as crewComparator_helper
 else:
     from gui.shared.items_parameters.params_helper import idealCrewComparator as crewComparator_helper
 
-#####################################################################
-# globals
 
+
+#
+# Globals
+#
+
+shellData = None
 carousel_tooltips_cache = {}
 styles_templates = {}
 toolTipDelayIntervalId = None
 weightTooHeavy = False
 p_replacement = None # will be something like <font size... color...>
 
+
+
+#
+# Constants
+#
+
 class XVM_TOOLTIPS(object):
     HIDE = 'xvm_hide_tooltip'
 
-#####################################################################
-# initialization/finalization
-
-def start():
-    g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
-
-BigWorld.callback(0, start)
 
 
-@registerEvent(game, 'fini')
-def fini():
-    g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
+#
+# Classes
+#
+
+class ShellData(object):
+
+    def __init__(self):
+        self.shells = {}
+        self.shell()
+        self.data = {'costShell': {}}
+
+    def shell(self):
+        xmlPath = ''
+        for nation in nations.NAMES:
+            xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
+            xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
+            id_xmlCtx_s = ((_xml.readInt(xmlCtx, s, 'id', 0, 65535), xmlCtx, s) for xmlCtx, s in xmlCtx_s)
+            self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if s.readBool('improved', False)]
+        ResMgr.purge(xmlPath, True)
+
+    def typeShell(self, gun):
+        self.data['costShell'] = {}
+        for shell in gun.shots:
+            shell_id = shell.shell.id
+            self.data['costShell'][shell.shell.compactDescr] = 'gold' if shell_id[1] in self.shells[nations.NAMES[shell_id[0]]] else 'silver'
+        return self.data['costShell']
 
 
-#####################################################################
-# handlers
 
-@overrideMethod(i18n, 'makeString')
+#
+# Handlers
+#
+
 def _i18n_makeString(base, key, *args, **kwargs):
     if config.get('tooltips/logLocalization', False):
         log('l10n key: ' + key + ', value: ' + base(key, *args, **kwargs))
@@ -89,33 +121,25 @@ def _i18n_makeString(base, key, *args, **kwargs):
     return base(key, *args, **kwargs)
 
 # tooltip delay to resolve performance issue
-@overrideMethod(ToolTip, 'onCreateComplexTooltip')
 def _ToolTip_onCreateComplexTooltip(base, self, tooltipId, stateType):
     if tooltipId is None or XVM_TOOLTIPS.HIDE not in tooltipId:
         _createTooltip(self, lambda: _onCreateComplexTooltip_callback(base, self, tooltipId, stateType))
 
 # tooltip delay to resolve performance issue
 # suppress carousel tooltips
-@overrideMethod(ToolTip, 'onCreateTypedTooltip')
 def _ToolTip_onCreateTypedTooltip(base, self, type, *args):
-    # log('ToolTip_onCreateTypedTooltip')
-    try:
-        if type == TOOLTIPS_CONSTANTS.CAROUSEL_VEHICLE and config.get('hangar/carousel/suppressCarouselTooltips'):
-            return
-    except Exception as ex:
-        err(traceback.format_exc())
+    if type == TOOLTIPS_CONSTANTS.CAROUSEL_VEHICLE and config.get('hangar/carousel/suppressCarouselTooltips'):
+        return
 
     if isinstance(args[0], basestring) and XVM_TOOLTIPS.HIDE in args[0]:
         return
     _createTooltip(self, lambda: _onCreateTypedTooltip_callback(base, self, type, *args))
 
-@overrideMethod(ToolTip, 'onHideTooltip')
 def _ToolTip_onHideTooltip(base, self, tooltipId):
     self.xvm_hide()
     base(self, tooltipId)
 
-@registerEvent(ToolTip, 'hide', True)
-def _ToolTip_onHideTooltip(self):
+def _ToolTip_hide(self):
     self.xvm_hide()
 
 # adds delay for tooltip appearance
@@ -126,60 +150,54 @@ def _createTooltip(self, func):
         tooltipDelay = config.get('tooltips/tooltipsDelay', 0.4)
         toolTipDelayIntervalId = BigWorld.callback(tooltipDelay, func)
     except Exception as ex:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Tooltips').exception('_createTooltip')
 
 def _onCreateTypedTooltip_callback(base, self, type, *args):
-    # log('ToolTip_onCreateTypedTooltip_callback')
     try:
         global toolTipDelayIntervalId
         toolTipDelayIntervalId = None
         base(self, type, *args)
     except Exception as ex:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Tooltips').exception('_onCreateTypedTooltip_callback')
 
 def _onCreateComplexTooltip_callback(base, self, tooltipId, stateType):
-    # log('_onCreateComplexTooltip_callback')
     try:
         global toolTipDelayIntervalId
         toolTipDelayIntervalId = None
         base(self, tooltipId, stateType)
     except Exception as ex:
-        err(traceback.format_exc())
+        logging.getLogger('XVM/Tooltips').exception('_onCreateComplexTooltip_callback')
 
 def _ToolTip_xvm_hide(self):
-    # log('_ToolTip_xvm_hide')
     global toolTipDelayIntervalId
     if toolTipDelayIntervalId is not None:
         BigWorld.cancelCallback(toolTipDelayIntervalId)
         toolTipDelayIntervalId = None
 
-ToolTip.xvm_hide = _ToolTip_xvm_hide
-
 
 #############################
 # carousel events
 
-@overrideMethod(tooltips_vehicle.VehicleInfoTooltipData, '_packBlocks')
 def VehicleInfoTooltipData_packBlocks(base, self, *args, **kwargs):
     result = base(self, *args, **kwargs)
     result = [item for item in result if item.get('data', {}).get('blocksData')]
     return result
 
-@overrideMethod(tooltips_vehicle.SimplifiedStatsBlockConstructor, 'construct')
+
 def SimplifiedStatsBlockConstructor_construct(base, self):
     if config.get('tooltips/hideSimplifiedVehParams'):
         return []
     else:
         return base(self)
 
-@overrideMethod(tooltips_vehicle.CrystalBlockConstructor, 'construct')
+
 def CrystalBlockConstructor_construct(base, self):
     if config.get('tooltips/hideCrystalBlock'):
         return [], None
     else:
         return base(self)
 
-@overrideMethod(tooltips_vehicle.AdditionalStatsBlockConstructor, 'construct')
+
 def AdditionalStatsBlockConstructor_construct(base, self):
     if config.get('tooltips/hideBottomText'):
         return []
@@ -207,63 +225,12 @@ def text_styles_getStyle(base, style, ctx = None):
                 return styles_templates[style]['text'] % ctx
             else:
                 return base(style, ctx)
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Tooltips').exception('text_styles_getStyle')
         return base(style, ctx)
 
-def tooltip_add_param(self, result, param0, param1):
-    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=107, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
-
-def tooltip_with_units(value, units):
-    return '%s %s' % (value, text_styles.standard(units))
-
-def getParameterValue(paramName):
-    return text_styles.main(i18n.makeString(MENU.tank_params(paramName))) + text_styles.standard(measureUnitsForParameter(paramName))
-
-def formatNumber(value):
-    if value > 99:
-        value = round(value)
-    elif value > 9:
-        value = round(value, 1)
-    else:
-        value = round(value, 2)
-    return str(getNiceNumberFormat(value))
-
-# replace <h>text1 <p>text2</p></h> with: text1 text_styles.standard(text2)
-def replace_p(text):
-    global p_replacement
-    if not p_replacement:
-        p_replacement = text_styles.standard('').split('>', 1)[0] + '>'
-    return text.replace('<p>', p_replacement).replace('</p>', '</font>').replace('<h>', '').replace('</h>', '')
-
-class ShellData(object):
-
-    def __init__(self):
-        self.shells = {}
-        self.shell()
-        self.data = {'costShell': {}}
-
-    def shell(self):
-        xmlPath = ''
-        for nation in nations.NAMES:
-            xmlPath = '%s%s%s%s' % (ITEM_DEFS_PATH, 'vehicles/', nation, '/components/shells.xml')
-            xmlCtx_s = (((None, '{}/{}'.format(xmlPath, n)), s) for n, s in ResMgr.openSection(xmlPath).items() if (n != 'icons') and (n != 'xmlns:xmlref'))
-            id_xmlCtx_s = ((_xml.readInt(xmlCtx, s, 'id', 0, 65535), xmlCtx, s) for xmlCtx, s in xmlCtx_s)
-            self.shells[nation] = [i for i, xmlCtx, s in id_xmlCtx_s if s.readBool('improved', False)]
-        ResMgr.purge(xmlPath, True)
-
-    def typeShell(self, gun):
-        self.data['costShell'] = {}
-        for shell in gun.shots:
-            shell_id = shell.shell.id
-            self.data['costShell'][shell.shell.compactDescr] = 'gold' if shell_id[1] in self.shells[nations.NAMES[shell_id[0]]] else 'silver'
-        return self.data['costShell']
-
-
-shellData = ShellData()
 
 # add to hangar tooltips display the missing experience to unlock the vehicle
-@overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')
 def StatusBlockConstructor_construct(base, self):
     block = base(self)
     if block and config.get('tooltips/showXpToUnlockVeh'):
@@ -279,14 +246,13 @@ def StatusBlockConstructor_construct(base, self):
                     template = "<font face='$TitleFont' size='14'><font color='#ff2717'>{}</font> {}</font> {}"
                     block[0]['data']['text'] = template.format(i18n.makeString(STORAGE.BLUEPRINTS_CARD_CONVERTREQUIRED), need, icon)
             return block
-        except Exception as ex:
-            err(traceback.format_exc())
+        except Exception:
+            logging.getLogger('XVM/Tooltips').exception('StatusBlockConstructor_construct')
             return block
     else:
         return block
 
 # overriding tooltips for tanks in hangar, configuration in tooltips.xc
-@overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')
 def CommonStatsBlockConstructor_construct(base, self):
     try:
         self.leftPadding = -15
@@ -525,12 +491,11 @@ def CommonStatsBlockConstructor_construct(base, self):
             result = result[:29]
         carousel_tooltips_cache[vehicle.intCD] = result
         return result
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Tooltips').exception('CommonStatsBlockConstructor_construct')
         return base(self)
 
-# # add '#menu:moduleInfo/params/weightTooHeavy' (red 'weight (kg)')
-# @overrideMethod(i18n, 'makeString')
+# add '#menu:moduleInfo/params/weightTooHeavy' (red 'weight (kg)')
 # def makeString(base, key, *args, **kwargs):
 #     if key == '#menu:moduleInfo/params/weightTooHeavy':
 #         global weightTooHeavy
@@ -539,10 +504,13 @@ def CommonStatsBlockConstructor_construct(base, self):
 #         return weightTooHeavy
 #     return base(key, *args, **kwargs)
 
-##########################################################################
-# paint 'weight (kg)' with red if module does not fit due to overweight
 
-@overrideMethod(param_formatter, 'formatModuleParamName')
+
+#
+# Handlers/Overweight
+#
+
+# paint 'weight (kg)' with red if module does not fit due to overweight
 def formatters_formatModuleParamName(base, paramName, vDescr=None):
     builder = text_styles.builder()
     if weightTooHeavy and paramName == 'weight':
@@ -551,7 +519,7 @@ def formatters_formatModuleParamName(base, paramName, vDescr=None):
         return builder.render()
     return base(paramName, vDescr)
 
-@overrideMethod(ModuleBlockTooltipData, '_packBlocks')
+
 def ModuleBlockTooltipData_packBlocks(base, self, *args, **kwargs):
     try:
         global weightTooHeavy
@@ -562,13 +530,33 @@ def ModuleBlockTooltipData_packBlocks(base, self, *args, **kwargs):
         if vehicle is not None:
             isFit, reason = module.mayInstall(vehicle, slotIdx)
             weightTooHeavy = not isFit and reason == 'too heavy'
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Tooltips').exception('ModuleBlockTooltipData_packBlocks')
     return base(self, *args, **kwargs)
 
 
-#####################################################################
-# Utility functions
+def ItemsRequester_invalidateItems(self, itemTypeID, uniqueIDs):
+    try:
+        if itemTypeID == GUI_ITEM_TYPE.VEHICLE:
+            for veh_id in uniqueIDs:
+                carousel_tooltips_cache[veh_id] = {}
+    except Exception:
+        logging.getLogger('XVM/Tooltips').exception('ItemsRequester_invalidateItems')
+        carousel_tooltips_cache.clear()
+
+
+def ItemsRequester_clear(*args, **kwargs):
+    tooltips_clear_cache(*args, **kwargs)
+
+
+def tooltips_clear_cache(*args, **kwargs):
+    carousel_tooltips_cache.clear()
+    styles_templates.clear()
+
+
+#
+# Helpers
+#
 
 def h1_pad(text):
     return '<h1>%s</h1>' % text
@@ -580,22 +568,76 @@ def red_pad(text):
     return "<font color='#FF0000'>%s</font>" % text
 
 
-@registerEvent(ItemsRequester, '_invalidateItems')
-def ItemsRequester_invalidateItems(self, itemTypeID, uniqueIDs):
-    try:
-        if itemTypeID == GUI_ITEM_TYPE.VEHICLE:
-            for veh_id in uniqueIDs:
-                carousel_tooltips_cache[veh_id] = {}
-    except Exception as ex:
-        err(traceback.format_exc())
-        carousel_tooltips_cache.clear()
+def tooltip_add_param(self, result, param0, param1):
+    result.append(formatters.packTextParameterBlockData(name=text_styles.main(param0), value=text_styles.stats(param1), valueWidth=107, padding=formatters.packPadding(left=self.leftPadding, right=self.rightPadding)))
+
+def tooltip_with_units(value, units):
+    return '%s %s' % (value, text_styles.standard(units))
+
+def getParameterValue(paramName):
+    return text_styles.main(i18n.makeString(MENU.tank_params(paramName))) + text_styles.standard(measureUnitsForParameter(paramName))
+
+def formatNumber(value):
+    if value > 99:
+        value = round(value)
+    elif value > 9:
+        value = round(value, 1)
+    else:
+        value = round(value, 2)
+    return str(getNiceNumberFormat(value))
+
+# replace <h>text1 <p>text2</p></h> with: text1 text_styles.standard(text2)
+def replace_p(text):
+    global p_replacement
+    if not p_replacement:
+        p_replacement = text_styles.standard('').split('>', 1)[0] + '>'
+    return text.replace('<p>', p_replacement).replace('</p>', '</font>').replace('<h>', '').replace('</h>', '')
 
 
-@registerEvent(ItemsRequester, 'clear')
-def ItemsRequester_clear(*args, **kwargs):
-    tooltips_clear_cache(*args, **kwargs)
+
+#
+# XFW API
+#
+
+__initialized = False
+
+def xfw_module_init():
+    global __initialized, shellData
+    if not __initialized:
+        shellData = ShellData()
+        ToolTip.xvm_hide = _ToolTip_xvm_hide
+
+        overrideMethod(i18n, 'makeString')(_i18n_makeString)
+        overrideMethod(ToolTip, 'onCreateComplexTooltip')(_ToolTip_onCreateComplexTooltip)
+        overrideMethod(ToolTip, 'onCreateTypedTooltip')(_ToolTip_onCreateTypedTooltip)
+        overrideMethod(ToolTip, 'onHideTooltip')(_ToolTip_onHideTooltip)
+        registerEvent(ToolTip, 'hide', prepend=True)(_ToolTip_hide)
+        overrideMethod(tooltips_vehicle.VehicleInfoTooltipData, '_packBlocks')(VehicleInfoTooltipData_packBlocks)
+        overrideMethod(tooltips_vehicle.SimplifiedStatsBlockConstructor, 'construct')(SimplifiedStatsBlockConstructor_construct)
+        overrideMethod(tooltips_vehicle.CrystalBlockConstructor, 'construct')(CrystalBlockConstructor_construct)
+        overrideMethod(tooltips_vehicle.AdditionalStatsBlockConstructor, 'construct')(AdditionalStatsBlockConstructor_construct)
+        overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')(StatusBlockConstructor_construct)
+        overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')(CommonStatsBlockConstructor_construct)
+        # overrideMethod(i18n, 'makeString')(makeString)
+        overrideMethod(param_formatter, 'formatModuleParamName')(formatters_formatModuleParamName)
+        overrideMethod(ModuleBlockTooltipData, '_packBlocks')(ModuleBlockTooltipData_packBlocks)
+        registerEvent(ItemsRequester, '_invalidateItems')(ItemsRequester_invalidateItems)
+        registerEvent(ItemsRequester, 'clear')(ItemsRequester_clear)
+
+        g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
+
+        __initialized = True
 
 
-def tooltips_clear_cache(*args, **kwargs):
-    carousel_tooltips_cache.clear()
-    styles_templates.clear()
+def xfw_module_fini():
+    global __initialized, shellData
+    if __initialized:
+        shellData = None
+        g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
+
+        __initialized = False
+
+
+def xfw_is_module_loaded():
+    global __initialized
+    return __initialized

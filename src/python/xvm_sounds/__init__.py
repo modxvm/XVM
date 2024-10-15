@@ -123,7 +123,8 @@ def xfw_module_fini():
         gunReloaded.fini()
         remoteCommunication.fini()
         sixthSense.fini()
-        __initialized = True
+
+        __initialized = False
 
 
 def xfw_is_module_loaded():
