@@ -3,28 +3,35 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2024 XVM Contributors
 """
 
-#####################################################################
-# imports
+#
+# Imports
+#
 
-import logging
 import os
 import threading
-import traceback
-
-import BigWorld
-import game
+import logging
 from hashlib import sha1
+
+# BigWorld
+import BigWorld
 from gui.shared import g_eventBus
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.shared import EVENT_BUS_SCOPE
 
+# XFW
 from xfw import *
+
+# XFW Loader
 from xfw_loader.python import XFWLOADER_PATH_TO_ROOT
+
+# XVM Main
 from xvm_main.python.logger import *
 
 
-#####################################################################
-# globals
+
+#
+# Globals
+#
 
 integrity_result = None
 lock = threading.RLock()
@@ -35,33 +42,20 @@ check_xvm_dirs = [
 ]
 
 
-#####################################################################
-# handlers
 
-def start():
-    g_eventBus.addListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
-
-BigWorld.callback(0, start)
-
-@registerEvent(game, 'fini')
-def fini():
-    remove_listener()
-
-def remove_listener():
-    g_eventBus.removeListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
-
-#####################################################################
-# handlers
+#
+# Handlers
+#
 
 def checkIntegrity(*args, **kwargs):
     try:
-        remove_listener() # don't call the check again
+        g_eventBus.removeListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
         thread = threading.Thread(target=_checkIntegrityAsync)
         thread.daemon = False
         thread.start()
         BigWorld.callback(0.05, _checkResult)
-    except Exception as ex:
-        err('checkIntegrity() exception: ' + traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Integrity').exception('checkIntegrity')
 
 
 def _checkResult(*args, **kwargs):
@@ -69,7 +63,7 @@ def _checkResult(*args, **kwargs):
         if integrity_result is None:
             BigWorld.callback(0.05, _checkResult)
             return
-        log('xvm_integrity results: %s' % ('incorrect!\n\t' + '\n\t'.join(integrity_result) if integrity_result else 'correct!'))
+        logging.getLogger('XVM/Integrity').info('Integrity check result: %s', 'incorrect!\n\t' + '\n\t'.join(integrity_result) if integrity_result else 'correct!')
 
 
 def _checkIntegrityAsync(*args, **kwargs):
@@ -80,7 +74,7 @@ def _checkIntegrityAsync(*args, **kwargs):
             for key in HASH_DATA.keys():
                 HASH_DATA[XFWLOADER_PATH_TO_ROOT + key] = HASH_DATA.pop(key)
         except Exception:
-            logging.exception('[XVM/Integrity]: _checkIntegrityAsync')
+            logging.getLogger('XVM/Integrity').exception('_checkIntegrityAsync')
             with lock:
                 integrity_result = ['hash_table.py is missing/corrupt']
             return
@@ -108,6 +102,35 @@ def _checkIntegrityAsync(*args, **kwargs):
         with lock:
             integrity_result = result
     except Exception as ex:
-        err('_checkIntegrityAsync() exception: ' + traceback.format_exc())
+        logging.getLogger('XVM/Integrity').exception('_checkIntegrityAsync')
         with lock:
             integrity_result = ['Error']
+
+
+
+#
+# XFW API
+#
+
+__initialized = False
+
+def xfw_module_init():
+    global __initialized
+    if not __initialized:
+        g_eventBus.addListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
+
+        __initialized = True
+
+
+def xfw_module_fini():
+    global __initialized
+    if __initialized:
+        g_eventBus.removeListener(VIEW_ALIAS.LOBBY_HANGAR, checkIntegrity, EVENT_BUS_SCOPE.LOBBY)
+
+        __initialized = False
+
+
+def xfw_is_module_loaded():
+    global __initialized
+    return __initialized
+
