@@ -36,6 +36,8 @@ from skeletons.gui.shared import IItemsCache
 
 # XFW
 from xfw import *
+
+# XFW ActionScript
 from xfw_actionscript.python import *
 
 # XVM Main
