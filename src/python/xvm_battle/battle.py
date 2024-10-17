@@ -78,9 +78,10 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
+    101, # constants.ARENA_GUI_TYPE.HALLOWEEN (WG 1.25 PvE event)
+    102, # constants.ARENA_GUI_TYPE.HALLOWEEN_DEFENCE (WG 1.25 PvE event)
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
-    400, # constants.ARENA_GUI_TYPE.RACES (Lesta 1.28.0.0)
 ]
 
 
