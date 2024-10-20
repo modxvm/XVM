@@ -39,17 +39,35 @@ package com.xvm.lobby
             return "[XVM:LOBBY]";
         }
 
-        private static const VIEWS:Object =
-        {
-            "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
-            "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
-            "hangar": [ HangarXvmView ],
-            //"battleResults": [ BattleResultsXvmView ],
-            //"ContactsPopover": [ ContactsXvmView ],
-            //"profile": [ ProfileXvmView ],
-            //"profileWindow": [ ProfileXvmView ],
-            "techtree": [ TechTreeXvmView ],
-            "research": [ ResearchXvmView ]
+        CLIENT::WG {
+            private static const VIEWS:Object =
+            {
+                "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
+                "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
+                "hangar": [ HangarXvmView ],
+                //"battleResults": [ BattleResultsXvmView ],
+                //"ContactsPopover": [ ContactsXvmView ],
+                //"profile": [ ProfileXvmView ],
+                //"profileWindow": [ ProfileXvmView ],
+                "techtree": [ TechTreeXvmView ],
+                "research": [ ResearchXvmView ]
+            }
+        }
+
+        CLIENT::LESTA {
+            private static const VIEWS:Object =
+            {
+                "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
+                "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
+                "hangar": [ HangarXvmView ],
+                //"battleResults": [ BattleResultsXvmView ],
+                //"ContactsPopover": [ ContactsXvmView ],
+                //"profile": [ ProfileXvmView ],
+                //"profileWindow": [ ProfileXvmView ],
+                // Obsolete since MT 1.30
+                // "techtree": [ TechTreeXvmView ],
+                "research": [ ResearchXvmView ]
+            }
         }
 
         public override function get views():Object
