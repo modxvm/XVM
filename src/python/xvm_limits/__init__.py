@@ -19,8 +19,6 @@ from gui.impl.dialogs.sub_views.top_right.money_balance import MoneyBalance
 from gui.impl.lobby.dialogs.full_screen_dialog_view import FullScreenDialogView
 from gui.shared import g_eventBus, tooltips
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
-from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
-from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
 from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
 from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView as CustomizationMainView
 from gui.Scaleform.genConsts.CURRENCIES_CONSTANTS import CURRENCIES_CONSTANTS
@@ -37,6 +35,14 @@ from xfw import *
 from xvm_main.python.consts import XVM_EVENT
 from xvm_main.python.logger import *
 import xvm_main.python.config as config
+
+# Per-realm
+if getRegion() != 'RU':
+    from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
+    from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
+else:
+    from gui.impl.lobby.techtree.vehicle_tech_tree import VehicleTechTree
+    from gui.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 
 
 
@@ -91,7 +97,7 @@ def handlersInvalidate(function, *handlers):
             if handler: # is active
                 eval('handler.%s' % function)
     except Exception:
-        logging.exception('xfw_limits/handlersInvalidate')
+        logging.getLogger('XVM/Limits').exception('handlersInvalidate')
 
 
 def onXfwCommand(cmd, *args):
@@ -112,7 +118,7 @@ def onXfwCommand(cmd, *args):
             crystal_enable = not args[0]
             return (None, True)
     except Exception:
-        logging.exception('xfw_limits/onXfwCommand')
+        logging.getLogger('XVM/Limits').exception('onXfwCommand')
         return (None, True)
     return (None, False)
 
@@ -221,6 +227,17 @@ def TechTree_dispose(base, self, *args, **kwargs):
     base(self, *args, **kwargs)
 
 
+def VehicleTechTree_initialize(base, self, *args, **kwargs):
+    global TechTree_handler
+    base(self, *args, **kwargs)
+    TechTree_handler = self._VehicleTechTree__invalidator
+
+
+def VehicleTechTree_finalize(base, self, *args, **kwargs):
+    global TechTree_handler
+    TechTree_handler = None
+    base(self, *args, **kwargs)
+
 
 #
 # Handlers/Research
@@ -296,8 +313,12 @@ def xfw_module_init():
 
         overrideMethod(FullScreenDialogView, '_FullScreenDialogView__setStats')(FullScreenDialogView__setStats)
 
-        overrideMethod(TechTree, '_populate')(TechTree_populate)
-        overrideMethod(TechTree, '_dispose')(TechTree_dispose)
+        if getRegion() != 'RU':
+            overrideMethod(TechTree, '_populate')(TechTree_populate)
+            overrideMethod(TechTree, '_dispose')(TechTree_dispose)
+        else:
+            overrideMethod(VehicleTechTree, '_initialize')(VehicleTechTree_initialize)
+            overrideMethod(VehicleTechTree, '_finalize')(VehicleTechTree_finalize)
 
         overrideMethod(Research, '_populate')(Research_populate)
         overrideMethod(Research, '_dispose')(Research_dispose)

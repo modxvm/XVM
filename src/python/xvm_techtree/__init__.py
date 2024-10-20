@@ -12,7 +12,6 @@ import logging
 import traceback
 
 # BigWorld
-from gui.Scaleform.daapi.view.lobby.techtree.techtree_dp import _TechTreeDataProvider
 from gui.Scaleform.daapi.view.meta.ModuleInfoMeta import ModuleInfoMeta
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
@@ -25,6 +24,11 @@ import xvm_main.python.config as config
 from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.xvm import l10n
 
+# Per-realm
+if getRegion() != 'RU':
+    from gui.Scaleform.daapi.view.lobby.techtree.techtree_dp import _TechTreeDataProvider
+else:
+    from gui.techtree.techtree_dp import TechTreeDataProvider as _TechTreeDataProvider
 
 
 #
