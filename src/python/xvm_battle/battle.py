@@ -82,6 +82,7 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     102, # constants.ARENA_GUI_TYPE.HALLOWEEN_DEFENCE (WG 1.25 PvE event)
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
+    301, # constants.ARENA_GUI_TYPE.WHITE_TIGER (Lesta 1.30.0.0 WT: Hyperion copycat)
 ]
 
 
