@@ -85,7 +85,7 @@ def __execute(code, file_name, context):
 
 def __load_lib(file_name):
     # TODO: fixup DEBUG loglevel for stdlib logging
-    logging.getLogger('XVM/PyMacro').info("__load_lib('{}')".format(file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
+    logging.getLogger('XVM/PyMacro').info("Loading py_macro: {}".format(file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
     try:
         code = parser.parse(__read_file(file_name), file_name)
         __execute(code, file_name, {'xvm': XvmNamespace})
