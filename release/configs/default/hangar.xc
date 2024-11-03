@@ -405,8 +405,17 @@
         "strength": 2
       }
     },
-    // Show/hide notifications counters in the main menu.
-    // Показывать/прятать счетчики уведомлений в главном меню.
+    // true - show counter on buttons in lobby menu.
+    // true - показать счетчики на кнопках в меню ангара.
+    "showLobbyMenuCounter": true,
+    // true - show counter on buttons in battle selector.
+    // true - показать счетчики на кнопках в меню выбора режима боя.
+    "showBattleSelectorCounter": true,
+    // true - show new crew books counter in crew widget in hangar.
+    // true - показать счетчики новых учебных материалов для прокачки экипажа в его виджете в ангаре.
+    "showNewCrewBooksCounter": true,
+    // Show/hide notifications counters in the lobby header.
+    // Показывать/прятать счетчики уведомлений в шапке ангара.
     "notificationCounter": {
       "storage": true,                       // Storage        / Склад
       "store": true,                         // Store          / Магазин

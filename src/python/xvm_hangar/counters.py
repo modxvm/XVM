@@ -8,9 +8,12 @@ Copyright (c) 2013-2024 XVM Contributors
 #
 
 # WoT
+from gui.impl.gen.view_models.views.lobby.crew.common.crew_books_button_model import CrewBooksButtonModel
 from gui.Scaleform.daapi.view.lobby.customization.customization_bottom_panel import CustomizationBottomPanel
 from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel
+from gui.Scaleform.daapi.view.lobby.header.battle_selector_items import SelectorItem
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
+from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
 from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 from notification.NotificationListView import NotificationListView
 
@@ -26,6 +29,31 @@ import xvm_main.python.config as config
 #
 # Handlers/Counters
 #
+
+def _LobbyMenu__updateNewSettingsCount(base, self):
+    if config.get('hangar/showLobbyMenuCounter', True):
+        return base(self)
+
+
+def LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventAnimEnabled, eventBgLinkage, showLegacySelector, hasNew):
+    if not config.get('hangar/showBattleSelectorCounter', True):
+        hasNew = False
+    return base(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventAnimEnabled, eventBgLinkage, showLegacySelector, hasNew)
+
+
+def SelectorItem_isShowNewIndicator(base, self):
+    if not config.get('hangar/showBattleSelectorCounter', True):
+        return False
+    return base(self)
+
+
+def CrewBooksButtonModel_setNewAmount(base, self, value):
+    # WG uses string to pass amount of new crew books
+    # while Lesta uses number so lets deal with it smart way
+    if not config.get('hangar/showNewCrewBooksCounter', True):
+        value = '0' if isinstance(value, basestring) else 0
+    base(self, value)
+
 
 def _LobbyHeader__setCounter(base, self, alias, counter=None):
     if config.get('hangar/notificationCounter/{0}'.format(alias), True):
@@ -63,6 +91,10 @@ def _NotificationListView__updateCounters(base, self):
 #
 
 def init():
+    overrideMethod(LobbyMenu, '_LobbyMenu__updateNewSettingsCount')(_LobbyMenu__updateNewSettingsCount)
+    overrideMethod(LobbyHeader, 'as_updateBattleTypeS')(LobbyHeader_as_updateBattleTypeS)
+    overrideMethod(SelectorItem, 'isShowNewIndicator')(SelectorItem_isShowNewIndicator)
+    overrideMethod(CrewBooksButtonModel, 'setNewAmount')(CrewBooksButtonModel_setNewAmount)
     overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(_LobbyHeader__setCounter)
     overrideMethod(AmmunitionPanel, '_AmmunitionPanel__applyCustomizationNewCounter')(_AmmunitionPanel__applyCustomizationNewCounter)
     overrideMethod(CustomizationBottomPanel, '_CustomizationBottomPanel__setNotificationCounters')(_CustomizationBottomPanel__setNotificationCounters)
