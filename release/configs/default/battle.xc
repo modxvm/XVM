@@ -51,7 +51,7 @@
       // Scale of the indicator (0..1)
       // Масштаб индикатора (0..1)
       "scale": 1,
-      // Scale of the custom image indicator in permanent mode, когда уменьшается лампа в размере (0..1)
+      // Scale of the custom image indicator in permanent mode when lamp's size shrinks (0..1)
       // (Only for Lesta)
       // Масштаб индикатора с пользовательским изображением в постоянном режиме, когда уменьшается лампа в размере (0..1)
       // (Только для Lesta)
