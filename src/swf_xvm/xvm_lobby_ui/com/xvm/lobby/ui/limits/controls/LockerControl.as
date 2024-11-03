@@ -16,20 +16,18 @@ package com.xvm.lobby.ui.limits.controls
 
     public class LockerControl extends LabelControl implements ISoundable
     {
-        // Images
-
-        private static const imgLockedPath:String = "xvm://res/locker/locked.png";
-        private static const imgUnlockedPath:String = "xvm://res/locker/unlocked.png";
-        private const imgLocked:ImageXVM = new ImageXVM();
-        private const imgUnlocked:ImageXVM = new ImageXVM();
-
         // Constants
 
+        private static const ICONS_FOLDER_FALLBACK:String = "xvm://res/locker/"
+        private static const ICON_LOCKED_NAME:String = "locked.png";
+        private static const ICON_UNLOCKED_NAME:String = "unlocked.png";
         private static const ALPHA_MOUSE_OUT:Number = 0.8;
         private static const ALPHA_MOUSE_OVER:Number = 1.0;
 
         // Private vars
 
+        private var _iconLocked:ImageXVM = new ImageXVM();
+        private var _iconUnlocked:ImageXVM = new ImageXVM();
         private var _selected:Boolean = false;
 
         // Initialization
@@ -40,8 +38,12 @@ package com.xvm.lobby.ui.limits.controls
             setSize(16, 16);
             _selected = false;
 
-            imgLocked.source = Utils.fixImgTagSrc(imgLockedPath);
-            imgUnlocked.source = Utils.fixImgTagSrc(imgUnlockedPath);
+            var lockerIconsFolder:String = XfwUtils.fixPath(Config.config.hangar.lockerIconsFolder);
+
+            _iconLocked.source = Utils.fixImgTagSrc(lockerIconsFolder + ICON_LOCKED_NAME);
+            _iconLocked.sourceAlt = Utils.fixImgTagSrc(ICONS_FOLDER_FALLBACK + ICON_LOCKED_NAME);
+            _iconUnlocked.source = Utils.fixImgTagSrc(lockerIconsFolder + ICON_UNLOCKED_NAME);
+            _iconUnlocked.sourceAlt = Utils.fixImgTagSrc(ICONS_FOLDER_FALLBACK + ICON_UNLOCKED_NAME);
         }
 
         // ISoundable
@@ -82,8 +84,8 @@ package com.xvm.lobby.ui.limits.controls
         {
             super.configUI();
 
-            this.addChild(imgLocked);
-            this.addChild(imgUnlocked);
+            this.addChild(_iconLocked);
+            this.addChild(_iconUnlocked);
 
             alpha = ALPHA_MOUSE_OUT;
 
@@ -109,10 +111,11 @@ package com.xvm.lobby.ui.limits.controls
         override protected function draw():void
         {
             super.draw();
+
             if (isInvalid(InvalidationType.STATE))
             {
-                imgLocked.visible = selected;
-                imgUnlocked.visible = !selected;
+                _iconLocked.visible = selected;
+                _iconUnlocked.visible = !selected;
             }
         }
 

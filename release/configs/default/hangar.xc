@@ -87,6 +87,9 @@
     // true - enable locker for bonds.
     // true - включить замок для бонов.
     "enableCrystalLocker": false,
+    // Path to locker icons.
+    // Путь к иконкам замков.
+    "lockerIconsFolder": "xvm://res/locker/",
     // Show/hide server info or change its parameters.
     // Показать/спрятать информацию о сервере, или изменить ее параметры.
     "serverInfo": {

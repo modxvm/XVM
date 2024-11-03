@@ -11,6 +11,7 @@ package com.xvm.types.cfg
         public var enableGoldLocker:*;
         public var enableFreeXpLocker:*;
         public var enableCrystalLocker:*;
+        public var lockerIconsFolder:*;
         public var hidePricesInTechTree:*;
         public var masteryMarkInTechTree:*;
         public var enableCrewAutoReturn:*;
