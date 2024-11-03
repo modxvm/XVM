@@ -11,10 +11,11 @@ Copyright (c) 2013-2024 XVM Contributors
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
 
 # XFW
-from xfw.events import overrideMethod
+from xfw import *
 
 # XVM Main
 import xvm_main.python.config as config
+from xvm_main.python.__version__ import __flavor__
 
 
 
@@ -23,7 +24,8 @@ import xvm_main.python.config as config
 #
 
 def LoginView_as_setVersionS(base, self, version):
-    base(self, '{} | XVM {} (WoT {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
+    targetGameShortName = 'WoT' if __flavor__ == 'wg' else 'MT'
+    base(self, '{} | XVM {} ({} {})'.format(version, config.get('__xvmVersion'), targetGameShortName, config.get('__wotVersion')))
 
 
 

@@ -24,7 +24,7 @@ def xfw_module_init():
         autologin.init()
         version_label.init()
         __initialized = True
-    
+
 
 def xfw_module_fini():
     global __initialized

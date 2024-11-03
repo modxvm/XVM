@@ -429,6 +429,9 @@ def xfw_module_init():
         import svcmsg
         svcmsg.init()
 
+        import version_label
+        version_label.init()
+
         __initialized = True
 
 
@@ -445,6 +448,9 @@ def xfw_module_fini():
 
         import svcmsg
         svcmsg.fini()
+
+        import version_label
+        version_label.fini()
 
         __initialized = False
 
