@@ -8,8 +8,7 @@ Copyright (c) 2013-2024 XVM Contributors
 #
 
 # Python
-import traceback
-
+import logging
 
 # WoT
 import helpers
@@ -33,6 +32,7 @@ from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import 
 from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
+from gui.Scaleform.daapi.view.lobby.hangar.hangar_header import HangarHeader
 from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 
@@ -42,7 +42,6 @@ from xfw import *
 # XVM.Main
 import xvm_main.python.config as config
 from xvm_main.python.consts import *
-from xvm_main.python.logger import *
 from xvm_main.python.xvm import l10n
 
 if getRegion() != 'RU':
@@ -87,8 +86,8 @@ def Vehicle_isAmmoFull(base, self):
         else:
             mult = self.NOT_FULL_AMMO_MULTIPLIER
         return sum((s.count for s in self.shells.installed.getItems())) >= self.ammoMaxSize * mult
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Hangar').exception('Vehicle_isAmmoFull')
         return base(self)
 
 
@@ -102,8 +101,8 @@ def Vehicle_isReadyToPrebattle(base, self, *args, **kwargs):
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Hangar').exception('Vehicle_isReadyToPrebattle')
     return result
 
 
@@ -117,8 +116,8 @@ def Vehicle_isReadyToFight(base, self, *args, **kwargs):
     try:
         if not self.hasLockMode() and not self.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
             return False
-    except Exception as ex:
-        err(traceback.format_exc())
+    except Exception:
+        logging.getLogger('XVM/Hangar').exception('Vehicle_isReadyToFight')
     return result # base is property
 
 
@@ -133,8 +132,8 @@ def CurrentVehicleActionsValidator_validate(base, self):
         try:
             if not g_currentVehicle.isReadyToFight() and g_currentVehicle.item and not g_currentVehicle.item.isAmmoFull and cfg_hangar_blockVehicleIfLowAmmo:
                 res = ValidationResult(False, PREBATTLE_RESTRICTION.VEHICLE_NOT_READY)
-        except Exception as ex:
-            err(traceback.format_exc())
+        except Exception:
+            logging.getLogger('XVM/Hangar').exception('CurrentVehicleActionsValidator_validate')
     return res
 
 
@@ -163,7 +162,7 @@ def _LobbyEntry__handleLazyChannelCtlInited(base, self, event):
         ctx = event.ctx
         controller = ctx.get('controller')
         if controller is None:
-            log('Controller is not defined', ctx)
+            logging.getLogger('XVM/Hangar').warning('Controller is not defined: %s', ctx)
             return
         else:
             ctx.clear()
@@ -338,6 +337,22 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, buttons):
 
 
 #
+# Handlers/HangarHeader
+#
+
+def _HangarHeader__getBPWidget(base, self):
+    if config.get('hangar/showBattlePassWidget', True):
+        return base(self)
+    return ''
+
+def _HangarHeader__updateBattlePassSmallWidget(base, self):
+    if config.get('hangar/showBattlePassWidget', True):
+        return base(self)
+    return
+
+
+
+#
 # Handlers/Achievements (WG)
 #
 
@@ -390,6 +405,8 @@ def xfw_module_init():
         overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPointWidget_getIsActive)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
+        overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
+        overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
 
         if getRegion() != 'RU':
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand

@@ -34,6 +34,9 @@
     // true - show info windows when receiving progressive decals.
     // true - показывать информационное окно при получении этапной декали.
     "showProgressiveDecalsWindow": true,
+    // true - show battle pass widget in hangar.
+    // true - показывать баннер боевого пропуска в ангаре.
+    "showBattlePassBanner": true,
     // true - show widget "Daily Quests" in the hangar.
     // true - показывать виджет "Ежедневные задачи" в ангаре.
     "showDailyQuestWidget": true,
