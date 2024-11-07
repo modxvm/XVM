@@ -345,6 +345,7 @@ def _HangarHeader__getBPWidget(base, self):
         return base(self)
     return ''
 
+
 def _HangarHeader__updateBattlePassSmallWidget(base, self):
     if config.get('hangar/showBattlePassWidget', True):
         return base(self)
