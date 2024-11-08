@@ -17,6 +17,7 @@ from gui.shared import g_eventBus
 from gui.prb_control.entities.base.actions_validator import CurrentVehicleActionsValidator
 from gui.prb_control.items import ValidationResult
 from gui.prb_control.settings import PREBATTLE_RESTRICTION
+from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 from gui.Scaleform.locale.MENU import MENU
 from gui.shared.gui_items.Vehicle import Vehicle
 from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
@@ -343,7 +344,14 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, buttons):
 def _HangarHeader__getBPWidget(base, self):
     if config.get('hangar/showBattlePassWidget', True):
         return base(self)
-    return '' if getRegion() != 'RU' else False
+    return ''
+
+
+def _HangarHeader__getWidgetAlias(base, self):
+    result = base(self)
+    if not config.get('hangar/showBattlePassWidget', True) and result == HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT:
+        result = ''
+    return result
 
 
 def _HangarHeader__updateBattlePassSmallWidget(base, self):
@@ -406,7 +414,6 @@ def xfw_module_init():
         overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPointWidget_getIsActive)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
-        overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
         overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
 
         if getRegion() != 'RU':
@@ -417,9 +424,12 @@ def xfw_module_init():
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             if hasattr(Hangar, 'as_setEventTournamentBannerVisibleS'):
                 overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
+            overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
+        else:
+            overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
 
         import battletype
         battletype.init()
