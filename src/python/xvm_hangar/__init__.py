@@ -343,7 +343,7 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, buttons):
 def _HangarHeader__getBPWidget(base, self):
     if config.get('hangar/showBattlePassWidget', True):
         return base(self)
-    return ''
+    return '' if getRegion() != 'RU' else False
 
 
 def _HangarHeader__updateBattlePassSmallWidget(base, self):
