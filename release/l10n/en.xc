@@ -75,6 +75,7 @@
     "armor_piercing_he": "HESH",
     "hollow_charge": "HEAT",
     "flame": "FM",
+    "armor_piercing_fsds": "DP",
     // Text at hits no damage (ricochet, no penetration, no damage), macro {{dmg}}
     "intermediate_ricochet": "ricochet",
     "final_ricochet": "ricochet",

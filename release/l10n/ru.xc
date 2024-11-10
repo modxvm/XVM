@@ -75,6 +75,7 @@
     "armor_piercing_he": "ХФ",
     "hollow_charge": "КС",
     "flame": "ОС",
+    "armor_piercing_fsds": "БО",
     // Text at hits no damage (ricochet, no penetration, no damage), macro {{dmg}}
     "intermediate_ricochet": "рикошет",
     "final_ricochet": "рикошет",
