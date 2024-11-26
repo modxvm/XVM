@@ -35,9 +35,11 @@ from .consts import PREFS, USERPREFS, _SUPPORTED_SECTIONS, _SUPPORTED_CLIENT_SEC
 
 # Per-realm
 if getRegion() != 'RU':
+    # WG, since 1.27.0.0
     from gui.Scaleform.daapi.view.common.common_constants import FILTER_POPOVER_SECTION
 else:
-    from gui.Scaleform.daapi.view.common.filter_popover import FILTER_POPOVER_SECTION as FILTER_POPOVER_SECTION
+    # Lesta
+    from gui.Scaleform.daapi.view.common.filter_popover import FILTER_SECTION as FILTER_POPOVER_SECTION
 
 
 
