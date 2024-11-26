@@ -50,7 +50,7 @@ from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
 
-# BigWorld per-realm imports
+# Per-realm
 if getRegion() != 'RU':
     from gui.shared.items_parameters.params_helper import similarCrewComparator as crewComparator_helper
 else:
