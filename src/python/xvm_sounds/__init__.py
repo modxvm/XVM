@@ -41,16 +41,15 @@ def _checkAndReplace(event):
 
     mappedEvent = config.get('sounds/soundMapping/%s' % event)
     logSoundEvents = config.get('sounds/logSoundEvents')
-    if mappedEvent is not None:
-        if mappedEvent == '':
-            mappedEvent = 'emptyEvent'
-        if logSoundEvents:
-            logging.getLogger('XVM/Sounds').info('_checkAndReplace: SOUND EVENT: %s => %s' % (event, mappedEvent))
-        return mappedEvent
-    else:
+    if mappedEvent is None:
         if logSoundEvents:
             logging.getLogger('XVM/Sounds').info('_checkAndReplace: SOUND EVENT: %s' % event)
         return event
+    if mappedEvent == '':
+        mappedEvent = 'emptyEvent'
+    if logSoundEvents:
+        logging.getLogger('XVM/Sounds').info('_checkAndReplace: SOUND EVENT: %s => %s' % (event, mappedEvent))
+    return mappedEvent
 
 
 
@@ -59,28 +58,28 @@ def _checkAndReplace(event):
 #
 
 
-def _WWISE_WW_eventGlobal(base, event):
-    return base(_checkAndReplace(event))
+def _WWISE_WW_eventGlobal(base, event, *args, **kwargs):
+    return base(_checkAndReplace(event), *args, **kwargs)
 
 
-def _WWISE_WW_eventGlobalPos(base, event, pos):
-    return base(_checkAndReplace(event), pos)
+def _WWISE_WW_eventGlobalPos(base, event, *args, **kwargs):
+    return base(_checkAndReplace(event), *args, **kwargs)
 
 
 def _WWISE_WW_getSoundObject(base, objectName, *args, **kwargs):
     return base(_checkAndReplace(objectName), *args, **kwargs)
 
 
-def _WWISE_WW_getSound(base, eventName, objectName, matrix, local):
-    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), matrix, local)
+def _WWISE_WW_getSound(base, eventName, objectName, *args, **kwargs):
+    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), *args, **kwargs)
 
 
-def _WWISE_WW_getSoundCallback(base, eventName, objectName, matrix, callback):
-    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), matrix, callback)
+def _WWISE_WW_getSoundCallback(base, eventName, objectName, *args, **kwargs):
+    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), *args, **kwargs)
 
 
-def _WWISE_WW_getSoundPos(base, eventName, objectName, position):
-    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), position)
+def _WWISE_WW_getSoundPos(base, eventName, objectName, *args, **kwargs):
+    return base(_checkAndReplace(eventName), _checkAndReplace(objectName), *args, **kwargs)
 
 
 
