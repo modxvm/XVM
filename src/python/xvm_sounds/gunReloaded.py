@@ -13,7 +13,7 @@ import logging
 
 # BigWorld
 import SoundGroups
-from gui.Scaleform.daapi.view.battle.shared.crosshair.plugins import AmmoPlugin
+from Avatar import PlayerAvatar
 
 # XFW
 from xfw.events import registerEvent
@@ -36,30 +36,16 @@ class XVM_SOUND_EVENT(object):
 # Handlers
 #
 
-def _AmmoPlugin__onGunReloadTimeSet(self, _, state, skipAutoLoader):
+def updateVehicleGunReloadTime(self, vehicleID, timeLeft, *args, **kwargs):
     try:
         if config.get('sounds/enabled'):
-            isAutoReload = self._AmmoPlugin__guiSettings.hasAutoReload
+            prevTimeLeft = self._PlayerAvatar__prevGunReloadTimeLeft
             isInPostmortem = self.sessionProvider.shared.vehicleState.isInPostmortem
-            timeLast = state.getActualValue()
-            timeLeft = state.getTimeLeft()
-            if timeLeft == 0.0 and not isAutoReload and not isInPostmortem and (timeLast != -1):
+            if prevTimeLeft != timeLeft and timeLeft == 0.0 and not isInPostmortem:
                 SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
     except Exception:
-        logging.getLogger('XVM/Sounds').exception('gunReloaded/_AmmoPlugin__onGunReloadTimeSet:')
+        logging.getLogger('XVM/Sounds').exception('gunReloaded/updateVehicleGunReloadTime')
 
-
-def _AmmoPlugin__onGunAutoReloadTimeSet(self, state, stunned):
-    try:
-        if config.get('sounds/enabled'):
-            isAutoReload = self._AmmoPlugin__guiSettings.hasAutoReload
-            isInPostmortem = self.sessionProvider.shared.vehicleState.isInPostmortem
-            timeLast = state.getActualValue()
-            timeLeft = state.getTimeLeft()
-            if timeLeft == 0.0 and isAutoReload and not isInPostmortem and (timeLast != -1):
-                SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
-    except:
-        logging.getLogger('XVM/Sounds').exception('gunReloaded/_AmmoPlugin__onGunAutoReloadTimeSet:')
 
 
 #
@@ -67,8 +53,7 @@ def _AmmoPlugin__onGunAutoReloadTimeSet(self, state, stunned):
 #
 
 def init():
-    registerEvent(AmmoPlugin, '_AmmoPlugin__onGunReloadTimeSet')(_AmmoPlugin__onGunReloadTimeSet)
-    registerEvent(AmmoPlugin, '_AmmoPlugin__onGunAutoReloadTimeSet')(_AmmoPlugin__onGunAutoReloadTimeSet)
+    registerEvent(PlayerAvatar, 'updateVehicleGunReloadTime', prepend=True)(updateVehicleGunReloadTime)
 
 
 def fini():
