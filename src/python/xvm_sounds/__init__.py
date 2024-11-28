@@ -38,7 +38,6 @@ def _checkAndReplace(event):
         return event
     if not config.get('sounds/enabled'):
         return event
-
     mappedEvent = config.get('sounds/soundMapping/%s' % event)
     logSoundEvents = config.get('sounds/logSoundEvents')
     if mappedEvent is None:

@@ -17,7 +17,7 @@ from gui.Scaleform.daapi.view.battle.shared.timers_panel import TimersPanel
 # XFW
 from xfw.events import registerEvent
 
-# XVM.Main
+# XVM Main
 import xvm_main.python.config as config
 
 
@@ -30,15 +30,16 @@ class XVM_SOUND_EVENT(object):
     FIRE_ALERT = "xvm_fireAlert"
 
 
+
 #
 # Handlers
 #
 
 def _TimersPanel__setFireInVehicle(self, isInFire):
     try:
-        if isInFire and config.get('sounds/enabled'):
+        if config.get('sounds/enabled') and isInFire:
             SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.FIRE_ALERT)
-    except:
+    except Exception:
         logging.getLogger('XVM/Main').exception('fireAlert/_TimersPanel__setFireInVehicle:')
 
 

@@ -5,7 +5,7 @@ Copyright (c) 2016-2021 night_dragon_on <https://kr.cm/f/p/14897/>
 """
 
 #
-# imports
+# Imports
 #
 
 # stdlib
@@ -19,7 +19,7 @@ from gui.Scaleform.daapi.view.battle.shared.minimap.entries import VehicleEntry
 # XFW
 from xfw.events import registerEvent
 
-# XVM.Main
+# XVM Main
 import xvm_main.python.config as config
 
 

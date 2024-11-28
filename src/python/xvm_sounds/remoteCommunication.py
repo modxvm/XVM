@@ -10,10 +10,10 @@ Copyright (c) 2013-2024 XVM Contributors
 # stdlib
 import logging
 
-# xfw.loader
+# XFW
 import xfw_loader.python as loader
 
-# xvm.main
+# XVM Main
 import xvm_main.python.config as config
 
 
@@ -29,12 +29,11 @@ def init():
             try:
                 wwise_module = loader.get_mod_module('com.modxvm.xfw.wwise')
                 wwise_module.wwise_communication_init()
-                logger.info("remoteCcommunication/init: communication with WWISE Authoring Tools is enabled")
-
+                logger.info("remoteCommunication/init: communication with WWISE Authoring Tools is enabled")
             except Exception:
-                logger.exception("remoteCcommunication/init:")
+                logger.exception("remoteCommunication/init")
         else:
-            logger.warning('[XVM/Sounds] [remote_communication] failed to load sound banks because XFW.WWISE is not loaded')
+            logger.warning('remoteCommunication/init: cannot enable communication with WWISE Authoring Tools since XFW.WWISE is not loaded')
 
 
 def fini():
