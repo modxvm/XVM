@@ -72,7 +72,24 @@ ATTACK_REASONS = {
     26: 'ram_brander',
     27: 'fort_artillery_eq',
     28: 'static_deathzone',
-    29: 'cgf_world'
+    29: 'cgf_world',
+    30: 'vehicle_explosion',
+    31: 'bunker_destroyed',
+    32: 'minefield_zone',
+    33: 'battleship',
+    34: 'destroyer',
+    35: 'damage_zone',
+    36: 'none',
+    #WG event
+    37: 'redirected_damage_from_bot',
+    38: 'slave_bot_damaged',
+    39: 'damage_by_blizzard_ability',
+    40: 'damage_by_snowstorm',
+    41: 'base_defender_bonus',
+    42: 'ability_assist_flare',
+    43: 'ability_assist_blizzard',
+    44: 'ability_assist_buff',
+    45: 'rage'
 }
 
 SHOT_EFFECTS_INDEXES = {
