@@ -62,11 +62,9 @@ UNSUPPORTED_GUI_TYPES = [
     # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
-    101, # constants.ARENA_GUI_TYPE.HALLOWEEN (WG 1.25 PvE event)
-    102, # constants.ARENA_GUI_TYPE.HALLOWEEN_DEFENCE (WG 1.25 PvE event)
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
+    106, # constants.ARENA_GUI_TYPE.GRINCH (WG 1.27 NY 2025 event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
-    301, # constants.ARENA_GUI_TYPE.WHITE_TIGER (Lesta 1.30.0.0 WT: Hyperion copycat)
 ]
 
 
