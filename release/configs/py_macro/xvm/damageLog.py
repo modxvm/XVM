@@ -433,18 +433,25 @@ class Data(object):
         attacker = player.arena.vehicles.get(self.data['attackerID'])
         if (attacker is None) or not attacker['vehicleType']:
             return
+        suitable_shell = None
         for shot in attacker['vehicleType'].gun.shots:
             _shell = shot.shell
             if effectsIndex == _shell.effectsIndex:
-                shellKind = str(_shell.kind).lower()
-                self.data['shellKind'] = 'high_explosive_stun' if shellKind == 'high_explosive' and _shell.hasStun else shellKind
-                self.data['caliber'] = _shell.caliber
-                self.data['shellDamage'] = _shell.armorDamage[0] if hasattr(_shell, 'armorDamage') else _shell.damage[0]
-                _id = _shell.id
-                nation = nations.NAMES[_id[0]]
-                self.data['costShell'] = 'gold-shell' if _id[1] in self.shells[nation] else 'silver-shell'
-                self.data['shells_stunning'] = _id[1] in self.shells_stunning[nation]
                 break
+            # workaround
+            if suitable_shell is None or abs(suitable_shell.effectsIndex - effectsIndex) > abs(_shell.effectsIndex - effectsIndex):
+                suitable_shell = _shell
+        else:
+            _shell = suitable_shell
+        shellKind = str(_shell.kind).lower()
+        self.data['shellKind'] = 'high_explosive_stun' if shellKind == 'high_explosive' and _shell.hasStun else shellKind
+        self.data['caliber'] = _shell.caliber
+        self.data['shellDamage'] = _shell.armorDamage[0] if hasattr(_shell, 'armorDamage') else _shell.damage[0]
+        _id = _shell.id
+        nation = nations.NAMES[_id[0]]
+        self.data['costShell'] = 'gold-shell' if _id[1] in self.shells[nation] else 'silver-shell'
+        self.data['shells_stunning'] = _id[1] in self.shells_stunning[nation]
+
 
     def timeReload(self, attackerID):
         player = BigWorld.player()
