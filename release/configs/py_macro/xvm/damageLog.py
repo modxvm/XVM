@@ -991,13 +991,11 @@ class LastHit(_Base):
                     dataLog['dmgRatio'] = key['damage'] * 100 // dataLog['maxHealth']
                     dataLog['fireDuration'] = BigWorld.time() - key['startAction'] if (attackReasonID == 1) and (key['startAction'] is not None) else None
                     dataLog['hitTime'] = key['hitTime']
-            else:
-                self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['numCrits'], dataLog['hitTime'], attackReasonID)
-                dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
+                    return dataLog
         else:
             self.dictVehicle[attackerID] = {}
-            self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['numCrits'], dataLog['hitTime'], attackReasonID)
-            dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
+        self.dictVehicle[attackerID][attackReasonID] = self.initGroupedValues(dataLog['damage'], dataLog['numCrits'], dataLog['hitTime'], attackReasonID)
+        dataLog['fireDuration'] = 0 if attackReasonID == 1 else None
         return dataLog
 
     def output(self):
