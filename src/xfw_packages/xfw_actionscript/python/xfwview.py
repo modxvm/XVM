@@ -64,13 +64,17 @@ class XfwArenaGuiType:
     STORY_MODE_ONBOARDING = 100
     # STORY_MODE_REGULAR (WG 1.25)
     STORY_MODE = 104
+    # WG 1.27.0.1 NY Event
+    GRINCH = 106
     # Lesta 1.25.0.0
     COSMIC_EVENT = 300
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
     COMP7_RANGE = (ARENA_GUI_TYPE.COMP7, TOURNAMENT_COMP7, TRAINING_COMP7, )
     STORY_MODE_RANGE = (STORY_MODE_ONBOARDING, STORY_MODE, )
     EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, )
-    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, )
+    # List for event battles to ignore basic XVM features (clock and sixth sense)
+    # Mainly used for special events with GF usage in battle
+    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, GRINCH, )
 
 
 
@@ -87,6 +91,7 @@ class _XfwInjectorView(View):
         super(_XfwInjectorView, self)._populate()
         if swf.appNS in [APP_NAME_SPACE.SF_LOBBY, APP_NAME_SPACE.SF_BATTLE]:
             self.flashObject.as_inject()
+
 
 class _XfwComponent(BaseDAAPIComponent):
 
@@ -168,7 +173,6 @@ class _XfwComponent(BaseDAAPIComponent):
             err(traceback.format_exc())
 
     # commands handlers
-
     def getMods(self):
         try:
             app = dependency.instance(IAppLoader).getApp(swf.appNS)
