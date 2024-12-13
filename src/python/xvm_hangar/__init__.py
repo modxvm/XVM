@@ -278,10 +278,22 @@ def _EventEntryPointsContainer__updateEntries(base, self):
 #
 
 # hide lootboxes widget in tank carousel in hangar
-def LootBoxesEntryPointWidget_getIsActive(base, state):
+def LootBoxesEntryPoint_getIsActive(base, state):
     if not config.get('hangar/showLootboxesWidget', True):
         return False
     return base(state)
+
+
+def Hangar_as_updateCarouselEventEntryStateS(base, self, isVisible):
+    if not config.get('hangar/showLootboxesWidget', True):
+        isVisible = False
+    return base(self, isVisible)
+
+
+def Hangar_as_setRewardKitsVisibleS(base, self, isVisible):
+    if not config.get('hangar/showLootboxesWidget', True):
+        isVisible = False
+    return base(self, isVisible)
 
 
 def Hangar_as_setEventTournamentBannerVisibleS(base, self, alias, visible):
@@ -411,7 +423,8 @@ def xfw_module_init():
         overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(ProgressiveItemsRewardHandler_showAward)
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
-        overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPointWidget_getIsActive)
+        overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
+        overrideMethod(Hangar, 'as_updateCarouselEventEntryStateS')(Hangar_as_updateCarouselEventEntryStateS)
 
         overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
         overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
@@ -419,11 +432,15 @@ def xfw_module_init():
         if getRegion() != 'RU':
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
             from gui.impl.lobby.comp7.tournaments_widget import TournamentsWidgetComponent
+            from gui.impl.lobby.lootbox_system.entry_point import LootBoxSystemEntryPoint
 
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
-            if hasattr(Hangar, 'as_setEventTournamentBannerVisibleS'):
-                overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
+            overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
+            # WG NY Lootboxes
+            # TODO: remove after WG NY
+            overrideMethod(Hangar, 'as_setRewardKitsVisibleS')(Hangar_as_setRewardKitsVisibleS)
+            overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
