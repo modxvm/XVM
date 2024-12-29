@@ -79,7 +79,6 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
-    106, # constants.ARENA_GUI_TYPE.GRINCH (WG 1.27 NY 2025 event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
 ]
 

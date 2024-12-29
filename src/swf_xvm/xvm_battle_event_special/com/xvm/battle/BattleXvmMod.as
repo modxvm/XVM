@@ -19,8 +19,7 @@ package com.xvm.battle
 
         private static const VIEWS:Object =
         {
-            "cosmicBattlePage": [],
-            "grinchBattlePage": []
+            "cosmicBattlePage": []
         }
 
         public override function get views():Object

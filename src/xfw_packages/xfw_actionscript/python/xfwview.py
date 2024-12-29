@@ -64,8 +64,6 @@ class XfwArenaGuiType:
     STORY_MODE_ONBOARDING = 100
     # STORY_MODE_REGULAR (WG 1.25)
     STORY_MODE = 104
-    # WG 1.27.0.1 NY Event
-    GRINCH = 106
     # Lesta 1.25.0.0
     COSMIC_EVENT = 300
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
@@ -74,7 +72,7 @@ class XfwArenaGuiType:
     EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, )
     # List for event battles to ignore basic XVM features (clock and sixth sense)
     # Mainly used for special events with GF usage in battle
-    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, GRINCH, )
+    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, )
 
 
 

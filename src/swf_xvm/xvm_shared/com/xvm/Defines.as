@@ -118,7 +118,6 @@ package com.xvm
             public static const BATTLE_TYPE_TRAINING_COMP7:Number = 48;
             public static const BATTLE_TYPE_STORY_MODE_ONBOARDING:Number = 100;
             public static const BATTLE_TYPE_STORY_MODE_REGULAR:Number = 104;
-            public static const BATTLE_TYPE_GRINCH:Number = 106;
         }
         CLIENT::LESTA {
             public static const BATTLE_TYPE_VERSUS_AI:Number = 50;
