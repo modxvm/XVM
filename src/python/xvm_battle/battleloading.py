@@ -15,7 +15,7 @@ import re
 from gui.Scaleform.daapi.view.battle.shared.battle_loading import BattleLoading
 
 # XFW
-from xfw.events import overrideMethod
+from xfw import *
 
 # XVM Main
 import xvm_main.python.config as config
@@ -68,6 +68,7 @@ def getTipText(text, isError=False):
 def init():
     overrideMethod(BattleLoading, 'as_setTipTitleS')(BattleLoading_as_setTipTitleS)
     overrideMethod(BattleLoading, 'as_setTipS')(BattleLoading_as_setTipS)
+
 
 def fini():
     pass

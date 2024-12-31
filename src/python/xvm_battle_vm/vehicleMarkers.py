@@ -41,7 +41,7 @@ from xvm_battle.python.consts import INV, XVM_BATTLE_COMMAND
 from xvm_battle.python.shared import getGlobalBattleData
 
 # XVM Battle VM
-from .consts import DAMAGE_TYPE, XVM_VM_COMMAND, UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES
+from .consts import UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES, XVM_VM_COMMAND, DAMAGE_TYPE
 
 
 

@@ -11,42 +11,10 @@ Copyright (c) 2013-2024 XVM Contributors
 from account_helpers.settings_core import settings_constants
 import constants
 
-# XFW
-from xfw import *
-
 
 
 #
-# Enums
-#
-
-class ADDITIONAL_ENTRY_SYMBOL_NAME:
-    ARCADE_CAMERA = 'ArcadeCameraEntry'
-    STRATEGIC_CAMERA = 'StrategicCameraEntry'
-    DIRECTION_ENTRY = 'DirectionEntry'
-    RECTANGLE_AREA = 'RectangleAreaMinimapEntry'
-
-
-class XVM_ENTRY_SYMBOL_NAME(object):
-    VEHICLE = 'com.xvm.battle.shared.minimap.entries.vehicle::UI_VehicleEntry'
-    VIEW_POINT = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewPointEntry'
-    DEAD_POINT = 'com.xvm.battle.shared.minimap.entries.personal::UI_DeadPointEntry'
-    VIDEO_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_VideoCameraEntry'
-    ARCADE_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_ArcadeCameraEntry'
-    STRATEGIC_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_StrategicCameraEntry'
-    # Renamed ARCADE_CAMERA and STRATEGIC_CAMERA entries for Lesta since 1.28.0.0
-    DIRECTION_ENTRY = 'com.xvm.battle.shared.minimap.entries.personal::UI_DirectionEntry'
-    RECTANGLE_AREA = 'com.xvm.battle.shared.minimap.entries.personal::UI_RectangleAreaMinimapEntry'
-    VIEW_RANGE_CIRCLES = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewRangeCirclesEntry'
-    MARK_CELL = 'com.xvm.battle.shared.minimap.entries.personal::UI_CellFlashEntry'
-    DEL_ENTRY_SYMBOLS = [VEHICLE, VIEW_POINT, DEAD_POINT, VIDEO_CAMERA,
-                         ARCADE_CAMERA, STRATEGIC_CAMERA, DIRECTION_ENTRY,
-                         RECTANGLE_AREA, VIEW_RANGE_CIRCLES, MARK_CELL]
-
-
-
-#
-# Settings
+# Constants
 #
 
 UNSUPPORTED_GUI_TYPES = [
@@ -66,12 +34,33 @@ UNSUPPORTED_GUI_TYPES = [
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
 ]
 
-
 UNSUPPORTED_BATTLE_TYPES = [
     constants.ARENA_BONUS_TYPE.EVENT_BATTLES,
     constants.ARENA_BONUS_TYPE.COMP7
 ]
 
+class XVM_ENTRY_SYMBOL_NAME(object):
+    VEHICLE = 'com.xvm.battle.shared.minimap.entries.vehicle::UI_VehicleEntry'
+    VIEW_POINT = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewPointEntry'
+    DEAD_POINT = 'com.xvm.battle.shared.minimap.entries.personal::UI_DeadPointEntry'
+    VIDEO_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_VideoCameraEntry'
+    ARCADE_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_ArcadeCameraEntry'
+    STRATEGIC_CAMERA = 'com.xvm.battle.shared.minimap.entries.personal::UI_StrategicCameraEntry'
+    # Renamed ARCADE_CAMERA and STRATEGIC_CAMERA entries for Lesta since 1.28.0.0
+    DIRECTION_ENTRY = 'com.xvm.battle.shared.minimap.entries.personal::UI_DirectionEntry'
+    RECTANGLE_AREA = 'com.xvm.battle.shared.minimap.entries.personal::UI_RectangleAreaMinimapEntry'
+    VIEW_RANGE_CIRCLES = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewRangeCirclesEntry'
+    MARK_CELL = 'com.xvm.battle.shared.minimap.entries.personal::UI_CellFlashEntry'
+    DEL_ENTRY_SYMBOLS = [VEHICLE, VIEW_POINT, DEAD_POINT, VIDEO_CAMERA,
+                         ARCADE_CAMERA, STRATEGIC_CAMERA, DIRECTION_ENTRY,
+                         RECTANGLE_AREA, VIEW_RANGE_CIRCLES, MARK_CELL]
+
+
+class ADDITIONAL_ENTRY_SYMBOL_NAME:
+    ARCADE_CAMERA = 'ArcadeCameraEntry'
+    STRATEGIC_CAMERA = 'StrategicCameraEntry'
+    DIRECTION_ENTRY = 'DirectionEntry'
+    RECTANGLE_AREA = 'RectangleAreaMinimapEntry'
 
 CIRCLES_SETTINGS = (
     settings_constants.GAME.MINIMAP_DRAW_RANGE,
@@ -81,22 +70,18 @@ CIRCLES_SETTINGS = (
     settings_constants.GAME.MINIMAP_MIN_SPOTTING_RANGE
 )
 
-
 LINES_SETTINGS = (
     settings_constants.GAME.SHOW_VECTOR_ON_MAP,
     settings_constants.GAME.SHOW_SECTOR_ON_MAP
 )
 
-
 LABELS_SETTINGS = (
     settings_constants.GAME.SHOW_VEH_MODELS_ON_MAP
 )
 
-
 HP_SETTINGS = (
     settings_constants.GAME.SHOW_VEHICLE_HP_IN_MINIMAP
 )
-
 
 DEFAULTS = {
     settings_constants.GAME.SHOW_VECTOR_ON_MAP: False,

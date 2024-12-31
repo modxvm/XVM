@@ -11,7 +11,6 @@ __initialized = False
 
 def xfw_module_init():
     global __initialized
-
     if not __initialized:
         import vehicleMarkers
         vehicleMarkers.init()

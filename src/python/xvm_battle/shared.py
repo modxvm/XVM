@@ -12,8 +12,8 @@ from gui.battle_control import avatar_getter
 
 # XVM Main
 import xvm_main.python.minimap_circles as minimap_circles
-import xvm_main.python.utils as utils
 import xvm_main.python.vehinfo as vehinfo
+import xvm_main.python.utils as utils
 
 
 

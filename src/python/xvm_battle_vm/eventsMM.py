@@ -9,21 +9,20 @@ Copyright (c) 2013-2024 XVM Contributors
 
 # BigWorld
 from BattleReplay import g_replayCtrl
-from constants import ATTACK_REASONS
 from gui.Scaleform.daapi.view.battle.shared.markers2d.manager import MarkersManager
 from gui.Scaleform.daapi.view.battle.shared.markers2d.settings import CommonMarkerType
 from gui.Scaleform.daapi.view.battle.shared.markers2d.vehicle_plugins import VehicleMarkerPlugin
+from constants import ATTACK_REASONS
 
 # XFW
-from xfw import getRegion
-from xfw.events import overrideMethod
+from xfw import *
 
 # XVM Main
 import xvm_main.python.config as config
 
 # XVM Battle VM
 from .vehicleMarkers import g_markers
-from .consts import AS_SYMBOLS
+from .consts import XVM_VM_AS_SYMBOLS
 
 
 
@@ -52,7 +51,7 @@ def _MarkersManager_dispose(base, self):
 def _MarkersManager_createMarker(base, self, symbol, matrixProvider=None, active=True, markerType=CommonMarkerType.NORMAL):
     if g_markers.active:
         if symbol == 'VehicleMarker':
-            symbol = AS_SYMBOLS.AS_VEHICLE_MARKER
+            symbol = XVM_VM_AS_SYMBOLS.AS_VEHICLE_MARKER
 
     markerID = base(self, symbol, matrixProvider, active, markerType)
     return markerID
@@ -61,8 +60,8 @@ def _MarkersManager_createMarker(base, self, symbol, matrixProvider=None, active
 def _MarkersManager_destroyMarker(base, self, markerID):
     base(self, markerID)
 
-
 _exInfo = False
+
 def _MarkersManager_as_setShowExInfoFlagS(base, self, flag):
     if g_markers.active:
         if config.get('hotkeys/markersAltMode/enabled'):
@@ -100,6 +99,7 @@ def init():
     overrideMethod(MarkersManager, 'destroyMarker')(_MarkersManager_destroyMarker)
     overrideMethod(MarkersManager, 'as_setShowExInfoFlagS')(_MarkersManager_as_setShowExInfoFlagS)
     overrideMethod(VehicleMarkerPlugin, '_updateVehicleHealth')(_VehicleMarkerPlugin_updateVehicleHealth)
+
 
 def fini():
     pass

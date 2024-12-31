@@ -14,20 +14,18 @@ import math
 # BigWorld
 import BigWorld
 import Math
-from constants import VISIBILITY
 from account_helpers.settings_core import settings_constants
 from account_helpers.settings_core.SettingsCore import SettingsCore
 from AvatarInputHandler.control_modes import PostMortemControlMode
 from gui.battle_control import avatar_getter
-from gui.shared import g_eventBus
 from gui.Scaleform.daapi.view.battle.shared.minimap.component import MinimapComponent
 from gui.Scaleform.daapi.view.battle.shared.minimap.settings import ENTRY_SYMBOL_NAME
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin, PersonalEntriesPlugin
+from gui.shared import g_eventBus
+from constants import VISIBILITY
 
 # XFW
-from xfw import IS_DEVELOPMENT
-from xfw.events import overrideMethod
-from xfw.wg import getBattleApp, isReplay
+from xfw import *
 
 # XVM Main
 import xvm_main.python.config as config
@@ -37,8 +35,8 @@ from xvm_main.python.consts import XVM_EVENT
 from xvm_battle.python.battle import g_battle
 
 # XVM Battle VM
-from .consts import ADDITIONAL_ENTRY_SYMBOL_NAME, XVM_ENTRY_SYMBOL_NAME,\
-     UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES, CIRCLES_SETTINGS, \
+from .consts import UNSUPPORTED_BATTLE_TYPES, UNSUPPORTED_GUI_TYPES, \
+     ADDITIONAL_ENTRY_SYMBOL_NAME, XVM_ENTRY_SYMBOL_NAME, CIRCLES_SETTINGS, \
      LABELS_SETTINGS, LINES_SETTINGS, HP_SETTINGS, DEFAULTS
 
 
@@ -361,35 +359,34 @@ class Minimap(object):
 #
 
 def init():
-    # minimapComponent
+    # MinimapComponent
     overrideMethod(MinimapComponent, '_populate')(_MinimapComponent_populate)
     overrideMethod(MinimapComponent, '_dispose')(_MinimapComponent_dispose)
     overrideMethod(MinimapComponent, 'addEntry')(_MinimapComponent_addEntry)
     overrideMethod(MinimapComponent, 'delEntry')(_MinimapComponent_delEntry)
-    
-    # arenaVehiclesPlugin
+
+    # ArenaVehiclesPlugin
     overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__switchToVehicle')(_ArenaVehiclesPlugin__switchToVehicle)
     overrideMethod(ArenaVehiclesPlugin, 'setSettings')(_ArenaVehiclesPlugin_setSettings)
     overrideMethod(ArenaVehiclesPlugin, 'updateSettings')(_ArenaVehiclesPlugin_updateSettings)
     overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__showFeatures')(_ArenaVehiclesPlugin__showFeatures)
     overrideMethod(ArenaVehiclesPlugin, '_ArenaVehiclesPlugin__showMinimapHP')(_ArenaVehiclesPlugin__showMinimapHP)
 
-    # personalEntriesPlugin
+    # PersonalEntriesPlugin
     overrideMethod(PersonalEntriesPlugin, '_PersonalEntriesPlugin__updateViewPointEntry')(_PersonalEntriesPlugin__updateViewPointEntry)
     overrideMethod(PersonalEntriesPlugin, 'start')(_PersonalEntriesPlugin_start)
     overrideMethod(PersonalEntriesPlugin, 'setSettings')(_PersonalEntriesPlugin_setSettings)
     overrideMethod(PersonalEntriesPlugin, 'updateSettings')(_PersonalEntriesPlugin_updateSettings)
     overrideMethod(PersonalEntriesPlugin, '_onVehicleFeedbackReceived')(_PersonalEntriesPlugin_onVehicleFeedbackReceived)
 
-    # postMortemControlMode
+    # PostMortemControlMode
     overrideMethod(PostMortemControlMode, 'onMinimapClicked')(_PostMortemControlMode_onMinimapClicked)
 
-    # settingsCore
+    # SettingsCore
     overrideMethod(SettingsCore, 'getSetting')(_SettingsCore_getSetting)
 
     global g_minimap
     g_minimap = Minimap()
-
 
 
 def fini():

@@ -17,33 +17,30 @@ import constants
 from PlayerEvents import g_playerEvents
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
-from helpers import dependency
-from skeletons.gui.app_loader import IAppLoader
-from skeletons.gui.battle_session import IBattleSessionProvider
 from gui.app_loader.settings import APP_NAME_SPACE
-from gui.shared import g_eventBus, events
-from gui.shared.gui_items.Vehicle import VEHICLE_CLASS_NAME
-from gui.shared.utils.functions import getBattleSubTypeBaseNumber
 from gui.battle_control import avatar_getter
 from gui.battle_control.arena_info.settings import INVALIDATE_OP
-from gui.battle_control.battle_constants import PLAYER_GUI_PROPS
-from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID
-from gui.battle_control.battle_constants import VEHICLE_VIEW_STATE
+from gui.battle_control.battle_constants import FEEDBACK_EVENT_ID, VEHICLE_VIEW_STATE
 from gui.battle_control.controllers.battle_field_ctrl import BattleFieldCtrl
+from gui.battle_control.controllers.dog_tags_ctrl import DogTagsController
 from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
-from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
+from gui.Scaleform.daapi.view.battle.classic.players_panel import PlayersPanel
 from gui.Scaleform.daapi.view.battle.epic.stats_exchange import EpicStatisticsDataController
 from gui.Scaleform.daapi.view.battle.shared import battle_loading
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
-from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers2d_settings
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
 from gui.Scaleform.daapi.view.battle.shared.page import SharedPage
 from gui.Scaleform.daapi.view.battle.shared.postmortem_panel import PostmortemPanel
 from gui.Scaleform.daapi.view.battle.shared.stats_exchange import BattleStatisticsDataController
-import gui.Scaleform.daapi.view.battle.shared.hint_panel.plugins as hint_plugin
-from gui.Scaleform.daapi.view.meta.PlayersPanelMeta import PlayersPanelMeta
-from gui.battle_control.controllers.dog_tags_ctrl import DogTagsController
+from gui.Scaleform.daapi.view.battle.shared.hint_panel import plugins as hint_panel_plugins
+from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
+from gui.shared import g_eventBus, events
+from gui.shared.gui_items.Vehicle import VEHICLE_CLASS_NAME
+from gui.shared.utils.functions import getBattleSubTypeBaseNumber
+from skeletons.gui.app_loader import IAppLoader
+from skeletons.gui.battle_session import IBattleSessionProvider
+from helpers import dependency
 
 # XFW
 from xfw import *
@@ -55,32 +52,8 @@ from xfw_actionscript.python import as_xfw_cmd
 import xvm_main.python.config as config
 
 # XVM Battle
-from consts import INT_CD, INV, SPOTTED_STATUS, XVM_BATTLE_COMMAND, XVM_BATTLE_EVENT
-import shared
-
-
-
-#
-# Constants
-#
-
-NOT_SUPPORTED_BATTLE_TYPES = [
-    constants.ARENA_GUI_TYPE.EVENT_BATTLES,
-    constants.ARENA_GUI_TYPE.BATTLE_ROYALE,
-    constants.ARENA_GUI_TYPE.MAPS_TRAINING,
-    constants.ARENA_GUI_TYPE.RTS,
-    constants.ARENA_GUI_TYPE.RTS_TRAINING,
-    constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
-    constants.ARENA_GUI_TYPE.COMP7,
-    31, # constants.ARENA_GUI_TYPE.WINBACK (removed in Lesta since 1.29) # TODO: fix broken totalEfficiency and hitLog due to broken PlayerPanels
-    33, # constants.ARENA_GUI_TYPE.TOURNAMENT_COMP7 (WG 1.24.1)
-    34, # constants.ARENA_GUI_TYPE.TRAINING_COMP7 (WG 1.24.1)
-    # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
-    # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
-    100,
-    104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
-    300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
-]
+from consts import NOT_SUPPORTED_BATTLE_TYPES, INT_CD, INV, SPOTTED_STATUS, XVM_BATTLE_COMMAND, XVM_BATTLE_EVENT
+import shared as xvm_battle_shared
 
 
 
@@ -142,7 +115,7 @@ def _DynSquadFunctional_updateVehiclesInfo(self, updated, arenaDP):
 def _DamagePanel_updateDeviceState(self, value):
     try:
         as_xfw_cmd(XVM_BATTLE_COMMAND.AS_UPDATE_DEVICE_STATE, *value)
-    except:
+    except Exception:
         logging.getLogger('XVM/Battle').exception('_DamagePanel_updateDeviceState')
 
 
@@ -152,7 +125,7 @@ def _ArenaVehiclesPlugin_setInAoI(self, entry, isInAoI):
         for vehicleID, entry2 in self._entries.iteritems():
             if entry == entry2:
                 g_battle.updateSpottedStatus(vehicleID, isInAoI)
-    except:
+    except Exception:
         logging.getLogger('XVM/Battle').exception('_ArenaVehiclesPlugin_setInAoI')
 
 
@@ -164,10 +137,12 @@ IGNORED_BATTLE_PAGES = ()
 def isIgnoredBattlePage(battlePage):
     return type(battlePage).__name__ in IGNORED_BATTLE_PAGES
 
+
 def _SharedPage_as_handlePostmortemTips(base, self, value):
     if not config.get('battle/showPostmortemTips') and not isIgnoredBattlePage(self):
         value = False
     base(self, value)
+
 
 def _SharedPage_switchToPostmortem(base, self):
     if config.get('battle/showPostmortemTips') and not isIgnoredBattlePage(self):
@@ -181,13 +156,13 @@ def _BattleStatisticsDataController_as_setQuestsInfoS(base, self, data, setForce
 
 
 # Hints
-def _hint_plugin_createPlugins(base):
+def _hint_panel_plugins_createPlugins(base):
     if not config.get('battle/showBattleHint'):
         return {}
     return base()
 
 
-# disable DogTag's
+# Disable DogTags
 def _DogTagsController__canShowMarkers(base, self):
     if not config.get('battle/showPrebattleDogTags', True):
         return False
@@ -206,7 +181,7 @@ def _PostmortemPanel__onKillerDogTagSet(base, self, dogTagInfo):
     base(self, dogTagInfo)
 
 
-def _PlayersPanelMetaas_setPanelHPBarVisibilityStateS(base, self, value):
+def _PlayersPanel_as_setPanelHPBarVisibilityStateS(base, self, value):
     if config.get('playersPanel/enabled') and config.get('playersPanel/removeHealthPoints'):
         return
     base(self, value)
@@ -248,7 +223,7 @@ class Battle(object):
         g_playerEvents.onAvatarBecomeNonPlayer -= self.onBecomeNonPlayer
 
     def onNewVehicleListReceived(self):
-        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
+        as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *xvm_battle_shared.getGlobalBattleData())
 
 
     def onBecomePlayer(self, *args, **kwargs):
@@ -484,7 +459,7 @@ class Battle(object):
         try:
             if cmd == XVM_BATTLE_COMMAND.REQUEST_BATTLE_GLOBAL_DATA:
                 self.xvm_battle_swf_initialized = True
-                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *shared.getGlobalBattleData())
+                as_xfw_cmd(XVM_BATTLE_COMMAND.AS_RESPONSE_BATTLE_GLOBAL_DATA, *xvm_battle_shared.getGlobalBattleData())
                 return (None, True)
 
             elif cmd == XVM_BATTLE_COMMAND.BATTLE_CTRL_SET_VEHICLE_DATA:
@@ -501,23 +476,6 @@ class Battle(object):
             return (None, True)
 
         return (None, False)
-
-    # misc
-
-    def _getVehicleDamageType(self, attackerID):
-        entryVehicle = avatar_getter.getArena().vehicles.get(attackerID, None)
-        if not entryVehicle:
-            return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
-        if attackerID == avatar_getter.getPlayerVehicleID():
-            return markers2d_settings.DAMAGE_TYPE.FROM_PLAYER
-        entityName = self.sessionProvider.getCtx().getPlayerGuiProps(attackerID, entryVehicle['team'])
-        if entityName == PLAYER_GUI_PROPS.squadman:
-            return markers2d_settings.DAMAGE_TYPE.FROM_SQUAD
-        if entityName == PLAYER_GUI_PROPS.ally:
-            return markers2d_settings.DAMAGE_TYPE.FROM_ALLY
-        if entityName == PLAYER_GUI_PROPS.enemy:
-            return markers2d_settings.DAMAGE_TYPE.FROM_ENEMY
-        return markers2d_settings.DAMAGE_TYPE.FROM_UNKNOWN
 
 
 
@@ -542,10 +500,10 @@ def init():
         overrideMethod(SharedPage, 'as_setPostmortemTipsVisibleS')(_SharedPage_as_handlePostmortemTips)
     overrideMethod(SharedPage, '_switchToPostmortem')(_SharedPage_switchToPostmortem)
     overrideMethod(BattleStatisticsDataController, 'as_setQuestsInfoS')(_BattleStatisticsDataController_as_setQuestsInfoS)
-    overrideMethod(hint_plugin, 'createPlugins')(_hint_plugin_createPlugins)
+    overrideMethod(hint_panel_plugins, 'createPlugins')(_hint_panel_plugins_createPlugins)
     overrideMethod(PostmortemPanel, 'onDogTagKillerInPlaySound')(_PostmortemPanel_onDogTagKillerInPlaySound)
     overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')(_PostmortemPanel__onKillerDogTagSet)
-    overrideMethod(PlayersPanelMeta, 'as_setPanelHPBarVisibilityStateS')(_PlayersPanelMetaas_setPanelHPBarVisibilityStateS)
+    overrideMethod(PlayersPanel, 'as_setPanelHPBarVisibilityStateS')(_PlayersPanel_as_setPanelHPBarVisibilityStateS)
     
     if getRegion() != 'RU':
         overrideMethod(DogTagsController, '_DogTagsController__canShowMarkers')(_DogTagsController__canShowMarkers)

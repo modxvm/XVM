@@ -12,6 +12,8 @@ import logging
 import math
 
 # BigWorld
+import Math
+from PlayerEvents import g_playerEvents
 from AvatarInputHandler.control_modes import SniperControlMode
 from AvatarInputHandler.DynamicCameras.ArcadeCamera import ArcadeCamera
 from AvatarInputHandler.DynamicCameras.arcade_camera_helper import MinMax, ZoomStateSwitcher
@@ -19,15 +21,13 @@ from AvatarInputHandler.DynamicCameras.SniperCamera import SniperCamera
 from AvatarInputHandler.DynamicCameras.StrategicCamera import StrategicCamera
 from gui.battle_control.battle_constants import CROSSHAIR_VIEW_ID
 from gui.Scaleform.daapi.view.battle.shared.crosshair.container import CrosshairPanelContainer
-from helpers import dependency
-from helpers.EffectsList import _FlashBangEffectDesc
-import Math
-from PlayerEvents import g_playerEvents
 from skeletons.gui.battle_session import IBattleSessionProvider
 from realm import CURRENT_REALM
+from helpers import dependency
+from helpers.EffectsList import _FlashBangEffectDesc
 
 # XFW
-from xfw.events import overrideMethod, registerEvent
+from xfw import *
 
 # XFW Actionscript
 from xfw_actionscript.python import as_xfw_cmd
@@ -110,7 +110,7 @@ def _disableShotRecoilEffect(dcfg):
 
 
 #
-# Common / Zoom State
+# Common / ZoomState
 #
 
 def _ZoomStateSwitcher__isEnabledBySettings(base, self, index):
@@ -122,7 +122,7 @@ def _ZoomStateSwitcher__isEnabledBySettings(base, self, index):
 
 
 #
-# Common / Flash Bang
+# Common / FlashBang
 #
 
 def _FlashBangEffectDesc_create(base, self, model, list, args):
@@ -133,12 +133,12 @@ def _FlashBangEffectDesc_create(base, self, model, list, args):
 
 
 #
-# Arcade Camera
+# ArcadeCamera
 #
 
 def _ArcadeCamera_create(base, self, onChangeControlMode = None, postmortemMode = False, smartPointCalculator = True):
     if config.get('battle/camera/enabled'):
-        # 'postmortemMode' is not work
+        # 'postmortemMode' does not work
         mode = 'arcade' if not self._ArcadeCamera__postmortemMode else 'postmortem'
         c = config.get('battle/camera/%s' % mode)
         cfg = self._cfg
@@ -182,7 +182,7 @@ def _ArcadeCamera_enable(self, *args, **kwargs):
 
 
 #
-# Sniper Camera
+# SniperCamera
 #
 
 def _SniperCamera_create(base, self, onChangeControlMode = None):
@@ -234,7 +234,7 @@ def _SniperCamera_disable(self):
 
 
 #
-# Sniper Camera / Binoculars
+# SniperCamera / Binoculars
 #
 
 def _SniperControlMode__setupBinoculars(base, self, optDevices):
@@ -245,7 +245,7 @@ def _SniperControlMode__setupBinoculars(base, self, optDevices):
 
 
 #
-# Sniper Camera / Crosshairs
+# SniperCamera / Crosshairs
 #
 
 def _CrosshairPanelContainer_as_setSettingsS(base, self, data):
@@ -258,7 +258,7 @@ def _CrosshairPanelContainer_as_setSettingsS(base, self, data):
 
 
 #
-# Strategic Camera
+# StrategicCamera
 #
 
 def _StrategicCamera_create_common(self):
@@ -291,34 +291,34 @@ def _StrategicCamera_create_lesta(base, self, onChangeControlMode = None, useSho
 #
 
 def init():
-    # avatar
+    # Avatar
     g_playerEvents.onAvatarBecomePlayer += _PlayerAvatar_onBecomePlayer
     g_playerEvents.onAvatarBecomeNonPlayer += _PlayerAvatar_onBecomeNonPlayer
 
-    # common / zoom state
+    # Common / ZoomState
     overrideMethod(ZoomStateSwitcher, '_ZoomStateSwitcher__isEnabledBySettings')(_ZoomStateSwitcher__isEnabledBySettings)
 
-    # common / flash bang
+    # Common / FlashBang
     overrideMethod(_FlashBangEffectDesc, 'create')(_FlashBangEffectDesc_create)
 
-    # arcade camera
+    # ArcadeCamera
     overrideMethod(ArcadeCamera, 'create')(_ArcadeCamera_create)
     registerEvent(ArcadeCamera, 'enable')(_ArcadeCamera_enable)
 
-    # sniper camera
+    # SniperCamera
     overrideMethod(SniperCamera, 'create')(_SniperCamera_create)
     overrideMethod(SniperCamera, '_handleSettingsChange')(_SniperCamera_handleSettingsChange)
     overrideMethod(SniperCamera, 'enable')(_SniperCamera_enable)
     registerEvent(SniperCamera, '_updateSettingsFromServer')(_SniperCamera_updateSettingsFromServer)
     registerEvent(SniperCamera, 'disable')(_SniperCamera_disable)
 
-    # sniper camera / binoculars
+    # SniperCamera / Binoculars
     overrideMethod(SniperControlMode, '_SniperControlMode__setupBinoculars')(_SniperControlMode__setupBinoculars)
 
-    # sniper camera / crosshair
+    # SniperCamera / Crosshair
     overrideMethod(CrosshairPanelContainer, 'as_setSettingsS')(_CrosshairPanelContainer_as_setSettingsS)
 
-    # strategic camera
+    # StrategicCamera
     if CURRENT_REALM == 'RU':
         overrideMethod(StrategicCamera, 'create')(_StrategicCamera_create_lesta)
     else:
@@ -326,6 +326,6 @@ def init():
 
 
 def fini():
-    # avatar
+    # Avatar
     g_playerEvents.onAvatarBecomePlayer -= _PlayerAvatar_onBecomePlayer
     g_playerEvents.onAvatarBecomeNonPlayer -= _PlayerAvatar_onBecomeNonPlayer

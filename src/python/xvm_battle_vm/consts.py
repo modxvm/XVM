@@ -10,46 +10,11 @@ Copyright (c) 2013-2024 XVM Contributors
 # BigWorld
 import constants
 
-# XFW
-from xfw import *
-
 
 
 #
 # Constants
 #
-
-class DAMAGE_TYPE(object):
-    FROM_UNKNOWN = 0
-    FROM_ALLY = 1
-    FROM_ENEMY = 2
-    FROM_SQUAD = 3
-    FROM_PLAYER = 4
-
-
-class XVM_VM_COMMAND(object):
-    LOG = "xfw.log"
-    INITIALIZED = "initialized"
-
-
-class BC(object):
-    setVehiclesData = 'BC_setVehiclesData'
-    addVehiclesInfo = 'BC_addVehiclesInfo'
-    updateVehiclesData = 'BC_updateVehiclesData'
-    updateVehicleStatus = 'BC_updateVehicleStatus'
-    updatePlayerStatus = 'BC_updatePlayerStatus'
-    setFrags = 'BC_setFrags'
-    updateVehiclesStat = 'BC_updateVehiclesStat'
-    updatePersonalStatus = 'BC_updatePersonalStatus'
-    setUserTags = 'BC_setUserTags'
-    updateUserTags = 'BC_updateUserTags'
-    setPersonalStatus = 'BC_setPersonalStatus'
-    updateInvitationsStatuses = 'BC_updateInvitationsStatuses'
-
-
-class AS_SYMBOLS(object):
-    AS_VEHICLE_MARKER = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
-
 
 UNSUPPORTED_GUI_TYPES = [
     constants.ARENA_GUI_TYPE.EVENT_BATTLES,
@@ -72,3 +37,35 @@ UNSUPPORTED_BATTLE_TYPES = [
     constants.ARENA_BONUS_TYPE.EVENT_BATTLES,
     constants.ARENA_BONUS_TYPE.COMP7
 ]
+
+class XVM_VM_COMMAND(object):
+    LOG = "xfw.log"
+    INITIALIZED = "initialized"
+
+
+class XVM_VM_AS_SYMBOLS(object):
+    AS_VEHICLE_MARKER = 'com.xvm.vehiclemarkers.ui::XvmVehicleMarker'
+
+
+class BC(object):
+    setVehiclesData = 'BC_setVehiclesData'
+    addVehiclesInfo = 'BC_addVehiclesInfo'
+    updateVehiclesData = 'BC_updateVehiclesData'
+    updateVehicleStatus = 'BC_updateVehicleStatus'
+    updatePlayerStatus = 'BC_updatePlayerStatus'
+    setFrags = 'BC_setFrags'
+    updateVehiclesStat = 'BC_updateVehiclesStat'
+    updatePersonalStatus = 'BC_updatePersonalStatus'
+    setUserTags = 'BC_setUserTags'
+    updateUserTags = 'BC_updateUserTags'
+    setPersonalStatus = 'BC_setPersonalStatus'
+    updateInvitationsStatuses = 'BC_updateInvitationsStatuses'
+
+
+# Backported only for WG client due to rework
+class DAMAGE_TYPE(object):
+    FROM_UNKNOWN = 0
+    FROM_ALLY = 1
+    FROM_ENEMY = 2
+    FROM_SQUAD = 3
+    FROM_PLAYER = 4

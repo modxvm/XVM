@@ -13,10 +13,9 @@ import logging
 # BigWorld
 from Avatar import PlayerAvatar
 from gui.Scaleform.daapi.view.battle.classic.stats_exchange import FragsCollectableStats
-from gui.shared import g_eventBus
 
 # XFW
-from xfw.events import registerEvent, overrideMethod
+from xfw import *
 
 # XVM Main
 from xvm_main.python import config
@@ -90,7 +89,7 @@ def _FragCorrelationPanel_getTotalStats(base, self, arenaVisitor, sessionProvide
 def init():
     registerEvent(PlayerAvatar, '_PlayerAvatar__destroyGUI')(_PlayerAvatar__destroyGUI)
     overrideMethod(FragsCollectableStats, 'getTotalStats')(_FragCorrelationPanel_getTotalStats)
-    pass
+
 
 def fini():
     pass

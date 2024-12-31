@@ -18,8 +18,7 @@ from PlayerEvents import g_playerEvents
 from gui.shared import g_eventBus, events
 
 # XFW
-from xfw import unicode_to_ascii
-from xfw.events import overrideMethod
+from xfw import *
 
 # XVM Main
 import xvm_main.python.minimap_circles as minimap_circles
@@ -39,7 +38,7 @@ _xvm_play_data = None
 
 
 #
-# handlers
+# Handlers
 #
 
 def onAvatarBecomePlayer(*args, **kwargs):

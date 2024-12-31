@@ -26,7 +26,7 @@ def xfw_module_init():
         battleloading.init()
         fragCorrelationPanel.init()
         __initialized = True
-    
+
 
 def xfw_module_fini():
     global __initialized

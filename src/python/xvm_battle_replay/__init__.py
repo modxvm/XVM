@@ -22,7 +22,7 @@ def xfw_module_init():
     if not __initialized:
         replay.init()
         __initialized = True
-    
+
 
 def xfw_module_fini():
     global __initialized
