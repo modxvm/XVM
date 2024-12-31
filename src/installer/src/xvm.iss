@@ -1,5 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
-// Copyright (c) 2017-2024 XVM Contributors
+// Copyright (c) 2017-2025 XVM Contributors
 
 #define APP_WEBSITE    "https://modxvm.com/"
 #define APP_DIR_UNINST "xvm_uninst"

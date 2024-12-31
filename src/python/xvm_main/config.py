@@ -1,6 +1,6 @@
 """
 SPDX-License-Identifier: GPL-3.0-or-later
-Copyright (c) 2013-2024 XVM Contributors
+Copyright (c) 2013-2025 XVM Contributors
 """
 
 __all__ = ['load', 'get', 'config_data', 'lang_data']

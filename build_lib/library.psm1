@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
-# Copyright (c) 2013-2024 XVM Contributors
+# Copyright (c) 2013-2025 XVM Contributors
 
 $xvm_pslib_version="2020.05.03"
 

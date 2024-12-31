@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # SPDX-License-Identifier: LGPL-3.0-or-later
-# Copyright (c) 2013-2024 XVM Contributors
+# Copyright (c) 2013-2025 XVM Contributors
 
 XVMINST_ROOT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 XVMBUILD_ROOT_PATH="$XVMINST_ROOT_PATH/../../"

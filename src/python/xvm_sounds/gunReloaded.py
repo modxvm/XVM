@@ -1,6 +1,6 @@
 """
 SPDX-License-Identifier: GPL-3.0-or-later
-Copyright (c) 2013-2024 XVM Contributors
+Copyright (c) 2013-2025 XVM Contributors
 Copyright (c) 2018-2021 night_dragon_on <https://kr.cm/f/p/14897/>
 """
 

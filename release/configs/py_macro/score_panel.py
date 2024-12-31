@@ -1,6 +1,6 @@
 """
 SPDX-License-Identifier: GPL-3.0-or-later
-Copyright (c) 2013-2024 XVM Contributors
+Copyright (c) 2013-2025 XVM Contributors
 """
 
 import xvm_battle.python.fragCorrelationPanel as panel
