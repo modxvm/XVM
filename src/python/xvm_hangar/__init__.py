@@ -283,12 +283,6 @@ def Hangar_as_updateCarouselEventEntryStateS(base, self, isVisible):
     return base(self, isVisible)
 
 
-def Hangar_as_setRewardKitsVisibleS(base, self, isVisible):
-    if not config.get('hangar/showLootboxesWidget', True):
-        isVisible = False
-    return base(self, isVisible)
-
-
 def Hangar_as_setEventTournamentBannerVisibleS(base, self, alias, visible):
     if not config.get('hangar/showEventTournamentWidget', True):
         visible = False
@@ -429,9 +423,6 @@ def xfw_module_init():
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
-            # WG NY Lootboxes
-            # TODO: remove after WG NY
-            overrideMethod(Hangar, 'as_setRewardKitsVisibleS')(Hangar_as_setRewardKitsVisibleS)
             overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
