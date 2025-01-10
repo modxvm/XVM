@@ -449,6 +449,9 @@ def xfw_module_init():
         import counters
         counters.init()
 
+        import messenger_bar
+        messenger_bar.init()
+
         import svcmsg
         svcmsg.init()
 
@@ -468,6 +471,9 @@ def xfw_module_fini():
 
         import counters
         counters.fini()
+
+        import messenger_bar
+        messenger_bar.fini()
 
         import svcmsg
         svcmsg.fini()

@@ -7,7 +7,7 @@ Copyright (c) 2013-2025 XVM Contributors
 # Imports
 #
 
-# WoT
+# BigWorld
 from gui.impl.gen.view_models.views.lobby.crew.common.crew_books_button_model import CrewBooksButtonModel
 from gui.Scaleform.daapi.view.lobby.customization.customization_bottom_panel import CustomizationBottomPanel
 from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel

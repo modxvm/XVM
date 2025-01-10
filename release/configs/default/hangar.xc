@@ -440,6 +440,9 @@
     // true - allow notification list (service channel) button blinking.
     // true - разрешить мигание кнопки центра оповещений (системного канала).
     "allowNotificationsButtonBlinking": true,
+    // true - allow messenger bar channel (clan or private chat) button blinking.
+    // true - разрешить мигание кнопок чата клана или с игроком.
+    "allowChannelButtonBlinking": true,
     // Parameters for tank carousel.
     // Параметры карусели танков.
     "carousel": ${"carousel.xc":"carousel"},

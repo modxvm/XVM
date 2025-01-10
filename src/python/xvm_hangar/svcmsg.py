@@ -7,7 +7,7 @@ Copyright (c) 2013-2025 XVM Contributors
 # Imports
 #
 
-# WoT
+# BigWorld
 from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 
 # XFW
