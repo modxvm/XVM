@@ -30,7 +30,6 @@ from gui.game_control.PromoController import PromoController
 from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
 from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
-from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_header import HangarHeader
@@ -407,7 +406,6 @@ def xfw_module_init():
         overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(_MessengerBar__updateSessionStatsBtn)
         overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(_SessionStatsButton__updateBatteleCount)
 
-        overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(ProgressiveItemsRewardHandler_showAward)
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
         overrideMethod(Hangar, 'as_updateCarouselEventEntryStateS')(Hangar_as_updateCarouselEventEntryStateS)
@@ -419,10 +417,12 @@ def xfw_module_init():
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
             from gui.impl.lobby.comp7.tournaments_widget import TournamentsWidgetComponent
             from gui.impl.lobby.lootbox_system.entry_point import LootBoxSystemEntryPoint
+            from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
+            overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
             overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
@@ -430,9 +430,11 @@ def xfw_module_init():
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
         else:
             from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
+            from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 
             overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
+            overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
 
         import battletype
         battletype.init()
