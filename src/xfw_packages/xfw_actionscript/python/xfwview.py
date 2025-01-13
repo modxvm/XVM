@@ -57,6 +57,7 @@ _WOT_ROOT = '../../../'
 
 
 class XfwArenaGuiType:
+    WINBACK = 31 # constants.ARENA_GUI_TYPE.WINBACK (removed in Lesta since 1.29)
     # WG 1.24.1
     TOURNAMENT_COMP7 = 33
     TRAINING_COMP7 = 34
@@ -69,7 +70,7 @@ class XfwArenaGuiType:
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
     COMP7_RANGE = (ARENA_GUI_TYPE.COMP7, TOURNAMENT_COMP7, TRAINING_COMP7, )
     STORY_MODE_RANGE = (STORY_MODE_ONBOARDING, STORY_MODE, )
-    EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, )
+    EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, WINBACK, )
     # List for event battles to ignore basic XVM features (clock and sixth sense)
     # Mainly used for special events with GF usage in battle
     EVENT_SPECIAL_RANGE = (COSMIC_EVENT, )

@@ -39,7 +39,6 @@ projects="
     xvm_battle_rts
     xvm_battle_storymode
     xvm_battle_stronghold
-    xvm_battle_winback
 "
 
 # special projects for WG
