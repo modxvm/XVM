@@ -256,7 +256,7 @@ def _PostMortemControlMode_onMinimapClicked(base, self, worldPos):
 
 def _SettingsCore_getSetting(base, self, name):
     value = base(self, name)
-    if g_minimap.active:
+    if g_minimap and g_minimap.active:
         if _in_PersonalEntriesPlugin_setSettings:
             if name in LINES_SETTINGS:
                 if g_minimap.opt_linesEnabled:
