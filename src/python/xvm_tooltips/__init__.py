@@ -184,6 +184,12 @@ def VehicleInfoTooltipData_packBlocks(base, self, *args, **kwargs):
     return result
 
 
+def _VehicleInfoTooltipData__createStatusBlock(base, self, vehicle, items, statsConfig, *args, **kwargs):
+    if config.get('tooltips/hideCrystalBlock'):
+        statsConfig.showEarnCrystals = False
+    return base(self, vehicle, items, statsConfig, *args, **kwargs)
+
+
 def SimplifiedStatsBlockConstructor_construct(base, self):
     if config.get('tooltips/hideSimplifiedVehParams'):
         return []
@@ -203,6 +209,7 @@ def AdditionalStatsBlockConstructor_construct(base, self):
         return []
     else:
         return base(self)
+
 
 # TODO:1.5.0: disabled, is required?
 #@overrideMethod(text_styles, "_getStyle")
@@ -614,7 +621,6 @@ def xfw_module_init():
         registerEvent(ToolTip, 'hide', prepend=True)(_ToolTip_hide)
         overrideMethod(tooltips_vehicle.VehicleInfoTooltipData, '_packBlocks')(VehicleInfoTooltipData_packBlocks)
         overrideMethod(tooltips_vehicle.SimplifiedStatsBlockConstructor, 'construct')(SimplifiedStatsBlockConstructor_construct)
-        overrideMethod(tooltips_vehicle.CrystalBlockConstructor, 'construct')(CrystalBlockConstructor_construct)
         overrideMethod(tooltips_vehicle.AdditionalStatsBlockConstructor, 'construct')(AdditionalStatsBlockConstructor_construct)
         overrideMethod(tooltips_vehicle.StatusBlockConstructor, 'construct')(StatusBlockConstructor_construct)
         overrideMethod(tooltips_vehicle.CommonStatsBlockConstructor, 'construct')(CommonStatsBlockConstructor_construct)
@@ -623,6 +629,10 @@ def xfw_module_init():
         overrideMethod(ModuleBlockTooltipData, '_packBlocks')(ModuleBlockTooltipData_packBlocks)
         registerEvent(ItemsRequester, '_invalidateItems')(ItemsRequester_invalidateItems)
         registerEvent(ItemsRequester, 'clear')(ItemsRequester_clear)
+        if getRegion() != 'RU':
+            overrideMethod(tooltips_vehicle.CrystalBlockConstructor, 'construct')(CrystalBlockConstructor_construct)
+        else:
+            overrideMethod(tooltips_vehicle.VehicleInfoTooltipData, '_VehicleInfoTooltipData__createStatusBlock')(_VehicleInfoTooltipData__createStatusBlock)
 
         g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, tooltips_clear_cache)
 
