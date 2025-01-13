@@ -77,7 +77,7 @@ package com.xvm.battle.shared.battleloading
         private var _icoIGR:BattleAtlasSprite;
         private var _icoTester:BattleAtlasSprite;
         private var _backTester:BattleAtlasSprite;
-        private var _selfBg:BattleAtlasSprite;
+        private var _selfBg:*;
         CLIENT::WG {
             private var _prestigeLevel:PrestigeLevel;
         }
@@ -120,7 +120,7 @@ package com.xvm.battle.shared.battleloading
         // CTOR
 
         public function XvmBattleLoadingItemRendererProxyBase(ui:BasePlayerItemRenderer, uiType:String,
-            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:*, invalidateFunc:Function)
         {
             _ui = ui;
             _uiType = uiType;
@@ -353,7 +353,7 @@ package com.xvm.battle.shared.battleloading
             return _playerActionMarker;
         }
 
-        public function get selfBg():BattleAtlasSprite
+        public function get selfBg():*
         {
             return _selfBg;
         }

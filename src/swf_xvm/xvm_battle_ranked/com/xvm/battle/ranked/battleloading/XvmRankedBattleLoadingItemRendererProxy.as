@@ -17,7 +17,7 @@ package com.xvm.battle.ranked.battleloading
         private var _rankIcon:BattleAtlasSprite;
 
         public function XvmRankedBattleLoadingItemRendererProxy(ui:BasePlayerItemRenderer, uiType:String,
-            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:*, invalidateFunc:Function)
         {
             _rankIcon = XfwAccess.getPrivateField(ui as RankedPlayerItemRenderer, 'xfw_rankIcon');
             super(ui, uiType, container, position, isEnemy, selfBg, invalidateFunc);

@@ -15,7 +15,7 @@ package com.xvm.battle.classic.battleloading
         private var _squad:BattleAtlasSprite;
 
         public function XvmRandomBattleLoadingItemRendererProxy(ui:BasePlayerItemRenderer, uiType:String,
-            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:BattleAtlasSprite, invalidateFunc:Function)
+            container:BaseRendererContainer, position:int, isEnemy:Boolean, selfBg:*, invalidateFunc:Function)
         {
             var randomContainer:RandomRendererContainer = container as RandomRendererContainer;
             if (isEnemy)

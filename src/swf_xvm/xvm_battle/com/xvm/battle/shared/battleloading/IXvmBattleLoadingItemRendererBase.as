@@ -24,7 +24,7 @@ package com.xvm.battle.shared.battleloading
         function get vehicleLevelIcon():BattleAtlasSprite;
         function get vehicleTypeIcon():BattleAtlasSprite;
         function get playerActionMarker():PlayerActionMarker;
-        function get selfBg():BattleAtlasSprite;
+        function get selfBg():*;
         function get icoIGR():BattleAtlasSprite;
         CLIENT::WG {
             function get prestigeLevel():PrestigeLevel;
