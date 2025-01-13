@@ -92,7 +92,12 @@ package com.xvm.battle.epicrandom.battleloading
             //Xvm.swfProfilerBegin("UI_EpicRandomBattleLoading.setup()");
             try
             {
-                cfg = battleLoadingForm.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+                CLIENT::WG {
+                    cfg = battleLoadingForm.formBackgroundTable.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+                }
+                CLIENT::LESTA {
+                    cfg = battleLoadingForm.bg.visible ? Config.config.battleLoading : Config.config.battleLoadingTips;
+                }
 
                 deleteComponents();
 
