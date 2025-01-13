@@ -48,7 +48,12 @@ package com.xvm.battle.shared.battleloading
             var notTipsForm:Boolean;
             try
             {
-                notTipsForm = form["formBackgroundTable"].visible;
+                CLIENT::WG {
+                    notTipsForm = form["formBackgroundTable"].visible;
+                }
+                CLIENT::LESTA {
+                    notTipsForm = form["bg"].visible;
+                }
             }
             catch (ex:Error)
             {
