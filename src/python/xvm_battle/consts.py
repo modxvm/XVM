@@ -24,6 +24,7 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     constants.ARENA_GUI_TYPE.RTS_BOOTCAMP,
     constants.ARENA_GUI_TYPE.COMP7,
     31, # constants.ARENA_GUI_TYPE.WINBACK (removed in Lesta since 1.29)
+    32, # constants.ARENA_GUI_TYPE.BOB (Lesta 1.32)
     33, # constants.ARENA_GUI_TYPE.TOURNAMENT_COMP7 (WG 1.24.1)
     34, # constants.ARENA_GUI_TYPE.TRAINING_COMP7 (WG 1.24.1)
     # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
