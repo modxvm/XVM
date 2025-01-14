@@ -54,14 +54,16 @@ if getRegion() != 'RU':
 # Lesta-only filter popover sections
 else:
     try:
-        from account_helpers.AccountSettings import VERSUS_AI_CAROUSEL_FILTER_2
-        from account_helpers.AccountSettings import VERSUS_AI_CAROUSEL_FILTER_CLIENT_1
+        from account_helpers.AccountSettings import VERSUS_AI_CAROUSEL_FILTER_2, BOB_CAROUSEL_FILTER_2
+        from account_helpers.AccountSettings import VERSUS_AI_CAROUSEL_FILTER_CLIENT_1, BOB_CAROUSEL_FILTER_CLIENT_1
 
         _ADDITIONAL_SUPPORTED_SECTIONS = (
             VERSUS_AI_CAROUSEL_FILTER_2,
+            BOB_CAROUSEL_FILTER_2,
         )
         _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS = (
             VERSUS_AI_CAROUSEL_FILTER_CLIENT_1,
+            BOB_CAROUSEL_FILTER_CLIENT_1
         )
     except Exception:
         logging.getLogger('XVM/TankCarousel').exception('filterSections/Lesta')
