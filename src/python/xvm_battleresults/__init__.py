@@ -108,7 +108,7 @@ def _DynamicPremiumState_getVO(base, self):
 
 
 #
-# StatsCompose
+# StatsComposer
 #
 
 def _StatsComposer__init__(base, self, *args):
@@ -119,6 +119,17 @@ def _StatsComposer__init__(base, self, *args):
         self._block.addNextComponent(_XVM_DATA_STATS_BLOCK.clone())
     except:
         logging.getLogger('XVM/BattleResults').exception('_StatsComposer__init__')
+
+
+
+#
+# PlayerSatisfactionWidget/ShowRateSatisfactionCmp
+#
+
+def _ShowRateSatisfactionCmp_convert(base, self, value, reusable):
+    if not config.get('battleResults/showPlayerSatisfactionWidget', True):
+        return False
+    return base(self, value, reusable)
 
 
 
@@ -138,6 +149,10 @@ def xfw_module_init():
         overrideMethod(BattleResultsWindow, 'as_setDataS')(BattleResultsWindow_as_setDataS)
         overrideMethod(DynamicPremiumState, 'getVO')(_DynamicPremiumState_getVO)
         overrideMethod(composer.StatsComposer, '__init__')(_StatsComposer__init__)
+        if getRegion() != 'RU':
+            from gui.battle_results.components.common import ShowRateSatisfactionCmp
+
+            overrideMethod(ShowRateSatisfactionCmp, '_convert')(_ShowRateSatisfactionCmp_convert)
         __initialized = True
 
 

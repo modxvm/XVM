@@ -22,6 +22,9 @@
     // true - display standard interface for the "FrontLine" mode.
     // true - отображать стандартный интерфейс для режима "Линия фронта".
     "showStandardFrontLineInterface": true,
+    // true - display battle rating (player satisfaction) widget (WG only, 1.27.1+).
+    // true - отображать виджет оценки боя игроком.
+    "showPlayerSatisfactionWidget": true,
     // Customize "Manageable bonus to experience" panel.
     // Настройка панели "Управляемый бонус к опыту".
     "bonusState": {
