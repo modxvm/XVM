@@ -22,7 +22,7 @@ from gui.battle_results.components import base
 from gui.battle_results.components.personal import DynamicPremiumState
 
 # XFW
-from xfw.events import overrideMethod
+from xfw import *
 
 # XFW Actionscript
 from xfw_actionscript.python import swf_loaded_info
