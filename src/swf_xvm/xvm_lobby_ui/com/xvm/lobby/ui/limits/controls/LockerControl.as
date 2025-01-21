@@ -89,8 +89,9 @@ package com.xvm.lobby.ui.limits.controls
 
             alpha = ALPHA_MOUSE_OUT;
 
-            buttonMode = true;
             mouseEnabled = true;
+            _iconLocked.buttonMode = true;
+            _iconUnlocked.buttonMode = true;
             addEventListener(MouseEvent.ROLL_OVER, this.handleMouseRollOver);
             addEventListener(MouseEvent.ROLL_OUT, this.handleMouseRollOut);
             addEventListener(MouseEvent.MOUSE_DOWN, this.handleMousePress);

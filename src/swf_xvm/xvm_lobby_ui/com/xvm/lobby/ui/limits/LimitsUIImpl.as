@@ -12,6 +12,9 @@ package com.xvm.lobby.ui.limits
     import flash.events.*;
     import net.wg.data.constants.generated.*;
     import net.wg.gui.lobby.*;
+    CLIENT::LESTA {
+        import net.wg.gui.lobby.header.vo.*;
+    }
     import net.wg.gui.lobby.header.events.*;
     import net.wg.gui.lobby.header.headerButtonBar.*;
 
@@ -34,9 +37,13 @@ package com.xvm.lobby.ui.limits
 
         private var page:LobbyPage = null;
 
+        CLIENT::LESTA {
+            private var _processed:Boolean = false;
+        }
+
+        private var crystalLocker:LockerControl = null;
         private var goldLocker:LockerControl = null;
         private var freeXpLocker:LockerControl = null;
-        private var crystalLocker:LockerControl = null;
 
         private var _disposed:Boolean = false;
 
@@ -50,11 +57,31 @@ package com.xvm.lobby.ui.limits
         public function init(page:LobbyPage):void
         {
             this.page = page;
+            var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
+
+            if (Config.config.hangar.enableCrystalLocker)
+            {
+                crystalLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                crystalLocker.name = CURRENCIES_CONSTANTS.CRYSTAL;
+                crystalLocker.addEventListener(Event.SELECT, onCrystalLockerSwitched, false, 0, true);
+                CLIENT::LESTA {
+                    crystalLocker.addEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver, false, 0, true);
+                    crystalLocker.addEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut, false, 0, true);
+                }
+                crystalLocker.toolTip = Locale.get(L10N_CRYSTAL_UNLOCKED_TOOLTIP);
+                crystalLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CRYSTAL_LOCK_STATUS, false);
+                crystalLocker.visible = false;
+            }
 
             if (Config.config.hangar.enableGoldLocker)
             {
                 goldLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                goldLocker.name = CURRENCIES_CONSTANTS.GOLD;
                 goldLocker.addEventListener(Event.SELECT, onGoldLockerSwitched, false, 0, true);
+                CLIENT::LESTA {
+                    goldLocker.addEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver, false, 0, true);
+                    goldLocker.addEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut, false, 0, true);
+                }
                 goldLocker.toolTip = Locale.get(L10N_GOLD_UNLOCKED_TOOLTIP);
                 goldLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_GOLD_LOCK_STATUS, false);
                 goldLocker.visible = false;
@@ -63,19 +90,15 @@ package com.xvm.lobby.ui.limits
             if (Config.config.hangar.enableFreeXpLocker)
             {
                 freeXpLocker = page.header.addChild(new LockerControl()) as LockerControl;
+                freeXpLocker.name = CURRENCIES_CONSTANTS.FREE_XP;
                 freeXpLocker.addEventListener(Event.SELECT, onFreeXpLockerSwitched, false, 0, true);
+                CLIENT::LESTA {
+                    freeXpLocker.addEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver, false, 0, true);
+                    freeXpLocker.addEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut, false, 0, true);
+                }
                 freeXpLocker.toolTip = Locale.get(L10N_FREEXP_UNLOCKED_TOOLTIP);
                 freeXpLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_FREEXP_LOCK_STATUS, false);
                 freeXpLocker.visible = false;
-            }
-
-            if (Config.config.hangar.enableCrystalLocker)
-            {
-                crystalLocker = page.header.addChild(new LockerControl()) as LockerControl;
-                crystalLocker.addEventListener(Event.SELECT, onCrystalLockerSwitched, false, 0, true);
-                crystalLocker.toolTip = Locale.get(L10N_CRYSTAL_UNLOCKED_TOOLTIP);
-                crystalLocker.selected = Xfw.cmd(XvmCommands.LOAD_SETTINGS, SETTINGS_CRYSTAL_LOCK_STATUS, false);
-                crystalLocker.visible = false;
             }
 
             page.header.headerButtonBar.addEventListener(HeaderEvents.HEADER_ITEMS_REPOSITION, this.onHeaderButtonsReposition, false, 0, true);
@@ -83,22 +106,60 @@ package com.xvm.lobby.ui.limits
 
         public function dispose():void
         {
+            var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
+
+            if (crystalLocker)
+            {
+                CLIENT::LESTA {
+                    var crystalControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.CRYSTAL);
+                    if (crystalControl)
+                    {
+                        crystalControl.removeEventListener(MouseEvent.ROLL_OVER, onControlMouseRollOver);
+                        crystalControl.removeEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
+                    }
+
+                    goldLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
+                    goldLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
+                }
+                crystalLocker.removeEventListener(Event.SELECT, onCrystalLockerSwitched);
+                crystalLocker.dispose();
+                crystalLocker = null;
+            }
+
             if (goldLocker)
             {
+                CLIENT::LESTA {
+                    var goldControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.GOLD);
+                    if (goldControl)
+                    {
+                        goldControl.removeEventListener(MouseEvent.ROLL_OVER, onControlMouseRollOver);
+                        goldControl.removeEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
+                    }
+
+                    crystalLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
+                    crystalLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
+                }
+                goldLocker.removeEventListener(Event.SELECT, onGoldLockerSwitched);
                 goldLocker.dispose();
                 goldLocker = null;
             }
 
             if (freeXpLocker)
             {
+                CLIENT::LESTA {
+                    var freeXpControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
+                    if (freeXpControl)
+                    {
+                        freeXpControl.removeEventListener(MouseEvent.ROLL_OVER, onControlMouseRollOver);
+                        freeXpControl.removeEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
+                    }
+
+                    freeXpLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
+                    freeXpLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
+                }
+                freeXpLocker.removeEventListener(Event.SELECT, onFreeXpLockerSwitched);
                 freeXpLocker.dispose();
                 freeXpLocker = null;
-            }
-
-            if (crystalLocker)
-            {
-                crystalLocker.dispose();
-                crystalLocker = null;
             }
 
             _disposed = true;
@@ -126,9 +187,14 @@ package com.xvm.lobby.ui.limits
                         var goldContent:HBC_Finance = goldControl.content as HBC_Finance;
                         if (goldContent)
                         {
-                            goldLocker.visible = true;
+                            CLIENT::WG {
+                                goldLocker.visible = true;
+                            }
                             goldLocker.x = goldControl.x + goldContent.x + goldContent.moneyIconText.x + 3;
                             goldLocker.y = goldControl.y + goldContent.y + goldContent.moneyIconText.y + 17;
+                            CLIENT::LESTA {
+                                goldLocker.y -= 7;
+                            }
                             goldContent.doItTextField.x = 20;
                             minWidth = goldContent.doItTextField.x + goldContent.doItTextField.textWidth;
                             if (goldContent.bounds.width < minWidth)
@@ -149,9 +215,14 @@ package com.xvm.lobby.ui.limits
                         var freeXpContent:HBC_Finance = freeXpControl.content as HBC_Finance;
                         if (freeXpContent)
                         {
-                            freeXpLocker.visible = true;
+                            CLIENT::WG {
+                                freeXpLocker.visible = true;
+                            }
                             freeXpLocker.x = freeXpControl.x + freeXpContent.x + freeXpContent.moneyIconText.x + 3;
                             freeXpLocker.y = freeXpControl.y + freeXpContent.y + freeXpContent.moneyIconText.y + 17;
+                            CLIENT::LESTA {
+                                freeXpLocker.y -= 7;
+                            }
                             freeXpContent.doItTextField.x = 20;
                             minWidth = freeXpContent.doItTextField.x + freeXpContent.doItTextField.textWidth;
                             if (freeXpContent.bounds.width < minWidth)
@@ -171,9 +242,14 @@ package com.xvm.lobby.ui.limits
                         var crystalContent:HBC_Finance = crystalControl.content as HBC_Finance;
                         if (crystalContent)
                         {
-                            crystalLocker.visible = true;
+                            CLIENT::WG {
+                                crystalLocker.visible = true;
+                            }
                             crystalLocker.x = crystalControl.x + crystalContent.x + crystalContent.moneyIconText.x + 3;
                             crystalLocker.y = crystalControl.y + crystalContent.y + crystalContent.moneyIconText.y + 17;
+                            CLIENT::LESTA {
+                                crystalLocker.y -= 7;
+                            }
                             crystalContent.doItTextField.x = 20;
                             minWidth = crystalContent.doItTextField.x + crystalContent.doItTextField.textWidth;
                             if (crystalContent.bounds.width < minWidth)
@@ -184,10 +260,90 @@ package com.xvm.lobby.ui.limits
                         }
                     }
                 }
+
+                CLIENT::LESTA {
+                    processControls();
+                }
             }
             catch (ex:Error)
             {
                 Logger.err(ex);
+            }
+        }
+
+        CLIENT::LESTA {
+            private function processControls():void
+            {
+                if (_processed)
+                    return;
+
+                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
+
+                if (crystalLocker)
+                {
+                    var crystalControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.CRYSTAL);
+                    if (!crystalControl)
+                        return;
+
+                    crystalControl.addEventListener(MouseEvent.ROLL_OVER, onControlMouseRollOver);
+                    crystalControl.addEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
+                }
+
+                if (goldLocker)
+                {
+                    var goldControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.GOLD);
+                    if (!goldControl)
+                        return;
+
+                    goldControl.addEventListener(MouseEvent.ROLL_OVER, onControlMouseRollOver);
+                    goldControl.addEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
+                }
+
+                if (freeXpLocker)
+                {
+                    var freeXpControl:HeaderButton = headerButtonsHelper.searchButtonById(CURRENCIES_CONSTANTS.FREE_XP);
+                    if (!freeXpControl)
+                        return;
+
+                    freeXpControl.addEventListener(MouseEvent.ROLL_OVER, onControlMouseRollOver);
+                    freeXpControl.addEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
+                }
+
+                _processed = true;
+            }
+
+            private function onControlMouseRollOver(e:MouseEvent):void
+            {
+                var button:HeaderButton = e.target as HeaderButton;
+                var data:HeaderButtonVo = button.headerButtonData;
+                var locker:LockerControl = page.header.getChildByName(data.id) as LockerControl;
+                locker.visible = true;
+            }
+
+            private function onControlMouseRollOut(e:MouseEvent):void
+            {
+                var button:HeaderButton = e.target as HeaderButton;
+                var data:HeaderButtonVo = button.headerButtonData;
+                var locker:LockerControl = page.header.getChildByName(data.id) as LockerControl;
+                locker.visible = false;
+            }
+
+            private function onLockerMouseRollOver(e:MouseEvent):void
+            {
+                var locker:LockerControl = e.target as LockerControl;
+                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
+                var button:HeaderButton = headerButtonsHelper.searchButtonById(locker.name);
+                locker.visible = true;
+                button.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OVER));
+            }
+
+            private function onLockerMouseRollOut(e:MouseEvent):void
+            {
+                var locker:LockerControl = e.target as LockerControl;
+                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
+                var button:HeaderButton = headerButtonsHelper.searchButtonById(locker.name);
+                locker.visible = false;
+                button.dispatchEvent(new MouseEvent(MouseEvent.ROLL_OUT));
             }
         }
 
