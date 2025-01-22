@@ -73,21 +73,26 @@ _SUPPORTED_CLIENT_SECTIONS += _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS
 
 class PREFS(object):
     # Standard
+    BONUS = 'bonus'
+    FAVORITE = 'favorite'
     PREMIUM = 'premium'
     ELITE = 'elite'
     RENTED = 'rented'
     CRYSTALS = 'crystals'
     EVENT = 'event'
     IGR = 'igr'
+    PARAGONS = 'paragons'
     # Added by XVM
-    NORMAL = 'normal'
     SPECIAL = 'special'
+    NORMAL = 'normal'
     NON_ELITE = 'nonelite'
     FULL_CREW = 'fullCrew'
     TRAINING_CREW = 'trainingCrew'
     NO_MASTER = 'noMaster'
     RESERVE = 'reserve'
-    XVM_KEYS = (NORMAL, SPECIAL, NON_ELITE, FULL_CREW, TRAINING_CREW, NO_MASTER, RESERVE)
+    # Available in tank carousel
+    TO_REMOVE = [BONUS, FAVORITE]
+    XVM_KEYS = [SPECIAL, NORMAL, NON_ELITE, FULL_CREW, TRAINING_CREW, NO_MASTER, RESERVE]
 
 
 class USERPREFS(object):

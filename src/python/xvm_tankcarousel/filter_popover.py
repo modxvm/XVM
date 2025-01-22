@@ -89,31 +89,19 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
         else:
             mapping = self._VehiclesFilterPopover__mapping
         try:
-            premium = data['specials'][mapping[FILTER_POPOVER_SECTION.SPECIALS].index(PREFS.PREMIUM)]
-            premium = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/premium.png', 'tooltip': makeTooltip(l10n('PremiumTooltipHeader'), l10n('PremiumTooltipBody'))}
-            special = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/special.png', 'tooltip': makeTooltip(l10n('SpecialTooltipHeader'), l10n('SpecialTooltipBody')), 'selected': filters[PREFS.SPECIAL]}
-            normal = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/normal.png', 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
-            elite = data['specials'][mapping[FILTER_POPOVER_SECTION.SPECIALS].index(PREFS.ELITE)]
-            elite['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/elite.png'
-            nonElite = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
-            fullCrew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
-            trainingCrew = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/trainingcrew.png', 'tooltip': makeTooltip(l10n('TrainingCrewTooltipHeader'), l10n('TrainingCrewTooltipBody')), 'selected': filters[PREFS.TRAINING_CREW]}
-            noMaster = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
-            reserve = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
-            crystals = data['specials'][mapping[FILTER_POPOVER_SECTION.SPECIALS].index(PREFS.CRYSTALS)]
-            crystals['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/crystals.png'
-            rented = data['specials'][mapping[FILTER_POPOVER_SECTION.SPECIALS].index(PREFS.RENTED)]
-            rented['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/rented.png'
-
-            isIGR = PREFS.IGR in mapping[FILTER_POPOVER_SECTION.SPECIALS]
-            if isIGR:
-                igr = data['specials'][-1]
-            data['specials'] = [
-                premium, special, normal, elite, nonElite,
-                fullCrew, trainingCrew, noMaster, reserve, crystals,
-                rented]
-            if isIGR:
-                data['specials'].append(igr)
+            specialsData = data['specials']
+            specialsSection = mapping[FILTER_POPOVER_SECTION.SPECIALS]
+            specialsData[specialsSection.index(PREFS.PREMIUM)]  = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/premium.png', 'tooltip': makeTooltip(l10n('PremiumTooltipHeader'), l10n('PremiumTooltipBody')), 'selected': filters[PREFS.PREMIUM]}
+            specialsData[specialsSection.index(PREFS.SPECIAL)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/special.png', 'tooltip': makeTooltip(l10n('SpecialTooltipHeader'), l10n('SpecialTooltipBody')), 'selected': filters[PREFS.SPECIAL]}
+            specialsData[specialsSection.index(PREFS.NORMAL)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/normal.png', 'tooltip': makeTooltip(l10n('NormalTooltipHeader'), l10n('NormalTooltipBody')), 'selected': filters[PREFS.NORMAL]}
+            specialsData[specialsSection.index(PREFS.ELITE)]['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/elite.png'
+            specialsData[specialsSection.index(PREFS.NON_ELITE)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nonelite.png', 'tooltip': makeTooltip(l10n('NonEliteTooltipHeader'), l10n('NonEliteTooltipBody')), 'selected': filters[PREFS.NON_ELITE]}
+            specialsData[specialsSection.index(PREFS.FULL_CREW)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/fullcrew.png', 'tooltip': makeTooltip(l10n('CompleteCrewTooltipHeader'), l10n('CompleteCrewTooltipBody')), 'selected': filters[PREFS.FULL_CREW]}
+            specialsData[specialsSection.index(PREFS.TRAINING_CREW)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/trainingcrew.png', 'tooltip': makeTooltip(l10n('TrainingCrewTooltipHeader'), l10n('TrainingCrewTooltipBody')), 'selected': filters[PREFS.TRAINING_CREW]}
+            specialsData[specialsSection.index(PREFS.NO_MASTER)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/nomaster.png', 'tooltip': makeTooltip(l10n('NoMasterTooltipHeader'), l10n('NoMasterTooltipBody')), 'selected': filters[PREFS.NO_MASTER]}
+            specialsData[specialsSection.index(PREFS.RESERVE)] = {'value': '../../../mods/shared_resources/xvm/res/icons/carousel/filter/reserve.png', 'tooltip': makeTooltip(l10n('ReserveFilterTooltipHeader'), l10n('ReserveFilterTooltipBody')), 'selected': filters[PREFS.RESERVE]}
+            specialsData[specialsSection.index(PREFS.CRYSTALS)]['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/crystals.png'
+            specialsData[specialsSection.index(PREFS.RENTED)]['value'] = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/rented.png'
         except Exception:
             logging.getLogger('XVM/TankCarousel/FilterPopover').exception('_TankCarouselFilterPopover_getInitialVO')
     return data
@@ -121,15 +109,15 @@ def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplie
 
 def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, hasRoles, *args, **kwargs):
     mapping = base(hasRented, hasEvent, hasRoles, *args, **kwargs)
-    isIGR = PREFS.IGR in mapping[FILTER_POPOVER_SECTION.SPECIALS]
-    # TODO: extend missing special filters from vanilla
-    mapping[FILTER_POPOVER_SECTION.SPECIALS] = [
-        PREFS.PREMIUM, PREFS.SPECIAL, PREFS.NORMAL, PREFS.ELITE, PREFS.NON_ELITE,
-        PREFS.FULL_CREW, PREFS.TRAINING_CREW, PREFS.NO_MASTER, PREFS.RESERVE, PREFS.CRYSTALS,
-        PREFS.RENTED
-    ]
-    if isIGR:
-        mapping[FILTER_POPOVER_SECTION.SPECIALS].append(PREFS.IGR)
+    specials = mapping[FILTER_POPOVER_SECTION.SPECIALS]
+    for key in PREFS.TO_REMOVE:
+        if key in specials:
+            specials.remove(key)
+    premiumIndex = specials.index(PREFS.PREMIUM) + 1 if PREFS.PREMIUM in specials else 0
+    specials = specials[:premiumIndex] + PREFS.XVM_KEYS[:2] + specials[premiumIndex:]
+    eliteIndex = specials.index(PREFS.ELITE) + 1 if PREFS.ELITE in specials else specials.index(PREFS.NORMAL) + 1
+    specials = specials[:eliteIndex] + PREFS.XVM_KEYS[2:] + specials[eliteIndex:]
+    mapping[FILTER_POPOVER_SECTION.SPECIALS] = specials
     return mapping
 
 
