@@ -4,15 +4,15 @@
 #define APP_WEBSITE    "https://modxvm.com/"
 #define APP_DIR_UNINST "xvm_uninst"
 
-#define OPENWGUTILS_DIR_SRC    "."
+#define OPENWGUTILS_DIR_SRC    "./openwg_utils/bin/"
 #define OPENWGUTILS_DIR_UNINST APP_DIR_UNINST
 
-#include "..\temp\defines\xvm_defines.iss"
-#include "..\temp\l10n_result\lang.iss"
-#include "openwg.utils.iss"
+#include "../temp/defines/xvm_defines.iss"
+#include "../temp/l10n_result/lang.iss"
+#include "openwg_utils/innosetup/openwg.utils.iss"
 
 [Setup]
-AppCopyright    = "2024 (c) XVM Team"
+AppCopyright    = "2025 (c) XVM Team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
 AppName         = "XVM"
 AppPublisher    = "XVM Team"
@@ -156,10 +156,10 @@ var
 
 function CHECK_IsLesta(): Boolean;
 var
-  Flavour: Integer;
+  Vendor: Integer;
 begin
-  Flavour := WotList_Selected_Record(WotList).LauncherFlavour
-  Result := Flavour = 4;
+  Vendor := WotList_Selected_Record(WotList).Vendor;
+  Result := Vendor = 2;
 end;
 
 
@@ -253,11 +253,31 @@ end;
 
 
 //
+// CurStepChanged
+//
+
+procedure CurStepChanged_ssPostInstall();
+begin
+  WOT_ClearClientCache(WotList.ItemIndex, 1); // 1 -- PDC cache
+end;
+
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  case CurStep of
+    ssPostInstall: CurStepChanged_ssPostInstall();
+  end
+end;
+
+
+
+//
 // CurUninstallStepChanged
 //
 
 procedure CurUninstallStepChanged_usUninstall();
 begin
+  WOT_ClearClientCache(WOT_ClientFind(ExpandConstant('{app}')), 1); // 1 -- PDC cache
   OPENWG_DllUnload();
   OPENWG_DllDelete();
 end;
