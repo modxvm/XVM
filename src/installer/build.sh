@@ -84,7 +84,7 @@ prepare_languages()
 
     echo "[Languages]" >> lang.iss
 
-    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-en.rtf\"" >> lang.iss
+    echo "Name: \"en\"; MessagesFile: \"l10n_inno\\en.islu,..\\temp\\l10n_result\\en.islu\"" >> lang.iss
 
     for file in *.islu; do
         lang="${file%.*}"
@@ -98,7 +98,7 @@ prepare_languages()
             fi
 
             if [ -f "$XVMINST_ROOT_PATH/src/l10n_inno/$lang.islu" ]; then
-                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"; InfoBeforeFile: \"..\\temp\\changelogs\\ChangeLog-$langchg.rtf\"" >> lang.iss
+                echo "Name: \"$lang\"; MessagesFile: \"l10n_inno\\$lang.islu,..\\temp\\l10n_result\\$lang.islu\"" >> lang.iss
             fi
         fi
     done

@@ -34,6 +34,7 @@ CreateAppDir=true
 AppendDefaultDirName=false
 ShowLanguageDialog=true
 DisableProgramGroupPage=true
+DisableReadyPage=true
 Uninstallable=true
 DisableDirPage=false
 
