@@ -7,6 +7,10 @@ Copyright (c) 2013-2025 XVM Contributors
 # Imports
 #
 
+# XFW
+from xfw import *
+
+# XVM Battle Minimap
 import minimap
 
 
@@ -20,14 +24,16 @@ __initialized = False
 def xfw_module_init():
     global __initialized
     if not __initialized:
-        minimap.init()
+        if getRegion() == 'RU':
+            minimap.init()
         __initialized = True
 
 
 def xfw_module_fini():
     global __initialized
     if __initialized:
-        minimap.fini()
+        if getRegion() == 'RU':
+            minimap.fini()
         __initialized = False
 
 
