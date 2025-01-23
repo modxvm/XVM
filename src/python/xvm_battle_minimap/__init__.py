@@ -24,7 +24,7 @@ __initialized = False
 def xfw_module_init():
     global __initialized
     if not __initialized:
-        if getRegion() == 'RU':
+        if getRegion() != 'RU':
             minimap.init()
         __initialized = True
 
@@ -32,7 +32,7 @@ def xfw_module_init():
 def xfw_module_fini():
     global __initialized
     if __initialized:
-        if getRegion() == 'RU':
+        if getRegion() != 'RU':
             minimap.fini()
         __initialized = False
 
