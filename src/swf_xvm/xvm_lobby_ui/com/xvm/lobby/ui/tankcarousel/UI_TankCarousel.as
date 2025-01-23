@@ -52,6 +52,10 @@ package com.xvm.lobby.ui.tankcarousel
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
                 startFadeMask.alpha = endFadeMask.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.edgeFadeAlpha, 100) / 100.0;
                 background.alpha = Macros.FormatNumberGlobal(_cfg.backgroundAlpha, 100) / 100.0;
+                CLIENT::LESTA {
+                    tiledBackgroundTop.alpha = Macros.FormatNumberGlobal(_cfg.backgroundAlpha, 100) / 100.0;
+                    tiledBackgroundCenter.alpha = Macros.FormatNumberGlobal(_cfg.backgroundAlpha, 100) / 100.0;
+                }
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
             }
             catch (ex:Error)
@@ -74,12 +78,25 @@ package com.xvm.lobby.ui.tankcarousel
             this._rowCount = rows;
             super.as_rowCount(rows);
         }
-        
-        override public function as_useExtendedCarousel(val: Boolean): void 
+
+        override public function as_useExtendedCarousel(value:Boolean):void 
         {
-            super.as_useExtendedCarousel(_enabled ? false : val);
+            super.as_useExtendedCarousel(_enabled ? false : value);
         }
-            
+
+        CLIENT::LESTA {
+            override public function set isUiEffectsEnabled(value:Boolean):void
+            {
+                if (!_enabled)
+                {
+                    super.isUiEffectsEnabled = value;
+                    return;
+                }
+
+                background.alpha = Macros.FormatNumberGlobal(_cfg.backgroundAlpha, 100) / 100.0;
+            }
+        }
+
         override public function getRectangles():Vector.<Rectangle>
         {
             return (_enabled && background.alpha < 1) ? null : super.getRectangles();
