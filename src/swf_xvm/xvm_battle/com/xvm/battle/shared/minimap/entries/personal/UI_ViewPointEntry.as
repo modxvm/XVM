@@ -20,8 +20,14 @@ package com.xvm.battle.shared.minimap.entries.personal
     {
         private static const INVALID_UPDATE_XVM:int = InvalidationType.SYSTEM_FLAGS_BORDER << 10;
 
-        private static const DEFAULT_VEHICLE_ICON_WIDTH:Number = 188;
-        private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 226;
+        CLIENT::WG {
+            private static const DEFAULT_VEHICLE_ICON_WIDTH:Number = 188;
+            private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 226;
+        }
+        CLIENT::LESTA {
+            private static const DEFAULT_VEHICLE_ICON_WIDTH:Number = 24;
+            private static const DEFAULT_VEHICLE_ICON_HEIGHT:Number = 24;
+        }
         private static const DEFAULT_VEHICLE_ICON_SCALE:Number = 0.5;
 
         private var _entryDeleted:Boolean = false;
@@ -261,8 +267,14 @@ package com.xvm.battle.shared.minimap.entries.personal
             GraphicsUtil.colorize(arrowPlaceholder, Macros.FormatNumber(UI_Minimap.cfg.selfIconColor, playerState));
             arrowPlaceholder.alpha = Macros.FormatNumber(UI_Minimap.cfg.selfIconAlpha, playerState, 100) / 100.0;
             var iconScale:Number = Macros.FormatNumber(UI_Minimap.cfg.selfIconScale, playerState, 1);
-            arrowPlaceholder.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 4.0;
-            arrowPlaceholder.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0 + 11 * iconScale;
+            CLIENT::WG {
+                arrowPlaceholder.x = -DEFAULT_VEHICLE_ICON_WIDTH * iconScale / 4.0;
+                arrowPlaceholder.y = -DEFAULT_VEHICLE_ICON_HEIGHT * iconScale / 2.0 + 11 * iconScale;
+            }
+            CLIENT::LESTA {
+                arrowPlaceholder.x = (-DEFAULT_VEHICLE_ICON_WIDTH * iconScale) >> 1;
+                arrowPlaceholder.y = (-DEFAULT_VEHICLE_ICON_HEIGHT * iconScale) >> 1;
+            }
             arrowPlaceholder.scaleX = arrowPlaceholder.scaleY = DEFAULT_VEHICLE_ICON_SCALE * iconScale;
         }
 
