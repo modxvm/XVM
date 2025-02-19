@@ -1,7 +1,7 @@
 diff -Naur battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm battle.orig-0/net/wg/data/constants/Linkages.class.asasm
---- battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm       2024-09-21 17:55:11.348527500 +0000
-+++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm    2024-09-21 19:09:39.004964200 +0000
-@@ -2342,7 +2342,7 @@
+--- battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm       2025-02-19 11:41:31.571129000 +0000
++++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm    2025-02-19 12:09:49.006236800 +0000
+@@ -2346,7 +2346,7 @@
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 269 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 270 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_TASK_SEPARATOR") slotid 271 type QName(PackageNamespace(""), "String") value Utf8("battleProgressTaskSeparatorUI") end
