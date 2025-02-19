@@ -415,8 +415,9 @@ def xfw_module_init():
 
         if getRegion() != 'RU':
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
-            from gui.impl.lobby.comp7.tournaments_widget import TournamentsWidgetComponent
-            from gui.impl.lobby.lootbox_system.entry_point import LootBoxSystemEntryPoint
+            from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
+            from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
+            from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
             overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
@@ -426,6 +427,7 @@ def xfw_module_init():
             overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
+            overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
         else:
