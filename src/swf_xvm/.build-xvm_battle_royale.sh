@@ -28,6 +28,7 @@ build_as3_swf \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/base_app-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_base-1.0-SNAPSHOT.swc \
     -external-library-path+=../swc_$XVMBUILD_FLAVOR/gui_battle-1.0-SNAPSHOT.swc \
+    -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/wg_battle_shared_ui.swc \
     -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/wg_battle_royale_ui.swc \
     -external-library-path+=../../~output/$XVMBUILD_FLAVOR/swc/xfw.swc \
     -include-libraries+=../../~output/$XVMBUILD_FLAVOR/swc/xvm_shared.swc \

@@ -16,7 +16,12 @@ package com.xvm.battle
     import scaleform.clik.utils.WeakReference;
 
     import net.wg.gui.battle.battleRoyale.BattleRoyalePage;
-    import net.wg.gui.battle.comp7.Comp7BattlePage;
+    CLIENT::WG {
+        import net.wg.comp7.battle.Comp7BattlePage;
+    }
+    CLIENT::LESTA {
+        import net.wg.gui.battle.comp7.Comp7BattlePage;
+    }
     import net.wg.gui.battle.eventBattle.views.EventBattlePage;
     import net.wg.gui.battle.views.BaseBattlePage;
     import net.wg.gui.battle.views.debugPanel.DebugPanel;

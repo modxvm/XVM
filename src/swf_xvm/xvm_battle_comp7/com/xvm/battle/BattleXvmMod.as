@@ -8,7 +8,12 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.battle.shared.sixthSense.SixthSenseXvmView;
-    import net.wg.gui.battle.comp7.Comp7BattlePage;
+    CLIENT::WG {
+        import net.wg.comp7.battle.Comp7BattlePage;
+    }
+    CLIENT::LESTA {
+        import net.wg.gui.battle.comp7.Comp7BattlePage;
+    }
 
     public class BattleXvmMod extends XvmModBase
     {
