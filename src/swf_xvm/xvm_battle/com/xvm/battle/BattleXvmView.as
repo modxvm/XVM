@@ -16,12 +16,6 @@ package com.xvm.battle
     import scaleform.clik.utils.WeakReference;
 
     import net.wg.gui.battle.battleRoyale.BattleRoyalePage;
-    CLIENT::WG {
-        import net.wg.comp7.battle.Comp7BattlePage;
-    }
-    CLIENT::LESTA {
-        import net.wg.gui.battle.comp7.Comp7BattlePage;
-    }
     import net.wg.gui.battle.eventBattle.views.EventBattlePage;
     import net.wg.gui.battle.views.BaseBattlePage;
     import net.wg.gui.battle.views.debugPanel.DebugPanel;
@@ -95,27 +89,27 @@ package com.xvm.battle
         public function BattleXvmView(view:IView)
         {
             super(view);
+            Logger.add('[XVM/BattleView] init');
             _battlePageRef = new WeakReference(super.view);
-
             _battleController = new BattleXvmComponentController();
 
             if (battlePage == null)
             {
-                Logger.add("BattleXvmView::ctor() --> battlePage is null");
+                Logger.add("[XVM/BattleView] battlePage is null");
                 return;
             }
 
             var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(battlePage, "battleStatisticDataController");
             if (bsdc == null)
             {
-                Logger.add("BattleXvmView::ctor() --> failed to get battleStatisticDataController");
+                Logger.add("[XVM/BattleView] Failed to get battleStatisticDataController");
                 return;
             }
 
             var cc:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdc, "_componentControllers");
             if (cc == null)
             {
-                Logger.add("BattleXvmView::ctor() --> failed to get componentControllers");
+                Logger.add("[XVM/BattleView] Failed to get componentControllers");
                 return;
             }
 
@@ -149,9 +143,9 @@ package com.xvm.battle
                     }
                 }
 
-                var isSupportBattleType:Boolean = !(battlePage is BattleRoyalePage || battlePage is Comp7BattlePage || battlePage is EventBattlePage);
-
-                if (Config.config.battle.elements && isSupportBattleType)
+                var isSupportedBattleType:Boolean = (Xvm.appType & BattleElements.NOT_SUPPORTED_BATTLE_TYPES_MASK) == 0;
+                Logger.add('[XVM/BattleView] BattleElements available for this battle type: ' + String(isSupportedBattleType));
+                if (Config.config.battle.elements && isSupportedBattleType)
                 {
                     if (Config.config.battle.elements.length)
                     {

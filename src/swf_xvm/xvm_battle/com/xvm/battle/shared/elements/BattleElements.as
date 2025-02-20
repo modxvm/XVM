@@ -14,6 +14,8 @@ package com.xvm.battle.shared.elements
 
     public class BattleElements implements IDisposable
     {
+        public static const NOT_SUPPORTED_BATTLE_TYPES_MASK:int = (Defines.APP_TYPE_BATTLE_ROYALE | Defines.APP_TYPE_BATTLE_COMP7 | Defines.APP_TYPE_BATTLE_EVENT | Defines.APP_TYPE_BATTLE_EVENT_SPECIAL);
+
         private static const CMD_LOG:String = "$log";
         private static const CMD_DELAY:String = "$delay";
         private static const CMD_INTERVAL:String = "$interval";
