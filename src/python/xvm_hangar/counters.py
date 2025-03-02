@@ -68,7 +68,7 @@ def _AmmunitionPanel__applyCustomizationNewCounter(base, self, vehicle):
 
 def _CustomizationBottomPanel__setNotificationCounters(base, self):
     if not config.get('hangar/showCustomizationCounter', True):
-        if getRegion() != 'RU':
+        if IS_WG:
             return self.as_setNotificationCountersS({'tabsCounters': [], 'unseenTabs': []})
         else:
             return self.as_setNotificationCountersS({'tabsCounters': [], 'switchersCounter': 0})

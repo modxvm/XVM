@@ -25,7 +25,7 @@ from xvm_main.python.vehinfo import _getRanges
 from xvm_main.python.xvm import l10n
 
 # Per-realm
-if getRegion() != 'RU':
+if IS_WG:
     from gui.Scaleform.daapi.view.lobby.techtree.techtree_dp import _TechTreeDataProvider
 else:
     from gui.techtree.techtree_dp import TechTreeDataProvider as _TechTreeDataProvider

@@ -149,7 +149,7 @@ def xfw_module_init():
         overrideMethod(BattleResultsWindow, 'as_setDataS')(BattleResultsWindow_as_setDataS)
         overrideMethod(DynamicPremiumState, 'getVO')(_DynamicPremiumState_getVO)
         overrideMethod(composer.StatsComposer, '__init__')(_StatsComposer__init__)
-        if getRegion() != 'RU':
+        if IS_WG:
             from gui.battle_results.components.common import ShowRateSatisfactionCmp
 
             overrideMethod(ShowRateSatisfactionCmp, '_convert')(_ShowRateSatisfactionCmp_convert)

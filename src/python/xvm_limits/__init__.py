@@ -37,7 +37,7 @@ from xvm_main.python.logger import *
 import xvm_main.python.config as config
 
 # Per-realm
-if getRegion() != 'RU':
+if IS_WG:
     from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
     from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 else:
@@ -313,7 +313,7 @@ def xfw_module_init():
 
         overrideMethod(FullScreenDialogView, '_FullScreenDialogView__setStats')(FullScreenDialogView__setStats)
 
-        if getRegion() != 'RU':
+        if IS_WG:
             overrideMethod(TechTree, '_populate')(TechTree_populate)
             overrideMethod(TechTree, '_dispose')(TechTree_dispose)
         else:

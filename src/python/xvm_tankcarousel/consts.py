@@ -46,7 +46,7 @@ _SUPPORTED_CLIENT_SECTIONS = (
 )
 
 # WG-only filter popover sections
-if getRegion() != 'RU':
+if IS_WG:
     try:
         _ADDITIONAL_SUPPORTED_SECTIONS = ()
         _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS = ()

@@ -505,7 +505,7 @@ def init():
     overrideMethod(PostmortemPanel, '_PostmortemPanel__onKillerDogTagSet')(_PostmortemPanel__onKillerDogTagSet)
     overrideMethod(PlayersPanel, 'as_setPanelHPBarVisibilityStateS')(_PlayersPanel_as_setPanelHPBarVisibilityStateS)
     
-    if getRegion() != 'RU':
+    if IS_WG:
         overrideMethod(DogTagsController, '_DogTagsController__canShowMarkers')(_DogTagsController__canShowMarkers)
 
 

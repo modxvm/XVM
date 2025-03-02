@@ -35,7 +35,7 @@ from .consts import XVM_FILTER_ICON_MASK, PREFS, FILTER_KEYS_VO_OVERRIDES, USERP
     _SUPPORTED_SECTIONS, _SUPPORTED_CLIENT_SECTIONS
 
 # Per-realm
-if getRegion() != 'RU':
+if IS_WG:
     # WG, since 1.27.0.0
     from gui.Scaleform.daapi.view.common.common_constants import FILTER_POPOVER_SECTION
 else:
@@ -105,7 +105,7 @@ def _TankCarouselFilterPopover_generateMapping(base, cls, hasRented, hasEvent, h
 def _TankCarouselFilterPopover_getInitialVO(base, self, filters, xpRateMultiplier):
     dataVO = base(self, filters, xpRateMultiplier)
     if PREFS.NORMAL in filters:
-        mapping = self._mapping if getRegion() != 'RU' else self._VehiclesFilterPopover__mapping
+        mapping = self._mapping if IS_WG else self._VehiclesFilterPopover__mapping
         try:
             specialsVO = dataVO['specials']
             specialsSection = mapping[FILTER_POPOVER_SECTION.SPECIALS]

@@ -223,7 +223,7 @@ class _MinimapCircles(object):
                 elif crewman.invID == tankman.invID:
                     level = tankman.roleLevel
                     # Needed on Lesta while not on WG
-                    if getRegion() == 'RU':
+                    if IS_LESTA:
                         level *= tankman.descriptor.efficiencyOnVehicle(self.vehicleItem.descriptor)
 
                     crew_member = {

@@ -12,8 +12,8 @@ import logging
 import base64
 
 # WoT
-from account_helpers.CustomFilesCache import CustomFilesCache
 import debug_utils
+from account_helpers.CustomFilesCache import CustomFilesCache
 
 # XFW
 from xfw import *
@@ -55,8 +55,8 @@ def xfw_module_init():
     global __initialized
     if not __initialized:
         overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')(_CustomFilesCache__onReadLocalFile)
-        # uncomment on Common Test
-        # overrideMethod(debug_utils, '_doLog')(_doLog)
+        if IS_CT:
+            overrideMethod(debug_utils, '_doLog')(_doLog)
 
         __initialized = True
 

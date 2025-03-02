@@ -51,7 +51,7 @@ from xvm_main.python.vehinfo_tiers import getTiers
 from xvm_main.python.xvm import l10n
 
 # Per-realm
-if getRegion() != 'RU':
+if IS_WG:
     from gui.shared.items_parameters.params_helper import similarCrewComparator as crewComparator_helper
 else:
     from gui.shared.items_parameters.params_helper import idealCrewComparator as crewComparator_helper
@@ -629,7 +629,7 @@ def xfw_module_init():
         overrideMethod(ModuleBlockTooltipData, '_packBlocks')(ModuleBlockTooltipData_packBlocks)
         registerEvent(ItemsRequester, '_invalidateItems')(ItemsRequester_invalidateItems)
         registerEvent(ItemsRequester, 'clear')(ItemsRequester_clear)
-        if getRegion() != 'RU':
+        if IS_WG:
             overrideMethod(tooltips_vehicle.CrystalBlockConstructor, 'construct')(CrystalBlockConstructor_construct)
         else:
             overrideMethod(tooltips_vehicle.VehicleInfoTooltipData, '_VehicleInfoTooltipData__createStatusBlock')(_VehicleInfoTooltipData__createStatusBlock)

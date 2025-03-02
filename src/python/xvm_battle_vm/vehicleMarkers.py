@@ -91,8 +91,7 @@ class VehicleMarkers(object):
 
     @property
     def distanceBackportEnabled(self):
-        return getRegion() != 'RU' \
-            and self.active \
+        return IS_WG and self.active \
             and (self.allyVehicleDistEnabled or self.enemyVehicleDistEnabled)
 
     #
