@@ -338,15 +338,15 @@ class _Stat(object):
         (value,) = self.req['args']
         orig_value = value
         region = getRegion()
-        if region == "CT":
-            suf = value[-3:]
-            if suf in ('_RU', '_EU', '_NA', '_US', '_SG'):
+        if region == 'CT':
+            suffix = value[-3:]
+            if suffix in ('_EU', '_NA', '_US', '_SG'):
                 region = value[-2:]
                 value = value[:-3]
                 if region == 'US':
                     region = 'NA'
             else:
-                region = "RU"
+                region = 'RU'
         cacheKey = "%s/%s" % (region, value)
         data = None
         if cacheKey not in self.cacheUser:
