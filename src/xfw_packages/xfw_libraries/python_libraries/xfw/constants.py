@@ -3,7 +3,21 @@ SPDX-License-Identifier: LGPL-3.0-or-later
 Copyright (c) 2013-2025 XVM Contributors
 """
 
-# EXPORT
+#
+# Imports
+#
+
+# WoT
+from constants import CURRENT_REALM, IS_CT
+
+
+
+#
+# Constants
+#
+
+IS_WG = CURRENT_REALM != 'RU'
+IS_LESTA = CURRENT_REALM == 'RU'
 
 class XFW_COMMAND(object):
     XFW_CMD = "xfw.cmd"

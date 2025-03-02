@@ -37,6 +37,9 @@ __all__ = [
     'IS_DEVELOPMENT',
     'XFW_NO_TOKEN_MASKING',
     # constants
+    'IS_WG',
+    'IS_LESTA',
+    'IS_CT',
     'XFW_COMMAND',
     'XFW_EVENT',
     'XFW_COLORS',
