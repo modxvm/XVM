@@ -214,7 +214,7 @@ def _tuneup_config(config):
     config['__xvmVersion'] = XVM.XVM_VERSION
     config['__wotVersion'] = XVM.WOT_VERSION
     config['__xvmIntro'] = XVM.XVM_INTRO
-    config['__wgApiAvailable'] = getRegion() in xfw_constants.URLS.WG_API_SERVERS
+    config['__wgApiAvailable'] = getRegion() in xfw_constants.SUPPORTED_API_REALMS
     try:
         from __version__ import __revision__
         config['__xvmRevision'] = __revision__

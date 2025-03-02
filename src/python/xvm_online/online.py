@@ -16,7 +16,7 @@ from helpers import dependency
 from skeletons.gui.shared.utils import IHangarSpace
 
 from xfw import *
-from xfw.constants import URLS
+from xfw.constants import SUPPORTED_API_REALMS
 from xfw_actionscript.python import *
 
 from xvm_main.python.logger import *
@@ -48,7 +48,7 @@ class _OnlineStats(object):
 
     def __init__(self):
         self.loginSection = None
-        if getRegion() not in URLS.WG_API_SERVERS:
+        if getRegion() not in SUPPORTED_API_REALMS and not (IS_CT and IS_DEVELOPMENT):
             logging.getLogger('XVM/Online').warning('No API available for this server')
             return
         self.lock = threading.RLock()
@@ -57,8 +57,7 @@ class _OnlineStats(object):
         self.done_config = False
         self.loginSection = ResMgr.openSection('scripts_config.xml')['login']
         self.region = getRegion().upper()
-        # CT is uncommented in xfw.constants to check on test server
-        if 'CT' in URLS.WG_API_SERVERS and self.region == 'CT':
+        if IS_CT and IS_DEVELOPMENT:
             self.region = 'RU'
 
     def update_config(self):

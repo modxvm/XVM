@@ -79,12 +79,4 @@ class COMMAND(object):
     XFW_COMMAND_GETMODS = "xfw.getMods"
     XFW_COMMAND_LOADFILE = "xfw.loadFile"
 
-class URLS(object):
-    WG_API_SERVERS = {
-        'RU':   'http://api.worldoftanks.ru',
-        'EU':   'http://api.worldoftanks.eu',
-        'NA':   'http://api.worldoftanks.com',
-        'ASIA': 'http://api.worldoftanks.asia',
-      # can be uncommented to test on common test server:
-      # 'CT':   'http://api.worldoftanks.ru',
-    }
+SUPPORTED_API_REALMS = ('EU', 'NA', 'ASIA', 'RU', )
