@@ -73,7 +73,7 @@ def getVehCD(vehicleID):
 # Region and language
 
 def getRegion():
-    return importlib.import_module('realm').CURRENT_REALM
+    return importlib.import_module('constants').AUTH_REALM
 
 def getLanguage():
     return getClientLanguage()
