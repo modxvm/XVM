@@ -24,6 +24,7 @@ from xfw import *
 #
 
 XVM_LOBBY_SWF_FILENAME = 'xvm_lobby_ui.swf'
+XVM_FILTER_ICON_MASK = '../../../mods/shared_resources/xvm/res/icons/carousel/filter/%s.png'
 
 _SUPPORTED_SECTIONS = (
     CAROUSEL_FILTER_2,
@@ -90,10 +91,22 @@ class PREFS(object):
     TRAINING_CREW = 'trainingCrew'
     NO_MASTER = 'noMaster'
     RESERVE = 'reserve'
-    # Available in tank carousel
     TO_REMOVE = [BONUS, FAVORITE]
     XVM_KEYS = [SPECIAL, NORMAL, NON_ELITE, FULL_CREW, TRAINING_CREW, NO_MASTER, RESERVE]
 
+FILTER_KEYS_VO_OVERRIDES = {
+    PREFS.PREMIUM: {'icon': 'premium', 'tooltip': 'PremiumTooltip'},
+    PREFS.SPECIAL: {'icon': 'special', 'tooltip': 'SpecialTooltip'},
+    PREFS.NORMAL: {'icon': 'normal', 'tooltip': 'NormalTooltip'},
+    PREFS.ELITE: {'icon': 'elite'},
+    PREFS.NON_ELITE: {'icon': 'nonelite', 'tooltip': 'NonEliteTooltip'},
+    PREFS.FULL_CREW: {'icon': 'fullcrew', 'tooltip': 'CompleteCrewTooltip'},
+    PREFS.TRAINING_CREW: {'icon': 'trainingcrew', 'tooltip': 'TrainingCrewTooltip'},
+    PREFS.NO_MASTER: {'icon': 'nomaster', 'tooltip': 'NoMasterTooltip'},
+    PREFS.RESERVE: {'icon': 'reserve', 'tooltip': 'ReserveFilterTooltip'},
+    PREFS.CRYSTALS: {'icon': 'crystals'},
+    PREFS.RENTED: {'icon': 'rented'}
+}
 
 class USERPREFS(object):
     CAROUSEL_FILTERS = "users/{accountDBID}/tankcarousel/filters"
