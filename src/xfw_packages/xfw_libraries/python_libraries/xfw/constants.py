@@ -7,8 +7,11 @@ Copyright (c) 2013-2025 XVM Contributors
 # Imports
 #
 
+# stdlib
+import importlib
+
 # WoT
-from constants import CURRENT_REALM, IS_CT
+game_constants = (lambda: importlib.import_module('constants'))()
 
 
 
@@ -16,8 +19,9 @@ from constants import CURRENT_REALM, IS_CT
 # Constants
 #
 
-IS_WG = CURRENT_REALM != 'RU'
-IS_LESTA = CURRENT_REALM == 'RU'
+IS_WG = game_constants.CURRENT_REALM != 'RU'
+IS_LESTA = game_constants.CURRENT_REALM == 'RU'
+IS_CT = game_constants.IS_CT
 
 class XFW_COMMAND(object):
     XFW_CMD = "xfw.cmd"
