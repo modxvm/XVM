@@ -8,6 +8,7 @@ Copyright (c) 2013-2025 XVM Contributors
 #
 
 # stdlib
+import importlib
 import logging
 
 # BigWorld
@@ -47,30 +48,33 @@ _SUPPORTED_CLIENT_SECTIONS = (
 
 # WG-only filter popover sections
 if IS_WG:
-    try:
-        _ADDITIONAL_SUPPORTED_SECTIONS = ()
-        _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS = ()
-    except Exception:
-        logging.getLogger('XVM/TankCarousel').exception('filterSections/Wargaming')
+    _ADDITIONAL_SUPPORTED_SECTIONS = ()
+    _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS = ()
 # Lesta-only filter popover sections
 else:
+    _ADDITIONAL_SUPPORTED_SECTIONS = (
+        'VERSUS_AI_CAROUSEL_FILTER_2',
+        'BOB_CAROUSEL_FILTER_2',
+    )
+    _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS = (
+        'VERSUS_AI_CAROUSEL_FILTER_CLIENT_1',
+        'BOB_CAROUSEL_FILTER_CLIENT_1',
+    )
+
+for section in _ADDITIONAL_SUPPORTED_SECTIONS + _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS:
     try:
-        from account_helpers.AccountSettings import VERSUS_AI_CAROUSEL_FILTER_2, BOB_CAROUSEL_FILTER_2
-        from account_helpers.AccountSettings import VERSUS_AI_CAROUSEL_FILTER_CLIENT_1, BOB_CAROUSEL_FILTER_CLIENT_1
-
-        _ADDITIONAL_SUPPORTED_SECTIONS = (
-            VERSUS_AI_CAROUSEL_FILTER_2,
-            BOB_CAROUSEL_FILTER_2,
-        )
-        _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS = (
-            VERSUS_AI_CAROUSEL_FILTER_CLIENT_1,
-            BOB_CAROUSEL_FILTER_CLIENT_1
-        )
+        module = importlib.import_module('account_helpers.AccountSettings')
+        filter = getattr(module, section, None)
+        if filter is None:
+            continue
+        if section in _ADDITIONAL_SUPPORTED_SECTIONS:
+            _SUPPORTED_SECTIONS += (filter, )
+        if section in _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS:
+            _SUPPORTED_CLIENT_SECTIONS += (filter, )
+    except ImportError:
+        logging.getLogger('XVM/TankCarousel').exception('Section %s is missing', section)
     except Exception:
-        logging.getLogger('XVM/TankCarousel').exception('filterSections/Lesta')
-
-_SUPPORTED_SECTIONS += _ADDITIONAL_SUPPORTED_SECTIONS
-_SUPPORTED_CLIENT_SECTIONS += _ADDITIONAL_SUPPORTED_CLIENT_SECTIONS
+        logging.getLogger('XVM/TankCarousel').exception('filterSections')
 
 class PREFS(object):
     # Standard
