@@ -1,9 +1,179 @@
+### XVM 12.2.0
+
+  * Compatibility with Mir Tankov 1.33.0.0
+
+### XVM 12.1.0
+
+  * Compatibility with World of Tanks 1.28.0.0
+  * Updated `crewAutoReturn` implementation
+
+### XVM 12.0.0
+
+  * Compatibility with Mir Tankov 1.32.0.0
+  * Added `"hangar/allowChannelButtonBlinking"` option
+  * Added `"battleResults/showPlayerSatisfactionWidget"` option
+  * Fixed `"hangar/showDailyQuestWidget"` option
+  * Removed Winback battle type support
+
+### XVM 11.9.0
+
+  * Compatibility with World of Tanks 1.27.1.0
+
+### XVM 11.8.1
+
+  * Compatibility with World of Tanks 1.27.0.1
+  * Fixed `"hangar/showLootboxesWidget"` option
+
+### XVM 11.8.0
+
+  * Compatibility with Mir Tankov 1.31.0.0
+  * Fixed `"hangar/showLootboxesWidget"` option
+
+### XVM 11.7.0
+
+  * Compatibility with World of Tanks 1.27.0.0
+  * Added Grinch event gamemode support
+  * Fixed `"hangar/showCustomizationCounter"` option
+
+  #### damageLog
+
+  * Updated attack reasons list
+  * Fixed unknown shell (select the most similar one)
+  * Fixed damage grouping in lastHit
+
+### XVM 11.6.1
+
+  * Compatibility with World of Tanks 1.26.1.1 nanopatch 3
+  * Fixed `"hangar/showBattlePassBanner"` option
+
+  #### damageLog, hitLog
+
+  * Added support for armor-piercing fin-stabilized discarding sabot projectile
+
+### XVM 11.6.0
+
+  * Compatibility with Mir Tankov 1.30.0.0
+  * Added `"hangar/lockerIconsPath"`, `"hangar/showBattleSelectorCounter"`, `"hangar/showBattleSelectorCounter"`, `"hangar/showNewCrewBooksCounter"`, `"hangar/showBattlePassBanner"` options
+  * Added XFW.Native unstable support and updated dependencies for Lesta client due to client changes (Lesta)
+  * Added Waffentrager 2025 event gamemode support (Lesta)
+  * Removed techtree view patching due to Gameface UI refactor (Lesta)
+
+### XVM 11.5.1
+
+  * Compatibility with World of Tanks 1.26.1.1
+
+### XVM 11.5.0
+
+  * Compatibility with World of Tanks 1.26.1.0
+
+### XVM 11.4.0
+
+  * Compatibility with Mir Tankov 1.29.0.0
+  * Added 11 level vehicles support (Lesta)
+  * Renamed `"hangar/showComp7TournamentWidget"` option to `"hangar/showEventTournamentWidget"`
+
+### XVM 11.3.0
+
+  * Compatibility with World of Tanks 1.26.0.0
+  * Updated soundbanks to WWISE 2023.1
+
+  #### damageLog
+
+  * Fixed {{shell-dmg}} macro
+
+### XVM 11.2.0
+
+  * Compatibility with Mir Tankov 1.28.0.0
+  * Added Races gamemode support (Lesta)
+  * Fixed vanilla minimap issues on dispose
+
+### XVM 11.1.0
+
+  * Compatibility with World of Tanks 1.25.1.0
+
+  #### damageLog
+
+  * Fixed damage kind definitions in damageLog
+
+### XVM 11.0.0
+
+  * Compatibility with World of Tanks 1.25.0.0 and Mir Tankov 1.27.0.0
+  * Compatibility with World of Tanks 1.24.1.0 and Mir Tankov 1.26.0.0
+  * Compatibility with World of Tanks 1.24.0.0 and Mir Tankov 1.25.0.0
+  * Added support for per-realm wn8exp, xte, xtdb and xvmscales data fetching
+  * Added support for interface scale (2k and 4k displays) for `xvm.screenWidth` and `xvm.screenHeight`
+  * Added support for beta UTF-8 support in Windows
+  * Added `vehicleDist` support for World of Tanks in VMs
+  * Added `"hangar/showLootboxesWidget"` option
+  * Added `"hangar/showAchievementRewardWindow"` and `"hangar/showAchievementPopups"` options
+  * Added `"battle/showPrebattleDogTags"` option
+  * Added `"hangar/showComp7TournamentWidget"` option
+  * Added Story Mode gamemode support
+  * Added minor Onslaught support
+  * Added support for new sixthSense behaviour (Lesta)
+  * Added Cosmic Event support (Lesta)
+  * Added Historical support (Lesta)
+  * Fixed `"battle/showPostmortemTips"` option (WG)
+  * Fixed blownup status in VMs in Frontline (Lesta)
+  * Removed `"hangar/crewMaxPerksCount"` option
+  * Removed duplicate `"hangar/showButtonCounters"` option
+  * Disabled VM in Maps Training gamemode
+  * Cleanup barracks support module due to refactor in Gameface UI
+
+### XVM 10.9.0
+
+  * Compatibility with World of Tanks 1.23.1.0
+  * Added `prestigeLevel` icon offset options to config
+  * Added initial support for `prestigeLevel` icon
+  * `"carousel/cellType"` now respects client setting if set to `"default"`
+
 ### XVM 10.8.1
+
+  * Compatibility with Mir Tankov 1.23.0.0
+  * Fixed `"hangar/blockVehicleIfLowAmmo"` option
+  * Fixed `prestigeLevel` icon in full stats
+  * Updated short vehicle info list
+  * Installer: Added different client support
 
   #### damageLog, hitLog
 
   * Added support for vehicle names from vehicleNames.xc to the {{vehicle}} macro
   * Added macro {{vehicle-short}} with support for vehicle names from vehicleNames.xc
+
+### XVM 10.8.0
+
+  * Compatibility with World of Tanks / Mir Tankov 1.22.1.0
+  * Added support for Halloween event gamemode
+  * Added Initial prestige system support in lobby and battle (ability to hide them in lobby and battle)
+  * Added `"hangar/showWotPlusButton"` option
+  * Added `"hangar/showButtonCounters"` option
+  * Added initial support for `crewAutoReturn` feature after breakage
+  * Added initial Winback gamemode support
+  * Disabled `contacts` features
+
+### XVM 10.7.0
+
+  * Compatibility with World of Tanks / Mir Tankov 1.22.0.0
+  * Switched to rolling release model (no nightly (-dev) builds)
+  * Removed nightly XVM build lobby mentions and battle watermark
+
+### XVM 10.6.1
+
+  * Compatibility with World of Tanks 1.21.1.1
+
+### XVM 10.6.0
+
+  * Compatibility with World of Tanks / Mir Tankov 1.21.1.0
+  * Updated short vehicle info list
+
+### XVM 10.5.0
+
+  * Compatibility with World of Tanks / Mir Tankov 1.20.1.0
+  * Compatibility with World of Tanks / Mir Tankov 1.21.0.0
+  * Added support for Cosmic Event gamemode
+  * Added support for Flame shell type
+  * Added `"damageLog/groupDamageFromShots"` option
+  * Fixed `"hangar/enableCrewAutoReturn"` option
 
 ### XVM 10.4.2
 
