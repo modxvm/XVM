@@ -83,7 +83,8 @@
     // Критерии сортировки танков, доступные значения: (минус = в обратном порядке)
     // "nation", "type", "level", "-level", "maxBattleTier", "-maxBattleTier", "premium", "-premium",
     // "battles", "-battles", "winRate", "-winRate", "markOfMastery", "-markOfMastery", "xtdb", "-xtdb",
-    // "xte", "-xte", "wtr", "-wtr", "damageRating", "-damageRating", "marksOnGun", "-marksOnGun"
+    // "xte", "-xte", "wtr", "-wtr", "damageRating", "-damageRating", "marksOnGun", "-marksOnGun",
+    // "battlePassPoints", "-battlePassPoints"
     "sorting_criteria": ["nation", "type", "level"],
     // true - suppress the tooltips for tanks in carousel.
     // true - убрать подсказки к танкам в карусели.

@@ -32,6 +32,7 @@ from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.tank_carousel import 
 from gui.Scaleform.daapi.view.common.vehicle_carousel import carousel_data_provider
 from frameworks.wulf import WindowLayer
 from helpers import dependency
+from skeletons.gui.game_control import IBattlePassController
 from skeletons.gui.shared import IItemsCache
 
 # XFW
@@ -59,7 +60,7 @@ from .consts import XVM_LOBBY_SWF_FILENAME, AS_SYMBOLS, XVM_CAROUSEL_COMMAND, VE
 # Globals
 #
 
-carousel_config = {}
+carouselConfig = {}
 
 
 
@@ -69,8 +70,8 @@ carousel_config = {}
 
 def onConfigUpdated(*args, **kwargs):
     try:
-        global carousel_config
-        carousel_config = config.get('hangar/carousel')
+        global carouselConfig
+        carouselConfig = config.get('hangar/carousel')
     except Exception:
         logging.getLogger('XVM/TankCarousel').exception('onConfigUpdated')
 
@@ -203,58 +204,68 @@ def _Hangar_as_setCarouselS(base, self, linkage, alias):
 # added sorting orders for tanks in carousel
 def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
     try:
-        global carousel_config
-        if not 'sorting_criteria' in carousel_config:
+        global carouselConfig
+        if not 'sorting_criteria' in carouselConfig:
             return base(vehicle)
 
         comparisonKey = [not vehicle.isEvent, not vehicle.isFavorite]
 
-        for sort_criterion in carousel_config['sorting_criteria']:
-            if sort_criterion.find('-') == 0:
-                sort_criterion = sort_criterion[1:] #remove minus sign
+        for sortingCriteria in carouselConfig['sorting_criteria']:
+            if sortingCriteria.find('-') == 0:
+                sortingCriteria = sortingCriteria[1:] #remove minus sign
                 factor = -1
             else:
                 factor = 1
 
-            if sort_criterion in ['battles', 'winRate', 'markOfMastery']:
+            if sortingCriteria in ['battles', 'winRate', 'markOfMastery']:
                 itemsCache = dependency.instance(IItemsCache)
                 vehicles_stats = itemsCache.items.getAccountDossier().getRandomStats().getVehicles() # battlesCount, wins, markOfMastery, xp
                 stats = vehicles_stats.get(vehicle.intCD)
                 comparisonKey.append(factor if stats else 0)
                 if stats:
-                    if sort_criterion == 'battles':
+                    if sortingCriteria == 'battles':
                         comparisonKey.append(stats.battlesCount * factor)
-                    elif sort_criterion == 'winRate':
+                    elif sortingCriteria == 'winRate':
                         comparisonKey.append(float(stats.wins) / stats.battlesCount * factor)
-                    elif sort_criterion == 'markOfMastery':
+                    elif sortingCriteria == 'markOfMastery':
                         comparisonKey.append(stats.markOfMastery * factor)
-            elif sort_criterion in ['wtr', 'xtdb', 'xte', 'marksOnGun', 'damageRating']:
+            elif sortingCriteria in ['wtr', 'xtdb', 'xte', 'marksOnGun', 'damageRating']:
                 vDossier = dossier.getDossier(PROFILE_DROPDOWN_KEYS.ALL, None, vehicle.intCD)
                 comparisonKey.append(factor if vDossier else 0)
-                if vDossier and vDossier.get(sort_criterion, None) is not None:
-                    comparisonKey.append(vDossier[sort_criterion] * factor)
-            elif sort_criterion == 'nation':
-                if 'nations_order' in carousel_config and len(carousel_config['nations_order']):
-                    custom_nations_order = carousel_config['nations_order']
+                if vDossier and vDossier.get(sortingCriteria, None) is not None:
+                    comparisonKey.append(vDossier[sortingCriteria] * factor)
+            elif sortingCriteria == 'nation':
+                if 'nations_order' in carouselConfig and len(carouselConfig['nations_order']):
+                    custom_nations_order = carouselConfig['nations_order']
                     comparisonKey.append(vehicle.nationName not in custom_nations_order)
                     if vehicle.nationName in custom_nations_order:
                         comparisonKey.append(custom_nations_order.index(vehicle.nationName))
                 comparisonKey.append(GUI_NATIONS_ORDER_INDEX[vehicle.nationName])
-            elif sort_criterion == 'type':
-                if 'types_order' in carousel_config and len(carousel_config['types_order']):
-                    custom_types_order = carousel_config['types_order']
+            elif sortingCriteria == 'type':
+                if 'types_order' in carouselConfig and len(carouselConfig['types_order']):
+                    custom_types_order = carouselConfig['types_order']
                     comparisonKey.append(vehicle.type not in custom_types_order)
                     if vehicle.type in custom_types_order:
                         comparisonKey.append(custom_types_order.index(vehicle.type))
                 comparisonKey.append(VEHICLE_TYPES_ORDER_INDICES[vehicle.type])
-            elif sort_criterion == 'premium':
+            elif sortingCriteria == 'premium':
                 comparisonKey.append(int(not vehicle.isPremium) * factor)
-            elif sort_criterion == 'level':
+            elif sortingCriteria == 'level':
                 comparisonKey.append(vehicle.level * factor)
-            elif sort_criterion == 'maxBattleTier':
+            elif sortingCriteria == 'maxBattleTier':
                 comparisonKey.append(getTiers(vehicle.level, vehicle.type, vehicle.name)[1] * factor)
+            elif sortingCriteria == 'battlePassPoints':
+                battlePassController = dependency.instance(IBattlePassController)
+                battlePassAvailable = battlePassController.isVisible()
+                comparisonKey.append(battlePassAvailable)
+                if battlePassAvailable:
+                    comparisonKey.append(battlePassController.getVehicleProgression(vehicle.intCD)[0] * factor)
 
-        comparisonKey.extend([vehicle.buyPrices.itemPrice.price.gold, vehicle.buyPrices.itemPrice.price.credits, vehicle.userName])
+        comparisonKey.extend([
+            vehicle.buyPrices.itemPrice.price.gold or 0,
+            vehicle.buyPrices.itemPrice.price.credits or 0,
+            vehicle.userName
+        ])
 
         return tuple(comparisonKey)
 
