@@ -14,6 +14,8 @@ import base64
 # WoT
 import debug_utils
 from account_helpers.CustomFilesCache import CustomFilesCache
+from account_helpers.settings_core.settings_constants import DAMAGE_LOG
+from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 
 # XFW
 from xfw import *
@@ -37,6 +39,18 @@ def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
             logging.getLogger('XVM/HotFix').exception('CustomFilesCache.__onReadLocalFile: reload attempt failed')
 
 
+def _DamageLogPanel__isDamageSettingEnabled(base, self, settingName):
+    if settingName == DAMAGE_LOG.STUN:
+        arenaDP = self.sessionProvider.getArenaDP()
+        vehicleID = self.sessionProvider.shared.vehicleState.getControllingVehicleID()
+        vehicleInfoVO = arenaDP.getVehicleInfo(vehicleID)
+        isSPG = vehicleInfoVO.isSPG()
+        isAssaultSPG = vehicleInfoVO.isAssaultVehicle()
+        isComp7Battle = self.sessionProvider.arenaVisitor.gui.isComp7Battle()
+        isStunEnabled = self.lobbyContext.getServerSettings().spgRedesignFeatures.isStunEnabled()
+        return ((isSPG and not isAssaultSPG) or isComp7Battle) and isStunEnabled
+
+
 def _doLog(base, category, msg, *args, **kwargs):
     if category == 'DEBUG':
         if msg == '_updateToLatestVersion':
@@ -55,6 +69,8 @@ def xfw_module_init():
     global __initialized
     if not __initialized:
         overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')(_CustomFilesCache__onReadLocalFile)
+        if IS_LESTA:
+            overrideMethod(DamageLogPanel, '_DamageLogPanel__isDamageSettingEnabled')(_DamageLogPanel__isDamageSettingEnabled)
         if IS_CT:
             overrideMethod(debug_utils, '_doLog')(_doLog)
 
