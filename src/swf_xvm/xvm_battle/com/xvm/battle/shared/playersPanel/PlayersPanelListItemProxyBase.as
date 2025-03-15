@@ -194,7 +194,7 @@ package com.xvm.battle.shared.playersPanel
             DEFAULT_FRAGS_WIDTH = ui.fragsTF.width;
             DEFAULT_VEHICLE_WIDTH = ui.vehicleTF.width;
             // ui.badge.width equal to zero :(
-            DEFAULT_BADGEICON_WIDTH = ui.badge.width;
+            // DEFAULT_BADGEICON_WIDTH = ui.badge.width;
             DEFAULT_PLAYERNAMECUT_WIDTH = ui.playerNameCutTF.width;
             DEFAULT_SPOTTED_INDICATOR_X = ui.spottedIndicator.x;
             DEFAULT_SPOTTED_INDICATOR_Y = ui.spottedIndicator.y;
@@ -491,7 +491,8 @@ package com.xvm.battle.shared.playersPanel
                     ui.deadBg.alpha = DEFAULT_DEADBG_ALPHA;
                     ui.fragsTF.width = DEFAULT_FRAGS_WIDTH;
                     ui.vehicleTF.width = DEFAULT_VEHICLE_WIDTH;
-                    ui.badge.width = DEFAULT_BADGEICON_WIDTH;
+                    // this does not work properly, badge is 24px wide
+                    // ui.badge.width = DEFAULT_BADGEICON_WIDTH;
                     ui.playerNameCutTF.width = DEFAULT_PLAYERNAMECUT_WIDTH;
                     ui.spottedIndicator.x = DEFAULT_SPOTTED_INDICATOR_X;
                     ui.spottedIndicator.y = DEFAULT_SPOTTED_INDICATOR_Y;
