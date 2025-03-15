@@ -144,7 +144,7 @@ package com.xvm.battle
                 }
 
                 var isSupportedBattleType:Boolean = (Xvm.appType & BattleElements.NOT_SUPPORTED_BATTLE_TYPES_MASK) == 0;
-                Logger.add('[XVM/BattleView] BattleElements available for this battle type: ' + String(isSupportedBattleType));
+                Logger.add('[XVM/BattleView] BattleElements for this battle type are ' + (isSupportedBattleType ? 'available' : 'not available'));
                 if (Config.config.battle.elements && isSupportedBattleType)
                 {
                     if (Config.config.battle.elements.length)
