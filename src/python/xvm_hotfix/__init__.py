@@ -50,6 +50,7 @@ def _DamageLogPanel__isDamageSettingEnabled(base, self, settingName):
         isComp7Battle = self.sessionProvider.arenaVisitor.gui.isComp7Battle()
         isStunEnabled = self.lobbyContext.getServerSettings().spgRedesignFeatures.isStunEnabled()
         return ((isSPG and not isAssaultSPG) or isComp7Battle) and isStunEnabled
+    return isDamageTypeVisible
 
 
 def _doLog(base, category, msg, *args, **kwargs):
