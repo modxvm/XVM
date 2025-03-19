@@ -118,8 +118,8 @@ package com.xvm.lobby.ui.limits
                         crystalControl.removeEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
                     }
 
-                    goldLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
-                    goldLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
+                    crystalLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
+                    crystalLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
                 }
                 crystalLocker.removeEventListener(Event.SELECT, onCrystalLockerSwitched);
                 crystalLocker.dispose();
@@ -136,8 +136,8 @@ package com.xvm.lobby.ui.limits
                         goldControl.removeEventListener(MouseEvent.ROLL_OUT, onControlMouseRollOut);
                     }
 
-                    crystalLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
-                    crystalLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
+                    goldLocker.removeEventListener(MouseEvent.ROLL_OVER, onLockerMouseRollOver);
+                    goldLocker.removeEventListener(MouseEvent.ROLL_OUT, onLockerMouseRollOut);
                 }
                 goldLocker.removeEventListener(Event.SELECT, onGoldLockerSwitched);
                 goldLocker.dispose();
