@@ -40,7 +40,8 @@ def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
 
 
 def _DamageLogPanel__isDamageSettingEnabled(base, self, settingName):
-    if settingName == DAMAGE_LOG.STUN:
+    isDamageTypeVisible = self.settingsCore.getSetting(settingName)
+    if settingName == DAMAGE_LOG.ASSIST_STUN and isDamageTypeVisible:
         arenaDP = self.sessionProvider.getArenaDP()
         vehicleID = self.sessionProvider.shared.vehicleState.getControllingVehicleID()
         vehicleInfoVO = arenaDP.getVehicleInfo(vehicleID)
