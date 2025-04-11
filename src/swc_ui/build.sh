@@ -21,7 +21,6 @@ projects="
     wg_battle_classic_ui
     wg_battle_comp7_ui
     wg_battle_event_ui
-    wg_battle_epicbattle_ui
     wg_battle_epicrandom_ui
     wg_battle_ranked_ui
     wg_battle_royale_ui
@@ -33,6 +32,7 @@ projects="
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
         $projects
+        wg_battle_frontline_ui
     "
 fi
 
@@ -40,6 +40,7 @@ fi
 if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
     projects="
         $projects
+        wg_battle_epicbattle_ui
     "
 fi
 

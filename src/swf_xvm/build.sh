@@ -30,7 +30,6 @@ projects="
     xvm_vehiclemarkers_ui
     xvm_battle_classic
     xvm_battle_comp7
-    xvm_battle_epicbattle
     xvm_battle_epicrandom
     xvm_battle_event
     xvm_battle_event_special
@@ -45,6 +44,7 @@ projects="
 if [[ "$XVMBUILD_FLAVOR" == "wg" ]]; then
     projects="
         $projects
+        xvm_battle_frontline
     "
 fi
 
@@ -52,6 +52,7 @@ fi
 if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
     projects="
         $projects
+        xvm_battle_epicbattle
     "
 fi
 

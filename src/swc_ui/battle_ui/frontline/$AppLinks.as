@@ -11,19 +11,19 @@ internal class $AppLinks
  *  from the classes specified in manifest.xml.
  */
 
-import net.wg.gui.battle.epicBattle.battleloading.EpicBattleLoadingForm; EpicBattleLoadingForm;
-import net.wg.gui.battle.epicBattle.battleloading.renderers.EpicBattleLoadingPlayerItemRenderer; EpicBattleLoadingPlayerItemRenderer;
-import net.wg.gui.battle.epicBattle.views.EpicBattlePage; EpicBattlePage;
+import net.wg.frontline.gui.battle.battleLoading.FrontlineBattleLoadingForm; FrontlineBattleLoadingForm;
+import net.wg.frontline.gui.battle.battleLoading.renderers.FrontlineBattleLoadingPlayerItemRenderer; FrontlineBattleLoadingPlayerItemRenderer;
+import net.wg.frontline.gui.battle.views.FrontlineBattlePage; FrontlineBattlePage;
 
 /**
  * UIs
  */
 
-// epicBattleLoading.swf
-EpicBattleLoadingUI;
+// frontlineBattleLoading.swf
+FrontlineBattleLoadingUI;
 
-// epicFullStats.swf
-EpicFullStatsUI;
+// frontlineFullStats.swf
+FrontlineFullStatsUI;
 
 // teamBasesPanel.swf
 teamBasesPanelUI;
@@ -39,8 +39,8 @@ VideoCameraEntry;
 ViewPointEntry;
 ViewRangeCirclesEntry;
 VehicleEntry;
-DirectionEntry;
-RectangleAreaMinimapEntry;
+ArcadeCameraEntry;
+StrategicCameraEntry;
 
 // sixthSense.swf
 sixthSenseUI;
