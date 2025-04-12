@@ -24,17 +24,33 @@ package com.xvm.battle
             return "[XVM:BATTLE]";
         }
 
-        private static const VIEWS:Object =
-        {
-            "rankedBattlePage": [
-                RankedBattleLoadingXvmView,
-                RankedFullStatsXvmView,
-                RankedPlayersPanelXvmView,
-                TeamBasesPanelXvmView,
-                MinimapXvmView,
-                SixthSenseXvmView,
-                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
-            ]
+        CLIENT::WG {
+            private static const VIEWS:Object =
+            {
+                "rankedBattlePage": [
+                    RankedBattleLoadingXvmView,
+                    RankedPlayersPanelXvmView,
+                    TeamBasesPanelXvmView,
+                    MinimapXvmView,
+                    SixthSenseXvmView,
+                    BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+                ]
+            }
+        }
+
+        CLIENT::LESTA {
+            private static const VIEWS:Object =
+            {
+                "rankedBattlePage": [
+                    RankedBattleLoadingXvmView,
+                    RankedFullStatsXvmView,
+                    RankedPlayersPanelXvmView,
+                    TeamBasesPanelXvmView,
+                    MinimapXvmView,
+                    SixthSenseXvmView,
+                    BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+                ]
+            }
         }
 
         public override function get views():Object
