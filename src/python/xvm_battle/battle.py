@@ -26,7 +26,6 @@ from gui.battle_control.controllers.dog_tags_ctrl import DogTagsController
 from gui.battle_control.controllers.dyn_squad_functional import DynSquadFunctional
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.battle.classic.players_panel import PlayersPanel
-from gui.Scaleform.daapi.view.battle.epic.stats_exchange import EpicStatisticsDataController
 from gui.Scaleform.daapi.view.battle.shared import battle_loading
 from gui.Scaleform.daapi.view.battle.shared.damage_panel import DamagePanel
 from gui.Scaleform.daapi.view.battle.shared.minimap.plugins import ArenaVehiclesPlugin
@@ -55,6 +54,13 @@ import xvm_main.python.config as config
 from consts import NOT_SUPPORTED_BATTLE_TYPES, INT_CD, INV, SPOTTED_STATUS, XVM_BATTLE_COMMAND, XVM_BATTLE_EVENT
 import shared as xvm_battle_shared
 
+# Per-flavour imports
+if IS_WG:
+    # WG after 1.28.1.0
+    from frontline.gui.Scaleform.daapi.view.battle.frontline_stats_exchange import FrontlineStatisticsDataController
+else:
+    # Lesta, old import
+    from gui.Scaleform.daapi.view.battle.epic.stats_exchange import EpicStatisticsDataController as FrontlineStatisticsDataController
 
 
 #
@@ -446,7 +452,7 @@ class Battle(object):
                         except Exception:
                             self._logger.exception('invalidateArenaInfo')
             ctrl = self.battle_page.getComponent(BATTLE_VIEW_ALIASES.BATTLE_STATISTIC_DATA_CONTROLLER)
-            if ctrl and not isinstance(ctrl, EpicStatisticsDataController):
+            if ctrl and not isinstance(ctrl, FrontlineStatisticsDataController):
                 ctrl._dispose()
                 ctrl._populate()
             # update vehicles data
