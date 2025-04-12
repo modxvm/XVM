@@ -65,6 +65,8 @@ class XfwArenaGuiType:
     STORY_MODE_ONBOARDING = 100
     # STORY_MODE_REGULAR (WG 1.25)
     STORY_MODE = 104
+    # WG 1.28.1.0
+    FALL_TANKS = 200
     # Lesta 1.25.0.0
     COSMIC_EVENT = 300
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
@@ -73,7 +75,7 @@ class XfwArenaGuiType:
     EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, WINBACK, )
     # List for event battles to ignore basic XVM features (clock and sixth sense)
     # Mainly used for special events with GF usage in battle
-    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, )
+    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, FALL_TANKS, )
 
 
 

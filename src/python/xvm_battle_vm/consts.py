@@ -31,6 +31,7 @@ UNSUPPORTED_GUI_TYPES = [
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
+    200, # constants.ARENA_GUI_TYPE.FALL_TANKS (WG 1.28.1.0)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
 ]
 
