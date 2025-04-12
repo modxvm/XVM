@@ -26,7 +26,9 @@ import net.wg.gui.battle.epicRandom.battleloading.renderers.TipEpicRandomPlayerI
 epicRandomBattleLoadingUI;
 
 // epicRandomFullStats.swf
+CLIENT::LESTA {
 epicRandomFullStatsUI;
+}
 
 // epicRandomPlayersPanel.swf
 EpicRandomPlayersPanelListItemLeftUI;
