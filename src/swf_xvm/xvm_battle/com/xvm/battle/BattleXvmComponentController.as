@@ -115,5 +115,12 @@ package com.xvm.battle
         {
             BattleState.instance.updateTriggeredChatCommands(data);
         }
+
+        CLIENT::WG {
+            public function updateTriggeredPriorityCommand(data:IDAAPIDataClass):void
+            {
+                BattleState.instance.updateTriggeredPriorityCommand(data);
+            }
+        }
     }
 }

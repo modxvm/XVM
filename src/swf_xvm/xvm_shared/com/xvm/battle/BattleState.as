@@ -255,9 +255,15 @@ package com.xvm.battle
 
         public function updateTriggeredChatCommands(data:Object):void
         {
-
+            // empty
         }
 
+        CLIENT::WG {
+            public function updateTriggeredPriorityCommand(data:Object):void
+            {
+                // empty
+            }
+        }
 
         public function updatePersonalStatus(param1:uint, param2:uint):void
         {
