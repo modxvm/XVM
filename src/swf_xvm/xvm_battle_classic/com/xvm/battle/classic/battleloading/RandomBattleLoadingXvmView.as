@@ -37,7 +37,7 @@ package com.xvm.battle.classic.battleloading
         {
             page.unregisterComponent(BATTLE_VIEW_ALIASES.BATTLE_LOADING);
             var bsdc:BattleStatisticDataController = XfwAccess.getPrivateField(page, 'battleStatisticDataController');
-            var cc:Vector.<IBattleComponentDataController> =XfwAccess.getPrivateField(bsdc, '_componentControllers');
+            var cc:Vector.<IBattleComponentDataController> = XfwAccess.getPrivateField(bsdc, '_componentControllers');
 
             cc.splice(cc.indexOf(page.battleLoading), 1);
             var idx:int = page.getChildIndex(page.battleLoading);
