@@ -1,3 +1,10 @@
+### XVM 12.3.0
+
+  **WARNING**
+  * Compatibility with World of Tanks 1.28.1.0
+     - statisticForm functionality (battle statistics window on TAB key press) won't work starting this WoT version due to this window implementation technology change from Autodesk Scaleform to Coherent Gameface. For "Mir Tankov" (Lesta) client this window will remain working.
+    - At the moment, there is no approximate deadline for solving the problem.
+
 ### XVM 12.2.0
 
   * Compatibility with Mir Tankov 1.33.0.0
