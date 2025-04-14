@@ -25,7 +25,6 @@ from gui.Scaleform.daapi.view import dialogs
 from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.Scaleform.framework.entities.BaseDAAPIComponent import BaseDAAPIComponent
-from gui.Scaleform.genConsts.BATTLE_VIEW_ALIASES import BATTLE_VIEW_ALIASES
 from frameworks.wulf import WindowLayer
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
@@ -119,7 +118,7 @@ class _XfwComponent(BaseDAAPIComponent):
             elif cmd == COMMAND.XFW_COMMAND_INITIALIZED:
                 swf.xfwInitialized = True
             elif cmd == COMMAND.XFW_COMMAND_SWF_LOADED:
-                logging.info('[XFW/Actionscript] COMMAND_SWF_LOADED: %s' % args[0])
+                logging.getLogger('XFW/Actionscript').info('COMMAND_SWF_LOADED: %s' % args[0])
                 swf_loaded_info.swf_loaded_set(args[0])
                 g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.SWF_LOADED, args[0]))
             elif cmd == COMMAND.XFW_COMMAND_GETMODS:
@@ -215,7 +214,7 @@ class _XfwComponent(BaseDAAPIComponent):
             #TODO: process only successful loaded mods
             mods_dir = loader.XFWLOADER_PACKAGES_REALFS
             if not os.path.isdir(mods_dir):
-                logging.warning('[XFW/Actionscript] getMods: directory: %s does not exists' % mods_dir)
+                logging.getLogger('XFW/Actionscript').warning('getMods: directory: %s does not exists' % mods_dir)
                 return None
 
             for as_path in as_paths:
@@ -226,7 +225,7 @@ class _XfwComponent(BaseDAAPIComponent):
                     if not m.lower().endswith('_ui.swf') and not m.lower().endswith('_view.swf'):
                         swf_loaded_info.swf_name_set(name, m)
 
-            logging.info('[XFW/Actionscript] getMods: found: %s' % swf_loaded_info.swf_name_get_all())
+            logging.getLogger('XFW/Actionscript').info('getMods: found: %s' % swf_loaded_info.swf_name_get_all())
             return {
                 'names': swf_loaded_info.swf_name_get_all(),
                 'loaded': swf_loaded_info.swf_loaded_get_all()
