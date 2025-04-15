@@ -31,6 +31,7 @@ detect_patch
 
 files=(
   'battle'
+  'frontline_battle'
   'battleVehicleMarkersApp'
   'lobby'
 )

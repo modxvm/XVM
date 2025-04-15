@@ -1,6 +1,6 @@
-diff -Naur battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm battle.orig-0/net/wg/data/constants/Linkages.class.asasm
---- battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm       2025-04-11 23:18:29.654587400 +0300
-+++ battle.orig-0/net/wg/data/constants/Linkages.class.asasm    2025-04-11 23:30:13.612517800 +0300
+diff -Naur frontline_battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm frontline_battle.orig-0/net/wg/data/constants/Linkages.class.asasm
+--- frontline_battle.orig-0.orig/net/wg/data/constants/Linkages.class.asasm     2025-04-12 01:19:44.976991200 +0300
++++ frontline_battle.orig-0/net/wg/data/constants/Linkages.class.asasm  2025-04-12 01:21:06.179296400 +0300
 @@ -2257,7 +2257,7 @@
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LABEL") slotid 268 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLabelUI") end
   trait const QName(PackageNamespace(""), "BATTLE_PROGRESS_ITEM_LINE") slotid 269 type QName(PackageNamespace(""), "String") value Utf8("battleProgressItemLineUI") end
