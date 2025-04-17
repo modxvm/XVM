@@ -82,6 +82,8 @@ class _Ping(object):
                 g_preDefinedHosts._PreDefinedHostList__onPingPerformed(results)
             else:
                 del results[DUMMY_ADDRESS]
+            if IS_WG and not dependency.isConfigured():
+                return
             if not len(results) or not len(self.url_to_serverName):
                 return
             ping_results = {}

@@ -120,6 +120,9 @@ class _OnlineStats(object):
     # Threaded
     def _getOnlineAsync(self):
         try:
+            if IS_WG and not dependency.isConfigured():
+                logging.getLogger('XVM/Online').error('dependency manager is not configured')
+                return
             data = xvmapi.getOnlineUsersCount()
             if not data:
                 return

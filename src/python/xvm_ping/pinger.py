@@ -127,6 +127,9 @@ class _Ping(object):
     # Threaded
     def _pingAsync(self):
         try:
+            if IS_WG and not dependency.isConfigured():
+                logging.getLogger('XVM/Ping').error('dependency manager is not configured')
+                return
             res = []
 
             # Parse ping output
@@ -140,7 +143,7 @@ class _Ping(object):
                 if hostping < 0:
                     res.append({'cluster': host, 'time': (self.hangarErrorString if self.hangarSpace.inited else self.loginErrorString)})
                     # TODO: fixup DEBUG loglevel for stdlib logging
-                    logging.getLogger('XVM/Ping').info('Ping has returned non-zero status: %d' % hostping)
+                    logging.getLogger('XVM/Ping').info('Ping has returned non-zero status: %s' % hostping)
                     continue
 
                 res.append({'cluster': host, 'time': hostping})
