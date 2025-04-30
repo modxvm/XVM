@@ -139,6 +139,13 @@ package com.xvm.battle.shared.sixthSense
 
         private function updateImage():void
         {
+            CLIENT::LESTA {
+                // Temporary disable custom sixth sense image functionality
+                // due to it being missing in battle
+                _imagePathValid = false;
+                return;
+            }
+
             var iconPath:String = Config.config.battle.sixthSense.icon;
 
             if (iconPath)
