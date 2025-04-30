@@ -139,13 +139,6 @@ package com.xvm.battle.shared.sixthSense
 
         private function updateImage():void
         {
-            CLIENT::LESTA {
-                // Temporary disable custom sixth sense image functionality
-                // due to it being missing in battle
-                _imagePathValid = false;
-                return;
-            }
-
             var iconPath:String = Config.config.battle.sixthSense.icon;
 
             if (iconPath)
@@ -287,6 +280,7 @@ package com.xvm.battle.shared.sixthSense
                 {
                     if (!_shown)
                     {
+                        XfwAccess.setPrivateField(this, '_isActive', true);
                         visible = true;
                         if (!_immediate)
                         {
@@ -319,6 +313,7 @@ package com.xvm.battle.shared.sixthSense
                 {
                     if (_shown)
                     {
+                        XfwAccess.setPrivateField(this, '_isActive', false);
                         if (!_immediate)
                         {
                             TweenLite.to(_loader, 0.5, {
