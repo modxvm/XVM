@@ -288,7 +288,13 @@ package com.xvm.battle.shared.sixthSense
                         }
                         else
                         {
+                            var permanentScale:Number = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
+                            permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
                             _loader.alpha = 1;
+                            if (permanentScale != 1)
+                            {
+                                _loader.scaleX = _loader.scaleY = permanentScale;
+                            }
                         }
                         _shown = true;
                     }
