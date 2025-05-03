@@ -81,8 +81,9 @@ class _DummyStats(object):
     def getTreesCut(self): return 0
 
 class _DummyDossier(object):
+    # TODO: Sync dossiers
     _dummyStats = _DummyStats()
-    def getRecordValue(*a, **k): return 0
+    def getRecordValue(self, blockName, keyName): return 0
     def getGlobalStats(self): return self._dummyStats
     def getTotalStats(self): return self._dummyStats
     def getRandomStats(self): return self._dummyStats
@@ -92,14 +93,13 @@ class _DummyDossier(object):
     def getRated7x7Stats(self): return self._dummyStats
     def getFortSortiesStats(self): return self._dummyStats
     def getGlobalMapStats(self): return self._dummyStats
-    def getSeasonRated7x7Stats(*a, **k): return self._dummyStats
+    def getSeasonRated7x7Stats(self, season): return self._dummyStats
     def getFortBattlesStats(self): return self._dummyStats
-    def getFortSortiesStats(self): return self._dummyStats
     def getCompanyStats(self): return self._dummyStats
     def getRankedStats(self): return self._dummyStats
+    def getEpicRandomStats(self): return self._dummyStats
 
 class _Dossier(object):
-
     itemsCache = dependency.descriptor(IItemsCache)
     lobbyContext = dependency.descriptor(ILobbyContext)
 
