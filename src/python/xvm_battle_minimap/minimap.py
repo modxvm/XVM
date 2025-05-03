@@ -88,7 +88,7 @@ def _MinimapComponent_addEntry(base, self, symbol, *args, **kwargs):
         elif symbol == ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES:
             symbol = XVM_ENTRY_SYMBOL_NAME.VIEW_RANGE_CIRCLES
         else:
-            logging.getLogger('XVM/Battle/Minimap').debug('add minimap entry: %s', symbol)
+            logging.getLogger('XVM/Battle/Minimap').debug('Add minimap entry: %s', symbol)
         # TODO: 1.10.0
         # elif symbol == ENTRY_SYMBOL_NAME.MARK_CELL:
         #     symbol = XVM_ENTRY_SYMBOL_NAME.MARK_CELL
@@ -329,7 +329,10 @@ class Minimap(object):
         self.entrySymbols[entryID] = symbol
 
     def delEntry(self, entryID):
-        symbol = self.entrySymbols.pop(entryID)
+        symbol = self.entrySymbols.pop(entryID, None)
+        if symbol is None:
+            self._logger.warning('Tried to delete minimap entry with id: %s', entryID)
+            return
         if symbol in XVM_ENTRY_SYMBOL_NAME.DEL_ENTRY_SYMBOLS:
             try:
                 self.minimapComponent.invoke(entryID, 'xvm_delEntry')

@@ -55,9 +55,9 @@ class XVM_ENTRY_SYMBOL_NAME(object):
     RECTANGLE_AREA = 'com.xvm.battle.shared.minimap.entries.personal::UI_RectangleAreaMinimapEntry'
     VIEW_RANGE_CIRCLES = 'com.xvm.battle.shared.minimap.entries.personal::UI_ViewRangeCirclesEntry'
     MARK_CELL = 'com.xvm.battle.shared.minimap.entries.personal::UI_CellFlashEntry'
-    DEL_ENTRY_SYMBOLS = [VEHICLE, VIEW_POINT, DEAD_POINT, VIDEO_CAMERA,
+    DEL_ENTRY_SYMBOLS = (VEHICLE, VIEW_POINT, DEAD_POINT, VIDEO_CAMERA,
                          ARCADE_CAMERA, STRATEGIC_CAMERA, DIRECTION_ENTRY,
-                         RECTANGLE_AREA, VIEW_RANGE_CIRCLES, MARK_CELL]
+                         RECTANGLE_AREA, VIEW_RANGE_CIRCLES, MARK_CELL, )
 
 
 class ADDITIONAL_ENTRY_SYMBOL_NAME:
