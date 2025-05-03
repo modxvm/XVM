@@ -32,6 +32,7 @@ import parser
 # Globals
 #
 
+_logger = logging.getLogger('XVM/PyMacro')
 _container = {}
 
 
@@ -49,7 +50,8 @@ class XvmNamespace(object):
         def decorator(func):
             f = _container.get(function_name)
             if f:
-                logging.getLogger('XVM/PyMacro').info('Override {}'.format(function_name))
+                _logger.info('Function override: {}'.format(function_name))
+            _logger.info('Registered function {}, deterministic: {}'.format(function_name, deterministic))
             _container[function_name] = (func, deterministic)
             return func
         return decorator
@@ -78,19 +80,18 @@ def __execute(code, file_name, context):
     except Exception as e:
         error_name = e.__class__.__name__
         message = e.args[0]
-        cl, exc, tb = sys.exc_info()
+        tb = sys.exc_info()[2]
         line_number = traceback.extract_tb(tb)[-1][1]
         raise ExecutionException("{} at file '{}' line {}: {}".format(error_name, file_name, line_number, message))
 
 
 def __load_lib(file_name):
-    # TODO: fixup DEBUG loglevel for stdlib logging
-    logging.getLogger('XVM/PyMacro').info("Loading py_macro: {}".format(file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
+    _logger.info("Loading py_macro: {}".format(file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
     try:
         code = parser.parse(__read_file(file_name), file_name)
         __execute(code, file_name, {'xvm': XvmNamespace})
     except Exception:
-        logging.getLogger('XVM/PyMacro').exception('__load_lib')
+        _logger.exception('__load_lib')
         return None
 
 
@@ -101,16 +102,20 @@ def __get_function(function):
         left_bracket_pos = function.index('(')
         right_bracket_pos = function.rindex(')')
         func_name = function[0:left_bracket_pos]
-        args_string = function[left_bracket_pos: right_bracket_pos + 1]
+        args_string = function[left_bracket_pos:right_bracket_pos + 1]
     except ValueError:
         raise ValueError('Function syntax error: {}'.format(function))
-    args = ast.literal_eval(args_string)
-    if not isinstance(args, tuple):
-        args = (args,)
-    (func, deterministic) = _container.get(func_name)
-    if not func:
+    macro = _container.get(func_name)
+    if not macro:
         raise NotImplementedError('Function {} not implemented'.format(func_name))
-    return (lambda: func(*args), deterministic)
+    func, deterministic = macro
+    try:
+        args = ast.literal_eval(args_string)
+    except SyntaxError:
+        raise SyntaxError('Invalid arguments passed to function {}: {}'.format(func_name, args_string))
+    if not isinstance(args, tuple):
+        args = (args, )
+    return lambda: func(*args), deterministic
 
 
 def __reload(e=None):
@@ -144,10 +149,10 @@ def __initialize():
 def process(arg):
     try:
         (func, deterministic) = __get_function(arg)
-        return (func(), deterministic)
+        return func(), deterministic
     except Exception:
-        logging.getLogger('XVM/PyMacro').exception("process: arg='{}'".format(arg))
-        return (None, True)
+        _logger.exception("process: {}".format(arg))
+        return None, True
 
 
 #
