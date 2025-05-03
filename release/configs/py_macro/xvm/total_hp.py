@@ -14,6 +14,7 @@ import BigWorld
 from Avatar import PlayerAvatar
 from CurrentVehicle import g_currentVehicle
 from constants import VEHICLE_HIT_FLAGS
+from gui.battle_control import avatar_getter
 from gui.Scaleform.daapi.view.battle.shared.frag_correlation_bar import FragCorrelationBar
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
@@ -112,10 +113,8 @@ def Hangar__updateParams(self):
     global playerAvgDamage
     if not g_currentVehicle.isPresent():
         return
-    else:
-        itemsCache = dependency.instance(IItemsCache)
-        playerAvgDamage = itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
-        return
+    itemsCache = dependency.instance(IItemsCache)
+    playerAvgDamage = itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
 
 
 @registerEvent(PlayerAvatar, 'showShotResults')
@@ -142,18 +141,16 @@ def ally(norm=None):
     maxhp = int(teams_maxhp[0])
     if (norm is None) or (maxhp == 0) or (teams_totalhp[0] == 0):
         return teams_totalhp[0]
-    else:
-        result = teams_totalhp[0] * norm / maxhp
-        return min(-1, result) if norm < 0 else max(1, result)
+    result = teams_totalhp[0] * norm / maxhp
+    return min(-1, result) if norm < 0 else max(1, result)
 
 
 def enemy(norm=None):
     maxhp = int(teams_maxhp[1])
     if (norm is None) or (maxhp == 0) or (teams_totalhp[1] == 0):
         return teams_totalhp[1]
-    else:
-        result = teams_totalhp[1] * norm / maxhp
-        return min(-1, result) if norm < 0 else max(1, result)
+    result = teams_totalhp[1] * norm / maxhp
+    return min(-1, result) if norm < 0 else max(1, result)
 
 
 def color():
@@ -169,32 +166,36 @@ def text():
 
 
 def avgDamage(dmg_total):
-    battletype = BigWorld.player().arena.guiType
-    if battletype != 1:
+    arena = avatar_getter.getArena()
+    if arena is None:
         return
-    elif playerAvgDamage == None:
+    battleType = arena.guiType
+    if battleType != 1:
         return
-    else:
-        avgDamage = int(playerAvgDamage - dmg_total)
-        if avgDamage <= 0:
-            avgDamage = '<font color="#96FF00">+%s</font>' % (abs(avgDamage))
+    if playerAvgDamage is None:
+        return
+    avgDamage = int(playerAvgDamage - dmg_total)
+    if avgDamage <= 0:
+        avgDamage = '<font color="#96FF00">+%s</font>' % (abs(avgDamage))
     return avgDamage
 
 
 def mainGun(dmg_total):
-    battletype = BigWorld.player().arena.guiType
-    if (battletype != 1) or (teams_maxhp[1] == 0):
+    arena = avatar_getter.getArena()
+    if arena is None:
         return
+    battleType = arena.guiType
+    if (battleType != 1) or (teams_maxhp[1] == 0):
+        return
+    threshold = teams_maxhp[1] * 0.2 if teams_maxhp[1] > 5000 else 1000
+    high_caliber = int(threshold - dmg_total)
+    if data.teamHits:
+        if high_caliber <= 0:
+            high_caliber = '<font color="#96FF00">+%s</font>' % (abs(high_caliber))
     else:
-        threshold = teams_maxhp[1] * 0.2 if teams_maxhp[1] > 5000 else 1000
-        high_caliber = int(threshold - dmg_total)
-        if data.teamHits:
-            if high_caliber <= 0:
-                high_caliber = '<font color="#96FF00">+%s</font>' % (abs(high_caliber))
+        if high_caliber <= 0:
+            high_caliber = '<font color="#00EAFF">+%s</font>' % (abs(high_caliber))
         else:
-            if high_caliber <= 0:
-                high_caliber = '<font color="#00EAFF">+%s</font>' % (abs(high_caliber))
-            else:
-                high_caliber = '<font color="#00EAFF">%s</font>' % (high_caliber)
+            high_caliber = '<font color="#00EAFF">%s</font>' % (high_caliber)
     if teams_maxhp[1] >= 1000:
         return high_caliber
