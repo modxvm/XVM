@@ -65,6 +65,9 @@ def event_dispatcher_showBattleResultsWindow(base, arenaUniqueID, cnt, *args, **
 
 def BattleResultsWindow_as_setDataS(base, self, data):
     try:
+        if data is None:
+            return base(self, data)
+
         linkage = data['tabInfo'][0]['linkage']
 
         if linkage == 'EpicStatsUI' and not config.get('battleResults/showStandardFrontLineInterface', True):
