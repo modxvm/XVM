@@ -46,6 +46,11 @@ from consts import *
 from logger import *
 import vehinfo
 
+if IS_WG:
+    from comp7.gui.Scaleform.daapi.view.lobby.profile.seasons_manager import getComp7SeasonManagers
+else:
+    from gui.Scaleform.daapi.view.lobby.comp7.comp7_profile_helper import isComp7Archive, isComp7Season, getArchiveName, getSeasonName
+
 
 #############################
 
@@ -98,6 +103,10 @@ class _DummyDossier(object):
     def getCompanyStats(self): return self._dummyStats
     def getRankedStats(self): return self._dummyStats
     def getEpicRandomStats(self): return self._dummyStats
+    def getBattleRoyaleSoloStats(self, *args, **kwargs): return self._dummyStats
+    def getBattleRoyaleSquadStats(self, *args, **kwargs): return self._dummyStats
+    def getComp7Stats(self, season=None, archive=None): return self._dummyStats
+    def getVersusAIStats(self): return self._dummyStats
 
 class _Dossier(object):
     itemsCache = dependency.descriptor(IItemsCache)
@@ -205,7 +214,7 @@ class _Dossier(object):
         wtr = -1
         xwtr = -1
         if randomBattles > 0:
-            stats = self.__getStatsBlock(dossier)
+            stats = self.__getStatsBlock(dossier, vehCD)
             dmg = stats.getDamageDealt()
             frg = stats.getFragsCount()
             if dmg >= 0 and frg >= 0:
@@ -245,7 +254,10 @@ class _Dossier(object):
         dossier = container.get((accountDBID, vehCD))
         return dossier is not None
 
-    def __getStatsBlock(self, dossier):
+    def __getStatsBlock(self, dossier, intCD=0):
+        if intCD is None:
+            intCD = 0
+
         if self._battlesType == PROFILE_DROPDOWN_KEYS.ALL:
             return dossier.getRandomStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.FALLOUT:
@@ -271,8 +283,38 @@ class _Dossier(object):
             return dossier.getCompanyStats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.RANKED:
             return dossier.getRankedStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.RANKED_10X10:
+            return dossier.getRanked10x10Stats()
         elif self._battlesType == PROFILE_DROPDOWN_KEYS.EPIC_RANDOM:
             return dossier.getEpicRandomStats()
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.BATTLE_ROYALE_SOLO:
+            if intCD == 0:
+                return dossier.getBattleRoyaleSoloStats()
+            stats = dossier.getBattleRoyaleSoloStats(intCD)
+            if not stats:
+                return _DummyStats()
+            return stats
+        elif self._battlesType == PROFILE_DROPDOWN_KEYS.BATTLE_ROYALE_SQUAD:
+            if intCD == 0:
+                return dossier.getBattleRoyaleSquadStats()
+            stats = dossier.getBattleRoyaleSquadStats(intCD)
+            if not stats:
+                return None
+            return stats
+        elif self._battlesType == XVM_PROFILE_DROPDOWN_KEYS.VERSUS_AI:
+            return dossier.getVersusAIStats()
+        if IS_WG:
+            comp7SeasonManagers = getComp7SeasonManagers()
+            comp7SeasonManager = comp7SeasonManagers.get(self._battlesType)
+            stats = comp7SeasonManager.getStats(dossier)
+            if not stats:
+                return _DummyStats()
+            return stats
+        else:
+            if isComp7Archive(self._battlesType):
+                return dossier.getComp7Stats(archive=getArchiveName(self._battlesType))
+            elif isComp7Season(self._battlesType):
+                return dossier.getComp7Stats(season=getSeasonName(self._battlesType))
         raise ValueError('_Dossier: Unknown battle type: ' + self._battlesType)
 
     def __prepareCommonResult(self, accountDBID, dossier):

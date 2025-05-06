@@ -66,7 +66,7 @@ def ProfileTechnique_sendAccountData(base, self, targetData, accountDossier):
     except Exception:
         logging.getLogger('XVM/Profile').exception('ProfileTechnique_sendAccountData')
 
-def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly = False):
+def ProfileTechnique_getTechniqueListVehicles(base, self, targetData, addVehiclesThatInHangarOnly=False):
     res = base(self, targetData, addVehiclesThatInHangarOnly)
     if config.networkServicesSettings.statAwards:
         global _lastAccountDBID

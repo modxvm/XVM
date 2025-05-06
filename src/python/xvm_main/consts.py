@@ -78,6 +78,17 @@ class XVM_COMMAND(object):
     AS_UPDATE_CURRENT_VEHICLE = "xvm.as.update_current_vehicle"
     AS_ON_CLAN_ICON_LOADED = "xvm.as.on_clan_icon_loaded"
 
+# Dossier
+
+class XVM_PROFILE_DROPDOWN_KEYS(object):
+    COMP7 = 'comp7'
+    COMP7_ARCHIVE_GRIFFIN = 'comp7_archive_Griffin'
+    COMP7_SEASON_1 = 'comp7_season_1'
+    COMP7_SEASON_2 = 'comp7_season_2'
+    COMP7_SEASON_3 = 'comp7_season_3'
+    COMP7_SEASON_4 = 'comp7_season_4'
+    VERSUS_AI = 'versusAI'
+
 class XVM_PROFILER_COMMAND(object):
     BEGIN = "xvm.profiler.begin"
     END = "xvm.profiler.end"
