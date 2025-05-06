@@ -13,7 +13,7 @@ import nations
 from Avatar import PlayerAvatar
 from Vehicle import Vehicle
 from VehicleEffects import DamageFromShotDecoder
-from constants import ITEM_DEFS_PATH, DAMAGE_INFO_CODES, VEHICLE_CLASSES
+from constants import ATTACK_REASON, ATTACK_REASONS, ITEM_DEFS_PATH, DAMAGE_INFO_CODES, VEHICLE_CLASSES
 from gui.Scaleform.daapi.view.battle.shared.damage_log_panel import DamageLogPanel
 from gui.Scaleform.daapi.view.meta.DamagePanelMeta import DamagePanelMeta
 from gui.shared.utils.TimeInterval import TimeInterval
@@ -43,89 +43,7 @@ chooseRating = []
 isImpact = False
 isShowDamageLog = True
 
-if IS_WG:
-    ATTACK_REASONS = {
-        0: "shot", 
-        1: "fire", 
-        2: "ramming", 
-        3: "world_collision", 
-        4: "death_zone", 
-        5: "drowning",
-        6: "gas_attack",
-        7: "overturn",
-        8: "manual",
-        9: "artillery_protection",
-        10: "artillery_sector",
-        11: "bombers",
-        12: "recovery",
-        13: "artillery_eq",
-        14: "bomber_eq",
-        15: "minefield_eq",
-        16: "none",
-        17: "spawned_bot_explosion",
-        18: "berserker_eq",
-        19: "smoke",
-        20: "corrodingShot",
-        21: "AdaptationHealthRestore",
-        22: "thunderStrike",
-        23: "fireCircle",
-        24: "clingBrander",
-        25: "ram_cling_brander",
-        26: "ram_brander",
-        27: "fort_artillery_eq",
-        28: "static_deathzone",
-        29: "cgf_world",
-        30: "vehicle_explosion",
-        31: "bunker_destroyed",
-        32: "minefield_zone",
-        33: "battleship",
-        34: "destroyer",
-        35: "damage_zone",
-        36: "ultimate",
-        37: "fall_tanks_falling",
-        38: "fall_tanks_finish",
-        39: "fall_tanks_leaver"
-    }
-else:
-    ATTACK_REASONS = {
-        0: "shot",
-        1: "fire",
-        2: "ramming",
-        3: "world_collision",
-        4: "death_zone",
-        5: "personal_death_zone",
-        6: "drowning",
-        7: "gas_attack",
-        8: "overturn",
-        9: "manual",
-        10: "artillery_protection",
-        11: "artillery_sector",
-        12: "bombers",
-        13: "bombercas",
-        14: "recovery",
-        15: "artillery_eq",
-        16: "bomber_eq",
-        17: "minefield_eq",
-        18: "none",
-        19: "spawned_bot_explosion",
-        20: "berserker_eq",
-        21: "smoke",
-        22: "corrodingShot",
-        23: "AdaptationHealthRestore",
-        24: "thunderStrike",
-        25: "fireCircle",
-        26: "clingBrander",
-        27: "ram_cling_brander",
-        28: "ram_brander",
-        29: "fort_artillery_eq",
-        30: "static_deathzone",
-        31: "autoshoot",
-        32: "cgf_world",
-        33: "spawned_bot_ram",
-        34: "artillery_rocket",
-        35: "artillery_mortar",
-        36: "artillery_on_yourself"
-    }
+ATTACK_REASONS_VALUES = dict((index, value) for index, value in enumerate(ATTACK_REASONS))
 
 SHOT_EFFECTS_INDEXES = {
     index: (9 if 'artilleryID' in effect else 11)
@@ -613,7 +531,7 @@ class Data(object):
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
                 if self.data['oldHealth'] == vehicle.health:
                     self.data.update(dataUpdate)
-                    self.data['attackReasonID'] = 2
+                    self.data['attackReasonID'] = ATTACK_REASON.getIndex(ATTACK_REASON.RAM)
                     self.updateData()
         elif damageCode in ('DEVICE_CRITICAL_AT_WORLD_COLLISION', 'DEVICE_DESTROYED_AT_WORLD_COLLISION', 'TANKMAN_HIT_AT_WORLD_COLLISION'):
             self.data['criticalHit'] = True
@@ -623,13 +541,13 @@ class Data(object):
                 vehicle = BigWorld.entities.get(player.playerVehicleID)
                 if self.data['oldHealth'] == vehicle.health:
                     self.data.update(dataUpdate)
-                    self.data['attackReasonID'] = 3
+                    self.data['attackReasonID'] = ATTACK_REASON.getIndex(ATTACK_REASON.WORLD_COLLISION)
                     self.updateData()
         elif damageCode == 'DEATH_FROM_DROWNING':
             self.data.update(dataUpdate)
             vehicle = BigWorld.entities.get(player.playerVehicleID)
             crewRoles = vehicle.typeDescriptor.type.crewRoles
-            self.data['attackReasonID'] = 5
+            self.data['attackReasonID'] = ATTACK_REASON.getIndex(ATTACK_REASON.DROWNING)
             self.data['isAlive'] = False
             self.data['criticalHit'] = True
             self.data['numCrits'] += len(crewRoles)
@@ -645,7 +563,7 @@ class Data(object):
         self.data['hp'] = max(0, newHealth)
         self.data['damage'] = self.data['oldHealth'] - self.data['hp']
         self.data['oldHealth'] = self.data['hp']
-        if self.data['damage'] < 0 or (attackReasonID == 16 and (newHealth - oldHealth) == 0):
+        if self.data['damage'] < 0 or (attackReasonID == ATTACK_REASON.getIndex(ATTACK_REASON.NONE) and (newHealth - oldHealth) == 0):
             return
         if self.data['attackReasonID'] == 0:
             self.data['attackReasonID'] = attackReasonID
@@ -785,8 +703,8 @@ class _Base(object):
                        'vtype': conf['vehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackerVehicleType']], ''),
                        'c:costShell': conf['c_Shell'][value['costShell']],
                        'costShell': conf['costShell'].get(value['costShell'], 'unknown'),
-                       'c:dmg-kind': conf['c_typeHit'].get(ATTACK_REASONS.get(value['attackReasonID']), '#CCCCCC'),
-                       'dmg-kind': conf['typeHit'].get(ATTACK_REASONS.get(value['attackReasonID']), 'reason: %s' % value['attackReasonID']),
+                       'c:dmg-kind': conf['c_typeHit'].get(ATTACK_REASONS_VALUES.get(value['attackReasonID']), '#CCCCCC'),
+                       'dmg-kind': conf['typeHit'].get(ATTACK_REASONS_VALUES.get(value['attackReasonID']), 'reason: %s' % value['attackReasonID']),
                        'c:vtype': conf['c_VehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackerVehicleType']], '#CCCCCC'),
                        'comp-name': conf['compNames'].get(value['compName'], 'unknown'),
                        'splash-hit': conf['splashHit'].get(value['splashHit'], 'unknown'),
