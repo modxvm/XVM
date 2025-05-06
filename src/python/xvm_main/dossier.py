@@ -105,7 +105,7 @@ class _DummyDossier(object):
     def getEpicRandomStats(self): return self._dummyStats
     def getBattleRoyaleSoloStats(self, *args, **kwargs): return self._dummyStats
     def getBattleRoyaleSquadStats(self, *args, **kwargs): return self._dummyStats
-    def getComp7Stats(self, season=None, archive=None): return self._dummyStats
+    def getComp7Stats(self, *args, **kwargs): return self._dummyStats
     def getVersusAIStats(self): return self._dummyStats
 
 class _Dossier(object):
