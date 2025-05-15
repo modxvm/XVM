@@ -64,7 +64,7 @@ class XfwArenaGuiType:
     STORY_MODE_ONBOARDING = 100
     # HISTORICAL_BATTLES (Lesta)
     HB_OFFENCE = 101
-    # HISTORICAL_BATTLES (Lesta)
+    # LAST_STAND (WG) | HB_DEFENCE (Lesta PvE event)
     HB_DEFENCE = 102
     # STORY_MODE_REGULAR (WG 1.25)
     STORY_MODE = 104
