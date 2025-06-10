@@ -120,6 +120,11 @@ function build_xfw_packages()
     
     cp -rf ~output/$XVMBUILD_FLAVOR/wotmod/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/"
     cp -rf ~output/$XVMBUILD_FLAVOR/wotmod_openwg/*.wotmod "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/net.openwg/"
+
+    if [[ "$XVMBUILD_FLAVOR" == "lesta" ]]; then
+        find "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/com.modxvm.xfw/" -type f -name "*.wotmod" -exec bash -c 'mv "$0" "${0%.wotmod}.mtmod"' {} \;
+        find "~output/$XVMBUILD_FLAVOR/deploy/mods/$WOT_VERSION/net.openwg/" -type f -name "*.wotmod" -exec bash -c 'mv "$0" "${0%.wotmod}.mtmod"' {} \;
+    fi
     
 }
 
