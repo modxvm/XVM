@@ -12,7 +12,7 @@ source "$currentdir"/../../build_lib/library.sh
 
 # $XVMBUILD_FLAVOR
 if [[ "$XVMBUILD_FLAVOR" == "" ]]; then
-    export XVMBUILD_FLAVOR="wg"
+    export XVMBUILD_FLAVOR="lesta"
 fi
 
 detect_os
