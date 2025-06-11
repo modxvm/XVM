@@ -7,11 +7,14 @@ Copyright (c) 2013-2025 XVM Contributors
 # Includes
 #
 
-# BigWorld
-from messenger.gui.Scaleform.meta.ContactNoteManageViewMeta import ContactNoteManageViewMeta
-
 # XFW
 from xfw import *
+
+# Per-realm imports
+if IS_WG:
+    from messenger.gui.Scaleform.meta.ContactNoteManageViewMeta import ContactNoteManageViewMeta
+else:
+    from gui.Scaleform.daapi.view.meta.ContactNoteManageViewMeta import ContactNoteManageViewMeta
 
 
 
