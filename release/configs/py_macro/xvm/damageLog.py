@@ -461,19 +461,32 @@ class Data(object):
         self.data['numCrits'] = 0
         self.data['shellDamage'] = None
 
-    def showDamageFromShot(self, vehicle, attackerID, points, effectsIndex, damageFactor, *args, **kwargs):
+    def showDamageFromShot(self, *args, **kwargs):
+        # WG 1.29.1.0 signature - self, attackerID, hitPoints, effectsIndex, prefabEffIndex, damage, damageFactor, lastMaterialIsShield, shellTypeIdx, shellCaliber, shellVelocity
+        # Lesta 1.35.0.0 signature - self, attackerID, points, effectsIndex, damage, damageFactor, lastMaterialIsShield
+        vehicle, attackerID, hitPoints, effectsIndex = args[:4]
+        damageFactor = args[5 if IS_WG else 4]
         if not vehicle.isStarted:
             return
         collisionComponent = vehicle.appearance.collisions
-        maxComponentIdx = vehicle.calcMaxComponentIdx()
-        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
+        if IS_WG:
+            decodedPoints = DamageFromShotDecoder.parseHitPoints(hitPoints, collisionComponent)
+        else:
+            maxComponentIdx = vehicle.calcMaxComponentIdx()
+            decodedPoints = DamageFromShotDecoder.decodeHitPoints(hitPoints, collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
+        # TODO: find out the case when hitPoints cannot be decoded and it enters this code section
         if not decodedPoints:
             self.data['hitEffect'] = HIT_EFFECT_CODES[7]
-            compIdx, hitEffectCode, startPoint, endPoint = DamageFromShotDecoder.decodeSegment(points[0], collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
-            convertedCompIdx = DamageFromShotDecoder.convertComponentIndex(compIdx, vehicle.typeDescriptor)
-            compName = TankPartIndexes.getName(compIdx)
-            if not compName:
-                compName = collisionComponent.getPartName(maxComponentIdx + convertedCompIdx + 1) if convertedCompIdx < 0 else TankPartNames.CHASSIS
+            if IS_WG:
+                compIdx, hitEffectCode, startPoint, endPoint = DamageFromShotDecoder.parseHitPoint(hitPoints[0], collisionComponent)
+                compName = DamageFromShotDecoder.getPartName(compIdx)
+                warn('damageLog.showDamageFromShot: Got no decoded points, hitPoints: %s, compName: %s' % (hitPoints, compName))
+            else:
+                compIdx, hitEffectCode, startPoint, endPoint = DamageFromShotDecoder.decodeSegment(hitPoints[0], collisionComponent, maxComponentIdx, vehicle.typeDescriptor)
+                convertedCompIdx = DamageFromShotDecoder.convertComponentIndex(compIdx, vehicle.typeDescriptor)
+                compName = TankPartIndexes.getName(compIdx)
+                if not compName:
+                    compName = collisionComponent.getPartName(maxComponentIdx + convertedCompIdx + 1) if convertedCompIdx < 0 else TankPartNames.CHASSIS
             self.data['compName'] = compName if compName[0] != 'W' else 'wheel'
         else:
             maxPriorityHitPoint = decodedPoints[-1]

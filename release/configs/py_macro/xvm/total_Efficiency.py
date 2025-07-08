@@ -172,8 +172,9 @@ def PlayerAvatar_showShotResults(self, results):
 
 
 @registerEvent(Vehicle, 'showShooting')
-def Vehicle_showShooting(self, burstCount, gunIndex, isPredictedShot=False):
+def Vehicle_showShooting(self, burstCount, **kwargs):
     global numberShotsDealt
+    isPredictedShot = kwargs['isPredictedShot']
     blockShooting = self.siegeState is not None and self.siegeState != VEHICLE_SIEGE_STATE.ENABLED and self.siegeState != VEHICLE_SIEGE_STATE.DISABLED and not self.typeDescriptor.hasAutoSiegeMode
     if not battle.isBattleTypeSupported or blockShooting or isPredictedShot or not self.isStarted :
         return
@@ -183,8 +184,14 @@ def Vehicle_showShooting(self, burstCount, gunIndex, isPredictedShot=False):
 
 
 @registerEvent(Vehicle, 'showDamageFromShot')
-def showDamageFromShot(self, attackerID, points, effectsIndex, damageFactor, *args, **kwargs):
+def Vehicle_showDamageFromShot(self, *args, **kwargs):
     global numberShotsReceived, numberHitsReceived
+    if IS_WG:
+        # self, attackerID, hitPoints, effectsIndex, prefabEffIndex, damage, damageFactor, lastMaterialIsShield, shellTypeIdx, shellCaliber, shellVelocity
+        damageFactor = args[5]
+    else:
+        # self, attackerID, points, effectsIndex, damage, damageFactor, lastMaterialIsShield
+        damageFactor = args[4]
     if battle.isBattleTypeSupported and self.isPlayerVehicle and self.isAlive:
         numberShotsReceived += 1
         if damageFactor != 0:

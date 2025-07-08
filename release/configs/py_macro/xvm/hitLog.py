@@ -23,12 +23,13 @@ from skeletons.gui.battle_session import IBattleSessionProvider
 from vehicle_systems.tankStructure import TankPartIndexes
 from realm import CURRENT_REALM
 
+from xfw import *
+from xfw_actionscript.python import *
+
 import xvm_battle.python.battle as battle
 import xvm_main.python.config as config
 import xvm_main.python.userprefs as userprefs
 import xvm_main.python.vehinfo_short as vehinfo_short
-from xfw.events import registerEvent
-from xfw_actionscript.python import *
 from xvm_main.python.logger import *
 from xvm_main.python.stats import _stat
 from xvm_main.python.xvm import l10n
@@ -374,12 +375,13 @@ class DataHitLog(object):
             self.data['teamDmg'] = 'ally-dmg' if vehicle.isPlayerTeam else 'enemy-dmg'
         self.updateData()
 
-    def showDamageFromShot(self, vehicle, attackerID, points, *args, **kwargs):
-        maxComponentIdx = TankPartIndexes.ALL[-1]
-        wheelsConfig = vehicle.appearance.typeDescriptor.chassis.generalWheelsAnimatorConfig
-        if wheelsConfig:
-            maxComponentIdx += wheelsConfig.getWheelsCount()
-        decodedPoints = DamageFromShotDecoder.decodeHitPoints(points, vehicle.appearance.collisions, maxComponentIdx)
+    def showDamageFromShot(self, vehicle, attackerID, hitPoints, *args, **kwargs):
+        collisionComponent = vehicle.appearance.collisions
+        if IS_WG:
+            decodedPoints = DamageFromShotDecoder.parseHitPoints(hitPoints, collisionComponent)
+        else:
+            maxComponentIdx = vehicle.calcMaxComponentIdx()
+            decodedPoints = DamageFromShotDecoder.decodeHitPoints(hitPoints, collisionComponent, maxComponentIdx)
         if decodedPoints:
             maxPriorityHitPoint = decodedPoints[-1]
             maxHitEffectCode = maxPriorityHitPoint.hitEffectCode
