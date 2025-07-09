@@ -177,10 +177,10 @@ def Vehicle_showShooting(self, burstCount, *args, **kwargs):
     # we will use an additional "False" fallback for the optional isPredictedShot param (in case of future changes in caller behavior)
     if IS_WG:
         # self, burstCount, currentGuns, shellType, isPredictedShot=False
-        isPredictedShot = args[4] if len(args) > 3 else False
+        isPredictedShot = args[4] if len(args) > 4 else False
     else:
         # self, burstCount, currentGuns, isPredictedShot=False
-        isPredictedShot = args[3] if len(args) > 2 else False
+        isPredictedShot = args[3] if len(args) > 3 else False
     blockShooting = self.siegeState is not None and self.siegeState != VEHICLE_SIEGE_STATE.ENABLED and self.siegeState != VEHICLE_SIEGE_STATE.DISABLED and not self.typeDescriptor.hasAutoSiegeMode
     if not battle.isBattleTypeSupported or blockShooting or isPredictedShot or not self.isStarted :
         return
