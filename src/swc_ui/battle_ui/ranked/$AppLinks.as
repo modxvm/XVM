@@ -11,8 +11,14 @@ internal class $AppLinks
  *  from the classes specified in manifest.xml.
  */
 
+CLIENT::WG {
 import net.wg.gui.battle.ranked.stats.components.playersPanel.list.PlayersPanelListLeft; PlayersPanelListLeft;
 import net.wg.gui.battle.ranked.stats.components.playersPanel.list.PlayersPanelListRight; PlayersPanelListRight;
+}
+CLIENT::LESTA {
+import net.wg.gui.battle.ranked.stats.components.playersPanel.list.RankedPlayersPanelListLeft; RankedPlayersPanelListLeft;
+import net.wg.gui.battle.ranked.stats.components.playersPanel.list.RankedPlayersPanelListRight; RankedPlayersPanelListRight;
+}
 import net.wg.gui.battle.ranked.battleloading.BattleLoadingForm; BattleLoadingForm;
 
 /**

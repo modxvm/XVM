@@ -67,8 +67,14 @@ package com.xvm.battle.ranked.playersPanel
             //Logger.add("UI_RankedPlayersPanel()");
             super();
 
-            XfwAccess.setPrivateField(PlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
-            XfwAccess.setPrivateField(PlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
+            CLIENT::WG {
+                XfwAccess.setPrivateField(PlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
+                XfwAccess.setPrivateField(PlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
+            }
+            CLIENT::LESTA {
+                XfwAccess.setPrivateField(RankedPlayersPanelListLeft, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_LEFT_LINKAGE);
+                XfwAccess.setPrivateField(RankedPlayersPanelListRight, "LINKAGE", XVM_PLAYERS_PANEL_LIST_ITEM_RIGHT_LINKAGE);
+            }
 
             registerPlayersPanelMacros();
 

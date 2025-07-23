@@ -11,17 +11,27 @@ package com.xvm.battle.ranked.playersPanel
     import com.xvm.battle.shared.playersPanel.PlayersPanelListItemProxyBase;
     import flash.events.MouseEvent;
     import net.wg.data.constants.generated.PLAYERS_PANEL_STATE;
-    import net.wg.gui.battle.ranked.stats.components.playersPanel.list.PlayersPanelListItem;
+    CLIENT::WG {
+        import net.wg.gui.battle.ranked.stats.components.playersPanel.list.PlayersPanelListItem;
+    }
+    CLIENT::LESTA {
+        import net.wg.gui.battle.ranked.stats.components.playersPanel.list.RankedPlayersPanelListItem;
+    }
 
     public class RankedPlayersPanelListItemProxy extends PlayersPanelListItemProxyBase
     {
         private static const RANK_ICON_AREA_WIDTH:int = 24;
 
-        private var ui:PlayersPanelListItem;
+        CLIENT::WG {
+            private var ui:PlayersPanelListItem;
+        }
+        CLIENT::LESTA {
+            private var ui:RankedPlayersPanelListItem;
+        }
 
         private var mopt_removeRankIcon:Boolean;
 
-        public function RankedPlayersPanelListItemProxy(ui:PlayersPanelListItem, isLeftPanel:Boolean)
+        public function RankedPlayersPanelListItemProxy(ui:*, isLeftPanel:Boolean)
         {
             super(ui, isLeftPanel);
             this.ui = ui;
