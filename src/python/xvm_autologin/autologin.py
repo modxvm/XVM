@@ -12,8 +12,7 @@ import BigWorld
 from gui.Scaleform.daapi.view.login.LoginView import LoginView
 
 # XFW
-from xfw import isReplay
-from xfw.events import overrideMethod
+from xfw import *
 
 # XVM Main
 import xvm_main.python.config as config
@@ -34,7 +33,8 @@ __firsttime = True
 
 def LoginView_populate(base, self):
     base(self)
-    if not isReplay() and not self.loginManager.wgcAvailable:
+    gcAvailable = self.loginManager.wgcAvailable if IS_WG else self.loginManager.lgcAvailable
+    if not isReplay() and not gcAvailable:
         global __firsttime
         if __firsttime:
             __firsttime = False
