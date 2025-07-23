@@ -278,6 +278,8 @@ package com.xvm.battle.shared.sixthSense
 
                 if (_spotted)
                 {
+                    var permanentScale:Number;
+
                     if (!_shown)
                     {
                         XfwAccess.setPrivateField(this, '_isActive', true);
@@ -288,7 +290,7 @@ package com.xvm.battle.shared.sixthSense
                         }
                         else
                         {
-                            var permanentScale:Number = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
+                            permanentScale = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
                             permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
                             _loader.alpha = 1;
                             if (permanentScale != 1)
@@ -300,7 +302,7 @@ package com.xvm.battle.shared.sixthSense
                     }
                     else if (_shown && _permanent)
                     {
-                        var permanentScale:Number = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
+                        permanentScale = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
                         permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
                         if (permanentScale != 1)
                         {
