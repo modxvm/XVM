@@ -17,7 +17,8 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersP
 -    findproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:RankedPlayersPanelListLeft"), "LINKAGE")
 +    findproperty        QName(PackageNamespace(""), "LINKAGE")
      pushstring          "RankedPlayersPanelListItemLeftUI"
-     initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:RankedPlayersPanelListLeft"), "LINKAGE")
+-    initproperty        QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:RankedPlayersPanelListLeft"), "LINKAGE")
++    initproperty        QName(PackageNamespace(""), "LINKAGE")
 
 @@ -234,6 +234,6 @@
     end ; code
