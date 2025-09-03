@@ -1,0 +1,7 @@
+{
+    "id": "com.modxvm.xvm.battle.vm",
+    "prefix": "xvm_battle_vm",
+    "dependencies": [
+        "com.modxvm.xvm.battle"
+    ]
+}

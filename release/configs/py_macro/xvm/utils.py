@@ -3,7 +3,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2025 XVM Contributors
 """
 
-import xvm_main.python.config as config
+import xvm_main.config as config
 
 def brighten_color(color, percent):
     r, g, b = hex_to_rgb(color)

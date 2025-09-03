@@ -1,0 +1,9 @@
+{
+    "id": "com.modxvm.xvm.sounds",
+    "prefix": "xvm_sounds",
+    "dependencies": [
+        "com.modxvm.xvm",
+        "net.openwg.audio"
+    ]
+}
+

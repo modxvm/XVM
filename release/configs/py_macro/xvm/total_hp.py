@@ -20,10 +20,10 @@ from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
-import xvm_battle.python.battle as battle
+import xvm_battle.battle as battle
 from xfw import *
-from xfw_actionscript.python import *
-from xvm_main.python import config
+from xvm_actionscript import *
+from xvm_main import config
 
 #####################################################################
 # globals

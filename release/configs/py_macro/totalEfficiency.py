@@ -4,9 +4,9 @@ Copyright (c) 2013-2025 XVM Contributors
 """
 
 from math import ceil
-import xvm_main.python.config as config
-import xvm_main.python.vehinfo as vehinfo
-from xvm_main.python.logger import *
+import xvm_main.config as config
+import xvm_main.vehinfo as vehinfo
+from xvm_main.logger import *
 
 import xvm.total_Efficiency as te
 import xvm.total_hp as total_hp

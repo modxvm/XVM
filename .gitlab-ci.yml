@@ -24,22 +24,13 @@ workflow:
       when: never
     - when: always
 
-build-lesta:
+build:
   stage: build
   script:
-    - XVMBUILD_FLAVOR="lesta" ./build.sh
+    - ./build.ps1
   artifacts:
     paths:
-      - ~output/lesta/deploy/
-    expire_in: 1 day
-
-build-wg:
-  stage: build
-  script:
-    - XVMBUILD_FLAVOR="wg" ./build.sh
-  artifacts:
-    paths:
-      - ~output/wg/deploy/
+      - ~output/deploy_full/
     expire_in: 1 day
 
 installer:
@@ -61,9 +52,7 @@ deploy:
   script:
     - ./build/ci_deploy.sh
   needs:
-    - job: build-lesta
-      artifacts: true
-    - job: build-wg
+    - job: build
       artifacts: true
     - job: installer
       artifacts: true

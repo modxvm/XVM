@@ -12,10 +12,10 @@ import GUI
 
 # XFW
 from xfw import *
-from xfw_actionscript.python import *
+from xvm_actionscript import *
 
 # XVM
-from xvm_main.python.logger import *
+from xvm_main.logger import *
 
 
 #######################################

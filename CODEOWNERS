@@ -13,7 +13,7 @@
 
 /src/installer/ @mixaill
 /src/xfw_actionscript/ @m.schedriviy
-/src/xfw_packages/ @mixaill @m.schedriviy
+/src/openwg_packages/ @mixaill @m.schedriviy
 /src/xfw_swf/ @mixaill @m.schedriviy
 /src/xpm/ @mixaill @m.schedriviy
 /src/xvm/ @m.schedriviy

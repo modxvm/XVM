@@ -24,15 +24,15 @@ from vehicle_systems.tankStructure import TankPartIndexes
 from realm import CURRENT_REALM
 
 from xfw import *
-from xfw_actionscript.python import *
+from xvm_actionscript import *
 
-import xvm_battle.python.battle as battle
-import xvm_main.python.config as config
-import xvm_main.python.userprefs as userprefs
-import xvm_main.python.vehinfo_short as vehinfo_short
-from xvm_main.python.logger import *
-from xvm_main.python.stats import _stat
-from xvm_main.python.xvm import l10n
+import xvm_battle.battle as battle
+import xvm_main.config as config
+import xvm_main.userprefs as userprefs
+import xvm_main.vehinfo_short as vehinfo_short
+from xvm_main.logger import *
+from xvm_main.stats import _stat
+from xvm_main.utils import l10n
 
 import parser_addon
 from xvm.damageLog import keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache

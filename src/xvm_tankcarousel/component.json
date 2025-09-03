@@ -1,0 +1,8 @@
+{
+    "id": "com.modxvm.xvm.tankcarousel",
+    "prefix": "xvm_tankcarousel",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}
+

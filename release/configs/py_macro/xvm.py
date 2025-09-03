@@ -7,10 +7,10 @@ import traceback
 import BigWorld
 
 # Import logger
-from xvm_main.python.logger import *
+from xvm_main.logger import *
 
 # Import config. Usage example: config.get('definition/author', 'XVM Team')
-import xvm_main.python.config as config
+import xvm_main.config as config
 
 from xvm import utils
 

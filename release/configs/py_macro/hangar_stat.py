@@ -7,8 +7,8 @@ from datetime import datetime
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
-from xvm_main.python import stats, utils
-from xvm_main.python.xvm import Xvm
+from xvm_main import stats, utils
+from xvm_main.xvm import Xvm
 from xfw.events import registerEvent
 
 timestamp = None

@@ -1,0 +1,5 @@
+{
+    "generators": [
+        "_generate_default_config.py"
+    ]
+}

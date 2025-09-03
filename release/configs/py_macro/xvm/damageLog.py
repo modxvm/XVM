@@ -24,14 +24,14 @@ from vehicle_systems.tankStructure import TankPartIndexes, TankPartNames
 
 from xfw import IS_WG
 from xfw.events import registerEvent, overrideMethod
-from xfw_actionscript.python import *
+from xvm_actionscript import *
 
-import xvm_battle.python.battle as battle
-import xvm_main.python.config as config
-import xvm_main.python.userprefs as userprefs
-import xvm_main.python.vehinfo_short as vehinfo_short
-from xvm_main.python.logger import *
-from xvm_main.python.stats import _stat
+import xvm_battle.battle as battle
+import xvm_main.config as config
+import xvm_main.userprefs as userprefs
+import xvm_main.vehinfo_short as vehinfo_short
+from xvm_main.logger import *
+from xvm_main.stats import _stat
 
 import parser_addon
 

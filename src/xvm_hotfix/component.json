@@ -1,0 +1,8 @@
+{
+    "id": "com.modxvm.xvm.hotfix",
+    "prefix": "xvm_hotfix",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}
+

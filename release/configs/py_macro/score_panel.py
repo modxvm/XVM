@@ -3,7 +3,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2025 XVM Contributors
 """
 
-import xvm_battle.python.fragCorrelationPanel as panel
+import xvm_battle.fragCorrelationPanel as panel
 
 @xvm.export('sp.allyFrags', deterministic=False)
 def ally_frags():

@@ -14,7 +14,7 @@ from helpers.i18n import makeString
 from constants import ITEM_DEFS_PATH
 from skeletons.gui.shared import IItemsCache
 
-from xvm_main.python.logger import *
+from xvm_main.logger import *
 from xfw import *
 
 

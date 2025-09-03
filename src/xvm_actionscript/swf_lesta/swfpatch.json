@@ -1,0 +1,37 @@
+{
+    "flavor": "lesta",
+    "build": [
+        {
+            "file": "battle.swf",
+            "patches": [
+                "battle.battleloading.patch",
+                "battle.fullStats.patch",
+                "battle.linkages.patch",
+                "battle.minimap.patch",
+                "battle.playersPanel.patch",
+                "battle.rankedBattleLoading.patch",
+                "battle.teamBasesPanel.patch"
+            ],
+            "install_directory": "res/gui/flash"
+        },
+        {
+            "file": "battleVehicleMarkersApp.swf",
+            "patches": [
+                "battleVehicleMarkersApp.vm.patch",
+                "battleVehicleMarkersApp.vma.patch",
+                "battleVehicleMarkersApp.vmm.patch"
+            ],
+            "install_directory": "res/gui/flash"
+        },
+        {
+            "file": "lobby.swf",
+            "patches": [
+                "lobby.contacts.patch",
+                "lobby.linkages.patch",
+                "lobby.profile.patch",
+                "lobby.Tankman.patch"
+            ],
+            "install_directory": "res/gui/flash"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "com.modxvm.xvm.limits",
+    "prefix": "xvm_limits",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}
+

@@ -1,0 +1,7 @@
+{
+    "id": "com.modxvm.xvm.tooltips",
+    "prefix": "xvm_tooltips",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}

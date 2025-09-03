@@ -1,0 +1,3 @@
+[submodule "src_build"]
+	path = src_build
+	url = https://gitlab.com/openwg/openwg.build.git

@@ -3,7 +3,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) ktulho
 """
 
-import xvm_main.python.config as config
+import xvm_main.config as config
 
 
 def parser_addon(strHTML, dict_macros):

@@ -1,0 +1,8 @@
+{
+    "id": "com.modxvm.xvm.profile",
+    "prefix": "xvm_profile",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}
+

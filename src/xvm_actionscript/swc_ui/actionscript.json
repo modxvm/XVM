@@ -1,0 +1,215 @@
+{
+    "build": [
+        {
+            "name": "wg_lobby_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_lobby-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/lobby_links",
+                "src/xvm_actionscript/swc_ui/lobby_ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_shared_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/shared",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_classic_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/classic",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_comp7_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/comp7",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_event_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/event",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_epicrandom_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/epicrandom",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_ranked_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/ranked",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_royale_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/royale",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_storymode_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/storymode",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        },
+        {
+            "name": "wg_vm_ui",
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battleVehicleMarkersApp_links",
+                "src/xvm_actionscript/swc_ui/battleVehicleMarkersApp_ui/*"
+            ]
+        },
+        {
+            "name": "wg_battle_frontline_ui",
+            "flavors": ["wg"],
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/frontline_common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/frontline_gui_battle-1.0-SNAPSHOT.swc"                
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/frontline",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]  
+        },
+        {
+            "name": "wg_battle_epicbattle_ui",
+            "flavors": ["lesta"],
+            "type": "swc",
+            "include_classes": [ 
+                "$AppLinks"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swc_ui/battle_ui/epicbattle",
+                "src/xvm_actionscript/swc_ui/battle_ui/ui/*"
+            ]
+        }
+    ]
+}
+

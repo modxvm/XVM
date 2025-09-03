@@ -1,0 +1,7 @@
+{
+    "id": "com.modxvm.xvm.actionscript",
+    "prefix": "xvm_actionscript",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}

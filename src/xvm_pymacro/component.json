@@ -1,0 +1,8 @@
+{
+    "id": "com.modxvm.xvm.pymacro",
+    "prefix": "xvm_pymacro",
+    "dependencies": [
+        "com.modxvm.xvm"
+    ]
+}
+

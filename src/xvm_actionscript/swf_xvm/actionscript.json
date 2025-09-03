@@ -1,0 +1,455 @@
+{
+    "build": [
+        {
+            "name": "xfw_shared",
+            "type": "swc",
+            "include_classes": [ 
+                "com.xfw.Xfw"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc"
+            ]
+        },
+        {
+            "name": "xfw_access",
+            "type": "swc",
+            "include_classes": [ 
+                "com.xfw.XfwAccess"
+            ],
+            "external_library_path" : [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/xfw_shared.swc"
+            ],
+            "patches": [
+                "<SRC>/xfw_access/postbuild.patch"
+            ]
+        },
+        {
+            "name": "xfw",
+            "type": "swc",
+            "include_classes": [ 
+                "com.xfw.XfwView"
+            ],
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc"
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xfw_shared.swc",
+                "<OUTPUT>/swc/xfw_access.swc"
+            ]
+        },
+        {
+            "name": "xfw",
+            "type": "swf",
+            "target": "<SRC>/xfw/com/xfw/XfwView.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc"
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xfw_shared.swc",
+                "<OUTPUT>/swc/xfw_access.swc"
+            ],
+            "install_directory": "res/gui/flash"
+        },
+        {
+            "name": "xvm_shared",
+            "type": "swc",
+            "include_classes": [ 
+                "com.xvm.Xvm"
+            ],
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/xfw_shared.swc",
+                "<OUTPUT>/swc/xfw_access.swc"
+            ]
+        },
+        {
+            "name": "xvm_app",
+            "type": "swc",
+            "include_classes": [ 
+                "com.xvm.XvmAppBase"
+            ],
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/xfw.swc",
+                "<OUTPUT>/swc/xvm_shared.swc"
+            ]
+        },
+        {
+            "name": "xvm_lobby",
+            "type": "swc",
+            "include_classes": [ 
+                "com.xvm.lobby.LobbyXvmApp"
+            ],
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_lobby-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_lobby_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ]
+        },
+        {
+            "name": "xvm_lobby",
+            "type": "swf",
+            "target": "<SRC>/xvm_lobby/com/xvm/lobby/LobbyXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_lobby-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_lobby_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_lobby/as_lobby"
+        },
+        {
+            "name": "xvm_lobby_ui",
+            "type": "swf",
+            "target": "<SRC>/xvm_lobby_ui/com/xvm/lobby/ui/LobbyUIMod.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_lobby-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_lobby_ui.swc",
+                "<OUTPUT>/swc/xfw.swc",
+                "<OUTPUT>/swc/xvm_lobby.swc"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_lobby/as_lobby"
+        },
+        {
+            "name": "xvm_lobbycontacts_ui",
+            "type": "swf",
+            "target": "<SRC>/xvm_lobbycontacts_ui/com/xvm/lobby/ui/LobbyContactsUIMod.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_lobby-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_lobby_ui.swc",
+                "<OUTPUT>/swc/xfw.swc",
+                "<OUTPUT>/swc/xvm_lobby.swc"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_lobby/as_lobby"
+        },
+        {
+            "name": "xvm_lobbyprofile_ui",
+            "type": "swf",
+            "target": "<SRC>/xvm_lobbyprofile_ui/com/xvm/lobby/ui/LobbyProfileUIMod.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_lobby-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_lobby_ui.swc",
+                "<OUTPUT>/swc/xfw.swc",
+                "<OUTPUT>/swc/xvm_lobby.swc"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_lobby/as_lobby"
+        },
+        {
+            "name": "xvm_vehiclemarkers_ui",
+            "type": "swf",
+            "target": "<SRC>/xvm_vehiclemarkers_ui/com/xvm/vehiclemarkers/ui/XvmVehicleMarkersMod.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_vm_ui.swc"
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xfw_shared.swc",
+                "<OUTPUT>/swc/xfw_access.swc",
+                "<OUTPUT>/swc/xvm_shared.swc"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle"
+        },
+        {
+            "name": "xvm_battle_classic",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_classic_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_classic"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_classic"  
+        },
+        {
+            "name": "xvm_battle_comp7",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_comp7_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_comp7"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_comp7"
+        },
+        {
+            "name": "xvm_battle_epicrandom",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_epicrandom_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_epicrandom"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_epicrandom"
+        },
+        {
+            "name": "xvm_battle_event",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_event_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_event"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_event"
+        },
+        {
+            "name": "xvm_battle_event_special",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_event_special"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_event_special"
+        },
+        {
+            "name": "xvm_battle_ranked",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_ranked_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_ranked"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_ranker"
+        },
+        {
+            "name": "xvm_battle_rts",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_rts"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_rts"
+        },
+        {
+            "name": "xvm_battle_storymode",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_storymode_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_storymode"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_storymode"
+        },
+        {
+            "name": "xvm_battle_stronghold",
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_classic_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_stronghold"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_stronghold"
+        },
+        {
+            "name": "xvm_battle_frontline",
+            "flavors": ["wg"],
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/frontline_common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/frontline_gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_frontline_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_frontline"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_frontline"  
+        },
+        {
+            "name": "xvm_battle_epicbattle",
+            "flavors": ["lesta"],
+            "type": "swf",
+            "target": "<SRC>/xvm_battle/com/xvm/battle/BattleXvmApp.as",
+            "external_library_path": [
+                "src/xvm_actionscript/swc_<FLAVOR>/common-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/common_i18n_library-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/base_app-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_base-1.0-SNAPSHOT.swc",
+                "src/xvm_actionscript/swc_<FLAVOR>/gui_battle-1.0-SNAPSHOT.swc",
+                "<OUTPUT>/swc/wg_battle_shared_ui.swc",
+                "<OUTPUT>/swc/wg_battle_epicbattle_ui.swc",
+                "<OUTPUT>/swc/xfw.swc"                
+            ],
+            "include_libraries": [
+                "<OUTPUT>/swc/xvm_shared.swc",
+                "<OUTPUT>/swc/xvm_app.swc"
+            ],
+            "source_path" : [
+                "src/xvm_actionscript/swf_xvm/xvm_battle",
+                "src/xvm_actionscript/swf_xvm/xvm_battle_epicbattle"
+            ],
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_epicbattle"
+        }
+    ]
+}

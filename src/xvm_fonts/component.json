@@ -1,0 +1,9 @@
+{
+    "id": "com.modxvm.xvm.fonts",
+    "prefix": "xvm_fonts",
+    "dependencies": [
+        "com.modxvm.xvm",
+        "net.openwg.fonts"
+    ]
+}
+

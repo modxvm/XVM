@@ -1,0 +1,7 @@
+{
+    "id": "com.modxvm.xvm.battle.xmqp",
+    "prefix": "xvm_battle_xmqp",
+    "dependencies": [
+        "com.modxvm.xvm.battle"
+    ]
+}

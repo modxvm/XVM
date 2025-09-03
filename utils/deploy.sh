@@ -39,9 +39,9 @@ install_xfw()
 install_xvm()
 {
   echo "=> xvm"
-  rm -rf "$WOT_PATH/res_mods/mods/xfw_packages" || err "[install_xvm] rm"
-  mkdir -p "$WOT_PATH/res_mods/mods/xfw_packages" || err "[install_xvm] mkdir"
-  cp -a ../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/xfw_packages/xvm_* "$WOT_PATH/res_mods/mods/xfw_packages/" || err "[install_xvm] cp"
+  rm -rf "$WOT_PATH/res_mods/mods/openwg_packages" || err "[install_xvm] rm"
+  mkdir -p "$WOT_PATH/res_mods/mods/openwg_packages" || err "[install_xvm] mkdir"
+  cp -a ../~output/$XVMBUILD_FLAVOR/xvm/res_mods/mods/openwg_packages/xvm_* "$WOT_PATH/res_mods/mods/openwg_packages/" || err "[install_xvm] cp"
 }
 
 copy_configs()

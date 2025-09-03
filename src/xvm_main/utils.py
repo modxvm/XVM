@@ -1,0 +1,222 @@
+"""
+SPDX-License-Identifier: GPL-3.0-or-later
+Copyright (c) 2013-2025 XVM Contributors
+"""
+
+import os
+import re
+import traceback
+import threading
+import math
+from bisect import bisect_left
+
+import BigWorld
+import Vehicle
+from gui import game_control
+from gui.battle_control import avatar_getter
+from helpers import dependency
+from skeletons.gui.battle_session import IBattleSessionProvider
+
+from xfw import *
+
+import config
+from consts import XVM_PATH
+from logger import *
+import userprefs
+
+
+def touch(fname, times=None):
+    with open(fname, 'a'):
+        os.utime(fname, times)
+
+def rm(fname):
+    if os.path.isfile(fname):
+        os.remove(fname)
+
+def hide_guid(txt):
+    return re.sub('([0-9A-Fa-f]{8}-)[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{8}([0-9A-Fa-f]{4})',
+                  '\\1****-****-****-********\\2', str(txt))
+
+def show_threads():
+    for t in threading.enumerate():
+        log('Thread: %s' % t.getName())
+
+def openWebBrowser(url, useInternalBrowser=False):
+    openBrowser = BigWorld.wg_openWebBrowser
+    if useInternalBrowser:
+        browser = game_control.g_instance.browser
+        if browser is not None:
+            openBrowser = browser.load
+    openBrowser(url)
+
+def getVehicleByName(name):
+    for v in BigWorld.entities.values():
+        if isinstance(v, Vehicle.Vehicle) and v.publicInfo['name'] == name:
+            return v
+    return None
+
+def getVehicleByHandle(handle):
+    for v in BigWorld.entities.values():
+        if isinstance(v, Vehicle.Vehicle) and hasattr(v, 'marker') and v.marker == handle:
+            return v
+    return None
+
+def getVehicleInfo(vehicleID):
+    sessionProvider = dependency.instance(IBattleSessionProvider)
+    return sessionProvider.getArenaDP().getVehicleInfo(vehicleID)
+
+def getVehicleStats(vehicleID):
+    sessionProvider = dependency.instance(IBattleSessionProvider)
+    return sessionProvider.getArenaDP().getVehicleStats(vehicleID)
+
+# 0 - equal, -1 - v1<v2, 1 - v1>v2, -2 - error
+def compareVersions(v1, v2):
+    try:
+        aa = v1.replace('-', '.').split('.')
+        ba = v2.replace('-', '.').split('.')
+        while len(aa) < 4 or len(aa) < len(ba):
+            aa.append('0')
+        while len(ba) < 4 or len(ba) < len(aa):
+            ba.append('0')
+        #debug('{} <=> {}'.format(aa, ba))
+        for i in xrange(len(aa)):
+            a = aa[i]
+            b = ba[i]
+            da = a.isdigit()
+            db = b.isdigit()
+            if a == 'dev':
+                return -1
+            if b == 'dev':
+                return 1
+            if not da and not db:
+                return 0 if a == b else -1 if a < b else 1
+            if not da:
+                return -1
+            if not db:
+                return 1
+            if int(a) < int(b):
+                return -1
+            if int(a) > int(b):
+                return 1
+    except Exception as ex:
+        # err(traceback.format_exc())
+        return -2
+    return 0
+
+def getDynamicColorValue(type, value, prefix='#'):
+    if value is None or math.isnan(value):
+        return ''
+
+    cfg = config.get('colors/%s' % type)
+    if not cfg:
+        return ''
+
+    color = next((int(x['color'], 0) for x in cfg if value <= float(x['value'])), 0xFFFFFF)
+
+    return "{0}{1:06x}".format(prefix, color)
+
+def getAccountDBID():
+    accountDBID = getCurrentAccountDBID() if not isReplay() else None
+    if accountDBID is None:
+        accountDBID = userprefs.get('tokens/lastAccountDBID')
+    return accountDBID
+
+def getAccountPlayerName():
+    return getattr(BigWorld.player(), 'name', None)
+
+def getClanDBID():
+    player = BigWorld.player()
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['clanDBID']
+    return 0
+
+def getClanAbbrev():
+    player = BigWorld.player()
+    arena = getattr(player, 'arena', None)
+    if arena is not None:
+        vehID = getattr(player, 'playerVehicleID', None)
+        if vehID is not None and vehID in arena.vehicles:
+            return arena.vehicles[vehID]['clanAbbrev']
+    return None
+
+def getMapSize():
+    (b, l), (t, r) = avatar_getter.getArena().arenaType.boundingBox
+    return t - b
+
+# Fix <img src='xvm://...'> to <img src='img://XVM_IMG_RES_ROOT/...'> (res_mods/mods/shared_resources/xvm/res)
+# Fix <img src='cfg://...'> to <img src='img://XVM_IMG_CFG_ROOT/...'> (res_mods/configs/xvm)
+def fixImgTag(path):
+    return path.replace('xvm://', 'img://' + XVM_PATH.XVM_IMG_RES_ROOT).replace('cfg://', 'img://' + XVM_PATH.XVM_IMG_CFG_ROOT)
+
+def takeClosest(myList, myNumber):
+    """
+    Assumes myList is sorted. Returns closest value to myNumber.
+
+    If two numbers are equally close, return the smallest number.
+    """
+    pos = bisect_left(myList, myNumber)
+    if pos == 0:
+        return myList[0]
+    if pos == len(myList):
+        return myList[-1]
+    before = myList[pos - 1]
+    after = myList[pos]
+    if after - myNumber < myNumber - before:
+       return after
+    else:
+       return before
+
+class PrettyFloat(float):
+    def __repr__(self):
+        return '%.15g' % self
+
+def pretty_floats(obj):
+    if isinstance(obj, float):
+        return PrettyFloat(obj)
+    elif isinstance(obj, dict):
+        return dict((k, pretty_floats(v)) for k, v in obj.items())
+    elif isinstance(obj, (list, tuple)):
+        return map(pretty_floats, obj)
+    return obj
+
+
+def l10n(text):
+
+    if text is None:
+        return None
+
+    lang_data = config.lang_data.get('locale', {})
+
+    if text in lang_data:
+        text = lang_data[text]
+        if text is None:
+            return None
+
+    while True:
+        localizedMacroStart = text.find('{{l10n:')
+        if localizedMacroStart == -1:
+            break
+        localizedMacroEnd = text.find('}}', localizedMacroStart)
+        if localizedMacroEnd == -1:
+            break
+
+        macro = text[localizedMacroStart + 7:localizedMacroEnd]
+
+        parts = macro.split(':')
+        macro = lang_data.get(parts[0], parts[0])
+        parts = parts[1:]
+        if len(parts) > 0:
+            try:
+                macro = macro.format(*parts)
+            except Exception as ex:
+                err('macro:  {}'.format(macro))
+                err('params: {}'.format(parts))
+                err(traceback.format_exc())
+
+        text = text[:localizedMacroStart] + macro + text[localizedMacroEnd + 2:]
+        #log(text)
+
+    return fixImgTag(lang_data.get(text, text))

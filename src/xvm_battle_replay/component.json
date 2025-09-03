@@ -1,0 +1,9 @@
+{
+    "id": "com.modxvm.xvm.battle.replay",
+    "prefix": "xvm_battle_replay",
+    "dependencies": [
+        "com.modxvm.xvm.battle",
+        "com.modxvm.xvm.battle.xmqp"
+    ]
+}
+

@@ -3,7 +3,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2025 XVM Contributors
 """
 
-import xvm_main.python.xvm_scale_data as xvm_scale_data
+import xvm_main.xvm_scale_data as xvm_scale_data
 
 def xvm2sup(x=None):
     if x is None or x == '':

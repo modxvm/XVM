@@ -16,10 +16,10 @@ from gui.battle_control.arena_info.arena_vos import VehicleArenaInfoVO
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 
 from xfw import *
-from xfw_actionscript.python import *
-from xvm_main.python.logger import *
+from xvm_actionscript import *
+from xvm_main.logger import *
 
-import xvm_battle.python.battle as battle
+import xvm_battle.battle as battle
 
 from xvm.damageLog import ATTACK_REASONS
 
