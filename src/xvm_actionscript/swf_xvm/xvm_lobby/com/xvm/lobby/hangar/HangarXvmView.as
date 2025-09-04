@@ -23,6 +23,7 @@ package com.xvm.lobby.hangar
         public function HangarXvmView(view:IView)
         {
             super(view);
+            Logger.add('HangarXvmView::init()');
         }
 
         public function get page():Hangar

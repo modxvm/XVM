@@ -37,95 +37,98 @@ package com.xvm.lobby
             Config.setNetworkServicesSettings(new NetworkServicesSettings(Xfw.cmd(XvmCommands.GET_SVC_SETTINGS)));
         }
 
-        override public function onAfterPopulate(e:LifeCycleEvent):void
-        {
-            super.onAfterPopulate(e);
-            setup();
-            page.header.addEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE, onGraphicsRectanglesUpdateHandler);
-        }
-
-        override public function onBeforeDispose(e:LifeCycleEvent):void
-        {
-            page.header.removeEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE, onGraphicsRectanglesUpdateHandler);
-            super.onBeforeDispose(e);
-        }
-
-        override public function onConfigLoaded(e:Event):void
-        {
-            super.onConfigLoaded(e);
-            setup();
-        }
-
-        // PRIVATE
-
-        public function setup():void
-        {
-            setupServerInfo();
-            setupHeaderButtons();
-        }
-
-        // server info
-
-        private var _orig_onlineCounter_x:Number = NaN;
-        private var _orig_onlineCounter_y:Number = NaN;
-        private function setupServerInfo():void
-        {
-            var cfg:CHangarElement = Config.config.hangar.serverInfo;
-            if (!cfg.enabled)
+        CLIENT::LESTA {
+            override public function onAfterPopulate(e:LifeCycleEvent):void
             {
-                page.header.onlineCounter.mouseEnabled = false;
-                page.header.onlineCounter.mouseChildren = false;
-                page.header.onlineCounter.alpha = 0;
+                super.onAfterPopulate(e);
+                setup();
+                page.header.addEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE, onGraphicsRectanglesUpdateHandler);
             }
-            else
+
+            override public function onBeforeDispose(e:LifeCycleEvent):void
             {
-                page.header.onlineCounter.mouseEnabled = true;
-                page.header.onlineCounter.mouseChildren = true;
-                if (isNaN(_orig_onlineCounter_x))
+                page.header.removeEventListener(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE, onGraphicsRectanglesUpdateHandler);
+                super.onBeforeDispose(e);
+            }
+
+            override public function onConfigLoaded(e:Event):void
+            {
+                super.onConfigLoaded(e);
+                setup();
+            }
+
+            // PRIVATE
+
+            public function setup():void
+            {
+                setupServerInfo();
+                setupHeaderButtons();
+            }
+
+            // server info
+
+            private var _orig_onlineCounter_x:Number = NaN;
+            private var _orig_onlineCounter_y:Number = NaN;
+
+            private function setupServerInfo():void
+            {
+                var cfg:CHangarElement = Config.config.hangar.serverInfo;
+                if (!cfg.enabled)
                 {
-                    _orig_onlineCounter_x = page.header.onlineCounter.x;
-                    _orig_onlineCounter_y = page.header.onlineCounter.y;
+                    page.header.onlineCounter.mouseEnabled = false;
+                    page.header.onlineCounter.mouseChildren = false;
+                    page.header.onlineCounter.alpha = 0;
                 }
-                page.header.onlineCounter.x = _orig_onlineCounter_x + cfg.offsetX;
-                page.header.onlineCounter.y = _orig_onlineCounter_y + cfg.offsetY;
-                page.header.onlineCounter.alpha = cfg.alpha / 100.0;
-                page.header.onlineCounter.rotation = cfg.rotation;
-            }
-        }
-
-        private function setupHeaderButtons():void
-        {
-            App.utils.scheduler.scheduleOnNextFrame(function():void
-            {
-                onGraphicsRectanglesUpdateHandler();
-            });
-        }
-
-        private function onGraphicsRectanglesUpdateHandler(e:Event = null):void
-        {
-            var btn:HeaderButton;
-
-            var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
-
-            if (!Config.config.hangar.showCreateSquadButtonText)
-            {
-                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
-                if (btn)
+                else
                 {
-                    var ctxSquad:HBC_Squad = btn.content as HBC_Squad;
-                    ctxSquad.wideScreenPrc = 0;
+                    page.header.onlineCounter.mouseEnabled = true;
+                    page.header.onlineCounter.mouseChildren = true;
+                    if (isNaN(_orig_onlineCounter_x))
+                    {
+                        _orig_onlineCounter_x = page.header.onlineCounter.x;
+                        _orig_onlineCounter_y = page.header.onlineCounter.y;
+                    }
+                    page.header.onlineCounter.x = _orig_onlineCounter_x + cfg.offsetX;
+                    page.header.onlineCounter.y = _orig_onlineCounter_y + cfg.offsetY;
+                    page.header.onlineCounter.alpha = cfg.alpha / 100.0;
+                    page.header.onlineCounter.rotation = cfg.rotation;
                 }
             }
 
-            if (!Config.config.hangar.showBattleTypeSelectorText)
+            private function setupHeaderButtons():void
             {
-                btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
-                if (btn)
+                App.utils.scheduler.scheduleOnNextFrame(function():void
                 {
-                    var ctxBattleSelector:HBC_BattleSelector = btn.content as HBC_BattleSelector;
-                    btn.headerButtonData.resizePriority = 0;
-                    ctxBattleSelector.wideScreenPrc = 0;
-                    ctxBattleSelector.availableWidth = 0;
+                    onGraphicsRectanglesUpdateHandler();
+                });
+            }
+
+            private function onGraphicsRectanglesUpdateHandler(e:Event = null):void
+            {
+                var btn:HeaderButton;
+
+                var headerButtonsHelper:HeaderButtonsHelper = XfwAccess.getPrivateField(page.header, "_headerButtonsHelper");
+
+                if (!Config.config.hangar.showCreateSquadButtonText)
+                {
+                    btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_SQUAD);
+                    if (btn)
+                    {
+                        var ctxSquad:HBC_Squad = btn.content as HBC_Squad;
+                        ctxSquad.wideScreenPrc = 0;
+                    }
+                }
+
+                if (!Config.config.hangar.showBattleTypeSelectorText)
+                {
+                    btn = headerButtonsHelper.searchButtonById(HeaderButtonsHelper.ITEM_ID_BATTLE_SELECTOR);
+                    if (btn)
+                    {
+                        var ctxBattleSelector:HBC_BattleSelector = btn.content as HBC_BattleSelector;
+                        btn.headerButtonData.resizePriority = 0;
+                        ctxBattleSelector.wideScreenPrc = 0;
+                        ctxBattleSelector.availableWidth = 0;
+                    }
                 }
             }
         }

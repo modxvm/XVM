@@ -67,10 +67,16 @@ package com.xvm.lobby.ping
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
             {
-                var layer:String = cfg.layer.toLowerCase();
-                var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
-                pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
-                setVisibility(_isHangar);
+                CLIENT::WG {
+                    pingControl = page.addChild(new PingServersView(cfg)) as PingServersView;
+                    setVisibility(_isHangar);
+                }
+                CLIENT::LESTA {
+                    var layer:String = cfg.layer.toLowerCase();
+                    var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
+                    pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
+                    setVisibility(_isHangar);
+                }
             }
         }
 

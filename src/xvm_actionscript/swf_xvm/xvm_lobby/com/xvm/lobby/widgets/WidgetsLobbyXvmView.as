@@ -32,8 +32,13 @@ package com.xvm.lobby.widgets
             }
             if (extraFieldsWidgetsTop)
             {
-                var page:LobbyPage = view as LobbyPage;
-                extraFieldsWidgetsTop.visible = page.header.visible;
+                CLIENT::WG {
+                    extraFieldsWidgetsTop.visible = isHangar;
+                }
+                CLIENT::LESTA {
+                    var page:LobbyPage = view as LobbyPage;
+                    extraFieldsWidgetsTop.visible = page.header.visible;
+                }
             }
         }
 
@@ -64,8 +69,14 @@ package com.xvm.lobby.widgets
             {
                 if (widgets.length > 0)
                 {
-                    index = 0;
-                    extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    CLIENT::WG {
+                        // temporarily spawn all widgets at the same layer
+                        extraFieldsWidgetsBottom = page.addChild(new ExtraFieldsWidgets(widgets)) as ExtraFieldsWidgets;
+                    }
+                    CLIENT::LESTA {
+                        index = 0;
+                        extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    }
                     extraFieldsWidgetsBottom.name = "extraFieldsWidgetsBottom";
                     extraFieldsWidgetsBottom.visible = false;
                 }
@@ -76,8 +87,14 @@ package com.xvm.lobby.widgets
             {
                 if (widgets.length > 0)
                 {
-                    index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
-                    extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    CLIENT::WG {
+                        // temporarily spawn all widgets at the same layer
+                        extraFieldsWidgetsNormal = page.addChild(new ExtraFieldsWidgets(widgets)) as ExtraFieldsWidgets;
+                    }
+                    CLIENT::LESTA {
+                        index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
+                        extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    }
                     extraFieldsWidgetsNormal.name = "extraFieldsWidgetsNormal";
                     extraFieldsWidgetsNormal.visible = false;
                 }
@@ -88,8 +105,14 @@ package com.xvm.lobby.widgets
             {
                 if (widgets.length > 0)
                 {
-                    index = page.getChildIndex(page.header) + 1;
-                    extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    CLIENT::WG {
+                        // temporarily spawn all widgets at the same layer
+                        extraFieldsWidgetsTop = page.addChild(new ExtraFieldsWidgets(widgets)) as ExtraFieldsWidgets;
+                    }
+                    CLIENT::LESTA {
+                        index = page.getChildIndex(page.header) + 1;
+                        extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                    }
                     extraFieldsWidgetsTop.name = "extraFieldsWidgetsTop";
                     extraFieldsWidgetsTop.visible = false;
                 }
@@ -105,6 +128,10 @@ package com.xvm.lobby.widgets
             //}
 
             onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);
+            CLIENT::WG {
+                // temporarily force show widgets
+                setVisibility(true);
+            }
         }
 
         override protected function remove():void

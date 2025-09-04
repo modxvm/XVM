@@ -43,7 +43,7 @@ package com.xvm.lobby
             private static const VIEWS:Object =
             {
                 "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
-                "lobby": [ LobbyXvmView, LimitsXvmView, OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
+                "lobby": [ LobbyXvmView, /* LimitsXvmView, */ OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
                 "hangar": [ HangarXvmView ],
                 //"battleResults": [ BattleResultsXvmView ],
                 //"ContactsPopover": [ ContactsXvmView ],

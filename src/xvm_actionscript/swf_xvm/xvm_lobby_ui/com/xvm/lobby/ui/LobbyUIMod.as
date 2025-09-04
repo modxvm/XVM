@@ -12,8 +12,11 @@ package com.xvm.lobby.ui
     UI_CommonStats;
     UI_ProgressElement;
 
-    import com.xvm.lobby.ui.limits.*;
-    LimitsUIImpl;
+    // temporarily disable limits functionality for WG
+    CLIENT::LESTA {
+        import com.xvm.lobby.ui.limits.*;
+        LimitsUIImpl;
+    }
 
     // TODO
     //import com.xvm.lobby.ui.squad.*;
