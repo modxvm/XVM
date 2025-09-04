@@ -116,7 +116,7 @@ package com.xvm.vehiclemarkers.ui
 
         // HACK: transfer attackerID in the damageType argument
         CLIENT::WG {
-            override public function updateHealth(newHealth:int, damageFlag:uint, damageType:String):void
+            override public function updateHealth(newHealth:int, damageFlag:uint, damageType:String, ramDamageThreshold:int = -1):void
             {
                 xvm_updateHealth(newHealth, damageFlag, damageType);
             }
