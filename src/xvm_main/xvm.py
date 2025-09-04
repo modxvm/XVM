@@ -390,9 +390,12 @@ class Xvm(object):
             err('onUpdateStage(): ' + traceback.format_exc())
 
     def onViewLoaded(self, view, loadParams):
-        trace('onViewLoaded: {}'.format('(None)' if not view else view.uniqueName))
         if not view:
+            trace('onViewLoaded: None, impl: None')
             return
+        trace('onViewLoaded: {}, impl: {}'.format(view.uniqueName, view.uiImpl))
+        if view.uiImpl == 3:
+            trace('onViewLoaded: sfWindow: {}'.format(view.getParentWindow()))
         if view.uniqueName == VIEW_ALIAS.LOBBY_HANGAR:
             self.hangarInit()
 
