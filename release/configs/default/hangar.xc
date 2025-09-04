@@ -49,9 +49,6 @@
     // true - show event tournaments widget in hangar.
     // true - показывать виджет ивентовых турниров в ангаре.
     "showEventTournamentWidget": true,
-    // true - show elite levels widget in the hangar.
-    // true - показывать виджет уровней элитности в ангаре.
-    "showHangarPrestigeWidget": true,
     // true - show elite levels widget in the profile for vehicle statistics.
     // true - показывать виджет уровней элитности в профиле для статистики техники.
     "showProfilePrestigeWidget": true,
