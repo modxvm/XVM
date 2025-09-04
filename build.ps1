@@ -54,13 +54,25 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
     New-Item -Path $wgResModsDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
     
     # Copy .wotmod files to wg directory
-    Get-ChildItem -Path $sourceDir, $ThirdPartyDir -Filter "*.wotmod" | ForEach-Object {
-        Copy-Item -Path $_.FullName -Destination $wgDir -Force
+    Get-ChildItem -Path $sourceDir, $ThirdPartyDir -Filter "*.wotmod" -Recurse | ForEach-Object {
+        $relativePath = $_.Directory.FullName.Substring($sourceDir.Length)
+        if ($_.Directory.FullName.StartsWith($ThirdPartyDir)) {
+            $relativePath = $_.Directory.FullName.Substring($ThirdPartyDir.Length)
+        }
+        $destinationPath = Join-Path -Path $wgDir -ChildPath $relativePath
+        New-Item -Path $destinationPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+        Copy-Item -Path $_.FullName -Destination $destinationPath -Force
     }
     
     # Copy .mtmod files to lesta directory
-    Get-ChildItem -Path $sourceDir, $ThirdPartyDir -Filter "*.mtmod" | ForEach-Object {
-        Copy-Item -Path $_.FullName -Destination $lestaDir -Force
+    Get-ChildItem -Path $sourceDir, $ThirdPartyDir -Filter "*.mtmod" -Recurse | ForEach-Object {
+        $relativePath = $_.Directory.FullName.Substring($sourceDir.Length)
+        if ($_.Directory.FullName.StartsWith($ThirdPartyDir)) {
+            $relativePath = $_.Directory.FullName.Substring($ThirdPartyDir.Length)
+        }
+        $destinationPath = Join-Path -Path $lestaDir -ChildPath $relativePath
+        New-Item -Path $destinationPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+        Copy-Item -Path $_.FullName -Destination $destinationPath -Force
     }
     
     # Copy configs
