@@ -26,7 +26,7 @@ import xvm_main.config as config
 
 def LobbyMenu_as_setVersionMessageS(base, self, version):
     currentGameShortName = 'WoT' if IS_WG else 'MT'
-    base(self, text_styles.main('{} {} | XVM {} ( {})'.format(currentGameShortName, getClientVersion(), config.get('__xvmVersion'), config.get('__wotVersion'))))
+    base(self, text_styles.main('{} {} | XVM {}'.format(currentGameShortName, getClientVersion(), config.get('__xvmVersion'))))
 
 
 

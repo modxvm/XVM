@@ -23,7 +23,7 @@ import xvm_main.config as config
 #
 
 def LoginView_as_setVersionS(base, self, version):
-    base(self, '{} | XVM {} (Game {})'.format(version, config.get('__xvmVersion'), config.get('__wotVersion')))
+    base(self, '{} | XVM {}'.format(version, config.get('__xvmVersion')))
 
 
 
