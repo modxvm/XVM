@@ -6,6 +6,8 @@ variables:
       - "False"
     description: "True: build & deploy as nightly. False: build and deploy as release."
 
+  GIT_SUBMODULE_STRATEGY: recursive
+
 stages:
   - build
   - installer
@@ -38,9 +40,7 @@ installer:
   script:
     - ./src/installer/build.sh
   needs:
-    - job: build-lesta
-      artifacts: true
-    - job: build-wg
+    - job: build
       artifacts: true
   artifacts:
     paths:
