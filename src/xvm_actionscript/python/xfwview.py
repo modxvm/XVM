@@ -188,7 +188,7 @@ class _XfwComponent(BaseDAAPIComponent):
             if app.appNS == APP_NAME_SPACE.SF_LOBBY:
                 as_paths = ['as_lobby']
             elif app.appNS == APP_NAME_SPACE.SF_BATTLE:
-                as_paths = ['as_battle']
+                as_paths = []
                 arenaGuiType = avatar_getter.getArena().guiType
                 if arenaGuiType == ARENA_GUI_TYPE.RANKED:
                     as_paths += ['as_battle_ranked']
