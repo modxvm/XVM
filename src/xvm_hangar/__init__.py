@@ -301,13 +301,6 @@ def TournamentsWidgetComponent_makeInjectView(base, self):
 # Handlers/Prestige (WG)
 #
 
-# hide prestige (elite levels) system widget in the hangar
-def Hangar_as_setPrestigeWidgetVisibleS(base, self, value):
-    if not config.get('hangar/showHangarPrestigeWidget', True):
-        value = False
-    return base(self, value)
-
-
 # hide prestige (elite levels) system widget in the profile 
 def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
     if not config.get('hangar/showProfilePrestigeWidget', True):
@@ -420,7 +413,6 @@ def owg_module_init():
             from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
-            overrideMethod(Hangar, 'as_setPrestigeWidgetVisibleS')(Hangar_as_setPrestigeWidgetVisibleS)
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
             overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
