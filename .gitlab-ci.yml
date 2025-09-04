@@ -38,7 +38,7 @@ build:
 installer:
   stage: installer
   script:
-    - ./src/installer/build.sh
+    - ./src_installer/build.ps1
   needs:
     - job: build
       artifacts: true

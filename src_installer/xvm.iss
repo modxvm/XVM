@@ -7,8 +7,8 @@
 #define OPENWGUTILS_DIR_SRC    "./openwg_utils/bin/"
 #define OPENWGUTILS_DIR_UNINST APP_DIR_UNINST
 
-#include "../temp/defines/xvm_defines.iss"
-#include "../temp/l10n_result/lang.iss"
+#include "../~output/installer_temp/defines/xvm_defines.iss"
+#include "../~output/installer_temp/l10n_result/lang.iss"
 #include "openwg_utils/innosetup/openwg.utils.iss"
 
 [Setup]
@@ -38,7 +38,7 @@ DisableReadyPage=true
 Uninstallable=true
 DisableDirPage=false
 
-OutputDir=..\output
+OutputDir=../~output
 OutputBaseFilename=setup_xvm
 
 UninstallFilesDir={app}\{#APP_DIR_UNINST}
@@ -63,14 +63,12 @@ Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: 
 Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_backup\mods\shared_resources\xvm\res"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall;
 
 ;xvm/WG
-Source: "..\..\..\~output\wg\deploy\mods\*"    ; DestDir: "{app}\mods"    ; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
-Source: "..\..\..\~output\wg\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
-Source: "..\..\..\~output\wg\deploy\readme*.*" ; DestDir: "{app}"         ; Check: not CHECK_IsLesta;
+Source: "..\~output\deploy_full\wg\mods\*"    ; DestDir: "{app}\mods"    ; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+Source: "..\~output\deploy_full\wg\res_mods\*"; DestDir: "{app}\res_mods"; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
 
 ;xvm/Lesta
-Source: "..\..\..\~output\lesta\deploy\mods\*"    ; DestDir: "{app}\mods"    ; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
-Source: "..\..\..\~output\lesta\deploy\res_mods\*"; DestDir: "{app}\res_mods"; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
-Source: "..\..\..\~output\lesta\deploy\readme*.*" ; DestDir: "{app}"         ; Check: CHECK_IsLesta;
+Source: "..\~output\deploy_full\lesta\mods\*"    ; DestDir: "{app}\mods"    ; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+Source: "..\~output\deploy_full\lesta\res_mods\*"; DestDir: "{app}\res_mods"; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
@@ -84,6 +82,8 @@ Type: filesandordirs; Name: "{app}\mods\temp\com.modxvm.*"
 Type: dirifempty; Name: "{app}\mods\temp\"
 
 ;res_mods\mods\packages
+Type: filesandordirs; Name: "{app}\res_mods\mods\xfw_packages\xvm_*"
+Type: dirifempty; Name: "{app}\res_mods\mods\xfw_packages\"
 Type: filesandordirs; Name: "{app}\res_mods\mods\openwg_packages\xvm_*"
 Type: dirifempty; Name: "{app}\res_mods\mods\openwg_packages\"
 Type: dirifempty; Name: "{app}\res_mods\mods\"
