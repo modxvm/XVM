@@ -33,6 +33,7 @@ build:
   artifacts:
     paths:
       - ~output/deploy_full/
+      - ~output/*.zip
     expire_in: 1 day
 
 installer:
@@ -44,13 +45,13 @@ installer:
       artifacts: true
   artifacts:
     paths:
-      - ~output/installer/
+      - ~output/*.exe
     expire_in: 1 day
 
 deploy:
   stage: deploy
   script:
-    - ./build/ci_deploy.sh
+    - ./build/ci_deploy.ps1
   needs:
     - job: build
       artifacts: true

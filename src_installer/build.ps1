@@ -121,8 +121,7 @@ function Build-Deploy()
     $vcs_commits = Get-VcsCommitsCount
     $vcs_branch = Get-VcsBranch
     $vcs_hash = Get-VcsHash
-    
-    Copy-Item -Path $sourceFile -Destination "$outputDir/xvm_latest_$($vcs_branch).exe"
+
     Copy-Item -Path $sourceFile -Destination "$outputDir/xvm_$($vcs_tag)_$($vcs_commits)_$($vcs_branch)_$($vcs_hash).exe"
 
     Remove-Item -Path $sourceFile

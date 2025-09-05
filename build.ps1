@@ -97,8 +97,12 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
     Download-Translations -L10nDir "$lestaSharedDir/l10n"
     Download-Translations -L10nDir "$wgSharedDir/l10n"
 
-    $zipFileName = "xvm_$($Version).zip"
-    $zipFilePath = Join-Path -Path $OutputDirectory -ChildPath $zipFileName
+    $vcs_tag = Get-VcsLastTag
+    $vcs_commits = Get-VcsCommitsCount
+    $vcs_branch = Get-VcsBranch
+    $vcs_hash = Get-VcsHash
+    
+    $zipFilePath = Join-Path -Path $OutputDirectory -ChildPath "xvm_$($vcs_tag)_$($vcs_commits)_$($vcs_branch)_$($vcs_hash).zip"
     if (Test-Path -Path $zipFilePath) {
         Remove-Item -Path $zipFilePath -Force
     }
