@@ -101,6 +101,10 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
         Copy-Item -Path $_.FullName -Destination $wgSharedDir -Recurse -Force
     }
 
+    # Drop unneeded banks
+    Remove-Item -Path "$deployFullDir/lesta/res_mods/mods/shared_resources/xvm/audioww/xvm_wg.bnk" -Force
+    Remove-Item -Path "$deployFullDir/wg/res_mods/mods/shared_resources/xvm/audioww/xvm_lesta.bnk" -Force
+
     # Download and unpack translations
     Download-Translations -L10nDir "$lestaSharedDir/l10n"
     Download-Translations -L10nDir "$wgSharedDir/l10n"
