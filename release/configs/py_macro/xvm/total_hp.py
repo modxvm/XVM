@@ -8,8 +8,14 @@ Copyright (c) ktulho
 # night_dragon_on <https://kr.cm/f/p/14897/>
 # ktulho <https://kr.cm/f/p/17624/>
 
+#
+# Imports
+#
+
+# CPython
 import traceback
 
+# BigWorld
 import BigWorld
 from Avatar import PlayerAvatar
 from CurrentVehicle import g_currentVehicle
@@ -20,13 +26,23 @@ from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
-import xvm_battle.battle as battle
+# XFW
 from xfw import *
+
+# XVM.ActionScript
 from xvm_actionscript import *
+
+# XVM.Main
 from xvm_main import config
 
-#####################################################################
-# globals
+# XVM.Battle
+import xvm_battle.battle as battle
+
+
+
+#
+# Globals
+#
 
 playerAvgDamage = None
 teams_totalhp = [0, 0]
@@ -35,8 +51,11 @@ hp_colors = {'bad': 'FF0000', 'neutral': 'FFFFFF', 'good': '00FF00'}
 total_hp_color = None
 total_hp_sign = None
 
-#####################################################################
-# handlers
+
+
+#
+# Classes
+#
 
 class PlayerDamages(object):
 
@@ -50,14 +69,24 @@ class PlayerDamages(object):
         arenaVehicles = playerAvatar.arena.vehicles
         VHF = VEHICLE_HIT_FLAGS
         for r in results:
-            vehicleID = r & 4294967295L
-            flags = r >> 32 & 4294967295L
+            if IS_WG:
+                vehicleID = r.vehicleID
+                flags = r.hitFlags
+            else:
+                vehicleID = r & 4294967295L
+                flags = r >> 32 & 4294967295L
             if playerAvatar.team == arenaVehicles[vehicleID]['team'] and playerAvatar.playerVehicleID != vehicleID and arenaVehicles[vehicleID]['isAlive']:
                 if flags & (VHF.IS_ANY_DAMAGE_MASK | VHF.ATTACK_IS_DIRECT_PROJECTILE):
                     self.teamHits = False
 
 
 data = PlayerDamages()
+
+
+
+#
+# Handlers
+#
 
 def update_conf_hp():
     try:
@@ -136,6 +165,10 @@ def destroyGUI(self):
     teams_totalhp = [0, 0]
     teams_maxhp = [0, 0]
 
+
+#
+# PyMacro Exports
+#
 
 def ally(norm=None):
     maxhp = int(teams_maxhp[0])

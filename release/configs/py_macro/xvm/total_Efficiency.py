@@ -3,6 +3,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2025 XVM Contributors
 """
 
+#
+# Imports
+#
+
+# WoT
 from Avatar import PlayerAvatar
 from BigWorld import player, cancelCallback, callback
 from Vehicle import Vehicle
@@ -15,16 +20,34 @@ from gui.battle_control.arena_info.arena_dp import ArenaDataProvider
 from gui.battle_control.arena_info.arena_vos import VehicleArenaInfoVO
 from gui.battle_control.battle_constants import PERSONAL_EFFICIENCY_TYPE
 
+# XFW
 from xfw import *
+
+# XVM.ActionScript
 from xvm_actionscript import *
+
+# XVM.Main
 from xvm_main.logger import *
 
+# XVM.Battle
 import xvm_battle.battle as battle
 
+# PyMacro
 from xvm.damageLog import ATTACK_REASONS
 
 
+
+#
+# Constants
+#
+
 ON_TOTAL_EFFICIENCY = 'ON_TOTAL_EFFICIENCY'
+
+
+
+#
+# Globals
+#
 
 totalDamage = 0
 damage = 0
@@ -82,6 +105,11 @@ ribbonTypes = {
 }
 
 
+
+#
+# Classes
+#
+
 class UpdateLabels(object):
     DELAY = 0.1
 
@@ -109,10 +137,31 @@ class UpdateLabels(object):
 
 updateLabels = UpdateLabels(ON_TOTAL_EFFICIENCY)
 
+#
+# Helpers
+#
+
 
 def isRandom():
     return _player.arena.guiType == ARENA_GUI_TYPE.RANDOM if _player is not None else False
 
+
+def isPlayerVehicle():
+    if _player is not None:
+        if hasattr(_player.inputHandler.ctrl, 'curVehicleID'):
+            vId = _player.inputHandler.ctrl.curVehicleID
+            v = vId.id if isinstance(vId, Vehicle) else vId
+            return _player.playerVehicleID == v
+        else:
+            return True
+    else:
+        return False
+
+
+
+#
+# Handlers
+#
 
 @registerEvent(VehicleArenaInfoVO, 'updatePlayerStatus')
 def totalEfficiency_updatePlayerStatus(self, **kwargs):
@@ -147,9 +196,15 @@ def PlayerAvatar_showShotResults(self, results):
         return
     isUpdate = False
     for r in results:
-        vehID = (r & 4294967295L)
+        if IS_WG:
+            vehID = r.vehicleID
+        else:
+            vehID = (r & 4294967295L)
         if self.playerVehicleID != vehID:
-            flags = r >> 32 & 4294967295L
+            if IS_WG:
+                vehID = r.hitFlags
+            else:
+                flags = r >> 32 & 4294967295L
             if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
                 numberHits += 1
                 isUpdate = True
@@ -203,18 +258,6 @@ def Vehicle_showDamageFromShot(self, *args, **kwargs):
         if damageFactor != 0:
             numberHitsReceived += 1
         updateLabels.update()
-
-
-def isPlayerVehicle():
-    if _player is not None:
-        if hasattr(_player.inputHandler.ctrl, 'curVehicleID'):
-            vId = _player.inputHandler.ctrl.curVehicleID
-            v = vId.id if isinstance(vId, Vehicle) else vId
-            return _player.playerVehicleID == v
-        else:
-            return True
-    else:
-        return False
 
 
 @registerEvent(DamageLogPanel, '_onTotalEfficiencyUpdated')
