@@ -18,7 +18,7 @@
         // Background image.
         // Фоновая картинка.
         "x": 4,
-        "y": 51,
+        "y": 66,
         "screenHAlign": "right",
         "format": "<img src='xvm://res/icons/clock/clockBg.png'>"
       },
@@ -29,7 +29,7 @@
         "x": -10,
         // Vertical position.
         // Положение по вертикали.
-        "y": 38,
+        "y": 53,
         // Width.
         // Ширина.
         "width": 200,
