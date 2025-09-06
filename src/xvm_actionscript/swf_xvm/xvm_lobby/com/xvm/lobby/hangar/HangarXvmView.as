@@ -9,9 +9,19 @@ package com.xvm.lobby.hangar
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
     import flash.events.*;
-    import net.wg.gui.lobby.hangar.*;
+    // TODO: consider doing per-flavour imports after shared ones?
+    CLIENT::WG {
+        import net.wg.gui.lobby.*;
+        import net.wg.gui.components.containers.*;
+    }
+    CLIENT::LESTA {
+        import net.wg.gui.lobby.hangar.*;
+    }
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    CLIENT::WG {
+        import net.wg.infrastructure.managers.impl.*;
+    }
 
     public class HangarXvmView extends XvmViewBase
     {
@@ -26,18 +36,35 @@ package com.xvm.lobby.hangar
             Logger.add('HangarXvmView::init()');
         }
 
-        public function get page():Hangar
-        {
-            return super.view as Hangar;
+        CLIENT::WG {
+            public function get page():LobbyPage
+            {
+                return super.view as LobbyPage;
+            }
+        }
+
+        CLIENT::LESTA {
+            public function get page():Hangar
+            {
+                return super.view as Hangar;
+            }
         }
 
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             super.onAfterPopulate(e);
+            Logger.add('HangarXvmView::onAfterPopulate()');
 
-            // fix bottomBg height and position - original is too high and affects carousel
-            page.bottomBg.height = 47; // MESSENGER_BAR_PADDING + 2
-            page.bottomBg.y = App.appHeight - 90; // MESSENGER_BAR_PADDING * 2
+            CLIENT::WG {
+                page.subTopContainer.addEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler, false, 0, true);
+                page.subViewContainer.addEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler, false, 0, true);
+            }
+
+            CLIENT::LESTA {
+                // fix bottomBg height and position - original is too high and affects carousel
+                page.bottomBg.height = 47; // MESSENGER_BAR_PADDING + 2
+                page.bottomBg.y = App.appHeight - 90; // MESSENGER_BAR_PADDING * 2
+            }
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
@@ -45,7 +72,9 @@ package com.xvm.lobby.hangar
                 setup();
             });
 
-            Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
+            CLIENT::LESTA {
+                Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
+            }
         }
 
         override public function onBeforeDispose(e:LifeCycleEvent):void
@@ -56,8 +85,15 @@ package com.xvm.lobby.hangar
                 return;
             _disposed = true;
 
-            //Logger.add("ON_HANGAR_BEFORE_DISPOSE");
-            Xvm.dispatchEvent(new Event(ON_HANGAR_BEFORE_DISPOSE));
+            CLIENT::WG {
+                page.subTopContainer.removeEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler);
+                page.subViewContainer.removeEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler);
+            }
+
+            CLIENT::LESTA {
+                //Logger.add("ON_HANGAR_BEFORE_DISPOSE");
+                Xvm.dispatchEvent(new Event(ON_HANGAR_BEFORE_DISPOSE));
+            }
             Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
@@ -68,6 +104,24 @@ package com.xvm.lobby.hangar
             //setupTxtTankInfo(); // TODO:1.8.0
             //setupBtnCommonQuests(); // TODO:1.1
             //setupBtnPersonalQuests(); // TODO:1.1
+        }
+
+        CLIENT::WG {
+            private function onSubContainerFramedModeChangedHandler(event:Event):void
+            {
+                var isFramed:Boolean = false;
+                for each (var subContainer:ILobbyPageSubContainer in page.getSubContainers())
+                {
+                    if (subContainer.isFramedMode)
+                    {
+                        isFramed = true;
+                        break;
+                    }
+                }
+
+                var eventName:String = isFramed ? ON_HANGAR_BEFORE_DISPOSE : ON_HANGAR_AFTER_POPULATE;
+                Xvm.dispatchEvent(new Event(eventName));
+            }
         }
 
         // txtTankInfo
@@ -190,11 +244,13 @@ package com.xvm.lobby.hangar
                 for (var n:String in data)
                     Config.config.minimap.circles._internal[n] = data[n];
 
-                VehicleParams.updateVehicleParams(page.params);
-                App.utils.scheduler.scheduleOnNextFrame(function():void
-                {
+                CLIENT::LESTA {
                     VehicleParams.updateVehicleParams(page.params);
-                });
+                    App.utils.scheduler.scheduleOnNextFrame(function():void
+                    {
+                        VehicleParams.updateVehicleParams(page.params);
+                    });
+                }
             }
             catch (ex:Error)
             {
