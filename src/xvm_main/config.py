@@ -139,7 +139,11 @@ def _load_xvm_xc(filename, autoreload):
         global _xvm_xc_files_counter
         _xvm_xc_files_counter = 0
 
-        config = deepcopy(default_config.DEFAULT_CONFIG)
+        if IS_WG:
+            config = deepcopy(default_config.DEFAULT_CONFIG_WG)
+        else:
+            config = deepcopy(default_config.DEFAULT_CONFIG_LESTA)
+
         if not os.path.isfile(filename):
             log('[WARNING] xvm.xc was not found, building new')
             with open(filename, 'w') as f:

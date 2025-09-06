@@ -80,8 +80,16 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
     $wgConfigsDir = "$deployFullDir/wg/res_mods/configs/xvm"
     New-Item -Path $lestaConfigsDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
     New-Item -Path $wgConfigsDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
-    Copy-Item -Path "$ConfigsDir/*" -Destination $lestaConfigsDir -Recurse -Force
-    Copy-Item -Path "$ConfigsDir/*" -Destination $wgConfigsDir -Recurse -Force
+
+    Copy-Item -Path "$ConfigsDir/configs.url"    -Destination  $lestaConfigsDir -Force
+    Copy-Item -Path "$ConfigsDir/xvm.xc.sample"  -Destination  $lestaConfigsDir -Force
+    Copy-Item -Path "$ConfigsDir/py_macro/"      -Destination "$lestaConfigsDir/py_macro" -Recurse -Force
+    Copy-Item -Path "$ConfigsDir/default_lesta/" -Destination "$lestaConfigsDir/default"  -Recurse -Force
+
+    Copy-Item -Path "$ConfigsDir/configs.url"   -Destination $wgConfigsDir -Force
+    Copy-Item -Path "$ConfigsDir/xvm.xc.sample" -Destination $wgConfigsDir -Force
+    Copy-Item -Path "$ConfigsDir/py_macro/"     -Destination "$wgConfigsDir/py_macro"     -Recurse -Force
+    Copy-Item -Path "$ConfigsDir/default_wg/"   -Destination "$wgConfigsDir/default"   -Recurse -Force
 
     # Copy release folders
     $lestaSharedDir = "$deployFullDir/lesta/res_mods/mods/shared_resources/xvm"

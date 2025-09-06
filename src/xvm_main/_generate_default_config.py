@@ -28,11 +28,12 @@ def main():
     # Generate default_config.py
     dc_fn = os.path.join(output_folder, 'default_config.py')
     try:
-        cfg = JSONxLoader.load(os.path.join(os.path.join(current_location, '../../release/'), 'configs/default/@xvm.xc'))
-        en = JSONxLoader.load(os.path.join(os.path.join(current_location, '../../release/'), 'l10n/en.xc'))
-        ru = JSONxLoader.load(os.path.join(os.path.join(current_location, '../../release/'), 'l10n/ru.xc'))
+        cfg_lesta = JSONxLoader.load(os.path.join(current_location, '../../release/configs/default_lesta/@xvm.xc'))
+        cfg_wg = JSONxLoader.load(os.path.join(current_location, '../../release/configs/default_wg/@xvm.xc'))
+        en = JSONxLoader.load(os.path.join(current_location, '../../release/l10n/en.xc'))
+        ru = JSONxLoader.load(os.path.join(current_location, '../../release/l10n/ru.xc'))
         with open(dc_fn, 'w') as f:
-            f.write('DEFAULT_CONFIG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg, en, ru))
+            f.write('DEFAULT_CONFIG_LESTA={}\nDEFAULT_CONFIG_WG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg_lesta, cfg_wg, en, ru))
         py_compile.compile(dc_fn)
         if not os.path.exists(dc_fn + 'c'):
             raise Exception('Failed to compile ' + dc_fn)
@@ -43,7 +44,7 @@ def main():
         sys.exit(1)
 
     # Generate default_xvm_xc.py
-    xvm_xc_sample_src = os.path.join(os.path.join(current_location, '../../release/'), 'configs/xvm.xc.sample')
+    xvm_xc_sample_src = os.path.join(current_location, '../../release/configs/xvm.xc.sample')
     xvm_xc_sample_trgt = os.path.join(output_folder, 'default_xvm_xc.py')
     try:
         with open(xvm_xc_sample_trgt, 'w') as trgt_file:

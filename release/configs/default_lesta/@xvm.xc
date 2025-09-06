@@ -1,5 +1,5 @@
 ﻿/**
- * Main configuration file (hereinafter - the configuration).
+ * Main configuration file (hereinafter - the configuration). LESTA
  *
  * Attention! Use \n as newline character instead of <br> tag
  *
