@@ -50,8 +50,8 @@ function Prepare-Defines()
     Copy-Item -Path $templateFile -Destination $outputFile
 
     (Get-Content $outputFile -Raw) `
-        -replace 'XVM_WOTVERSION', $Global:version_lesta `
-        -replace 'XVM_MTVERSION',  $Global:version_wg `
+        -replace 'XVM_WOTVERSION', $Global:version_wg`
+        -replace 'XVM_MTVERSION',  $Global:version_lesta`
         -replace 'XVM_VERSION',    $Global:version_xvm |
         Set-Content $outputFile
 }
