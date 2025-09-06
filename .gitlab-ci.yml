@@ -67,7 +67,7 @@ deploy:
 notify-krcm:
   stage: notify
   script:
-    - ./build/ci_notify_krcm.sh
+    - ./build/ci_notify_krcm.ps1
   rules:
     - if: '$CI_PIPELINE_SOURCE != "push"'
       when: never
