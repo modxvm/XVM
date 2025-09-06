@@ -14,12 +14,21 @@ import logging
 # BigWorld
 import SoundGroups
 from Avatar import PlayerAvatar
+from PlayerEvents import g_playerEvents
 
 # XFW
 from xfw.events import registerEvent
 
 # XVM.Main
 import xvm_main.config as config
+
+
+
+#
+# Globals
+#
+
+_prevGunReloadTimeLeft = -1.0
 
 
 
@@ -36,15 +45,21 @@ class XVM_SOUND_EVENT(object):
 # Handlers
 #
 
+def _onAvatarBecomeNonPlayer(*args, **kwargs):
+    global _prevGunReloadTimeLeft
+    _prevGunReloadTimeLeft = -1.0
+
+
 def updateVehicleGunReloadTime(self, vehicleID, timeLeft, *args, **kwargs):
     try:
         if config.get('sounds/enabled'):
-            prevTimeLeft = self._PlayerAvatar__prevGunReloadTimeLeft
+            global _prevGunReloadTimeLeft
             isInPostmortem = self.sessionProvider.shared.vehicleState.isInPostmortem
-            if prevTimeLeft != timeLeft and timeLeft == 0.0 and not isInPostmortem:
+            if timeLeft != _prevGunReloadTimeLeft and timeLeft == 0.0 and not isInPostmortem:
                 SoundGroups.g_instance.playSound2D(XVM_SOUND_EVENT.GUN_RELOADED)
+            _prevGunReloadTimeLeft = timeLeft
     except Exception:
-        logging.getLogger('XVM/Sounds').exception('gunReloaded/updateVehicleGunReloadTime')
+        logging.getLogger('XVM/Sounds').exception('[gunReloaded.py] updateVehicleGunReloadTime')
 
 
 
@@ -53,6 +68,7 @@ def updateVehicleGunReloadTime(self, vehicleID, timeLeft, *args, **kwargs):
 #
 
 def init():
+    g_playerEvents.onAvatarBecomeNonPlayer += _onAvatarBecomeNonPlayer
     registerEvent(PlayerAvatar, 'updateVehicleGunReloadTime', prepend=True)(updateVehicleGunReloadTime)
 
 
