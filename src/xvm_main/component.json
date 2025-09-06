@@ -2,6 +2,7 @@
     "id": "com.modxvm.xvm",
     "prefix": "xvm_main",
     "dependencies": [
-        "com.modxvm.xvm.actionscript"
+        "com.modxvm.xvm.actionscript",
+        "net.openwg.filewatcher"
     ]
 }

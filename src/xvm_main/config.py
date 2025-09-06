@@ -19,6 +19,7 @@ import collections
 from gui.shared import g_eventBus, events
 
 #OpenWG
+import openwg_filewatcher
 import openwg_loader
 
 #xfw.libraries
@@ -104,19 +105,17 @@ def load(e, from_init_stage = False):
 
         if config_autoreload:
             try:
-                xfw_filewatcher = openwg_loader.get_mod_module('com.modxvm.xvm.filewatcher')
-                if not xfw_filewatcher:
-                    logging.error("[XVM/Main] [config/load]: failed to start filewatcher because XFW.Filewatcher is not loaded")
-                else:
-                    if not xfw_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
-                        xfw_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
-                            "import BigWorld;"\
-                            "from gui.shared import g_eventBus, events;" \
-                            "BigWorld.callback(0, lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
-                            True)
-                    xfw_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
+                if not openwg_filewatcher.watcher_is_exists(XVM_EVENT.RELOAD_CONFIG):
+                    openwg_filewatcher.watcher_add(XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_DIR, \
+                        "import BigWorld;"\
+                        "import logging;" \
+                        "from gui.shared import g_eventBus, events;" \
+                        "logging.getLogger('XVM/Config').info('load: config auto reload');" \
+                        "BigWorld.callback(0, lambda: g_eventBus.handleEvent(events.HasCtxEvent('%s', {'filename':'%s'})))" % (XVM_EVENT.RELOAD_CONFIG, XVM.CONFIG_FILE), \
+                        True)
+                openwg_filewatcher.watcher_start(XVM_EVENT.RELOAD_CONFIG)
             except Exception:
-                log('[WARNING] XFW Filewatcher is not available. Config reload was disabled.')
+                log('[WARNING] OpenWG Filewatcher is not available. Config reload was disabled.')
 
     except Exception:
         err(traceback.format_exc())
