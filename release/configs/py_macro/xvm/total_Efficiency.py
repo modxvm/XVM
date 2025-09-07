@@ -202,7 +202,7 @@ def PlayerAvatar_showShotResults(self, results):
             vehID = (r & 4294967295L)
         if self.playerVehicleID != vehID:
             if IS_WG:
-                vehID = r.hitFlags
+                flags = r.hitFlags
             else:
                 flags = r >> 32 & 4294967295L
             if flags & VHF.ATTACK_IS_DIRECT_PROJECTILE:
