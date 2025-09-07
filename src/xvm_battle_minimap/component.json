@@ -2,7 +2,8 @@
     "id": "com.modxvm.xvm.battle.minimap",
     "prefix": "xvm_battle_minimap",
     "dependencies": [
-        "com.modxvm.xvm"
+        "com.modxvm.xvm",
+        "com.modxvm.xvm.battle"
     ]
 }
 
