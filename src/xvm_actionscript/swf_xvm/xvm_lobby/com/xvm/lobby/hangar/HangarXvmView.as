@@ -8,32 +8,31 @@ package com.xvm.lobby.hangar
     import com.xvm.*;
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
+    import flash.display.*;
     import flash.events.*;
-    // TODO: consider doing per-flavour imports after shared ones?
+    import net.wg.infrastructure.events.*;
+    import net.wg.infrastructure.interfaces.*;
     CLIENT::WG {
         import net.wg.gui.lobby.*;
-        import net.wg.gui.components.containers.*;
+        import net.wg.infrastructure.managers.impl.*;
     }
     CLIENT::LESTA {
         import net.wg.gui.lobby.hangar.*;
     }
-    import net.wg.infrastructure.events.*;
-    import net.wg.infrastructure.interfaces.*;
-    CLIENT::WG {
-        import net.wg.infrastructure.managers.impl.*;
-    }
 
     public class HangarXvmView extends XvmViewBase
     {
-        public static const ON_HANGAR_AFTER_POPULATE:String = "ON_HANGAR_AFTER_POPULATE";
-        public static const ON_HANGAR_BEFORE_DISPOSE:String = "ON_HANGAR_BEFORE_DISPOSE";
+        CLIENT::WG {
+            public static const HANGAR_GF_NAME:String = 'mono/hangar/main';
+        }
+        public static const ON_HANGAR_AFTER_POPULATE:String = 'ON_HANGAR_AFTER_POPULATE';
+        public static const ON_HANGAR_BEFORE_DISPOSE:String = 'ON_HANGAR_BEFORE_DISPOSE';
 
         private var _disposed:Boolean = false;
 
         public function HangarXvmView(view:IView)
         {
             super(view);
-            Logger.add('HangarXvmView::init()');
         }
 
         CLIENT::WG {
@@ -53,11 +52,11 @@ package com.xvm.lobby.hangar
         public override function onAfterPopulate(e:LifeCycleEvent):void
         {
             super.onAfterPopulate(e);
-            Logger.add('HangarXvmView::onAfterPopulate()');
 
             CLIENT::WG {
-                page.subTopContainer.addEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler, false, 0, true);
-                page.subViewContainer.addEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler, false, 0, true);
+                var mgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
+                mgr.addEventListener(ContainerManagerEvent.VIEW_ADDED, onContainerViewLifecycleHandler);
+                mgr.addEventListener(ContainerManagerEvent.VIEW_REMOVED, onContainerViewLifecycleHandler);
             }
 
             CLIENT::LESTA {
@@ -68,9 +67,9 @@ package com.xvm.lobby.hangar
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
-            App.utils.scheduler.scheduleOnNextFrame(function():void {
-                setup();
-            });
+            // App.utils.scheduler.scheduleOnNextFrame(function():void {
+            //     setup();
+            // });
 
             CLIENT::LESTA {
                 Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
@@ -80,20 +79,23 @@ package com.xvm.lobby.hangar
         override public function onBeforeDispose(e:LifeCycleEvent):void
         {
             super.onBeforeDispose(e);
+
             // This method is called twice on config reload
             if (_disposed)
                 return;
             _disposed = true;
 
             CLIENT::WG {
-                page.subTopContainer.removeEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler);
-                page.subViewContainer.removeEventListener(LobbyPageSubContainer.FRAMED_MODE_CHANGED, onSubContainerFramedModeChangedHandler);
+                var mgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
+                mgr.removeEventListener(ContainerManagerEvent.VIEW_ADDED, onContainerViewLifecycleHandler);
+                mgr.removeEventListener(ContainerManagerEvent.VIEW_REMOVED, onContainerViewLifecycleHandler);
             }
 
             CLIENT::LESTA {
                 //Logger.add("ON_HANGAR_BEFORE_DISPOSE");
                 Xvm.dispatchEvent(new Event(ON_HANGAR_BEFORE_DISPOSE));
             }
+
             Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
         }
 
@@ -101,139 +103,19 @@ package com.xvm.lobby.hangar
 
         private function setup():void
         {
-            //setupTxtTankInfo(); // TODO:1.8.0
-            //setupBtnCommonQuests(); // TODO:1.1
-            //setupBtnPersonalQuests(); // TODO:1.1
         }
 
         CLIENT::WG {
-            private function onSubContainerFramedModeChangedHandler(event:Event):void
+            private function onContainerViewLifecycleHandler(event:ContainerManagerEvent): void
             {
-                var isFramed:Boolean = false;
-                for each (var subContainer:ILobbyPageSubContainer in page.getSubContainers())
-                {
-                    if (subContainer.isFramedMode)
-                    {
-                        isFramed = true;
-                        break;
-                    }
-                }
-
-                var eventName:String = isFramed ? ON_HANGAR_BEFORE_DISPOSE : ON_HANGAR_AFTER_POPULATE;
-                Xvm.dispatchEvent(new Event(eventName));
+                var view:IView = event.view;
+                var name:String = XfwUtils.normalizeWulfViewName(view.as_config.name);
+                if (name != HANGAR_GF_NAME)
+                    return;
+                var hangarEventName:String = event.type == ContainerManagerEvent.VIEW_ADDED ? ON_HANGAR_AFTER_POPULATE : ON_HANGAR_BEFORE_DISPOSE;
+                Xvm.dispatchEvent(new Event(hangarEventName));
             }
         }
-
-        // txtTankInfo
-        // TODO:1.8.0
-        /*
-        private var _orig_txtTankInfo_x:Number = NaN;
-        private var _orig_txtTankInfo_y:Number = NaN;
-        private var _orig_tankTypeIcon_x:Number = NaN;
-        private var _orig_tankTypeIcon_y:Number = NaN;
-        private function setupTxtTankInfo():void
-        {
-            try
-            {
-            var cfg:CHangarElement = Config.config.hangar.vehicleName;
-            if (!cfg.enabled)
-            {
-                page.xfw_header.txtTankInfo.mouseEnabled = false;
-                page.xfw_header.txtTankInfo.alpha = 0;
-                page.xfw_header.tankTypeIcon.mouseEnabled = false;
-                page.xfw_header.tankTypeIcon.alpha = 0;
-            }
-            else
-            {
-                page.xfw_header.txtTankInfo.mouseEnabled = true;
-                if (isNaN(_orig_txtTankInfo_x))
-                {
-                    _orig_txtTankInfo_x = page.xfw_header.txtTankInfo.x;
-                    _orig_txtTankInfo_y = page.xfw_header.txtTankInfo.y;
-                }
-                page.xfw_header.txtTankInfo.x = _orig_txtTankInfo_x + cfg.offsetX;
-                page.xfw_header.txtTankInfo.y = _orig_txtTankInfo_y + cfg.offsetY;
-                page.xfw_header.txtTankInfo.alpha = cfg.alpha / 100.0;
-                page.xfw_header.txtTankInfo.rotation = cfg.rotation;
-
-                page.xfw_header.tankTypeIcon.mouseEnabled = true;
-                if (isNaN(_orig_tankTypeIcon_x))
-                {
-                    _orig_tankTypeIcon_x = page.xfw_header.tankTypeIcon.x;
-                    _orig_tankTypeIcon_y = page.xfw_header.tankTypeIcon.y;
-                }
-                page.xfw_header.tankTypeIcon.x = _orig_tankTypeIcon_x + cfg.offsetX;
-                page.xfw_header.tankTypeIcon.y = _orig_tankTypeIcon_y + cfg.offsetY;
-                page.xfw_header.tankTypeIcon.alpha = cfg.alpha / 100.0;
-                page.xfw_header.tankTypeIcon.rotation = cfg.rotation;
-            }
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
-            }
-        }
-        */
-
-        // btnCommonQuests
-        // TODO:1.1
-        /*
-        private var _orig_btnCommonQuests_x:Number = NaN;
-        private var _orig_btnCommonQuests_y:Number = NaN;
-        private function setupBtnCommonQuests():void
-        {
-            var cfg:CHangarElement = Config.config.hangar.commonQuests;
-            if (!cfg.enabled)
-            {
-                page.xfw_header.btnCommonQuests.mouseEnabled = false;
-                page.xfw_header.btnCommonQuests.alpha = 0;
-            }
-            else
-            {
-                page.xfw_header.btnCommonQuests.mouseEnabled = true;
-                if (isNaN(_orig_btnCommonQuests_x))
-                {
-                    _orig_btnCommonQuests_x = page.xfw_header.btnCommonQuests.x;
-                    _orig_btnCommonQuests_y = page.xfw_header.btnCommonQuests.y;
-                }
-                page.xfw_header.btnCommonQuests.x = _orig_btnCommonQuests_x + cfg.offsetX;
-                page.xfw_header.btnCommonQuests.y = _orig_btnCommonQuests_y + cfg.offsetY;
-                page.xfw_header.btnCommonQuests.alpha = cfg.alpha / 100.0;
-                page.xfw_header.btnCommonQuests.rotation = cfg.rotation;
-            }
-        }
-        */
-
-        // btnPersonalQuests
-        // TODO:1.1
-        /*
-        private var _orig_btnPersonalQuests_x:Number = NaN;
-        private var _orig_btnPersonalQuests_y:Number = NaN;
-        private function setupBtnPersonalQuests():void
-        {
-            var cfg:CHangarElement = Config.config.hangar.personalQuests;
-            if (!cfg.enabled)
-            {
-                page.xfw_header.btnPersonalQuests.mouseEnabled = false;
-                page.xfw_header.btnPersonalQuests.alpha = 0;
-            }
-            else
-            {
-                page.xfw_header.btnPersonalQuests.mouseEnabled = true;
-                if (isNaN(_orig_btnPersonalQuests_x))
-                {
-                    _orig_btnPersonalQuests_x = page.xfw_header.btnPersonalQuests.x;
-                    _orig_btnPersonalQuests_y = page.xfw_header.btnPersonalQuests.y;
-                }
-                page.xfw_header.btnPersonalQuests.x = _orig_btnPersonalQuests_x + cfg.offsetX;
-                page.xfw_header.btnPersonalQuests.y = _orig_btnPersonalQuests_y + cfg.offsetY;
-                page.xfw_header.btnPersonalQuests.alpha = cfg.alpha / 100.0;
-                page.xfw_header.btnPersonalQuests.rotation = cfg.rotation;
-            }
-        }
-        */
-
-        //
 
         private function onUpdateCurrentVehicle(vehCD:int, data:Object):Object
         {

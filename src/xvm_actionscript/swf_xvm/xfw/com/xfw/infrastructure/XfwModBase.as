@@ -100,7 +100,7 @@ package com.xfw.infrastructure
 
         protected function processView(view:IView, populated:Boolean):Vector.<IXfwView>
         {
-            //Logger.add("processView: " + view.as_config.alias);
+            // Logger.add("processView: " + view.as_config.alias);
             try
             {
                 if (views == null)
