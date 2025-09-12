@@ -17,6 +17,7 @@ package com.xvm.lobby.ui.tankcarousel
     import net.wg.data.constants.generated.*;
     import net.wg.gui.components.controls.*;
     import net.wg.gui.lobby.hangar.tcarousel.*;
+    import org.idmedia.as3commons.util.*;
     import scaleform.clik.interfaces.*;
     import scaleform.gfx.*;
 
@@ -152,7 +153,7 @@ package com.xvm.lobby.ui.tankcarousel
                                 {
                                     var vdata:VehicleDossierCut = dossier.getVehicleDossierCut(options.vehCD);
                                     //Logger.addObject(item.vehicleCarouselVO);
-                                    vdata.elite = XfwUtils.endsWith(item.vehicleCarouselVO.tankType, "_elite") ? "elite" : null; // FIXIT: why item.vehicleCarouselVO.elite altays false?
+                                    vdata.elite = StringUtils.endsWith(item.vehicleCarouselVO.tankType, "_elite") ? "elite" : null; // FIXIT: why item.vehicleCarouselVO.elite altays false?
                                     vdata.selected = renderer.selected ? "sel" : null;
                                     if (options.vehicleData)
                                     {
