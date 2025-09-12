@@ -9,6 +9,7 @@ package com.xfw
     import flash.utils.*;
     import flash.text.*;
     import mx.utils.*;
+    import org.idmedia.as3commons.util.*;
 
     public class XfwUtils
     {
@@ -66,23 +67,6 @@ package com.xfw
             return r.join("");
         }
 
-        // From org.idmedia.as3commons.util.StringUtils;
-
-        public static function startsWith(str:String, substr:String) : Boolean
-        {
-            return testString(str, new RegExp("^" + substr, ""));
-        }
-
-        public static function endsWith(str:String, substr:String):Boolean
-        {
-            return testString(str, new RegExp(substr + "$", ""));
-        }
-
-        private static function testString(str:String, substr:RegExp) : Boolean
-        {
-            return str != null && substr.test(str);
-        }
-
         /**
          * @param format http://php.net/date
          * https://code.google.com/p/as3-php-date/wiki/Documentation
@@ -97,7 +81,7 @@ package com.xfw
             if (path == null)
                 return null;
             path = path.replace(/\\/g, "/");
-            if (!XfwUtils.endsWith(path, "/"))
+            if (!StringUtils.endsWith(path, "/"))
                 path += "/";
             return path;
         }
