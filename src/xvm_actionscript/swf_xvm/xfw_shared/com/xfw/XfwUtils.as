@@ -228,6 +228,13 @@ package com.xfw
             return style;
         }
 
+        public static function normalizeWulfViewName(name:String):String
+        {
+            name = StringUtils.removeStart(name, 'GF: ');
+            name = StringUtils.removeStart(name, 'UB: ');
+            return name;
+        }
+
         public static function logChilds(o:DisplayObject):void
         {
             _logChilds(o, "");
