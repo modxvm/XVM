@@ -9,6 +9,7 @@ package com.xvm.lobby.ping
     import com.xvm.infrastructure.*;
     import com.xvm.types.cfg.*;
     import com.xvm.lobby.ping.PingServers.*;
+    import flash.display.*;
     import flash.events.*;
     import net.wg.gui.components.containers.inject.*;
     import net.wg.gui.lobby.*;
@@ -74,11 +75,11 @@ package com.xvm.lobby.ping
                 var layer:String = cfg.layer.toLowerCase();
                 CLIENT::WG {
                     var header:GFInjectComponent = XfwAccess.getPrivateField(page, '_header');
+                    var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(header) + 1 : page.getChildIndex(page.subTopContainer as DisplayObject);
                 }
                 CLIENT::LESTA {
-                    var header:LobbyHeader = page.header;
+                    var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                 }
-                var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(header) + 1 : page.getChildIndex(header);
                 pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
                 setVisibility(_isHangar);
             }
