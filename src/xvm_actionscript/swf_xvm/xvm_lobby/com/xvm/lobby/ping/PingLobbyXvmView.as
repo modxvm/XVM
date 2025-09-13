@@ -89,6 +89,8 @@ package com.xvm.lobby.ping
             PingServers.stop();
             if (pingControl)
             {
+                if (pingControl.parent)
+                    pingControl.parent.removeChild(pingControl);
                 pingControl.dispose();
                 pingControl = null;
             }

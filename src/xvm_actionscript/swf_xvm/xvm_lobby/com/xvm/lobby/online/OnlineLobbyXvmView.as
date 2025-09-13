@@ -95,6 +95,8 @@ package com.xvm.lobby.online
             OnlineServers.stop();
             if (onlineControl)
             {
+                if (onlineControl.parent)
+                    onlineControl.parent.removeChild(onlineControl);
                 onlineControl.dispose();
                 onlineControl = null;
             }
