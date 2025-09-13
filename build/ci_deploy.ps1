@@ -78,7 +78,7 @@ function Deploy-NightlyFiles {
     Write-Output "Deploy data"
 
     # get VCS info
-    $vcs_branch = Get-VcsBranch
+    $vcs_branch = $(Get-VcsBranch) -replace '/','-'
     $vcs_commits = Get-VcsCommitsCount
     $vcs_hash = Get-VcsHash
     $vcs_tag = Get-VcsLastTag
@@ -100,7 +100,7 @@ function Deploy-NightlyFiles {
 function Deploy-NightlyMeta {
     Write-Output "Deploy meta"
 
-    $vcs_branch = Get-VcsBranch
+    $vcs_branch = $(Get-VcsBranch) -replace '/','-'
     $vcs_commits = Get-VcsCommitsCount
     $vcs_hash = Get-VcsHash
     $vcs_tag = Get-VcsLastTag

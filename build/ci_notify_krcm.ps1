@@ -71,6 +71,7 @@ function Build-ArtifactUrls {
     [Parameter(Mandatory)][string]$Branch,
     [Parameter(Mandatory)][string]$Hash
   )
+  $Branch = $Branch -replace '/','-'
   $baseName = "xvm_{0}_{1}_{2}_{3}" -f $Tag, $Commits, $Branch, $Hash
   [pscustomobject]@{
     Zip = "https://nightly.modxvm.com/download/$Branch/$baseName.zip"
