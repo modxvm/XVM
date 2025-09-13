@@ -10,9 +10,13 @@ package com.xvm.lobby.ping
     import com.xvm.types.cfg.*;
     import com.xvm.lobby.ping.PingServers.*;
     import flash.events.*;
+    import net.wg.gui.components.containers.inject.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    CLIENT::LESTA {
+        import net.wg.gui.lobby.header.*;
+    }
 
     public class PingLobbyXvmView extends XvmViewBase
     {
@@ -67,14 +71,15 @@ package com.xvm.lobby.ping
             PingServers.initFeature(cfg.enabled, cfg.updateInterval);
             if (cfg.enabled)
             {
+                var layer:String = cfg.layer.toLowerCase();
                 CLIENT::WG {
-                    pingControl = page.addChild(new PingServersView(cfg)) as PingServersView;
+                    var header:GFInjectComponent = XfwAccess.getPrivateField(page, '_header');
                 }
                 CLIENT::LESTA {
-                    var layer:String = cfg.layer.toLowerCase();
-                    var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
-                    pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
+                    var header:LobbyHeader = page.header;
                 }
+                var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(header) + 1 : page.getChildIndex(header);
+                pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
                 setVisibility(_isHangar);
             }
         }

@@ -10,9 +10,13 @@ package com.xvm.lobby.online
     import com.xvm.types.cfg.*;
     import com.xvm.lobby.online.OnlineServers.*;
     import flash.events.*;
+    import net.wg.gui.components.containers.inject.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
+    CLIENT::LESTA {
+        import net.wg.gui.lobby.header.*;
+    }
 
     public class OnlineLobbyXvmView extends XvmViewBase
     {
@@ -74,12 +78,13 @@ package com.xvm.lobby.online
                 {
                     var layer:String = cfg.layer.toLowerCase();
                     CLIENT::WG {
-                        onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;
+                        var header:GFInjectComponent = XfwAccess.getPrivateField(page, '_header');
                     }
                     CLIENT::LESTA {
-                        var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
-                        onlineControl = page.addChildAt(new OnlineServersView(cfg), index) as OnlineServersView;
+                        var header:LobbyHeader = page.header;
                     }
+                    var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(header) + 1 : page.getChildIndex(header);
+                    onlineControl = page.addChildAt(new OnlineServersView(cfg), index) as OnlineServersView;
                     setVisibility(_isHangar);
                 }
             }

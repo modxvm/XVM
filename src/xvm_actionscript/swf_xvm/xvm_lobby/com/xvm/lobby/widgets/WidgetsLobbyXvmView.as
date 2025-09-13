@@ -10,8 +10,12 @@ package com.xvm.lobby.widgets
     import com.xvm.types.dossier.*;
     import flash.display.*;
     import net.wg.data.constants.generated.*;
+    import net.wg.gui.components.containers.inject.*;
     import net.wg.gui.lobby.*;
     import net.wg.infrastructure.interfaces.*;
+    CLIENT::LESTA {
+        import net.wg.gui.lobby.header.*;
+    }
 
     public class WidgetsLobbyXvmView extends WidgetsBaseXvmView
     {
@@ -59,7 +63,7 @@ package com.xvm.lobby.widgets
 
             cfg = Config.config.hangar.widgets;
 
-            //XfwUtils.logChilds(page);
+            // XfwUtils.logChilds(page);
 
             //Logger.add("page.subViewContainer = " + page.subViewContainer);
             if (page.subViewContainer == null)
@@ -72,14 +76,8 @@ package com.xvm.lobby.widgets
             {
                 if (widgets.length > 0)
                 {
-                    CLIENT::WG {
-                        // temporarily spawn all widgets at the same layer
-                        extraFieldsWidgetsBottom = page.addChild(new ExtraFieldsWidgets(widgets)) as ExtraFieldsWidgets;
-                    }
-                    CLIENT::LESTA {
-                        index = 0;
-                        extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                    }
+                    index = 0;
+                    extraFieldsWidgetsBottom = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
                     extraFieldsWidgetsBottom.name = "extraFieldsWidgetsBottom";
                     extraFieldsWidgetsBottom.visible = false;
                 }
@@ -90,14 +88,8 @@ package com.xvm.lobby.widgets
             {
                 if (widgets.length > 0)
                 {
-                    CLIENT::WG {
-                        // temporarily spawn all widgets at the same layer
-                        extraFieldsWidgetsNormal = page.addChild(new ExtraFieldsWidgets(widgets)) as ExtraFieldsWidgets;
-                    }
-                    CLIENT::LESTA {
-                        index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
-                        extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
-                    }
+                    index = page.getChildIndex(page.subViewContainer as DisplayObject) + 1;
+                    extraFieldsWidgetsNormal = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
                     extraFieldsWidgetsNormal.name = "extraFieldsWidgetsNormal";
                     extraFieldsWidgetsNormal.visible = false;
                 }
@@ -109,15 +101,18 @@ package com.xvm.lobby.widgets
                 if (widgets.length > 0)
                 {
                     CLIENT::WG {
-                        // temporarily spawn all widgets at the same layer
-                        extraFieldsWidgetsTop = page.addChild(new ExtraFieldsWidgets(widgets)) as ExtraFieldsWidgets;
+                        var header:GFInjectComponent = XfwAccess.getPrivateField(page, '_header');
                     }
                     CLIENT::LESTA {
-                        index = page.getChildIndex(page.header) + 1;
-                        extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                        var header:LobbyHeader = page.header;
                     }
-                    extraFieldsWidgetsTop.name = "extraFieldsWidgetsTop";
-                    extraFieldsWidgetsTop.visible = false;
+                    if (header)
+                    {
+                        index = page.getChildIndex(header) + 1;
+                        extraFieldsWidgetsTop = page.addChildAt(new ExtraFieldsWidgets(widgets), index) as ExtraFieldsWidgets;
+                        extraFieldsWidgetsTop.name = "extraFieldsWidgetsTop";
+                        extraFieldsWidgetsTop.visible = false;
+                    }
                 }
             }
 
