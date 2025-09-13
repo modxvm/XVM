@@ -69,15 +69,13 @@ package com.xvm.lobby.ping
             {
                 CLIENT::WG {
                     pingControl = page.addChild(new PingServersView(cfg)) as PingServersView;
-                    // temporary hack
-                    setVisibility(true);
                 }
                 CLIENT::LESTA {
                     var layer:String = cfg.layer.toLowerCase();
                     var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                     pingControl = page.addChildAt(new PingServersView(cfg), index) as PingServersView;
-                    setVisibility(_isHangar);
                 }
+                setVisibility(_isHangar);
             }
         }
 

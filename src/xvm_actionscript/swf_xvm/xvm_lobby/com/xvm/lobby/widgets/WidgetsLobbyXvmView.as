@@ -20,6 +20,11 @@ package com.xvm.lobby.widgets
             super(view);
         }
 
+        public function get page():LobbyPage
+        {
+            return view as LobbyPage;
+        }
+
         public function setVisibility(isHangar:Boolean):void
         {
             if (extraFieldsWidgetsBottom)
@@ -53,8 +58,6 @@ package com.xvm.lobby.widgets
             Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL);
 
             cfg = Config.config.hangar.widgets;
-
-            var page:LobbyPage = view as LobbyPage;
 
             //XfwUtils.logChilds(page);
 
@@ -118,20 +121,7 @@ package com.xvm.lobby.widgets
                 }
             }
 
-            //for  (var i:int = 0; i < page.numChildren; ++i)
-            //{
-                //var child:DisplayObject = page.getChildAt(i) as DisplayObject;
-                //if (child)
-                //{
-                    //Logger.add(child.name + " = " + i);
-                //}
-            //}
-
             onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);
-            CLIENT::WG {
-                // temporarily force show widgets
-                setVisibility(true);
-            }
         }
 
         override protected function remove():void

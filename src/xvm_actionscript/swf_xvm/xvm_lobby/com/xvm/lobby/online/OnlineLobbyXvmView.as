@@ -75,14 +75,12 @@ package com.xvm.lobby.online
                     var layer:String = cfg.layer.toLowerCase();
                     CLIENT::WG {
                         onlineControl = page.addChild(new OnlineServersView(cfg)) as OnlineServersView;
-                        // temporary hack
-                        setVisibility(true);
                     }
                     CLIENT::LESTA {
                         var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                         onlineControl = page.addChildAt(new OnlineServersView(cfg), index) as OnlineServersView;
-                        setVisibility(_isHangar);
                     }
+                    setVisibility(_isHangar);
                 }
             }
         }

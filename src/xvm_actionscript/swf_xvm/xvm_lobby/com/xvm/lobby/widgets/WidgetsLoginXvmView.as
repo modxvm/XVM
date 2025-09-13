@@ -17,13 +17,17 @@ package com.xvm.lobby.widgets
             super(view);
         }
 
+        public function get page():LoginPage
+        {
+            return view as LoginPage;
+        }
+
         // PROTECTED
 
         override protected function init():void
         {
             cfg = Config.config.login.widgets;
 
-            var page:LoginPage = view as LoginPage;
             var index:int;
 
             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
