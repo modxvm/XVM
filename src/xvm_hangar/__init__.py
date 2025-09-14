@@ -430,6 +430,10 @@ def owg_module_init():
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
 
+        if IS_WG:
+            import observer
+            observer.init()
+
         import battletype
         battletype.init()
 
@@ -452,6 +456,10 @@ def owg_module_fini():
     global __initialized
     if __initialized:
         g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
+
+        if IS_WG:
+            import observer
+            observer.fini()
 
         import battletype
         battletype.fini()
