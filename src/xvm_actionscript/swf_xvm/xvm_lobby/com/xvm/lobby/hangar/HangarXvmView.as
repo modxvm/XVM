@@ -7,12 +7,14 @@ package com.xvm.lobby.hangar
     import com.xfw.*;
     import com.xvm.*;
     import com.xvm.infrastructure.*;
+    import com.xvm.lobby.events.*;
     import com.xvm.types.cfg.*;
     import flash.display.*;
     import flash.events.*;
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     CLIENT::WG {
+        import net.wg.data.constants.generated.*;
         import net.wg.gui.lobby.*;
         import net.wg.infrastructure.managers.impl.*;
     }
@@ -23,10 +25,8 @@ package com.xvm.lobby.hangar
     public class HangarXvmView extends XvmViewBase
     {
         CLIENT::WG {
-            public static const HANGAR_GF_NAME:String = 'mono/hangar/main';
+            private static const COMMAND_AS_ON_HANGAR_STATE_CHANGED:String = 'xvm_hangar.as.on_hangar_state_changed';
         }
-        public static const ON_HANGAR_AFTER_POPULATE:String = 'ON_HANGAR_AFTER_POPULATE';
-        public static const ON_HANGAR_BEFORE_DISPOSE:String = 'ON_HANGAR_BEFORE_DISPOSE';
 
         private var _disposed:Boolean = false;
 
@@ -54,9 +54,7 @@ package com.xvm.lobby.hangar
             super.onAfterPopulate(e);
 
             CLIENT::WG {
-                var mgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
-                mgr.addEventListener(ContainerManagerEvent.VIEW_ADDED, onContainerViewLifecycleHandler);
-                mgr.addEventListener(ContainerManagerEvent.VIEW_REMOVED, onContainerViewLifecycleHandler);
+                Xfw.addCommandListener(COMMAND_AS_ON_HANGAR_STATE_CHANGED, onHangarStateChanged);
             }
 
             CLIENT::LESTA {
@@ -67,12 +65,8 @@ package com.xvm.lobby.hangar
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
-            // App.utils.scheduler.scheduleOnNextFrame(function():void {
-            //     setup();
-            // });
-
             CLIENT::LESTA {
-                Xvm.dispatchEvent(new Event(ON_HANGAR_AFTER_POPULATE));
+                Xvm.dispatchEvent(new HangarStateEvent(HangarStateEvent.ON_CHANGED, true));
             }
         }
 
@@ -86,14 +80,12 @@ package com.xvm.lobby.hangar
             _disposed = true;
 
             CLIENT::WG {
-                var mgr:ContainerManagerBase = App.containerMgr as ContainerManagerBase;
-                mgr.removeEventListener(ContainerManagerEvent.VIEW_ADDED, onContainerViewLifecycleHandler);
-                mgr.removeEventListener(ContainerManagerEvent.VIEW_REMOVED, onContainerViewLifecycleHandler);
+                Xfw.removeCommandListener(COMMAND_AS_ON_HANGAR_STATE_CHANGED, onHangarStateChanged);
             }
 
             CLIENT::LESTA {
                 //Logger.add("ON_HANGAR_BEFORE_DISPOSE");
-                Xvm.dispatchEvent(new Event(ON_HANGAR_BEFORE_DISPOSE));
+                Xvm.dispatchEvent(new HangarStateEvent(HangarStateEvent.ON_CHANGED, false));
             }
 
             Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
@@ -106,14 +98,9 @@ package com.xvm.lobby.hangar
         }
 
         CLIENT::WG {
-            private function onContainerViewLifecycleHandler(event:ContainerManagerEvent): void
+            private function onHangarStateChanged(isHangar:Boolean, isEvent:Boolean): void
             {
-                var view:IView = event.view;
-                var name:String = XfwUtils.normalizeWulfViewName(view.as_config.name);
-                if (name != HANGAR_GF_NAME)
-                    return;
-                var hangarEventName:String = event.type == ContainerManagerEvent.VIEW_ADDED ? ON_HANGAR_AFTER_POPULATE : ON_HANGAR_BEFORE_DISPOSE;
-                Xvm.dispatchEvent(new Event(hangarEventName));
+                Xvm.dispatchEvent(new HangarStateEvent(HangarStateEvent.ON_CHANGED, isHangar, isEvent));
             }
         }
 

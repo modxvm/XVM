@@ -25,6 +25,7 @@ package com.xvm.lobby.online
         private static const UPDATE_INTERVAL:int = 60000;
 
         private var _isHangar:Boolean = false;
+        private var _isEventHangar:Boolean = false;
         private var cfg:COnlineServers;
 
         public function OnlineLobbyXvmView(view:IView)
@@ -56,9 +57,10 @@ package com.xvm.lobby.online
             remove();
         }
 
-        public function setVisibility(isHangar:Boolean):void
+        public function setVisibility(isHangar:Boolean, isEvent:Boolean):void
         {
             _isHangar = isHangar;
+            _isEventHangar = isEvent;
             if (onlineControl)
             {
                 onlineControl.visible = isHangar || (cfg.layer.toLowerCase() == Defines.LAYER_TOP);
@@ -86,7 +88,7 @@ package com.xvm.lobby.online
                         var index:int = (layer == Defines.LAYER_BOTTOM) ? 0 : (layer == Defines.LAYER_TOP) ? page.getChildIndex(page.header) + 1 : page.getChildIndex(page.header);
                     }
                     onlineControl = page.addChildAt(new OnlineServersView(cfg), index) as OnlineServersView;
-                    setVisibility(_isHangar);
+                    setVisibility(_isHangar, _isEventHangar);
                 }
             }
         }

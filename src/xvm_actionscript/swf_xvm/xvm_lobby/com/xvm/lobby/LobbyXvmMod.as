@@ -10,6 +10,7 @@ package com.xvm.lobby
     import com.xvm.infrastructure.*;
     import com.xvm.lobby.battleresults.BattleResultsXvmView;
     import com.xvm.lobby.contacts.ContactsXvmView;
+    import com.xvm.lobby.events.*;
     import com.xvm.lobby.hangar.HangarXvmView;
     import com.xvm.lobby.limits.LimitsXvmView;
     import com.xvm.lobby.online.OnlineLobbyXvmView;
@@ -30,8 +31,7 @@ package com.xvm.lobby
         public function LobbyXvmMod()
         {
             super();
-            Xvm.addEventListener(HangarXvmView.ON_HANGAR_AFTER_POPULATE, onHangarAfterPopulate);
-            Xvm.addEventListener(HangarXvmView.ON_HANGAR_BEFORE_DISPOSE, onHangarBeforeDispose);
+            Xvm.addEventListener(HangarStateEvent.ON_CHANGED, onHangarStateChanged);
         }
 
         public override function get logPrefix():String
@@ -115,29 +115,24 @@ package com.xvm.lobby
         private var _pingLobbyXvmView:PingLobbyXvmView = null;
         private var _widgetsLobbyXvmView:WidgetsLobbyXvmView = null;
 
-        private function onHangarAfterPopulate():void
+        private function onHangarStateChanged(event:HangarStateEvent):void
         {
-            setModsVisibility(true);
+            setModsVisibility(event.isHangar, event.isEvent);
         }
 
-        private function onHangarBeforeDispose():void
-        {
-            setModsVisibility(false);
-        }
-
-        private function setModsVisibility(isHangar:Boolean):void
+        private function setModsVisibility(isHangar:Boolean, isEvent:Boolean):void
         {
             if (_onlineLobbyXvmView)
             {
-                _onlineLobbyXvmView.setVisibility(isHangar);
+                _onlineLobbyXvmView.setVisibility(isHangar, isEvent);
             }
             if (_pingLobbyXvmView)
             {
-                _pingLobbyXvmView.setVisibility(isHangar);
+                _pingLobbyXvmView.setVisibility(isHangar, isEvent);
             }
             if (_widgetsLobbyXvmView)
             {
-                _widgetsLobbyXvmView.setVisibility(isHangar);
+                _widgetsLobbyXvmView.setVisibility(isHangar, isEvent);
             }
         }
     }

@@ -29,7 +29,7 @@ package com.xvm.lobby.widgets
             return view as LobbyPage;
         }
 
-        public function setVisibility(isHangar:Boolean):void
+        public function setVisibility(isHangar:Boolean, isEvent:Boolean):void
         {
             if (extraFieldsWidgetsBottom)
             {
@@ -115,6 +115,8 @@ package com.xvm.lobby.widgets
                     }
                 }
             }
+
+            // XfwUtils.logChilds(page);
 
             onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);
         }
