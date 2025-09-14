@@ -157,9 +157,14 @@ def _LobbyEntry__handleLazyChannelCtlInited(base, self, event):
         if controller is None:
             logging.getLogger('XVM/Hangar').warning('Controller is not defined: %s', ctx)
             return
-        else:
-            ctx.clear()
-            return
+        ctx.clear()
+        return
+    return base(self, event)
+
+
+def _LobbyEntry__updateCommonChatVisibility(base, self, *_):
+    if not config.get('hangar/showGeneralChatButton', True):
+        return
     return base(self, event)
 
 
@@ -426,6 +431,7 @@ def owg_module_init():
             from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
 
+            overrideMethod(LobbyEntry, '_LobbyEntry__updateCommonChatVisibility')(_LobbyEntry__updateCommonChatVisibility)
             overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
