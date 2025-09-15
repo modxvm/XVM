@@ -162,10 +162,10 @@ def _LobbyEntry__handleLazyChannelCtlInited(base, self, event):
     return base(self, event)
 
 
-def _LobbyEntry__updateCommonChatVisibility(base, self, *_):
+def _LobbyEntry__updateCommonChatVisibility(base, self, *args, **kwargs):
     if not config.get('hangar/showGeneralChatButton', True):
         return
-    return base(self, event)
+    base(self, *args, **kwargs)
 
 
 
