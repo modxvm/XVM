@@ -117,6 +117,7 @@ package com.xvm.lobby
 
         private function onHangarStateChanged(event:HangarStateEvent):void
         {
+            LobbyMacros.RegisterHangarStateMacros(event.isHangar, event.isEvent);
             setModsVisibility(event.isHangar, event.isEvent);
         }
 

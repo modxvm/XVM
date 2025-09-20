@@ -11,6 +11,14 @@ package com.xvm.lobby
 
     internal class LobbyMacros
     {
+        internal static function RegisterHangarStateMacros(isHangar:Boolean, isEvent:Boolean):void
+        {
+            // {{hangar}}
+            Macros.Globals["hangar"] = function():Boolean { return isHangar; }
+            // {{hangar-type}}
+            Macros.Globals["hangar-type"] = function():String { return isEvent ? 'event' : ''; }
+        }
+
         internal static function RegisterBattleTypeMacros(battleType:String):void
         {
             // {{battletype-key}}
