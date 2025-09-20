@@ -6,8 +6,8 @@ package com.xvm.lobby
 {
     import com.xfw.*;
     import com.xvm.*;
-    import com.xvm.lobby.online.OnlineServers.OnlineServers;
-    import com.xvm.lobby.ping.PingServers.PingServers;
+    import com.xvm.lobby.online.OnlineServers.*;
+    import com.xvm.lobby.ping.PingServers.*;
 
     public class LobbyXvmApp extends XvmAppBase
     {
@@ -24,7 +24,7 @@ package com.xvm.lobby
             addChild(lobbyXvmMod);
 
             // loading ui mods
-            XfwComponent.tryLoadUISWF("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf"]);
+            XfwComponent.tryLoadUISWF("xvm_lobby", "xvm_lobby_ui.swf", [ "battleResults.swf", "TankCarousel.swf", "nodesLib.swf" ]);
 
             // mod: online
             // init as earlier as possible
