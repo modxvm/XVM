@@ -59,7 +59,12 @@ package com.xvm.lobby.widgets
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
 
-            Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL);
+            CLIENT::WG {
+                Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
+            }
+            CLIENT::LESTA {
+                Dossier.requestAccountDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL);
+            }
 
             cfg = Config.config.hangar.widgets;
 
@@ -156,6 +161,21 @@ package com.xvm.lobby.widgets
             }
             //Logger.addObject(options, 3);
             return null;
+        }
+
+        CLIENT::WG {
+            private function onAccountDossierLoaded():void
+            {
+                var dossier:AccountDossier = Dossier.getAccountDossier();
+                //Logger.addObject(dossier);
+                if (dossier)
+                {
+                    for (var vehCD:String in dossier.vehicles)
+                    {
+                        Dossier.requestVehicleDossier(null, null, PROFILE_DROPDOWN_KEYS.ALL, parseInt(vehCD));
+                    }
+                }
+            }
         }
     }
 }

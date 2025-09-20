@@ -54,11 +54,11 @@ package com.xvm
             }
 
             var key:String = accountDBID + "," + vehCD;
-            //Logger.add("loadDossier: " + key);
+            // Logger.add("loadDossier: " + key);
             if (_requests[key] == null)
                 _requests[key] = [];
             if (callback != null)
-                _requests[key].push( { target: target, callback: callback } );
+                _requests[key].push({ target: target, callback: callback });
             Xfw.cmd(XvmCommandsInternal.REQUEST_DOSSIER, battleType, accountDBID, vehCD);
         }
 
@@ -67,7 +67,7 @@ package com.xvm
             try
             {
                 var key:String = accountDBID + "," + vehCD;
-                //Logger.addObject(data, 3, key);
+                // Logger.addObject(data, 3, key);
 
                 var dossier:* = (vehCD == 0)
                     ? new AccountDossier(data)
