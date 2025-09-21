@@ -15,6 +15,7 @@ package com.xvm.types.cfg
         public var rows:*;
         public var backgroundAlpha:*;
         public var slotBackgroundAlpha:*;
+        public var showSlotHighlight:Boolean;
         public var slotBorderAlpha:*;
         public var edgeFadeAlpha:*;
         public var scrollingSpeed:*;

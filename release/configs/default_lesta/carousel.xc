@@ -25,6 +25,9 @@
     // Slot transparency (default - 100).
     // Прозрачность слота (по умолчанию - 100).
     "slotBackgroundAlpha": 100,
+    // true - show slot highlight.
+    // true - показывать подсветку слота.
+    "showSlotHighlight": true,
     // Slot border transparency (default - 100).
     // Прозрачность рамки слота (по умолчанию - 100).
     "slotBorderAlpha": 100,

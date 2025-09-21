@@ -57,7 +57,7 @@ package com.xvm.lobby.ui.tankcarousel
             this.isSmallCarousel = isSmallCarousel;
 
             renderer = item as TankCarouselItemRenderer;
-            //XfwUtils.logChilds(renderer);
+            // XfwUtils.logChilds(renderer);
 
             this.orig_TankName_x = renderer.content.txtTankName.x;
             this.orig_TankName_y = renderer.content.txtTankName.y;
@@ -81,6 +81,8 @@ package com.xvm.lobby.ui.tankcarousel
                     item.extraFields = new ExtraFieldsGroup(item as IExtraFieldGroupHolder, formats, false, CTextFormat.GetDefaultConfigForLobby());
                 }
             }
+
+            _setupRenderer();
 
             //App.utils.scheduler.scheduleTask(function():void {
             _setupStandardFieldFlag();
@@ -260,6 +262,28 @@ package com.xvm.lobby.ui.tankcarousel
             field.scaleY = DEFAULT_SCALE_Y * scale;
             field.x = (field.x * field.scaleX) + cfg.dx;
             field.y = (field.y * field.scaleY) + cfg.dy;
+        }
+
+        private function _setupRenderer():void
+        {
+            var slotBackgroundAlpha:Number = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBackgroundAlpha, 100) / 100.0;
+            var bg:Shape = renderer.getChildAt(renderer.getChildIndex(renderer.hoverBg) - 1) as Shape;
+            if (bg)
+            {
+                bg.alpha = slotBackgroundAlpha;
+            }
+            if (renderer.bgMc)
+            {
+                renderer.bgMc.alpha = slotBackgroundAlpha;
+            }
+            if (renderer.hoverBg)
+            {
+                renderer.hoverBg.visible = Config.config.hangar.carousel.showSlotHighlight;
+            }
+            if (renderer.border)
+            {
+                renderer.border.alpha = Macros.FormatNumberGlobal(Config.config.hangar.carousel.slotBorderAlpha, 100) / 100.0;
+            }
         }
 
         private function _setupStandardFieldFlag():void
