@@ -11,10 +11,8 @@ package com.xvm.lobby.ui.tankcarousel
     import net.wg.data.constants.generated.PROFILE_DROPDOWN_KEYS;
     import net.wg.gui.lobby.hangar.tcarousel.helper.ITankCarouselHelper;
     import net.wg.infrastructure.events.LifeCycleEvent;
-    import com.xfw.Logger;
-    import com.xvm.Config;
-    import com.xvm.Dossier;
-    import com.xvm.Macros;
+    import com.xfw.*;
+    import com.xvm.*;
     import com.xvm.types.dossier.AccountDossier;
     import com.xvm.types.cfg.CCarousel;
 
@@ -84,24 +82,26 @@ package com.xvm.lobby.ui.tankcarousel
             super.as_useExtendedCarousel(_enabled ? false : value);
         }
 
-        CLIENT::LESTA {
-            override public function set isUiEffectsEnabled(value:Boolean):void
-            {
-                if (!_enabled)
-                {
-                    super.isUiEffectsEnabled = value;
-                    return;
-                }
+        override public function get isSmall():Boolean
+        {
+            return !(this.helper is TankCarouselHelper && this._rowCount > 1);
+        }
 
-                background.alpha = Macros.FormatNumberGlobal(_cfg.backgroundAlpha, 100) / 100.0;
+        override public function set isUiEffectsEnabled(value:Boolean):void
+        {
+            if (!_enabled)
+            {
+                super.isUiEffectsEnabled = value;
+                return;
             }
+
+            background.alpha = Macros.FormatNumberGlobal(_cfg.backgroundAlpha, 100) / 100.0;
         }
 
         override public function getRectangles():Vector.<Rectangle>
         {
             return (_enabled && background.alpha < 1) ? null : super.getRectangles();
         }
-
 
         //
         // Override Protected
