@@ -38,6 +38,7 @@ Legend:
 │ {{v.nation}}               │ X │ X │ vehicle nation
 │ {{v.premium}}              │ X │ X │ value 'premium' for premium, empty - for normal vehicle
 │ {{v.special}}              │ X │ X │ value 'special' for reward vehicle, empty - for normal vehicle
+│ {{v.role}}                 │ X │ X │ vehicle role in role_vehicleType_vehicleRole format
 │ {{v.elite}}                │ X │ X │ value 'elite' for elite, empty - for normal vehicle
 │ {{v.rent}}                 │ X │ X │ value 'rent' for rented, empty - for normal vehicle
 │ {{v.multiNation}}          │ X │ X │ value 'multi' for vehicle on which it is possible to change the nation, empty - for normal vehicle

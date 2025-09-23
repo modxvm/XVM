@@ -105,6 +105,7 @@ import ResMgr
 import nations
 from gun_rotation_shared import calcPitchLimitsFromDesc
 from items import vehicles
+from constants import ROLE_TYPE_TO_LABEL
 
 from xfw import *
 
@@ -310,6 +311,7 @@ def initialize():
                 data['localizedFullName'] = descr.userString
                 data['premium'] = 'premium' in descr.tags and 'special' not in descr.tags
                 data['special'] = 'special' in descr.tags
+                data['role'] = ROLE_TYPE_TO_LABEL.get(descr.role, '')
 
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]
