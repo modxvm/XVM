@@ -13,7 +13,6 @@ Legend:
 │ macro                      │ C │ W │ Description
 ├────────────────────────────┼───┼───┼─────────────────────────────────
 │ {{hangar}}                 │   │ X │ is currenly in hangar or no (boolean)
-│ {{hangar-type}}            │   │ X │ value 'event' for event hangar, empty for default hangar (only for WG client)
 │ {{battletype-key}}         │ X │ X │ selected battle type
 │ {{v.vehId}}                │ X │   │ vehicle id
 │ {{v.battles}}              │ X │ X │ total battles count for current vehicle
