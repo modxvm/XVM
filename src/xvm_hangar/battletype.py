@@ -8,64 +8,59 @@ Copyright (c) 2020 Andrii Andrushchyshyn
 # Imports
 #
 
+# stdlib
+import logging
+
 # BigWorld
 from gui.Scaleform.daapi.view.lobby.header import battle_selector_items
-from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.shared import g_eventBus, events
 
 # XFW
+from xfw import *
+
+# XVM ActionScript
 from xvm_actionscript import as_xfw_cmd
-from xfw.events import *
 
 # XVM
 import xvm_main.config as config
 import xvm_main.userprefs as userprefs
 
-
-
-#
-# Globals
-#
-
-g_controller = None
+# XVM Hangar
+from xvm_hangar.consts import *
 
 
 
 #
-# Classes/BattleType (persist logic)
+# Logger
 #
 
-class XVM_Hangar_BattleType(object):
+_logger = logging.getLogger(__name__)
 
-    def __init__(self):
-        self._userpref = "users/{accountDBID}/last_battle_type"
-
-    def init(self):
-        g_eventBus.addListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, self.changeMode)
-
-    def fini(self):
-        g_eventBus.removeListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, self.changeMode)
-
-    def changeMode(self, *a, **kw):
-        if config.get('hangar/restoreBattleType', False):
-            actionName = userprefs.get(self._userpref, None)
-            if actionName is not None:
-                battle_selector_items.getItems().select(actionName)
 
 
 #
 # Handlers
 #
 
-def select(self, action, onlyActive=False):
-    if config.get('hangar/restoreBattleType', False) and self.isSelected(action):
-        userprefs.set(g_controller._userpref, action)
+def onLobbyViewLoaded(_):
+    if config.get('hangar/restoreBattleType', False):
+        action = userprefs.get(USERPREFS.LAST_BATTLE_TYPE, None)
+        if action is not None:
+            battle_selector_items.getItems().select(action)
+
+
+def _MainMenuModel_setModeId(self, battleTypeID):
+    as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
+
+
+def _LobbyHeader_as_updateBattleTypeS(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew):
+    as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
 
 
 # needed for {{battleType}} macro
-def _LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew):
-    base(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew)
-    as_xfw_cmd('xvm_hangar.as_update_battle_type', battleTypeID)
+def _BattleSelectorItems_select(self, action, onlyActive=False):
+    if config.get('hangar/restoreBattleType', False) and self.isSelected(action):
+        userprefs.set(USERPREFS.LAST_BATTLE_TYPE, action)
 
 
 
@@ -74,16 +69,18 @@ def _LobbyHeader_as_updateBattleTypeS(base, self, battleTypeName, battleTypeIcon
 #
 
 def init():
-    global g_controller
+    g_eventBus.addListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, onLobbyViewLoaded)
+    registerEvent(battle_selector_items._BattleSelectorItems, 'select')(_BattleSelectorItems_select)
 
-    g_controller = XVM_Hangar_BattleType()
-    g_controller.init()
-    registerEvent(battle_selector_items._BattleSelectorItems, 'select')(select)
-    overrideMethod(LobbyHeader, 'as_updateBattleTypeS')(_LobbyHeader_as_updateBattleTypeS)
+    if IS_WG:
+        from gui.impl.gen.view_models.views.lobby.hangar.main_menu_model import MainMenuModel
+
+        registerEvent(MainMenuModel, 'setModeId')(_MainMenuModel_setModeId)
+    else:
+        from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
+
+        registerEvent(LobbyHeader, 'as_updateBattleTypeS')(_LobbyHeader_as_updateBattleTypeS)
 
 
 def fini():
-    global g_controller
-
-    g_controller.fini()
-    g_controller = None
+    g_eventBus.removeListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, onLobbyViewLoaded)
