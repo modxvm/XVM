@@ -134,6 +134,7 @@ package com.xvm.types.dossier
                     c_damageRating = MacrosUtils.getDynamicColorValue(Defines.DYNAMIC_COLOR_DAMAGERATING, damageRating, NaN, "#");
                     crystalEarned = isNaN(vdossier.crystalEarned) ? NaN : vdossier.crystalEarned;
                     levelPostProgress = isNaN(vdossier.levelPostProgress) || vdossier.levelPostProgress < 0 ? NaN : vdossier.levelPostProgress;
+                    battlePassPoints = isNaN(vdossier.battlePassPoints) || vdossier.battlePassPoints < 0 ? NaN : vdossier.battlePassPoints;
                 }
             }
         }
@@ -209,6 +210,7 @@ package com.xvm.types.dossier
         public var camouflageDesert:String;
         public var camouflageCount:int;
         public var crystalEarned:Number;
+        public var battlePassPoints:Number;
 
         // extra
         public var elite:String;

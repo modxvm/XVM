@@ -77,6 +77,7 @@ Legend:
 │ {{v.camouflageDesert}}     │ X │ X │ value 'desert' if desert camouflage installed, empty - if not
 │ {{v.camouflageCount}}      │ X │ X │ count of camouflages installed
 │ {{v.crystalEarned}}        │ X │ X │ number of bonds earned (from weekly limit) from 0 to 100, empty - for vehicles that can't earn bonds
+│ {{v.battlePassPoints}}     │ X │ X │ number of battle pass points earned, empty - if battle pass is not available or vehicle can't earn BP points
 │ {{v.equipment1}}           │ . │ . │ small icon of equipment in 1st slot
 │ {{v.equipment2}}           │ . │ . │ small icon of equipment in 2nd slot
 │ {{v.equipment3}}           │ . │ . │ small icon of equipment in 3rd slot

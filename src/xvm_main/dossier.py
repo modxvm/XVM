@@ -35,8 +35,9 @@ from items.components.c11n_constants import SeasonType
 from helpers import dependency
 from helpers.i18n import makeString
 from helpers.server_settings import ServerSettings
-from skeletons.gui.shared import IItemsCache
+from skeletons.gui.game_control import IBattlePassController
 from skeletons.gui.lobby_context import ILobbyContext
+from skeletons.gui.shared import IItemsCache
 
 from xfw import *
 from xvm_actionscript import *
@@ -111,6 +112,7 @@ class _DummyDossier(object):
 class _Dossier(object):
     itemsCache = dependency.descriptor(IItemsCache)
     lobbyContext = dependency.descriptor(ILobbyContext)
+    battlePassCtrl = dependency.descriptor(IBattlePassController)
 
     def __init__(self, *args):
         self.__dataReceiver = QueuedVehicleDossierReceiver()
@@ -178,6 +180,7 @@ class _Dossier(object):
         desert_camo = outfit is not None and bool(outfit.hull.slotFor(GUI_ITEM_TYPE.CAMOUFLAGE).getItemCD())
         limit = self.itemsCache.items.stats.getWeeklyVehicleCrystals(vehCD)
         crystalEarned = limit if vehicle.isEarnCrystals else None
+        battlePassPoints = self.__getBattlePassPoints(vehCD)
 
         if self.__isVehicleDossierLoaded(accountDBID, vehCD):
             dossier = self.itemsCache.items.getVehicleDossier(vehCD, accountDBID)
@@ -228,7 +231,7 @@ class _Dossier(object):
                 #    wtr = -1
                 #else:
                 #    xwtr = vehinfo.calculateXvmScale('wtr', wtr)
-        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned)
+        res = self.__prepareVehicleResult(accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned, battlePassPoints)
         self.__updateCamouflageResult(res, summer_camo, winter_camo, desert_camo)
         res['levelPostProgress'] = levelPostProgress
         res['coreVehicle'] = coreVehicle
@@ -244,6 +247,13 @@ class _Dossier(object):
             if step.isReceived() and level > levelPostProgress:
                 levelPostProgress = level
         return levelPostProgress
+
+    def __getBattlePassPoints(self, vehCD):
+        battlePassPoints = None
+        battlePassAvailable = self.battlePassCtrl.isVisible()
+        if battlePassAvailable:
+            battlePassPoints = self.battlePassCtrl.getVehicleProgression(vehCD)[0]
+        return battlePassPoints
 
     # check vehicle dossier already loaded and cached
     def __isVehicleDossierLoaded(self, accountDBID, vehCD):
@@ -399,7 +409,7 @@ class _Dossier(object):
 
         return res
 
-    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned):
+    def __prepareVehicleResult(self, accountDBID, vehCD, dossier, xtdb, xte, wtr, xwtr, earnedXP, freeXP, xpToElite, rent, multiNation, crystalEarned, battlePassPoints):
         res = self.__prepareCommonResult(accountDBID, dossier)
         res.update({
             'vehCD': vehCD,
@@ -414,7 +424,8 @@ class _Dossier(object):
             'multiNation': 'multi' if multiNation else None,
             'marksOnGun': int(dossier.getRecordValue(_AB.TOTAL, 'marksOnGun')),
             'damageRating': dossier.getRecordValue(_AB.TOTAL, 'damageRating') / 100.0,
-            'crystalEarned': crystalEarned})
+            'crystalEarned': crystalEarned,
+            'battlePassPoints': battlePassPoints})
         return res
 
     def __updateCamouflageResult(self, res, summer_camo, winter_camo, desert_camo):
