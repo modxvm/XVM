@@ -6,13 +6,12 @@ package com.xvm.lobby
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.lobby.*;
     import com.xvm.lobby.online.OnlineServers.*;
     import com.xvm.lobby.ping.PingServers.*;
 
     public class LobbyXvmApp extends XvmAppBase
     {
-        public static const AS_UPDATE_BATTLE_TYPE:String = "xvm_hangar.as_update_battle_type";
-
         private var lobbyXvmMod:LobbyXvmMod;
 
         public function LobbyXvmApp():void
@@ -34,7 +33,7 @@ package com.xvm.lobby
             // init pinger as earlier as possible
             PingServers.initFeature(Config.config.login.pingServers.enabled || Config.config.hangar.pingServers.enabled);
 
-            Xfw.addCommandListener(LobbyXvmApp.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
+            Xfw.addCommandListener(LobbyCommands.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
 
             LobbyMacros.RegisterMyStatMacros();
             LobbyMacros.RegisterVehiclesMacros();

@@ -92,7 +92,7 @@ class HangarStateObserver(object):
         isEvent = isinstance(state, EVENT_HANGAR_STATES)
         if isInHangar != self._isInHangar:
             self._isInHangar = isInHangar
-            as_xfw_cmd(XVM_HANGAR_COMMAND.AS_ON_HANGAR_STATE_CHANGED, self._isInHangar, isEvent)
+            as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_HANGAR_STATE, self._isInHangar, isEvent)
 
     def __onVisibleRouteChanged(self, routeInfo):
         self._update(routeInfo)

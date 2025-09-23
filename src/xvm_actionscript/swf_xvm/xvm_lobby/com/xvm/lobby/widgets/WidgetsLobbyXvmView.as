@@ -6,6 +6,7 @@ package com.xvm.lobby.widgets
 {
     import com.xfw.*;
     import com.xvm.*;
+    import com.xvm.lobby.*;
     import com.xvm.lobby.vo.*;
     import com.xvm.types.dossier.*;
     import flash.display.*;
@@ -19,6 +20,8 @@ package com.xvm.lobby.widgets
 
     public class WidgetsLobbyXvmView extends WidgetsBaseXvmView
     {
+        private var _curVehCD:int;
+
         public function WidgetsLobbyXvmView(view:IView)
         {
             super(view);
@@ -55,9 +58,10 @@ package com.xvm.lobby.widgets
 
         override protected function init():void
         {
-            //Logger.add("[widgets] init lobby");
+            //Logger.add("WidgetsLobbyXvmView::init()");
 
             Xfw.addCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
+            Xfw.addCommandListener(LobbyCommands.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
 
             CLIENT::WG {
                 Dossier.requestAccountDossier(this, onAccountDossierLoaded, PROFILE_DROPDOWN_KEYS.ALL);
@@ -123,22 +127,24 @@ package com.xvm.lobby.widgets
 
             // XfwUtils.logChilds(page);
 
-            onUpdateCurrentVehicle(Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD), null);
+            _curVehCD = Xfw.cmd(XvmCommands.GET_CURRENT_VEH_CD);
+            update();
         }
 
         override protected function remove():void
         {
+            //Logger.add("WidgetsLobbyXvmView::remove()");
             Xfw.removeCommandListener(XvmCommands.AS_UPDATE_CURRENT_VEHICLE, onUpdateCurrentVehicle);
+            Xfw.removeCommandListener(LobbyCommands.AS_UPDATE_BATTLE_TYPE, onUpdateBattleType);
             super.remove();
         }
 
         // PRIVATE
 
-        private function onUpdateCurrentVehicle(vehCD:int, data:Object):Object
+        private function update():void
         {
-            //Logger.add("onUpdateCurrentVehicle: " + vehCD);
             var options:VOLobbyMacrosOptions = new VOLobbyMacrosOptions();
-            options.vehCD = vehCD;
+            options.vehCD = _curVehCD;
             var dossier:AccountDossier = Dossier.getAccountDossier();
             if (dossier)
             {
@@ -159,7 +165,22 @@ package com.xvm.lobby.widgets
                     extraFieldsWidgetsTop.update(options);
                 }
             }
-            //Logger.addObject(options, 3);
+            // Logger.addObject(options, 3);
+        }
+
+        private function onUpdateCurrentVehicle(vehCD:int, data:Object):Object
+        {
+            // Logger.add("onUpdateCurrentVehicle: " + vehCD);
+            _curVehCD = vehCD;
+            update();
+
+            return null;
+        }
+
+        private function onUpdateBattleType(battleType:String):Object
+        {
+            update();
+
             return null;
         }
 
@@ -167,7 +188,7 @@ package com.xvm.lobby.widgets
             private function onAccountDossierLoaded():void
             {
                 var dossier:AccountDossier = Dossier.getAccountDossier();
-                //Logger.addObject(dossier);
+                // Logger.addObject(dossier);
                 if (dossier)
                 {
                     for (var vehCD:String in dossier.vehicles)
