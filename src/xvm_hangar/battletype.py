@@ -12,6 +12,7 @@ Copyright (c) 2020 Andrii Andrushchyshyn
 import logging
 
 # BigWorld
+from PlayerEvents import g_playerEvents
 from gui.Scaleform.daapi.view.lobby.header import battle_selector_items
 from gui.shared import g_eventBus, events
 
@@ -39,14 +40,29 @@ _logger = logging.getLogger(__name__)
 
 
 #
+# Globals
+#
+
+_inLobby = False
+
+
+
+#
 # Handlers
 #
 
 def onLobbyViewLoaded(_):
+    global _inLobby
+    _inLobby = True
     if config.get('hangar/restoreBattleType', False):
         action = userprefs.get(USERPREFS.LAST_BATTLE_TYPE, None)
         if action is not None:
             battle_selector_items.getItems().select(action)
+
+
+def onAccountBecomeNonPlayer():
+    global _inLobby
+    _inLobby = False
 
 
 def _BattleSelectorItems_select(self, action, onlyActive=False):
@@ -56,11 +72,15 @@ def _BattleSelectorItems_select(self, action, onlyActive=False):
 
 # WG, needed for {{battleType}} macro
 def _MainMenuModel_setModeId(self, battleTypeID):
+    if config.get('hangar/restoreBattleType', False) and _inLobby:
+        userprefs.set(USERPREFS.LAST_BATTLE_TYPE, battleTypeID)
     as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
 
 
 # Lesta, needed for {{battleType}} macro
 def _LobbyHeader_as_updateBattleTypeS(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew):
+    if config.get('hangar/restoreBattleType', False) and _inLobby:
+        userprefs.set(USERPREFS.LAST_BATTLE_TYPE, battleTypeID)
     as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
 
 
@@ -71,6 +91,7 @@ def _LobbyHeader_as_updateBattleTypeS(self, battleTypeName, battleTypeIcon, isEn
 
 def init():
     g_eventBus.addListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, onLobbyViewLoaded)
+    g_playerEvents.onAccountBecomeNonPlayer += onAccountBecomeNonPlayer
     registerEvent(battle_selector_items._BattleSelectorItems, 'select')(_BattleSelectorItems_select)
 
     if IS_WG:
@@ -85,3 +106,4 @@ def init():
 
 def fini():
     g_eventBus.removeListener(events.GUICommonEvent.LOBBY_VIEW_LOADED, onLobbyViewLoaded)
+    g_playerEvents.onAccountBecomeNonPlayer -= onAccountBecomeNonPlayer
