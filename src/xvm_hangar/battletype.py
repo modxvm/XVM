@@ -49,18 +49,19 @@ def onLobbyViewLoaded(_):
             battle_selector_items.getItems().select(action)
 
 
+def _BattleSelectorItems_select(self, action, onlyActive=False):
+    if config.get('hangar/restoreBattleType', False):
+        userprefs.set(USERPREFS.LAST_BATTLE_TYPE, action)
+
+
+# WG, needed for {{battleType}} macro
 def _MainMenuModel_setModeId(self, battleTypeID):
     as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
 
 
+# Lesta, needed for {{battleType}} macro
 def _LobbyHeader_as_updateBattleTypeS(self, battleTypeName, battleTypeIcon, isEnabled, tooltip, tooltipType, battleTypeID, eventBgEnabled, eventAnimEnabled, showLegacySelector, hasNew):
     as_xfw_cmd(XVM_HANGAR_COMMAND.AS_UPDATE_BATTLE_TYPE, battleTypeID)
-
-
-# needed for {{battleType}} macro
-def _BattleSelectorItems_select(self, action, onlyActive=False):
-    if config.get('hangar/restoreBattleType', False) and self.isSelected(action):
-        userprefs.set(USERPREFS.LAST_BATTLE_TYPE, action)
 
 
 
