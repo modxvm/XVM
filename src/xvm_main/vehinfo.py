@@ -103,6 +103,7 @@ from math import sin, radians
 import BigWorld
 import ResMgr
 import nations
+from gui.shared.formatters import getRoleText
 from gun_rotation_shared import calcPitchLimitsFromDesc
 from items import vehicles
 from constants import ROLE_TYPE_TO_LABEL
@@ -311,7 +312,8 @@ def initialize():
                 data['localizedFullName'] = descr.userString
                 data['premium'] = 'premium' in descr.tags and 'special' not in descr.tags
                 data['special'] = 'special' in descr.tags
-                data['role'] = ROLE_TYPE_TO_LABEL.get(descr.role, '')
+                data['role'] = ROLE_TYPE_TO_LABEL.get(item.role, '') if item.role else ''
+                data['localizedRole'] = getRoleText(data['role']) if item.role else ''
 
                 stockTurret = item.turrets[0][0]
                 topTurret = item.turrets[0][-1]

@@ -19,6 +19,7 @@ package com.xvm.vo
         public var special:Boolean;
         public var isReserved:Boolean;
         public var role:String;
+        public var localizedRole:String;
 
         public var hpStock:int;
         public var hpTop:int;

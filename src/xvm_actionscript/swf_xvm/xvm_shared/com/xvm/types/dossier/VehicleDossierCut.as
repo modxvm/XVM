@@ -45,6 +45,7 @@ package com.xvm.types.dossier
                 premium = vdata.premium ? "premium" : null;
                 special = vdata.special ? "special" : null;
                 role = vdata.role;
+                role_l = vdata.localizedRole;
                 maxHP = vdata.hpTop;
                 battletiermin = vdata.tierLo;
                 battletiermax = vdata.tierHi;
@@ -162,6 +163,7 @@ package com.xvm.types.dossier
         public var premium:String;
         public var special:String;
         public var role:String;
+        public var role_l:String;
         public var maxHP:Number;
         public var battletiermin:int;
         public var battletiermax:int;

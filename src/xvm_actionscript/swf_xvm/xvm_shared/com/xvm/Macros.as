@@ -1148,6 +1148,8 @@ package com.xvm
             pdata["special"] = vdata.special ? "special" : null;
             // {{role}}
             pdata["role"] = vdata.role;
+            // {{role}}
+            pdata["role-l"] = vdata.localizedRole;
         }
 
         private function _RegisterStatisticsMacros(pname:String, stat:StatData):void

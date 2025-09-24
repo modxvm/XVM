@@ -41,6 +41,7 @@ Legend:
 │ H │ {{premium}}        │ X │ X │ X │ X │ X │ X │ value 'premium' for premium, empty - for normal vehicle
 │ H │ {{special}}        │ X │ X │ X │ X │ X │ X │ value 'special' for reward vehicle, empty - for normal vehicle
 │ H │ {{role}}           │ X │ X │ X │ X │ X │ X │ vehicle role in role_vehicleType_vehicleRole format
+│ H │ {{role-l}}         │ X │ X │ X │ X │ X │ X │ vehicle role (text substitution from locale)
 │ H │ {{squad}}          │ X │ X │ X │ X │ X │   │ value 'sq' for own squad, empty - for others
 │ D │ {{frags}}          │   │ X │ X │ X │ X │   │ current frags
 │ H │ {{ready}}          │ X │ X │ X │ X │ X │   │ value 'ready' if player loaded to the game, empty - if not
