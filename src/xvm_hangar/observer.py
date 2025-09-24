@@ -83,6 +83,7 @@ class HangarStateObserver(object):
         if self._lsm is not None:
             self._lsm.onVisibleRouteChanged -= self.__onVisibleRouteChanged
             self._lsm = None
+        self._isInHangar = False
 
     def _update(self, routeInfo):
         state = routeInfo.state
