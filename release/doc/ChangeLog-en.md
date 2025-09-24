@@ -1,3 +1,43 @@
+### XVM 13.0.0
+
+  * Compatibility with World of Tanks 2.0
+  * Compatibility with World of Tanks 2.0
+  * Switched to single wotmod structure instead of multiple files in mods and res_mods folder
+  * Added {{hangar}}, {{v.role}}, {{v.role_l}}, {{v.battlePassPoints}} macroses
+  * Added ability to update widgets on battle type update ({{battletype-key}})
+  * Added `carousel/showSlotHighlight` option to hide hover highlight introduced in MT client since MT Alpha (1.32)
+  * Fixed widgets functionality and visibility bugs when not in hangar for WoT client
+  * Fixed `hangar/showGeneralChatButton`, `carousel/slotBackgroundAlpha` options for MT client
+  * Fixed carousel lootboxes entrypoint sizing for MT client
+  * Temporarily disabled limits due to rework to Gameface
+  * Temporarily disabled tank carousel due to rework to Gameface
+  * Removed `hangar/showHangarPrestigeWidget` option for WoT client
+
+### XVM 12.8.0
+
+  * Compatibility with World of Tanks 1.29.1.1
+  * Compatibility with Mir Tankov 1.36.0.0
+
+### XVM 12.7.0
+
+  * Compatibility with World of Tanks 1.29.1.0
+
+### XVM 12.6.0
+
+  * Compatibility with Mir Tankov 1.35.0.0
+
+### XVM 12.5.0
+
+  * Compatibility with World of Tanks 1.29.0.0
+
+### XVM 12.4.1
+
+  * Compatibility with World of Tanks 1.28.1.1
+
+### XVM 12.4.0
+
+  * Compatibility with Mir Tankov 1.34.0.0
+
 ### XVM 12.3.0
 
   **WARNING**
