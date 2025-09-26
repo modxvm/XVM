@@ -18,7 +18,6 @@ from gui.shared.gui_items.dossier.achievements import MarkOfMasteryAchievement
 from gui.shared.utils.functions import makeTooltip
 from gui.shared.utils.requesters.ItemsRequester import REQ_CRITERIA
 from gui.Scaleform.daapi.view.common.filter_popover import TankCarouselFilterPopover
-from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_filter import BasicCriteriesGroup
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
@@ -216,7 +215,11 @@ def init():
     overrideStaticMethod(AccountSettings, 'setFilter')(_AccountSettings_setFilter)
     overrideMethod(TankCarouselFilterPopover, '_getInitialVO')(_TankCarouselFilterPopover_getInitialVO)
     overrideClassMethod(TankCarouselFilterPopover, '_generateMapping')(_TankCarouselFilterPopover_generateMapping)
-    overrideMethod(BasicCriteriesGroup, 'update')(_BasicCriteriesGroup_update)
+
+    if IS_LESTA:
+        from gui.Scaleform.daapi.view.common.vehicle_carousel.carousel_filter import BasicCriteriesGroup
+
+        overrideMethod(BasicCriteriesGroup, 'update')(_BasicCriteriesGroup_update)
 
 
 def fini():
