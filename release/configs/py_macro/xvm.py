@@ -3,38 +3,70 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2025 XVM Contributors
 """
 
-import traceback
-import BigWorld
+#
+# Imports
+#
 
-# Import logger
-from xvm_main.logger import *
-
-# Import config. Usage example: config.get('definition/author', 'XVM Team')
-import xvm_main.config as config
-
-from xvm import utils
-
-# Date and time
-
+# stdlib
 import datetime
 import locale
-from helpers import dependency
+
+# WoT
+import BigWorld
 from skeletons.gui.app_loader import IAppLoader
 from skeletons.account_helpers.settings_core import ISettingsCore
+from helpers import dependency
+
+# XFW
+from xfw import *
+
+# XVM Main
+from xvm_main.logger import *
+import xvm_main.config as config
+
+# XVM PyMacro
+from xvm import total_hp
+from xvm import xvm2sup
+from xvm import utils
+
+
+
+#
+# Globals
+#
 
 _default_encoding = locale.getpreferredencoding()
 # Fallback to explicit UTF-8 encoding usage on Windows
 # if the beta global UTF-8 support is enabled in Region settings
 if _default_encoding == 'cp65001':
     _default_encoding = 'utf-8'
+
+# Resolve native method due to Lesta rename (wg_ prefix removal)
+firstDayOfWeek = BigWorld.wg_firstDayOfWeek if IS_WG else BigWorld.firstDayOfWeek
+
+
+
+#
+# Constants
+#
+
 _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
                 'a', 'A', 'b', 'B', 'p' ] # single
 
+
+
+#
+# Macroses
+#
+
+# Date and time
 # https://docs.python.org/2/library/time.html#time.strftime
+
 @xvm.export('xvm.formatDate', deterministic=False)
 def xvm_formatDate(formatDate):
+    global firstDayOfWeek
     dt = datetime.datetime.now()
-    weekday = (dt.weekday() - BigWorld.wg_firstDayOfWeek() + 7) % 7
+    weekday = (dt.weekday() - firstDayOfWeek() + 7) % 7
     app = dependency.instance(IAppLoader).getApp()
     d = {}
 
@@ -93,55 +125,63 @@ def color_rating(rating, value=None):
 def arabic_to_roman(data=None):
     return utils.arabic_to_roman(data)
 
-# TotalHP
 
-from xvm import total_hp
+# TotalHP
 
 @xvm.export('xvm.total_hp.ally', deterministic=False)
 def total_hp_ally(norm=None):
     return total_hp.ally(norm)
 
+
 @xvm.export('xvm.total_hp.enemy', deterministic=False)
 def total_hp_enemy(norm=None):
     return total_hp.enemy(norm)
+
 
 @xvm.export('xvm.total_hp.color', deterministic=False)
 def total_hp_color():
     return total_hp.color()
 
+
 @xvm.export('xvm.total_hp.sign', deterministic=False)
 def total_hp_sign():
     return total_hp.sign()
 
+
 @xvm.export('xvm.total_hp.text', deterministic=False)
 def total_hp_text():
     return total_hp.text()
+
 
 @xvm.export('xvm.total_hp.avgDamage', deterministic=False)
 def total_hp_avgDamage(header, dmg_total):
     _avgDamage = total_hp.avgDamage(dmg_total)
     return "%s%s" % (header, _avgDamage) if _avgDamage is not None else None
 
+
 @xvm.export('xvm.total_hp.mainGun', deterministic=False)
 def total_hp_mainGun(header, dmg_total):
     _mainGun = total_hp.mainGun(dmg_total)
     return "%s%s" % (header, _mainGun) if _mainGun is not None else None
 
+
 @xvm.export('xvm.total_hp.getAvgDamage', deterministic=False)
 def total_hp_getAvgDamage(a, b, dmg_total):
     return a if total_hp.avgDamage(dmg_total) is not None else b
+
 
 @xvm.export('xvm.total_hp.getMainGun', deterministic=False)
 def total_hp_getMainGun(a, b, dmg_total):
     return a if total_hp.mainGun(dmg_total) is not None else b
 
 
-# Screen size
+# Screen size and scale
 
 def getInterfaceScale():
     settingsCore = dependency.instance(ISettingsCore)
     scale = settingsCore.interfaceScale.get()
     return scale
+
 
 @xvm.export('xvm.screenWidth', deterministic=False)
 def xvm_screenWidth():
@@ -192,9 +232,9 @@ def xvm_YFromBottom(y=0):
     except ValueError:
         return screenHeight
 
-# xvm2sup
 
-from xvm import xvm2sup
+# xvm2sup
+# XVM Scale
 
 @xvm.export('xvm.xvm2sup')
 def xvm2sup_xvm2sup(x=None, default=''):
