@@ -12,14 +12,16 @@ import logging
 
 # BigWorld
 from PlayerEvents import g_playerEvents
+from battle_royale.gui.impl.lobby.views.states import BattleRoyaleHangarState
 from gui.impl.lobby.maps_training.states import MapsTrainingState
 from gui.lobby_state_machine.states import LobbyStateFlags
 from gui.Scaleform.lobby_entry import getLobbyStateMachine
 from gui.shared import g_eventBus
 from gui.shared.events import GUICommonEvent
-from last_stand.gui.impl.lobby.states import LastStandHangarState
+from frontline.gui.impl.lobby.states import FrontlineHangarState
+from fun_random.gui.impl.lobby.hangar.states import FunRandomHangarState
+from halloween.gui.impl.lobby.states import HalloweenHangarState
 from story_mode.gui.impl.lobby.states import StoryModeState
-from white_tiger.gui.impl.lobby.states import WTHangarState
 
 # XFW
 from xfw import *
@@ -58,8 +60,10 @@ g_observer = None
 EVENT_HANGAR_STATES = (
     StoryModeState,
     MapsTrainingState,
-    LastStandHangarState,
-    WTHangarState,
+    BattleRoyaleHangarState,
+    FrontlineHangarState,
+    FunRandomHangarState,
+    HalloweenHangarState,
 )
 
 
