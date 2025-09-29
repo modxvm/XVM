@@ -32,11 +32,10 @@ UNSUPPORTED_GUI_TYPES = [
     # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
-    102, # constants.ARENA_GUI_TYPE.LAST_STAND (WG)
+    101, # constants.ARENA_GUI_TYPE.HALLOWEEN (WG 2.0.1 PvE event)
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
-    110, # constants.ARENA_GUI_TYPE.WHITE_TIGER (WG 2.0 Waffentrager)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
-    301, # constants.ARENA_GUI_TYPE.WHITE_TIGER (Lesta 1.37.0.0)
+    301, # constants.ARENA_GUI_TYPE.PORTAL (Lesta 1.38.0.0)
 ]
 
 UNSUPPORTED_BATTLE_TYPES = [

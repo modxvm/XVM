@@ -24,7 +24,11 @@ package com.xvm.battle
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ],
-            "historicalBattles": [
+            "HalloweenBattlePage": [
+                SixthSenseXvmView,
+                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+            ],
+            "portalBattlePage": [
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ]
