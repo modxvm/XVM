@@ -215,7 +215,7 @@ class _XfwComponent(BaseDAAPIComponent):
                         break
                 if not as_packages:
                     as_packages += ['as_battle_classic']
-                logger.info('Collected battle SWF mods to load for battle type %s: %s', gui_type, as_packages)
+                logger.info('Collected battle SWF packages to load for battle type %s: %s', gui_type, as_packages)
             else:
                 return None
 
@@ -230,7 +230,7 @@ class _XfwComponent(BaseDAAPIComponent):
                         name = os.path.basename(os.path.dirname(os.path.dirname(file)))
                         swf_loaded_info.swf_name_set(name, '%s%s' % ('../../', file.replace('\\', '/').replace('//', '/')))
 
-            logger.info('getMods: found: %s' % swf_loaded_info.swf_name_get_all())
+            logger.info('Found SWF packages: %s' % swf_loaded_info.swf_name_get_all())
             return {
                 'names': swf_loaded_info.swf_name_get_all(),
                 'loaded': swf_loaded_info.swf_loaded_get_all()
