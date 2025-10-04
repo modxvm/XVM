@@ -30,13 +30,16 @@ def owg_module_loaded():
     global __initialized
     return __initialized
 
+
 def owg_module_init():
     global __initialized
     __initialized = True
     return __initialized
 
+
 def owg_module_event(eventName, *args, **kwargs):
     pass
+
 
 def owg_module_fini():
     pass

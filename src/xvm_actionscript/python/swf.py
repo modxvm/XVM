@@ -31,6 +31,7 @@ def as_xfw_cmd(cmd, *args):
     view = g_xfwview() if g_xfwview else None
     return view.as_xfw_cmdS(cmd, *args) if view else None
 
+
 def as_event(*args):
     return as_xfw_cmd('xfw.as.py_event', *args)
 
@@ -45,8 +46,6 @@ def as_callback(event_name, handler):
 
 #####################################################################
 # SWF mods initializer
-
-_curdir = os.path.dirname(os.path.realpath(__file__))
 
 # Load xfw.swf
 xfwInitialized = False
@@ -71,12 +70,14 @@ def _getParentWindow():
         parentWindow = guiLoader.windowsManager.getMainWindow()
     return parentWindow
 
+
 def _loadXFWView():
     global appNS
     appLoader = dependency.instance(IAppLoader)
     app = appLoader.getApp(appNS)
     parent = _getParentWindow()
     app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, parent=parent))
+
 
 def _appInitialized(event):
     debug('[XFW] _appInitialized: {}'.format(event.ns))
@@ -101,6 +102,7 @@ def _appInitialized(event):
         err(traceback.format_exc())
     g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.APP_INITIALIZED, event))
 
+
 def _appDestroyed(event):
     g_eventBus.handleEvent(HasCtxEvent(XFW_EVENT.APP_DESTROYED, event))
 
@@ -113,6 +115,7 @@ def _fini():
     g_eventBus.removeListener(events.AppLifeCycleEvent.INITIALIZED, _appInitialized)
     g_eventBus.removeListener(events.AppLifeCycleEvent.DESTROYED, _appDestroyed)
 
+
 @overrideMethod(AppEntry, 'onAsInitializationCompleted')
 def _AppEntry_onAsInitializationCompleted(base, self):
     if self.initialized:
@@ -123,9 +126,11 @@ def _AppEntry_onAsInitializationCompleted(base, self):
     else:
         base(self)
 
+
 @overrideMethod(AppEntry, 'loadView')
 def _AppEntry_loadView(base, self, loadParams, *args, **kwargs):
     onLoadView(base, self, loadParams, *args, **kwargs)
+
 
 def onLoadView(base, self, loadParams, *args, **kwargs):
     #debug('[XFW] _AppEntry_loadView: ' + loadParams.viewKey)

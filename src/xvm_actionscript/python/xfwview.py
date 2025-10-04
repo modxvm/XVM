@@ -9,10 +9,10 @@ Copyright (c) 2013-2025 XVM Contributors
 
 # stdlib
 import os
-import glob
-import logging
-import traceback
 import weakref
+import collections
+import traceback
+import logging
 
 # BigWorld
 from constants import ARENA_GUI_TYPE
@@ -29,7 +29,7 @@ from frameworks.wulf import WindowLayer
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader
 
-# XFW.Loader
+# OpenWG
 import openwg_loader as loader
 import openwg_vfs
 
@@ -38,9 +38,17 @@ from xfw import IS_DEVELOPMENT
 from xfw.constants import *
 from xfw.logger import *
 
-# XFW.Actionscript
+# XVM Actionscript
 from . import swf
 from .swfloadedinfo import swf_loaded_info
+
+
+
+#
+# Logger
+#
+
+logger = logging.getLogger('XVM/Actionscript')
 
 
 
@@ -72,6 +80,20 @@ class XfwArenaGuiType:
     # List for event battles to ignore basic XVM features (clock and sixth sense)
     # Mainly used for special events with GF usage in battle
     EVENT_SPECIAL_RANGE = (COSMIC_EVENT, )
+
+
+_BATTLE_PACKAGES_MAP = {
+    ARENA_GUI_TYPE.RANKED: ['as_battle_ranked'],
+    ARENA_GUI_TYPE.EPIC_RANDOM: ['as_battle_epicrandom'],
+    ARENA_GUI_TYPE.EPIC_BATTLE: ['as_battle_epicbattle'],
+    ARENA_GUI_TYPE.BATTLE_ROYALE: ['as_battle_royale'],
+    XfwArenaGuiType.EVENT_RANGE: ['as_battle_event'],
+    XfwArenaGuiType.EVENT_SPECIAL_RANGE: ['as_battle_event_special'],
+    XfwArenaGuiType.RTS_RANGE: ['as_battle_rts'],
+    ARENA_GUI_TYPE.STRONGHOLD_RANGE: ['as_battle_stronghold'],
+    XfwArenaGuiType.COMP7_RANGE: ['as_battle_comp7'],
+    XfwArenaGuiType.STORY_MODE_RANGE: ['as_battle_storymode'],
+}
 
 
 
@@ -171,41 +193,29 @@ class _XfwComponent(BaseDAAPIComponent):
 
     # commands handlers
     def getMods(self):
-        logger = logging.getLogger('XVM/Actionscript')
-
         try:
             app = dependency.instance(IAppLoader).getApp(swf.appNS)
             if app is None:
                 return None
 
-            as_paths = None
-            if app.appNS == APP_NAME_SPACE.SF_LOBBY:
-                as_paths = ['as_lobby']
-            elif app.appNS == APP_NAME_SPACE.SF_BATTLE:
-                as_paths = []
-                arenaGuiType = avatar_getter.getArena().guiType
-                if arenaGuiType == ARENA_GUI_TYPE.RANKED:
-                    as_paths += ['as_battle_ranked']
-                elif arenaGuiType == ARENA_GUI_TYPE.EPIC_RANDOM:
-                    as_paths += ['as_battle_epicrandom']
-                elif arenaGuiType == ARENA_GUI_TYPE.EPIC_BATTLE:
-                    as_paths += ['as_battle_epicbattle']
-                elif arenaGuiType == ARENA_GUI_TYPE.BATTLE_ROYALE:
-                    as_paths += ['as_battle_royale']
-                elif arenaGuiType in XfwArenaGuiType.EVENT_RANGE:
-                    as_paths += ['as_battle_event']
-                elif arenaGuiType in XfwArenaGuiType.EVENT_SPECIAL_RANGE:
-                    as_paths += ['as_battle_event_special']
-                elif arenaGuiType in XfwArenaGuiType.RTS_RANGE:
-                    as_paths += ['as_battle_rts']
-                elif arenaGuiType in ARENA_GUI_TYPE.STRONGHOLD_RANGE:
-                    as_paths += ['as_battle_stronghold']
-                elif arenaGuiType in XfwArenaGuiType.COMP7_RANGE:
-                    as_paths += ['as_battle_comp7']
-                elif arenaGuiType in XfwArenaGuiType.STORY_MODE_RANGE:
-                    as_paths += ['as_battle_storymode']
-                else:
-                    as_paths += ['as_battle_classic']
+            as_packages = None
+            appNS = app.appNS
+            if appNS == APP_NAME_SPACE.SF_LOBBY:
+                as_packages = ['as_lobby']
+            elif appNS == APP_NAME_SPACE.SF_BATTLE:
+                as_packages = []
+                gui_type = avatar_getter.getArena().guiType
+                for target, packages in _BATTLE_PACKAGES_MAP.iteritems():
+                    if isinstance(target, collections.Iterable):
+                        if gui_type in target:
+                            as_packages += packages
+                            break
+                    if target == gui_type:
+                        as_packages += packages
+                        break
+                if not as_packages:
+                    as_packages += ['as_battle_classic']
+                logger.info('Collected battle SWF mods to load for battle type %s: %s', gui_type, as_packages)
             else:
                 return None
 
@@ -214,8 +224,8 @@ class _XfwComponent(BaseDAAPIComponent):
                     continue
                 if file.endswith('_ui.swf') or file.endswith('_view.swf'):
                     continue
-                for as_path in as_paths:
-                    if as_path in file:
+                for as_package in as_packages:
+                    if file.endswith('%s.swf' % as_package):
                         name = os.path.basename(os.path.dirname(os.path.dirname(file)))
                         swf_loaded_info.swf_name_set(name, '%s%s' % ('../../', file.replace('\\', '/').replace('//', '/')))
 
