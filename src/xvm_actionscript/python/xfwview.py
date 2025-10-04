@@ -225,7 +225,8 @@ class _XfwComponent(BaseDAAPIComponent):
                 if file.endswith('_ui.swf') or file.endswith('_view.swf'):
                     continue
                 for as_package in as_packages:
-                    if file.endswith('%s.swf' % as_package):
+                    as_package_dir = os.path.basename(os.path.dirname(file))
+                    if as_package == as_package_dir:
                         name = os.path.basename(os.path.dirname(os.path.dirname(file)))
                         swf_loaded_info.swf_name_set(name, '%s%s' % ('../../', file.replace('\\', '/').replace('//', '/')))
 
