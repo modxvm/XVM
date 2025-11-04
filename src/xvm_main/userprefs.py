@@ -33,12 +33,7 @@ def set(key, value):
 class _UserPrefs():
     def __init__(self):
         try:
-            pref_path = ''
-            if IS_WG:
-                pref_path = BigWorld.wg_getPreferencesFilePath()
-            else:
-                pref_path = BigWorld.getPreferencesFilePath()
-
+            pref_path = BigWorld.wg_getPreferencesFilePath() if IS_WG else BigWorld.getPreferencesFilePath()
             self.cache_dir = os.path.join(os.path.dirname(unicode_from_utf8(pref_path)[1]), u'xvm')
             if not os.path.isdir(self.cache_dir):
                 os.makedirs(self.cache_dir)

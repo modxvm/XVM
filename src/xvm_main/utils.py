@@ -42,7 +42,7 @@ def show_threads():
         log('Thread: %s' % t.getName())
 
 def openWebBrowser(url, useInternalBrowser=False):
-    openBrowser = BigWorld.wg_openWebBrowser
+    openBrowser = BigWorld.wg_openWebBrowser if IS_WG else BigWorld.openWebBrowser
     if useInternalBrowser:
         browser = game_control.g_instance.browser
         if browser is not None:

@@ -64,7 +64,6 @@ _DIRECTIVES = [ 'au', 'al', 'Au', 'Al', 'bu', 'bl', 'Bu', 'Bl', # double
 
 @xvm.export('xvm.formatDate', deterministic=False)
 def xvm_formatDate(formatDate):
-    global firstDayOfWeek
     dt = datetime.datetime.now()
     weekday = (dt.weekday() - firstDayOfWeek() + 7) % 7
     app = dependency.instance(IAppLoader).getApp()

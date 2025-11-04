@@ -10,11 +10,10 @@ Copyright (c) 2013-2025 XVM Contributors
 import re
 
 import BigWorld
-
-from Avatar import PlayerAvatar
-from BattleReplay import g_replayCtrl
 import game
+from BattleReplay import g_replayCtrl
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechniqueWindow import ProfileTechniqueWindow
+from gui.Scaleform.framework.application import AppEntry
 from gui.shared import g_eventBus, events
 from notification.actions_handlers import NotificationsActionsHandlers
 from notification.decorators import MessageDecorator
@@ -22,14 +21,15 @@ from notification.settings import NOTIFICATION_TYPE
 from PlayerEvents import g_playerEvents
 from skeletons.gameplay import ReplayEventID
 
-from xfw.events import registerEvent, overrideMethod
+from xfw import *
 
 import config
 from consts import XVM_EVENT
-from gui.Scaleform.framework.application import AppEntry
 from logger import trace
 import svcmsg
 from xvm import g_xvm
+
+BW_openWebBrowser = BigWorld.wg_openWebBrowser if IS_WG else BigWorld.openWebBrowser
 
 #
 # Handlers
@@ -56,7 +56,7 @@ def _NotificationsActionsHandlers_handleAction(base, self, model, typeID, entity
     if actionName == 'XVM_CHECK_ACTIVATION':
         g_eventBus.handleEvent(events.HasCtxEvent(XVM_EVENT.CHECK_ACTIVATION))
     elif typeID == NOTIFICATION_TYPE.MESSAGE and re.match('https?://', actionName, re.I):
-        BigWorld.wg_openWebBrowser(actionName)
+        BW_openWebBrowser(actionName)
     else:
         base(self, model, typeID, entityID, actionName)
 
