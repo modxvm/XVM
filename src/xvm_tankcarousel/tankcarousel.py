@@ -14,6 +14,7 @@ import logging
 # BigWorld
 import BigWorld
 import game
+import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from constants import QUEUE_TYPE
 from gui import GUI_NATIONS_ORDER_INDEX
 from gui.shared import g_eventBus
@@ -26,12 +27,12 @@ from gui.Scaleform.genConsts.PROFILE_DROPDOWN_KEYS import PROFILE_DROPDOWN_KEYS
 from gui.Scaleform.daapi.settings.views import VIEW_ALIAS
 from gui.Scaleform.daapi.view.dialogs import SimpleDialogMeta, I18nConfirmDialogButtons
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
-import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.carousel_data_provider import CarouselDataProvider, HangarCarouselDataProvider, _SUPPLY_ITEMS
 from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.tank_carousel import TankCarousel
 from gui.Scaleform.daapi.view.common.vehicle_carousel import carousel_data_provider
 from frameworks.wulf import WindowLayer
 from helpers import dependency
+from shared_utils import findFirst
 from skeletons.gui.game_control import IBattlePassController
 from skeletons.gui.shared import IItemsCache
 
@@ -52,7 +53,7 @@ from xvm_main.vehinfo_tiers import getTiers
 from xvm_main.utils import l10n
 
 # XVM TankCarousel
-from .consts import XVM_LOBBY_SWF_FILENAME, AS_SYMBOLS, XVM_CAROUSEL_COMMAND, VEHICLE
+from .consts import XVM_LOBBY_SWF_FILENAME, AS_SYMBOLS, XVM_CAROUSEL_COMMAND, VEHICLE, VEHICLE_FAVOURITE_OPTIONS
 
 
 
@@ -120,15 +121,16 @@ def _SimpleVehicleCMHandler__init__(base, self, cmProxy, ctx=None, handlers=None
 
 
 def _VehicleContextMenuHandler_generateOptions(base, self, ctx=None, *args, **kwargs):
-    result = base(self, ctx)
+    options = base(self, ctx)
     try:
+        setPrimaryOptionIdx = findFirst(lambda option: option.get('id') in VEHICLE_FAVOURITE_OPTIONS, options, len(options))
         if reserve.is_reserved(self.vehCD):
-            result.insert(-1, self._makeItem(VEHICLE.UNCHECK_RESERVE, l10n('uncheck_reserve_menu')))
+            options.insert(setPrimaryOptionIdx, self._makeItem(VEHICLE.UNCHECK_RESERVE, l10n('uncheck_reserve_menu')))
         else:
-            result.insert(-1, self._makeItem(VEHICLE.CHECK_RESERVE, l10n('check_reserve_menu')))
+            options.insert(setPrimaryOptionIdx, self._makeItem(VEHICLE.CHECK_RESERVE, l10n('check_reserve_menu')))
     except Exception:
         logging.getLogger('XVM/TankCarousel').exception('_VehicleContextMenuHandler_generateOptions')
-    return result
+    return options
 
 
 def confirmReserveVehicle(self):

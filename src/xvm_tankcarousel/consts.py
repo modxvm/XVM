@@ -12,6 +12,7 @@ import importlib
 import logging
 
 # BigWorld
+import gui.Scaleform.daapi.view.lobby.hangar.hangar_cm_handlers as hangar_cm_handlers
 from account_helpers.AccountSettings import CAROUSEL_FILTER_2, RANKED_CAROUSEL_FILTER_2, EPICBATTLE_CAROUSEL_FILTER_2, MAPBOX_CAROUSEL_FILTER_2, FUN_RANDOM_CAROUSEL_FILTER_2, COMP7_CAROUSEL_FILTER_2
 from account_helpers.AccountSettings import CAROUSEL_FILTER_CLIENT_1, RANKED_CAROUSEL_FILTER_CLIENT_1, EPICBATTLE_CAROUSEL_FILTER_CLIENT_1, BATTLEPASS_CAROUSEL_FILTER_CLIENT_1, MAPBOX_CAROUSEL_FILTER_CLIENT_1, FUN_RANDOM_CAROUSEL_FILTER_CLIENT_1, COMP7_CAROUSEL_FILTER_CLIENT_1
 
@@ -128,3 +129,5 @@ class XVM_CAROUSEL_COMMAND(object):
 class VEHICLE(object):
     CHECK_RESERVE = 'confirmReserveVehicle'
     UNCHECK_RESERVE = 'uncheckReserveVehicle'
+
+VEHICLE_FAVOURITE_OPTIONS = (hangar_cm_handlers.VEHICLE.CHECK, hangar_cm_handlers.VEHICLE.UNCHECK, )
