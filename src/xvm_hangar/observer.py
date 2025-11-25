@@ -20,7 +20,6 @@ from gui.shared import g_eventBus
 from gui.shared.events import GUICommonEvent
 from frontline.gui.impl.lobby.states import FrontlineHangarState
 from fun_random.gui.impl.lobby.hangar.states import FunRandomHangarState
-from halloween.gui.impl.lobby.states import HalloweenHangarState
 from story_mode.gui.impl.lobby.states import StoryModeState
 
 # XFW
@@ -63,7 +62,6 @@ EVENT_HANGAR_STATES = (
     BattleRoyaleHangarState,
     FrontlineHangarState,
     FunRandomHangarState,
-    HalloweenHangarState,
 )
 
 
