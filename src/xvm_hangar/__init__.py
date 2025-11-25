@@ -293,6 +293,7 @@ def Hangar_as_setEventTournamentBannerVisibleS(base, self, alias, visible):
     return base(self, alias, visible)
 
 
+# Broken since WoT 2.1, due to refactor
 # Destroy widget if hidden
 def TournamentsWidgetComponent_makeInjectView(base, self):
     if not config.get('hangar/showEventTournamentWidget', True):
@@ -413,8 +414,8 @@ def owg_module_init():
 
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
-            from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
-            from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
+            # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
+            # from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
             from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
@@ -423,8 +424,8 @@ def owg_module_init():
             overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
             overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
-            overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
-            overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
+            # overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
+            # overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
             overrideMethod(EarningAnimationCommand, 'execute')(EarningAnimationCommand_execute)
         else:
