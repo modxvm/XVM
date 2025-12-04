@@ -70,6 +70,7 @@ class XfwArenaGuiType:
     STORY_MODE_ONBOARDING = 100 # _ONBOARDING (WG 1.25) / STORY_MODE (Lesta)
     HALLOWEEN = 101 # WG 2.0.1 Halloween 2025 event
     STORY_MODE_REGULAR = 104 # WG 1.25
+    GRINCH = 106 # WG 2.1.0
     COSMIC_EVENT = 300 # Lesta 1.25
     PORTAL = 301 # Lesta 1.38
     RTS_RANGE = (ARENA_GUI_TYPE.RTS, ARENA_GUI_TYPE.RTS_TRAINING, ARENA_GUI_TYPE.RTS_BOOTCAMP, )
@@ -78,8 +79,7 @@ class XfwArenaGuiType:
     EVENT_RANGE = (ARENA_GUI_TYPE.EVENT_BATTLES, WINBACK, HALLOWEEN, PORTAL, )
     # List for event battles to ignore basic XVM features (clock and sixth sense)
     # Mainly used for special events with GF usage in battle
-    EVENT_SPECIAL_RANGE = (COSMIC_EVENT, )
-
+    EVENT_SPECIAL_RANGE = (GRINCH, COSMIC_EVENT, )
 
 _BATTLE_PACKAGES_MAP = {
     ARENA_GUI_TYPE.RANKED: ['as_battle_ranked'],
