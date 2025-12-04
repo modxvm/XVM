@@ -33,6 +33,7 @@ UNSUPPORTED_GUI_TYPES = [
     100,
     101, # constants.ARENA_GUI_TYPE.HALLOWEEN (WG 2.0.1 PvE event)
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
+    106, # constants.ARENA_GUI_TYPE.GRINCH (WG 2.1.0 PvP event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
     301, # constants.ARENA_GUI_TYPE.PORTAL (Lesta 1.38.0.0)
 ]
