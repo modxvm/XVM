@@ -16,13 +16,11 @@ Copyright (c) ktulho
 import traceback
 
 # BigWorld
-import BigWorld
 from Avatar import PlayerAvatar
 from CurrentVehicle import g_currentVehicle
 from constants import VEHICLE_HIT_FLAGS
 from gui.battle_control import avatar_getter
 from gui.Scaleform.daapi.view.battle.shared.frag_correlation_bar import FragCorrelationBar
-from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
 
@@ -37,6 +35,12 @@ from xvm_main import config
 
 # XVM.Battle
 import xvm_battle.battle as battle
+
+# Per-realm imports
+if IS_WG:
+    from gui.impl.lobby.hangar.presenters.vehicle_inventory_presenter import VehicleInventoryPresenter
+else:
+    from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 
 
 
@@ -137,14 +141,19 @@ def updateTeamHealth(self, alliesHP, enemiesHP, totalAlliesHP, totalEnemiesHP):
         update_hp()
 
 
-@registerEvent(Hangar, '_Hangar__updateParams')
-def Hangar__updateParams(self):
+def handleVehicleChange(self, *args, **kwargs):
     global playerAvgDamage
     if not g_currentVehicle.isPresent():
         return
     itemsCache = dependency.instance(IItemsCache)
-    playerAvgDamage = itemsCache.items.getVehicleDossier(g_currentVehicle.item.intCD).getRandomStats().getAvgDamage()
+    vehIntCD = g_currentVehicle.item.intCD
+    vehDossier = itemsCache.items.getVehicleDossier(vehIntCD)
+    playerAvgDamage = vehDossier.getRandomStats().getAvgDamage()
 
+if IS_WG:
+    registerEvent(VehicleInventoryPresenter, '_VehicleInventoryPresenter__onVehicleChanged')(handleVehicleChange)
+else:
+    registerEvent(Hangar, '_Hangar__updateParams')(handleVehicleChange)
 
 @registerEvent(PlayerAvatar, 'showShotResults')
 def showShotResults(self, results):
