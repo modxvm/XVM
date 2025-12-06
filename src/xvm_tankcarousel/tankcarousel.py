@@ -32,7 +32,6 @@ from gui.Scaleform.daapi.view.lobby.hangar.carousels.basic.tank_carousel import 
 from gui.Scaleform.daapi.view.common.vehicle_carousel import carousel_data_provider
 from frameworks.wulf import WindowLayer
 from helpers import dependency
-from shared_utils import findFirst
 from skeletons.gui.game_control import IBattlePassController
 from skeletons.gui.shared import IItemsCache
 
@@ -123,11 +122,11 @@ def _SimpleVehicleCMHandler__init__(base, self, cmProxy, ctx=None, handlers=None
 def _VehicleContextMenuHandler_generateOptions(base, self, ctx=None, *args, **kwargs):
     options = base(self, ctx)
     try:
-        setPrimaryOptionIdx = findFirst(lambda option: option.get('id') in VEHICLE_FAVOURITE_OPTIONS, options, len(options))
+        setFavouriteOptionIdx = next((index for index, option in enumerate(options) if option.get('id') in VEHICLE_FAVOURITE_OPTIONS), len(options))
         if reserve.is_reserved(self.vehCD):
-            options.insert(setPrimaryOptionIdx, self._makeItem(VEHICLE.UNCHECK_RESERVE, l10n('uncheck_reserve_menu')))
+            options.insert(setFavouriteOptionIdx, self._makeItem(VEHICLE.UNCHECK_RESERVE, l10n('uncheck_reserve_menu')))
         else:
-            options.insert(setPrimaryOptionIdx, self._makeItem(VEHICLE.CHECK_RESERVE, l10n('check_reserve_menu')))
+            options.insert(setFavouriteOptionIdx, self._makeItem(VEHICLE.CHECK_RESERVE, l10n('check_reserve_menu')))
     except Exception:
         logging.getLogger('XVM/TankCarousel').exception('_VehicleContextMenuHandler_generateOptions')
     return options
