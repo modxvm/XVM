@@ -6,11 +6,13 @@
             "patches": [
                 "battle.battleloading.patch",
                 "battle.fullStats.patch",
-                "battle.linkages.patch",
                 "battle.minimap.patch",
                 "battle.playersPanel.patch",
                 "battle.rankedBattleLoading.patch",
                 "battle.teamBasesPanel.patch"
+            ],
+            "linkages": [
+                "CAPTURE_BAR_LINKAGE"
             ],
             "install_directory": "res/gui/flash"
         },
@@ -27,9 +29,11 @@
             "file": "lobby.swf",
             "patches": [
                 "lobby.contacts.patch",
-                "lobby.linkages.patch",
                 "lobby.profile.patch",
                 "lobby.Tankman.patch"
+            ],
+            "linkages": [
+                "TECHNIQUE_STATISTIC_TAB"
             ],
             "install_directory": "res/gui/flash"
         }
