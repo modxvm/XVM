@@ -416,13 +416,13 @@ def owg_module_init():
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
             # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
             # from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
-            from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
+            #TODO WoT 2.1.1: from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
             overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
-            overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
+            #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             # overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             # overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
