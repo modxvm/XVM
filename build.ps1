@@ -1,5 +1,12 @@
 #!/usr/bin/env pwsh
 
+param(
+    [string]$ComponentId = $null,
+    [string]$Type = $null,
+    [string]$Mode = $null,
+    [string]$Option = $null
+)
+
 Import-Module "$PSScriptRoot/src_build/library.psm1" -Force -DisableNameChecking
 
 # Read game versions from build.json
@@ -8,7 +15,7 @@ $buildConfig = Get-Content -Path $buildConfigFile | ConvertFrom-Json
 $game_version_lesta = $buildConfig.game_version_lesta
 $game_version_wg = $buildConfig.game_version_wg
 
-Build-Packages -PackageDirectory "$PSScriptRoot/src/" -OutputDirectory "$PSScriptRoot/~output"
+Build-Packages -PackageDirectory "$PSScriptRoot/src/" -OutputDirectory "$PSScriptRoot/~output" -ComponentId $ComponentId -Type $Type -Mode $Mode -Option $Option
 
 function Download-Translations($L10nDir) {
     $url = "https://translate.modxvm.com/downloads/xvm-client/xvm-client-l10n_json.zip"
@@ -123,5 +130,7 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
 
 $xvm_version = Get-VcsVersionString
 
-Copy-Deploy -OutputDirectory "$PSScriptRoot/~output" -ThirdPartyDir "$PSScriptRoot/3rdparty_packages" -ConfigsDir "$PSScriptRoot/release/configs" -ReleaseDir "$PSScriptRoot/release" -LestaVersion $game_version_lesta -WgVersion $game_version_wg -Version $xvm_version
+if (-not $ComponentId) {
+    Copy-Deploy -OutputDirectory "$PSScriptRoot/~output" -ThirdPartyDir "$PSScriptRoot/3rdparty_packages" -ConfigsDir "$PSScriptRoot/release/configs" -ReleaseDir "$PSScriptRoot/release" -LestaVersion $game_version_lesta -WgVersion $game_version_wg -Version $xvm_version
+}
 
