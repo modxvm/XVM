@@ -133,4 +133,3 @@ $xvm_version = Get-VcsVersionString
 if (-not $ComponentId) {
     Copy-Deploy -OutputDirectory "$PSScriptRoot/~output" -ThirdPartyDir "$PSScriptRoot/3rdparty_packages" -ConfigsDir "$PSScriptRoot/release/configs" -ReleaseDir "$PSScriptRoot/release" -LestaVersion $game_version_lesta -WgVersion $game_version_wg -Version $xvm_version
 }
-
