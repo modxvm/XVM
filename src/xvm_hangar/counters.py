@@ -71,7 +71,7 @@ def _CustomizationBottomPanel__setNotificationCounters(base, self):
         if IS_WG:
             return self.as_setNotificationCountersS({'tabsCounters': [], 'unseenTabs': []})
         else:
-            return self.as_setNotificationCountersS({'tabsCounters': [], 'switchersCounter': 0})
+            return self.as_setNotificationCountersS({'tabsCounters': []})
     base(self)
 
 
