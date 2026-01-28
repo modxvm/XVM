@@ -85,41 +85,42 @@ RATINGS = {
     'basic_xte': {'name': 'xte', 'size': 2}
 }
 
-DEVICES_TANKMAN = {'engineHealth': 'engine_crit',
-                   'ammoBayHealth': 'ammo_bay_crit',
-                   'fuelTankHealth': 'fuel_tank_crit',
-                   'radioHealth': 'radio_crit',
-                   'leftTrackHealth': 'left_track_crit',
-                   'leftTrack0Health': 'left_track_crit',
-                   'leftTrack1Health': 'left_track_crit',
-                   'rightTrackHealth': 'right_track_crit',
-                   'rightTrack0Health': 'right_track_crit',
-                   'rightTrack1Health': 'right_track_crit',
-                   'gunHealth': 'gun_crit',
-                   'turretRotatorHealth': 'turret_rotator_crit',
-                   'surveyingDeviceHealth': 'surveying_device_crit',
-                   'commanderHealth': 'commander',
-                   'driverHealth': 'driver',
-                   'radioman1Health': 'radioman',
-                   'radioman2Health': 'radioman',
-                   'gunner1Health': 'gunner',
-                   'gunner2Health': 'gunner',
-                   'loader1Health': 'loader',
-                   'loader2Health': 'loader',
-                   'engineHealth_destr': 'engine_destr',
-                   'ammoBayHealth_destr': 'ammo_bay_destr',
-                   'fuelTankHealth_destr': 'fuel_tank_destr',
-                   'radioHealth_destr': 'radio_destr',
-                   'leftTrackHealth_destr': 'left_track_destr',
-                   'leftTrack0Health_destr': 'left_track_destr',
-                   'leftTrack1Health_destr': 'left_track_destr',
-                   'rightTrackHealth_destr': 'right_track_destr',
-                   'rightTrack0Health_destr': 'right_track_destr',
-                   'rightTrack1Health_destr': 'right_track_destr',
-                   'gunHealth_destr': 'gun_destr',
-                   'turretRotatorHealth_destr': 'turret_rotator_destr',
-                   'surveyingDeviceHealth_destr': 'surveying_device_destr'
-                   }
+DEVICES_TANKMAN = {
+    'engineHealth': 'engine_crit',
+    'ammoBayHealth': 'ammo_bay_crit',
+    'fuelTankHealth': 'fuel_tank_crit',
+    'radioHealth': 'radio_crit',
+    'leftTrackHealth': 'left_track_crit',
+    'leftTrack0Health': 'left_track_crit',
+    'leftTrack1Health': 'left_track_crit',
+    'rightTrackHealth': 'right_track_crit',
+    'rightTrack0Health': 'right_track_crit',
+    'rightTrack1Health': 'right_track_crit',
+    'gunHealth': 'gun_crit',
+    'turretRotatorHealth': 'turret_rotator_crit',
+    'surveyingDeviceHealth': 'surveying_device_crit',
+    'commanderHealth': 'commander',
+    'driverHealth': 'driver',
+    'radioman1Health': 'radioman',
+    'radioman2Health': 'radioman',
+    'gunner1Health': 'gunner',
+    'gunner2Health': 'gunner',
+    'loader1Health': 'loader',
+    'loader2Health': 'loader',
+    'engineHealth_destr': 'engine_destr',
+    'ammoBayHealth_destr': 'ammo_bay_destr',
+    'fuelTankHealth_destr': 'fuel_tank_destr',
+    'radioHealth_destr': 'radio_destr',
+    'leftTrackHealth_destr': 'left_track_destr',
+    'leftTrack0Health_destr': 'left_track_destr',
+    'leftTrack1Health_destr': 'left_track_destr',
+    'rightTrackHealth_destr': 'right_track_destr',
+    'rightTrack0Health_destr': 'right_track_destr',
+    'rightTrack1Health_destr': 'right_track_destr',
+    'gunHealth_destr': 'gun_destr',
+    'turretRotatorHealth_destr': 'turret_rotator_destr',
+    'surveyingDeviceHealth_destr': 'surveying_device_destr'
+}
 
 ADD_LINE = -1
 
@@ -138,28 +139,31 @@ DAMAGE_LOG_ENABLED = DAMAGE_LOG + ENABLED
 DAMAGE_LOG_DISABLED_DETAIL_STATS = DAMAGE_LOG + 'disabledDetailStats'
 DAMAGE_LOG_DISABLED_SUMMARY_STATS = DAMAGE_LOG + 'disabledSummaryStats'
 
-damageInfoCriticals = ('DEVICE_CRITICAL',
-                       'DEVICE_CRITICAL_AT_SHOT',
-                       'DEVICE_CRITICAL_AT_RAMMING',
-                       'DEVICE_CRITICAL_AT_FIRE',
-                       'DEVICE_CRITICAL_AT_WORLD_COLLISION',
-                       'DEVICE_CRITICAL_AT_DROWNING',
-                       'ENGINE_CRITICAL_AT_UNLIMITED_RPM'
-                       )
-damageInfoDestructions = ('DEVICE_DESTROYED',
-                          'DEVICE_DESTROYED_AT_SHOT',
-                          'DEVICE_DESTROYED_AT_RAMMING',
-                          'DEVICE_DESTROYED_AT_FIRE',
-                          'DEVICE_DESTROYED_AT_WORLD_COLLISION',
-                          'DEVICE_DESTROYED_AT_DROWNING',
-                          'ENGINE_DESTROYED_AT_UNLIMITED_RPM',
-                          'DEATH_FROM_DEVICE_EXPLOSION_AT_SHOT'
-                          )
-damageInfoTANKMAN = ('TANKMAN_HIT',
-                     'TANKMAN_HIT_AT_SHOT',
-                     'TANKMAN_HIT_AT_WORLD_COLLISION',
-                     'TANKMAN_HIT_AT_DROWNING'
-                     )
+damageInfoCriticals = (
+    'DEVICE_CRITICAL',
+    'DEVICE_CRITICAL_AT_SHOT',
+    'DEVICE_CRITICAL_AT_RAMMING',
+    'DEVICE_CRITICAL_AT_FIRE',
+    'DEVICE_CRITICAL_AT_WORLD_COLLISION',
+    'DEVICE_CRITICAL_AT_DROWNING',
+    'ENGINE_CRITICAL_AT_UNLIMITED_RPM'
+)
+damageInfoDestructions = (
+    'DEVICE_DESTROYED',
+    'DEVICE_DESTROYED_AT_SHOT',
+    'DEVICE_DESTROYED_AT_RAMMING',
+    'DEVICE_DESTROYED_AT_FIRE',
+    'DEVICE_DESTROYED_AT_WORLD_COLLISION',
+    'DEVICE_DESTROYED_AT_DROWNING',
+    'ENGINE_DESTROYED_AT_UNLIMITED_RPM',
+    'DEATH_FROM_DEVICE_EXPLOSION_AT_SHOT'
+)
+damageInfoTANKMAN = (
+    'TANKMAN_HIT',
+    'TANKMAN_HIT_AT_SHOT',
+    'TANKMAN_HIT_AT_WORLD_COLLISION',
+    'TANKMAN_HIT_AT_DROWNING'
+)
 
 
 class GROUP_DAMAGE(object):
@@ -228,9 +232,9 @@ def readyConfig(section):
         return {'vehicleClass': keyLower(_config.get(section + 'vtype')),
                 'c_Shell': keyLower(_config.get(section + 'c:costShell')),
                 'costShell': keyLower(_config.get(section + 'costShell')),
-                'c_typeHit': keyLower(_config.get(section + 'c:dmg-kind')),
+                'c_dmg-kind': keyLower(_config.get(section + 'c:dmg-kind')),
                 'c_VehicleClass': keyLower(_config.get(section + 'c:vtype')),
-                'typeHit': keyLower(_config.get(section + 'dmg-kind')),
+                'dmg-kind': keyLower(_config.get(section + 'dmg-kind')),
                 'c_teamDmg': keyLower(_config.get(section + 'c:team-dmg')),
                 'teamDmg': keyLower(_config.get(section + 'team-dmg')),
                 'compNames': keyLower(_config.get(section + 'comp-name')),
@@ -263,45 +267,46 @@ class Data(object):
         ResMgr.purge(xmlPath, True)
 
     def reset(self):
-        self.data = {'isAlive': True,
-                     'isDamage': False,
-                     'attackReasonID': 0,
-                     'attackerID': 0,
-                     'compName': 'unknown',
-                     'splashHit': 'no-splash',
-                     'criticalHit': False,
-                     'hitEffect': HIT_EFFECT_CODES[None],
-                     'damage': 0,
-                     'dmgRatio': 0,
-                     'oldHealth': 0,
-                     'maxHealth': 0,
-                     'hp': 0,
-                     'costShell': 'unknown',
-                     'shellKind': 'not_shell',
-                     'teamDmg': 'unknown',
-                     'attackerVehicleType': 'not_vehicle',
-                     'userString': '',
-                     'shortUserString': '',
-                     'name': '',
-                     'clanAbbrev': '',
-                     'level': 1,
-                     'clanicon': None,
-                     'squadnum': None,
-                     'number': None,
-                     'reloadGun': 0.0,
-                     'caliber': None,
-                     'shellDamage': None,
-                     'fireDuration': None,
-                     'diff-masses': None,
-                     'nation': None,
-                     'blownup': False,
-                     'stun-duration': None,
-                     'shells_stunning': False,
-                     'critDevice': 'no-critical',
-                     'hitTime': 0,
-                     'attackerVehicleName': '',
-                     'numCrits': 0
-                     }
+        self.data = {
+            'isAlive': True,
+            'isDamage': False,
+            'attackReasonID': 0,
+            'attackerID': 0,
+            'compName': 'unknown',
+            'splashHit': 'no-splash',
+            'criticalHit': False,
+            'hitEffect': HIT_EFFECT_CODES[None],
+            'damage': 0,
+            'dmgRatio': 0,
+            'oldHealth': 0,
+            'maxHealth': 0,
+            'hp': 0,
+            'costShell': 'unknown',
+            'shellKind': 'not_shell',
+            'teamDmg': 'unknown',
+            'attackerVehicleType': 'not_vehicle',
+            'userString': '',
+            'shortUserString': '',
+            'name': '',
+            'clanAbbrev': '',
+            'level': 1,
+            'clanicon': None,
+            'squadnum': None,
+            'number': None,
+            'reloadGun': 0.0,
+            'caliber': None,
+            'shellDamage': None,
+            'fireDuration': None,
+            'diff-masses': None,
+            'nation': None,
+            'blownup': False,
+            'stun-duration': None,
+            'shells_stunning': False,
+            'critDevice': 'no-critical',
+            'hitTime': 0,
+            'attackerVehicleName': '',
+            'numCrits': 0
+        }
 
     def updateData(self):
         player = BigWorld.player()
@@ -665,89 +670,94 @@ class _Base(object):
 
         conf = readyConfig(self.section)
         if macros is None:
+            vehicleClass = VEHICLE_CLASSES_SHORT[value['attackerVehicleType']]
+            attackReason = ATTACK_REASONS_VALUES.get(value['attackReasonID'])
             xwn8 = value.get('xwn8', None)
             xwtr = value.get('xwtr', None)
             xeff = value.get('xeff', None)
             xwgr = value.get('xwgr', None)
-            macros = {'vehicle': value['userString'],
-                      'vehicle-short': value['shortUserString'],
-                      'name': value['name'],
-                      'clannb': value['clanAbbrev'],
-                      'clan': ''.join(['[', value['clanAbbrev'], ']']) if value['clanAbbrev'] else '',
-                      'level': value['level'],
-                      'clanicon': value.get('clanicon', None),
-                      'squad-num': value['squadnum'],
-                      'reloadGun': value['reloadGun'],
-                      'my-alive': 'al' if value['isAlive'] else None,
-                      'gun-caliber': value['caliber'],
-                      'shell-dmg': value['shellDamage'],
-                      'wn8': value.get('wn8', None),
-                      'xwn8': value.get('xwn8', None),
-                      'wtr': value.get('wtr', None),
-                      'xwtr': value.get('xwtr', None),
-                      'eff': value.get('eff', None),
-                      'xeff': value.get('xeff', None),
-                      'wgr': value.get('wgr', None),
-                      'xwgr': value.get('xwgr', None),
-                      'xte': value.get('xte', None),
-                      'r': '{{%s}}' % chooseRating,
-                      'xr': '{{%s}}' % chooseRating if chooseRating[0] == 'x' else '{{x%s}}' % chooseRating,
-                      'c:r': '{{c:%s}}' % chooseRating,
-                      'c:xr': '{{c:%s}}' % chooseRating if chooseRating[0] == 'x' else '{{c:x%s}}' % chooseRating,
-                      'c:wn8': readColor('wn8', value.get('wn8', None), xwn8),
-                      'c:xwn8': readColor('x', xwn8),
-                      'c:wtr': readColor('wtr', value.get('wtr', None), xwtr),
-                      'c:xwtr': readColor('x', xwtr),
-                      'c:eff': readColor('eff', value.get('eff', None), xeff),
-                      'c:xeff': readColor('x', xeff),
-                      'c:wgr': readColor('wgr', value.get('wgr', None), xwgr),
-                      'c:xwgr': readColor('x', xwgr),
-                      'c:xte': readColor('x', value.get('xte', None)),
-                      'diff-masses': value.get('diff-masses', None),
-                      'nation': value.get('nation', None),
-                      'my-blownup': 'blownup' if value['blownup'] else None,
-                      'type-shell-key': value['shellKind'],
-                      'stun-duration': value.get('stun-duration', None),
-                      'vehiclename': value.get('attackerVehicleName', '')
-                      }
+            macros = {
+                'vehicle': value['userString'],
+                'vehicle-short': value['shortUserString'],
+                'name': value['name'],
+                'clannb': value['clanAbbrev'],
+                'clan': ''.join(['[', value['clanAbbrev'], ']']) if value['clanAbbrev'] else '',
+                'level': value['level'],
+                'clanicon': value.get('clanicon', None),
+                'squad-num': value['squadnum'],
+                'reloadGun': value['reloadGun'],
+                'my-alive': 'al' if value['isAlive'] else None,
+                'gun-caliber': value['caliber'],
+                'shell-dmg': value['shellDamage'],
+                'wn8': value.get('wn8', None),
+                'xwn8': value.get('xwn8', None),
+                'wtr': value.get('wtr', None),
+                'xwtr': value.get('xwtr', None),
+                'eff': value.get('eff', None),
+                'xeff': value.get('xeff', None),
+                'wgr': value.get('wgr', None),
+                'xwgr': value.get('xwgr', None),
+                'xte': value.get('xte', None),
+                'r': '{{%s}}' % chooseRating,
+                'xr': '{{%s}}' % chooseRating if chooseRating[0] == 'x' else '{{x%s}}' % chooseRating,
+                'c:r': '{{c:%s}}' % chooseRating,
+                'c:xr': '{{c:%s}}' % chooseRating if chooseRating[0] == 'x' else '{{c:x%s}}' % chooseRating,
+                'c:wn8': readColor('wn8', value.get('wn8', None), xwn8),
+                'c:xwn8': readColor('x', xwn8),
+                'c:wtr': readColor('wtr', value.get('wtr', None), xwtr),
+                'c:xwtr': readColor('x', xwtr),
+                'c:eff': readColor('eff', value.get('eff', None), xeff),
+                'c:xeff': readColor('x', xeff),
+                'c:wgr': readColor('wgr', value.get('wgr', None), xwgr),
+                'c:xwgr': readColor('x', xwgr),
+                'c:xte': readColor('x', value.get('xte', None)),
+                'diff-masses': value.get('diff-masses', None),
+                'nation': value.get('nation', None),
+                'my-blownup': 'blownup' if value['blownup'] else None,
+                'type-shell-key': value['shellKind'],
+                'stun-duration': value.get('stun-duration', None),
+                'vehiclename': value.get('attackerVehicleName', '')
+            }
 
-        macros.update({'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],
-                       'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
-                       'vtype': conf['vehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackerVehicleType']], ''),
-                       'c:costShell': conf['c_Shell'][value['costShell']],
-                       'costShell': conf['costShell'].get(value['costShell'], 'unknown'),
-                       'c:dmg-kind': conf['c_typeHit'].get(ATTACK_REASONS_VALUES.get(value['attackReasonID']), '#CCCCCC'),
-                       'dmg-kind': conf['typeHit'].get(ATTACK_REASONS_VALUES.get(value['attackReasonID']), 'reason: %s' % value['attackReasonID']),
-                       'c:vtype': conf['c_VehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackerVehicleType']], '#CCCCCC'),
-                       'comp-name': conf['compNames'].get(value['compName'], 'unknown'),
-                       'splash-hit': conf['splashHit'].get(value['splashHit'], 'unknown'),
-                       'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
-                       'type-shell': conf['typeShell'][value['shellKind']],
-                       'c:type-shell': conf['c_typeShell'][value['shellKind']],
-                       'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], HIT_EFFECT_CODES[None]),
-                       'hit-effects': conf['hitEffect'].get(value['hitEffect'], HIT_EFFECT_CODES[None]),
-                       'crit-device': conf['critDevice'].get(value.get('critDevice', '')),
-                       'number': value['number'],
-                       'dmg': value['damage'],
-                       'dmg-ratio': value['dmgRatio'],
-                       'fire-duration': value.get('fireDuration', None),
-                       'hitTime': value['hitTime'],
-                       'n-crits': value.get('numCrits', 0),
-                       'hp': value.get('hp', 0)
-                       })
+        macros.update({
+            'c:team-dmg': conf['c_teamDmg'][value['teamDmg']],
+            'team-dmg': conf['teamDmg'].get(value['teamDmg'], ''),
+            'vtype': conf['vehicleClass'].get(vehicleClass, ''),
+            'c:costShell': conf['c_Shell'][value['costShell']],
+            'costShell': conf['costShell'].get(value['costShell'], 'unknown'),
+            'c:dmg-kind': conf['c_dmg-kind'].get(attackReason, '#CCCCCC'),
+            'dmg-kind': conf['dmg-kind'].get(attackReason, 'reason: %s!' % value['attackReasonID']),
+            'c:vtype': conf['c_VehicleClass'].get(vehicleClass, '#CCCCCC'),
+            'comp-name': conf['compNames'].get(value['compName'], 'unknown'),
+            'splash-hit': conf['splashHit'].get(value['splashHit'], 'unknown'),
+            'critical-hit': conf['criticalHit'].get('critical') if value['criticalHit'] else conf['criticalHit'].get('no-critical'),
+            'type-shell': conf['typeShell'][value['shellKind']],
+            'c:type-shell': conf['c_typeShell'][value['shellKind']],
+            'c:hit-effects': conf['c_hitEffect'].get(value['hitEffect'], HIT_EFFECT_CODES[None]),
+            'hit-effects': conf['hitEffect'].get(value['hitEffect'], HIT_EFFECT_CODES[None]),
+            'crit-device': conf['critDevice'].get(value.get('critDevice', '')),
+            'number': value['number'],
+            'dmg': value['damage'],
+            'dmg-ratio': value['dmgRatio'],
+            'fire-duration': value.get('fireDuration', None),
+            'hitTime': value['hitTime'],
+            'n-crits': value.get('numCrits', 0),
+            'hp': value.get('hp', 0)
+        })
 
     def getShadow(self):
-        return {SHADOW_OPTIONS.DISTANCE: parser(_config.get(self.SHADOW_DISTANCE)),
-                SHADOW_OPTIONS.ANGLE: parser(_config.get(self.SHADOW_ANGLE)),
-                SHADOW_OPTIONS.ALPHA: parser(_config.get(self.SHADOW_ALPHA)),
-                SHADOW_OPTIONS.BLUR: parser(_config.get(self.SHADOW_BLUR)),
-                SHADOW_OPTIONS.STRENGTH: parser(_config.get(self.SHADOW_STRENGTH)),
-                SHADOW_OPTIONS.COLOR: parser(_config.get(self.SHADOW_COLOR)),
-                SHADOW_OPTIONS.HIDE_OBJECT: parser(_config.get(self.SHADOW_HIDE_OBJECT)),
-                SHADOW_OPTIONS.INNER: parser(_config.get(self.SHADOW_INNER)),
-                SHADOW_OPTIONS.KNOCKOUT: parser(_config.get(self.SHADOW_KNOCKOUT)),
-                SHADOW_OPTIONS.QUALITY: parser(_config.get(self.SHADOW_QUALITY))
-                }
+        return {
+            SHADOW_OPTIONS.DISTANCE: parser(_config.get(self.SHADOW_DISTANCE)),
+            SHADOW_OPTIONS.ANGLE: parser(_config.get(self.SHADOW_ANGLE)),
+            SHADOW_OPTIONS.ALPHA: parser(_config.get(self.SHADOW_ALPHA)),
+            SHADOW_OPTIONS.BLUR: parser(_config.get(self.SHADOW_BLUR)),
+            SHADOW_OPTIONS.STRENGTH: parser(_config.get(self.SHADOW_STRENGTH)),
+            SHADOW_OPTIONS.COLOR: parser(_config.get(self.SHADOW_COLOR)),
+            SHADOW_OPTIONS.HIDE_OBJECT: parser(_config.get(self.SHADOW_HIDE_OBJECT)),
+            SHADOW_OPTIONS.INNER: parser(_config.get(self.SHADOW_INNER)),
+            SHADOW_OPTIONS.KNOCKOUT: parser(_config.get(self.SHADOW_KNOCKOUT)),
+            SHADOW_OPTIONS.QUALITY: parser(_config.get(self.SHADOW_QUALITY))
+        }
 
     def isGroupDmg(self):
         attackReasonID = data.data['attackReasonID']
@@ -825,14 +835,15 @@ class DamageLog(_Base):
 
     def addLine(self, attackerID=None, attackReasonID=None):
         if not (attackerID is None or attackReasonID is None):
-            self.dictVehicle[attackerID][attackReasonID] = {'time': BigWorld.serverTime(),
-                                                            'damage': self.dataLog['damage'],
-                                                            'criticalHit': self.dataLog['criticalHit'],
-                                                            'numCrits': self.dataLog['numCrits'],
-                                                            'numberLine': 0,
-                                                            'startAction': BigWorld.time() if attackReasonID == 1 else None,
-                                                            'hitTime': self.dataLog['hitTime']
-                                                            }
+            self.dictVehicle[attackerID][attackReasonID] = {
+                'time': BigWorld.serverTime(),
+                'damage': self.dataLog['damage'],
+                'criticalHit': self.dataLog['criticalHit'],
+                'numCrits': self.dataLog['numCrits'],
+                'numberLine': 0,
+                'startAction': BigWorld.time() if attackReasonID == 1 else None,
+                'hitTime': self.dataLog['hitTime']
+            }
         self.dataLog['number'] = len(self.listLog) + 1
         self.dataLog['fireDuration'] = BigWorld.time() - self.dictVehicle[attackerID][attackReasonID]['startAction'] if attackReasonID == 1 else None
         self.setOutParameters(ADD_LINE)

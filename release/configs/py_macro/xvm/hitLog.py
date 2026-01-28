@@ -35,7 +35,7 @@ from xvm_main.stats import _stat
 from xvm_main.utils import l10n
 
 import parser_addon
-from xvm.damageLog import keyLower, ATTACK_REASONS, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
+from xvm.damageLog import keyLower, ATTACK_REASONS_VALUES, RATINGS, VEHICLE_CLASSES_SHORT, ConfigCache
 
 # WG 1.24.1 only
 WINBACK = 31
@@ -511,16 +511,18 @@ class GroupHit(object):
         conf = self.readyConfig()
         player = self.players[self.vehID]
         value = g_dataHitLog.data
+        vehicleClass = VEHICLE_CLASSES_SHORT[value['attackedVehicleType']]
+        attackReason = ATTACK_REASONS_VALUES.get(value['attackReasonID'])
 
         data['c:team-dmg'] = conf['c_teamDmg'].get(value['teamDmg'], '#FFFFFF')
         data['team-dmg'] = conf['teamDmg'].get(value['teamDmg'], '')
-        data['vtype'] = conf['vehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackedVehicleType']], '')
+        data['vtype'] = conf['vehicleClass'].get(vehicleClass, '')
         data['c:costShell'] = conf['c_shell'].get(value['costShell'], None)
         data['costShell'] = conf['costShell'].get(value['costShell'], None)
-        data['c:dmg-kind'] = conf['c_dmg-kind'][ATTACK_REASONS[value['attackReasonID']]]
-        data['dmg-kind'] = conf['dmg-kind'].get(ATTACK_REASONS[value['attackReasonID']], 'reason: %s' % value['attackReasonID'])
-        data['dmg-kind-player'] = ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS[i], None) for i in player.get('dmg-kind-player', [])])
-        data['c:vtype'] = conf['c_vehicleClass'].get(VEHICLE_CLASSES_SHORT[value['attackedVehicleType']], '#CCCCCC')
+        data['c:dmg-kind'] = conf['c_dmg-kind'].get(attackReason, '#CCCCCC')
+        data['dmg-kind'] = conf['dmg-kind'].get(attackReason, 'reason: %s!' % value['attackReasonID'])
+        data['dmg-kind-player'] = ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS_VALUES.get(attackReasonID, 'unknown')) for attackReasonID in player.get('dmg-kind-player', [])])
+        data['c:vtype'] = conf['c_vehicleClass'].get(vehicleClass, '#CCCCCC')
         data['comp-name'] = conf['compNames'].get(value['compName'], None)
         data['type-shell'] = conf['typeShell'].get(value['shellKind'], 'not_shell')
         data['type-shell-key'] = value['shellKind'] if value['shellKind'] is not None else 'not_shell'
