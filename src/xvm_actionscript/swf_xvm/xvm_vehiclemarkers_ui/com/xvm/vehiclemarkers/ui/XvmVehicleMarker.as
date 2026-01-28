@@ -266,16 +266,33 @@ package com.xvm.vehiclemarkers.ui
             }
         }
 
-        private final function setupVehicleIcon():void
-        {
-            var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
-
-            var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
-            var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
-            if (atlasManager.isAtlasInitialized(atlasName))
+        CLIENT::WG {
+            private final function setupVehicleIcon():void
             {
-                RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
-                XfwAccess.getPrivateField(this, 'updateIconColor')();
+                var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
+
+                var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
+                var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
+                if (atlasManager.isAtlasInitialized(atlasName))
+                {
+                    RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
+                    XfwAccess.getPrivateField(this, 'updateIconColor')();
+                }
+            }
+        }
+
+        CLIENT::LESTA {
+            override protected final function setupVehicleIcon():void
+            {
+                var isAlly:Boolean = this.entityType == VehicleMarkersConstants.ENTITY_TYPE_ALLY;
+
+                var atlasManager:RootSWFAtlasManager = RootSWFAtlasManager.instance;
+                var atlasName:String = isAlly ? XvmVehicleMarkersMod.allyAtlas : XvmVehicleMarkersMod.enemyAtlas;
+                if (atlasManager.isAtlasInitialized(atlasName))
+                {
+                    RootSWFAtlasManager.instance.drawWithCenterAlign(atlasName, vehicleIconName, vehicleIcon.graphics, true, false);
+                    XfwAccess.getPrivateField(this, 'updateIconColor')();
+                }
             }
         }
 

@@ -53,7 +53,12 @@ package com.xvm.battle.shared.teamBasesPanel
         private var m_colorType:String = "";
 
         private var m_points:Number;
-        private var m_vehiclesCount:String;
+        CLIENT::WG {
+            private var m_vehiclesCount:String;
+        }
+        CLIENT::LESTA {
+            private var m_vehiclesCount:int;
+        }
         private var m_timeLeft:String
 
         public function UI_TeamCaptureBar()
@@ -96,40 +101,85 @@ package com.xvm.battle.shared.teamBasesPanel
             super.y = value - HIDE_ICONS_HACK_OFFSET_Y;
         }
 
-        override public function setData(param1:Number, param2:Number, param3:String, param4:String, param5:Number, param6:String, param7:String):void
-        {
-            try
+        CLIENT::WG {
+            override public function setData(barId:Number, sortWeight:Number, colorType:String, title:String, points:Number, captureTime:String, vehiclesCount:String):void
             {
-                cfg = null;
-                m_captured = (param5 < 100.0) ? false:true;
-                super.setData.apply(this, arguments);
-                onConfigLoaded(null);
-            }
-            catch (ex:Error)
-            {
-                Logger.err(ex);
+                try
+                {
+                    cfg = null;
+                    m_captured = (points < 100.0) ? false:true;
+                    super.setData.apply(this, arguments);
+                    onConfigLoaded(null);
+                }
+                catch (ex:Error)
+                {
+                    Logger.err(ex);
+                }
             }
         }
 
-        override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:String, title:String, param8:String, param9:Boolean=true):void
-        {
-            try
+        CLIENT::LESTA {
+            override public function setData(barId:Number, sortWeight:Number, colorType:String, title:String, points:Number, captureTime:String, vehiclesCount:int, hasSupply:Boolean):void
             {
-                super.updateCaptureData.apply(this, arguments);
-                if (m_captured != this.colorType)
+                try
                 {
+                    cfg = null;
+                    m_captured = (points < 100.0) ? false:true;
+                    super.setData.apply(this, arguments);
                     onConfigLoaded(null);
                 }
-                if (!cfg)
-                    return;
-                m_points = points;
-                m_timeLeft = timeLeft;
-                m_vehiclesCount = vehiclesCount;
-                updateTextFields();
+                catch (ex:Error)
+                {
+                    Logger.err(ex);
+                }
             }
-            catch (ex:Error)
+        }
+
+        CLIENT::WG {
+            override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:String, title:String, colorType:String, param9:Boolean = true):void
             {
-                Logger.err(ex);
+                try
+                {
+                    super.updateCaptureData.apply(this, arguments);
+                    if (m_captured != this.colorType)
+                    {
+                        onConfigLoaded(null);
+                    }
+                    if (!cfg)
+                        return;
+                    m_points = points;
+                    m_timeLeft = timeLeft;
+                    m_vehiclesCount = vehiclesCount;
+                    updateTextFields();
+                }
+                catch (ex:Error)
+                {
+                    Logger.err(ex);
+                }
+            }
+        }
+
+        CLIENT::LESTA {
+            override public function updateCaptureData(points:Number, param2:Boolean, param3:Boolean, param4:Number, timeLeft:String, vehiclesCount:int, title:String, colorType:String, hasSupply:Boolean, param9:Boolean = true):void
+            {
+                try
+                {
+                    super.updateCaptureData.apply(this, arguments);
+                    if (m_captured != this.colorType)
+                    {
+                        onConfigLoaded(null);
+                    }
+                    if (!cfg)
+                        return;
+                    m_points = points;
+                    m_timeLeft = timeLeft;
+                    m_vehiclesCount = vehiclesCount;
+                    updateTextFields();
+                }
+                catch (ex:Error)
+                {
+                    Logger.err(ex);
+                }
             }
         }
 
@@ -270,7 +320,7 @@ package com.xvm.battle.shared.teamBasesPanel
 
             BattleState.captureBarDataVO.update({
                 points: Math.round(m_points),
-                vehiclesCount: m_vehiclesCount,
+                vehiclesCount: Number(m_vehiclesCount),
                 timeLeft: m_timeLeft,
                 timeLeftSec: m_timeLeft ? Utils.timeStrToSec(m_timeLeft) : -1
             });
