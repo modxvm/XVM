@@ -19,7 +19,7 @@ package com.xvm.battle
 
         private static const VIEWS:Object =
         {
-            "grinchBattlePage": []
+            "LunarPossesionBattlePage": []
         }
 
         public override function get views():Object
