@@ -258,9 +258,11 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
             elif sortingCriteria == 'battlePassPoints':
                 battlePassController = dependency.instance(IBattlePassController)
                 battlePassAvailable = battlePassController.isVisible()
-                comparisonKey.append(battlePassAvailable)
+                comparisonKey.append(int(battlePassAvailable) * factor)
                 if battlePassAvailable:
                     comparisonKey.append(battlePassController.getVehicleProgression(vehicle.intCD)[0] * factor)
+		else:
+		    comparisonKey.append(0)
 
         comparisonKey.extend([
             vehicle.buyPrices.itemPrice.price.gold or 0,
