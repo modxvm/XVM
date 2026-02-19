@@ -669,9 +669,9 @@ class _Base(object):
                         return '#' + val['color'][2:] if val['color'][:2] == '0x' else val['color']
 
         conf = readyConfig(self.section)
+        vehicleClass = VEHICLE_CLASSES_SHORT[value['attackerVehicleType']]
+        attackReason = ATTACK_REASONS_VALUES.get(value['attackReasonID'])
         if macros is None:
-            vehicleClass = VEHICLE_CLASSES_SHORT[value['attackerVehicleType']]
-            attackReason = ATTACK_REASONS_VALUES.get(value['attackReasonID'])
             xwn8 = value.get('xwn8', None)
             xwtr = value.get('xwtr', None)
             xeff = value.get('xeff', None)
@@ -683,39 +683,39 @@ class _Base(object):
                 'clannb': value['clanAbbrev'],
                 'clan': ''.join(['[', value['clanAbbrev'], ']']) if value['clanAbbrev'] else '',
                 'level': value['level'],
-                'clanicon': value.get('clanicon', None),
+                'clanicon': value.get('clanicon'),
                 'squad-num': value['squadnum'],
                 'reloadGun': value['reloadGun'],
                 'my-alive': 'al' if value['isAlive'] else None,
                 'gun-caliber': value['caliber'],
                 'shell-dmg': value['shellDamage'],
-                'wn8': value.get('wn8', None),
-                'xwn8': value.get('xwn8', None),
-                'wtr': value.get('wtr', None),
-                'xwtr': value.get('xwtr', None),
-                'eff': value.get('eff', None),
-                'xeff': value.get('xeff', None),
-                'wgr': value.get('wgr', None),
-                'xwgr': value.get('xwgr', None),
-                'xte': value.get('xte', None),
+                'wn8': value.get('wn8'),
+                'xwn8': value.get('xwn8'),
+                'wtr': value.get('wtr'),
+                'xwtr': value.get('xwtr'),
+                'eff': value.get('eff'),
+                'xeff': value.get('xeff'),
+                'wgr': value.get('wgr'),
+                'xwgr': value.get('xwgr'),
+                'xte': value.get('xte'),
                 'r': '{{%s}}' % chooseRating,
                 'xr': '{{%s}}' % chooseRating if chooseRating[0] == 'x' else '{{x%s}}' % chooseRating,
                 'c:r': '{{c:%s}}' % chooseRating,
                 'c:xr': '{{c:%s}}' % chooseRating if chooseRating[0] == 'x' else '{{c:x%s}}' % chooseRating,
-                'c:wn8': readColor('wn8', value.get('wn8', None), xwn8),
+                'c:wn8': readColor('wn8', value.get('wn8'), xwn8),
                 'c:xwn8': readColor('x', xwn8),
-                'c:wtr': readColor('wtr', value.get('wtr', None), xwtr),
+                'c:wtr': readColor('wtr', value.get('wtr'), xwtr),
                 'c:xwtr': readColor('x', xwtr),
-                'c:eff': readColor('eff', value.get('eff', None), xeff),
+                'c:eff': readColor('eff', value.get('eff'), xeff),
                 'c:xeff': readColor('x', xeff),
-                'c:wgr': readColor('wgr', value.get('wgr', None), xwgr),
+                'c:wgr': readColor('wgr', value.get('wgr'), xwgr),
                 'c:xwgr': readColor('x', xwgr),
-                'c:xte': readColor('x', value.get('xte', None)),
-                'diff-masses': value.get('diff-masses', None),
-                'nation': value.get('nation', None),
+                'c:xte': readColor('x', value.get('xte')),
+                'diff-masses': value.get('diff-masses'),
+                'nation': value.get('nation'),
                 'my-blownup': 'blownup' if value['blownup'] else None,
                 'type-shell-key': value['shellKind'],
-                'stun-duration': value.get('stun-duration', None),
+                'stun-duration': value.get('stun-duration'),
                 'vehiclename': value.get('attackerVehicleName', '')
             }
 
