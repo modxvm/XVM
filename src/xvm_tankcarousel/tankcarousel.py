@@ -213,7 +213,7 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
 
         for sortingCriteria in carouselConfig['sorting_criteria']:
             if sortingCriteria.find('-') == 0:
-                sortingCriteria = sortingCriteria[1:] #remove minus sign
+                sortingCriteria = sortingCriteria[1:] # remove minus sign
                 factor = -1
             else:
                 factor = 1
@@ -259,10 +259,8 @@ def _CarouselDataProvider_vehicleComparisonKey(base, cls, vehicle):
                 battlePassController = dependency.instance(IBattlePassController)
                 battlePassAvailable = battlePassController.isVisible()
                 comparisonKey.append(int(battlePassAvailable) * factor)
-                if battlePassAvailable:
-                    comparisonKey.append(battlePassController.getVehicleProgression(vehicle.intCD)[0] * factor)
-		else:
-		    comparisonKey.append(0)
+                progression = battlePassController.getVehicleProgression(vehicle.intCD)[0] * factor if battlePassAvailable else 0
+                comparisonKey.append(progression)
 
         comparisonKey.extend([
             vehicle.buyPrices.itemPrice.price.gold or 0,
