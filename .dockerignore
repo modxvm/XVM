@@ -1,0 +1,8 @@
+.git
+~output
+_build
+_devel
+_logs
+temp
+*.log
+XVM.md
