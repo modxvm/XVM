@@ -18,8 +18,10 @@ package com.xvm.lobby
     import com.xvm.lobby.ping.PingLobbyXvmView;
     import com.xvm.lobby.ping.PingLoginXvmView;
     import com.xvm.lobby.profile.ProfileXvmView;
-    import com.xvm.lobby.techtree.ResearchXvmView;
-    import com.xvm.lobby.techtree.TechTreeXvmView;
+    CLIENT::LESTA {
+        import com.xvm.lobby.techtree.ResearchXvmView;
+    }
+    // import com.xvm.lobby.techtree.TechTreeXvmView;
     import com.xvm.lobby.widgets.WidgetsLobbyXvmView;
     import com.xvm.lobby.widgets.WidgetsLoginXvmView;
     import net.wg.infrastructure.interfaces.*;
@@ -43,13 +45,14 @@ package com.xvm.lobby
             private static const VIEWS:Object =
             {
                 "login": [ OnlineLoginXvmView, PingLoginXvmView, WidgetsLoginXvmView ],
-                "lobby": [ LobbyXvmView, HangarXvmView, /* LimitsXvmView, */ OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ],
+                "lobby": [ LobbyXvmView, HangarXvmView, /* LimitsXvmView, */ OnlineLobbyXvmView, PingLobbyXvmView, WidgetsLobbyXvmView ]
                 //"battleResults": [ BattleResultsXvmView ],
                 //"ContactsPopover": [ ContactsXvmView ],
                 //"profile": [ ProfileXvmView ],
                 //"profileWindow": [ ProfileXvmView ],
-                "techtree": [ TechTreeXvmView ],
-                "research": [ ResearchXvmView ]
+                // TODO: implement in Gameface?, broken since WoT 2.2
+                // "techtree": [ TechTreeXvmView ],
+                // "research": [ ResearchXvmView ]
             }
         }
 

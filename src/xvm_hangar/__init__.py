@@ -20,20 +20,16 @@ from gui.prb_control.settings import PREBATTLE_RESTRICTION
 from gui.Scaleform.genConsts.HANGAR_ALIASES import HANGAR_ALIASES
 from gui.Scaleform.locale.MENU import MENU
 from gui.shared.gui_items.Vehicle import Vehicle
-from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 from messenger.gui.Scaleform.lobby_entry import LobbyEntry
 from HeroTank import HeroTank
 from vehicle_systems.tankStructure import ModelStates
 from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.AwardController import ProgressiveItemsRewardHandler
 from gui.game_control.PromoController import PromoController
-from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
-from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
 from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_header import HangarHeader
-from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
 
 # XFW
@@ -320,9 +316,9 @@ def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
 #
 
 LOBBY_HEADER_BUTTON_TO_CONFIG = {
-    LobbyHeader.BUTTONS.WOT_PLUS: 'showWotPlusButton',
-    LobbyHeader.BUTTONS.PREM: 'showBuyPremiumButton',
-    LobbyHeader.BUTTONS.PREMSHOP: 'showPremiumShopButton'
+    'wotPlus': 'showWotPlusButton',
+    'prem': 'showBuyPremiumButton',
+    'premShop': 'showPremiumShopButton'
 }
 
 # hide premium account, shop and WoT Plus buttons
@@ -396,20 +392,16 @@ def owg_module_init():
         overrideMethod(CurrentVehicleActionsValidator, '_validate')(CurrentVehicleActionsValidator_validate)
         overrideMethod(helpers.i18n, 'makeString')(_i18n_makeString)
 
-        overrideMethod(MessengerBarMeta, 'as_setInitDataS')(MessengerBarMeta_as_setInitDataS)
         overrideMethod(LobbyEntry, '_LobbyEntry__handleLazyChannelCtlInited')(_LobbyEntry__handleLazyChannelCtlInited)
         overrideMethod(HeroTank, 'recreateVehicle')(HeroTank_recreateVehicle)
         overrideMethod(TeaserViewer, 'show')(TeaserViewer_show)
         overrideMethod(PromoController, 'getPromoCount')(PromoController_getPromoCount)
         overrideMethod(RankedBattlesResults, '_populate')(RankedBattlesResults_populate)
-        overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(_MessengerBar__updateSessionStatsBtn)
-        overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(_SessionStatsButton__updateBatteleCount)
 
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(ProgressiveItemsRewardHandler_showAward)
         overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
         overrideMethod(Hangar, 'as_updateCarouselEventEntryStateS')(Hangar_as_updateCarouselEventEntryStateS)
 
-        overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
         overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
 
         if IS_WG:
@@ -431,8 +423,16 @@ def owg_module_init():
         else:
             from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
+            from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
+            from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
+            from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
+            from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 
             overrideMethod(LobbyEntry, '_LobbyEntry__updateCommonChatVisibility')(_LobbyEntry__updateCommonChatVisibility)
+            overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
+            overrideMethod(MessengerBarMeta, 'as_setInitDataS')(MessengerBarMeta_as_setInitDataS)
+            overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(_MessengerBar__updateSessionStatsBtn)
+            overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(_SessionStatsButton__updateBatteleCount)
             overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)

@@ -19,7 +19,6 @@ from gui.impl.dialogs.sub_views.top_right.money_balance import MoneyBalance
 from gui.impl.lobby.dialogs.full_screen_dialog_view import FullScreenDialogView
 from gui.shared import g_eventBus, tooltips
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
-from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
 from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView as CustomizationMainView
 from gui.Scaleform.genConsts.CURRENCIES_CONSTANTS import CURRENCIES_CONSTANTS
 from gui.shared.formatters import text_styles
@@ -38,9 +37,10 @@ import xvm_main.config as config
 
 # Per-realm
 if IS_WG:
-    from gui.Scaleform.daapi.view.lobby.techtree.techtree_page import TechTree
+    from gui.impl.lobby.tech_tree.tech_tree_view import TechTreeWindow
     from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 else:
+    from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
     from gui.impl.lobby.techtree.vehicle_tech_tree import VehicleTechTree
     from gui.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 
@@ -216,12 +216,14 @@ def FullScreenDialogView__setStats(base, self, model):
 
 TechTree_handler = None
 
-def TechTree_populate(base, self, *args, **kwargs):
+# TODO: WoT 2.2 fix after removal
+def TechTree_initialize(base, self, *args, **kwargs):
     global TechTree_handler
     base(self, *args, **kwargs)
     TechTree_handler = self
 
-def TechTree_dispose(base, self, *args, **kwargs):
+
+def TechTree_finalize(base, self, *args, **kwargs):
     global TechTree_handler
     TechTree_handler = None
     base(self, *args, **kwargs)
@@ -314,14 +316,13 @@ def owg_module_init():
         overrideMethod(FullScreenDialogView, '_FullScreenDialogView__setStats')(FullScreenDialogView__setStats)
 
         if IS_WG:
-            overrideMethod(TechTree, '_populate')(TechTree_populate)
-            overrideMethod(TechTree, '_dispose')(TechTree_dispose)
+            overrideMethod(TechTreeWindow, '_initialize')(TechTree_initialize)
+            overrideMethod(TechTreeWindow, '_finalize')(TechTree_finalize)
         else:
             overrideMethod(VehicleTechTree, '_initialize')(VehicleTechTree_initialize)
             overrideMethod(VehicleTechTree, '_finalize')(VehicleTechTree_finalize)
-
-        overrideMethod(Research, '_populate')(Research_populate)
-        overrideMethod(Research, '_dispose')(Research_dispose)
+            overrideMethod(Research, '_populate')(Research_populate)
+            overrideMethod(Research, '_dispose')(Research_dispose)
 
         overrideMethod(CustomizationMainView, '_populate')(CustomizationMainView_populate)
         overrideMethod(CustomizationMainView, '_dispose')(CustomizationMainView_dispose)

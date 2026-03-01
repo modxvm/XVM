@@ -13,7 +13,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/random/views/BattlePage.class.as
 @@ -2646,7 +2646,7 @@
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "OFFSET_MAP_INFO_X") slotid 1 type QName(PackageNamespace(""), "uint") value Integer(70) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_X_POSITION") slotid 2 type QName(PackageNamespace(""), "int") value Integer(229) end
-  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING") slotid 3 type QName(PackageNamespace(""), "int") value Integer(3) end
+  trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "BATTLE_DAMAGE_LOG_Y_PADDING") slotid 3 type QName(PackageNamespace(""), "int") value Integer(8) end
 - trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT") slotid 4 type QName(PackageNamespace(""), "int") value Integer(6) end
 + trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_HEIGHT") slotid 4 type QName(PackageNamespace(""), "int") value Integer(-100) end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.random.views:BattlePage"), "MINIMAP_MARGIN_WIDTH") slotid 5 type QName(PackageNamespace(""), "int") value Integer(0) end

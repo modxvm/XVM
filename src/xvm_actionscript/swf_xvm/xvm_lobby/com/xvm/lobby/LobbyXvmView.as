@@ -12,9 +12,10 @@ package com.xvm.lobby
     import com.xvm.types.cfg.*;
     import flash.events.*;
     import net.wg.gui.lobby.*;
-    import net.wg.gui.lobby.header.headerButtonBar.HeaderButtonsHelper;
-    import net.wg.gui.lobby.header.headerButtonBar.*;
-    import net.wg.gui.lobby.header.vo.*;
+    CLIENT::LESTA {
+        import net.wg.gui.lobby.header.headerButtonBar.*;
+        import net.wg.gui.lobby.header.vo.*;
+    }
     import net.wg.infrastructure.events.*;
     import net.wg.infrastructure.interfaces.*;
     import scaleform.clik.constants.*;

@@ -24,13 +24,14 @@ import net.wg.gui.lobby.battleResults.components.EfficiencyIconRenderer; Efficie
 import net.wg.gui.lobby.hangar.Hangar; Hangar;
 import net.wg.gui.lobby.hangar.tcarousel.SmallTankIcon; SmallTankIcon;
 import net.wg.gui.lobby.hangar.tcarousel.TankIcon; TankIcon;
+CLIENT::LESTA {
 import net.wg.gui.lobby.header.headerButtonBar.HBC_BattleSelector; HBC_BattleSelector;
 import net.wg.gui.lobby.header.headerButtonBar.HBC_Finance; HBC_Finance;
 import net.wg.gui.lobby.header.headerButtonBar.HBC_Squad; HBC_Squad;
+}
 import net.wg.gui.lobby.profile.Profile; Profile;
+CLIENT::LESTA {
 import net.wg.gui.lobby.techtree.ResearchPage; ResearchPage;
-CLIENT::WG{
-import net.wg.gui.lobby.techtree.TechTreePage; TechTreePage;
 }
 import net.wg.gui.lobby.window.ProfileWindow; ProfileWindow;
 import net.wg.gui.login.impl.LoginPage; LoginPage;
@@ -64,7 +65,9 @@ LabelControl;
 ContactItemUI;
 
 // nodesLib.swf
+CLIENT::LESTA {
 NationTreeNodeSkinned;
+}
 ResearchItemNode;
 
 // prebattleComponents.swf

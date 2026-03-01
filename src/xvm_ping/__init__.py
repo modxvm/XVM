@@ -14,7 +14,6 @@ import logging
 import BigWorld
 from gui.shared import g_eventBus
 from predefined_hosts import g_preDefinedHosts
-from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 from skeletons.connection_mgr import IConnectionManager
 from helpers import dependency
 
@@ -114,12 +113,16 @@ def owg_module_init():
     if not __initialized:
         pinger.update_config()
 
-        registerEvent(LobbyHeader, 'as_setServerS')(LobbyHeader_as_setServerS)
         # Read the comment for handler
         # overrideMethod(g_preDefinedHosts, 'autoLoginQuery')(PreDefinedHostList_autoLoginQuery)
 
         g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, pinger.update_config)
+
+        if IS_LESTA:
+            from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
+
+            registerEvent(LobbyHeader, 'as_setServerS')(LobbyHeader_as_setServerS)
 
         __initialized = True
 
