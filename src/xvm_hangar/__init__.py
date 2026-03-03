@@ -27,7 +27,6 @@ from gui.promo.hangar_teaser_widget import TeaserViewer
 from gui.game_control.AwardController import ProgressiveItemsRewardHandler
 from gui.game_control.PromoController import PromoController
 from gui.Scaleform.daapi.view.lobby.rankedBattles.ranked_battles_results import RankedBattlesResults
-from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
 from gui.Scaleform.daapi.view.lobby.hangar.Hangar import Hangar
 from gui.Scaleform.daapi.view.lobby.hangar.hangar_header import HangarHeader
 from gui.Scaleform.daapi.view.lobby.profile.ProfileTechnique import ProfileTechnique
@@ -399,7 +398,6 @@ def owg_module_init():
         overrideMethod(RankedBattlesResults, '_populate')(RankedBattlesResults_populate)
 
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(ProgressiveItemsRewardHandler_showAward)
-        overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
         overrideMethod(Hangar, 'as_updateCarouselEventEntryStateS')(Hangar_as_updateCarouselEventEntryStateS)
 
         overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
@@ -423,6 +421,7 @@ def owg_module_init():
         else:
             from gui_lootboxes.gui.impl.lobby.gui_lootboxes.entry_point_view import LootBoxesEntryPointWidget
             from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import DailyQuestWidget
+            from gui.Scaleform.daapi.view.lobby.hangar.entry_points.event_entry_points_container import EventEntryPointsContainer
             from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
             from gui.Scaleform.daapi.view.lobby.messengerBar.messenger_bar import MessengerBar
             from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
@@ -436,6 +435,7 @@ def owg_module_init():
             overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
+            overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
 
         if IS_WG:
             import observer
