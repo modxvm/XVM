@@ -383,6 +383,25 @@ __initialized = False
 def owg_module_init():
     global __initialized
     if not __initialized:
+        if IS_WG:
+            import observer
+            observer.init()
+
+        import battletype
+        battletype.init()
+
+        import counters
+        counters.init()
+
+        import messenger_bar
+        messenger_bar.init()
+
+        import svcmsg
+        svcmsg.init()
+
+        import version_label
+        version_label.init()
+
         g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
         overrideMethod(Vehicle, 'isAmmoFull')(Vehicle_isAmmoFull)
@@ -407,11 +426,11 @@ def owg_module_init():
             # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
             # from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
             #TODO WoT 2.1.1: from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
-            from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
+            # TODO WoT 2.2: from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
-            overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
+            # overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
             #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             # overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
@@ -437,33 +456,12 @@ def owg_module_init():
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
             overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
 
-        if IS_WG:
-            import observer
-            observer.init()
-
-        import battletype
-        battletype.init()
-
-        import counters
-        counters.init()
-
-        import messenger_bar
-        messenger_bar.init()
-
-        import svcmsg
-        svcmsg.init()
-
-        import version_label
-        version_label.init()
-
         __initialized = True
 
 
 def owg_module_fini():
     global __initialized
     if __initialized:
-        g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
-
         if IS_WG:
             import observer
             observer.fini()
@@ -482,6 +480,8 @@ def owg_module_fini():
 
         import version_label
         version_label.fini()
+
+        g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
         __initialized = False
 
