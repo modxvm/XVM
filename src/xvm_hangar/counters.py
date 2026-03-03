@@ -13,7 +13,6 @@ from gui.Scaleform.daapi.view.lobby.customization.customization_bottom_panel imp
 from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.header.battle_selector_items import SelectorItem
 from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
-from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 from notification.NotificationListView import NotificationListView
 
 # XFW
@@ -97,14 +96,15 @@ def init():
     overrideMethod(CrewBooksButtonModel, 'setNewAmount')(CrewBooksButtonModel_setNewAmount)
     overrideMethod(AmmunitionPanel, '_AmmunitionPanel__applyCustomizationNewCounter')(_AmmunitionPanel__applyCustomizationNewCounter)
     overrideMethod(CustomizationBottomPanel, '_CustomizationBottomPanel__setNotificationCounters')(_CustomizationBottomPanel__setNotificationCounters)
-    overrideMethod(NotificationListButton, '_NotificationListButton__setState')(_NotificationListButton__setState)
     overrideMethod(NotificationListView, '_NotificationListView__updateCounters')(_NotificationListView__updateCounters)
 
     if IS_LESTA:
         from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
+        from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 
         overrideMethod(LobbyHeader, 'as_updateBattleTypeS')(LobbyHeader_as_updateBattleTypeS)
         overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(_LobbyHeader__setCounter)
+        overrideMethod(NotificationListButton, '_NotificationListButton__setState')(_NotificationListButton__setState)
 
 
 def fini():

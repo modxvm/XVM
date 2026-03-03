@@ -7,9 +7,6 @@ Copyright (c) 2013-2025 XVM Contributors
 # Imports
 #
 
-# BigWorld
-from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
-
 # XFW
 from xfw import *
 
@@ -35,7 +32,10 @@ def _NotificationListButton_as_setStateS(base, self, isBlinking, counterValue):
 #
 
 def init():
-    overrideMethod(NotificationListButton, 'as_setStateS')(_NotificationListButton_as_setStateS)
+    if IS_LESTA:
+        from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
+
+        overrideMethod(NotificationListButton, 'as_setStateS')(_NotificationListButton_as_setStateS)
 
 
 def fini():
