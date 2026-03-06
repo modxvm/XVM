@@ -38,11 +38,21 @@ function Download-Translations($L10nDir) {
     Remove-Item -Path $tempDir -Recurse -Force
 }
 
+function Get-RelativePackagePath($BaseDirectory, $CurrentDirectory) {
+    $relativePath = [System.IO.Path]::GetRelativePath($BaseDirectory, $CurrentDirectory)
+    if ($relativePath -eq ".") {
+        return ""
+    }
+
+    return $relativePath
+}
+
 function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir, $LestaVersion, $WgVersion, $Version) {
     Write-Output "Copying deploy files..."
     
-    $sourceDir = "$OutputDirectory/deploy"
-    $deployFullDir = "$OutputDirectory/deploy_full"
+    $sourceDir = [System.IO.Path]::GetFullPath("$OutputDirectory/deploy")
+    $deployFullDir = [System.IO.Path]::GetFullPath("$OutputDirectory/deploy_full")
+    $ThirdPartyDir = [System.IO.Path]::GetFullPath($ThirdPartyDir)
     $lestaDir = "$deployFullDir/lesta/mods/$LestaVersion"
     $wgDir = "$deployFullDir/wg/mods/$WgVersion"
     
@@ -62,22 +72,26 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
     
     # Copy .wotmod files to wg directory
     Get-ChildItem -Path $sourceDir, $ThirdPartyDir -Filter "*.wotmod" -Recurse | ForEach-Object {
-        $relativePath = $_.Directory.FullName.Substring($sourceDir.Length)
-        if ($_.Directory.FullName.StartsWith($ThirdPartyDir)) {
-            $relativePath = $_.Directory.FullName.Substring($ThirdPartyDir.Length)
+        $baseDirectory = if ($_.Directory.FullName.StartsWith($ThirdPartyDir, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $ThirdPartyDir
+        } else {
+            $sourceDir
         }
-        $destinationPath = Join-Path -Path $wgDir -ChildPath $relativePath
+        $relativePath = Get-RelativePackagePath -BaseDirectory $baseDirectory -CurrentDirectory $_.Directory.FullName
+        $destinationPath = if ([string]::IsNullOrEmpty($relativePath)) { $wgDir } else { Join-Path -Path $wgDir -ChildPath $relativePath }
         New-Item -Path $destinationPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
         Copy-Item -Path $_.FullName -Destination $destinationPath -Force
     }
     
     # Copy .mtmod files to lesta directory
     Get-ChildItem -Path $sourceDir, $ThirdPartyDir -Filter "*.mtmod" -Recurse | ForEach-Object {
-        $relativePath = $_.Directory.FullName.Substring($sourceDir.Length)
-        if ($_.Directory.FullName.StartsWith($ThirdPartyDir)) {
-            $relativePath = $_.Directory.FullName.Substring($ThirdPartyDir.Length)
+        $baseDirectory = if ($_.Directory.FullName.StartsWith($ThirdPartyDir, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $ThirdPartyDir
+        } else {
+            $sourceDir
         }
-        $destinationPath = Join-Path -Path $lestaDir -ChildPath $relativePath
+        $relativePath = Get-RelativePackagePath -BaseDirectory $baseDirectory -CurrentDirectory $_.Directory.FullName
+        $destinationPath = if ([string]::IsNullOrEmpty($relativePath)) { $lestaDir } else { Join-Path -Path $lestaDir -ChildPath $relativePath }
         New-Item -Path $destinationPath -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
         Copy-Item -Path $_.FullName -Destination $destinationPath -Force
     }
