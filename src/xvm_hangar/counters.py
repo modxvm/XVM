@@ -73,6 +73,18 @@ def _CustomizationBottomPanel__setNotificationCounters(base, self):
     base(self)
 
 
+def _NotificationsCenterPresenter__updateNotifiedMessagesCount(base, self):
+    if not config.get('hangar/showNotificationButtonCounter', True):
+        return
+    base(self)
+
+
+def _NotificationsCenterPresenter__onNotificationReceived(base, self, notification):
+    if not config.get('hangar/showNotificationButtonCounter', True):
+        return
+    base(self, notification)
+
+
 def _NotificationListButton__setState(base, self, count):
     if not config.get('hangar/showNotificationButtonCounter', True):
         return
@@ -98,7 +110,12 @@ def init():
     overrideMethod(CustomizationBottomPanel, '_CustomizationBottomPanel__setNotificationCounters')(_CustomizationBottomPanel__setNotificationCounters)
     overrideMethod(NotificationListView, '_NotificationListView__updateCounters')(_NotificationListView__updateCounters)
 
-    if IS_LESTA:
+    if IS_WG:
+        from gui.impl.lobby.page.notifications_center_presenter import NotificationsCenterPresenter
+
+        overrideMethod(NotificationsCenterPresenter, '_NotificationsCenterPresenter__updateNotifiedMessagesCount')(_NotificationsCenterPresenter__updateNotifiedMessagesCount)
+        overrideMethod(NotificationsCenterPresenter, '_NotificationsCenterPresenter__onNotificationReceived')(_NotificationsCenterPresenter__onNotificationReceived)
+    else:
         from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
         from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
 

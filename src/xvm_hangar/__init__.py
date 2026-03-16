@@ -137,7 +137,14 @@ def _i18n_makeString(base, key, *args, **kwargs):
 # Handlers/MessengerBar
 #
 
-# hide referral program button
+# hide referral program button (WG)
+def _ReferralProgramPresenter__updateModel(base, self, *args):
+    if not config.get('hangar/showReferralButton', True):
+        return
+    return base(self, *args)
+
+
+# hide referral program button (Lesta)
 def MessengerBarMeta_as_setInitDataS(base, self, data):
     if not config.get('hangar/showReferralButton', True) and ('isReferralEnabled' in data):
         data['isReferralEnabled'] = False
@@ -326,7 +333,7 @@ def ProfileTechnique_as_setPrestigeVisibleS(base, self, value):
 
 
 #
-# Handlers/LobbyHeader
+# Handlers/LobbyHeader (Lesta)
 #
 
 LOBBY_HEADER_BUTTON_TO_CONFIG = {
@@ -438,6 +445,8 @@ def owg_module_init():
 
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
+            # from gui.impl.lobby.page.chats_presenter import ChatsPresenter
+            from gui.impl.lobby.page.referral_program_presenter import ReferralProgramPresenter
             from gui.impl.lobby.page.session_stats_presenter import SessionStatsPresenter
             # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
             # from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
@@ -449,8 +458,11 @@ def owg_module_init():
             # overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
             #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
+            # TODO: try to remove chat from messages map
+            # overrideMethod(ChatsPresenter, '_ChatsPresenter__updateModel')(_ChatsPresenter__updateModel)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateSessionStats')(_SessionStatsPresenter__updateSessionStats)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateBattleCount')(_SessionStatsPresenter__updateBattleCount)
+            overrideMethod(ReferralProgramPresenter, '_ReferralProgramPresenter__updateModel')(_ReferralProgramPresenter__updateModel)
             # overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             # overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
