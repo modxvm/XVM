@@ -211,7 +211,22 @@ def RankedBattlesResults_populate(base, self):
 # Handlers/SessionStatsButton
 #
 
-# hide display session statistics button
+# hide display session statistics button (WG)
+def _SessionStatsPresenter__updateSessionStats(base, self):
+    if not config.get('hangar/sessionStatsButton/showButton', True):
+        return
+    return base(self)
+
+
+# hide display the counter of spent battles on the button (WG)
+def _SessionStatsPresenter__updateBattleCount(base, self, model):
+    if not config.get('hangar/sessionStatsButton/showBattleCount', True):
+        model.setBattleCount(0)
+        return
+    return base(self)
+
+
+# hide display session statistics button (Lesta)
 def _MessengerBar__updateSessionStatsBtn(base, self):
     if not config.get('hangar/sessionStatsButton/showButton', True):
         self.as_setSessionStatsButtonVisibleS(False)
@@ -220,7 +235,7 @@ def _MessengerBar__updateSessionStatsBtn(base, self):
     base(self)
 
 
-# hide display the counter of spent battles on the button
+# hide display the counter of spent battles on the button (Lesta)
 def _SessionStatsButton__updateBatteleCount(base, self):
     if not config.get('hangar/sessionStatsButton/showBattleCount', True):
         return
@@ -423,6 +438,7 @@ def owg_module_init():
 
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
+            from gui.impl.lobby.page.session_stats_presenter import SessionStatsPresenter
             # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
             # from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
             #TODO WoT 2.1.1: from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
@@ -433,6 +449,8 @@ def owg_module_init():
             # overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
             #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
+            overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateSessionStats')(_SessionStatsPresenter__updateSessionStats)
+            overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateBattleCount')(_SessionStatsPresenter__updateBattleCount)
             # overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             # overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
