@@ -64,7 +64,16 @@ def getCurrentServer(*args, **kwargs):
 
 
 #
-# Handlers/LobbyHeader
+# Handlers/ServerInfoPresenter (WG)
+#
+
+def _ServerInfoPresenter__updateModel(*args, **kwargs):
+    getCurrentServer()
+
+
+
+#
+# Handlers/LobbyHeader (Lesta)
 #
 
 def LobbyHeader_as_setServerS(*args, **kwargs):
@@ -86,7 +95,11 @@ def owg_module_init():
         g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, online.update_config)
 
-        if IS_LESTA:
+        if IS_WG:
+            from gui.impl.lobby.page.server_info_presenter import ServerInfoPresenter
+
+            registerEvent(ServerInfoPresenter, '_ServerInfoPresenter__updateModel')(_ServerInfoPresenter__updateModel)
+        else:
             from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
 
             registerEvent(LobbyHeader, 'as_setServerS')(LobbyHeader_as_setServerS)
