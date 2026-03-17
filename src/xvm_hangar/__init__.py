@@ -352,6 +352,35 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, buttons):
 
 
 #
+# Handlers/UserMissionsPresenter
+#
+
+def _UserMissionsPresenter_updateBattlePass(base, self, vm):
+    if not config.get('hangar/showBattlePassWidget', True):
+        self._addChild(self._WIDGET_ALIAS.BattlePass(), False)
+        vm.setIsBattlePassActive(False)
+        return
+    return base(self, vm)
+
+
+def _UserMissionsPresenter_updateMissions(base, self, vm):
+    if not config.get('hangar/showDailyQuestWidget', True):
+        self._addChild(self._WIDGET_ALIAS.Quests(), False)
+        vm.setAreMissionsActive(False)
+        return
+    return base(self, vm)
+
+
+def _UserMissionsPresenter_updateEntryPoints(base, self, vm):
+    if not config.get('hangar/showEventBanner', True):
+        self._addChild(self._WIDGET_ALIAS.Events(), False)
+        vm.setIsAnyEntryPointAvailable(False)
+        return
+    return base(self, vm)
+
+
+
+#
 # Handlers/HangarHeader
 #
 
@@ -444,21 +473,21 @@ def owg_module_init():
 
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
-            # from gui.impl.lobby.page.chats_presenter import ChatsPresenter
+            from gui.impl.lobby.hangar.presenters.user_missions_presenter import UserMissionsPresenter
             from gui.impl.lobby.page.referral_program_presenter import ReferralProgramPresenter
             from gui.impl.lobby.page.session_stats_presenter import SessionStatsPresenter
             # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
             # from comp7.gui.impl.lobby.comp7_grand_tournament_widget import Comp7GrandTournamentsWidgetComponent
             #TODO WoT 2.1.1: from gui.impl.lobby.lootbox_system.base.entry_point import LootBoxSystemEntryPoint
-            # TODO WoT 2.2: from gui.Scaleform.daapi.view.lobby.hangar.daily_quest_widget import BaseQuestsWidgetComponent
 
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
-            # overrideMethod(BaseQuestsWidgetComponent, '_shouldHide')(_DailyQuestWidget__shouldHide)
             #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
+            
             overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
-            # TODO: try to remove chat from messages map
-            # overrideMethod(ChatsPresenter, '_ChatsPresenter__updateModel')(_ChatsPresenter__updateModel)
+            overrideMethod(UserMissionsPresenter, '_updateBattlePass')(_UserMissionsPresenter_updateBattlePass)
+            overrideMethod(UserMissionsPresenter, '_updateMissions')(_UserMissionsPresenter_updateMissions)
+            overrideMethod(UserMissionsPresenter, '_updateEntryPoints')(_UserMissionsPresenter_updateEntryPoints)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateSessionStats')(_SessionStatsPresenter__updateSessionStats)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateBattleCount')(_SessionStatsPresenter__updateBattleCount)
             overrideMethod(ReferralProgramPresenter, '_ReferralProgramPresenter__updateModel')(_ReferralProgramPresenter__updateModel)
