@@ -230,7 +230,7 @@ def _SessionStatsPresenter__updateBattleCount(base, self, model):
     if not config.get('hangar/sessionStatsButton/showBattleCount', True):
         model.setBattleCount(0)
         return
-    return base(self)
+    return base(self, model)
 
 
 # hide display session statistics button (Lesta)
