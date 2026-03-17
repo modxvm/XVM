@@ -122,6 +122,9 @@ def onAccountBecomeNonPlayer():
 #
 
 def init():
+    if not IS_WG:
+        return
+
     global g_observer
     g_observer = HangarStateObserver()
 
@@ -130,10 +133,12 @@ def init():
 
 
 def fini():
+    if not IS_WG:
+        return
+
     global g_observer
+    g_observer.fini()
+    g_observer = None
 
     g_eventBus.removeListener(GUICommonEvent.LOBBY_VIEW_LOADED, onLobbyViewLoaded)
     g_playerEvents.onAccountBecomeNonPlayer -= onAccountBecomeNonPlayer
-
-    g_observer.fini()
-    g_observer = None

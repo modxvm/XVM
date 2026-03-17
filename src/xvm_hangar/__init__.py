@@ -405,9 +405,8 @@ __initialized = False
 def owg_module_init():
     global __initialized
     if not __initialized:
-        if IS_WG:
-            import observer
-            observer.init()
+        import observer
+        observer.init()
 
         import battletype
         battletype.init()
@@ -492,9 +491,8 @@ def owg_module_init():
 def owg_module_fini():
     global __initialized
     if __initialized:
-        if IS_WG:
-            import observer
-            observer.fini()
+        import observer
+        observer.fini()
 
         import battletype
         battletype.fini()
