@@ -122,9 +122,6 @@ def onAccountBecomeNonPlayer():
 #
 
 def init():
-    if not IS_WG:
-        return
-
     global g_observer
     g_observer = HangarStateObserver()
 
@@ -133,9 +130,6 @@ def init():
 
 
 def fini():
-    if not IS_WG:
-        return
-
     global g_observer
     g_observer.fini()
     g_observer = None
