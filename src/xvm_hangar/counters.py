@@ -9,7 +9,6 @@ Copyright (c) 2013-2025 XVM Contributors
 
 # BigWorld
 from gui.impl.gen.view_models.views.lobby.crew.common.crew_books_button_model import CrewBooksButtonModel
-from gui.Scaleform.daapi.view.lobby.customization.customization_bottom_panel import CustomizationBottomPanel
 from gui.Scaleform.daapi.view.lobby.hangar.ammunition_panel import AmmunitionPanel
 from gui.Scaleform.daapi.view.lobby.header.battle_selector_items import SelectorItem
 from gui.Scaleform.daapi.view.lobby.LobbyMenu import LobbyMenu
@@ -66,11 +65,14 @@ def _AmmunitionPanel__applyCustomizationNewCounter(base, self, vehicle):
 
 def _CustomizationBottomPanel__setNotificationCounters(base, self):
     if not config.get('hangar/showCustomizationCounter', True):
-        if IS_WG:
-            return self.as_setNotificationCountersS({'tabsCounters': [], 'unseenTabs': []})
-        else:
-            return self.as_setNotificationCountersS({'tabsCounters': []})
+        return self.as_setNotificationCountersS({'tabsCounters': [], 'unseenTabs': []})
     base(self)
+
+
+def _CustomizationTabItemModel_setNoveltyCounter(base, self, value):
+    if not config.get('hangar/showCustomizationCounter', True):
+        value = 0
+    base(self, value)
 
 
 def _NotificationsCenterPresenter__updateNotifiedMessagesCount(base, self):
@@ -107,21 +109,24 @@ def init():
     overrideMethod(SelectorItem, 'isShowNewIndicator')(SelectorItem_isShowNewIndicator)
     overrideMethod(CrewBooksButtonModel, 'setNewAmount')(CrewBooksButtonModel_setNewAmount)
     overrideMethod(AmmunitionPanel, '_AmmunitionPanel__applyCustomizationNewCounter')(_AmmunitionPanel__applyCustomizationNewCounter)
-    overrideMethod(CustomizationBottomPanel, '_CustomizationBottomPanel__setNotificationCounters')(_CustomizationBottomPanel__setNotificationCounters)
     overrideMethod(NotificationListView, '_NotificationListView__updateCounters')(_NotificationListView__updateCounters)
 
     if IS_WG:
         from gui.impl.lobby.page.notifications_center_presenter import NotificationsCenterPresenter
+        from gui.Scaleform.daapi.view.lobby.customization.customization_bottom_panel import CustomizationBottomPanel
 
         overrideMethod(NotificationsCenterPresenter, '_NotificationsCenterPresenter__updateNotifiedMessagesCount')(_NotificationsCenterPresenter__updateNotifiedMessagesCount)
         overrideMethod(NotificationsCenterPresenter, '_NotificationsCenterPresenter__onNotificationReceived')(_NotificationsCenterPresenter__onNotificationReceived)
+        overrideMethod(CustomizationBottomPanel, '_CustomizationBottomPanel__setNotificationCounters')(_CustomizationBottomPanel__setNotificationCounters)
     else:
         from gui.Scaleform.daapi.view.lobby.header.LobbyHeader import LobbyHeader
         from gui.Scaleform.daapi.view.lobby.messengerBar.NotificationListButton import NotificationListButton
+        from gui.impl.gen.view_models.views.lobby.customization.customization_tab_item_model import CustomizationTabItemModel
 
         overrideMethod(LobbyHeader, 'as_updateBattleTypeS')(LobbyHeader_as_updateBattleTypeS)
         overrideMethod(LobbyHeader, '_LobbyHeader__setCounter')(_LobbyHeader__setCounter)
         overrideMethod(NotificationListButton, '_NotificationListButton__setState')(_NotificationListButton__setState)
+        overrideMethod(CustomizationTabItemModel, 'setNoveltyCounter')(_CustomizationTabItemModel_setNoveltyCounter)
 
 
 def fini():
