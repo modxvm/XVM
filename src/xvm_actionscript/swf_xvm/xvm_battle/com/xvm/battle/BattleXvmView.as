@@ -89,7 +89,8 @@ package com.xvm.battle
         public function BattleXvmView(view:IView)
         {
             super(view);
-            Logger.add('[XVM/BattleView] init');
+
+            Logger.add('[XVM/BattleView] Initialization');
             _battlePageRef = new WeakReference(super.view);
             _battleController = new BattleXvmComponentController();
 

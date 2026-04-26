@@ -117,11 +117,14 @@ package com.xvm
             public static const BATTLE_TYPE_TOURNAMENT_COMP7:Number = 47;
             public static const BATTLE_TYPE_TRAINING_COMP7:Number = 48;
             public static const BATTLE_TYPE_STORY_MODE_ONBOARDING:Number = 100;
+            public static const BATTLE_TYPE_LAST_STAND:Number = 102;
             public static const BATTLE_TYPE_STORY_MODE_REGULAR:Number = 104;
         }
         CLIENT::LESTA {
             public static const BATTLE_TYPE_VERSUS_AI:Number = 50;
             public static const BATTLE_TYPE_STORY_MODE:Number = 100;
+            public static const BATTLE_TYPE_HB_OFFENCE:Number = 101;
+            public static const BATTLE_TYPE_HB_DEFENCE:Number = 102;
         }
 
         // Events

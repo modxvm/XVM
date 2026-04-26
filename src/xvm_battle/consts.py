@@ -30,11 +30,10 @@ NOT_SUPPORTED_BATTLE_TYPES = [
     # constants.ARENA_GUI_TYPE.STORY_MODE_ONBOARDING (WG 1.25 Newbie tutorial)
     # constants.ARENA_GUI_TYPE.STORY_MODE (Lesta only)
     100,
-    101, # constants.ARENA_GUI_TYPE.HALLOWEEN (WG 2.0.1 PvE event)
+    101, # constants.ARENA_GUI_TYPE.HB_OFFENCE - Lesta 1.42 Historical Battles
+    102, # constants.ARENA_GUI_TYPE.LAST_STAND (WG 2.2.1 PvE event) / constants.ARENA_GUI_TYPE.HB_DEFENCE - Lesta 1.42 Historical Battles
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
-    200, # constatns.ARENA_GUI_TYPE.FALL_TANKS (WG 2.2 PvP event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
-    301, # constants.ARENA_GUI_TYPE.PORTAL (Lesta 1.38.0.0)
 ]
 
 class XVM_BATTLE_COMMAND(object):

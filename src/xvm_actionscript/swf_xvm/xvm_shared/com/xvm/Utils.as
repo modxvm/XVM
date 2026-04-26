@@ -148,6 +148,20 @@ package com.xvm
                     CLIENT::LESTA {
                         return 'story_mode';
                     }
+                case 101:
+                    CLIENT::WG {
+                        return 'unknown';
+                    }
+                    CLIENT::LESTA {
+                        return 'historical_battles';
+                    }
+                case 102:
+                    CLIENT::WG {
+                        return 'last_stand';
+                    }
+                    CLIENT::LESTA {
+                        return 'historical_battles';
+                    }
                 case 104: return 'story_mode_regular';
                 default: return 'unknown';
             }
