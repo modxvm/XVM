@@ -19,7 +19,6 @@ from gui.impl.dialogs.sub_views.top_right.money_balance import MoneyBalance
 from gui.impl.lobby.dialogs.full_screen_dialog_view import FullScreenDialogView
 from gui.shared import g_eventBus, tooltips
 from gui.shared.utils.requesters.StatsRequester import StatsRequester
-from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView as CustomizationMainView
 from gui.Scaleform.genConsts.CURRENCIES_CONSTANTS import CURRENCIES_CONSTANTS
 from gui.shared.formatters import text_styles
 from gui.shared.money import Currency
@@ -38,9 +37,12 @@ import xvm_main.config as config
 # Per-realm
 if IS_WG:
     from gui.impl.lobby.tech_tree.tech_tree_view import TechTreeWindow
+    from gui.Scaleform.daapi.view.lobby.customization.main_view import MainView as CustomizationMainView
     from gui.Scaleform.daapi.view.lobby.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 else:
     from gui.Scaleform.daapi.view.lobby.techtree.research_page import Research
+    from gui.impl.lobby.customization.customization_main_view import CustomizationMainView
+    from gui.impl.lobby.customization.customization_bin.customization_bin_subview import CustomizationBinSubview
     from gui.impl.lobby.techtree.vehicle_tech_tree import VehicleTechTree
     from gui.techtree.settings import UNKNOWN_VEHICLE_LEVEL
 
@@ -106,7 +108,11 @@ def onXfwCommand(cmd, *args):
             global gold_enable
             gold_enable = not args[0]
             handlersInvalidate('invalidateGold()', TechTree_handler, Research_handler)
-            handlersInvalidate("onBuyConfirmed(False)", CustomizationMainView_handler)
+            if IS_WG:
+                handlersInvalidate("onBuyConfirmed(False)", CustomizationMainView_handler)
+            else:
+                handlersInvalidate("_CustomizationBinSubview__onWindowClose()", CustomizationBinSubview_handler)
+                handlersInvalidate("_CustomizationMainView__updateMoney()", CustomizationMainView_handler)
             return (None, True)
         elif cmd == XVM_LIMITS_COMMAND.SET_FREEXP_LOCK_STATUS:
             global freeXP_enable
@@ -252,6 +258,7 @@ def Research_populate(base, self, *args, **kwargs):
     base(self, *args, **kwargs)
     Research_handler = self
 
+
 def Research_dispose(base, self, *args, **kwargs):
     global Research_handler
     Research_handler = None
@@ -264,15 +271,29 @@ def Research_dispose(base, self, *args, **kwargs):
 #
 
 CustomizationMainView_handler = None
+CustomizationBinSubview_handler = None
 
-def CustomizationMainView_populate(base, self, *args, **kwargs):
+def CustomizationMainView_initialize(base, self, *args, **kwargs):
     global CustomizationMainView_handler
     base(self, *args, **kwargs)
     CustomizationMainView_handler = self
 
-def CustomizationMainView_dispose(base, self, *args, **kwargs):
+
+def CustomizationMainView_finalize(base, self, *args, **kwargs):
     global CustomizationMainView_handler
     CustomizationMainView_handler = None
+    base(self, *args, **kwargs)
+
+
+def CustomizationBinSubview_initialize(base, self, *args, **kwargs):
+    global CustomizationBinSubview_handler
+    base(self, *args, **kwargs)
+    CustomizationBinSubview_handler = self
+
+
+def CustomizationBinSubview_finalize(base, self, *args, **kwargs):
+    global CustomizationBinSubview_handler
+    CustomizationBinSubview_handler = None
     base(self, *args, **kwargs)
 
 
@@ -318,14 +339,17 @@ def owg_module_init():
         if IS_WG:
             overrideMethod(TechTreeWindow, '_initialize')(TechTree_initialize)
             overrideMethod(TechTreeWindow, '_finalize')(TechTree_finalize)
+            overrideMethod(CustomizationMainView, '_populate')(CustomizationMainView_initialize)
+            overrideMethod(CustomizationMainView, '_dispose')(CustomizationMainView_finalize)
         else:
             overrideMethod(VehicleTechTree, '_initialize')(VehicleTechTree_initialize)
             overrideMethod(VehicleTechTree, '_finalize')(VehicleTechTree_finalize)
             overrideMethod(Research, '_populate')(Research_populate)
             overrideMethod(Research, '_dispose')(Research_dispose)
-
-        overrideMethod(CustomizationMainView, '_populate')(CustomizationMainView_populate)
-        overrideMethod(CustomizationMainView, '_dispose')(CustomizationMainView_dispose)
+            overrideMethod(CustomizationMainView, '_initialize')(CustomizationMainView_initialize)
+            overrideMethod(CustomizationMainView, '_finalize')(CustomizationMainView_finalize)
+            overrideMethod(CustomizationBinSubview, '_initialize')(CustomizationBinSubview_initialize)
+            overrideMethod(CustomizationBinSubview, '_finalize')(CustomizationBinSubview_finalize)
 
         overrideMethod(tooltips, 'getUnlockPrice')(tooltips_getUnlockPrice)
         import gui.shared.tooltips.module as tooltips_module
