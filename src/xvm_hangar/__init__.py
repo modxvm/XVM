@@ -470,8 +470,6 @@ def owg_module_init():
         overrideMethod(ProgressiveItemsRewardHandler, '_showAward')(ProgressiveItemsRewardHandler_showAward)
         overrideMethod(Hangar, 'as_updateCarouselEventEntryStateS')(Hangar_as_updateCarouselEventEntryStateS)
 
-        overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
-
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
             from gui.impl.lobby.hangar.presenters.user_missions_presenter import UserMissionsPresenter
@@ -484,8 +482,6 @@ def owg_module_init():
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
             #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
-            
-            overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(UserMissionsPresenter, '_updateBattlePass')(_UserMissionsPresenter_updateBattlePass)
             overrideMethod(UserMissionsPresenter, '_updateMissions')(_UserMissionsPresenter_updateMissions)
             overrideMethod(UserMissionsPresenter, '_updateEntryPoints')(_UserMissionsPresenter_updateEntryPoints)
@@ -512,6 +508,8 @@ def owg_module_init():
             overrideMethod(SessionStatsButton, '_SessionStatsButton__updateBatteleCount')(_SessionStatsButton__updateBatteleCount)
             overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
+            overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
+            overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
             overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
 
