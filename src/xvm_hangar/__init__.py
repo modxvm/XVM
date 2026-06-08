@@ -137,20 +137,6 @@ def _i18n_makeString(base, key, *args, **kwargs):
 # Handlers/MessengerBar
 #
 
-# hide referral program button (WG)
-def _ReferralProgramPresenter__updateModel(base, self, *args):
-    if not config.get('hangar/showReferralButton', True):
-        return
-    return base(self, *args)
-
-
-# hide referral program button (Lesta)
-def MessengerBarMeta_as_setInitDataS(base, self, data):
-    if not config.get('hangar/showReferralButton', True) and ('isReferralEnabled' in data):
-        data['isReferralEnabled'] = False
-    return base(self, data)
-
-
 # hide shared chat button
 def _LobbyEntry__handleLazyChannelCtlInited(base, self, event):
     if not config.get('hangar/showGeneralChatButton', True):
@@ -164,10 +150,32 @@ def _LobbyEntry__handleLazyChannelCtlInited(base, self, event):
     return base(self, event)
 
 
-def _LobbyEntry__updateCommonChatVisibility(base, self, *args, **kwargs):
+def _ChatsPresenter__updateModel(base, self, *args):
+    base(self, *args)
+    return # TODO: implement GF handler for hangar/showGeneralChatButton
+    if not self.isBound():
+        return
+    messages = self.viewModel.getMessages()
+
+
+def _LobbyEntry__updateCommonChatAccessibility(base, self, *args, **kwargs):
     if not config.get('hangar/showGeneralChatButton', True):
         return
     base(self, *args, **kwargs)
+
+
+# hide referral program button (WG)
+def _ReferralProgramPresenter__updateModel(base, self, *args):
+    if not config.get('hangar/showReferralButton', True):
+        return
+    return base(self, *args)
+
+
+# hide referral program button (Lesta)
+def MessengerBarMeta_as_setInitDataS(base, self, data):
+    if not config.get('hangar/showReferralButton', True) and ('isReferralEnabled' in data):
+        data['isReferralEnabled'] = False
+    return base(self, data)
 
 
 
@@ -473,6 +481,7 @@ def owg_module_init():
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
             from gui.impl.lobby.hangar.presenters.user_missions_presenter import UserMissionsPresenter
+            from gui.impl.lobby.page.chats_presenter import ChatsPresenter
             from gui.impl.lobby.page.referral_program_presenter import ReferralProgramPresenter
             from gui.impl.lobby.page.session_stats_presenter import SessionStatsPresenter
             # from comp7.gui.impl.lobby.tournaments_widget import TournamentsWidgetComponent
@@ -485,9 +494,10 @@ def owg_module_init():
             overrideMethod(UserMissionsPresenter, '_updateBattlePass')(_UserMissionsPresenter_updateBattlePass)
             overrideMethod(UserMissionsPresenter, '_updateMissions')(_UserMissionsPresenter_updateMissions)
             overrideMethod(UserMissionsPresenter, '_updateEntryPoints')(_UserMissionsPresenter_updateEntryPoints)
+            overrideMethod(ChatsPresenter, '_ChatsPresenter__updateModel')(_ChatsPresenter__updateModel)
+            overrideMethod(ReferralProgramPresenter, '_ReferralProgramPresenter__updateModel')(_ReferralProgramPresenter__updateModel)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateSessionStats')(_SessionStatsPresenter__updateSessionStats)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateBattleCount')(_SessionStatsPresenter__updateBattleCount)
-            overrideMethod(ReferralProgramPresenter, '_ReferralProgramPresenter__updateModel')(_ReferralProgramPresenter__updateModel)
             # overrideMethod(TournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             # overrideMethod(Comp7GrandTournamentsWidgetComponent, '_makeInjectView')(TournamentsWidgetComponent_makeInjectView)
             overrideMethod(RewardScreenCommand, 'execute')(RewardScreenCommand_execute)
@@ -501,7 +511,7 @@ def owg_module_init():
             from gui.Scaleform.daapi.view.lobby.messengerBar.session_stats_button import SessionStatsButton
             from gui.Scaleform.daapi.view.meta.MessengerBarMeta import MessengerBarMeta
 
-            overrideMethod(LobbyEntry, '_LobbyEntry__updateCommonChatVisibility')(_LobbyEntry__updateCommonChatVisibility)
+            overrideMethod(LobbyEntry, '_LobbyEntry__updateCommonChatAccessibility')(_LobbyEntry__updateCommonChatAccessibility)
             overrideMethod(LobbyHeader, 'as_setHeaderButtonsS')(LobbyHeader_as_setHeaderButtonsS)
             overrideMethod(MessengerBarMeta, 'as_setInitDataS')(MessengerBarMeta_as_setInitDataS)
             overrideMethod(MessengerBar, '_MessengerBar__updateSessionStatsBtn')(_MessengerBar__updateSessionStatsBtn)

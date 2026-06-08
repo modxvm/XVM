@@ -23,16 +23,16 @@ from xvm_main.logger import *
 # Handlers
 #
 
-def _ChannelsCarouselHandler_addChannel(base, self, channel, lazy=False, isNotified=False):
+def _ChannelsCarouselHandler_addChannel(base, self, channel, lazy=False, isNotified=False, *args, **kwargs):
     if not config.get('hangar/allowChannelButtonBlinking', True):
         isNotified = False
-    base(self, channel, lazy, isNotified)
+    base(self, channel, lazy, isNotified, *args, **kwargs)
 
 
-def _ChannelsCarouselHandler__setItemField(base, self, clientID, key, value):
+def _ChannelsCarouselHandler__setItemField(base, self, clientID, key, value, *args, **kwargs):
     if not config.get('hangar/allowChannelButtonBlinking', True) and key == 'isNotified':
         value = False
-    return base(self, clientID, key, value)
+    return base(self, clientID, key, value, *args, **kwargs)
 
 
 
