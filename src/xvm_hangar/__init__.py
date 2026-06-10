@@ -392,12 +392,6 @@ def _UserMissionsPresenter_updateEntryPoints(base, self, vm):
 # Handlers/HangarHeader
 #
 
-def _HangarHeader__getBPWidget(base, self):
-    if config.get('hangar/showBattlePassWidget', True):
-        return base(self)
-    return ''
-
-
 def _HangarHeader__getWidgetAlias(base, self):
     result = base(self)
     if not config.get('hangar/showBattlePassWidget', True) and result == HANGAR_ALIASES.BATTLE_PASSS_ENTRY_POINT:
@@ -408,7 +402,6 @@ def _HangarHeader__getWidgetAlias(base, self):
 def _HangarHeader__updateBattlePassSmallWidget(base, self):
     if config.get('hangar/showBattlePassWidget', True):
         return base(self)
-    return
 
 
 
@@ -519,7 +512,6 @@ def owg_module_init():
             overrideStaticMethod(LootBoxesEntryPointWidget, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
             overrideMethod(HangarHeader, '_HangarHeader__getWidgetAlias')(_HangarHeader__getWidgetAlias)
             overrideMethod(HangarHeader, '_HangarHeader__updateBattlePassSmallWidget')(_HangarHeader__updateBattlePassSmallWidget)
-            overrideMethod(HangarHeader, '_HangarHeader__getBPWidget')(_HangarHeader__getBPWidget)
             overrideMethod(DailyQuestWidget, '_DailyQuestWidget__shouldHide')(_DailyQuestWidget__shouldHide)
             overrideMethod(EventEntryPointsContainer, '_EventEntryPointsContainer__updateEntries')(_EventEntryPointsContainer__updateEntries)
 
