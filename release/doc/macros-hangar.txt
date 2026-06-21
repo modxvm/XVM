@@ -1,4 +1,4 @@
-﻿Macros available in hangar
+Macros available in hangar
 
 Legend:
   C - tank carousel

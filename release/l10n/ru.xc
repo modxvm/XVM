@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Russian translation file.
  */
 {

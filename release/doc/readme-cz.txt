@@ -1,4 +1,4 @@
-﻿Obsah:
+Obsah:
   1. Základní informace
   2. Instalace
   3. Aktualizace

@@ -1,4 +1,4 @@
-﻿package com.xfw
+package com.xfw
 {
 	import flash.utils.getQualifiedClassName;
     import com.xfw.Logger;

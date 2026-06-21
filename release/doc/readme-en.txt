@@ -1,4 +1,4 @@
-﻿Content:
+Content:
   1. Common information
   2. Installation
   3. Update

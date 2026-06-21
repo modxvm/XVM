@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Textfield for map side size.
  * Поле размера стороны карты.
  *

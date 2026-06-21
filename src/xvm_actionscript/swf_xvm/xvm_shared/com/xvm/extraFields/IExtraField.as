@@ -1,4 +1,4 @@
-﻿/**
+/**
  * XVM: eXtended Visualization Mod for World of Tanks.
  * https://modxvm.com/
  */

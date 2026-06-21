@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Battle interface text fields.
  * Текстовые поля боевого интерфейса.
  */

@@ -1,4 +1,4 @@
-﻿Macros available
+Macros available
 
 Legend:
   SDH - Static (S), Dynamic (D) or Hybrid (H) macro. Dynamic macros are slow.

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Options for alive without Alt markers.
  * Настройки маркеров для живых без Alt.
  */

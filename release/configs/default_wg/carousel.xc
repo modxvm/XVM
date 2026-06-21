@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Parameters for tank carousel.
  * Параметры карусели танков.
  */

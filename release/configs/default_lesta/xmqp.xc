@@ -1,4 +1,4 @@
-﻿/**
+/**
  * XMQP services settings.
  * Настройки сервисов XMQP.
  */

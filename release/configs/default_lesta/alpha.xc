@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Options for dynamic transparency. Values from smallest to largest.
  * Настройки динамической прозрачности. Значения от меньшего к большему.
  */

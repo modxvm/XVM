@@ -1,4 +1,4 @@
-﻿{
+{
   "lines": {
     "vehicle": [
       { "enabled": true, "from": -50, "to": 150,  "inmeters": true, "thickness": 1.2,  "alpha": 65, "color": "0xFFFFFF"}

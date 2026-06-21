@@ -1,4 +1,4 @@
-﻿{
+{
   //"enabled": false,
   "def": {
     "markersStat": "<b><font face='$TitleFont' size='8' color='{{t-battles>19?#FFFFFF|#666666}}'>{{marksOnGun|*}}</font> <font face='Symbol' color='#CCCCCC' size='11'><font color='{{t-battles>19?{{c:xte|#666666}}|#666666}}'>·</font> <font color='{{c:t-battles|#666666}}'>·</font> <font color='{{c:xeff}}'>·</font> <font color='{{c:xwn8}}'>·</font></b>",

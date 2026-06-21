@@ -1,4 +1,4 @@
-﻿/**
+/**
  * GUI elements settings (experts only)
  * Настройки графических элементов (только для экспертов!)
  * https://kr.cm/f/t/1761/

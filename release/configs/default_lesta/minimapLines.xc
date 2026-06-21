@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Minimap lines. Only for owned vehicle.
  * Линии на миникарте. Только для своей техники.
  */

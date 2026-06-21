@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Minimap circles. Only real map meters. Only for own unit.
  * Круги на миникарте. Дистанция только в реальных метрах карты. Только для своей техники.
  */

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Parameters for hangar.
  * Параметры ангара.
  */

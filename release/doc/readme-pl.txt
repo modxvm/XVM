@@ -1,4 +1,4 @@
-﻿Zawartość:
+Zawartość:
   1. Informacje ogólne
   2. Instalacja
   3. Aktualizacja

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * General parameters for the battle interface.
  * Общие параметры боевого интерфейса.
  */

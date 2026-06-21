@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Log of applied damage.
  * For additional settings see battleLabelsTemplates.xc
  * Лог нанесенного урона.

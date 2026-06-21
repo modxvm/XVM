@@ -1,4 +1,4 @@
-﻿/**
+/**
  * English translation file.
  */
 {

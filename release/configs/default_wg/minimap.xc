@@ -1,4 +1,4 @@
-﻿/**
+/**
  * General parameters for minimap.
  * Общие параметры миникарты.
  *

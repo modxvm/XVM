@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Vehicle names mapping. null value for standard name.
  * Замена названий танков. Значение null - использовать стандартное название.
  */

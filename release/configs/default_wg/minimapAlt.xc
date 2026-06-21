@@ -1,4 +1,4 @@
-﻿/**
+/**
  * General parameters for minimap (alternative mode).
  * Общие параметры миникарты (альтернативный режим).
  */

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Parameters of the After Battle Screen.
  * Параметры окна послебоевой статистики.
  */

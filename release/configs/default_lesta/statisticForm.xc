@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Parameters of the Battle Statistics form.
  * Параметры окна статистики по клавише Tab.
  */

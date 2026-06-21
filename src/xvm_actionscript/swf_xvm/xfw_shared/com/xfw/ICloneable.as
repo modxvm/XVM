@@ -1,4 +1,4 @@
-﻿package com.xfw
+package com.xfw
 {
     public interface ICloneable
     {

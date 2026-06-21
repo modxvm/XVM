@@ -1,4 +1,4 @@
-﻿{
+{
   "my_items": {
     "txt_player_alive_mog": {
       "$ref": { "file":"../default/minimapLabelsTemplates.xc", "path":"def.defaultItem" },

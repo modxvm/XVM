@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Main configuration file (hereinafter - the configuration). WARGAMING
  *
  * Attention! Use \n as newline character instead of <br> tag

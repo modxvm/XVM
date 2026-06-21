@@ -1,4 +1,4 @@
-﻿Extra field parameters available:
+Extra field parameters available:
 
 Legend:
   BL  - battle loading screen

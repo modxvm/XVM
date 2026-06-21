@@ -1,4 +1,4 @@
-﻿{
+{
   //"$log": 1,
   //"$delay": 100,
   //"playersPanel": {

@@ -1,4 +1,4 @@
-﻿List of sound events in the sound bank res_mods/X.Y.Z/audioww/xvm.bnk:
+List of sound events in the sound bank res_mods/X.Y.Z/audioww/xvm.bnk:
   "emptyEvent"            - empty event for silent sound
   "xvm_sixthSense"        - sixthSense perk
   "xvm_sixthSenseVoice"   - sixthSense perk with voice alert

@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) 2005 JSON.org
 Copyright (c) 2013 max(at)modxvm.com (JSONx extension)
 

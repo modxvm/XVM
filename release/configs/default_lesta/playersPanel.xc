@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Parameters of the Players Panels ("ears").
  * Параметры панелей игроков ("ушей").
  */

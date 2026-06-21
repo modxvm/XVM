@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Parameters for login screen.
  * Параметры экрана логина.
  */
