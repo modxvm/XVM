@@ -34,6 +34,22 @@ import parser
 
 _logger = logging.getLogger('XVM/PyMacro')
 _container = {}
+_ignored = set()
+
+
+
+#
+# Public
+#
+
+def process(codestring):
+    try:
+        (func, deterministic) = __get_function(codestring)
+        return func(), deterministic
+    except Exception:
+        _logger.exception('process: exception during macro call: {}:'.format(codestring))
+        return None, True
+
 
 
 #
@@ -57,6 +73,7 @@ class XvmNamespace(object):
         return decorator
 
 
+
 #
 # Private
 #
@@ -64,7 +81,7 @@ class XvmNamespace(object):
 def __compile():
     for root, dirnames, _ in os.walk(openwg_loader.PATH_ROOT + "res_mods/configs/xvm/py_macro/"):
         for dirname in dirnames:
-            compileall.compile_dir(os.path.join(root, dirname), quiet = 1)
+            compileall.compile_dir(os.path.join(root, dirname), quiet=1)
 
 
 def __read_file(file_name):
@@ -87,6 +104,7 @@ def __execute(code, file_name, context):
 
 def __load_lib(file_name):
     _logger.info("Loading py_macro: {}".format(file_name.replace('\\', '/').replace(XVM.CONFIG_DIR, '[cfg]')))
+
     try:
         code = parser.parse(__read_file(file_name), file_name)
         __execute(code, file_name, {'xvm': XvmNamespace})
@@ -95,34 +113,94 @@ def __load_lib(file_name):
         return None
 
 
-def __get_function(function):
+def __parse_args_string(args_list):
+    if not args_list.startswith('(') or not args_list.endswith(')'):
+        raise ValueError('Invalid parameter list: {}'.format(args_list))
+
+    inner = args_list[1:-1]
+
+    if not inner.strip():
+        return '()'
+
+    result = []
+    start = 0
+    depth = 0
+    quote = None
+    escaped = False
+
+    for index, char in enumerate(inner):
+        if quote is not None:
+            if escaped:
+                escaped = False
+            elif char == '\\':
+                escaped = True
+            elif char == quote:
+                quote = None
+            continue
+
+        if char in ('"', "'"):
+            quote = char
+        elif char in '([{':
+            depth += 1
+        elif char in ')]}':
+            depth -= 1
+            if depth < 0:
+                raise ValueError('Invalid parameter list: {}'.format(args_list))
+        elif char == ',' and depth == 0:
+            value = inner[start:index].strip()
+            result.append(value if value else 'None')
+            start = index + 1
+
+    if quote is not None or depth != 0:
+        raise ValueError('Invalid parameter list: {}'.format(args_list))
+
+    value = inner[start:].strip()
+    result.append(value if value else 'None')
+
+    return '({})'.format(', '.join(result))
+
+
+def __get_function(codestring):
     try:
-        if function.find('(') == -1:
-            function += '()'
-        left_bracket_pos = function.index('(')
-        right_bracket_pos = function.rindex(')')
-        func_name = function[0:left_bracket_pos]
-        args_string = function[left_bracket_pos:right_bracket_pos + 1]
+        if codestring.find('(') == -1:
+            codestring += '()'
+
+        left_bracket_pos = codestring.index('(')
+        right_bracket_pos = codestring.rindex(')')
+        func_name = codestring[0:left_bracket_pos]
+        args_string = codestring[left_bracket_pos:right_bracket_pos + 1]
+        args_string = __parse_args_string(args_string)
     except ValueError:
-        raise ValueError('Function syntax error: {}'.format(function))
+        raise ValueError('Function syntax error: {}'.format(codestring))
+
+    if func_name in _ignored:
+        return lambda: None, True
+
     macro = _container.get(func_name)
     if not macro:
+        _ignored.add(func_name)
         raise NotImplementedError('Function {} not implemented'.format(func_name))
+
     func, deterministic = macro
+
     try:
         args = ast.literal_eval(args_string)
     except SyntaxError:
         raise SyntaxError('Invalid arguments passed to function {}: {}'.format(func_name, args_string))
+
     if not isinstance(args, tuple):
         args = (args, )
+
     return lambda: func(*args), deterministic
 
 
 def __reload(e=None):
     __compile()
 
-    global _container
+    global _container, _ignored
     _container = {}
+    _ignored = set()
+
     files = glob.iglob(os.path.join(XVM.PY_MACRO_DIR, "*.py"))
     if files:
         for file_name in files:
@@ -142,37 +220,27 @@ def __initialize():
 #     g_eventBus.removeListener(XVM_EVENT.CONFIG_LOADED, __reload)
 
 
-#
-# Public
-#
-
-def process(arg):
-    try:
-        (func, deterministic) = __get_function(arg)
-        return func(), deterministic
-    except Exception:
-        _logger.exception("process: {}".format(arg))
-        return None, True
-
 
 #
 # OpenWG API
 #
 
-__xvm_main_loaded = False
+__initialized = False
 
 def owg_module_init():
     __initialize()
 
-    global __xvm_main_loaded
-    __xvm_main_loaded = True
+    global __initialized
+    __initialized = True
 
 
 def owg_module_loaded():
-    return __xvm_main_loaded
+    return __initialized
+
 
 def owg_module_event(eventName, *args, **kwargs):
     pass
+
 
 def owg_module_fini():
     pass
