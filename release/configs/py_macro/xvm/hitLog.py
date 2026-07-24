@@ -506,7 +506,7 @@ class GroupHit(object):
             self.maxCountLines = 7
         self.isAddToEnd = _config.get(self.S_ADD_TO_END, False)
 
-    def udateMacros(self):
+    def updateMacros(self):
         data = g_dataHitLog.macros
         conf = self.readyConfig()
         player = self.players[self.vehID]
@@ -517,16 +517,16 @@ class GroupHit(object):
         data['c:team-dmg'] = conf['c_teamDmg'].get(value['teamDmg'], '#FFFFFF')
         data['team-dmg'] = conf['teamDmg'].get(value['teamDmg'], '')
         data['vtype'] = conf['vehicleClass'].get(vehicleClass, '')
-        data['c:costShell'] = conf['c_shell'].get(value['costShell'], None)
-        data['costShell'] = conf['costShell'].get(value['costShell'], None)
+        data['c:costShell'] = conf['c_shell'].get(value['costShell'])
+        data['costShell'] = conf['costShell'].get(value['costShell'])
         data['c:dmg-kind'] = conf['c_dmg-kind'].get(attackReason, '#CCCCCC')
         data['dmg-kind'] = conf['dmg-kind'].get(attackReason, 'reason: %s!' % value['attackReasonID'])
-        data['dmg-kind-player'] = ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS_VALUES.get(attackReasonID, 'unknown')) for attackReasonID in player.get('dmg-kind-player', [])])
+        data['dmg-kind-player'] = ''.join([conf['dmg-kind-player'].get(ATTACK_REASONS_VALUES.get(attackReasonID, 'unknown'), 'unknown') for attackReasonID in player.get('dmg-kind-player', [])])
         data['c:vtype'] = conf['c_vehicleClass'].get(vehicleClass, '#CCCCCC')
-        data['comp-name'] = conf['compNames'].get(value['compName'], None)
+        data['comp-name'] = conf['compNames'].get(value['compName'])
         data['type-shell'] = conf['typeShell'].get(value['shellKind'], 'not_shell')
         data['type-shell-key'] = value['shellKind'] if value['shellKind'] is not None else 'not_shell'
-        data['c:type-shell'] = conf['c_typeShell'].get(value['shellKind'], None)
+        data['c:type-shell'] = conf['c_typeShell'].get(value['shellKind'])
         data['dmg'] = player['damage']
         data['dmg-ratio'] = player['dmg-ratio']
         data['n-player'] = player.get('n-player', 0)
@@ -572,7 +572,7 @@ class GroupHitByPlayer(GroupHit):
         self._listLogNumber[:] = []
 
     def updateList(self, mode, numberLine=0):
-        macros = self.udateMacros()
+        macros = self.updateMacros()
         formattedString = parser(_config.get(self.S_FORMAT_HISTORY, ''), macros)
         if mode == self.APPEND:
             self._listLog.append(formattedString)
@@ -678,8 +678,8 @@ class GroupHitByFireRamming(GroupHit):
             if self.ATTACK_REASON_RAM_ID in v:
                 v[self.ATTACK_REASON_RAM_ID]['numberLine'] += direction
 
-    def udateListLog(self):
-        macros = self.udateMacros()
+    def updateListLog(self):
+        macros = self.updateMacros()
         if self.isGroup:
             player = self.players[self.vehID]
             lineNumber = player[self.attackReasonID]['numberLine']
@@ -729,7 +729,7 @@ class GroupHitByFireRamming(GroupHit):
         if self.maxCountLines <= 0:
             return []
         self.updatePlayer()
-        self.udateListLog()
+        self.updateListLog()
         return self._listLog
 
 
