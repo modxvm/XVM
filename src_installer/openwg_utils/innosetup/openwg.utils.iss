@@ -1,5 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
-// Copyright (c) 2017-2024 OpenWG.Utils Contributors
+// Copyright (c) 2017-2025 OpenWG.Utils Contributors
 
 // directory with OpenWG.Utils installation files, relative to the main .iss file
 #ifndef OPENWGUTILS_DIR_SRC
@@ -27,9 +27,13 @@
 
 
 [Files]
+#ifdef OPENWGUTILS_ARCH_X64
+Source: "{#OPENWGUTILS_DIR_SRC}\openwg.utils.x86_64.dll"; DestName: openwg.utils.dll; Flags: ignoreversion dontcopy noencryption;
+Source: "{#OPENWGUTILS_DIR_SRC}\openwg.utils.x86_64.dll"; DestDir: {app}\{#OPENWGUTILS_DIR_UNINST}; DestName: openwg.utils.dll; Flags: ignoreversion noencryption;
+#else
 Source: "{#OPENWGUTILS_DIR_SRC}\openwg.utils.x86_32.dll"; DestName: openwg.utils.dll; Flags: ignoreversion dontcopy noencryption;
 Source: "{#OPENWGUTILS_DIR_SRC}\openwg.utils.x86_32.dll"; DestDir: {app}\{#OPENWGUTILS_DIR_UNINST}; DestName: openwg.utils.dll; Flags: ignoreversion noencryption;
-
+#endif
 
 
 //
@@ -37,6 +41,12 @@ Source: "{#OPENWGUTILS_DIR_SRC}\openwg.utils.x86_32.dll"; DestDir: {app}\{#OPENW
 //
 
 [Code]
+
+#if VER < EncodeVer(7,0,0)
+#define owg_nativeint_t "Integer"
+#else
+#define owg_nativeint_t "NativeInt"
+#endif
 
 procedure OPENWG_DllDelete();
 begin
@@ -113,6 +123,37 @@ end;
 
 [Code]
 
+// FS/FileCreate
+function FS_FileCreate_I(Path: String): Boolean;
+external 'FS_FileCreateW@files:openwg.utils.dll cdecl setuponly';
+
+function FS_FileCreate_U(Path: String): Boolean;
+external 'FS_FileCreateW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function FS_FileCreate(Path: String): Boolean;
+begin
+    if IsUninstaller() then
+        Result := FS_FileCreate_U(Path)
+    else
+        Result := FS_FileCreate_I(Path)
+end;
+
+
+// FS/FileDelete
+function FS_FileDelete_I(Path: String): Boolean;
+external 'FS_FileDeleteW@files:openwg.utils.dll cdecl setuponly';
+
+function FS_FileDelete_U(Path: String): Boolean;
+external 'FS_FileDeleteW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function FS_FileDelete(Path: String): Boolean;
+begin
+    if IsUninstaller() then
+        Result := FS_FileDelete_U(Path)
+    else
+        Result := FS_FileDelete_I(Path)
+end;
+
 // FS/FileExists
 function FS_FileExists_I(Path: String): Integer;
 external 'FS_FileExistsW@files:openwg.utils.dll cdecl setuponly';
@@ -126,6 +167,22 @@ begin
         Result := FS_FileExists_U(Path)
     else
         Result := FS_FileExists_I(Path)
+end;
+
+
+// FS/FileSize
+function FS_FileSize_I(Path: String): Integer;
+external 'FS_FileSizeW@files:openwg.utils.dll cdecl setuponly';
+
+function FS_FileSize_U(Path: String): Integer;
+external 'FS_FileSizeW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function FS_FileSize(Path: String): Integer;
+begin
+    if IsUninstaller() then
+        Result := FS_FileSize_U(Path)
+    else
+        Result := FS_FileSize_I(Path)
 end;
 
 
@@ -146,13 +203,13 @@ end;
 
 
 // FS/Search/Close
-function FS_Search_Close_I(Handle: Integer): Boolean;
+function FS_Search_Close_I(Handle: {#owg_nativeint_t}): Boolean;
 external 'FS_Search_Close@files:openwg.utils.dll cdecl setuponly';
 
-function FS_Search_Close_U(Handle: Integer): Boolean;
+function FS_Search_Close_U(Handle: {#owg_nativeint_t}): Boolean;
 external 'FS_Search_Close@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function FS_Search_Close(Handle: Integer): Boolean;
+function FS_Search_Close(Handle: {#owg_nativeint_t}): Boolean;
 begin
     if IsUninstaller() then
         Result := FS_Search_Close_U(Handle)
@@ -162,13 +219,13 @@ end;
 
 
 // FS/Search/GetCount
-function FS_Search_GetCount_I(Handle: Integer): Integer;
+function FS_Search_GetCount_I(Handle: {#owg_nativeint_t}): Integer;
 external 'FS_Search_GetCount@files:openwg.utils.dll cdecl setuponly';
 
-function FS_Search_GetCount_U(Handle: Integer): Integer;
+function FS_Search_GetCount_U(Handle: {#owg_nativeint_t}): Integer;
 external 'FS_Search_GetCount@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function FS_Search_GetCount(Handle: Integer): Integer;
+function FS_Search_GetCount(Handle: {#owg_nativeint_t}): Integer;
 begin
     if IsUninstaller() then
         Result := FS_Search_GetCount_U(Handle)
@@ -178,13 +235,13 @@ end;
 
 
 // FS/Search/GetPath
-function FS_Search_GetPathW_I(Handle: Integer; Index: Integer; Output: String; OutputSize: Integer): Integer;
+function FS_Search_GetPathW_I(Handle: {#owg_nativeint_t}; Index: Integer; Output: String; OutputSize: Integer): Integer;
 external 'FS_Search_GetPathW@files:openwg.utils.dll cdecl setuponly';
 
-function FS_Search_GetPathW_U(Handle: Integer; Index: Integer; Output: String; OutputSize: Integer): Integer;
+function FS_Search_GetPathW_U(Handle: {#owg_nativeint_t}; Index: Integer; Output: String; OutputSize: Integer): Integer;
 external 'FS_Search_GetPathW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function FS_Search_GetPath(Handle: Integer; Index: Integer): String;
+function FS_Search_GetPath(Handle: {#owg_nativeint_t}; Index: Integer): String;
 var
     Buffer: String;
 begin
@@ -200,19 +257,20 @@ end;
 
 
 // FS/Search/QueryFolder
-function FS_Search_QueryFolderW_I(Regex: String; MaxDepth: Integer): Integer;
+function FS_Search_QueryFolderW_I(Regex: String; MaxDepth: Integer): {#owg_nativeint_t};
 external 'FS_Search_QueryFolderW@files:openwg.utils.dll cdecl setuponly';
 
-function FS_Search_QueryFolderW_U(Regex: String; MaxDepth: Integer): Integer;
+function FS_Search_QueryFolderW_U(Regex: String; MaxDepth: Integer): {#owg_nativeint_t};
 external 'FS_Search_QueryFolderW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function FS_Search_QueryFolder(Regex: String; MaxDepth: Integer): Integer;
+function FS_Search_QueryFolder(Regex: String; MaxDepth: Integer): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := FS_Search_QueryFolderW_U(Regex, MaxDepth)
     else
         Result := FS_Search_QueryFolderW_I(Regex, MaxDepth)
 end;
+
 
 
 //
@@ -373,13 +431,13 @@ end;
 
 
 // IMAGE/BrushCreate
-function IMAGE_BrushCreate_I(Bitmap: Integer): Integer;
+function IMAGE_BrushCreate_I(Bitmap: HBITMAP): {#owg_nativeint_t};
 external 'IMAGE_BrushCreate@files:openwg.utils.dll cdecl setuponly';
 
-function IMAGE_BrushCreate_U(Bitmap: Integer): Integer;
+function IMAGE_BrushCreate_U(Bitmap: HBITMAP): {#owg_nativeint_t};
 external 'IMAGE_BrushCreate@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function IMAGE_BrushCreate(Bitmap: Integer): Integer;
+function IMAGE_BrushCreate(Bitmap: HBITMAP): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := IMAGE_BrushCreate_U(Bitmap)
@@ -390,13 +448,13 @@ end;
 
 
 // IMAGE/BrushFree
-function IMAGE_BrushFree_I(Brush: Integer): Boolean;
+function IMAGE_BrushFree_I(Brush: {#owg_nativeint_t}): Boolean;
 external 'IMAGE_BrushFree@files:openwg.utils.dll cdecl setuponly';
 
-function IMAGE_BrushFree_U(Brush: Integer): Boolean;
+function IMAGE_BrushFree_U(Brush: {#owg_nativeint_t}): Boolean;
 external 'IMAGE_BrushFree@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function IMAGE_BrushFree(Brush: Integer): Boolean;
+function IMAGE_BrushFree(Brush: {#owg_nativeint_t}): Boolean;
 begin
     if IsUninstaller() then
         Result := IMAGE_BrushFree_U(Brush)
@@ -610,13 +668,13 @@ end;
 [Code]
 
 // JSON/OpenFile
-function JSON_OpenFileW_I(Path: String; AllowCreation: Boolean): Integer;
+function JSON_OpenFileW_I(Path: String; AllowCreation: Boolean): {#owg_nativeint_t};
 external 'JSON_OpenFileW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_OpenFileW_U(Path: String; AllowCreation: Boolean): Integer;
+function JSON_OpenFileW_U(Path: String; AllowCreation: Boolean): {#owg_nativeint_t};
 external 'JSON_OpenFileW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_OpenFile(Path: String; AllowCreation: Boolean): Integer;
+function JSON_OpenFile(Path: String; AllowCreation: Boolean): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := JSON_OpenFileW_U(Path, AllowCreation)
@@ -626,13 +684,13 @@ end;
 
 
 // JSON/OpenString
-function JSON_OpenStringW_I(Text: String): Integer;
+function JSON_OpenStringW_I(Text: String): {#owg_nativeint_t};
 external 'JSON_OpenStringW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_OpenStringW_U(Text: String): Integer;
+function JSON_OpenStringW_U(Text: String): {#owg_nativeint_t};
 external 'JSON_OpenStringW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_OpenString(Text: String): Integer;
+function JSON_OpenString(Text: String): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := JSON_OpenStringW_U(Text)
@@ -643,13 +701,13 @@ end;
 
 
 // Json/Close
-function JSON_Close_I(Handle: Integer): Boolean;
+function JSON_Close_I(Handle: {#owg_nativeint_t}): {#owg_nativeint_t};
 external 'JSON_Close@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_Close_U(Handle: Integer): Boolean;
+function JSON_Close_U(Handle: {#owg_nativeint_t}): {#owg_nativeint_t};
 external 'JSON_Close@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_Close(Handle: Integer): Boolean;
+function JSON_Close(Handle: {#owg_nativeint_t}): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := JSON_Close_U(Handle)
@@ -659,13 +717,13 @@ end;
 
 
 // Json/ContainsKey
-function JSON_ContainsKeyW_I(Handle: Integer; Path: String): Boolean;
+function JSON_ContainsKeyW_I(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'JSON_ContainsKeyW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_ContainsKeyW_U(Handle: Integer; Path: String): Boolean;
+function JSON_ContainsKeyW_U(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'JSON_ContainsKeyW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_ContainsKey(Handle: Integer; Path: String): Boolean;
+function JSON_ContainsKey(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 begin
     if IsUninstaller() then
         Result := JSON_ContainsKeyW_U(Handle, Path)
@@ -675,13 +733,13 @@ end;
 
 
 // Json/GetString
-procedure JSON_GetStringW_I(Handle: Integer; Path: String; Output: String; OutputSize: Integer);
+procedure JSON_GetStringW_I(Handle: {#owg_nativeint_t}; Path: String; Output: String; OutputSize: Integer);
 external 'JSON_GetStringW@files:openwg.utils.dll cdecl setuponly';
 
-procedure JSON_GetStringW_U(Handle: Integer; Path: String; Output: String; OutputSize: Integer);
+procedure JSON_GetStringW_U(Handle: {#owg_nativeint_t}; Path: String; Output: String; OutputSize: Integer);
 external 'JSON_GetStringW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_GetString(Handle: Integer; Path: String): String;
+function JSON_GetString(Handle: {#owg_nativeint_t}; Path: String): String;
 var
     Buffer: String;
 begin
@@ -697,13 +755,13 @@ end;
 
 
 // Json/SetBool
-function JSON_SetBoolW_I(Handle: Integer; Path: String; Value: Boolean): Boolean;
+function JSON_SetBoolW_I(Handle: {#owg_nativeint_t}; Path: String; Value: Boolean): Boolean;
 external 'JSON_SetBoolW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_SetBoolW_U(Handle: Integer; Path: String; Value: Boolean): Boolean;
+function JSON_SetBoolW_U(Handle: {#owg_nativeint_t}; Path: String; Value: Boolean): Boolean;
 external 'JSON_SetBoolW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_SetBool(Handle: Integer; Path: String; Value: Boolean): Boolean;
+function JSON_SetBool(Handle: {#owg_nativeint_t}; Path: String; Value: Boolean): Boolean;
 begin
     if IsUninstaller() then
         Result := JSON_SetBoolW_U(Handle, Path, Value)
@@ -713,13 +771,13 @@ end;
 
 
 // Json/SetDouble
-function JSON_SetDoubleW_I(Handle: Integer; Path: String; Value: Double): Boolean;
+function JSON_SetDoubleW_I(Handle: {#owg_nativeint_t}; Path: String; Value: Double): Boolean;
 external 'JSON_SetDoubleW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_SetDoubleW_U(Handle: Integer; Path: String; Value: Double): Boolean;
+function JSON_SetDoubleW_U(Handle: {#owg_nativeint_t}; Path: String; Value: Double): Boolean;
 external 'JSON_SetDoubleW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_SetDouble(Handle: Integer; Path: String; Value: Double): Boolean;
+function JSON_SetDouble(Handle: {#owg_nativeint_t}; Path: String; Value: Double): Boolean;
 begin
     if IsUninstaller() then
         Result := JSON_SetDoubleW_U(Handle, Path, Value)
@@ -729,13 +787,13 @@ end;
 
 
 // Json/SetInteger
-function JSON_SetIntegerW_I(Handle: Integer; Path: String; Value: Integer): Boolean;
+function JSON_SetIntegerW_I(Handle: {#owg_nativeint_t}; Path: String; Value: Integer): Boolean;
 external 'JSON_SetIntegerW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_SetIntegerW_U(Handle: Integer; Path: String; Value: Integer): Boolean;
+function JSON_SetIntegerW_U(Handle: {#owg_nativeint_t}; Path: String; Value: Integer): Boolean;
 external 'JSON_SetIntegerW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_SetInteger(Handle: Integer; Path: String; Value: Integer): Boolean;
+function JSON_SetInteger(Handle: {#owg_nativeint_t}; Path: String; Value: Integer): Boolean;
 begin
     if IsUninstaller() then
         Result := JSON_SetIntegerW_U(Handle, Path, Value)
@@ -745,13 +803,13 @@ end;
 
 
 // Json/SetString
-function JSON_SetStringW_I(Handle: Integer; Path: String; Value: String): Boolean;
+function JSON_SetStringW_I(Handle: {#owg_nativeint_t}; Path: String; Value: String): Boolean;
 external 'JSON_SetStringW@files:openwg.utils.dll cdecl setuponly';
 
-function JSON_SetStringW_U(Handle: Integer; Path: String; Value: String): Boolean;
+function JSON_SetStringW_U(Handle: {#owg_nativeint_t}; Path: String; Value: String): Boolean;
 external 'JSON_SetStringW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function JSON_SetString(Handle: Integer; Path: String; Value: String): Boolean;
+function JSON_SetString(Handle: {#owg_nativeint_t}; Path: String; Value: String): Boolean;
 begin
     if IsUninstaller() then
         Result := JSON_SetStringW_U(Handle, Path, Value)
@@ -806,35 +864,217 @@ end;
 
 [Code]
 
-// STRING/ReplaceRegex
-function STRING_ReplaceRegex_I(Input: String; Search: String; Replace: String; Output: String; BufferSize: Integer): Integer;
-external 'STRING_ReplaceRegex@files:openwg.utils.dll cdecl setuponly';
+// String/LoadFromFile
+function STRING_LoadFromFile_I(FilePath: String; Buffer: String; BufferSize: Integer): Integer;
+external 'STRING_LoadFromFile@files:openwg.utils.dll cdecl setuponly';
 
-function STRING_ReplaceRegex_U(Input: String; Search: String; Replace: String; Output: String; BufferSize: Integer): Integer;
-external 'STRING_ReplaceRegex@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+function STRING_LoadFromFile_U(FilePath: String; Buffer: String; BufferSize: Integer): Integer;
+external 'STRING_LoadFromFile@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function STRING_ReplaceRegex(Input: String; Search: String; Replace: String): String;
+function STRING_LoadFromFile(FilePath: String): String;
 var
-    ResultSize: Integer;
+    BufferBytes: Integer;
+    BufferChars: Integer;
     ErrorCode: Integer;
 begin
-    ResultSize := Length(Input)*2;
-    SetLength(Result, ResultSize);
+    Result := '';
+
+    BufferBytes := FS_FileSize(FilePath);
+    if BufferBytes <= 0 then
+        Exit;
+
+    // UTF-8 -> UTF-16 worst-case expansion + UTF-16 null terminator
+    BufferBytes := BufferBytes * 2 + 2;
+    BufferChars := (BufferBytes + 1) div 2;
+    SetLength(Result, BufferChars);
 
     if IsUninstaller() then
-        ErrorCode := STRING_ReplaceRegex_U(Input, Search, Replace, Result, ResultSize)
+        ErrorCode := STRING_LoadFromFile_U(FilePath, Result, BufferChars * 2)
     else
-        ErrorCode := STRING_ReplaceRegex_I(Input, Search, Replace, Result, ResultSize);
+        ErrorCode := STRING_LoadFromFile_I(FilePath, Result, BufferChars * 2);
+
+    // Fatal Error
+    if (ErrorCode = -2147483648) then
+        Exit;
+
+    // not enough space
+    if (ErrorCode < 0) then
+        begin
+            BufferBytes := -ErrorCode;
+            BufferChars := (BufferBytes + 1) div 2;
+            SetLength(Result, BufferChars);
+            if IsUninstaller() then
+                ErrorCode := STRING_LoadFromFile_U(FilePath, Result, BufferChars * 2)
+            else
+                ErrorCode := STRING_LoadFromFile_I(FilePath, Result, BufferChars * 2);
+        end;
+
+    // Fatal Error / unresolved allocation error
+    if (ErrorCode = -2147483648) or (ErrorCode < 0) then
+        Exit;
+
+    // empty string
+    if (ErrorCode = 0) then
+        Exit;
+
+    // ErrorCode = UTF-16 text length in bytes (without null terminator)
+    SetLength(Result, ErrorCode div 2);
+end;
+
+
+// STRING/SaveFile
+function STRING_SaveFile_I(Input: String; FilePath: String; Encoding: String): Integer;
+external 'STRING_SaveFile@files:openwg.utils.dll cdecl setuponly';
+
+function STRING_SaveFile_U(Input: String; FilePath: String; Encoding: String): Integer;
+external 'STRING_SaveFile@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function STRING_SaveFile(Input: String; FilePath: String; Encoding: String): Integer;
+begin
+    if IsUninstaller() then
+        Result := STRING_SaveFile_U(Input, FilePath, Encoding)
+    else
+        Result := STRING_SaveFile_I(Input, FilePath, Encoding);
+end;
+
+
+// STRING/SaveFile/UTF8
+function STRING_SaveFile_UTF8_I(Input: String; FilePath: String): Integer;
+external 'STRING_SaveFile_UTF8@files:openwg.utils.dll cdecl setuponly';
+
+function STRING_SaveFile_UTF8_U(Input: String; FilePath: String): Integer;
+external 'STRING_SaveFile_UTF8@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function STRING_SaveFile_UTF8(Input: String; FilePath: String): Integer;
+begin
+    if IsUninstaller() then
+        Result := STRING_SaveFile_UTF8_U(Input, FilePath)
+    else
+        Result := STRING_SaveFile_UTF8_I(Input, FilePath);
+end;
+
+
+// STRING/SaveFile/UTF8BOM
+function STRING_SaveFile_UTF8BOM_I(Input: String; FilePath: String): Integer;
+external 'STRING_SaveFile_UTF8BOM@files:openwg.utils.dll cdecl setuponly';
+
+function STRING_SaveFile_UTF8BOM_U(Input: String; FilePath: String): Integer;
+external 'STRING_SaveFile_UTF8BOM@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function STRING_SaveFile_UTF8BOM(Input: String; FilePath: String): Integer;
+begin
+    if IsUninstaller() then
+        Result := STRING_SaveFile_UTF8BOM_U(Input, FilePath)
+    else
+        Result := STRING_SaveFile_UTF8BOM_I(Input, FilePath);
+end;
+
+
+// STRING/MatchRegex
+function STRING_MatchRegex_I(Input: String; Search: String): Boolean;
+external 'STRING_MatchRegex@files:openwg.utils.dll cdecl setuponly';
+
+function STRING_MatchRegex_U(Input: String; Search: String): Boolean;
+external 'STRING_MatchRegex@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function STRING_MatchRegex(Input: String; Search: String): Boolean;
+begin
+    if IsUninstaller() then
+        Result := STRING_MatchRegex_U(Input, Search)
+    else
+        Result := STRING_MatchRegex_I(Input, Search);
+end;
+
+
+// STRING/SelectRegex
+function STRING_SelectRegex_I(Input: String; Search: String; SubgroupIndex: Integer; Output: String; BufferSize: Integer): Integer;
+external 'STRING_SelectRegex@files:openwg.utils.dll cdecl setuponly';
+
+function STRING_SelectRegex_U(Input: String; Search: String; SubgroupIndex: Integer; Output: String; BufferSize: Integer): Integer;
+external 'STRING_SelectRegex@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function STRING_SelectRegex(Input: String; Search: String; SubgroupIndex: Integer): String;
+var
+    BufferChars: Integer;
+    BufferBytes: Integer;
+    ErrorCode: Integer;
+begin
+    BufferChars := Length(Input) + 1;
+    if (BufferChars < 1) then
+        BufferChars := 1;
+
+    SetLength(Result, BufferChars);
+    BufferBytes := BufferChars * 2;
+
+    if IsUninstaller() then
+        ErrorCode := STRING_SelectRegex_U(Input, Search, SubgroupIndex, Result, BufferBytes)
+    else
+        ErrorCode := STRING_SelectRegex_I(Input, Search, SubgroupIndex, Result, BufferBytes);
 
     // not enough space
     if (ErrorCode < 0) then
     begin
-        ResultSize := -ErrorCode;
-        SetLength(Result, ResultSize);
+        BufferBytes := -ErrorCode;
+        BufferChars := (BufferBytes + 1) div 2;
+        SetLength(Result, BufferChars);
+
         if IsUninstaller() then
-            ErrorCode := STRING_ReplaceRegex_U(Input, Search, Replace, Result, ResultSize)
+            ErrorCode := STRING_SelectRegex_U(Input, Search, SubgroupIndex, Result, BufferChars * 2)
         else
-            ErrorCode := STRING_ReplaceRegex_I(Input, Search, Replace, Result, ResultSize);
+            ErrorCode := STRING_SelectRegex_I(Input, Search, SubgroupIndex, Result, BufferChars * 2);
+    end;
+
+    // general error or no match
+    if (ErrorCode = 0) then
+    begin
+        Result := '';
+        Exit;
+    end;
+
+    // ErrorCode = output length in bytes including UTF-16 null terminator
+    if (ErrorCode >= 2) then
+        SetLength(Result, (ErrorCode div 2) - 1)
+    else
+        Result := '';
+end;
+
+
+// STRING/ReplaceRegexEx
+function STRING_ReplaceRegexEx_I(Input: String; Search: String; Replace: String; Output: String; BufferSize: Integer; FirstOnly: Boolean): Integer;
+external 'STRING_ReplaceRegexEx@files:openwg.utils.dll cdecl setuponly';
+
+function STRING_ReplaceRegexEx_U(Input: String; Search: String; Replace: String; Output: String; BufferSize: Integer; FirstOnly: Boolean): Integer;
+external 'STRING_ReplaceRegexEx@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function STRING_ReplaceRegexEx(Input: String; Search: String; Replace: String; FirstOnly: Boolean): String;
+var
+    BufferChars: Integer;
+    BufferBytes: Integer;
+    ErrorCode: Integer;
+begin
+    BufferChars := Length(Input) + 1;
+    if (BufferChars < 1) then
+        BufferChars := 1;
+
+    SetLength(Result, BufferChars);
+    BufferBytes := BufferChars * 2;
+
+    if IsUninstaller() then
+        ErrorCode := STRING_ReplaceRegexEx_U(Input, Search, Replace, Result, BufferBytes, FirstOnly)
+    else
+        ErrorCode := STRING_ReplaceRegexEx_I(Input, Search, Replace, Result, BufferBytes, FirstOnly);
+
+    // not enough space
+    if (ErrorCode < 0) then
+    begin
+        BufferBytes := -ErrorCode;
+        BufferChars := (BufferBytes + 1) div 2;
+        SetLength(Result, BufferChars);
+
+        if IsUninstaller() then
+            ErrorCode := STRING_ReplaceRegexEx_U(Input, Search, Replace, Result, BufferChars * 2, FirstOnly)
+        else
+            ErrorCode := STRING_ReplaceRegexEx_I(Input, Search, Replace, Result, BufferChars * 2, FirstOnly);
     end;
 
     // general error
@@ -844,11 +1084,22 @@ begin
         Exit;
     end;
 
-    // crop result
-    Result := Copy(Result, 1, Pos(#0, Result)-1);
+    // ErrorCode = output length in bytes including UTF-16 null terminator
+    if (ErrorCode >= 2) then
+        SetLength(Result, (ErrorCode div 2) - 1)
+    else
+        Result := '';
 end;
 
 
+// STRING/ReplaceRegex
+function STRING_ReplaceRegex(Input: String; Search: String; Replace: String): String;
+begin
+    Result := STRING_ReplaceRegexEx(Input, Search, Replace, False);
+end;
+
+
+// String/Split
 function STRING_Split(const Value: string; Delimiter: Char): TStringList;
 var
     S: string;
@@ -940,13 +1191,13 @@ end;
 
 
 // SPLASHSCREEN/Close
-function SPLASHSCREEN_Close_I(Handle: Integer): Boolean;
+function SPLASHSCREEN_Close_I(Handle: {#owg_nativeint_t}): Boolean;
 external 'SPLASHSCREEN_Close@files:openwg.utils.dll cdecl setuponly';
 
-function SPLASHSCREEN_Close_U(Handle: Integer): Boolean;
+function SPLASHSCREEN_Close_U(Handle: {#owg_nativeint_t}): Boolean;
 external 'SPLASHSCREEN_Close@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function SPLASHSCREEN_Close(Handle: Integer): Boolean;
+function SPLASHSCREEN_Close(Handle: {#owg_nativeint_t}): Boolean;
 begin
     if IsUninstaller() then
         Result := SPLASHSCREEN_Close_U(Handle)
@@ -956,13 +1207,13 @@ end;
 
 
 // SPLASHSCREEN/CloseAfter
-function SPLASHSCREEN_CloseAfter_I(Handle: Integer; Msecs: Integer): Boolean;
+function SPLASHSCREEN_CloseAfter_I(Handle: {#owg_nativeint_t}; Msecs: Integer): Boolean;
 external 'SPLASHSCREEN_CloseAfter@files:openwg.utils.dll cdecl setuponly';
 
-function SPLASHSCREEN_CloseAfter_U(Handle: Integer; Msecs: Integer): Boolean;
+function SPLASHSCREEN_CloseAfter_U(Handle: {#owg_nativeint_t}; Msecs: Integer): Boolean;
 external 'SPLASHSCREEN_CloseAfter@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function SPLASHSCREEN_CloseAfter(Handle: Integer; Msecs: Integer): Boolean;
+function SPLASHSCREEN_CloseAfter(Handle: {#owg_nativeint_t}; Msecs: Integer): Boolean;
 begin
     if IsUninstaller() then
         Result := SPLASHSCREEN_CloseAfter_U(Handle, Msecs)
@@ -972,13 +1223,13 @@ end;
 
 
 //SPLASHSCREEN/Show
-function SPLASHSCREEN_ShowW_I(FileName: String): Integer;
+function SPLASHSCREEN_ShowW_I(FileName: String): {#owg_nativeint_t};
 external 'SPLASHSCREEN_ShowW@files:openwg.utils.dll cdecl setuponly';
 
-function SPLASHSCREEN_ShowW_U(FileName: String): Integer;
+function SPLASHSCREEN_ShowW_U(FileName: String): {#owg_nativeint_t};
 external 'SPLASHSCREEN_ShowW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function SPLASHSCREEN_Show(FileName: String): Integer;
+function SPLASHSCREEN_Show(FileName: String): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := SPLASHSCREEN_ShowW_U(FileName)
@@ -1003,6 +1254,7 @@ en.openwg_branch_release=Release
 en.openwg_branch_ct=Common Test
 en.openwg_branch_st=Super Test
 en.openwg_branch_sb=Sandbox
+en.openwg_branch_closed=Closed Test
 #endif
 
 #if OPENWGUTILS_LANG_RU == 1
@@ -1013,6 +1265,7 @@ ru.openwg_branch_release=Релиз
 ru.openwg_branch_ct=Общий тест
 ru.openwg_branch_st=Супертест
 ru.openwg_branch_sb=Песочница
+ru.openwg_branch_closed=Закрытый тест
 #endif
 
 [Code]
@@ -1471,6 +1724,37 @@ begin
         Result := WOT_ClearClientCache_I(ClientIndex, CacheType)
 end;
 
+// WOT/Discovery/SetBranchFilter
+function WOT_Discovery_SetBranchFilter_I(BranchFilter: Integer): Integer;
+external 'WOT_Discovery_SetBranchFilter@files:openwg.utils.dll cdecl setuponly';
+
+function WOT_Discovery_SetBranchFilter_U(BranchFilter: Integer): Integer;
+external 'WOT_Discovery_SetBranchFilter@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+// filter, bitmask: 1 - release, 2 - ct, 4 - st, 8 - sb, 16 - closed_test
+function WOT_Discovery_SetBranchFilter(BranchFilter: Integer): Integer;
+begin
+    if IsUninstaller() then
+        Result := WOT_Discovery_SetBranchFilter_U(BranchFilter)
+    else
+        Result := WOT_Discovery_SetBranchFilter_I(BranchFilter)
+end;
+
+
+function WOT_ClientBuildResMap_I(ClientIndex: Integer): Integer;
+external 'WOT_ClientBuildResMap@files:openwg.utils.dll cdecl setuponly';
+
+function WOT_ClientBuildResMap_U(ClientIndex: Integer): Integer;
+external 'WOT_ClientBuildResMap@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
+
+function WOT_ClientBuildResMap(ClientIndex: Integer): Integer;
+begin
+    if IsUninstaller() then
+        Result := WOT_ClientBuildResMap_U(ClientIndex)
+    else
+        Result := WOT_ClientBuildResMap_I(ClientIndex)
+end;
+
 //
 // Record
 //
@@ -1521,8 +1805,9 @@ begin
           end;
         end;
      2: Result := Result + ExpandConstant('/{cm:openwg_branch_ct}');
-     3: Result := Result + ExpandConstant('/{cm:openwg_branch_st}');
-     4: Result := Result + ExpandConstant('/{cm:openwg_branch_sb}');
+     4: Result := Result + ExpandConstant('/{cm:openwg_branch_st}');
+     8: Result := Result + ExpandConstant('/{cm:openwg_branch_sb}');
+     16: Result := Result + ExpandConstant('/{cm:openwg_branch_closed}');
   end;
 
   Result := Result + '] - ' + Client.Path;
@@ -1655,13 +1940,13 @@ end;
 [Code]
 
 // WWISE/OpenFile
-function WWISE_OpenFileW_I(Path: String): Integer;
+function WWISE_OpenFileW_I(Path: String): {#owg_nativeint_t};
 external 'WWISE_OpenFileW@files:openwg.utils.dll cdecl setuponly';
 
-function WWISE_OpenFileW_U(Path: String): Integer;
+function WWISE_OpenFileW_U(Path: String): {#owg_nativeint_t};
 external 'WWISE_OpenFileW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function WWISE_OpenFile(Path: String): Integer;
+function WWISE_OpenFile(Path: String): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := WWISE_OpenFileW_U(Path)
@@ -1671,13 +1956,13 @@ end;
 
 
 // WWISE/Close
-function WWISE_Close_I(Handle: Integer): Boolean;
+function WWISE_Close_I(Handle: {#owg_nativeint_t}): Boolean;
 external 'WWISE_Close@files:openwg.utils.dll cdecl setuponly';
 
-function WWISE_Close_U(Handle: Integer): Boolean;
+function WWISE_Close_U(Handle: {#owg_nativeint_t}): Boolean;
 external 'WWISE_Close@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function WWISE_Close(Handle: Integer): Boolean;
+function WWISE_Close(Handle: {#owg_nativeint_t}): Boolean;
 begin
     if IsUninstaller() then
         Result := WWISE_Close_U(Handle)
@@ -1688,13 +1973,13 @@ end;
 
 // WWISE/LicenseGet
 // result: 0 - Unknown, 1 - Unlicensed bank, 2 - Wargaming license
-function WWISE_LicenseGet_I(Handle: Integer): Integer;
+function WWISE_LicenseGet_I(Handle: {#owg_nativeint_t}): Integer;
 external 'WWISE_Close@files:openwg.utils.dll cdecl setuponly';
 
-function WWISE_LicenseGet_U(Handle: Integer): Integer;
+function WWISE_LicenseGet_U(Handle: {#owg_nativeint_t}): Integer;
 external 'WWISE_Close@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function WWISE_LicenseGet(Handle: Integer): Integer;
+function WWISE_LicenseGet(Handle: {#owg_nativeint_t}): Integer;
 begin
     if IsUninstaller() then
         Result := WWISE_LicenseGet_U(Handle)
@@ -1705,13 +1990,13 @@ end;
 
 // WWISE/LicenseSet
 // license: 1 - unlicensed, 2 - wargaming
-function WWISE_LicenseSet_I(Handle: Integer; License: Integer): Boolean;
+function WWISE_LicenseSet_I(Handle: {#owg_nativeint_t}; License: Integer): Boolean;
 external 'WWISE_LicenseSet@files:openwg.utils.dll cdecl setuponly';
 
-function WWISE_LicenseSet_U(Handle: Integer; License: Integer): Boolean;
+function WWISE_LicenseSet_U(Handle: {#owg_nativeint_t}; License: Integer): Boolean;
 external 'WWISE_LicenseSet@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function WWISE_LicenseSet(Handle: Integer; License: Integer): Boolean;
+function WWISE_LicenseSet(Handle: {#owg_nativeint_t}; License: Integer): Boolean;
 begin
     if IsUninstaller() then
         Result := WWISE_LicenseSet_U(Handle, License)
@@ -1722,13 +2007,13 @@ end;
 
 // WWISE/SaveFile
 // null path - overwrite source file
-function WWISE_SaveFileW_I(Handle: Integer; Path: String): Boolean;
+function WWISE_SaveFileW_I(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'WWISE_SaveFileW@files:openwg.utils.dll cdecl setuponly';
 
-function WWISE_SaveFileW_U(Handle: Integer; Path: String): Boolean;
+function WWISE_SaveFileW_U(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'WWISE_SaveFileW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function WWISE_SaveFile(Handle: Integer; Path: String): Boolean;
+function WWISE_SaveFile(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 begin
     if IsUninstaller() then
         Result := WWISE_SaveFileW_U(Handle, Path)
@@ -1745,13 +2030,13 @@ end;
 [Code]
 
 // XML/AddKey
-function XML_AddKey_I(Handle: Integer; Path: String; Name: String; Value: String): Boolean;
+function XML_AddKey_I(Handle: {#owg_nativeint_t}; Path: String; Name: String; Value: String): Boolean;
 external 'XML_AddKeyW@files:openwg.utils.dll cdecl setuponly';
 
-function XML_AddKey_U(Handle: Integer; Path: String; Name: String; Value: String): Boolean;
+function XML_AddKey_U(Handle: {#owg_nativeint_t}; Path: String; Name: String; Value: String): Boolean;
 external 'XML_AddKeyW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function XML_AddKey(Handle: Integer; Path: String; Name: String; Value: String): Boolean;
+function XML_AddKey(Handle: {#owg_nativeint_t}; Path: String; Name: String; Value: String): Boolean;
 begin
     if IsUninstaller() then
         Result := XML_AddKey_U(Handle, Path, Name, Value)
@@ -1761,13 +2046,13 @@ end;
 
 
 // XML/Close
-function XML_Close_I(Handle: Integer): Boolean;
+function XML_Close_I(Handle: {#owg_nativeint_t}): Boolean;
 external 'XML_Close@files:openwg.utils.dll cdecl setuponly';
 
-function XML_Close_U(Handle: Integer): Boolean;
+function XML_Close_U(Handle: {#owg_nativeint_t}): Boolean;
 external 'XML_Close@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function XML_Close(Handle: Integer): Boolean;
+function XML_Close(Handle: {#owg_nativeint_t}): Boolean;
 begin
     if IsUninstaller() then
         Result := XML_Close_U(Handle)
@@ -1777,13 +2062,13 @@ end;
 
 
 // XML/ContainsKey
-function XML_ContainsKey_I(Handle: Integer; Path: String): Boolean;
+function XML_ContainsKey_I(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'XML_ContainsKeyW@files:openwg.utils.dll cdecl setuponly';
 
-function XML_ContainsKey_U(Handle: Integer; Path: String): Boolean;
+function XML_ContainsKey_U(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'XML_ContainsKeyW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function XML_ContainsKey(Handle: Integer; Path: String): Boolean;
+function XML_ContainsKey(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 begin
     if IsUninstaller() then
         Result := XML_ContainsKey_U(Handle, Path)
@@ -1793,13 +2078,13 @@ end;
 
 
 // XML/ContainsKeyEx
-function XML_ContainsKeyEx_I(Handle: Integer; Path: String; Value: String): Boolean;
+function XML_ContainsKeyEx_I(Handle: {#owg_nativeint_t}; Path: String; Value: String): Boolean;
 external 'XML_ContainsKeyExW@files:openwg.utils.dll cdecl setuponly';
 
-function XML_ContainsKeyEx_U(Handle: Integer; Path: String; Value: String): Boolean;
+function XML_ContainsKeyEx_U(Handle: {#owg_nativeint_t}; Path: String; Value: String): Boolean;
 external 'XML_ContainsKeyExW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function XML_ContainsKeyEx(Handle: Integer; Path: String; Value: String): Boolean;
+function XML_ContainsKeyEx(Handle: {#owg_nativeint_t}; Path: String; Value: String): Boolean;
 begin
     if IsUninstaller() then
         Result := XML_ContainsKeyEx_U(Handle, Path, Value)
@@ -1809,13 +2094,13 @@ end;
 
 
 // XML/OpenFile
-function XML_OpenFileW_I(Path: String; AllowCreation: Boolean): Integer;
+function XML_OpenFileW_I(Path: String; AllowCreation: Boolean): {#owg_nativeint_t};
 external 'XML_OpenFileW@files:openwg.utils.dll cdecl setuponly';
 
-function XML_OpenFileW_U(Path: String; AllowCreation: Boolean): Integer;
+function XML_OpenFileW_U(Path: String; AllowCreation: Boolean): {#owg_nativeint_t};
 external 'XML_OpenFileW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function XML_OpenFile(Path: String; AllowCreation: Boolean): Integer;
+function XML_OpenFile(Path: String; AllowCreation: Boolean): {#owg_nativeint_t};
 begin
     if IsUninstaller() then
         Result := XML_OpenFileW_U(Path, AllowCreation)
@@ -1825,13 +2110,13 @@ end;
 
 
 // XML/SaveFile
-function XML_SaveFileW_I(Handle: Integer; Path: String): Boolean;
+function XML_SaveFileW_I(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'XML_SaveFileW@files:openwg.utils.dll cdecl setuponly';
 
-function XML_SaveFileW_U(Handle: Integer; Path: String): Boolean;
+function XML_SaveFileW_U(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 external 'XML_SaveFileW@{app}\{#OPENWGUTILS_DIR_UNINST}\openwg.utils.dll cdecl uninstallonly';
 
-function XML_SaveFile(Handle: Integer; Path: String): Boolean;
+function XML_SaveFile(Handle: {#owg_nativeint_t}; Path: String): Boolean;
 begin
     if IsUninstaller() then
         Result := XML_SaveFileW_U(Handle, Path)
