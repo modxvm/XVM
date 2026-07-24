@@ -130,10 +130,10 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
     Download-Translations -L10nDir "$lestaSharedDir/l10n"
     Download-Translations -L10nDir "$wgSharedDir/l10n"
 
-    $vcs_tag = Get-VcsLastTag
-    $vcs_commits = Get-VcsCommitsCount
-    $vcs_branch = $(Get-VcsBranch) -replace '/','-'
-    $vcs_hash = Get-VcsHash
+    $vcs_tag = Get-VcsLastTag -RepositoryPath $PSScriptRoot
+    $vcs_commits = Get-VcsCommitsCount -RepositoryPath $PSScriptRoot
+    $vcs_branch = $(Get-VcsBranch -RepositoryPath $PSScriptRoot) -replace '/','-'
+    $vcs_hash = Get-VcsHash -RepositoryPath $PSScriptRoot
 
     $zipFilePath = Join-Path -Path $OutputDirectory -ChildPath "xvm_$($vcs_tag)_$($vcs_commits)_$($vcs_branch)_$($vcs_hash).zip"
     if (Test-Path -Path $zipFilePath) {
@@ -142,7 +142,7 @@ function Copy-Deploy($OutputDirectory, $ThirdPartyDir, $ConfigsDir, $ReleaseDir,
     Create-Zip -Directory $deployFullDir -OutputFile $zipFilePath -CompressionLevel 9
 }
 
-$xvm_version = Get-VcsVersionString
+$xvm_version = Get-VcsVersionString -RepositoryPath $PSScriptRoot
 
 if (-not $ComponentId) {
     Copy-Deploy -OutputDirectory "$PSScriptRoot/~output" -ThirdPartyDir "$PSScriptRoot/3rdparty_packages" -ConfigsDir "$PSScriptRoot/release/configs" -ReleaseDir "$PSScriptRoot/release" -LestaVersion $game_version_lesta -WgVersion $game_version_wg -Version $xvm_version

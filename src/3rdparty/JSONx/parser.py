@@ -1,8 +1,8 @@
 __author__ = 'Alex'
 
-from lexer import *
-from ast import *
-import exception
+from .lexer import *
+from .ast import *
+from . import exception
 
 
 class Parser(object):

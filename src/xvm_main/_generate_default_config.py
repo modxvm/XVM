@@ -5,8 +5,20 @@ from __future__ import print_function
 
 import sys
 import os
-import py_compile
-import shutil
+import io
+
+
+def python_repr(value):
+    if sys.version_info[0] < 3:
+        return repr(value)
+    if isinstance(value, dict):
+        return '{' + ', '.join('{}: {}'.format(python_repr(key), python_repr(item))
+                              for key, item in value.items()) + '}'
+    if isinstance(value, list):
+        return '[' + ', '.join(python_repr(item) for item in value) + ']'
+    if isinstance(value, str):
+        return 'u' + ascii(value)
+    return repr(value)
 
 def main():
     if len(sys.argv) != 3:
@@ -19,7 +31,8 @@ def main():
     #print('sys.argv: %s' % sys.argv)
     #print('generate default_config.py and xvm.xc.sample')
 
-    os.makedirs(output_folder)
+    if not os.path.isdir(output_folder):
+        os.makedirs(output_folder)
 
     # Path to JSONxLoader
     sys.path.insert(0, os.path.join(os.path.join(current_location, '../3rdparty/')))
@@ -32,12 +45,10 @@ def main():
         cfg_wg = JSONxLoader.load(os.path.join(current_location, '../../release/configs/default_wg/@xvm.xc'))
         en = JSONxLoader.load(os.path.join(current_location, '../../release/l10n/en.xc'))
         ru = JSONxLoader.load(os.path.join(current_location, '../../release/l10n/ru.xc'))
-        with open(dc_fn, 'w') as f:
-            f.write('DEFAULT_CONFIG_LESTA={}\nDEFAULT_CONFIG_WG={}\nLANG_EN={}\nLANG_RU={}'.format(cfg_lesta, cfg_wg, en, ru))
-        py_compile.compile(dc_fn)
-        if not os.path.exists(dc_fn + 'c'):
-            raise Exception('Failed to compile ' + dc_fn)
-    except Exception, e:
+        with io.open(dc_fn, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(u'# -*- coding: utf-8 -*-\nDEFAULT_CONFIG_LESTA={}\nDEFAULT_CONFIG_WG={}\nLANG_EN={}\nLANG_RU={}'.format(
+                python_repr(cfg_lesta), python_repr(cfg_wg), python_repr(en), python_repr(ru)))
+    except Exception as e:
         print('Error generating {}: {}'.format(dc_fn, e))
         if os.path.exists(dc_fn):
             os.remove(dc_fn)
@@ -47,15 +58,12 @@ def main():
     xvm_xc_sample_src = os.path.join(current_location, '../../release/configs/xvm.xc.sample')
     xvm_xc_sample_trgt = os.path.join(output_folder, 'default_xvm_xc.py')
     try:
-        with open(xvm_xc_sample_trgt, 'w') as trgt_file:
-            trgt_file.write("# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''")
-            with open(xvm_xc_sample_src, 'r') as src_file:
-                shutil.copyfileobj(src_file, trgt_file)
-            trgt_file.write("'''")
-        py_compile.compile(xvm_xc_sample_trgt)
-        if not os.path.exists(xvm_xc_sample_trgt + 'c'):
-            raise Exception('Failed to compile ' + xvm_xc_sample_trgt)
-    except Exception, e:
+        with io.open(xvm_xc_sample_trgt, 'w', encoding='utf-8', newline='\n') as trgt_file:
+            trgt_file.write(u"# -*- coding: utf-8 -*-\n''' Generated automatically by XVM builder '''\nDEFAULT_XVM_XC = '''")
+            with io.open(xvm_xc_sample_src, 'r', encoding='utf-8-sig') as src_file:
+                trgt_file.write(src_file.read())
+            trgt_file.write(u"'''")
+    except Exception as e:
         print('Error generating {}: {}'.format(xvm_xc_sample_trgt, e))
         if os.path.exists(xvm_xc_sample_trgt):
             os.remove(xvm_xc_sample_trgt)

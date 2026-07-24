@@ -11,7 +11,7 @@ class Node(object):
         return isinstance(other, Node)
 
     def __repr__(self):
-        strings = [repr(item) for item in self.__dict__.itervalues()]
+        strings = [repr(item) for item in self.__dict__.values()]
         return "{}({})".format(self.__class__.__name__, ', '.join(strings))
 
     def __str__(self):

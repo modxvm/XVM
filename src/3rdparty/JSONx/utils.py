@@ -3,6 +3,7 @@ __all__ = ['on', 'when', 'decode_escapes', 'get_dict_path']
 import re
 import codecs
 import copy
+from functools import reduce
 
 
 ESCAPE_SEQUENCE_RE = re.compile(r'''
@@ -38,8 +39,9 @@ def get_dict_path(dic, path):
         result, _ = reduce(callback, path.split('/'), (dic, []))
 
         return copy.copy(result), None
-    except Exception, e:
-        return None, e.message
+    except Exception as e:
+        message = e.message if hasattr(e, 'message') else str(e)
+        return None, message
 
 
 def get_position(string, index):

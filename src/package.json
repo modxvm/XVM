@@ -2,5 +2,6 @@
     "id": "com.modxvm.xvm",
     "name": "XVM",
     "split_build": true,
+    "version": "0.0.0",
     "build_devel": false
 }

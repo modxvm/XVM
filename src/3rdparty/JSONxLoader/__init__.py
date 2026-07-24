@@ -1,9 +1,9 @@
 __author__ = 'Alex'
 
-from loader import JSONxLoaderException
+from .loader import JSONxLoaderException
 
 
 def load(file_path, log_func=None):
-    import loader
+    from . import loader
     config_loader = loader.JSONxLoader(file_path, log_func)
     return config_loader.load()

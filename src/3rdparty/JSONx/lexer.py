@@ -1,6 +1,6 @@
 import re
-import exception
-import utils
+from . import exception
+from . import utils
 
 
 class Type(object):
@@ -44,8 +44,9 @@ class JSONxToken(object):
         return repr(self)
 
     def __repr__(self):
+        escaped_value = self.value.encode('unicode-escape').decode('ascii')
         return "JSONxToken(type={} value='{:.50s}' pos={})" \
-            .format(self.type, self.value.encode('unicode-escape'), self.position)
+            .format(self.type, escaped_value, self.position)
 
 
 class JSONxLexer(object):
@@ -75,8 +76,9 @@ class JSONxLexer(object):
                 if tag:
                     result += JSONxToken(tag, text, index, source),
             else:
+                escaped_value = source[index].encode('unicode-escape').decode('ascii')
                 raise exception.LexerException('Illegal character "{0}"'
-                                               .format(source[index].encode('unicode-escape')),
+                                               .format(escaped_value),
                                                utils.get_position(source, index))
 
             index = match.end()

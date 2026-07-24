@@ -1,15 +1,15 @@
 __author__ = 'Alex'
 
 
-import lexer
-import parser
-import utils
-import JSONx.ast
-from exception import JSONxException
+from . import ast
+from . import lexer
+from . import parser
+from . import utils
+from .exception import JSONxException
 
 
 def parse(source):
-    visitor = JSONx.ast.JSONxVisitor()
+    visitor = ast.JSONxVisitor()
     tokens = lexer.tokenize(source)
     json_ast = parser.parse(tokens)
     return visitor.visit(json_ast)

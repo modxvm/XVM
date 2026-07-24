@@ -33,9 +33,10 @@ class JSONxLoader(object):
             config = self.load_file(path)
             result = self.data_cache[path] = JSONx.parse(config)
             return result
-        except JSONx.JSONxException, e:
+        except JSONx.JSONxException as e:
             line, col = e.error_position
-            raise JSONxLoaderException(u"{} at {}:{} in \"{}\"".format(e.message, line, col, path), path)
+            message = e.message if hasattr(e, 'message') else str(e)
+            raise JSONxLoaderException(u"{} at {}:{} in \"{}\"".format(message, line, col, path), path)
 
     def visit(self, root, path, file_name, level):
         if level < 0:
@@ -49,7 +50,7 @@ class JSONxLoader(object):
 
     def visit_dict(self, root, path, file_name, level):
         if '$ref' not in root:
-            return {key: self.visit(value, path + [key], file_name, level - 1) for key, value in root.iteritems()}
+            return {key: self.visit(value, path + [key], file_name, level - 1) for key, value in root.items()}
 
         ref_path = root['$ref'].get('path') or '.'
         ref_file = root['$ref'].get('file')
@@ -64,7 +65,7 @@ class JSONxLoader(object):
                                        .format(ref_file or file_name, ref_path, config_file, obj_path, err), file_name)
 
         if isinstance(result, dict):
-            items = (item for item in root.iteritems() if item[0] != '$ref')
+            items = (item for item in root.items() if item[0] != '$ref')
             result.update(items)
         return self.visit(result, path, config_file, level - 1)
 
@@ -90,7 +91,7 @@ class JSONxLoader(object):
                 self.log_func(u'[JSONxLoader] load: {}'.format(path))
             stream.close()
             return self.file_cache[path]
-        except IOError, e:
+        except IOError as e:
             raise JSONxLoaderException(u'File not found: {}'.format(e.filename), e.filename)
 
 
