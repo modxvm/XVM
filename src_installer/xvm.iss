@@ -1,5 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
-// Copyright (c) 2017-2025 XVM Contributors
+// Copyright (c) 2017-2026 XVM Contributors
 
 #define APP_WEBSITE    "https://modxvm.com/"
 #define APP_DIR_UNINST "xvm_uninst"
@@ -12,7 +12,7 @@
 #include "openwg_utils/innosetup/openwg.utils.iss"
 
 [Setup]
-AppCopyright    = "2025 (c) XVM Team"
+AppCopyright    = "2026 (c) XVM Team"
 AppId           = {{2865cd27-6b8b-4413-8272-cd968f316050}
 AppName         = "XVM"
 AppPublisher    = "XVM Team"
