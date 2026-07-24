@@ -23,7 +23,7 @@ def math_sum(*a):
 # Subtraction. Вычитание.
 @xvm.export('math.sub')
 @xvm.export('sub')
-def math_sub(a, b):
+def math_sub(a=None, b=None):
     return None if a is None or b is None else a - b
 
 # Multiplication. Умножение.
@@ -36,14 +36,14 @@ def math_mul(*a):
 # Division. Деление.
 @xvm.export('math.div')
 @xvm.export('div')
-def math_div(a, b):
+def math_div(a=None, b=None):
     if a is not None and b is not None:
         return a / float(b) if b != 0 else 0
     return None
 
 # Modulo. Деление по модулю.
 @xvm.export('mod')
-def math_mod(a, b):
+def math_mod(a=None, b=None):
     if a is not None and b is not None:
         return a % b if b != 0 else 0
     return None
@@ -51,13 +51,13 @@ def math_mod(a, b):
 # Raise to power. Возведение в степень.
 @xvm.export('math.pow')
 @xvm.export('pow')
-def math_pow(a, n):
+def math_pow(a=None, n=None):
     return None if a is None or n is None else a ** n
 
 # Absolute value. Абсолютная величина
 @xvm.export('math.abs')
 @xvm.export('abs')
-def math_abs(a):
+def math_abs(a=None):
     return abs(a) if a is not None else None
 
 # Minimum value. Минимальное значение
