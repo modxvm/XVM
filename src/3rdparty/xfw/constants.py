@@ -20,7 +20,7 @@ game_constants = (lambda: importlib.import_module('constants'))()
 #
 
 IS_WG = game_constants.CURRENT_REALM != 'RU'
-IS_LESTA = game_constants.CURRENT_REALM == 'RU'
+IS_LESTA = not IS_WG
 IS_CT = game_constants.IS_CT
 
 class XFW_COMMAND(object):
