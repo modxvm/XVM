@@ -83,7 +83,6 @@ package com.xvm.battle
         private var _battleElements:BattleElements = null;
         private var _battleLabels:BattleLabels = null;
         private var _zoomIndicator:ZoomIndicator = null;
-        private var _watermark:MovieClip = null;
         private var hotkeys_cfg:CHotkeys;
 
         public function BattleXvmView(view:IView)
@@ -202,10 +201,6 @@ package com.xvm.battle
                 {
                     _zoomIndicator.dispose();
                     _zoomIndicator = null;
-                }
-                if (_watermark)
-                {
-                    _watermark = null;
                 }
             }
             catch (ex:Error)
