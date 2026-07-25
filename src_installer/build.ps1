@@ -3,11 +3,18 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 # Copyright (c) 2013-2026 XVM Contributors
 
+param(
+    [string[]] $Flavours = @('Lesta', 'WG')
+)
+
+$ErrorActionPreference = 'Stop'
+
 #
 # Imports
 #
 
 Import-Module "$PSScriptRoot/../src_build/library.psm1" -Force -DisableNameChecking
+$Global:flavours = @(Resolve-BuildFlavours $Flavours)
 
 
 
@@ -21,7 +28,7 @@ $Global:path_temp = "$PSScriptRoot/../~output/installer_temp/"
 
 $Global:version_lesta = $config.game_version_lesta
 $Global:version_wg = $config.game_version_wg
-$Global:version_xvm = Get-VcsVersionString
+$Global:version_xvm = Get-VcsVersionString -RepositoryPath "$PSScriptRoot/.."
 
 $Global:url_l10n = "https://translate.modxvm.com/downloads/xvm-installer/xvm-installer-l10n_isl.zip"
 
@@ -54,6 +61,8 @@ function Prepare-Defines()
         -replace 'XVM_MTVERSION',  $Global:version_lesta`
         -replace 'XVM_VERSION',    $Global:version_xvm |
         Set-Content $outputFile
+    if ('wg' -in $Global:flavours) { Add-Content $outputFile '#define BUILD_WG' }
+    if ('lesta' -in $Global:flavours) { Add-Content $outputFile '#define BUILD_LESTA' }
 }
 
 
@@ -105,10 +114,16 @@ function Build-Run()
 {
     $isccPath = "$PSScriptRoot/../src_build/bin/windows_i686/innosetup/ISCC.exe"
 
-    if ($IsLinux) {
-        Invoke-ProcessAndLog -Process "wine" -Arguments @($isccPath, "xvm.iss") -WorkingDirectory "$PSScriptRoot"
-    } else {
-        Invoke-ProcessAndLog -Process $isccPath -Arguments @("xvm.iss") -WorkingDirectory "$PSScriptRoot"
+    Push-Location $PSScriptRoot
+    try {
+        if ($IsLinux) { & wine $isccPath 'xvm.iss' }
+        else { & $isccPath 'xvm.iss' }
+        if ($LASTEXITCODE -ne 0) {
+            throw "Inno Setup compiler failed with exit code $LASTEXITCODE."
+        }
+    }
+    finally {
+        Pop-Location
     }
 }
 
@@ -117,12 +132,14 @@ function Build-Deploy()
     $outputDir = "$PSScriptRoot/../~output"
     $sourceFile = "$outputDir/setup_xvm.exe"
     
-    $vcs_tag = Get-VcsLastTag
-    $vcs_commits = Get-VcsCommitsCount
-    $vcs_branch = Get-VcsBranch
-    $vcs_hash = Get-VcsHash
+    $vcs_tag = Get-VcsLastTag -RepositoryPath "$PSScriptRoot/.."
+    $vcs_commits = Get-VcsCommitsCount -RepositoryPath "$PSScriptRoot/.." -Tag $vcs_tag
+    $vcs_branch = (Get-VcsBranch -RepositoryPath "$PSScriptRoot/..") -replace '/', '-'
+    $vcs_hash = Get-VcsHash -RepositoryPath "$PSScriptRoot/.."
 
-    Copy-Item -Path $sourceFile -Destination "$outputDir/xvm_$($vcs_tag)_$($vcs_commits)_$($vcs_branch)_$($vcs_hash).exe"
+    $flavourSuffix = $Global:flavours.Count -eq 1 ? "_$($Global:flavours[0])" : ''
+    Copy-Item -Path $sourceFile -Destination `
+        "$outputDir/xvm_$($vcs_tag)_$($vcs_commits)_$($vcs_branch)_$($vcs_hash)$flavourSuffix.exe"
 
     Remove-Item -Path $sourceFile
 }

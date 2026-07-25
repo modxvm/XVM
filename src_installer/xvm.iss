@@ -63,12 +63,16 @@ Source: "{app}\res_mods\configs\*"; DestDir: "{app}\xvm_backup\configs"; Tasks: 
 Source: "{app}\res_mods\mods\shared_resources\xvm\res\*"; DestDir: "{app}\xvm_backup\mods\shared_resources\xvm\res"; Tasks: xvmbackup; Flags: external skipifsourcedoesntexist createallsubdirs recursesubdirs uninsneveruninstall;
 
 ;xvm/WG
+#ifdef BUILD_WG
 Source: "..\~output\deploy_full\wg\mods\*"    ; DestDir: "{app}\mods"    ; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
 Source: "..\~output\deploy_full\wg\res_mods\*"; DestDir: "{app}\res_mods"; Check: not CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+#endif
 
 ;xvm/Lesta
+#ifdef BUILD_LESTA
 Source: "..\~output\deploy_full\lesta\mods\*"    ; DestDir: "{app}\mods"    ; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
 Source: "..\~output\deploy_full\lesta\res_mods\*"; DestDir: "{app}\res_mods"; Check: CHECK_IsLesta; Flags: createallsubdirs recursesubdirs;
+#endif
 
 [InstallDelete]
 ;mods\ver\com.modxvm.xfw\*.wotmod
@@ -161,6 +165,17 @@ var
 begin
   Vendor := WotList_Selected_Record(WotList).Vendor;
   Result := Vendor = 2;
+end;
+
+function CHECK_IsSupportedFlavour(): Boolean;
+begin
+  Result := False;
+#ifdef BUILD_WG
+  if not CHECK_IsLesta() then Result := True;
+#endif
+#ifdef BUILD_LESTA
+  if CHECK_IsLesta() then Result := True;
+#endif
 end;
 
 
@@ -309,6 +324,13 @@ end;
 function NextButtonClick_wpSelectDir(): Boolean;
 begin
   Result := True;
+
+  if not CHECK_IsSupportedFlavour() then
+  begin
+    MsgBox(ExpandConstant('{cm:version_not_match}'), mbError, MB_OK);
+    Result := False;
+    Exit;
+  end;
 
   // check for version
   if (not CHECK_IsLesta and not WotList_Selected_VersionMatch(WotList, '{#VersionWOT}')) or (CHECK_IsLesta and not WotList_Selected_VersionMatch(WotList, '{#VersionMT}')) then

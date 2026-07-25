@@ -1,4 +1,45 @@
 {
+    "schema_version": 1,
     "game_version_lesta": "1.44.0.0",
-    "game_version_wg": "2.3.1.0"
+    "game_version_wg": "2.3.1.0",
+    "build": {
+        "package_directory": "src",
+        "output_directory": "~output"
+    },
+    "full_package": {
+        "generated_packages_directory": "com.modxvm.xvm/deploy",
+        "deployment_directory": "deploy_full",
+        "third_party_directories": ["3rdparty_packages"],
+        "configs_directory": "release/configs",
+        "common_config_files": ["configs.url", "xvm.xc.sample"],
+        "common_config_directories": ["py_macro"],
+        "default_config_destination": "default",
+        "config_destination": "res_mods/configs/xvm",
+        "shared_directory": "release",
+        "shared_directories": ["audioww", "doc", "l10n", "res"],
+        "shared_destination": "res_mods/mods/shared_resources/xvm",
+        "translations": {
+            "url": "https://translate.modxvm.com/downloads/xvm-client/xvm-client-l10n_json.zip",
+            "destination": "l10n",
+            "exclude": ["ru.xc"]
+        },
+        "archive": {
+            "file_name": "xvm_{tag}_{commits}_{branch}_{hash}{flavour_suffix}.zip",
+            "compression_level": 9
+        },
+        "targets": {
+            "lesta": {
+                "version_property": "game_version_lesta",
+                "package_extension": ".mtmod",
+                "default_config": "default_lesta",
+                "exclude_shared": ["audioww/xvm_wg.bnk"]
+            },
+            "wg": {
+                "version_property": "game_version_wg",
+                "package_extension": ".wotmod",
+                "default_config": "default_wg",
+                "exclude_shared": ["audioww/xvm_lesta.bnk"]
+            }
+        }
+    }
 }
