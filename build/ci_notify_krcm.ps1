@@ -3,10 +3,20 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 # Copyright (c) 2013-2026 XVM Contributors
 
+param(
+  [string[]] $Flavours = @('Lesta', 'WG'),
+  [switch] $DryRun
+)
+
+$ErrorActionPreference = 'Stop'
+
 #
 # Imports
 #
 Import-Module "$PSScriptRoot/../src_build/library.psm1" -Force -DisableNameChecking
+$script:repository_path = [System.IO.Path]::GetFullPath("$PSScriptRoot/..")
+$script:flavours = @(Resolve-BuildFlavours $Flavours)
+$script:flavour_suffix = $script:flavours.Count -eq 1 ? "_$($script:flavours[0])" : ''
 
 
 
@@ -14,26 +24,26 @@ Import-Module "$PSScriptRoot/../src_build/library.psm1" -Force -DisableNameCheck
 # Globals / env validation
 #
 
-if(!$env:XVMBUILD_IPB_SERVER){
+if(!$env:XVMBUILD_IPB_SERVER -and -not $DryRun){
     Write-Error "XVMBUILD_IPB_SERVER is not set"
     exit 1
 }
 $Global:ipb_server     = $env:XVMBUILD_IPB_SERVER
 
-if(!$env:XVMBUILD_IPB_APIKEY){
+if(!$env:XVMBUILD_IPB_APIKEY -and -not $DryRun){
     Write-Error "XVMBUILD_IPB_APIKEY is not set"
     exit 1
 }
 $Global:ipb_apikey     = $env:XVMBUILD_IPB_APIKEY
 
-if(!$env:XVMBUILD_IPB_USERID){
+if(!$env:XVMBUILD_IPB_USERID -and -not $DryRun){
     Write-Error "XVMBUILD_IPB_USERID is not set"
     exit 1
 }
 $Global:ipb_userid     = $env:XVMBUILD_IPB_USERID
 
 
-if(!$env:XVMBUILD_IPB_TOPICID){
+if(!$env:XVMBUILD_IPB_TOPICID -and -not $DryRun){
     Write-Error "XVMBUILD_IPB_TOPICID is not set"
     exit 1
 }
@@ -52,10 +62,10 @@ function HtmlEncode {
 }
 
 function Get-RepoStats {
-  $branch  = Get-VcsBranch
-  $commits = Get-VcsCommitsCount
-  $hash    = Get-VcsHash
-  $tag     = Get-VcsLastTag
+  $branch  = Get-VcsBranch -RepositoryPath $script:repository_path
+  $tag     = Get-VcsLastTag -RepositoryPath $script:repository_path
+  $commits = Get-VcsCommitsCount -RepositoryPath $script:repository_path -Tag $tag
+  $hash    = Get-VcsHash -RepositoryPath $script:repository_path
   return @{
     Branch  = "$branch".Trim()
     Commits = "$commits".Trim()
@@ -72,7 +82,7 @@ function Build-ArtifactUrls {
     [Parameter(Mandatory)][string]$Hash
   )
   $Branch = $Branch -replace '/','-'
-  $baseName = "xvm_{0}_{1}_{2}_{3}" -f $Tag, $Commits, $Branch, $Hash
+  $baseName = "xvm_{0}_{1}_{2}_{3}{4}" -f $Tag, $Commits, $Branch, $Hash, $script:flavour_suffix
   [pscustomobject]@{
     Zip = "https://nightly.modxvm.com/download/$Branch/$baseName.zip"
     Exe = "https://nightly.modxvm.com/download/$Branch/$baseName.exe"
@@ -86,10 +96,11 @@ function Build-IpbHtml {
     [Parameter(Mandatory)] $GameVersions
   )
 
-  $author  = HtmlEncode (Get-VcsOneLine "%an")
-  $subject = HtmlEncode (Get-VcsOneLine "%s")
-  $body    = HtmlEncode (Get-VcsOneLine "%b")
-  $date    = Get-Date (Get-VcsOneLine "%ci") -Format "dd.MM.yyyy HH:mm (UTC)"
+  $author  = HtmlEncode (Get-VcsCommitText -RepositoryPath $script:repository_path -Format '%an')
+  $subject = HtmlEncode (Get-VcsCommitText -RepositoryPath $script:repository_path -Format '%s')
+  $body    = HtmlEncode (Get-VcsCommitText -RepositoryPath $script:repository_path -Format '%b')
+  $date    = Get-Date (Get-VcsCommitText -RepositoryPath $script:repository_path -Format '%ci') `
+    -Format "dd.MM.yyyy HH:mm (UTC)"
 
     $commitUrl = "https://gitlab.com/xvm/xvm/commit/$($RepoStats.Hash)"
 
@@ -144,5 +155,8 @@ $versions = Get-Content "$PSScriptRoot/../build.json" -Raw | ConvertFrom-Json
 $stats    = Get-RepoStats
 $urls     = Build-ArtifactUrls -Tag $stats.Tag -Commits $stats.Commits -Branch $stats.Branch -Hash $stats.Hash
 $html     = Build-IpbHtml -RepoStats $stats -Urls $urls -GameVersions $versions
-Send-IpbPost -Html $html
-Write-Host "IPB notification posted for $($stats.Tag)_$($stats.Commits) on branch $($stats.Branch)."
+if ($DryRun) { Write-Output $html }
+else {
+  Send-IpbPost -Html $html
+  Write-Host "IPB notification posted for $($stats.Tag)_$($stats.Commits) on branch $($stats.Branch)."
+}
