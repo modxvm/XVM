@@ -81,6 +81,7 @@ def owg_module_init():
 def owg_module_fini():
     global __initialized
     if __initialized:
+        xmqp.stop()
         g_eventBus.removeListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_CONNECTED, xmqp_events.onXmqpConnected)
         g_eventBus.removeListener(XVM_BATTLE_EVENT.XMQP_MESSAGE, xmqp_events.onXmqpMessage)

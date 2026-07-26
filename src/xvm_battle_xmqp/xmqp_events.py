@@ -3,7 +3,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 Copyright (c) 2013-2026 XVM Contributors
 """
 
-import traceback
+import logging
 
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
@@ -12,12 +12,14 @@ from xfw import *
 from xvm_actionscript import *
 
 import xvm_main.config as config
-from xvm_main.logger import *
 import xvm_main.utils as utils
 
 from xvm_battle.consts import *
 import xmqp
 from xvm_battle_vm.vehicleMarkers import g_markers
+
+
+_logger = logging.getLogger('XVM/Battle/XMQP')
 
 
 class EVENTS(object):
@@ -36,7 +38,7 @@ class TARGETS(object):
 
 
 def onXmqpConnected(e):
-    #debug('onXmqpConnected')
+    # _logger.debug('onXmqpConnected')
     # send "hola" broadcast
     data = {'event': EVENTS.XMQP_HOLA, 'capabilities': xmqp.getCapabilitiesData()}
     if xmqp.is_active():
@@ -48,23 +50,23 @@ def onBattleInit():
 
 def onXmqpMessage(e):
     try:
-        #debug('onXmqpMessage: ' + str(e.ctx))
+        # _logger.debug('onXmqpMessage: %s', e.ctx)
         data = e.ctx.get('data', '')
         event_type = data['event']
         global _event_handlers
         if event_type in _event_handlers:
             _event_handlers[event_type](e.ctx.get('accountDBID', ''), data)
         else:
-            debug('unknown XMQP message: {}'.format(data))
-    except Exception as ex:
-        err(traceback.format_exc())
+            _logger.debug('Unknown XMQP message: %s', data)
+    except Exception:
+        _logger.exception('onXmqpMessage')
 
 
 # XMQP default event handler
 
 def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
-    #debug('_as_xmqp_event: {} => {}'.format(accountDBID, data))
+    # _logger.debug('_as_xmqp_event: %s => %s', accountDBID, data)
 
     if xmqp.XMQP_DEVELOPMENT:
         if accountDBID == utils.getAccountDBID():
@@ -75,11 +77,11 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
         return
 
     if not data:
-        warn('[XMQP] no data')
+        _logger.warning('No data')
         return
 
     if 'event' not in data:
-        warn('[XMQP] no "event" field in data: %s' % str(data))
+        _logger.warning('No "event" field in data: %s', data)
         return
 
     event = data['event']
@@ -96,7 +98,7 @@ def _as_xmqp_event(accountDBID, data, targets=TARGETS.ALL):
 
 def _sendCapabilities():
     for accountDBID, data in list(xmqp.players_capabilities.items()):
-        #debug('_sendCapabilities: {} {}'.format(accountDBID, data))
+        # _logger.debug('_sendCapabilities: %s %s', accountDBID, data)
         if xmqp.XMQP_DEVELOPMENT:
             if accountDBID == utils.getAccountDBID():
                 accountDBID = getCurrentAccountDBID()
@@ -111,7 +113,7 @@ def _onXmqpHola(accountDBID, data):
             accountDBID = getCurrentAccountDBID()
     if accountDBID not in xmqp.players_capabilities:
         xmqp.players_capabilities[accountDBID] = data['capabilities']
-        #debug('_onXmqpHola: {} {}'.format(accountDBID, data))
+        # _logger.debug('_onXmqpHola: %s %s', accountDBID, data)
         _as_xmqp_event(accountDBID, data)
 
 
@@ -178,9 +180,8 @@ def _TimersPanel_showDeathZoneTimer(self, value):
                     'totalTime': value.totalTime,
                     'level': value.level,
                     'finishTime': value.finishTime})
-        except Exception as ex:
-            err(traceback.format_exc())
-            err('value: ' + str(value))
+        except Exception:
+            _logger.exception('_TimersPanel_showDeathZoneTimer: value=%s', value)
 
 # sixth sense indicator
 
@@ -194,10 +195,10 @@ def _SixthSenseIndicator_as_showS(self, *args, **kwargs):
 # minimap click
 
 def send_minimap_click(path):
-    #debug('send_minimap_click: [...]')
+    # _logger.debug('send_minimap_click: [...]')
     if xmqp.is_active():
         path = [[int(x), int(y)] for x,y in path]
-        #debug('send_minimap_click: {}'.format(path))
+        # _logger.debug('send_minimap_click: %s', path)
         xmqp.call({
             'event': EVENTS.XMQP_MINIMAP_CLICK,
             'path': path,
