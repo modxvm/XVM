@@ -4,7 +4,7 @@ Copyright (c) 2013-2026 XVM Contributors
 """
 
 #
-# imports
+# Imports
 #
 
 # stdlib
@@ -42,6 +42,14 @@ from xvm_battle.consts import XVM_BATTLE_COMMAND
 
 
 #
+# Logger
+#
+
+_logger = logging.getLogger('XVM/Battle/Camera')
+
+
+
+#
 # Avatar
 #
 
@@ -55,7 +63,7 @@ def _PlayerAvatar_onBecomePlayer(*args, **kwargs):
             onCrosshairPositionChanged(*ctrl.getPosition())
             onCrosshairZoomFactorChanged(ctrl.getZoomFactor())
     except Exception:
-        logging.getLogger('XVM/Battle/Camera').exception('_PlayerAvatar_onBecomePlayer')
+        _logger.exception('_PlayerAvatar_onBecomePlayer')
 
 
 def _PlayerAvatar_onBecomeNonPlayer(*args, **kwargs):
@@ -66,7 +74,8 @@ def _PlayerAvatar_onBecomeNonPlayer(*args, **kwargs):
             ctrl.onCrosshairPositionChanged -= onCrosshairPositionChanged
             ctrl.onCrosshairZoomFactorChanged -= onCrosshairZoomFactorChanged
     except Exception:
-        logging.getLogger('XVM/Battle/Camera').exception('_PlayerAvatar_onBecomeNonPlayer')
+        _logger.exception('_PlayerAvatar_onBecomeNonPlayer')
+
 
 
 #
@@ -105,8 +114,9 @@ def _disableShotRecoilEffect(dcfg):
         elif isinstance(value, Math.Vector3):
             value = Math.Vector3(0.0, 0.0, 0.0)
         else:
-            logging.getLogger('XVM/Battle/Camera').warning('unknown dynamic camera option type: %s %s = %s', type(value), name, value)
+            _logger.warning('Unknown dynamic camera option type: %s %s = %s', type(value), name, value)
         dcfg[name] = value
+
 
 
 #
@@ -114,7 +124,7 @@ def _disableShotRecoilEffect(dcfg):
 #
 
 def _ZoomStateSwitcher__isEnabledBySettings(base, self, index):
-    if config.get('battle/camera/enabled'):
+    if config.get('battle/camera/enabled') and config.get('battle/camera/sniper/zoomIndicator/enabled'):
         return False
     else:
         return base(self, index)
@@ -275,12 +285,12 @@ def _StrategicCamera_create_common(self):
             cfg['distRange'] = [float(i) for i in value]
 
 
-def _StrategicCamera_create_wg(base, self, onChangeControlMode = None):
+def _StrategicCamera_create_wg(base, self, onChangeControlMode=None):
     _StrategicCamera_create_common(self)
     base(self, onChangeControlMode)
 
 
-def _StrategicCamera_create_lesta(base, self, onChangeControlMode = None, useShotMaxDistance=True):
+def _StrategicCamera_create_lesta(base, self, onChangeControlMode=None, useShotMaxDistance=True):
     _StrategicCamera_create_common(self)
     base(self, onChangeControlMode, useShotMaxDistance)
 
