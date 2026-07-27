@@ -56,10 +56,10 @@
     // Снайперский режим.
     "sniper": {
       // List of multiplicities for the sniper mode,
-      // Default: [ 2, 4, 8 ]. It's possible to use a greater number of values.
+      // Default: [ 2, 4, 8, 16, 24 ]. It's possible to use a greater number of values.
       // Список значений кратности для снайперского режима,
-      // По умолчанию: [ 2, 4, 8 ]. Можно использовать большее количество значений.
-      "zooms": [2, 4, 8],
+      // По умолчанию: [ 2, 4, 8, 16, 24 ]. Можно использовать большее количество значений.
+      "zooms": [2, 4, 8, 16, 24],
       // Start zoom value (null for default behavior - depends on the settings in the client).
       // Начальное значение кратности (null для поведения по умолчанию - зависит от настроек в клиенте).
       "startZoom": null,
