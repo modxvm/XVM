@@ -320,6 +320,8 @@ __initialized = False
 def owg_module_init():
     global __initialized
     if not __initialized:
+        onConfigLoaded(None)
+
         g_eventBus.addListener(XFW_COMMAND.XFW_CMD, onXfwCommand)
         g_eventBus.addListener(XVM_EVENT.CONFIG_LOADED, onConfigLoaded)
 
