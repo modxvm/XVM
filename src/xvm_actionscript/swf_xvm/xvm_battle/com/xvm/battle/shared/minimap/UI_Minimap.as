@@ -57,6 +57,7 @@ package com.xvm.battle.shared.minimap
         private var _bottomHolder:Sprite;
         private var _normalHolder:Sprite;
         private var _topHolder:Sprite;
+        private var _xmqpDrawHolder:Sprite;
 
         static private var _instance:UI_Minimap = null;
 
@@ -107,10 +108,14 @@ package com.xvm.battle.shared.minimap
         {
             super.configUI();
 
-            this.mapHit.visible = true; // to show minimap clicks and paths
-            this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown, false, 0, true);
-            stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove, false, 0, true);
-            stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp, false, 0, true);
+            _xmqpDrawHolder = addChild(new Sprite()) as Sprite;
+            _xmqpDrawHolder.mouseEnabled = false;
+            _xmqpDrawHolder.mouseChildren = false;
+            updateXmqpDrawHolder();
+
+            stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown, true, 0, true);
+            stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove, true, 0, true);
+            stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp, true, 0, true);
         }
 
         public function get isAltMode():Boolean
@@ -123,7 +128,26 @@ package com.xvm.battle.shared.minimap
             Xvm.removeEventListener(Defines.XVM_EVENT_CONFIG_LOADED, setup);
             Xvm.removeEventListener(BattleEvents.MINIMAP_ALT_MODE, setAltMode);
             Xvm.removeEventListener(BattleEvents.MINIMAP_ZOOM, setZoom);
+            Xvm.removeEventListener(XmqpEvent.XMQP_MINIMAP_CLICK, onXmqpMinimapClickEvent);
             Xfw.removeCommandListener(XvmCommands.AS_ON_UPDATE_STAGE, onUpdateStage);
+            if (stage != null)
+            {
+                stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown, true);
+                stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove, true);
+                stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp, true);
+            }
+
+            minimap_path = null;
+            minimap_path_mc = null;
+            if (_xmqpDrawHolder != null)
+            {
+                removeChild(_xmqpDrawHolder);
+                _xmqpDrawHolder = null;
+            }
+            if (_instance == this)
+            {
+                _instance = null;
+            }
 
             disposeMapSize();
 
@@ -141,6 +165,7 @@ package com.xvm.battle.shared.minimap
             {
                 sizeIndex = Math.max(0, Math.min(MinimapSizeConst.MAP_SIZE.length - 1, sizeIndex));
                 super.as_setSize(sizeIndex);
+                updateXmqpDrawHolder();
 
                 alignMinimap();
                 dispatchEvent(new LifeCycleEvent(LifeCycleEvent.ON_GRAPHICS_RECTANGLES_UPDATE));
@@ -384,38 +409,50 @@ package com.xvm.battle.shared.minimap
         private var minimap_path:Array = null;
         private var minimap_path_mc:Sprite = null;
 
-        private function onMouseDown(e:MouseEventEx):void
+        private function isMouseOverMap():Boolean
+        {
+            return mapHit != null && mapHit.getBounds(mapHit).contains(mapHit.mouseX, mapHit.mouseY);
+        }
+
+        private function isLeftButton(e:MouseEvent):Boolean
+        {
+            return !(e is MouseEventEx) || MouseEventEx(e).buttonIdx == MouseEventEx.LEFT_BUTTON;
+        }
+
+        private function updateXmqpDrawHolder():void
+        {
+            if (_xmqpDrawHolder != null && mapHit != null)
+            {
+                _xmqpDrawHolder.transform.matrix = mapHit.transform.matrix.clone();
+            }
+        }
+
+        private function onMouseDown(e:MouseEvent):void
         {
             try
             {
-                var target:Sprite = e.target as Sprite;
-                if (target != null)
+                var overMap:Boolean = isMouseOverMap();
+                var leftButton:Boolean = isLeftButton(e);
+                if (overMap && leftButton && Config.networkServicesSettings.xmqp)
                 {
-                    if (target.hitArea == mapHit)
+                    //Logger.addObject(e);
+                    var minimap_mouse_x:int = int(mapHit.mouseX);
+                    var minimap_mouse_y:int = int(mapHit.mouseY);
+                    minimap_path = [[minimap_mouse_x, minimap_mouse_y]];
+                    if (!minimap_path_mc)
                     {
-                        if (e.buttonIdx == MouseEventEx.LEFT_BUTTON)
-                        {
-                            if (Config.networkServicesSettings.xmqp)
-                            {
-                                //Logger.addObject(e);
-                                var minimap_mouse_x:int = int(mapHit.mouseX);
-                                var minimap_mouse_y:int = int(mapHit.mouseY);
-                                minimap_path = [[minimap_mouse_x, minimap_mouse_y]];
-                                if (!minimap_path_mc)
-                                {
-                                    minimap_path_mc = new Sprite();
-                                }
-                                else
-                                {
-                                    minimap_path_mc.graphics.clear();
-                                }
-                                minimap_path_mc.graphics.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 0.3);
-                                minimap_path_mc.graphics.moveTo(minimap_mouse_x, minimap_mouse_y);
-                                minimap_path_mc.graphics.lineTo(minimap_mouse_x + 0.1, minimap_mouse_y + 0.1);
-                                mapHit.addChild(minimap_path_mc);
-                            }
-                        }
+                        minimap_path_mc = new Sprite();
+                        minimap_path_mc.mouseEnabled = false;
+                        minimap_path_mc.mouseChildren = false;
                     }
+                    else
+                    {
+                        minimap_path_mc.graphics.clear();
+                    }
+                    minimap_path_mc.graphics.lineStyle(1, Config.networkServicesSettings.x_minimap_clicks_color, 0.3);
+                    minimap_path_mc.graphics.moveTo(minimap_mouse_x, minimap_mouse_y);
+                    minimap_path_mc.graphics.lineTo(minimap_mouse_x + 0.1, minimap_mouse_y + 0.1);
+                    _xmqpDrawHolder.addChild(minimap_path_mc);
                 }
             }
             catch (ex:Error)
@@ -424,44 +461,34 @@ package com.xvm.battle.shared.minimap
             }
         }
 
-        private function onMouseMove(e:MouseEventEx):void
+        private function onMouseMove(e:MouseEvent):void
         {
-            if (minimap_path != null)
+            if (minimap_path != null && minimap_path.length < _MAX_MINIMAP_PATH_LENGTH && isMouseOverMap())
             {
-                if (minimap_path.length < _MAX_MINIMAP_PATH_LENGTH)
-                {
-                    var target:Sprite = e.target as Sprite;
-                    if (target != null)
-                    {
-                        if (target.hitArea == mapHit)
-                        {
-                            //Logger.addObject(e);
-                            var minimap_mouse_x:int = int(mapHit.mouseX);
-                            var minimap_mouse_y:int = int(mapHit.mouseY);
+                //Logger.addObject(e);
+                var minimap_mouse_x:int = int(mapHit.mouseX);
+                var minimap_mouse_y:int = int(mapHit.mouseY);
 
-                            var lastpos:Array = minimap_path[minimap_path.length - 1];
-                            var distance:Number = Math.sqrt(Math.pow(lastpos[0] - minimap_mouse_x, 2) + Math.pow(lastpos[1] - minimap_mouse_y, 2));
-                            if (distance > 10)
-                            {
-                                minimap_path.push([minimap_mouse_x, minimap_mouse_y]);
-                                minimap_path_mc.graphics.lineTo(minimap_mouse_x, minimap_mouse_y);
-                            }
-                        }
-                    }
+                var lastpos:Array = minimap_path[minimap_path.length - 1];
+                var distance:Number = Math.sqrt(Math.pow(lastpos[0] - minimap_mouse_x, 2) + Math.pow(lastpos[1] - minimap_mouse_y, 2));
+                if (distance > 10)
+                {
+                    minimap_path.push([minimap_mouse_x, minimap_mouse_y]);
+                    minimap_path_mc.graphics.lineTo(minimap_mouse_x, minimap_mouse_y);
                 }
             }
         }
 
-        private function onMouseUp(e:MouseEventEx):void
+        private function onMouseUp(e:MouseEvent):void
         {
-            if (minimap_path != null)
+            if (minimap_path != null && isLeftButton(e))
             {
-                if (e.buttonIdx == MouseEventEx.LEFT_BUTTON)
+                //Logger.addObject(e);
+                Xfw.cmd(BattleCommands.MINIMAP_CLICK, minimap_path);
+                minimap_path = null;
+                if (minimap_path_mc.parent == _xmqpDrawHolder)
                 {
-                    //Logger.addObject(e);
-                    Xfw.cmd(BattleCommands.MINIMAP_CLICK, minimap_path);
-                    minimap_path = null;
-                    mapHit.removeChild(minimap_path_mc);
+                    _xmqpDrawHolder.removeChild(minimap_path_mc);
                 }
             }
         }
@@ -496,10 +523,15 @@ package com.xvm.battle.shared.minimap
                 if (e.data.path != undefined)
                 {
                     var mc:Sprite = new Sprite();
-                    mapHit.addChild(mc);
+                    mc.mouseEnabled = false;
+                    mc.mouseChildren = false;
+                    _xmqpDrawHolder.addChild(mc);
                     App.utils.scheduler.scheduleTask(function():void
                     {
-                        mapHit.removeChild(mc);
+                        if (_xmqpDrawHolder != null && mc.parent == _xmqpDrawHolder)
+                        {
+                            _xmqpDrawHolder.removeChild(mc);
+                        }
                     }, minimapDrawTime * 1000);
 
                     var len:int = e.data.path.length;

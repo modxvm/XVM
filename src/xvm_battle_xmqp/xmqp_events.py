@@ -195,7 +195,7 @@ def _SixthSenseIndicator_as_showS(self, *args, **kwargs):
 # minimap click
 
 def send_minimap_click(path):
-    # _logger.debug('send_minimap_click: [...]')
+    _logger.debug('send_minimap_click: %d points', len(path))
     if xmqp.is_active():
         path = [[int(x), int(y)] for x,y in path]
         # _logger.debug('send_minimap_click: %s', path)
