@@ -176,13 +176,19 @@ class _XMQP(object):
             except openwg_mq.ConnectionError as ex:
                 retry_session = True
                 if not self._closing.isSet():
-                    _logger.error('Connection failure (%s): %s', ex.operation, ex)
+                    _logger.error(
+                        'Connection failure: operation=%s status=%s %s error=%s',
+                        ex.operation, ex.status, self._connection_context(ex), ex
+                    )
             except openwg_mq.AMQPError as ex:
                 if not self._closing.isSet():
-                    _logger.error('Permanent AMQP failure (%s): %s', ex.operation, ex)
+                    _logger.error(
+                        'Permanent AMQP failure: operation=%s status=%s %s error=%s',
+                        ex.operation, ex.status, self._connection_context(ex), ex
+                    )
             except Exception:
                 if not self._closing.isSet():
-                    _logger.exception('Worker failure')
+                    _logger.exception('Worker failure: %s', self._connection_context())
             finally:
                 self._connected.clear()
                 self._exchange_name = None
@@ -210,7 +216,10 @@ class _XMQP(object):
             try:
                 connection.close()
             except Exception:
-                _logger.debug('Failed to close connection while stopping', exc_info=True)
+                _logger.debug(
+                    'Failed to close connection while stopping: %s',
+                    self._connection_context(), exc_info=True
+                )
 
     def call(self, data):
         if not self.is_consuming or self._exchange_name is None:
@@ -239,7 +248,7 @@ class _XMQP(object):
         if self._closing.isSet():
             connection.close()
             return
-        _logger.debug('Connection and channel opened')
+        _logger.info('Connection and channel opened: %s', self._connection_context())
 
         self._queue_name = connection.declare_queue(exclusive=True)
         _logger.debug('queue: %s', self._queue_name)
@@ -281,6 +290,13 @@ class _XMQP(object):
                 return connection.connect()
             except openwg_mq.ConnectionError as ex:
                 last_error = ex
+                if attempt < 2 and not self._closing.isSet():
+                    _logger.warning(
+                        'Connection attempt %s/3 failed: operation=%s status=%s '
+                        '%s error=%s',
+                        attempt + 1, ex.operation, ex.status,
+                        self._connection_context(ex), ex
+                    )
                 connection.close()
                 if attempt < 2 and self._closing.wait(3.0):
                     return None
@@ -335,7 +351,10 @@ class _XMQP(object):
             if self._exchange_correlation_id == correlation_id:
                 response = json.loads(message.body)
                 if 'exchange' not in response:
-                    _logger.error("Invalid lobby response: response='%s'", message.body)
+                    _logger.error(
+                        "Invalid lobby response: %s response='%s'",
+                        self._connection_context(), message.body
+                    )
                     self.stop()
                     return
 
@@ -356,7 +375,45 @@ class _XMQP(object):
         except openwg_mq.AMQPError:
             raise
         except Exception:
-            _logger.exception('Failed to process message')
+            _logger.exception('Failed to process message: %s', self._connection_context())
+
+    def _connection_context(self, error=None):
+        origin = getattr(error, 'origin_endpoint', None) if error is not None else None
+        endpoint = getattr(error, 'endpoint', None) if error is not None else None
+        via_teleport = getattr(error, 'via_teleport', None) if error is not None else None
+        retry_via_teleport = bool(
+            getattr(error, 'retry_via_teleport', False)
+        ) if error is not None else False
+        teleport_endpoint = getattr(error, 'teleport_endpoint', None) if error is not None else None
+
+        connection = self._connection
+        if connection is not None:
+            if origin is None:
+                origin = (connection.host, connection.port)
+            if endpoint is None:
+                endpoint = getattr(connection, 'connected_endpoint', None)
+                via_teleport = getattr(connection, 'connected_via_teleport', None)
+        if origin is None:
+            origin = (
+                XVM.XMQP_SERVER_TEMPLATE.format(HASH=self.server_hash),
+                XVM.XMQP_SERVER_PORT_BASE + self.server_hash,
+            )
+
+        actual = '%s:%s' % endpoint if endpoint is not None else 'unknown'
+        if via_teleport is None:
+            route = 'unknown'
+        else:
+            route = 'Teleport' if via_teleport else 'direct'
+        context = 'origin=%s:%s actual=%s via=%s' % (
+            origin[0], origin[1], actual, route
+        )
+        if retry_via_teleport:
+            retry_endpoint = (
+                '%s:%s' % teleport_endpoint
+                if teleport_endpoint is not None else 'unknown'
+            )
+            context += ' next=Teleport(%s)' % retry_endpoint
+        return context
 
     def _dispatch_event(self, event):
         generation = self._session_generation
@@ -369,6 +426,7 @@ class _XMQP(object):
     def _close_connection(self):
         connection = self._connection
         consumer_tag = self._consumer_tag
+        context = self._connection_context()
         self._connection = None
         self._consumer_tag = None
         self._queue_name = None
@@ -378,8 +436,8 @@ class _XMQP(object):
             if not self._closing.isSet() and consumer_tag is not None and connection.is_open():
                 connection.cancel(consumer_tag)
         except Exception:
-            _logger.debug('Failed to cancel consumer', exc_info=True)
+            _logger.debug('Failed to cancel consumer: %s', context, exc_info=True)
         try:
             connection.close()
         except Exception:
-            _logger.debug('Failed to close connection', exc_info=True)
+            _logger.debug('Failed to close connection: %s', context, exc_info=True)
