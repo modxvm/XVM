@@ -21,6 +21,7 @@ from gui.shared import g_eventBus, events
 
 # OpenWG
 import openwg_mq
+import openwg_network
 from xfw import *
 
 # XVM
@@ -176,7 +177,14 @@ class _XMQP(object):
             except openwg_mq.ConnectionError as ex:
                 retry_session = True
                 if not self._closing.isSet():
-                    _logger.error(
+                    log = _logger.error
+                    if isinstance(ex, openwg_mq.MQTimeoutError):
+                        via_teleport = getattr(ex, 'via_teleport', None)
+                        if via_teleport is None and self._connection is not None:
+                            via_teleport = self._connection.connected_via_teleport
+                        if via_teleport is not True:
+                            log = _logger.warning
+                    log(
                         'Connection failure: operation=%s status=%s %s error=%s',
                         ex.operation, ex.status, self._connection_context(ex), ex
                     )
@@ -263,6 +271,8 @@ class _XMQP(object):
             if message is not None:
                 self._on_message(message)
             if not self._connected.isSet() and time.time() >= lobby_deadline:
+                if connection.connected_via_teleport is False:
+                    openwg_network.teleport_domain_set(host, True)
                 raise openwg_mq.MQTimeoutError(
                     'lobby response timed out',
                     'lobby_handshake'
