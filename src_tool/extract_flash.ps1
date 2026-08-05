@@ -13,7 +13,8 @@ $targetSwfNames = @(
     "battle.swf",
     "battleVehicleMarkersApp.swf",
     "frontline_battle.swf",
-    "lobby.swf"
+    "lobby.swf",
+    "comp7_battle.swf"
 )
 
 $targetSwfSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
@@ -95,7 +96,8 @@ function Extract-SelectedEntriesFromPkg {
                 $outDir = $swcOutDir
             }
             elseif ($targetSwfSet.Contains($entryName)) {
-                $outDir = $swfOutDir
+                $outDir = Join-Path $swfOutDir (Get-SafeFileName $pkgBaseName)
+                New-Item -ItemType Directory -Force -Path $outDir | Out-Null
             }
             else {
                 continue
@@ -120,6 +122,7 @@ function Extract-SelectedEntriesFromPkg {
 $pkgFiles = @()
 $pkgFiles += Get-ChildItem -Path $Root -Recurse -File -Filter "gui*.pkg"
 $pkgFiles += Get-ChildItem -Path $Root -Recurse -File -Filter "frontline*.pkg"
+$pkgFiles += Get-ChildItem -Path $Root -Recurse -File -Filter "comp7*.pkg"
 $pkgFiles = $pkgFiles | Sort-Object FullName -Unique
 
 if (-not $pkgFiles -or $pkgFiles.Count -eq 0) {
