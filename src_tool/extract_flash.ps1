@@ -9,6 +9,10 @@ $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+# PowerShell and .NET can have different current directories. Use an absolute
+# path before passing destinations to both New-Item and ExtractToFile.
+$OutputRoot = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OutputRoot)
+
 $targetSwfNames = @(
     "battle.swf",
     "battleVehicleMarkersApp.swf",
