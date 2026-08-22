@@ -326,7 +326,7 @@
                 "src/xvm_actionscript/swf_xvm/xvm_battle",
                 "src/xvm_actionscript/swf_xvm/xvm_battle_ranked"
             ],
-            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_ranker"
+            "install_directory": "res/mods/openwg_packages/xvm_battle/as_battle_ranked"
         },
         {
             "name": "xvm_battle_rts",
