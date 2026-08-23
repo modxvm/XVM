@@ -180,11 +180,17 @@
       // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
       // true - disable platoon/rank icons.
-      // true - убрать отображение иконки взвода/ранга.
+      // true - убрать отображение иконки взвода.
       "removeSquadIcon": false,
+      // true - disable rank icons.
+      // true - убрать отображение иконки ранга.
+      "removeRankIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
+      // Transparency of the rank icon in ranked battles.
+      // Прозрачность иконки ранга.
+      "rankIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconOffsetXLeft": 0,
@@ -312,12 +318,18 @@
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon/rank icons.
-      // true - убрать отображение иконки взвода/ранга.
+      // true - disable platoon icons.
+      // true - убрать отображение иконки взвода.
       "removeSquadIcon": false,
+      // true - disable rank icons.
+      // true - убрать отображение иконки ранга.
+      "removeRankIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
+      // Transparency of the rank icon in ranked battles.
+      // Прозрачность иконки ранга.
+      "rankIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconOffsetXLeft": 0,
@@ -439,12 +451,18 @@
       // Width of area for switching to "large" mode on mouse over.
       // Ширина области переключения в режим "large" при наведении мыши.
       "expandAreaWidth": 230,
-      // true - disable platoon/rank icons.
-      // true - убрать отображение иконки взвода/ранга.
+      // true - disable platoon icons.
+      // true - убрать отображение иконки взвода.
       "removeSquadIcon": false,
+      // true - disable rank icons.
+      // true - убрать отображение иконки ранга.
+      "removeRankIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
+      // Transparency of the rank icon in ranked battles.
+      // Прозрачность иконки ранга.
+      "rankIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconOffsetXLeft": 0,
@@ -570,9 +588,15 @@
       // true - disable platoon/rank icons.
       // true - убрать отображение иконки взвода/ранга.
       "removeSquadIcon": false,
+      // true - disable rank icons.
+      // true - убрать отображение иконки ранга.
+      "removeRankIcon": false,
       // Transparency of the squad icon.
       // Прозрачность иконки взвода.
       "squadIconAlpha": 100,
+      // Transparency of the rank icon in ranked battles.
+      // Прозрачность иконки ранга.
+      "rankIconAlpha": 100,
       // Offset of X value for vehicle icon.
       // Смещение координаты X для иконки танка.
       "vehicleIconOffsetXLeft": 0,

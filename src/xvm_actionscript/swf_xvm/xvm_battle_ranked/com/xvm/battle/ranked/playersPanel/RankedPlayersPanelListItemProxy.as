@@ -21,6 +21,7 @@ package com.xvm.battle.ranked.playersPanel
     public class RankedPlayersPanelListItemProxy extends PlayersPanelListItemProxyBase
     {
         private static const RANK_ICON_AREA_WIDTH:int = 24;
+        private static const SQUAD_ICON_AREA_WIDTH:int = 22;
 
         CLIENT::WG {
             private var ui:PlayersPanelListItem;
@@ -30,6 +31,7 @@ package com.xvm.battle.ranked.playersPanel
         }
 
         private var mopt_removeRankIcon:Boolean;
+        private var mopt_removeSquadIcon:Boolean;
 
         public function RankedPlayersPanelListItemProxy(ui:*, isLeftPanel:Boolean)
         {
@@ -46,12 +48,15 @@ package com.xvm.battle.ranked.playersPanel
         {
             if (isXVMEnabled)
             {
-                // TODO: use separate option (removeRankIcon)
-                mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeRankIcon);
             }
             else
             {
                 ui.rankIcon.alpha = 1;
+                CLIENT::LESTA {
+                    ui.squadIcon.alpha = 1;
+                }
             }
         }
 
@@ -63,8 +68,8 @@ package com.xvm.battle.ranked.playersPanel
                 case PLAYERS_PANEL_STATE.LONG:
                 case PLAYERS_PANEL_STATE.MEDIUM:
                 case PLAYERS_PANEL_STATE.SHORT:
-                    // TODO: use separate option (removeRankIcon)
-                    mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
+                    mopt_removeRankIcon = Macros.FormatBooleanGlobal(mcfg.removeRankIcon);
+                    mopt_removeSquadIcon = Macros.FormatBooleanGlobal(mcfg.removeSquadIcon);
                     break;
                 default:
                     break;
@@ -79,22 +84,49 @@ package com.xvm.battle.ranked.playersPanel
             }
             else
             {
-                // TODO: use separate option (rankIconAlpha)
-                ui.rankIcon.alpha = Macros.FormatNumber(mcfg.squadIconAlpha, currentPlayerState, 100) / 100.0;
+                ui.rankIcon.alpha = Macros.FormatNumber(mcfg.rankIconAlpha, currentPlayerState, 100) / 100.0;
+            }
+
+            CLIENT::LESTA {
+                if (mopt_removeSquadIcon)
+                {
+                    ui.squadIcon.alpha = 0;
+                }
+                else
+                {
+                    ui.squadIcon.alpha = Macros.FormatNumber(mcfg.squadIconAlpha, currentPlayerState, 100) / 100.0;
+                }
             }
         }
 
         override protected function updatePositionsLeft(lastX:int):void
         {
-            ui.x = -(lastX - (mopt_removeRankIcon ? 0 : RANK_ICON_AREA_WIDTH));
-            //Logger.add("ui.x=" + ui.x + " ui.vehicleIcon.x=" + ui.vehicleIcon.x);
-            ui.rankIcon.x = -ui.x;
+            var rankIconWidth:int = mopt_removeRankIcon ? 0 : RANK_ICON_AREA_WIDTH;
+            var squadIconWidth:int = 0;
+            CLIENT::LESTA {
+                squadIconWidth = mopt_removeSquadIcon ? 0 : SQUAD_ICON_AREA_WIDTH;
+            }
+
+            ui.x = -(lastX - rankIconWidth - squadIconWidth);
+            ui.rankIcon.x = -ui.x + squadIconWidth;
+            CLIENT::LESTA {
+                ui.squadIcon.x = ui.noSoundIcon.x = -ui.x;
+            }
         }
 
         override protected function updatePositionsRight(lastX:int):void
         {
-            ui.x = -(lastX + (mopt_removeRankIcon ? 0 : RANK_ICON_AREA_WIDTH));
-            ui.rankIcon.x = -ui.x - RANK_ICON_AREA_WIDTH;
+            var rankIconWidth:int = mopt_removeRankIcon ? 0 : RANK_ICON_AREA_WIDTH;
+            var squadIconWidth:int = 0;
+            CLIENT::LESTA {
+                squadIconWidth = mopt_removeSquadIcon ? 0 : SQUAD_ICON_AREA_WIDTH;
+            }
+
+            ui.x = -(lastX + rankIconWidth + squadIconWidth);
+            ui.rankIcon.x = -ui.x - rankIconWidth - squadIconWidth;
+            CLIENT::LESTA {
+                ui.squadIcon.x = ui.noSoundIcon.x = -ui.x + rankIconWidth;
+            }
         }
 
         override protected function createExtraFields():void
