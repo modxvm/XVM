@@ -634,7 +634,7 @@ package com.xvm.battle.shared.playersPanel
 
         private function _updateBadgeIcon():void
         {
-            ui.badge.alpha = Macros.FormatNumber(mcfg.rankBadgeAlpha, currentPlayerState, currentPlayerState.isAlive ? 100 : 70) / 100.0;
+            ui.badge.alpha = Macros.FormatNumber(mcfg.badgeAlpha, currentPlayerState, currentPlayerState.isAlive ? 100 : 70) / 100.0;
         }
 
         private function _updateSpottedIndicator():void
@@ -817,7 +817,7 @@ package com.xvm.battle.shared.playersPanel
                     }
                     break;
                 case ui.badge:
-                    w = Macros.FormatNumber(mcfg.rankBadgeWidth, currentPlayerState, 0);
+                    w = Macros.FormatNumber(mcfg.badgeWidth, currentPlayerState, 0);
                     if (int(ui.badge.width) != w)
                     {
                         ui.badge.width = w;
@@ -887,7 +887,7 @@ package com.xvm.battle.shared.playersPanel
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsOffsetXLeft, currentPlayerState, 0);
                 case ui.badge:
-                    return Macros.FormatNumber(mcfg.rankBadgeOffsetXLeft, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.badgeOffsetXLeft, currentPlayerState, 0);
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickOffsetXLeft, currentPlayerState, 0);
                 case ui.vehicleTF:
@@ -916,7 +916,7 @@ package com.xvm.battle.shared.playersPanel
                 case ui.fragsTF:
                     return Macros.FormatNumber(mcfg.fragsOffsetXRight, currentPlayerState, 0);
                 case ui.badge:
-                    return Macros.FormatNumber(mcfg.rankBadgeOffsetXRight, currentPlayerState, 0);
+                    return Macros.FormatNumber(mcfg.badgeOffsetXRight, currentPlayerState, 0);
                 case ui.playerNameFullTF:
                     return Macros.FormatNumber(mcfg.nickOffsetXRight, currentPlayerState, 0);
                 case ui.vehicleTF:

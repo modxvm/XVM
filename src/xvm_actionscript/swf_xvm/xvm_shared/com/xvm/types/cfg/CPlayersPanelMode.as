@@ -28,10 +28,10 @@ package com.xvm.types.cfg
         public var nickShadowRight:CShadow;
         public var nickOffsetXLeft:*;
         public var nickOffsetXRight:*;
-        public var rankBadgeAlpha:*;
-        public var rankBadgeWidth:*;
-        public var rankBadgeOffsetXLeft:*;
-        public var rankBadgeOffsetXRight:*;
+        public var badgeAlpha:*;
+        public var badgeWidth:*;
+        public var badgeOffsetXLeft:*;
+        public var badgeOffsetXRight:*;
         public var removeSpottedIndicator:*;
         public var removeSquadIcon:*;
         public var spottedIndicatorAlpha:*;

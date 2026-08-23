@@ -213,14 +213,14 @@
       "fragsShadowRight": null,
       // Offset of X value for badge column.
       // Смещение координаты X для поля нашивки.
-      "rankBadgeOffsetXLeft": 0,
-      "rankBadgeOffsetXRight": 0,
+      "badgeOffsetXLeft": 0,
+      "badgeOffsetXRight": 0,
       // Width of the badge column. Default is 24.
       // Ширина поля нашивки. По умолчанию: 24.
-      "rankBadgeWidth": 24,
+      "badgeWidth": 24,
       // Transparency of the badge icons.
       // Прозрачность иконки нашивки.
-      "rankBadgeAlpha": "{{alive?100|70}}",
+      "badgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
       "nickOffsetXLeft": 0,
@@ -346,14 +346,14 @@
       "fragsShadowRight": null,
       // Offset of X value for badge column.
       // Смещение координаты X для поля нашивки.
-      "rankBadgeOffsetXLeft": 0,
-      "rankBadgeOffsetXRight": 0,
+      "badgeOffsetXLeft": 0,
+      "badgeOffsetXRight": 0,
       // Width of the badge column. Default is 24.
       // Ширина поля нашивки. По умолчанию: 24.
-      "rankBadgeWidth": 24,
+      "badgeWidth": 24,
       // Transparency of the badge icons.
       // Прозрачность иконки нашивки.
-      "rankBadgeAlpha": "{{alive?100|70}}",
+      "badgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
       "nickOffsetXLeft": 0,
@@ -473,14 +473,14 @@
       "fragsShadowRight": null,
       // Offset of X value for badge column.
       // Смещение координаты X для поля нашивки.
-      "rankBadgeOffsetXLeft": 0,
-      "rankBadgeOffsetXRight": 0,
+      "badgeOffsetXLeft": 0,
+      "badgeOffsetXRight": 0,
       // Width of the badge column. Default is 24.
       // Ширина поля нашивки. По умолчанию: 24.
-      "rankBadgeWidth": 24,
+      "badgeWidth": 24,
       // Transparency of the badge icons.
       // Прозрачность иконки нашивки.
-      "rankBadgeAlpha": "{{alive?100|70}}",
+      "badgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
       "nickOffsetXLeft": 0,
@@ -601,14 +601,14 @@
       "fragsShadowRight": null,
       // Offset of X value for badge column.
       // Смещение координаты X для поля нашивки.
-      "rankBadgeOffsetXLeft": 0,
-      "rankBadgeOffsetXRight": 0,
+      "badgeOffsetXLeft": 0,
+      "badgeOffsetXRight": 0,
       // Width of the badge column. Default is 24.
       // Ширина поля нашивки. По умолчанию: 24.
-      "rankBadgeWidth": 24,
+      "badgeWidth": 24,
       // Transparency of the badge icons.
       // Прозрачность иконки нашивки.
-      "rankBadgeAlpha": "{{alive?100|70}}",
+      "badgeAlpha": "{{alive?100|70}}",
       // Offset of X value for player name column.
       // Смещение координаты X для поля имени игрока.
       "nickOffsetXLeft": 0,
