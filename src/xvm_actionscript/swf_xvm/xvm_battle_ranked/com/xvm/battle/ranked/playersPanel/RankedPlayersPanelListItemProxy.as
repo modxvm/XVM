@@ -125,7 +125,7 @@ package com.xvm.battle.ranked.playersPanel
             ui.x = -(lastX + rankIconWidth + squadIconWidth);
             ui.rankIcon.x = -ui.x - rankIconWidth - squadIconWidth;
             CLIENT::LESTA {
-                ui.squadIcon.x = ui.noSoundIcon.x = -ui.x + rankIconWidth;
+                ui.squadIcon.x = ui.noSoundIcon.x = -ui.x - squadIconWidth;
             }
         }
 
