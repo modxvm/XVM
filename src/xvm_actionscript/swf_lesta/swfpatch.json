@@ -8,8 +8,10 @@
                 "battle.fullStats.patch",
                 "battle.minimap.patch",
                 "battle.playersPanel.patch",
+                "battle.teamBasesPanel.patch",
                 "battle.rankedBattleLoading.patch",
-                "battle.teamBasesPanel.patch"
+                "battle.rankedPlayersPanel.patch",
+                "battle.rankedFullStats.patch"
             ],
             "linkages": [
                 "CAPTURE_BAR_LINKAGE"

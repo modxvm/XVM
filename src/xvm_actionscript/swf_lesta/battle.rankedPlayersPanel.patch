@@ -25,7 +25,7 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersP
    end ; body
   end ; method
 - trait const QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:RankedPlayersPanelListLeft"), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemLeftUI") end
-+ trait const QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemLeftUI") end
++ trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemLeftUI") end
   trait const QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:RankedPlayersPanelListLeft"), "WIDTH") slotid 2 type QName(PackageNamespace(""), "uint") value Integer(485) end
  end ; class
 diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersPanel/list/RankedPlayersPanelListRight.class.asasm battle.orig-0/net/wg/gui/battle/ranked/stats/components/playersPanel/list/RankedPlayersPanelListRight.class.asasm
@@ -55,5 +55,5 @@ diff -Naur battle.orig-0.orig/net/wg/gui/battle/ranked/stats/components/playersP
    end ; body
   end ; method
 - trait const QName(PrivateNamespace(null, "net.wg.gui.battle.ranked.stats.components.playersPanel.list:RankedPlayersPanelListRight"), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemRightUI") end
-+ trait const QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemRightUI") end
++ trait slot QName(PackageNamespace(""), "LINKAGE") slotid 1 type QName(PackageNamespace(""), "String") value Utf8("RankedPlayersPanelListItemRightUI") end
  end ; class
