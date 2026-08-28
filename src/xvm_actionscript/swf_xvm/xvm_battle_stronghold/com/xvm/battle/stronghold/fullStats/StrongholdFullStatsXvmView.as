@@ -57,6 +57,15 @@ package com.xvm.battle.stronghold.fullStats
             component.y = fullStats.y;
             component.visible = fullStats.visible;
             qpw[qidx] = component.getStatsProgressView();
+            var reservesStats:IReservesStats = component as IReservesStats;
+            if (reservesStats)
+            {
+                var reservesView:IDAAPIModule = reservesStats.getReservesView();
+                if (reservesView)
+                {
+                    XfwAccess.getPrivateField(page, 'registerComponent')(reservesView, BATTLE_VIEW_ALIASES.PERSONAL_RESERVES_TAB);
+                }
+            }
             page.fullStats = component;
             page.addChildAt(component, idx);
             bsdController.registerComponentController(page.fullStats);
