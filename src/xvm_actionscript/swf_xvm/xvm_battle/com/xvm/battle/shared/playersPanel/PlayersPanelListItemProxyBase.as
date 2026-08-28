@@ -251,7 +251,7 @@ package com.xvm.battle.shared.playersPanel
                 {
                     _applyState();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_COLORS))
+                if (isInvalid(INVALIDATE_PLAYER_STATE) || isInvalid(INVALIDATE_PANEL_STATE) || isInvalid(INVALIDATE_UPDATE_COLORS))
                 {
                     _updateStandardFields();
                 }
@@ -259,7 +259,7 @@ package com.xvm.battle.shared.playersPanel
                 {
                     _updatePositions();
                 }
-                if (isInvalid(INVALIDATE_PLAYER_STATE, INVALIDATE_PANEL_STATE, INVALIDATE_UPDATE_POSITIONS))
+                if (isInvalid(INVALIDATE_PLAYER_STATE) || isInvalid(INVALIDATE_PANEL_STATE) || isInvalid(INVALIDATE_UPDATE_POSITIONS))
                 {
                     _updateExtraFields();
                 }

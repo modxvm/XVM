@@ -80,7 +80,7 @@ package com.xvm.battle.shared.battleLabels
 
         override protected function draw():void
         {
-            if (isInvalid(InvalidationType.STATE, InvalidationType.POSITION))
+            if (isInvalid(InvalidationType.STATE) || isInvalid(InvalidationType.POSITION))
             {
                 if (extraFields)
                 {

@@ -116,7 +116,7 @@ package com.xvm.lobby.ui.battleresults
             super.draw();
             if (_data != null)
             {
-                if (isInvalid(InvalidationType.DATA, InvalidationType.SIZE))
+                if (isInvalid(InvalidationType.DATA) || isInvalid(InvalidationType.SIZE))
                 {
                     var compareState:ComparePremiumState = detailsMc.compareState;
                     var cfg:CBattleResultsBonusState = Config.config.battleResults.bonusState;
