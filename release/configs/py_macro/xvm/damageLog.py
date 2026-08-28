@@ -1006,15 +1006,15 @@ def _PlayerAvatar_onBecomePlayer(self):
 
 
 @overrideMethod(DamageLogPanel, '_addToTopLog')
-def DamageLogPanel_addToTopLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
+def DamageLogPanel_addToTopLog(base, *args, **kwargs):
     if not (_config.get(DAMAGE_LOG_DISABLED_DETAIL_STATS) and isShowDamageLog):
-        return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
+        return base(*args, **kwargs)
 
 
 @overrideMethod(DamageLogPanel, '_addToBottomLog')
-def DamageLogPanel_addToBottomLog(base, self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG):
+def DamageLogPanel_addToBottomLog(base, *args, **kwargs):
     if not (_config.get(DAMAGE_LOG_DISABLED_DETAIL_STATS) and isShowDamageLog):
-        return base(self, value, actionTypeImg, vehicleTypeImg, vehicleName, shellTypeStr, shellTypeBG)
+        return base(*args, **kwargs)
 
 
 @overrideMethod(DamageLogPanel, 'as_summaryStatsS')
