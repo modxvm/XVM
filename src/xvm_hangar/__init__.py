@@ -363,28 +363,22 @@ def LobbyHeader_as_setHeaderButtonsS(base, self, buttons):
 # Handlers/UserMissionsPresenter
 #
 
-def _UserMissionsPresenter_updateBattlePass(base, self, vm):
+def _BattlePassPresenter_isVisible(base, self):
     if not config.get('hangar/showBattlePassWidget', True):
-        self._addChild(self._WIDGET_ALIAS.BattlePass(), False)
-        vm.setIsBattlePassActive(False)
-        return
-    return base(self, vm)
+        return False
+    return base(self)
 
 
-def _UserMissionsPresenter_updateMissions(base, self, vm):
-    if not config.get('hangar/showDailyQuestWidget', True):
-        self._addChild(self._WIDGET_ALIAS.Quests(), False)
-        vm.setAreMissionsActive(False)
-        return
-    return base(self, vm)
-
-
-def _UserMissionsPresenter_updateEntryPoints(base, self, vm):
+def _EventBannersPresenter_isVisible(base, self):
     if not config.get('hangar/showEventBanner', True):
-        self._addChild(self._WIDGET_ALIAS.Events(), False)
-        vm.setIsAnyEntryPointAvailable(False)
-        return
-    return base(self, vm)
+        return False
+    return base(self)
+
+
+def _QuestsPresenter_isVisible(base, self):
+    if not config.get('hangar/showDailyQuestWidget', True):
+        return False
+    return base(self)
 
 
 
@@ -473,7 +467,9 @@ def owg_module_init():
 
         if IS_WG:
             from gui.game_control.achievements_earning_controller import EarningAnimationCommand, RewardScreenCommand
-            from gui.impl.lobby.hangar.presenters.user_missions_presenter import UserMissionsPresenter
+            from gui.impl.lobby.user_missions.hangar_widget.presenters.battle_pass_presenter import BattlePassPresenter
+            from gui.impl.lobby.user_missions.hangar_widget.presenters.event_banners_presenter import EventBannersPresenter
+            from gui.impl.lobby.user_missions.hangar_widget.presenters.quests_presenter import QuestsPresenter
             from gui.impl.lobby.page.chats_presenter import ChatsPresenter
             from gui.impl.lobby.page.referral_program_presenter import ReferralProgramPresenter
             from gui.impl.lobby.page.session_stats_presenter import SessionStatsPresenter
@@ -484,9 +480,9 @@ def owg_module_init():
             overrideMethod(ProfileTechnique, 'as_setPrestigeVisibleS')(ProfileTechnique_as_setPrestigeVisibleS)
             overrideMethod(Hangar, 'as_setEventTournamentBannerVisibleS')(Hangar_as_setEventTournamentBannerVisibleS)
             #TODO WoT 2.1.1: overrideStaticMethod(LootBoxSystemEntryPoint, 'getIsActive')(LootBoxesEntryPoint_getIsActive)
-            overrideMethod(UserMissionsPresenter, '_updateBattlePass')(_UserMissionsPresenter_updateBattlePass)
-            overrideMethod(UserMissionsPresenter, '_updateMissions')(_UserMissionsPresenter_updateMissions)
-            overrideMethod(UserMissionsPresenter, '_updateEntryPoints')(_UserMissionsPresenter_updateEntryPoints)
+            overrideMethod(BattlePassPresenter, 'isVisible')(_BattlePassPresenter_isVisible)
+            overrideMethod(EventBannersPresenter, 'isVisible')(_EventBannersPresenter_isVisible)
+            overrideMethod(QuestsPresenter, 'isVisible')(_QuestsPresenter_isVisible)
             overrideMethod(ChatsPresenter, '_ChatsPresenter__updateModel')(_ChatsPresenter__updateModel)
             overrideMethod(ReferralProgramPresenter, '_ReferralProgramPresenter__updateModel')(_ReferralProgramPresenter__updateModel)
             overrideMethod(SessionStatsPresenter, '_SessionStatsPresenter__updateSessionStats')(_SessionStatsPresenter__updateSessionStats)
