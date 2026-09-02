@@ -12,9 +12,11 @@ def getTiers(level, cls, key):
 # PRIVATE
 
 from logger import *
+from xfw.constants import IS_LESTA
 from gui.shared.utils.requesters import REQ_CRITERIA
 from helpers import dependency
 from skeletons.gui.shared import IItemsCache
+from items import vehicles
 
 _special = {
     # Data from https://forum.worldoftanks.ru/index.php?/topic/1894923-
@@ -81,8 +83,14 @@ _special = {
 }
 
 def _getTiers(level, cls, key):
-    if key in _special:
-        return _special[key]
+    if IS_LESTA:
+        if key:
+            vDesc = vehicles.VehicleDescr(typeName = key)
+            if 'preferential' in vDesc.type.tags:
+                return (level, level)
+    else:
+        if key in _special:
+            return _special[key]
 
     # HT: (=T4 max+1)
     if level == 4 and cls == 'heavyTank':
