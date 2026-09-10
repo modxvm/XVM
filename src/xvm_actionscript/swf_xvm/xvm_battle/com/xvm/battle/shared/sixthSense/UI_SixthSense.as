@@ -279,16 +279,30 @@ package com.xvm.battle.shared.sixthSense
                 if (_spotted)
                 {
                     var permanentScale:Number;
-
-                    if (!_shown)
-                    {
+                    if (_shown) {
+                        if (_immediate) {
+                            _loader.alpha = 1;
+                        }
+                        if (_permanent) {
+                            permanentScale = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
+                            permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
+                            if (permanentScale != 1)
+                            {
+                                TweenLite.to(_loader, 0.2, {
+                                    scaleX: permanentScale,
+                                    scaleY: permanentScale,
+                                    onUpdate: function():void {
+                                        _loader.x = -_loader.width / 2;
+                                        _loader.y = -_loader.height / 2;
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    else {
                         XfwAccess.setPrivateField(this, '_isActive', true);
                         visible = true;
-                        if (!_immediate)
-                        {
-                            TweenLite.to(_loader, 0.2, {alpha: 1});
-                        }
-                        else
+                        if (_immediate)
                         {
                             permanentScale = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
                             permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
@@ -298,31 +312,28 @@ package com.xvm.battle.shared.sixthSense
                                 _loader.scaleX = _loader.scaleY = permanentScale;
                             }
                         }
+                        else
+                        {
+                            TweenLite.to(_loader, 0.2, {alpha: 1});
+                        }
                         _shown = true;
                     }
-                    else if (_shown && _permanent)
-                    {
-                        permanentScale = Macros.FormatNumberGlobal(Config.config.battle.sixthSense.permanentScale, 0.7);
-                        permanentScale = isNaN(permanentScale) ? 1 : permanentScale;
-                        if (permanentScale != 1)
-                        {
-                            TweenLite.to(_loader, 0.2, {
-                                scaleX: permanentScale,
-                                scaleY: permanentScale,
-                                onUpdate: function():void {
-                                    _loader.x = -_loader.width / 2;
-                                    _loader.y = -_loader.height / 2;
-                                }
-                            });
-                        }
-                    }
+
                 }
                 else
                 {
                     if (_shown)
                     {
                         XfwAccess.setPrivateField(this, '_isActive', false);
-                        if (!_immediate)
+                        if (_immediate)
+                        {
+                            _loader.alpha = 0;
+                            visible = false;
+                            _loader.scaleX = _loader.scaleY = 1;
+                            _loader.x = -_loader.width / 2;
+                            _loader.y = -_loader.height / 2;
+                        }
+                        else
                         {
                             TweenLite.to(_loader, 0.5, {
                                 alpha: 0,
@@ -334,16 +345,13 @@ package com.xvm.battle.shared.sixthSense
                                 }
                             });
                         }
-                        else
-                        {
-                            _loader.alpha = 0;
-                            visible = false;
-                            _loader.scaleX = _loader.scaleY = 1;
-                            _loader.x = -_loader.width / 2;
-                            _loader.y = -_loader.height / 2;
-                        }
                         _shown = false;
                     }
+                    else if (_immediate)
+                    {
+                        _loader.alpha = 0;
+                    }
+
                 }
             }
         }
