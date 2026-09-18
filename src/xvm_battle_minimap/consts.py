@@ -35,7 +35,9 @@ UNSUPPORTED_GUI_TYPES = [
     101, # constants.ARENA_GUI_TYPE.HB_OFFENCE - Lesta 1.42 Historical Battles
     102, # constants.ARENA_GUI_TYPE.LAST_STAND (WG 2.2.1 PvE event) / constants.ARENA_GUI_TYPE.HB_DEFENCE - Lesta 1.42 Historical Battles
     104, # constants.ARENA_GUI_TYPE.STORY_MODE_REGULAR (WG 1.25 PvE event)
+    110, # constants.ARENA_GUI_TYPE.WHITE_TIGER (WG 2.4.0 Waffentrager event)
     300, # constants.ARENA_GUI_TYPE.COSMIC_EVENT (Lesta 1.25.0.0)
+    301, # constants.ARENA_GUI_TYPE.WHITE_TIGER (Lesta 1.45.0.0)
 ]
 
 UNSUPPORTED_BATTLE_TYPES = [

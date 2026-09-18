@@ -33,6 +33,10 @@ package com.xvm.battle
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ],
+            "whiteTigerBattlePage": [
+                SixthSenseXvmView,
+                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+            ],
             // Lesta
             "historicalBattles": [
                 SixthSenseXvmView,
