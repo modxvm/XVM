@@ -18,7 +18,8 @@ $targetSwfNames = @(
     "battleVehicleMarkersApp.swf",
     "frontline_battle.swf",
     "lobby.swf",
-    "comp7_battle.swf"
+    "comp7_battle.swf",
+    "comp7_light_battle.swf"
 )
 
 $targetSwfSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
