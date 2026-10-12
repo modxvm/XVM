@@ -22,7 +22,7 @@ from gui.battle_control import avatar_getter
 from gui.shared import g_eventBus, EVENT_BUS_SCOPE
 from gui.shared.events import HasCtxEvent
 from gui.Scaleform.daapi.view import dialogs
-from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
+from gui.Scaleform.framework import ViewSettings, ScopeTemplates
 from gui.Scaleform.framework.entities.View import View
 from gui.Scaleform.framework.entities.BaseDAAPIComponent import BaseDAAPIComponent
 from frameworks.wulf import WindowLayer
@@ -32,6 +32,7 @@ from skeletons.gui.app_loader import IAppLoader
 # OpenWG
 import openwg_loader as loader
 import openwg_vfs
+from openwg_scaleform import get_entities_factory
 
 # XFW
 from xfw import IS_DEVELOPMENT
@@ -241,7 +242,8 @@ class _XfwComponent(BaseDAAPIComponent):
             return None
 
 
-g_entitiesFactories.addSettings(ViewSettings(
+entities_factory = get_entities_factory()
+entities_factory.addSettings(ViewSettings(
     CONST.XFW_VIEW_ALIAS,
     _XfwInjectorView,
     PATH.XFW_SWF_URL,
@@ -249,7 +251,7 @@ g_entitiesFactories.addSettings(ViewSettings(
     None,
     ScopeTemplates.GLOBAL_SCOPE))
 
-g_entitiesFactories.addSettings(ViewSettings(
+entities_factory.addSettings(ViewSettings(
     CONST.XFW_COMPONENT_ALIAS,
     _XfwComponent,
     None,

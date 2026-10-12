@@ -14,11 +14,11 @@ from gui.Scaleform.framework.application import AppEntry
 from gui.Scaleform.framework.managers.loaders import SFViewLoadParams
 from helpers import dependency
 from skeletons.gui.app_loader import IAppLoader, GuiGlobalSpaceID
-from skeletons.gui.impl import IGuiLoader
 
 from xfw.constants import *
 from xfw.events import *
 from xfw.logger import *
+from openwg_scaleform import get_parent_window
 import openwg_vfs as vfs
 
 from .swfloadedinfo import swf_loaded_info
@@ -63,19 +63,11 @@ debug('[XFW] _start')
 #    from gui.Scaleform.daapi.view.battle.shared.markers2d import settings as markers_settings
 #    markers_settings.MARKERS_MANAGER_SWF = 'xfw_battleVehicleMarkersApp.swf'
 
-def _getParentWindow():
-    guiLoader = dependency.instance(IGuiLoader)
-    parentWindow = None
-    if guiLoader and guiLoader.windowsManager:
-        parentWindow = guiLoader.windowsManager.getMainWindow()
-    return parentWindow
-
-
 def _loadXFWView():
     global appNS
     appLoader = dependency.instance(IAppLoader)
     app = appLoader.getApp(appNS)
-    parent = _getParentWindow()
+    parent = get_parent_window()
     app.loadView(SFViewLoadParams(CONST.XFW_VIEW_ALIAS, parent=parent))
 
 

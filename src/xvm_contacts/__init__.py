@@ -8,12 +8,15 @@ Copyright (c) 2013-2026 XVM Contributors
 #
 
 # BigWorld
-from gui.Scaleform.framework import g_entitiesFactories, ViewSettings, ScopeTemplates
+from gui.Scaleform.framework import ViewSettings, ScopeTemplates
 from gui.shared.tooltips.common import ContactTooltipData
 from frameworks.wulf import WindowLayer
 from messenger.gui.Scaleform.view.lobby.ContactsListPopover import ContactsListPopover
 from messenger.gui.Scaleform.data.contacts_vo_converter import ContactConverter
 from messenger.gui.Scaleform.data.contacts_cm_handlers import PlayerContactsCMHandler
+
+# OpenWG
+from openwg_scaleform import get_entities_factory
 
 # XFW
 from xfw import *
@@ -116,7 +119,7 @@ __initialized = False
 def owg_module_init():
     global __initialized
     if not __initialized:
-        g_entitiesFactories.addSettings(ViewSettings(
+        get_entities_factory().addSettings(ViewSettings(
             VIEW.XVM_EDIT_CONTACT_DATA_ALIAS,
             view.XvmEditContactDataView,
             None,
