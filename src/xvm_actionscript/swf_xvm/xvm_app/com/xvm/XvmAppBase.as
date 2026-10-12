@@ -4,6 +4,8 @@
  */
 package com.xvm
 {
+    import net.wg.infrastructure.events.LifeCycleEvent;
+
     /**
      *  Link additional classes into xvm_app.swc
      */
@@ -23,6 +25,19 @@ package com.xvm
         public function XvmAppBase(appType:int)
         {
             super(appType);
+            App.instance.loaderMgr.addEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, onBeforeLibrariesDispose);
+        }
+
+        override protected function onDispose():void
+        {
+            App.instance.loaderMgr.removeEventListener(LifeCycleEvent.ON_BEFORE_DISPOSE, onBeforeLibrariesDispose);
+            super.onDispose();
+        }
+
+        private function onBeforeLibrariesDispose(e:LifeCycleEvent):void
+        {
+            // Library unload order is unspecified; clean up while the app is still intact.
+            dispose();
         }
     }
 }

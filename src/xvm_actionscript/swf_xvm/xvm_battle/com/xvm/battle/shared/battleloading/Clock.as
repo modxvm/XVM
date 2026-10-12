@@ -15,7 +15,8 @@ package com.xvm.battle.shared.battleloading
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import flash.utils.setInterval;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	
 	import net.wg.gui.battle.battleloading.BaseLoadingForm;
 	import net.wg.infrastructure.interfaces.entity.IDisposable;
@@ -27,6 +28,7 @@ package com.xvm.battle.shared.battleloading
         private var form:BaseLoadingForm;
         private var clock:TextField;
         private var clockFormat:String;
+        private var timer:Timer;
 
         private var _disposed: Boolean = false;
 
@@ -83,7 +85,11 @@ package com.xvm.battle.shared.battleloading
                 form.addChild(clock);
 
                 update();
-                setInterval(update, 1000);
+
+                // Unlike setInterval callbacks, the built-in Timer has no XVM MovieDef.
+                timer = new Timer(1000);
+                timer.addEventListener(TimerEvent.TIMER, onTimer);
+                timer.start();
             }
         }
 
@@ -100,6 +106,13 @@ package com.xvm.battle.shared.battleloading
 
         protected function onDispose():void
         {
+            if (timer)
+            {
+                timer.stop();
+                timer.removeEventListener(TimerEvent.TIMER, onTimer);
+                timer = null;
+            }
+
             if (clock)
             {
                 form.removeChild(clock);
@@ -108,6 +121,11 @@ package com.xvm.battle.shared.battleloading
         }
 
         // PRIVATE
+
+        private function onTimer(e:TimerEvent):void
+        {
+            update();
+        }
 
         private function update():void
         {

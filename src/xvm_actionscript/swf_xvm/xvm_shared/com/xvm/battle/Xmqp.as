@@ -8,18 +8,35 @@ package com.xvm.battle
     import com.xvm.*;
     import com.xvm.battle.events.*;
     import com.xvm.battle.vo.*;
-    import flash.utils.*;
+    import flash.events.TimerEvent;
+    import flash.utils.Timer;
     import scaleform.clik.constants.*;
 
     public class Xmqp
     {
+        private static var _initialized:Boolean = false;
+
         public static function init():void
         {
+            _initialized = true;
             Xfw.addCommandListener(BattleCommands.AS_XMQP_EVENT, onXmqpEvent);
+        }
+
+        public static function dispose():void
+        {
+            _initialized = false;
+            Xfw.removeCommandListener(BattleCommands.AS_XMQP_EVENT, onXmqpEvent);
+            for each (var timer:Timer in _sixSenseIndicatorTimers)
+            {
+                timer.stop();
+            }
+            _sixSenseIndicatorTimers = {};
         }
 
         private static function onXmqpEvent(accountDBID:Number, eventName:String, data:Object):void
         {
+            if (!_initialized)
+                return;
             //Logger.add(eventName + " " + accountDBID + " " + JSONx.stringify(data));
             switch (eventName)
             {
@@ -69,7 +86,7 @@ package com.xvm.battle
 
         // {{x-spotted}}
 
-        private static var _sixSenseIndicatorTimeoutIds:Object = {};
+        private static var _sixSenseIndicatorTimers:Object = {};
 
         private static function onSpottedEvent(accountDBID:Number):void
         {
@@ -82,16 +99,30 @@ package com.xvm.battle
                 BattleState.instance.invalidate(InvalidationType.STATE);
                 Xvm.dispatchEvent(new XmqpEvent(XmqpEvent.XMQP_SPOTTED, accountDBID));
             }
-            if (_sixSenseIndicatorTimeoutIds[accountDBID])
+            stopSixSenseIndicatorTimer(accountDBID);
+
+            if (!_initialized)
+                return;
+
+            var timer:Timer = new Timer(Config.config.xmqp.spottedTime * 1000, 1);
+            timer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void { onSpottedEventDone(accountDBID); });
+            _sixSenseIndicatorTimers[accountDBID] = timer;
+            timer.start();
+        }
+
+        private static function stopSixSenseIndicatorTimer(accountDBID:Number):void
+        {
+            var timer:Timer = _sixSenseIndicatorTimers[accountDBID] as Timer;
+            if (timer)
             {
-                clearTimeout(_sixSenseIndicatorTimeoutIds[accountDBID]);
+                timer.stop();
+                delete _sixSenseIndicatorTimers[accountDBID];
             }
-            _sixSenseIndicatorTimeoutIds[accountDBID] = setTimeout(function():void { onSpottedEventDone(accountDBID); }, Config.config.xmqp.spottedTime * 1000);
         }
 
         private static function onSpottedEventDone(accountDBID:Number):void
         {
-            delete _sixSenseIndicatorTimeoutIds[accountDBID];
+            stopSixSenseIndicatorTimer(accountDBID);
             var playerState:VOPlayerState = BattleState.get(BattleState.getVehicleIDByAccountDBID(accountDBID));
             var updated:Boolean = playerState && playerState.updateXmqpData({
                 x_spotted: false

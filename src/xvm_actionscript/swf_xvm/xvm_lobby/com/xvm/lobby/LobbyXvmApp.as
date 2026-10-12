@@ -39,6 +39,13 @@ package com.xvm.lobby
             LobbyMacros.RegisterVehiclesMacros();
         }
 
+        override protected function onDispose():void
+        {
+            OnlineServers.stop();
+            PingServers.stop();
+            super.onDispose();
+        }
+
         // PRIVATE
 
         private function onUpdateBattleType(battleType:String):void

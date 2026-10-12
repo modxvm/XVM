@@ -7,7 +7,7 @@ package com.xvm.lobby.ping.PingServers
     import com.xfw.*;
     import com.xfw.events.*;
     import flash.events.*;
-    import flash.utils.*;
+    import flash.utils.Timer;
 
     public class PingServers extends EventDispatcher
     {
@@ -22,32 +22,29 @@ package com.xvm.lobby.ping.PingServers
             return _instance;
         }
 
-        private var pingTimer:uint;
-        private var pingTimeouts:Array;
+        private var pingTimer:Timer;
         private var serversOrder:Array;
 
         public static function initFeature(enabled:Boolean, interval:Number = 0):void
         {
+            stop();
             if (!enabled || interval <= 0)
                 return;
 
             instance.ping();
-            instance.pingTimer = setInterval(instance.ping, interval);
+
+            instance.pingTimer = new Timer(interval);
+            instance.pingTimer.addEventListener(TimerEvent.TIMER, instance.onPingTimer);
+            instance.pingTimer.start();
         }
 
         public static function stop():void
         {
-            if (instance.pingTimer > 0)
+            if (_instance && _instance.pingTimer)
             {
-                clearInterval(instance.pingTimer);
-                instance.pingTimer = 0;
-            }
-
-            if (instance.pingTimeouts)
-            {
-                for each (var t:uint in instance.pingTimeouts)
-                    clearTimeout(t);
-                instance.pingTimeouts = null;
+                _instance.pingTimer.stop();
+                _instance.pingTimer.removeEventListener(TimerEvent.TIMER, _instance.onPingTimer);
+                _instance.pingTimer = null;
             }
         }
 
@@ -67,8 +64,12 @@ package com.xvm.lobby.ping.PingServers
         {
             Xfw.addCommandListener(COMMAND_AS_PINGDATA, pingCallback);
 
-            pingTimer = 0;
-            pingTimeouts = null;
+            pingTimer = null;
+        }
+
+        private function onPingTimer(e:TimerEvent):void
+        {
+            ping();
         }
 
         private function ping():void

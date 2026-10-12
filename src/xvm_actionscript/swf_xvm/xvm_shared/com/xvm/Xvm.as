@@ -70,11 +70,15 @@ package com.xvm
 
         private static var _instance:Xvm;
         private var _battleState:BattleState;
+        private var _disposed:Boolean = false;
 
         public function Xvm(appType:int)
         {
             _appType = appType;
             _instance = this;
+
+            if (loaderInfo != null)
+                loaderInfo.addEventListener(Event.UNLOAD, onUnload);
 
             Macros.clear();
 
@@ -98,6 +102,29 @@ package com.xvm
 
             Xfw.addCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
             Xfw.cmd(XvmCommandsInternal.REQUEST_CONFIG);
+        }
+
+        public final function dispose():void
+        {
+            if (_disposed)
+                return;
+            _disposed = true;
+            if (loaderInfo != null)
+                loaderInfo.removeEventListener(Event.UNLOAD, onUnload);
+            onDispose();
+        }
+
+        protected function onDispose():void
+        {
+            Xfw.removeCommandListener(XvmCommandsInternal.AS_SET_CONFIG, onSetConfig);
+            Xfw.removeCommandListener(XvmCommandsInternal.AS_UPDATE_RESERVE, onUpdateReserve);
+            Xmqp.dispose();
+            ExtraFieldsHelper.dispose();
+        }
+
+        private function onUnload(e:Event):void
+        {
+            dispose();
         }
 
         // DAAPI Python-Flash interface

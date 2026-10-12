@@ -332,6 +332,20 @@ package com.xvm.extraFields
             }
         }
 
+        public static function dispose():void
+        {
+            if (timerFrame)
+            {
+                timerFrame.stop();
+                timerFrame = null;
+            }
+            if (timerSec)
+            {
+                timerSec.stop();
+                timerSec = null;
+            }
+        }
+
         // PRIVATE
 
         private static var timerFrame:Timer = null;
@@ -340,7 +354,7 @@ package com.xvm.extraFields
         private static function initTimerFrame():void
         {
             timerFrame = new Timer(1);
-            timerFrame.addEventListener(TimerEvent.TIMER, function():void
+            timerFrame.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void
             {
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_EVERY_FRAME));
             });
@@ -350,7 +364,7 @@ package com.xvm.extraFields
         private static function initTimerSec():void
         {
             timerSec = new Timer(1000);
-            timerSec.addEventListener(TimerEvent.TIMER, function():void
+            timerSec.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void
             {
                 Xvm.dispatchEvent(new PlayerStateEvent(PlayerStateEvent.ON_EVERY_SECOND));
             });

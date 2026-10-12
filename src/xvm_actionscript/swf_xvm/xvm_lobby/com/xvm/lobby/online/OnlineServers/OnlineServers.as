@@ -7,7 +7,7 @@ package com.xvm.lobby.online.OnlineServers
     import com.xfw.*;
     import com.xfw.events.*;
     import flash.events.*;
-    import flash.utils.*;
+    import flash.utils.Timer;
 
     public class OnlineServers extends EventDispatcher
     {
@@ -22,32 +22,29 @@ package com.xvm.lobby.online.OnlineServers
             return _instance;
         }
 
-        private var onlineTimer:uint;
-        private var onlineTimeouts:Array;
+        private var onlineTimer:Timer;
         private var serversOrder:Array;
 
         public static function initFeature(enabled:Boolean, interval:Number = 0):void
         {
+            stop();
             if (!enabled || interval <= 0)
                 return;
 
             instance.online();
-            instance.onlineTimer = setInterval(instance.online, interval);
+
+            instance.onlineTimer = new Timer(interval);
+            instance.onlineTimer.addEventListener(TimerEvent.TIMER, instance.onOnlineTimer);
+            instance.onlineTimer.start();
         }
 
         public static function stop():void
         {
-            if (instance.onlineTimer > 0)
+            if (_instance && _instance.onlineTimer)
             {
-                clearInterval(instance.onlineTimer);
-                instance.onlineTimer = 0;
-            }
-
-            if (instance.onlineTimeouts)
-            {
-                for each (var t:uint in instance.onlineTimeouts)
-                    clearTimeout(t);
-                instance.onlineTimeouts = null;
+                _instance.onlineTimer.stop();
+                _instance.onlineTimer.removeEventListener(TimerEvent.TIMER, _instance.onOnlineTimer);
+                _instance.onlineTimer = null;
             }
         }
 
@@ -67,8 +64,12 @@ package com.xvm.lobby.online.OnlineServers
         {
             Xfw.addCommandListener(COMMAND_AS_ONLINEDATA, onlineCallback);
 
-            onlineTimer = 0;
-            onlineTimeouts = null;
+            onlineTimer = null;
+        }
+
+        private function onOnlineTimer(e:TimerEvent):void
+        {
+            online();
         }
 
         private function online():void
