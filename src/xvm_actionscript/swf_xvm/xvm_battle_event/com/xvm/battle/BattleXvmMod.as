@@ -25,6 +25,10 @@ package com.xvm.battle
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ],
             // WG
+            "FortRushBattlePage": [
+                SixthSenseXvmView,
+                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
+            ],
             "HalloweenBattlePage": [
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
@@ -33,15 +37,7 @@ package com.xvm.battle
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
             ],
-            "whiteTigerBattlePage": [
-                SixthSenseXvmView,
-                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
-            ],
             // Lesta
-            "historicalBattles": [
-                SixthSenseXvmView,
-                BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
-            ],
             "portalBattlePage": [
                 SixthSenseXvmView,
                 BattleXvmView                   // BattleXvmView should be loaded last (implements invalidation methods)
