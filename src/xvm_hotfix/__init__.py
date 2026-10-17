@@ -39,7 +39,7 @@ def _CustomFilesCache__onReadLocalFile(base, self, url, showImmediately):
             logging.getLogger('XVM/HotFix').exception('CustomFilesCache.__onReadLocalFile: reload attempt failed')
 
 
-def _DamageLogPanel__isDamageSettingEnabled(base, self, settingName):
+def _DamageLogPanel_isDamageSettingEnabled(base, self, settingName):
     isDamageTypeVisible = self.settingsCore.getSetting(settingName)
     if settingName == DAMAGE_LOG.ASSIST_STUN and isDamageTypeVisible:
         arenaDP = self.sessionProvider.getArenaDP()
@@ -72,7 +72,8 @@ def owg_module_init():
     if not __initialized:
         overrideMethod(CustomFilesCache, '_CustomFilesCache__onReadLocalFile')(_CustomFilesCache__onReadLocalFile)
         if IS_LESTA:
-            overrideMethod(DamageLogPanel, '_DamageLogPanel__isDamageSettingEnabled')(_DamageLogPanel__isDamageSettingEnabled)
+            overrideMethod(DamageLogPanel, '_isDamageSettingEnabled')(_DamageLogPanel_isDamageSettingEnabled)
+
         if IS_CT:
             overrideMethod(debug_utils, '_doLog')(_doLog)
 
