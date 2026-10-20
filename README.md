@@ -1,4 +1,4 @@
-**XVM: eXtended Visualization Mod** is the most popular mod for MMO World of Tanks.
+**XVM: eXtended Visualization Mod** is the most popular mod for MMO World of Tanks / Mir Tankov.
 Millions of players worldwide are using XVM.
 
 If you can write code, [you can help us make it better for everyone](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html).
