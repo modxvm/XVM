@@ -1,6 +1,6 @@
 {
     "schema_version": 1,
-    "game_version_lesta": "1.45.0.0",
+    "game_version_lesta": "1.46.0.0",
     "game_version_wg": "2.4.1.0",
     "build": {
         "package_directory": "src",
