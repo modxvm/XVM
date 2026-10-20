@@ -6,6 +6,8 @@ variables:
       - "False"
     description: "True: build & deploy as nightly. False: build and deploy as release."
 
+  # Versions and artifact names depend on the latest reachable tag and commit count.
+  GIT_DEPTH: "0"
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:

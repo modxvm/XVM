@@ -76,7 +76,7 @@ function Get-RepoStats {
 
 function Build-ArtifactUrls {
   param(
-    [Parameter(Mandatory)][string]$Tag,
+    [Parameter(Mandatory)][AllowEmptyString()][string]$Tag,
     [Parameter(Mandatory)][string]$Commits,
     [Parameter(Mandatory)][string]$Branch,
     [Parameter(Mandatory)][string]$Hash
