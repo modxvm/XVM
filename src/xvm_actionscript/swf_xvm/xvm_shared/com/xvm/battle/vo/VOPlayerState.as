@@ -380,8 +380,9 @@ package com.xvm.battle.vo
             // DESTR_BY_FALL_RAMMING = -2
             // FUEL_EXPLODED = -3
             // AMMO_BAY_DESTROYED = -5
-            // TURRET_DETACHED = -13
-            _isBlown = value == -5 || value == -13;
+            // AMMO_BAY_EXPLODED = -13
+            // TURRET_DETACHED = -29
+            _isBlown = value <= -5;
             if (value < 0)
                 value = 0;
             __curHealth = value;
