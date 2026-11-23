@@ -53,7 +53,8 @@ installer:
 deploy:
   stage: deploy
   script:
-    - ./build/ci_deploy.ps1
+    # Requires OpenSSH (ssh and sftp). Set XVMBUILD_UPLOAD_PASSWORD or a File variable XVMBUILD_UPLOAD_PRIVATE_KEY.
+    - pwsh -NoProfile -NonInteractive -File ./build/ci_deploy.ps1
   needs:
     - job: build
       artifacts: true
